@@ -1,5 +1,5 @@
 # project internal requirements
-git+https://chh59ja@gitlab2.informatik.uni-wuerzburg.de/de.uniwue.ethik-chat/de.uniwue.ethik-chat.nlp.git@1.0.0#egg=de.uniwue.ethik-chat.nlp
+git+https://chh59ja@gitlab2.informatik.uni-wuerzburg.de/de_uniwue_ethikchat/de_uniwue_ethikchat_argumentation_toolkit.git@1.0.0#egg=de.uniwue.ethik-chat.nlp
 # external requirements
 click
 Sphinx
