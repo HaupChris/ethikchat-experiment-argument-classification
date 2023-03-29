@@ -1,6 +1,9 @@
 # Workflow for Conducting Experiments in the `de.uniwue.ethik-chat` Project
 
+This repository is a template for conducting experiments in the `de.uniwue.ethik-chat` project. It contains a `Makefile` with commands for installing required packages, running experiments, and generating reports. It also contains a `requirements.txt` file for installing required packages, and a `src/main.py` file for running experiments.
+
 This workflow outlines the steps for conducting experiments in the `de.uniwue.ethik-chat` project, including setting up a virtual environment, installing required packages, and organizing experiment code.
+
 
 ## Prerequisites
 
@@ -11,7 +14,6 @@ To use this workflow, you will need the following software installed on your sys
 - Pip
 - Virtualenv
 
-You will also need access to your own GitLab repository, where you can host the `de.uniwue.ethik-chat.Data`, `de.uniwue.ethik-chat.NLP`, and `de.uniwue.ethik-chat.Dialogue` packages.
 
 ## Getting Started
 
@@ -28,41 +30,12 @@ git clone https://gitlab2.informatik.uni-wuerzburg.de/de.uniwue.ethik-chat/de.un
 git checkout -b your-branch-name
 ``` 
 
-3. Create a new virtual environment for your experiment and activate it:
-
-```bash 
-virtualenv -p python3.9 venv
-``` 
-
+3. Use the `Makefile` to create a virtual environment, install required packages and download the data by running the following command in the root directory of the repository.Since the data is stored in a private gitlab repository, your gitlab account needs to have access to the repository.
+If it has, you have to create a private access token and insert it into the file `.gitlab_personal_access_token` in the root directory of the repository.
+Then run the following command in the root directory of the repository:
 ```bash
-source venv/bin/activate
+  make
 ```
-
-4. Install the required packages for your experiment by running the following command from the root directory of the `de.uniwue.ethik-chat.Experiment` repository:
-
-```bash
-pip install -e .
-```
-
-This command installs the `de.uniwue.ethik-chat.Data`, `de.uniwue.ethik-chat.NLP`, and `de.uniwue.ethik-chat.Dialogue` packages from your GitLab repository, as well as the `de.uniwue.ethik-chat.Experiment` package itself. The `-e` option tells pip to install the packages in "editable" mode, which means that any changes you make to the packages will be reflected in your environment immediately.
-
-5. If you have a `requirements.txt` file for your experiment, you can install the required packages by running the following command from the root directory of the `de.uniwue.ethik-chat.Experiment` repository:
-
-```bash
-pip install -r requirements.txt
-```
-
-This will install the required packages listed in the `requirements.txt` file. You can use this method instead of Step 4 if you prefer not to install the packages in "editable" mode.
-
-
-
-
-6. Put your data in the `data/` folder, Your code goes into the `src/` folder. You can use the `src/main.py` file as a starting point for your experiment code.
-    `models/` is for storing your trained models. When you are done with your experiments, write a brief report in the `reports/` folder and commit your changes to your branch.
-
-
-
-8. Run your experiment using the packages provided by `de.uniwue.ethik-chat.Data`, `de.uniwue.ethik-chat.NLP`, and `de.uniwue.ethik-chat.Dialogue`:
 
 
 Project Organization

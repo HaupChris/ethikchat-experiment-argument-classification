@@ -65,6 +65,9 @@ target/
 
 # Pycharm
 .idea
+# all files within the .idea folder
+.idea/*
+
 
 # VS Code
 .vscode/
@@ -74,9 +77,6 @@ target/
 
 # Jupyter NB Checkpoints
 .ipynb_checkpoints/
-
-# exclude data from source control by default
-/data/
 
 # Mac OS-specific storage files
 .DS_Store
