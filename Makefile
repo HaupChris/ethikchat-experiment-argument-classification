@@ -36,4 +36,4 @@ all:
 .PHONY: clean
 clean:
 	rm -rf venv
-	rm -rf data/de.uniwue.ethik-chat.Data
+	rm -rf data/ethikchat_data
