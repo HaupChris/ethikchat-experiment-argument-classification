@@ -1,0 +1,27 @@
+{
+  "name": "20230130_115434_703724",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "None",
+  "start": "2023/01/30-11:54:34",
+  "end": "in progress",
+  "utterances": [
+    {
+      "user": "Max",
+      "type": "user",
+      "text": "Hallo\nHallo",
+      "id_in_dialogue": 0,
+      "timestamp": "2023/01/30-11:54:43",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    }
+  ],
+  "start_survey": {
+    "name": "6a061313d22e51e0f25b7cd4dc065233",
+    "type": "StartSurvey",
+    "surveyOptionResults": {}
+  },
+  "end_survey": "not available"
+}

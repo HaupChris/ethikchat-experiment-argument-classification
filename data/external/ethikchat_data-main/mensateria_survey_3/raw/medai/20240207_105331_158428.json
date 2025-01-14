@@ -1,0 +1,123 @@
+{
+  "name": "20240207_105331_158428",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-10:53:31",
+  "end": "2024/02/07-11:01:41",
+  "utterances": [
+    {
+      "user": "Z82AO",
+      "type": "user",
+      "text": "Auf dem Stand von heute ist KI noch nicht ausgereift genug, um solche wichtigen Entscheidungen zu treffen. ",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-10:55:06",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich kann Ihre Bedenken hinsichtlich der aktuellen Reife der KI-Technologie verstehen. Allerdings gehen wir in diesem Szenario von einer zukünftigen Entwicklung aus, in der die medizinische KI (medKI) ausreichend entwickelt ist, um eigenständige Diagnose- und Therapie-Entscheidungen zu treffen. Es ist wichtig, das Potential zukünftiger KI-Entwicklungen nicht einzuschränken, nur aufgrund der aktuellen Einschränkungen.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-10:55:11",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "Z82AO",
+      "type": "user",
+      "text": "Das stimmt, allerdings haben Ärzte auch im besten Fall ein Gewissen, was Maschinen nicht habn",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-10:55:55",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sie haben Recht, dass Ärzte ein Gewissen haben, was Maschinen nicht besitzen. Allerdings sollten wir auch bedenken, dass die medKI auf der Grundlage von umfangreichen medizinischen Daten und Algorithmen programmiert wird, die auf wissenschaftlichen Erkenntnissen basieren. Diese Faktoren könnten eine medKI potenziell objektiver und konsistenter bei Diagnose- und Therapie-Entscheidungen machen als Menschen.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-10:56:02",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "Z82AO",
+      "type": "user",
+      "text": "Dennoch ist es fragwürdig auch aud Datenschutzgründen die Krankheit einem Chatbot anzuvertrauen",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-10:57:04",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Bedenken hinsichtlich des Datenschutzes sind durchaus berechtigt. Es ist wichtig, dass die Privatsphäre und der Datenschutz von Patient:innen gewahrt bleiben, wenn sie sich auf eine medKI verlassen. Um dies zu gewährleisten, können geeignete Sicherheitsmaßnahmen implementiert werden, wie z.B. die Verschlüsselung von Patientendaten und die Einhaltung von Datenschutzrichtlinien. Diese Maßnahmen können dazu beitragen, das Vertrauen der Patient:innen in die medKI zu stärken und gleichzeitig die notwendigen Sicherheitsstandards einzuhalten.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-10:57:11",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "Z82AO",
+      "type": "user",
+      "text": "Wie sähe denn ein ärztlicher ChatBort aus?",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-10:58:00",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ein ärztlicher Chatbot wäre ein computergestütztes System, das in der Lage ist, über eine Text-basierte Benutzeroberfläche mit Patient:innen zu kommunizieren. Er wäre speziell für den medizinischen Kontext entwickelt und programmiert, um Symptome und Krankheitsbilder zu erkennen, Diagnosen zu stellen und Therapie-Empfehlungen zu geben. Der Chatbot würde auf Basis von umfangreichen medizinischen Daten und Algorithmen arbeiten, um fundierte Entscheidungen zu treffen.\nEs ist wichtig zu betonen, dass der Chatbot nicht die menschliche Interaktion und die persönliche Beziehung zwischen Arzt und Patient ersetzen soll, sondern eine Ergänzung und Unterstützung im medizinischen Alltag darstellen könnte.\nUm die Akzeptanz und das Vertrauen der Patient:innen in den Chatbot zu gewährleisten, müssten auch hier Sicherheitsmaßnahmen implementiert werden, um die Privatsphäre und den Datenschutz zu gewährleisten.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-10:58:10",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "492d57921e9990e6093d466570186c22",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "informed": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "492d57921e9990e6093d466570186c22",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "opinion_1": 0,
+      "opinion_1_reason": "Ich würde den ChatBot benutzen, um evtl eine Diagnose zu stellen, aber sollte ich doch krank sein würde ich immer zum Arzt gehen.",
+      "opinion_2": 0.8,
+      "argument_quality_2": 1,
+      "user_information_argument_breadth": 0.75,
+      "user_information_argument_depth": 0.5,
+      "positive_critics": "Das Thema allgemein + der Chatbot"
+    }
+  }
+}

@@ -1,0 +1,216 @@
+{
+  "name": "20240207_105555_369878",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-10:55:55",
+  "end": "2024/02/07-11:34:17",
+  "utterances": [
+    {
+      "user": "9XKPJ",
+      "type": "user",
+      "text": "Ich habe bedenken bei der Fehlerquote einer KI in Bezug auf das Leben von Menschen ",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-10:57:31",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Verstehe Ihre Bedenken hinsichtlich der Fehlerquote einer KI im Zusammenhang mit menschlichem Leben. Es ist jedoch wichtig zu bedenken, dass menschliche Fehler in der Medizin ebenfalls häufig auftreten und oft sogar schwerwiegendere Folgen haben können. Ein gut entwickeltes und reguliertes medizinisches KI-System könnte tatsächlich eine niedrigere Fehlerquote aufweisen als menschliche Ärzte.\n",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-10:57:35",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "9XKPJ",
+      "type": "user",
+      "text": "Ist die menschliche Intuition nicht ein Punkt die die KI nicht aufweisen kann?",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-10:58:41",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sicher, die menschliche Intuition ist ein wichtiger Faktor, aber in Bezug auf medizinische Diagnosen und Therapieentscheidungen ist sie nicht immer zuverlässig. Emotionen, Voreingenommenheit und kognitive Verzerrungen können die menschliche Intuition beeinflussen. Im Gegensatz dazu kann eine KI auf der Grundlage von validen, groß angelegten klinischen Studien und validierten Algorithmen objektive Entscheidungen treffen.\n",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-10:58:46",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "9XKPJ",
+      "type": "user",
+      "text": "Und wie ist das mit der menschlichen Komponente, also die soziale Interaktion mit einem Arzt",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-10:59:57",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die menschliche Komponente ist zweifellos ein wichtiger Aspekt der medizinischen Versorgung. Patient:innen schätzen oft die zwischenmenschliche Interaktion mit ihren Ärzt:innen. In diesem Szenario würde das medizinische Personal jedoch weiterhin eine wichtige Rolle spielen, indem es Daten erhebt, die Entscheidungen der medKI erklärt und die Patient:innen durch den Prozess begleitet. Die medKI würde lediglich die diagnostischen und therapeutischen Entscheidungen treffen.\n",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-11:00:03",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "9XKPJ",
+      "type": "user",
+      "text": "Könnte man eine KI aber nicht auch so modifizieren, dass es um die Kosteneffizienz geht und nicht um die Gesundheit?",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-11:25:57",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Es ist möglich, eine KI so zu programmieren, dass sie kosteneffiziente Entscheidungen trifft, aber dies muss nicht unbedingt zulasten der Patient:innengesundheit gehen. Durch die Analyse großer Datensätze kann eine KI tatsächlich die kosteneffizienteste Behandlungsoption ermitteln, die auch die besten klinischen Ergebnisse liefert. Ein weiterer Vorteil von KI ist die Minimierung von Über- und Unterversorgung, was ebenfalls zu Kosteneinsparungen führen kann.\n",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-11:26:02",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "9XKPJ",
+      "type": "user",
+      "text": "Wie kann man das Transparent gestalten, dass jedem klar ist, wonach die KI entscheidet?",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-11:27:10",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Transparenz ist ein wichtiges Anliegen bei der Implementierung von medizinischen KI-Systemen. Die Entscheidungsfindung der KI sollte nachvollziehbar sein, und die Patient:innen sollten das Recht haben, die Kriterien zu kennen, die zur Entscheidungsfindung herangezogen werden. Dies kann durch die Verwendung von erklärbaren KI-Algorithmen und visuellen Darstellungen der Entscheidungsprozesse erreicht werden. Darüber hinaus sollten die medizinischen Fachkräfte, die mit der KI zusammenarbeiten, in der Lage sein, die Entscheidungen der KI zu erklären und zu rechtfertigen.\n",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-11:27:18",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "9XKPJ",
+      "type": "user",
+      "text": "Das glaube ich nicht.",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-11:27:58",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Es ist verständlich, dass Sie skeptisch sind, aber es gibt bereits Fortschritte bei der Entwicklung erklärbarer KI-Algorithmen in der Medizin. Diese Algorithmen ermöglichen es, die Entscheidungsfindung der KI nachzuvollziehen und zu verstehen, was hinter den einzelnen Entscheidungen steckt. Durch die Verwendung solcher Algorithmen und die Schulung des medizinischen Personals, das die KI einsetzt, kann Transparenz in Bezug auf die KI-Entscheidungsfindung gewährleistet werden.\n",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-11:28:03",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "9XKPJ",
+      "type": "user",
+      "text": "Das glaube ich nicht",
+      "id_in_dialogue": 12,
+      "timestamp": "2024/02/07-11:28:16",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Es ist verständlich, dass Sie skeptisch sind, aber Fortschritte bei der Entwicklung erklärbarer KI-Algorithmen in der Medizin sind bereits erzielt worden. Diese Algorithmen ermöglichen es, die Entscheidungsfindung der KI nachzuvollziehen und zu verstehen, was hinter den einzelnen Entscheidungen steckt. Durch die Verwendung solcher Algorithmen und die Schulung des medizinischen Personals, das die KI einsetzt, kann Transparenz in Bezug auf die KI-Entscheidungsfindung gewährleistet werden.\n\n(Ich wiederhole meine vorherige Antwort, da Sie nach den Richtlinien kein neues Gegenargument lieferten.)",
+      "id_in_dialogue": 13,
+      "timestamp": "2024/02/07-11:28:22",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "9XKPJ",
+      "type": "user",
+      "text": "Wie kann eine KI auch auf guten Daten trainiert werden und dabei Minderheiten Repräsentieren ",
+      "id_in_dialogue": 14,
+      "timestamp": "2024/02/07-11:29:41",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die Repräsentation von Minderheiten in den Trainingsdaten von KI-Systemen ist ein wichtiges Thema, um eine faire und gerechte Behandlung zu gewährleisten. Es gibt verschiedene Ansätze, um sicherzustellen, dass Minderheiten in den Trainingsdaten ausreichend repräsentiert sind:\n1. Daten aus verschiedenen Populationen und Regionen sammeln, um eine breite Palette von Krankheitsbildern und Patient:inneneigenschaften abzudecken.\n2. Übergewichtung der Daten von Minderheiten, um sicherzustellen, dass die KI-Modelle auf diese Gruppen spezifisch trainiert werden.\n3. Verwendung von Synthetischen Datensätzen, um die Datengrundlage zu erweitern und die Repräsentation von Minderheiten zu verbessern.\n4. Regelmäßige Überprüfung und Aktualisierung der Trainingsdaten, um sicherzustellen, dass die KI-Modelle auf dem neuesten Stand der Forschung und der demografischen Veränderungen bleiben.\n",
+      "id_in_dialogue": 15,
+      "timestamp": "2024/02/07-11:29:50",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "e7a2e339d73a25a5175b58568b094164",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "e7a2e339d73a25a5175b58568b094164",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "opinion_1": 0,
+      "opinion_1_reason": "Fehlendes Interesse",
+      "opinion_2": 0.6,
+      "argument_quality_2": 0.6,
+      "user_information_argument_breadth": 1,
+      "user_information_argument_depth": 0.5,
+      "positive_critics": "Es wurde auf mich und meine Bedenken eingegangen",
+      "negative_critics": "Ich hätte gerne noch eine Erklärung bekommen wie einzelne Aspekte in Realität umgesetzt werden könnten "
+    }
+  }
+}

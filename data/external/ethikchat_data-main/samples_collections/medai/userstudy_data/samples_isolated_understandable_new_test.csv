@@ -1,0 +1,104 @@
+,label,text
+user,Z.K15,"Die Qualität derzeitiger KI Recommender ist sehr heterogen. Bei einer KI gibt es keine Garantie, dass sie nicht grob falsche Vorschläge macht."
+user,Z.K10,"Aber ist nicht gerade der ältere Teil der Gesellschaft der, der einer KI misstrauisch gegenüber steht."
+user,Z.K6,manchmal ist kreatives und themenübergreifendes denken für richtige diagnosen essentiell
+user,Z.P6,KI sind präziser
+user,Z.K6,Echte Ärzte sind nicht durch KI zu ersetzen.
+user,Z.K1,Das Gespräch mit einem Arzt/Ärztin trägt wesentlich zum Behandlungserfolg bei. Das kann eine KI nicht ersetzen.
+user,Z.K10,Aber insbesondere auf dem Land möchten die älteren Menschen eine persönliche Betreuung und nicht durch Technik behandelt werden.
+user,Z.K15,Gefährliche Krankheiten werden dann nicht erkannt
+user,Z.P2,Menschliche Fehler sind bei der KI ausgeschlossen
+user,Z.K4,"Was aber, wenn die KI einen Fehler aufweist? Kein System ist perfekt. Die KI würde in einem solchen Fall gleichbleibend fehlerbehaftete Ergebnisse liefern und hätte als System eine größere Auswirkung, da sie standardisiert an mehreren Orten zu Einsatz kommt. Ein menschlicher Fehler hätte zunächst nur auf einen kleineren Patientenkreis Auswirkungen."
+user,Z.K14,Pflegepersonal kann auch ersetzt werden
+user,Z.K1,"Man will aber lieber mit einer Person sprechen, die eventuell schon ähnliche Erfahurngen im menschlichen Leben gemacht hat"
+user,Z.P2,"Ich glaube eine KI ist über den Tag hin leistungsfähiger und macht weniger Fehler aufgrund von Überlastung oder Erschöpfung. Für diagnostische Zwecke halte ich es für sinnvoll und würde den Ärzten viel Zeit sparen, die sie für die Behandlung der Patienten nutzen können"
+user,Z.K1,"Das ist ja noch schlechter, man würde Patienten mit kleineren Problemen diskriminieren und ihnen das Gegühl geben dass sie weniger Berücksichtigt werden als Patienten mit schlimmeren Problemen"
+user,NZ.K10,"Deswegen würde ich eine KI nie als vollständigen Ersatz einsetzen, sondern eher ergänzend"
+user,NZ.K8,es ist immer möglich eine ki auszunutzen. es ist nicht möglich die innere funktionsweise einer ki nachzuvollziehen
+user,Z.P5,"Ich vermute, dass in einem fortgeschrittenen Stadium eine KI die kosten verringern wird, da sie die Arbeit von mehr Menschen übernehmen kann, als neuer Arbeitsaufwand durch sie entsteht."
+user,Z.K1,Außerdem ist die emotionale Verbindung zwischen medizinischem personal und Patient für eine gute behandlung essentiell
+user,Z.K9,Kann die KI anfällig für Cyberangriffe sein?
+user,Z.K2,Eine KI kann aber die teils komplexen Lebensumstände nicht einbeziehen und würde damit eine insgesamt schlechtere Behandlung liefern.
+user,Z.P6,"Ich finde Ärzte sollen durch KI ersetzt werden, weil Menschen fehlbar sind"
+user,Z.P3,Eine KI ist immer auf dem neuesten Stand der Wissenschaft und kann sich problemlos weiter fortbilden.
+user,Z.K9,Kann gehäckt werden
+user,Z.K15,Manchmal kann die IA Fehler machen die nur Personen lösen können
+user,Z.K9,Eine KI könnte auch gehackt werden
+user,Z.K7,Menschen sind einfühlsamer und können denke ich einfach präziser arbeiten
+user,Z.K1,"Meiner Meinung nach ist es wichtig, dass Ärtze eine Einschätzung der gesundheitlichen Lage in Person und vor Ort durchführen müssen, was durch eine KI nicht möglich ist."
+user,Z.K15,ja aber eine KI kann unbekannte Krankheiten nur falsch diagnostizieren und nicht erforschen?
+user,Z.K1,Zur diagnose mag eine KI gut sein aber um sich um Patientinnen zu kümmern braucht es einen Menschen
+user,Z.P5,"Durch Einsparung von Personal bei Ärzt*innen, kann mehr für Pflegepersonal ausgegeben werden."
+user,Z.K10,Das stimmt. Ich habe allerdings mehr Vertrauen in Menschen als in Maschinen. Maschinen können auch Fehler machen
+user,Z.P7,"Die Finanzen werden auf Dauer eh immer problematischer. Ich denke, das auf lange Sicht eine Wandlung im Gesundheitssystem nötig ist, sodass Krankenhäuser keine wirtschaftlich rentablen Unternehmen mehr sein müssen."
+user,Z.P1,"Ich habe meine Position wohl falsch gewählt. Meine Meinung ist, dass KI eine vergleichbare Zulassung bekommen soll. Der Grund hierfür ist, dass KI eine 24h Verfügbarkeit hat und die Behandlung konstante Qualität bietet. Menschliches Versagen ist nur bei der Programmierung der KI möglich."
+user,Z.K13,"Wenn ich darüber nachdenke, woher solche System kommen sollten, dann fallen mir da eigentlich nur die großen Internetfirmen wie Google oder Apple ein. Und dann wäre das schon sehr problematisch, wenn unsere Gesundheitswesen Schritt für Schritt in die Hände von großen Konzernen wandert. Damit würden ja auch alle Patientenakten bei den entwicklern des Systems landen oder?"
+user,Z.P3,Ki verfügt über gleiches oder mehr wissen als das menschliche Gehirn
+user,Z.K3,"Und wer trägt die Verantwortung für die KI bei falsch getroffenen Diagnosen, die im schlimmsten Fall tödlich enden?"
+user,Z.K1,"Ich denke KI kann nicht auf die gleiche Weise eine Verbindung zum Patienten aufbauen, wie ein Mensch das könnte. Das ist jedoch essentiell für bestimmte Therapien, da die psychologie der Menschen einen wesentlichen Teil des Heilungsprozesses ausmachen kann."
+user,Z.K10,"Außerdem wäre es doch auch in der Anfangszeit für alte Menschen problematisch oder? Ich glaube nicht, dass meine Oma sich von einem Computer behandeln lassen wollen würde."
+user,Z.P6,"Im Gegensatz zu Menschen kann eine Ki quasi unendlich viele Informationen aufnehmen und verarbeiten, ohne diese zu vergessen. Lernt sie von realen Daten so wird sie immer die Entscheidungen treffen die die höchste Wahrscheinlichkeit für ein gutes Ergebnis zur Folge hat."
+user,Z.K5,Aber eine KI könnte die Ergebnisse nicht verständlich dem Menschen erklären. Er würde die Diagnose gar nicht verstehen.
+user,NZ.K10,Da diese ärtzte nur unterstützen sollte da die Ki immer eine Fehlerquote hat
+user,Z.P7,Das sehe ich als einen der größten Nachteile einer KI. Allerdings ist die aktuelle analoge Situation in Krankenhäuser auch nicht ideal. Momentan muss alles noch händisch erfasst werden wodurch es auch zu vielen Fehlern kommen kann und was einen enormen Aufwand für das Personal darstellt.
+user,Z.K9,"OK. Aber mit dem steigenden Einsatz der KI wird sich auch die Klinik noch attraktiver für Hackerangriffe machen. Eine Gefahr, die bei bei menschlichen Ärzten nicht direkt die Patienten treffen würde."
+user,NZ.K8,niemand kann nachvollziehen wie genau die ki funktioniert
+user,Z.P6,"Die Präzision der Diagnose steigt, wenn menschliches, also fehlerhaftes, Urteilsvermögen weitestgehend abgekoppelt werden."
+user,Z.K10,"Das stimmt, da gebe ich dir Recht. Nichtsdesto trotz kann man zu KI keine persönliche Bindung aufbauen, kein Vertrauen kann entstehen."
+user,Z.K14,"Allerdings sollte man darauf achten, dass die KI letztendlich den menschlichen Arzt nicht völlig verdrängt oder? Das Berufsbild des Arztes könnte als zu unsicher gelten."
+user,NZ.K10,"Sollte die KI gute Qualität erzielen und die Option bestehen, im Zweifel einen menschlichen Arzt zu Rate zu ziehen, dann steht einem Einsatz nichts im Wege."
+user,Z.K7,"Im Alltag ist die ärztliche Zuwendung ein wichtiger Teil der Patientenversorgung. Das spricht zwar nicht gegen die medKI, ist aber ein Nachteil, den man akzeptieren muss."
+user,Z.K7,"Dadurch wird der ganze Behandlungsprozess aber viel weniger empathisch, was eine essentielle Qualifikation für einen Arzt ist und nie durch eine KI ersetzt werden kann. Viele, gerade ältere Leute benötigen neben einer Diagnose auch einfach menschliche Aufmerksamkeit"
+user,Z.K14,"Dies wäre aber nur bei größeren Notfällen von Bedeutung, zumahl extrem viele Arbeitsplätze verloren gehen würden"
+user,Z.K1,Was ist mir der persönlichen Beziehung?
+user,Z.K14,Einige Menschen würde die Möglichkeit verwehrt bleiben Mediziner zu werden. Für einige ist das ein Traumberuf. Sie hätten keine Berufung mehr.
+user,Z.K2,Die individuelle Betrachtung durch das Fachpersonal ist notwendig
+user,Z.K1,"Die Diagnosen und therapeutischen Entscheidungen treffen Menschen und sollten daher auch von Menschen kommen, da eine KI immer unpersönlicher ist und keine Zuwendung gibt. Evtl. sich positiv auswirkender Kontakt und Zuspruch im Hinblick auf die Therapie würden wegfallen."
+user,Z.K1,Kommunikation mit realen Menschen ist angenehmer
+user,Z.K7,"Ich kann mir nicht vorstellen, das ein KI die persönlichen Gesichtspunkte/ psychische mit einbezieht in seine Diagnose Fakten sind nicht alles, zudem glaube ich das ältere Menschen vor der Technik Angst bekommen könnten"
+user,Z.K3,"Wenn eine KI eine falsche diagnose stellt, wer trägt die verantwortung?"
+user,Z.K14,Was würde mit bereits arbeitenden Medizinern passieren? Wären sie arbeitslos?
+user,Z.K7,Medizin ist auch viel Psychologie und eine KI kann nicht wirklich auf die Psyche der Patienten eingehen.
+user,Z.K3,Mich würde aber auch interessiert wie viel Haftung dan die krankenpflegekraft tragen muss wenn die ki falsch entscheiden würde und sie es nicht erkennt
+user,Z.K1,Echte Ärzte können empathisch auf Patientinnen eingehen
+user,Z.K3,"Ich finde der ethische Aspekt geht hier Hand in Hand mit dem Sozialen. Eine medKI kann sehr gut bei Diagnose und Behandlungsstrategien helfen. Die KI sollte aber mehr wie eine Verlängerung der ärztlichen Fähigkeiten wirken, sonst wird wichtige Aspekte der Behandlung, sowie die Forschung beeinträchtigt. Auch die Frage der Verantwortung wird durch eine selbstständige KI erschwert."
+user,Z.P1,Es gibt zu wenig gute Ärzte. Die Wartezeiten für freie Termine sind sehr lange.
+user,Z.P6,Mehr Daten zur Beurteilung
+user,NZ.K10,"Nicht die KI alleine sollte Diagnosen stellen, sondern auch Fachpersonal sollte gegebenenfalls zur Verfügung stehen"
+user,Z.K7,"Mein Hauptproblem mit eines KI, die äquivalent zu einem menschlich Arzt ist, ist die fehlende menschliche Seite im Austausch mit Patient und Arzt."
+user,NZ.K10,"MedKIs könnten als Unterstützung dienen, aber nicht als Arztersatz"
+user,Z.K3,dass eine KI nicht verklagt werden kann.
+user,Z.K14,Mit Robotern steigt die Arbeotslosenrate
+user,Z.K14,Und Arbeitsplätze gehen verloren und Menschen müssen sich langweilen und müssen einen Job machen der ihnen keinen Spaß macht.
+user,FAQ.2,"Okay, also bin ich der Meinung dass eine KI niemals so gute Ergebnisse liefern kann wie ein Mensch. Aber in unserem Szenario gehen wir jetzt davon aus dass es möglich wäre?"
+user,NZ.K10,Allerdings sollte die Entscheidungshoheit beim behandelnden Arzt liegen. Dies vermittelt zusätzliches Vertrauen.
+user,NZ.K10,"Ja, deswegen sollte der letzte Schritt immer bei den Ärzten liegen."
+user,NZ.K10,In dieser Funktion ist die KI aber meiner Meinung nach ein Helfer für die Ärzt*innen. Ich würde es in diesem Fall mit einer hochintelligenten Wissensquelle für Ärzt*innen vergleichen. Aber muss dann wirklich auch die KI die endgültige Entscheidung treffen? Die Entscheidung können doch dann die Ärzt*innen mit dem so erlangten Wissen treffen.
+user,Z.P6,"Hallo. Im vorausgesetzten Szenario ist die KI fähig, die ärztlichen Aufgaben zu übernehmen. Aufgrund einer größeren Datengrundlage kann sie diese im Idealfall sogar präziser ausführen als Ärzt*innen."
+user,Z.K14,"Das stimmt, Pflegepersonal kann ebenso ersetzt werden"
+user,Z.K14,Maschinen sollten ausgebildeten Ärzten nicht die Arbeitsplätze wegnehmen
+user,Z.K3,"Aber wenn diese KI mich falsch behandelt, wer übernimmt dafür die Verantwortung?"
+user,Z.K7,"Der menschliche Kontakt zwischen Arzt und Patienten, welcher ebenfalls viel zu Heilungsprozessen beitragen kann, kann von einer Maschine nicht genauso nachempfunden werden, wie es bei Menschen der Fall ist."
+user,Z.K1,Einfühlsamkeit
+user,Z.P7,Oft haben Ärzte überhaupt nicht die Zeit und den Willen Patienten die nötige Zuneigung und Aufmerksamkeit zu geben die ein kranker Mensch benötigt.
+user,Z.P6,"Bessere Diagnose, quasi frei von Vorurteilen."
+user,Z.P1,"In der Pandemie hat sich gezeigt, dass ein Mangel an medizinischem Fachpersonal besteht. Wenn eine KI manche Aufgaben übernehmen kann, bleibt mehr Zeit für die nicht von der KI behandelbaren Patienten."
+user,NZ.K10,aber in letzter Instanz sollte doch ein Arzt entscheiden.
+user,Z.P3,"Ärzt*innen treffen ihre Entscheidungen aufgrund von Erfahrung und erlernter Symptombilder. Da eine KI wesentlich größere Datenmengen verarbeiten kann, sind die Entscheidungen einer KI genauso valide."
+user,Z.K7,allerdings bietet die KI somit auch keine menschliche Nähe und emotionale Hilfe. Psychologische Hilfe beispielsweise lebt von der persönlichen Beziehung zwischen Patient und Therapeut. Das würde bei einer medKI komplett wegfallen. Eine positive Mentalität vom Arzt hilft auch dem Patienten sehr.
+user,Z.P5,"Da das medizinischer Personal eine einfachere Ausbildung hat, ist es kostengünstiger als Ärzte. Insgesamt ist das eine Ersparnis."
+user,Z.P2,KI sind objektiv
+user,Z.K7,Bei schwerwiegenden Diagnosen keine emotionale Unterstützung durch anwesende Person
+user,Z.P2,Die KI würde auch unter Stress fehlerfrei arbeiten im Gegensatz zu Ärzten
+user,Z.K6,Bisher haben Ärzte ihre Arbeit geleistet und das passend. Ich sehe keine 100%ige Nötigkeit dies auf ausschließlich KIs umzurüsten.
+user,Z.K3,"wenn eine KI fehler macht, wer haftet?"
+user,NZ.K10,"Als zusätzliche Hilfe vielleicht, aber ich stimme nicht zu, dass es ausschließlich medKIs geben sollte"
+user,Z.K10,"Ich stelle es mir gerade bei älteren Menschen problematisch vor, dass diese genügend Vertrauen der KI gegenüber entwickeln werden, da gerade diese weniger nah an den technischen Entwicklungen sind."
+user,Z.K7,"Ich finde, man muss das von beiden Seiten betrachten. Es gibt klare Vorteile, aber nur wenn bestimmte Rahmenbedingungen gegeben sind (z.B. Datenschutz auch ggü Krankenkassen) und eine KI kann aus meiner Sicht niemals menschliche Empathie ersetzen."
+user,NZ.K10,Dies wäre eine gute Umsetzung. Aber wieso sollte man Ärzte nicht dennoch als Hauptakteur einsetzen und nur den medKI als Unterstützung?
+user,Z.K1,Im Gegensatz zu Maschinen haben Menschen Empathiefähigkeit die eine wichtige Rolle spielt.
+user,NZ.K10,"Ich denke eine KI kann einen Arzt nicht komplett ersetzen, allerdings in der Entscheidungsfindung unterstützen."
+user,Z.K2,KIs gehen nicht individuell drauf ein
+user,Z.K7,"Therapeutische und medikamentöse Entscheidungen können starke Folgen für die Entwicklung/Genesung des Patienten/der Patientin nach sich ziehen. Einem Roboter fehlt Empathie, die Möglichkeit Vertrauensperson und Ansprechpartner für Patient*innen zu sein."
+user,Z.K9,"Wenn derart viele Daten erhoben werden, steigt gleichzeitig auch das Risiko für Hackerangriffe auf ebenjene Daten."
+user,Z.K6,Ich glaube die Berufserfahrung von Ärzt*innen ist nicht durch Pateintendaten für eine KI zu ersetzen

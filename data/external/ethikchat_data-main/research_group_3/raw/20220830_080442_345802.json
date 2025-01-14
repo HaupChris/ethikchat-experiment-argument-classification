@@ -1,0 +1,832 @@
+{
+  "name": "20220830_080442_345802",
+  "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE",
+  "start": "2022/08/30-08:04:42",
+  "end": "2022/08/30-08:15:21",
+  "utterances": [
+    {
+      "user": "3095c3e4f1465133e5e6be134eb2ebe2",
+      "type": "user",
+      "text": "Eine KI arbeitet 24/7 und ist immer voll leistungsfähig.",
+      "id_in_dialogue": 0,
+      "timestamp": "2022/08/30-08:05:56",
+      "true_labels": [
+        "Z.P2"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Mit anderen Worten,die medKI ist standardisiert und reproduzierbar. Das ist ein gutes Argument. Direkt dazu: Probleme einer medKI sind grundsätzlicher Art, wie Strukturfehler im System. Während Fehler von einzelnen Ärzt:innen gemacht werden, wird eine fehlerhafte medKI an zahlreichen Standorten eingesetzt, wodurch Fehler deutlich gravierender ausfallen können. Im Übrigen: Eine medKI kann zwar den Ärztemangel lindern, aber dafür wird mehr medizinisches Fachpersonal (u.a.  Pflegeberufe, Praxishelfer:innen, medizinische Fachassistent:innnen usw.) einschl. neuer, ähnlicher Berufsbilder benötigt. ",
+      "id_in_dialogue": 1,
+      "timestamp": "2022/08/30-08:07:11",
+      "true_labels": [
+        "intro_32",
+        "Z.P2",
+        "intro_47",
+        "Z.K4",
+        "z_trans_10",
+        "Z.P1-1"
+      ],
+      "true_bounds": [
+        [
+          0,
+          19
+        ],
+        [
+          19,
+          67
+        ],
+        [
+          67,
+          108
+        ],
+        [
+          108,
+          362
+        ],
+        [
+          362,
+          374
+        ],
+        [
+          374,
+          599
+        ]
+      ],
+      "is_template": true,
+      "search_terms": [],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_32",
+          "intro_25",
+          "intro_24",
+          "intro_27",
+          "intro_26",
+          "intro_28",
+          "intro_23"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.P2",
+        "introductions": [
+          "intro_47",
+          "intro_50",
+          "intro_46",
+          "intro_48",
+          "intro_49",
+          "intro_51",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_10",
+          "z_trans_8",
+          "z_trans_1",
+          "z_trans_2",
+          "z_trans_4",
+          "z_trans_9",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [
+          "Z.K4"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.P1-1",
+          "Z.K18",
+          "Z.K7",
+          "Z.K1",
+          "Z.K2",
+          "Z.K5",
+          "Z.K10",
+          "Z.K3",
+          "Z.K12",
+          "Z.K9",
+          "Z.K15",
+          "Z.K11",
+          "Z.K13",
+          "Z.K14",
+          "Z.K16",
+          "Z.P1-2",
+          "Z.K6",
+          "Z.K19"
+        ],
+        "preselect_second_argument": true
+      }
+    },
+    {
+      "user": "3095c3e4f1465133e5e6be134eb2ebe2",
+      "type": "user",
+      "text": "Berufe durchlaufen einen stetigen Wandel und es ist durchaus als positives Argument zusehen, dass neue/weiteres Personal, mit weniger Hürden als ein klassischer Arzt mit seiner langwierigen  Ausbildung, im Bereich der Medizin Arbeit finden. ",
+      "id_in_dialogue": 2,
+      "timestamp": "2022/08/30-08:09:51",
+      "true_labels": [
+        "Z.P1-1-1"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Mit anderen Worten,das Berufsbild des Medizinisches Fachpersonals wird aufgewertet. Da gebe ich dir recht. Darüber hinaus finde ich, dass hier noch folgendes beachtet werden sollte: Eine rund um die Uhr erreichbare medKI wäre allerdings sehr teuer, da in dem Untersuchungszentrum viel medizinisches Personal erforderlich ist.",
+      "id_in_dialogue": 3,
+      "timestamp": "2022/08/30-08:10:24",
+      "true_labels": [
+        "intro_32",
+        "Z.P1-1-1",
+        "intro_6",
+        "z_trans_1",
+        "Z.P1-2"
+      ],
+      "true_bounds": [
+        [
+          0,
+          19
+        ],
+        [
+          19,
+          83
+        ],
+        [
+          83,
+          106
+        ],
+        [
+          106,
+          181
+        ],
+        [
+          181,
+          325
+        ]
+      ],
+      "is_template": true,
+      "search_terms": [],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_32",
+          "intro_24",
+          "intro_28",
+          "intro_25",
+          "intro_27",
+          "intro_26",
+          "intro_23"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.P1-1-1",
+        "introductions": [
+          "intro_6",
+          "intro_5",
+          "intro_4",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_1",
+          "z_trans_2",
+          "z_trans_4",
+          "z_trans_8",
+          "z_trans_9",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [],
+        "preselect_first_argument": false,
+        "second_arguments": [
+          "Z.P1-2",
+          "Z.K18",
+          "Z.K7",
+          "Z.K1",
+          "Z.K2",
+          "Z.K5",
+          "Z.K10",
+          "Z.K3",
+          "Z.K12",
+          "Z.K9",
+          "Z.K15",
+          "Z.K11",
+          "Z.K13",
+          "Z.K14",
+          "Z.K16",
+          "Z.K6",
+          "Z.K19"
+        ],
+        "preselect_second_argument": true
+      }
+    },
+    {
+      "user": "3095c3e4f1465133e5e6be134eb2ebe2",
+      "type": "user",
+      "text": "Die Kostenfrage ist relativ, da sie sich wohl mit der Zeit amortisieren dürften. Somit wäre die KI langfristig sogar preiswerter und könnte auch in ländlichen Gegenden zum Einsatz kommen, wo auch aus Kostengründen ein Ärztemangel besteht. ",
+      "id_in_dialogue": 4,
+      "timestamp": "2022/08/30-08:11:33",
+      "true_labels": [
+        "Z.P5"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Du merkst an, dassdie medKI ist kostengünstiger bei höherer Qualität. Das ist ein gutes Argument. Andererseits: Es sollte aber auch ausreichend Geld vorhanden sein, um gute Medizin bereitzustellen. Notfalls muss mehr Geld für die medizinische Versorgung ausgegeben werden. Ferner: Wenn Fehler vom Fachpersonal in den Datenerhebungszentren gemacht werden, kommt die medKI zu falschen Schlussfolgerungen. Daher kann man sich auf die Entscheidungen nicht verlassen.",
+      "id_in_dialogue": 5,
+      "timestamp": "2022/08/30-08:12:15",
+      "true_labels": [
+        "intro_28",
+        "Z.P5",
+        "intro_46",
+        "Z.P5-1",
+        "z_trans_8",
+        "Z.K18"
+      ],
+      "true_bounds": [
+        [
+          0,
+          18
+        ],
+        [
+          18,
+          69
+        ],
+        [
+          69,
+          111
+        ],
+        [
+          111,
+          272
+        ],
+        [
+          272,
+          280
+        ],
+        [
+          280,
+          462
+        ]
+      ],
+      "is_template": true,
+      "search_terms": [],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_28",
+          "intro_25",
+          "intro_27",
+          "intro_32",
+          "intro_26",
+          "intro_23",
+          "intro_24"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.P5",
+        "introductions": [
+          "intro_46",
+          "intro_51",
+          "intro_48",
+          "intro_47",
+          "intro_49",
+          "intro_50",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_8",
+          "z_trans_10",
+          "z_trans_1",
+          "z_trans_2",
+          "z_trans_4",
+          "z_trans_9",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [
+          "Z.P5-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.K18",
+          "Z.K7",
+          "Z.K1",
+          "Z.K2",
+          "Z.K5",
+          "Z.K10",
+          "Z.K3",
+          "Z.K12",
+          "Z.K9",
+          "Z.K15",
+          "Z.K11",
+          "Z.K13",
+          "Z.K14",
+          "Z.K16",
+          "Z.K6",
+          "Z.K19"
+        ],
+        "preselect_second_argument": true
+      }
+    },
+    {
+      "user": "3095c3e4f1465133e5e6be134eb2ebe2",
+      "type": "user",
+      "text": "Aber auch Menschen machen Fehler. Im Gegensatz zum Menschen wird man entsprechende Fehler bei der KI beheben könne und somit wahrscheinlicher entsprechende Fehler in Zukunft vermeiden.",
+      "id_in_dialogue": 6,
+      "timestamp": "2022/08/30-08:13:06",
+      "true_labels": [
+        "Z.K18-1"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Dein Argument ist, dassdie medKI benötigt gut ausgebildetes Fachpersonal für die Datenerfassung. Ich denke damit liegst du richtig. Darüber hinaus finde ich, dass hier noch folgendes beachtet werden sollte: medKIs führen dazu, dass Patient:innen alleine bleiben, weil sie keine menschliche Zuwendung bekommen. Persönlicher Kontakt mit Ärzt:innen und aufmunternder Zuspruch kann schon zu einer Verbesserung des Zustands beitragen.",
+      "id_in_dialogue": 7,
+      "timestamp": "2022/08/30-08:13:31",
+      "true_labels": [
+        "intro_25",
+        "Z.K18-1",
+        "intro_5",
+        "z_trans_1",
+        "Z.K1"
+      ],
+      "true_bounds": [
+        [
+          0,
+          23
+        ],
+        [
+          23,
+          96
+        ],
+        [
+          96,
+          131
+        ],
+        [
+          131,
+          206
+        ],
+        [
+          206,
+          429
+        ]
+      ],
+      "is_template": true,
+      "search_terms": [],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_25",
+          "intro_26",
+          "intro_23",
+          "intro_24",
+          "intro_27",
+          "intro_32",
+          "intro_28"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.K18-1",
+        "introductions": [
+          "intro_5",
+          "intro_4",
+          "intro_6",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_1",
+          "z_trans_2",
+          "z_trans_4",
+          "z_trans_8",
+          "z_trans_9",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [],
+        "preselect_first_argument": false,
+        "second_arguments": [
+          "Z.K1",
+          "Z.K2",
+          "Z.K15",
+          "Z.K6",
+          "Z.K7",
+          "Z.K5",
+          "Z.K10",
+          "Z.K3",
+          "Z.K12",
+          "Z.K9",
+          "Z.K11",
+          "Z.K13",
+          "Z.K14",
+          "Z.K16",
+          "Z.K19"
+        ],
+        "preselect_second_argument": true
+      }
+    },
+    {
+      "user": "3095c3e4f1465133e5e6be134eb2ebe2",
+      "type": "user",
+      "text": "Vorliegend geht es doch um eine spezialisierte KI, die eigenständig Diagnosen stellt und therapeutische Entscheidungen trifft. Sie ersetz nicht das komplette Personal in den Untersuchungszentren, sodass sie durchaus auch weiterhin menschliche Zuwendung bekommen.",
+      "id_in_dialogue": 8,
+      "timestamp": "2022/08/30-08:14:46",
+      "true_labels": [
+        "Z.K1-1"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Du merkst an, dassmenschliche Zuwendung wird durch Fachpersonal gewährleistet. Dem würde ich zustimmen. Darüber hinaus finde ich, dass hier noch folgendes beachtet werden sollte: Eine medKI kann nicht alle Lebensumstände der Patient:innen in die Untersuchung mit einbeziehen. Das Umfeld und die Lebenssituation der Patient:innen können jedoch für die Diagnostik und die passende Therapieentscheidung enorm wichtig sein.",
+      "id_in_dialogue": 9,
+      "timestamp": "2022/08/30-08:15:01",
+      "true_labels": [
+        "intro_28",
+        "Z.K1-1",
+        "intro_4",
+        "z_trans_1",
+        "Z.K2"
+      ],
+      "true_bounds": [
+        [
+          0,
+          18
+        ],
+        [
+          18,
+          78
+        ],
+        [
+          78,
+          103
+        ],
+        [
+          103,
+          178
+        ],
+        [
+          178,
+          419
+        ]
+      ],
+      "is_template": true,
+      "search_terms": [],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_28",
+          "intro_25",
+          "intro_32",
+          "intro_23",
+          "intro_26",
+          "intro_24",
+          "intro_27"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.K1-1",
+        "introductions": [
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_1",
+          "z_trans_2",
+          "z_trans_4",
+          "z_trans_8",
+          "z_trans_9",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [],
+        "preselect_first_argument": false,
+        "second_arguments": [
+          "Z.K2",
+          "Z.K15",
+          "Z.K6",
+          "Z.K7",
+          "Z.K5",
+          "Z.K10",
+          "Z.K3",
+          "Z.K12",
+          "Z.K9",
+          "Z.K11",
+          "Z.K13",
+          "Z.K14",
+          "Z.K16",
+          "Z.K19"
+        ],
+        "preselect_second_argument": true
+      }
+    }
+  ],
+  "surveys": [
+    {
+      "name": "3095c3e4f1465133e5e6be134eb2ebe2",
+      "type": "StartSurvey",
+      "agreement": 0.75
+    },
+    {
+      "name": "3095c3e4f1465133e5e6be134eb2ebe2",
+      "type": "EndSurvey",
+      "agreement": "0.75",
+      "opinion": "1",
+      "text_like": "Test",
+      "text_dislike": ""
+    }
+  ]
+}

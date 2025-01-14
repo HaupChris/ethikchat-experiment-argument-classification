@@ -1,0 +1,328 @@
+{
+  "name": "20240207_113419_117880",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:34:19",
+  "end": "2024/02/07-11:49:26",
+  "utterances": [
+    {
+      "user": "CXHMS",
+      "type": "user",
+      "text": "weniger empathie",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:34:40",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe, dass Sie Bedenken hinsichtlich der geringeren Empathie von KI-Systemen gegenüber menschlichem medizinischem Personal haben. Es ist wichtig zu beachten, dass eine medizinische KI in Untersuchungszentren nicht ersetzen, sondern lediglich unterstützen und entlasten würde. Dennoch sollte die medKI eigenständige Entscheidungen treffen dürfen, da sie in der Lage ist, eine unvergleichliche Datenmenge zu verarbeiten und zu analysieren, was zu präziseren Diagnosen und Therapieentscheidungen führen kann.\n",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:34:45",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "CXHMS",
+      "type": "user",
+      "text": "kann man sicher sein dass sie richtig und besser arbeitet?",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-11:35:19",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, man kann sich in vielen Fällen darauf verlassen, dass eine gut programmierte medizinische KI präziser und zuverlässiger arbeitet als Menschen. Dies liegt daran, dass KIs in der Lage sind, eine enorme Menge an medizinischen Fachinformationen zu verarbeiten und zu aktualisieren, ohne durch menschliche Fehlerquellen wie Müdigkeit, Emotionen oder kognitive Verzerrungen beeinträchtigt zu werden. Dennoch sollte die medizinische KI nicht isoliert operieren, sondern als Teil eines größeren medizinischen Teams, das menschliche Expertise und Intuition einbezieht, um die bestmöglichen Ergebnisse für die Patienten zu erzielen.\n",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-11:35:26",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "CXHMS",
+      "type": "user",
+      "text": "das halte ich für unwahr",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-11:35:59",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe, dass Sie skeptisch sind. Es ist wichtig zu betonen, dass keine Lösung, weder menschlich noch künstlich, zu 100% fehlerfrei ist. Dennoch haben Studien gezeigt, dass medizinische KI-Systeme, die auf großen Datenmengen trainiert wurden, oft genauere Diagnosen stellen und bessere Behandlungsempfehlungen geben können als menschliche Ärzte. Die Integration von KI in die medizinische Versorgung sollte nicht als Ersatz für menschliche Ärzte betrachtet werden, sondern als ein Werkzeug, das die Genauigkeit und Effizienz der Patientenversorgung verbessern kann.\n",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-11:36:06",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "CXHMS",
+      "type": "user",
+      "text": "fehldiagnosen sind eine gefahr",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-11:38:30",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, Fehldiagnosen können tatsächlich gefährlich sein. Um dieses Risiko zu minimieren, sollten strenge Qualitätskontrollen und Validierungsverfahren für medizinische KI-Systeme implementiert werden, bevor sie in klinischen Umgebungen eingesetzt werden. Darüber hinaus sollte die medizinische KI als Teil eines größeren medizinischen Teams operieren, das menschliche Expertise und Intuition einbezieht, um die bestmöglichen Ergebnisse für die Patienten zu erzielen. Die Zusammenarbeit zwischen Mensch und Maschine kann dazu beitragen, die Fehldiagnoseraten zu reduzieren und die Patientensicherheit zu erhöhen.\n",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-11:38:36",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "CXHMS",
+      "type": "user",
+      "text": "dazu können leute die keine ahnung von technik haben probleme haben",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-11:38:58",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sie haben Recht, dass Menschen, die wenig bis keine Erfahrung mit Technik haben, möglicherweise Schwierigkeiten haben, sich an die Nutzung einer medizinischen KI zu gewöhnen. Daher ist es entscheidend, Schulungs- und Unterstützungsmaßnahmen für das medizinische Personal bereitzustellen, um sicherzustellen, dass sie die Funktionsweise und die Vorteile der KI vollständig verstehen und effektiv nutzen können. Durch die Bereitstellung von benutzerfreundlichen Oberflächen und Schulungen kann die Akzeptanz und Effektivität der medizinischen KI in der klinischen Praxis gesteigert werden.\n",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-11:39:04",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "CXHMS",
+      "type": "user",
+      "text": "was passiert bei einem stromausfall",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-11:40:20",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Im Falle eines Stromausfalls oder technischen Ausfalls der medizinischen KI würden die Untersuchungszentren auf ihre etablierten Notfallprotokolle zurückgreifen. Das medizinische Personal, das in diesen Einrichtungen arbeitet, wäre weiterhin in der Lage, manuelle Diagnose- und Behandlungsverfahren durchzuführen. Obwohl die Einführung einer medizinischen KI die Effizienz und Präzision der Patientenversorgung verbessern kann, sollte die Funktionsweise der KI so gestaltet werden, dass sie im Falle eines Ausfalls nicht kritische Versorgungslücken hinterlässt.\n",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-11:40:25",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "CXHMS",
+      "type": "user",
+      "text": "arbeitsplätze fallen weg",
+      "id_in_dialogue": 12,
+      "timestamp": "2024/02/07-11:41:38",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die Einführung einer medizinischen KI in Untersuchungszentren könnte tatsächlich zu Veränderungen in der Arbeitsplatzlandschaft führen, was möglicherweise zur Reduzierung einiger Arbeitsplätze führt. Dennoch ist es wichtig zu beachten, dass die Integration von KI auch neue Arbeitsplätze schaffen und das Gesundheitssystem insgesamt effizienter gestalten kann.\nMedizinisches Personal könnte von der KI entlastet werden und sich auf komplexere Aufgaben konzentrieren, was zu einer höheren Arbeitszufriedenheit führen kann. Die Aus- und Weiterbildung des Personals sollte angepasst werden, um sicherzustellen, dass die Belegschaft über die notwendigen Fähigkeiten verfügt, um in einem von KI geprägten Gesundheitssystem erfolgreich zu sein.\n",
+      "id_in_dialogue": 13,
+      "timestamp": "2024/02/07-11:41:49",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "CXHMS",
+      "type": "user",
+      "text": "ich will nicht dass mama ihren job verliert",
+      "id_in_dialogue": 14,
+      "timestamp": "2024/02/07-11:42:21",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich kann Ihre Sorge verstehen, dass Ihre Mutter oder andere Familienmitglieder, die im Gesundheitswesen arbeiten, von der Einführung einer medizinischen KI betroffen sein könnten. Es ist wichtig zu betonen, dass die Integration von KI nicht zwangsläufig zu massenhaften Entlassungen führen muss. Stattdessen kann sie dazu beitragen, die Arbeitsbelastung der Mitarbeiter zu reduzieren und es ihnen ermöglichen, sich auf anspruchsvollere Aufgaben zu konzentrieren.\nDie Aus- und Weiterbildung des Personals sollte angepasst werden, um sicherzustellen, dass die Belegschaft über die notwendigen Fähigkeiten verfügt, um in einem von KI geprägten Gesundheitssystem erfolgreich zu sein. Durch die Weiterentwicklung ihrer Fähigkeiten und die Übernahme neuer Rollen können Ihre Angehörigen von den Vorteilen der KI profitieren und ihre Arbeitsplätze langfristig sichern.\n",
+      "id_in_dialogue": 15,
+      "timestamp": "2024/02/07-11:42:32",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "CXHMS",
+      "type": "user",
+      "text": "kann das eine möglichkeit für geringere arbeitszeit sein?",
+      "id_in_dialogue": 16,
+      "timestamp": "2024/02/07-11:43:31",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, die Einführung einer medizinischen KI in Untersuchungszentren könnte tatsächlich zu einer Verringerung der Arbeitszeit für das medizinische Personal führen. Durch die Automatisierung routinemäßiger Aufgaben und die Unterstützung bei der Diagnose und Behandlung könnte die KI dazu beitragen, die Arbeitsbelastung der Mitarbeiter zu reduzieren und es ihnen ermöglichen, ihre Arbeitszeit besser zu verwalten.\nDies könnte wiederum positive Auswirkungen auf die Work-Life-Balance der Mitarbeiter haben und gleichzeitig die Qualität der Patientenversorgung verbessern. Allerdings sollte die Implementierung von KI sorgfältig geplant und durchgeführt werden, um sicherzustellen, dass sie die Arbeitsbelastung der Mitarbeiter tatsächlich reduziert und nicht unbeabsichtigt erhöht.\n",
+      "id_in_dialogue": 17,
+      "timestamp": "2024/02/07-11:43:40",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "CXHMS",
+      "type": "user",
+      "text": "ich mag weniger arbeit! gibts auch gleich viel geld?",
+      "id_in_dialogue": 18,
+      "timestamp": "2024/02/07-11:43:58",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die mögliche Verringerung der Arbeitszeit durch die Einführung einer medizinischen KI könnte zu einer besseren Work-Life-Balance führen, aber eine direkte Entsprechung in Form von höheren Löhnen ist nicht zwangsläufig gegeben. Die Vergütung im Gesundheitswesen hängt von vielen Faktoren ab, wie z.B. Qualifikation, Berufserfahrung, Arbeitsvertrag und regionalen Gegebenheiten.\nSollte die Arbeitszeit tatsächlich reduziert werden, wäre es jedoch sinnvoll, dass die Arbeitgeber im Gesundheitswesen die Vergütung und Arbeitsbedingungen überprüfen, um sicherzustellen, dass die Mitarbeiter weiterhin motiviert und zufrieden sind und die Qualität der Patientenversorgung aufrecht erhalten wird.\n",
+      "id_in_dialogue": 19,
+      "timestamp": "2024/02/07-11:44:07",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "CXHMS",
+      "type": "user",
+      "text": "es können risken auftreten die man nocg nicht kennt! was ist wenn viel wissen und know how verloren geht weil man sich komplett auf die ki verlässt",
+      "id_in_dialogue": 20,
+      "timestamp": "2024/02/07-11:45:49",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sie haben Recht, dass die zunehmende Abhängigkeit von medizinischer KI potenzielle Risiken mit sich bringen kann, insbesondere wenn es um den Verlust von Wissen und Fähigkeiten des medizinischen Personals geht. Um diesen Risiken entgegenzuwirken, sollten einige Maßnahmen ergriffen werden:\n1. Kontinuierliche Fortbildung: Das medizinische Personal sollte regelmäßig geschult und auf dem Laufenden gehalten werden, um sicherzustellen, dass sie über die notwendigen Fähigkeiten und Kenntnisse verfügen, um mit der KI zu interagieren und diese effektiv zu nutzen.\n2. Überwachung und Validierung: Es ist wichtig, die Leistung der KI kontinuierlich zu überwachen und zu validieren, um sicherzustellen, dass sie korrekt und sicher arbeitet.\n3. Mensch-Maschine-Interaktion: Die medizinische KI sollte als Unterstützung für das Personal dienen, nicht als Ersatz. Das medizinische Personal sollte weiterhin die endgültigen Entscheidungen treffen und die Verantwortung für die Patientenversorgung übernehmen.\n4. Notfallplanung: Es sollten Notfallpläne entwickelt und implementiert werden, um sicherzustellen, dass das Personal im Falle eines technischen Ausfalls oder einer Störung der KI weiterhin in der Lage ist, die Patientenversorgung aufrechtzuerhalten.\nDurch die Umsetzung dieser Maßnahmen kann das Risiko des Wissens- und Fähigkeitsverlusts reduziert werden, und das medizinische Personal kann sicherstellen, dass es die Kontrolle über die Patientenversorgung behält.\n",
+      "id_in_dialogue": 21,
+      "timestamp": "2024/02/07-11:46:05",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "CXHMS",
+      "type": "user",
+      "text": "ich habe bedenken beim datenschutz",
+      "id_in_dialogue": 22,
+      "timestamp": "2024/02/07-11:48:11",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Bedenken hinsichtlich des Datenschutzes sind durchaus berechtigt. Der Schutz sensibler Patientendaten ist von entscheidender Bedeutung, wenn es um die Einführung einer medizinischen KI geht. Um die Privatsphäre der Patienten zu wahren, sollten folgende Maßnahmen ergriffen werden:\n1. Datenschutz durch Design: Die medizinische KI sollte so entwickelt werden, dass sie die Datenschutzprinzipien von Anfang an integriert.\n2. Datenverschlüsselung: Sensible Patientendaten sollten während der Übertragung und Speicherung verschlüsselt werden, um unbefugten Zugriff zu verhindern.\n3. Zugriffsbeschränkungen: Der Zugriff auf Patientendaten sollte auf die notwendigen Mitarbeiter beschränkt werden, und es sollten Protokolle implementiert werden, um die Aktivitäten der Benutzer zu überwachen und zu auditieren.\n4. Transparenz und Rechenschaftspflicht: Die Patienten sollten über die Art und Weise informiert werden, wie ihre Daten verwendet und geschützt werden, und es sollte eine Rechenschaftspflicht für den Umgang mit Patientendaten bestehen.\n5. Recht auf Vergessenwerden: Patienten sollten das Recht haben, die Löschung ihrer Daten zu verlangen, sofern dies rechtlich zulässig ist und keine übergeordneten Interessen entgegenstehen.\nDurch die Umsetzung dieser Datenschutzmaßnahmen kann das Vertrauen der Patienten in die medizinische KI gestärkt und das Risiko von Datenschutzverletzungen minimiert werden.\n",
+      "id_in_dialogue": 23,
+      "timestamp": "2024/02/07-11:48:26",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "CXHMS",
+      "type": "user",
+      "text": "hacker können meine daten leaken. das lässt sich nie verhindern",
+      "id_in_dialogue": 24,
+      "timestamp": "2024/02/07-11:48:31",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Obwohl es wahr ist, dass keine Sicherheitsmaßnahme zu 100% gegen Hackerangriffe schützen kann, können wir durch die Implementierung robuste Sicherheitsvorkehrungen und Best Practices das Risiko von Datenlecks minimieren. Einige dieser Maßnahmen umfassen:\n1. Starke Authentifizierung: Verwenden Sie starke Passwörter, Zwei-Faktor-Authentifizierung und andere fortschrittliche Authentifizierungsmethoden, um den Zugriff auf Patientendaten zu schützen.\n2. Netzwerksicherheit: Implementieren Sie Firewalls, Intrusion Detection Systeme und andere Sicherheitstools, um Ihr Netzwerk vor unbefugtem Zugriff zu schützen.\n3. Regelmäßige Updates und Patches: Stellen Sie sicher, dass Ihre Systeme und Anwendungen auf dem neuesten Stand sind, indem Sie regelmäßig Sicherheitsupdates und Patches installieren.\n4. Sicherheitsaudits und Penetrationstests: Führen Sie regelmäßige Sicherheitsaudits und Penetrationstests durch, um potenzielle Schwachstellen in Ihren Systemen und Anwendungen zu identifizieren und zu beheben.\n5. Mitarbeiterschulung: Schulen Sie Ihr Personal in Bezug auf Best Practices für Datensicherheit und sensibilisieren Sie sie für die Risiken von Social Engineering und Phishing-Angriffen.\nIndem Sie diese Maßnahmen umsetzen, können Sie das Risiko von Datenlecks durch Hackerangriffe erheblich reduzieren und das Vertrauen der Patienten in die medizinische KI stärken.\n",
+      "id_in_dialogue": 25,
+      "timestamp": "2024/02/07-11:48:43",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "a76d1903be9e3def28eeac709aa29d59",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "a76d1903be9e3def28eeac709aa29d59",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.5,
+      "opinion_1": 0,
+      "opinion_2": 0.6,
+      "argument_quality_2": 0.6,
+      "user_information_argument_breadth": 0.25,
+      "user_information_argument_depth": 0.6
+    }
+  }
+}

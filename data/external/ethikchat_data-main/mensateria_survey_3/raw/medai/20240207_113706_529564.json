@@ -1,0 +1,75 @@
+{
+  "name": "20240207_113706_529564",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:37:06",
+  "end": "2024/02/07-11:39:56",
+  "utterances": [
+    {
+      "user": "1R4C5",
+      "type": "user",
+      "text": "Triage Frage ",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:38:18",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Vielen Dank für Ihre Frage. Lassen Sie uns über das Szenario sprechen, in dem eine medizinische KI (medKI) in Untersuchungszentren eigenständig Diagnosen stellt und therapeutische Entscheidungen trifft.\n\nWenn es um Triage-Fragen geht, kann eine medKI schnell und effizient priorisieren, welche Patient:innen am dringendsten medizinische Hilfe benötigt. Im Vergleich zu Menschen ist eine KI nicht anfällig für Emotionen oder Müdigkeit, was ihre Entscheidungen objektiver machen kann.\n\nWas denken Sie über die Vorteile einer medKI bei der Triage-Bewertung? ",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:38:25",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "1R4C5",
+      "type": "user",
+      "text": "Was berechtigt eine Maschine über Leben und Tod zu entscheiden ",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-11:38:59",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Vielen Dank für Ihre wichtige Frage. Es ist klar, dass die Entscheidung über Leben und Tod eine große Verantwortung mit sich bringt. In unserem Szenario ist die medizinische KI (medKI) jedoch nicht allein verantwortlich für diese Entscheidungen. Sie arbeitet in Zusammenarbeit mit medizinischem Personal, das die Daten erhebt und den Patient:innen die Entscheidungen der medKI erklären kann.\n\nDie medKI trifft Entscheidungen auf Grundlage von Algorithmen und riesigen Datenmengen, was sie möglicherweise präziser und konsistenter als Menschen machen kann. Dennoch ist es wichtig, dass das System regelmäßig überprüft und aktualisiert wird, um sicherzustellen, dass es ethischen und moralischen Standards entspricht.\n\nWas denken Sie über die Zusammenarbeit von Mensch und Maschine bei diesen schwierigen Entscheidungen? ",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-11:39:07",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "549e2c82790dc202f517e2c26e9f6923",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "informed": 0.5
+    }
+  },
+  "end_survey": {
+    "name": "549e2c82790dc202f517e2c26e9f6923",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "opinion_1": 0,
+      "opinion_2": 0.8,
+      "argument_quality_2": 0.2,
+      "user_information_argument_breadth": 0,
+      "user_information_argument_depth": 0.4
+    }
+  }
+}

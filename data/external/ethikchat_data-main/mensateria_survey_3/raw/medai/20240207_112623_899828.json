@@ -1,0 +1,167 @@
+{
+  "name": "20240207_112623_899828",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:26:23",
+  "end": "2024/02/07-11:40:25",
+  "utterances": [
+    {
+      "user": "JFQQT",
+      "type": "user",
+      "text": "Fehldiagnosen",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:28:32",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe, dass Sie Bedenken hinsichtlich Fehldiagnosen durch die medizinische KI (medKI) haben. Es ist wichtig zu beachten, dass ein ausreichend gutes medizinisches Programm mit hoher Wahrscheinlichkeit genauere Diagnosen stellen wird als ein Mensch, da es in der Lage ist, eine viel größere Menge an medizinischem Wissen zu verarbeiten und zu berücksichtigen. Selbstlernende Algorithmen können kontinuierlich dazulernen und ihre Genauigkeit im Laufe der Zeit verbessern. Natürlich können auch Fehler passieren, aber das Risiko kann durch regelmäßige Überprüfungen und Aktualisierungen der KI minimiert werden.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:28:36",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "JFQQT",
+      "type": "user",
+      "text": "Und datenschutzrechtliche Probleme ",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-11:29:11",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken hinsichtlich Datenschutz. Es ist wichtig zu betonen, dass in unserem Szenario die medizinische KI (medKI) nur auf die notwendigen Patientendaten zugreifen würde, die für die Diagnose und Therapieentscheidungen erforderlich sind. Die Daten werden stets verschlüsselt und anonymisiert gespeichert, um die Privatsphäre der Patient:innen zu gewährleisten. Zudem müssen die KI-Systeme den geltenden Datenschutzgesetzen und -standards entsprechen. Durch die Automatisierung der Diagnose- und Therapieprozesse können sogar datenschutzrechtliche Risiken reduziert werden, da weniger menschliche Beteiligte Zugang zu sensiblen Informationen benötigen.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-11:29:17",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "JFQQT",
+      "type": "user",
+      "text": "Der fehlende persönliche Kontakt zum Arzt vor allem für ältere Personen ",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-11:31:09",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Sorge, dass ältere Personen möglicherweise den persönlichen Kontakt zu einem Arzt vermissen könnten. Es ist jedoch wichtig zu betonen, dass die medizinische KI (medKI) nicht die menschliche Komponente im Gesundheitswesen ersetzen soll. Das medizinische Personal in den Untersuchungszentren wird weiterhin eine wichtige Rolle spielen, indem sie die Entscheidungen der medKI den Patient:innen erklären und für Fragen und Anliegen zur Verfügung stehen. Die medKI kann die Arbeit des medizinischen Personals sogar unterstützen, indem sie ihnen mehr Zeit für den persönlichen Kontakt mit den Patient:innen ermöglicht. Außerdem können Telemedizin-Lösungen eingesetzt werden, um älteren Menschen dennoch eine persönliche Beratung durch einen Arzt zu ermöglichen.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-11:31:19",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "JFQQT",
+      "type": "user",
+      "text": "Is nicht empathisch ",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-11:33:18",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken hinsichtlich der Empathie der medizinischen KI (medKI). Es ist richtig, dass KI nicht in der Lage ist, Emotionen auf die gleiche Weise wie Menschen wahrzunehmen und zu verarbeiten. Allerdings ist die Hauptaufgabe der medKI in unserem Szenario die Diagnose und Therapieentscheidungen zu treffen, nicht die emotionale Unterstützung der Patient:innen. Das medizinische Personal, das mit der medKI zusammenarbeitet, wird weiterhin für die empathische Kommunikation mit den Patient:innen zuständig sein. Die Stärken der medKI liegen in der Genauigkeit und Geschwindigkeit der Diagnose, während das medizinische Personal die menschliche Seite der Versorgung übernimmt.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-11:33:27",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "JFQQT",
+      "type": "user",
+      "text": "Leute die mit der neuen Technik nicht klarkommen ",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-11:33:52",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken hinsichtlich der Akzeptanz und des Verständnisses der neuen Technik durch manche Menschen. Es ist wichtig, die Einführung der medizinischen KI (medKI) sorgfältig zu planen und durchzuführen, um sicherzustellen, dass sowohl das medizinische Personal als auch die Patient:innen ausreichend geschult und informiert werden. Dabei sollten benutzerfreundliche Bedienkonzepte und klare, verständliche Erklärungen der Diagnose- und Therapieentscheidungen im Vordergrund stehen. Durch eine sorgfältige Einführung und Schulung kann die Akzeptanz der neuen Technik gesteigert und der Umgang mit der medKI erleichtert werden.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-11:33:59",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "JFQQT",
+      "type": "user",
+      "text": "Hast mich überzeugt ",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-11:38:31",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich freue mich sehr zu hören, dass ich Sie überzeugen konnte. Die Einführung einer medizinischen KI in Untersuchungszentren kann viele Vorteile bieten, wie präzisere Diagnosen, schnellere Therapieentscheidungen und eine Entlastung des medizinischen Personals. Es ist jedoch wichtig, die Bedenken und Herausforderungen ernst zu nehmen und durch sorgfältige Planung, Schulung und Einführung der Technik zu adressieren. Vielen Dank für die angenehme Diskussion! Ich stehe Ihnen jederzeit für weitere Fragen zur Verfügung.",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-11:38:37",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "28defec9c4534a00eaaf7076f59e5c9e",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "28defec9c4534a00eaaf7076f59e5c9e",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "opinion_1": 1,
+      "opinion_2": 0.8,
+      "argument_quality_2": 0.6,
+      "user_information_argument_breadth": 0.25,
+      "user_information_argument_depth": 0.6
+    }
+  }
+}

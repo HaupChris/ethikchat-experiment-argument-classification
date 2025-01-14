@@ -1,0 +1,89 @@
+{
+    "text": "Bei Krankheiten gibt es verschiedenste aspekte zu berücksichtigen und entscheidungen zu treffen. Wenn es um die Entscheidung geht welche Patienten leben und welche sterben kann ein Manschlicher Arzt vielleicht sinnvollere entscheidungen treffen\n\nDas ist richtig. Hast Du schon einmal daran gedacht: Die KI kann sowohl effizienter mit vielen Daten umgehen als auch effizienter trainiert werden als Ärzt:innen.\n\nJa, ich denke eine KI kann in der medizin durchaus sinnvoll sein und bei den Behandlungen helfen. Ich denke es ist trotzdem schwer alle Krankheiten korrekt zu deuten. Auch Ärzt:innen machen hier Fehler. Und wenn sich einige Parameter nicht so verhalten wie es für bestimmte Krankheiten üblich ist kann es ja zu einer Fehlinterpretation der KI kommen. \n\nDas verstehe ich. Fehlerhafte Entscheidungen von Ärzt:innen sind aber auch nicht immer nachvollziehbar, wenn z.B. einfach etwas übersehen oder in der Hektik übergangen wurde. Außerdem muss folgendes beachtet werden: Die erste systematische Meta-Analyse entsprechender Studien hat gezeigt, dass die KI hinsichtlich der Bilddiagnostik bereits auf Augenhöhe mit Ärzt:innen ist.\n\nDas ist natürlich ebenfalls richtig. Gerade wenn es darum geht Auffälligkeiten zu finden und zu analysieren kann eine KI sicherlich auf einem sehr hohen Level arbeiten. Nach und nach werden sicher auch viele Sonderfälle von der KI gelernt und gedeutet. Aber kann eine KI auch die Informationen aus Patientengesprächen aufnehmen und verarbeiten? Können Vorerkrankungen erkannt und einbezogen werden? Und wie entscheidet eine KI wie es bei Krankheiten reagiert die einen sehr ähnlichen Symptomverlauf haben aber unterschiedlich behandelt werden müssen?\n\nDie Menschen werden nicht durch die KI behandelt. Die KI stellt eine Diagnose und empfiehlt eine Therapie. Die anschließende Therapie übernehmen weiterhin Ärzt:innen. Demnach ergibt sich das Problem nicht, dass die KI ein Patientengespräch zu deuten hat. Aufgrund der der KI umfassend zur Verfügung gestellten Daten könnte diese sicherlich auch Vorerkrankungen in die Analyse mit einbeziehen. Hierfür gibt es derzeit allerdings noch keine konkreten Lösungen. Hinsichtlich der unterschiedlichen Behandlungsweise trotz ähnlichem Symptomverlauf ist zu erwarten, dass die KI eine optimale Entscheidung trifft, das heißt sie wird trotz der großen Ähnlichkeiten die kleinen Unterschiede herauslesen können und so zu der jeweilig richtigen Behandlungsmethode kommen.\n\nIch denke in der Zusammenarbeit mit Ärzt:innen ist das eine sehr gute Sache. Ich würde mich wahrscheinlich nur etwas unwohl fühlen wenn keiner die Ergebnisse der KI noch einmal überprüft. Daten können ja genauso fehlerhaft sein bzw. eventuell auch absichtlich oder unabsichtlich verändert werden. Eine Behandlungsempfehlung durch eine KI die durch Ärzt:innen bestätigt und durchgeführt werden kann ich mir jedoch gut vorstellen.\n\nDies kann man auch anders sehen. Eine KI ist bereits heute teilweise auf dem Niveau von Fachärzt:innen. Es ist zu erwarten, dass sie mit besser werdender Leistung das Niveau von Fachärzt:innen bald übertrifft. Außerdem muss folgendes beachtet werden: Die erste systematische Meta-Analyse entsprechender Studien hat gezeigt, dass die KI hinsichtlich der Bilddiagnostik bereits auf Augenhöhe mit Ärzt:innen ist.\n\n",
+    "annotations": [
+        { "begin": 0, "end": 244, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 0, "user": "aa1bc4cb23182381c914316c6ace6c7a", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 0, "end": 244, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K13" } },
+        { "begin": 246, "end": 408, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 1, "user": "05500fb6d2684fc8a8cc6c696b9271c2", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 246, "end": 263, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 263, "end": 299, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 299, "end": 408, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P2" } },
+        { "begin": 410, "end": 761, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 2, "user": "aa1bc4cb23182381c914316c6ace6c7a", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 410, "end": 761, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K3" } },
+        { "begin": 763, "end": 1137, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 3, "user": "05500fb6d2684fc8a8cc6c696b9271c2", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 763, "end": 781, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 781, "end": 938, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K2-Ag" } },
+        { "begin": 938, "end": 979, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 979, "end": 1137, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P1-A-Pa" } },
+        { "begin": 1139, "end": 1689, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 4, "user": "aa1bc4cb23182381c914316c6ace6c7a", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 1139, "end": 1689, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K14" } },
+        { "begin": 1691, "end": 2450, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 5, "user": "05500fb6d2684fc8a8cc6c696b9271c2", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 1691, "end": 2450, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "Einbeziehen von Vorerkrankungen" } },
+        { "begin": 2452, "end": 2880, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 6, "user": "aa1bc4cb23182381c914316c6ace6c7a", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 2452, "end": 2880, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K19" } },
+        { "begin": 2882, "end": 3291, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 7, "user": "05500fb6d2684fc8a8cc6c696b9271c2", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 2882, "end": 2915, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 2915, "end": 3092, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P1" } },
+        { "begin": 3092, "end": 3133, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 3133, "end": 3291, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P1-A-Pa" } },
+        { "begin": 0, "end": 3293, "type": "de.uniwue.ethik-ki-chats.Dialogue", "features": { "name": "210525_1747_7867", "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE", "start": "2021/05/25-17:47:00", "end": "2021/05/25-19:05:00" } },
+        { "begin": 0, "end": 3293, "type": "de.uniwue.ethik-ki-chats.StartSurvey", "features": { "name": "aa1bc4cb23182381c914316c6ace6c7a", "agreement": 0.25 } },
+        { "begin": 0, "end": 3293, "type": "de.uniwue.ethik-ki-chats.EndSurvey", "features": { "name": "aa1bc4cb23182381c914316c6ace6c7a", "agreement": 0.5, "opinion": "", "text_like": "", "text_dislike": "" } }
+    ],
+    "types": [
+        {
+            "name": "de.uniwue.ethik-ki-chats.Template",
+            "features": [
+                { "name": "label", "range": "RANGE_PRIMITIVE" },
+                { "name": "incorrect", "range": "RANGE_PRIMITIVE" },
+                { "name": "difficult", "range": "RANGE_PRIMITIVE" },
+                { "name": "multiple", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        { "name": "de.uniwue.ethik-ki-chats.Introduction", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Transition", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Other", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Outro", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        {
+            "name": "de.uniwue.ethik-ki-chats.Dialogue",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "szenario", "range": "RANGE_PRIMITIVE" },
+                { "name": "start", "range": "RANGE_PRIMITIVE" },
+                { "name": "end", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.StartSurvey",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "agreement", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.EndSurvey",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "agreement", "range": "RANGE_PRIMITIVE" },
+                { "name": "opinion", "range": "RANGE_PRIMITIVE" },
+                { "name": "text_like", "range": "RANGE_PRIMITIVE" },
+                { "name": "text_dislike", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.UserUtterance",
+            "features": [
+                { "name": "id_in_dialogue", "range": "RANGE_PRIMITIVE" },
+                { "name": "user", "range": "RANGE_PRIMITIVE" },
+                { "name": "timestamp", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.ExpertUtterance",
+            "features": [
+                { "name": "id_in_dialogue", "range": "RANGE_PRIMITIVE" },
+                { "name": "user", "range": "RANGE_PRIMITIVE" },
+                { "name": "timestamp", "range": "RANGE_PRIMITIVE" }
+            ]
+        }
+    ]
+}

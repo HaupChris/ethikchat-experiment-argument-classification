@@ -1,0 +1,367 @@
+{
+  "name": "20230130_132604_710964",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "None",
+  "start": "2023/01/30-13:26:04",
+  "end": "2023/01/30-13:37:15",
+  "utterances": [
+    {
+      "user": "userY8C0",
+      "type": "user",
+      "text": "Ich finde nicht, dass Ärzt:innen durch eine KI ersetzt werden sollten \nMeiner Meinung nach können KIs nicht spontan auf eine Situation reagieren, was im Medizinbereich allerdings entscheidend sein kann ",
+      "id_in_dialogue": 0,
+      "timestamp": "2023/01/30-13:27:07",
+      "true_labels": [
+        "clarify"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "FAQ.1",
+          0.013742783561972166
+        ],
+        [
+          "Z.P1",
+          0.0
+        ],
+        [
+          "Z.P1-1",
+          0.0
+        ],
+        [
+          "Z.P2",
+          0.0
+        ],
+        [
+          "Z.P2-1",
+          0.0
+        ],
+        [
+          "Z.P3",
+          0.0
+        ],
+        [
+          "Z.P4",
+          0.0
+        ],
+        [
+          "Z.P4-1",
+          0.0
+        ],
+        [
+          "Z.P5",
+          0.0
+        ],
+        [
+          "Z.P5-1",
+          0.0
+        ],
+        [
+          "Z.P6",
+          0.0
+        ],
+        [
+          "Z.P6-1",
+          0.0
+        ],
+        [
+          "Z.P7",
+          0.0
+        ],
+        [
+          "Z.P7-1",
+          0.0
+        ],
+        [
+          "Z.P12",
+          0.0
+        ],
+        [
+          "Z.P12-1",
+          0.0
+        ],
+        [
+          "Z.P12-1-1",
+          0.0
+        ],
+        [
+          "Z.P12-1-2",
+          0.0
+        ],
+        [
+          "Z.P13",
+          0.0
+        ],
+        [
+          "Z.P14",
+          0.0
+        ],
+        [
+          "Z.C2",
+          0.0
+        ],
+        [
+          "Z.C2-1",
+          0.0
+        ],
+        [
+          "Z.C2-1-1",
+          0.0
+        ],
+        [
+          "Z.C3",
+          0.0
+        ],
+        [
+          "Z.C3-1",
+          0.0
+        ],
+        [
+          "Z.C4",
+          0.0
+        ],
+        [
+          "Z.C4-1",
+          0.0
+        ],
+        [
+          "Z.C4-1-1",
+          0.0
+        ],
+        [
+          "Z.C4-1-2",
+          0.0
+        ],
+        [
+          "Z.C5",
+          0.0
+        ],
+        [
+          "Z.C5-1",
+          0.0
+        ],
+        [
+          "Z.C5-1-1",
+          0.0
+        ],
+        [
+          "Z.C5-1-1-1",
+          0.0
+        ],
+        [
+          "Z.C5-1-1-1-1",
+          0.0
+        ],
+        [
+          "Z.C5-1-1-2",
+          0.0
+        ],
+        [
+          "Z.C5-2",
+          0.0
+        ],
+        [
+          "Z.P8",
+          0.0
+        ],
+        [
+          "Z.P8-1",
+          0.0
+        ],
+        [
+          "Z.P8-1-1",
+          0.0
+        ],
+        [
+          "Z.P9",
+          0.0
+        ],
+        [
+          "Z.P9-1",
+          0.0
+        ],
+        [
+          "Z.P9-1-1",
+          0.0
+        ],
+        [
+          "Z.C6",
+          0.0
+        ],
+        [
+          "Z.C6-1",
+          0.0
+        ],
+        [
+          "Z.C6-2",
+          0.0
+        ],
+        [
+          "Z.C6-2-1",
+          0.0
+        ],
+        [
+          "Z.C6-3",
+          0.0
+        ],
+        [
+          "Z.C6-3-1",
+          0.0
+        ],
+        [
+          "Z.P11",
+          0.0
+        ],
+        [
+          "Z.P11-1",
+          0.0
+        ],
+        [
+          "Z.P11-1-1",
+          0.0
+        ],
+        [
+          "Z.P10",
+          0.0
+        ],
+        [
+          "Z.P10-1",
+          0.0
+        ],
+        [
+          "Z.P10-1-1",
+          0.0
+        ],
+        [
+          "Z.P10-2",
+          0.0
+        ],
+        [
+          "Z.P10-2-1",
+          0.0
+        ],
+        [
+          "Z.C7",
+          0.0
+        ],
+        [
+          "Z.C7-1",
+          0.0
+        ],
+        [
+          "Z.P11",
+          0.0
+        ],
+        [
+          "Z.P11-1",
+          0.0
+        ],
+        [
+          "Z.C8",
+          0.0
+        ],
+        [
+          "Z.C8-1",
+          0.0
+        ],
+        [
+          "Z.C9",
+          0.0
+        ],
+        [
+          "Z.C9-1",
+          0.0
+        ],
+        [
+          "Z.C9-2",
+          0.0
+        ],
+        [
+          "Z.C10",
+          0.0
+        ],
+        [
+          "Z.C10-1",
+          0.0
+        ],
+        [
+          "Z.C10-1-1",
+          0.0
+        ],
+        [
+          "Z.C11",
+          0.0
+        ],
+        [
+          "Z.C11-1",
+          0.0
+        ],
+        [
+          "Z.C12",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "EthiBot",
+      "type": "bot",
+      "text": " Ich bin mir nicht sicher, was du genau meinst. Kannst du das anders formulieren?",
+      "id_in_dialogue": 1,
+      "timestamp": "2023/01/30-13:29:27",
+      "true_labels": [
+        "intro_61"
+      ],
+      "true_bounds": [
+        [
+          0,
+          81
+        ]
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [],
+        "preselect_paraphrase_introduction": false,
+        "paraphrase": "",
+        "introductions": [
+          "intro_61",
+          "intro_62"
+        ],
+        "preselect_introduction": true,
+        "transitions": [],
+        "preselect_transition": false,
+        "first_arguments": [],
+        "preselect_first_argument": false,
+        "second_arguments": [],
+        "preselect_second_argument": false
+      }
+    },
+    {
+      "user": "userY8C0",
+      "type": "user",
+      "text": "Wenn es um eine Operation geht, können Menscher schneller entscheiden was getan werden muss um das Leben eines Patienten zu retten ",
+      "id_in_dialogue": 2,
+      "timestamp": "2023/01/30-13:31:14",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    }
+  ],
+  "start_survey": {
+    "name": "31c8253920765a841f8ffe9428ed301d",
+    "type": "StartSurvey",
+    "surveyOptionResults": {}
+  },
+  "end_survey": {
+    "name": "31c8253920765a841f8ffe9428ed301d",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "opinion": 0.25,
+      "informative": 0,
+      "negative_critics": "Die KI hat nicht auf meine Nachrichten geantwortet und meine Nachrichten wurden auch nicht richtig abgeschickt "
+    }
+  }
+}

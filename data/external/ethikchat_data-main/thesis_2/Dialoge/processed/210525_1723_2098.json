@@ -1,0 +1,557 @@
+{
+  "name": "210525_1723_2098",
+  "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE",
+  "start": "17:23",
+  "end": "19:12",
+  "utterances": [
+    {
+      "user": "426f33ce864c49a31d568567d27c1524",
+      "type": "user",
+      "text": "Teilweise stimme ich dieser These zu. Ersetzen ist für mich allerdings nicht der richtige Begriff für die Rolle, die KI dabei in der Zukunft spielen sollte. Viel mehr sollte KI einen wesentlichen Beitrag zur Unterstützung der Ärzte leisten, jedoch möglicherweise irgendwann den Hauptanteil der Diagnosen und Therapieentscheidungen übernehmen.",
+      "id_in_dialogue": 0,
+      "true_labels": [
+        "K7-Aa"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Das ist richtig. KI-Diagnoseverfahren können jedoch immerhin Ärzt:innen dabei unterstützen, Erkrankungen präziser und frühzeitiger zu erkennen und damit den Therapieerfolg verbessern. Hast Du schon einmal daran gedacht: Die Krankheitsverläufe unterscheiden sich auch bei vermeintlich gleicher Ausgangslage oft massiv. Fachärzt:innen vermögen aufgrund ihrer Erfahrungen eine bessere Prognose über den Verlauf der Krankheit zu stellen.",
+      "id_in_dialogue": 1,
+      "true_labels": [
+        null,
+        "K7-Aa",
+        null,
+        "K5"
+      ],
+      "true_bounds": [
+        [
+          0,
+          17
+        ],
+        [
+          17,
+          184
+        ],
+        [
+          184,
+          220
+        ],
+        [
+          220,
+          433
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "426f33ce864c49a31d568567d27c1524",
+      "type": "user",
+      "text": "Dass sich die Krankheitsverläufe massiv unterscheiden können bei scheinbar gleicher Ausgangslage ist mir zwar bewusst aber ich weiß nicht, wie häufig das der Fall ist. Sinnvoll ist ein KI-Diagnoseverfahren meiner Meinung nach erst dann, wenn es mit \"hinreichender\" Wahrscheinlichkeit gut diagnostiziert.",
+      "id_in_dialogue": 2,
+      "true_labels": [
+        "P15-A"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Das stimmt. Das muss erst in klinischen Studien nachgewiesen werden. Außerdem muss folgendes beachtet werden: Die KI kann keine für Fachärzt:innen verständlichen und nachvollziehbaren Erklärungen der Ergebnisse liefern (sog. Black Box Verhalten). Gerade bei der Diagnostik und Therapieentscheidung sind die Erklärungen der Ergebnisse jedoch essentiell, da letztlich die Patient:innen jeder einzelnen Therapie zustimmen müssen.",
+      "id_in_dialogue": 3,
+      "true_labels": [
+        null,
+        "P1-A",
+        null,
+        "K2"
+      ],
+      "true_bounds": [
+        [
+          0,
+          12
+        ],
+        [
+          12,
+          69
+        ],
+        [
+          69,
+          110
+        ],
+        [
+          110,
+          426
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "426f33ce864c49a31d568567d27c1524",
+      "type": "user",
+      "text": "Trotz des Black Box Verhaltens würden vermutlich einige Patienten einer Therapie auch dann zustimmen, wenn die Erklärungen für die Diagnose nicht auf der Hand liegen. Schließlich ist ihre Gesundheit betroffen und das Vertrauen, welches Menschen künstlichen Intelligenzen entgegenbringen steigt rasant an. Algorithmen wird mehr und mehr Macht übertragen: Der Bereich der Diagnostik und Therapie, so finde ich, ist einer, in dem diese Tendenz sich zum Guten auswirken könnte. \nDamit meine ich insbesondere, dass KIs dem Menschen in ihren Entscheidungen bald überlegen sein könnten, wie es in eurer These auch formuliert wird.",
+      "id_in_dialogue": 4,
+      "true_labels": [
+        "K2-Ad",
+        "P1"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Aber zu beachten ist: Bei komplexen bzw. zweifelhaften Diagnosen ist eine Erklärung wichtig, damit entschieden werden kann, ob es sich um einen Fehler oder eine ungewöhnliche aber korrekte Diagnose handelt. Im Übrigen: Patient:innen sind bei schwerwiegenden medizinischen Entscheidungen keine rationalen Entscheider. Die Berücksichtigung ihrer Gefühlslage, bis hin zur Verzweiflung, ist essentiell. Hier stößt eine KI an ihre Grenzen, da ihr das Einfühlungsvermögen gänzlich fehlt. Hinzukommt, dass Patient:innen obendrein kein Vertrauen in die KI haben, da diese unpersönlich ist.",
+      "id_in_dialogue": 5,
+      "true_labels": [
+        null,
+        "K2-Ad-P",
+        null,
+        "K14"
+      ],
+      "true_bounds": [
+        [
+          0,
+          22
+        ],
+        [
+          22,
+          207
+        ],
+        [
+          207,
+          219
+        ],
+        [
+          219,
+          581
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "426f33ce864c49a31d568567d27c1524",
+      "type": "user",
+      "text": "Da stimme ich völlig zu. Dem möchte ich hinzufügen, dass das Black-Box-Verhalten der KI dahingehend missbraucht werden könnte, dass aufgrund von finanziellen Interessen seitens der Krankenhäuser und Medizin-Branche Diagnosen gestellt und Therapien begonnen werden, die nicht notwendig sind.",
+      "id_in_dialogue": 6,
+      "true_labels": [
+        "Das Black-Box-Verhalten der KI könnte aufgrund von finanziellen Interessen seitens der Krankenhäuser und Medizin-Branche dahingehend missbraucht werden, dass Diagnosen gestellt und Therapien begonnen werden, die nicht notwendig sind."
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Dies sollte verhindert werden. Erklärbare KI-Systeme liefern eine Beschreibung der Ergebnisfindung, die für Menschen interpretierbar ist. Das heißt, die Gründe für eine Entscheidung lassen sich explizit beschreiben und können den Adressat:innen eines Systems verständlich vermittelt werden. Fallen dir noch weitere Argumente ein? ",
+      "id_in_dialogue": 7,
+      "true_labels": [
+        null,
+        "K2-Aa",
+        null
+      ],
+      "true_bounds": [
+        [
+          0,
+          31
+        ],
+        [
+          31,
+          291
+        ],
+        [
+          291,
+          330
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "426f33ce864c49a31d568567d27c1524",
+      "type": "user",
+      "text": "Meinst du Argumente, die gegen KI sprechen?",
+      "id_in_dialogue": 8,
+      "true_labels": [
+        "unk"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Das wäre eine Möglichkeit Hast Du schon einmal daran gedacht: Die KI könnte falsch lernen und bspw. durch unbalancierte Daten zu Vorurteilen neigen, wodurch die von der KI angegebenen Daten und Diagnosen zu ungenau oder sogar falsch sein könnten.",
+      "id_in_dialogue": 9,
+      "true_labels": [
+        null,
+        null,
+        "K3"
+      ],
+      "true_bounds": [
+        [
+          0,
+          26
+        ],
+        [
+          26,
+          62
+        ],
+        [
+          62,
+          246
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "426f33ce864c49a31d568567d27c1524",
+      "type": "user",
+      "text": "Ich nehme an, dass die Ungenauigkeit und/oder Falschheit der Diagnosen momentan der Regelfall ist... Aber ich bin nicht gut darüber informiert, wie exakt bzw. richtig die Entscheidungen einer KI momentan sind. Vermutlich können KIs nur sehr domänenspezifisch agieren. Beispielsweise eine bestimmte Art von Tumor erkennen.\nWas mich sorgt, ist, dass KI-Forschung nicht auf das Feld der Medizin beschränkt bleiben wird. Offensichtlich  sind KIs extrem schnell lernend und können den Menschen in vielen Bereichen schlagen.",
+      "id_in_dialogue": 10,
+      "true_labels": [
+        "K11",
+        "Sorge, dass die KI den Menschen in vielen weiteren Bereichen schlagen wird."
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Nur eine KI ist in der Lage, verborgene Muster in den großen Datenmengen zu erkennen und kann so den Ärzt:innen eine wertvolle Unterstützung für Prognose- und Therapieentscheidungen sein. Man kann es auch so sehen: Im Gegensatz zum menschlichen Gehirn ermüdet eine KI nicht.",
+      "id_in_dialogue": 11,
+      "true_labels": [
+        "K2-Ac",
+        null,
+        "P16"
+      ],
+      "true_bounds": [
+        [
+          0,
+          188
+        ],
+        [
+          188,
+          215
+        ],
+        [
+          215,
+          274
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "426f33ce864c49a31d568567d27c1524",
+      "type": "user",
+      "text": "Ja, das ist das große Versprechen dieses Forschungszweiges und ich nehme an, dass dieses auch in großen Teilen relativ zukunftsnah erfüllt werden kann. \nDamit geht natürlich einher, dass wir unsere Entscheidungen in Teilen auslagern an eine Maschine. Dies schafft eine Abhängigkeit. Was hältst du davon?",
+      "id_in_dialogue": 12,
+      "true_labels": [
+        "Abhängigkeit"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Das stimmt. Ärztliche Diagnosen werden in Zeiten des digitalen Wandels überflüssig und das Berufsbild von Ärzt:innen allgemein könnte dadurch als nicht zukunftssicher gelten, wenn davon auszugehen ist, dass die KI das Niveau von Fachärzt:innen aktuell oder zumindest im Laufe der Zeit übertreffen wird. Aber zu beachten ist: Die Menschen werden nicht durch die KI behandelt. Die KI stellt eine Diagnose und empfiehlt eine Therapie. Die anschließende Therapie übernehmen weiterhin Ärzt:innen.",
+      "id_in_dialogue": 13,
+      "true_labels": [
+        null,
+        "K9",
+        null,
+        "K14-A"
+      ],
+      "true_bounds": [
+        [
+          0,
+          12
+        ],
+        [
+          12,
+          303
+        ],
+        [
+          303,
+          325
+        ],
+        [
+          325,
+          491
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "426f33ce864c49a31d568567d27c1524",
+      "type": "user",
+      "text": "Es ist allerdings nicht auszuschließen, dass die Behandlung selbst bald KI-gestützt abläuft. Damit meine ich, dass im Prozess der Behandlung auch Entscheidungen getroffen werden müssen, die zunehmend durch KIs ersetzt werden und so dem medizinischen Personal Arbeit abnehmen bzw. es überflüssig machen könnten.",
+      "id_in_dialogue": 14,
+      "true_labels": [
+        "K9"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Das verstehe ich. Für die Überprüfung, Bestätigung oder gegebenenfalls Verwerfung der Hypothese seitens der KI sind die behandelnden Ärzt:innen auch weiterhin unerlässlich. Dies gilt ebenso für die Behandlungseinleitung. Und: In vielen Bereichen der Medizin ist noch nicht einmal ansatzweise absehbar, dass Ärzt:innen durch Maschinen ersetzt werden könnten.",
+      "id_in_dialogue": 15,
+      "true_labels": [
+        null,
+        "K9-A",
+        null,
+        "K9-Aa"
+      ],
+      "true_bounds": [
+        [
+          0,
+          18
+        ],
+        [
+          18,
+          221
+        ],
+        [
+          221,
+          226
+        ],
+        [
+          226,
+          357
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "426f33ce864c49a31d568567d27c1524",
+      "type": "user",
+      "text": "Wie schätzt du die Entwicklung der KI-gestützten Diagnose ein?\nKennst du Bereiche, in denen KI bereits zur Diagnose nutzbringend eingesetzt wird? ",
+      "id_in_dialogue": 16,
+      "true_labels": [
+        "Wie wird die Entwicklung der KI eingeschätzt?",
+        "In welchen Bereichen wird die KI bereits zur Diagnose nutzbringend eingesetzt?"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Eine KI ist bereits heute teilweise auf dem Niveau von Fachärzt:innen. Es ist zu erwarten, dass sie mit besser werdender Leistung das Niveau von Fachärzt:innen bald übertrifft. Die erste systematische Meta-Analyse entsprechender Studien hat gezeigt, dass die KI hinsichtlich der Bilddiagnostik bereits auf Augenhöhe mit Ärzt:innen ist.",
+      "id_in_dialogue": 17,
+      "true_labels": [
+        "P1",
+        "P1-A-Pa"
+      ],
+      "true_bounds": [
+        [
+          0,
+          177
+        ],
+        [
+          177,
+          335
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "426f33ce864c49a31d568567d27c1524",
+      "type": "user",
+      "text": "Das klingt vielversprechend.\nUm nochmal auf einen vorherigen Punkt zurückzukommen: Mit möglichen Falschdiagnosen durch die KI treten rechtliche Fragen auf: Wer haftet, wenn es zu Personenschäden kommt, die aus einer Falschdiagnose resultieren?",
+      "id_in_dialogue": 18,
+      "true_labels": [
+        "K20"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Schadensersatzforderungen sollten kein Grund sein eine fortschrittliche Technologie zu verhindern. Fehlerfreie Entscheidungen sind in der Medizin unmöglich. Es geht immer nur darum, möglichst gut zu sein. Wenn eine KI in Studien nachweisen kann, dass sie besser ist als Radiologen, sollte kein Schadenersatz in den Fällen, wo sie Fehler macht, gezahlt werden, da Radiologen für Fehldiagnosen auch keinen Schadenersatz zahlen müssen (außer bei grober Fahrlässigkeit). Wenn allerdings die Rechtsprechung hohen Schadenersatz bei jedem Fehler der KI verlangen würde, würde die KI nicht einsetzbar sein - zum Schaden der Patienten, denen eine bessere Diagnostik vorenthalten wird.",
+      "id_in_dialogue": 19,
+      "true_labels": [
+        "Schadensersatzforderungen kein Grund für Technologieverhinderung",
+        "",
+        "Fehler unvermeidbar; Haftung wie bei Radiologen regeln",
+        ""
+      ],
+      "true_bounds": [],
+      "is_template": false
+    },
+    {
+      "user": "426f33ce864c49a31d568567d27c1524",
+      "type": "user",
+      "text": "Trotz zuverlässiger Entscheidungsgenauigkeit könnte es aufgrund es Blackbox-Verhaltens zu plötzlichen und häufigen Fehlentscheidungen kommen. Was, wenn die scheinbar bewiesene Zuverlässigkeit sich als Anomalie herausstellt?\nDem entgegen könnte man natürlich argumentieren, dass hier das Gesetz der großen Zahlen zum Tragen kommt und die Wahrscheinlichkeit für eine Fehlentscheidung mit zunehmender Zahl richtiger Diagnosen sinkt.",
+      "id_in_dialogue": 20,
+      "true_labels": [
+        "Trotz zuverlässiger Entscheidungsgenauigkeit könnte es aufgrund es Blackbox-Verhaltens zu plötzlichen und häufigen Fehlentscheidungen kommen. Was, wenn die scheinbar bewiesene Zuverlässigkeit sich als Anomalie herausstellt?",
+        "Dem entgegen könnte man natürlich argumentieren, dass hier das Gesetz der großen Zahlen zum Tragen kommt und die Wahrscheinlichkeit für eine Fehlentscheidung mit zunehmender Zahl richtiger Diagnosen sinkt."
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Das ist richtig. Eine KI liefert gleichbleibend gute Ergebnisse. Anders als Ärzt:innen steht sie nicht unter dem Einfluss äußerer Faktoren, wie zum Beispiel Stress. Und: Auch in Anbetracht der zur Zeit bestehenden Defizite hinsichtlich des Einsatzes von KI, überwiegen im Ergebnis wohl die Vorteile des Einsatzes der KI.",
+      "id_in_dialogue": 21,
+      "true_labels": [
+        null,
+        "P4",
+        null,
+        "K7-A"
+      ],
+      "true_bounds": [
+        [
+          0,
+          17
+        ],
+        [
+          17,
+          165
+        ],
+        [
+          165,
+          170
+        ],
+        [
+          170,
+          320
+        ]
+      ],
+      "is_template": true
+    }
+  ],
+  "surveys": [
+    {
+      "name": "426f33ce864c49a31d568567d27c1524",
+      "type": "StartSurvey",
+      "result": "weak-agree"
+    },
+    {
+      "name": "426f33ce864c49a31d568567d27c1524",
+      "type": "EndSurvey",
+      "result": "weak-agree",
+      "improvement_suggestions": "",
+      "persuasive_arguments": [
+        [
+          0,
+          true
+        ],
+        [
+          1,
+          true
+        ],
+        [
+          2,
+          true
+        ],
+        [
+          3,
+          true
+        ],
+        [
+          4,
+          true
+        ],
+        [
+          5,
+          true
+        ],
+        [
+          6,
+          true
+        ],
+        [
+          7,
+          true
+        ],
+        [
+          8,
+          false
+        ],
+        [
+          9,
+          true
+        ],
+        [
+          10,
+          true
+        ],
+        [
+          11,
+          true
+        ],
+        [
+          12,
+          true
+        ],
+        [
+          13,
+          true
+        ],
+        [
+          14,
+          true
+        ],
+        [
+          15,
+          true
+        ],
+        [
+          16,
+          true
+        ],
+        [
+          17,
+          true
+        ],
+        [
+          18,
+          true
+        ],
+        [
+          19,
+          true
+        ],
+        [
+          20,
+          true
+        ],
+        [
+          21,
+          true
+        ]
+      ]
+    }
+  ]
+}

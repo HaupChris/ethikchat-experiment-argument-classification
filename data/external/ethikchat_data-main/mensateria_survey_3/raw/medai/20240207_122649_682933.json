@@ -1,0 +1,190 @@
+{
+  "name": "20240207_122649_682933",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-12:26:49",
+  "end": "2024/02/07-12:42:10",
+  "utterances": [
+    {
+      "user": "JKXTM",
+      "type": "user",
+      "text": "Eine KI kann die Empathie einer Ärztin oder eines Arztes nicht ersetzen, deshalb sollte sie nur als Unterstützung eingesetzt werden.",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-12:28:33",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken hinsichtlich der menschlichen Empathie in der Medizin. Allerdings muss man bedenken, dass die medKI lediglich auf der Grundlage von Fakten und medizinischem Wissen entscheidet, was zu objektiveren Ergebnissen führen kann. Darüber hinaus kann das medizinische Personal, das mit der medKI arbeitet, die erklärungsbedürftigen Aspekte der Diagnose und Behandlung weiterhin persönlich vermitteln.\n",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-12:28:38",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "JKXTM",
+      "type": "user",
+      "text": "Medizinisches Personal sind aber keine ÄrztInnen. Sie können zwar persönlich vermitteln aber können ebenfalls keinen Arzt oder Ärztin ersetzen.",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-12:30:18",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sie haben Recht, dass medizinisches Personal keine Ärztinnen oder Ärzte ersetzen kann. Ihre Rolle ist es vielmehr, die Daten der Patienten zu erheben und die Entscheidungen der medKI zu erklären. Die eigentliche Diagnose und Therapie-Empfehlung trifft die medKI, die auf fundierten medizinischen Erkenntnissen basiert und nicht durch menschliche Emotionen beeinflusst wird.\n",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-12:30:25",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "JKXTM",
+      "type": "user",
+      "text": "Was ist wenn das Medizinische Personal wichtige Aspekte vergisst abzufragen, die für eine Diagnosestellung benötigt werden?",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-12:32:52",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Das ist ein berechtigter Einwand. Um dieses Risiko zu minimieren, kann die medKI mit einem standardisierten und umfassenden Datenerfassungsprozess ausgestattet werden, um sicherzustellen, dass keine wesentlichen Informationen übersehen werden. Darüber hinaus kann das medizinische Personal durch kontinuierliche Fortbildung und Schulungen unterstützt werden, um sicherzustellen, dass sie die notwendigen Informationen korrekt erfassen.\n",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-12:32:57",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "JKXTM",
+      "type": "user",
+      "text": "Okay. Aber können Notfälle schnell genug behandelt werden ? Das Abfragen mit standardisierten Tests dauert vielleicht zu lange.",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-12:35:14",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sie haben Recht, dass Zeit in Notfällen ein entscheidender Faktor ist. Die medKI kann jedoch so konzipiert werden, dass sie in Notfallsituationen priorisiert und schnell reagiert. Zudem kann sie auf Basis der erhobenen Daten und unter Berücksichtigung der Dringlichkeit eine rasche Ersteinschätzung vornehmen und entsprechende Handlungsempfehlungen geben.\n",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-12:35:19",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "JKXTM",
+      "type": "user",
+      "text": "Okay. Wenn es zu einer Fehleinschätzung kommt, wer wird dann dafür verantwortlich gemacht ?",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-12:36:20",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die Verantwortung für die Entscheidungen der medKI läge bei den Entwicklern und Betreibern der KI. Sie müssten sicherstellen, dass die medKI regelmäßig überprüft und aktualisiert wird, um Fehleinschätzungen zu minimieren. Im Falle einer Fehleinschätzung müssten sie die Konsequenzen tragen und angemessene Maßnahmen ergreifen, um zukünftige Fehler zu vermeiden.\n",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-12:36:26",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "JKXTM",
+      "type": "user",
+      "text": "Okay. Meiner Meinung nach, sollte immer ein Arzt oder ein Ärztin vor Ort sein, da es auch atypische Symptome gibt , die eine KI vielleicht nicht richtig zuordnen kann. ",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-12:38:03",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Bedenken hinsichtlich atypischer Symptome sind verständlich. Es ist möglich, die medKI als Unterstützung für Ärztinnen und Ärzte einzusetzen, um die Diagnoseprozesse zu optimieren und zu beschleunigen. In diesem Fall könnte die medKI eine zweite Meinung abgeben und die endgültige Entscheidung läge immer noch in den Händen der Ärztin oder des Arztes.\n",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-12:38:09",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "JKXTM",
+      "type": "user",
+      "text": "Ja genau.",
+      "id_in_dialogue": 12,
+      "timestamp": "2024/02/07-12:38:23",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Gerne, ich hoffe, ich konnte Ihre Bedenken zum Thema medizinische KI in Untersuchungszentren ausreichend adressieren. Sollten Sie weitere Fragen oder Anmerkungen haben, stehe ich Ihnen gerne zur Verfügung.\n",
+      "id_in_dialogue": 13,
+      "timestamp": "2024/02/07-12:38:26",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "89e8a9ab82da5681aa4e23d810a05c49",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "informed": 0,
+      "agreement": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "89e8a9ab82da5681aa4e23d810a05c49",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "opinion_1": 1,
+      "opinion_2": 1,
+      "argument_quality_2": 0.8,
+      "user_information_argument_breadth": 0.25,
+      "user_information_argument_depth": 0.6
+    }
+  }
+}

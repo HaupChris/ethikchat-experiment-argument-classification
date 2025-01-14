@@ -1,0 +1,8 @@
+﻿id, author, utterance, arg_label, arg_label, arg_label
+14:44, 15:02
+0, alexander.rohen, "Nein, sollte sie nicht. Die KI kann den Kontext der Untersuchung nicht mit einbeziehen.", con_1
+1, frank.puppe, "Meistens ist das nicht nötig. Wenn man auf einem CT eine Läsion findet, die auf einen Tumor hindeutet, braucht man keinen Kontext, aber eine gute Bilderkennung", con_1.1
+2, alexander.rohen, "Das ist zwar ein gutes Argument; allerdings hat die Maschine keinerlei Möglichkeit zu verifizieren, ob es sich dann wirklich um eine Läsion handelt.", exp_1
+3, frank.puppe, "Das kann eine KI sogar besser verifizieren als ein Arzt. Bei der KI liegen umfassenden Evaluationsergebnisse von Studien vor. Beim Menschen kann man nur seiner Erfahrung vertrauen.", exp_1.1
+4, alexander.rohen, "Allerdings orientiert sich die Maschine an vorgegebenen Mustern. Es besteht die Gefahr, dass ein einmal fehlerhaft gebautes und ausgeliefertes System zu enormen Problemen führen kann, wenn die ursprüngliche Bilderkennungsweise fehlerhaft ist.", exp_2
+5, frank.puppe, "Das war bei alten KI-Ansätzen so. Die modernen Ansätze werden mit einer großen Menge echter Bilder und deren Interpretation (von Radiologen) trainiert und erstellen sich ihre Muster selbst. Das kann völlig anders sein als bei Menschen. Durch eine extrem große Menge von Trainingsbeispielen wird die Qualität dann sehr hoch.", exp_2.1

@@ -1,0 +1,167 @@
+{
+  "name": "20240207_115855_237750",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:58:55",
+  "end": "2024/02/07-12:05:43",
+  "utterances": [
+    {
+      "user": "UABEF",
+      "type": "user",
+      "text": "Menschliche Interaktion ist für eine Behandlung essenziell ",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:59:38",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Vielen Dank für Ihre Anmerkung. Ich verstehe Ihre Bedenken, aber im Szenario geht es auch weiterhin um menschliche Interaktion. Das medizinische Personal ist weiterhin vor Ort, um Daten zu erheben und die Entscheidungen der medKI zu erklären. Die menschlichen Interaktion und Fürsorge sind somit immer noch gegeben. Allerdings könnte die medKI eine genauere und schnellere Diagnosis stellen, was für die Behandlung ebenfalls essenziell ist.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:59:43",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "UABEF",
+      "type": "user",
+      "text": "Aber ist eine KI Behandlung nicht dahingegen problematisch, weil sie Entscheidungen nur anhand einer Datenbank treffen kann? Diese Entscheidungen sind nicht unbedingt die besten",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-12:00:52",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken, aber im Szenario wird von einem ausreichend guten medizinischen Programm ausgegangen. Das bedeutet, dass die medKI über eine umfangreiche und aktuelle Datenbank verfügt, die auf wissenschaftlichen Erkenntnissen und Erfahrungen von medizinischen Expert:innen basiert. Die medKI trifft Entscheidungen anhand dieser Datenbank, was zu präziseren und konsistenteren Diagnosen und Therapieentscheidungen führen kann.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-12:01:02",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "UABEF",
+      "type": "user",
+      "text": "Das verstehe ich, allerdings ist jeder Mensch individuell und kann nicht nur anhand von Daten behandelt werden. Dabei werden wünsche, bedenken und Ängste der Patienten ggf. Außer acht gelassen",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-12:02:30",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Bedenken sind verständlich, aber im Szenario ist das medizinische Personal weiterhin vor Ort, um die Entscheidungen der medKI zu erklären und die individuellen Bedürfnisse der Patient:innen zu berücksichtigen. Die medKI kann zwar eine genaue Diagnose stellen, aber die menschliche Komponente im medizinischen Personal ist weiterhin vorhanden, um die menschlichen Aspekte wie Wünsche, Bedenken und Ängste der Patient:innen zu adressieren.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-12:02:36",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "UABEF",
+      "type": "user",
+      "text": "Okay aber dann ein anderes Problem, es werden masshenhaft Arbeitsplätze zerstört werden",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-12:03:14",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich kann Ihre Bedenken hinsichtlich des Arbeitsplatzverlusts verstehen. Es ist jedoch wichtig zu beachten, dass die Einführung neuer Technologien und Automatisierung in verschiedenen Branchen immer zu Veränderungen im Arbeitsmarkt führt. Im Gesundheitswesen könnte die Einführung einer medKI dazu führen, dass sich das Aufgabenfeld des medizinischen Personals ändert, anstatt dass Arbeitsplätze vollständig verschwinden. Das medizinische Personal könnte sich stärker auf die Betreuung und Beratung der Patient:innen konzentrieren, während die medKI für die Diagnose und Therapieentscheidungen zuständig ist.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-12:03:23",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "UABEF",
+      "type": "user",
+      "text": "Durchaus, jedoch bezweifle ich das eine KI das gleiche hinbekommt wie ein Mensch der min. 6 Jahre dafür studiert hat",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-12:04:12",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Zweifel sind verständlich, aber es ist wichtig zu beachten, dass die medKI in diesem Szenario nicht die menschliche Expertise und Erfahrung ersetzen soll, sondern eine Ergänzung sein soll. Die medKI kann auf eine umfangreiche Datenbank zugreifen und schnellere und präzisere Diagnosen stellen, während das medizinische Personal seine Erfahrung und menschliche Komponente einbringt, um die individuellen Bedürfnisse der Patient:innen zu berücksichtigen. Durch die Zusammenarbeit von Mensch und Maschine könnte eine bessere Versorgung der Patient:innen erreicht werden.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-12:04:23",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "UABEF",
+      "type": "user",
+      "text": "Als Ergänzung wäre sie sinnvoll ja",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-12:04:45",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, genau. Die medKI kann als Ergänzung zum medizinischen Personal dienen, um die Versorgung der Patient:innen zu verbessern. Die medKI kann eine genauere und schnellere Diagnose stellen, während das medizinische Personal die menschliche Komponente einbringt, um die individuellen Bedürfnisse der Patient:innen zu berücksichtigen. Durch die Zusammenarbeit von Mensch und Maschine könnte eine bessere Versorgung der Patient:innen erreicht werden.",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-12:04:51",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "7d40d186a5672d67699ffb841232c6ef",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "informed": 0.75,
+      "agreement": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "7d40d186a5672d67699ffb841232c6ef",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "opinion_1": 1,
+      "opinion_2": 0.6,
+      "argument_quality_2": 0.6,
+      "user_information_argument_breadth": 0.25,
+      "user_information_argument_depth": 0.4
+    }
+  }
+}

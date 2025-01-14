@@ -1,0 +1,147 @@
+{
+  "name": "20240207_113737_219491",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:37:37",
+  "end": "2024/02/07-11:46:48",
+  "utterances": [
+    {
+      "user": "31UYE",
+      "type": "user",
+      "text": "Ich denke, dass eine KI nicht alle Faktoren mit einbeziehen kann. Besonders die emotionalen und psychologischen Aspekte können nicht beachtet werden.",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:38:37",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Vielen Dank für Ihre Bedenken. Ich verstehe Ihre Sorge, dass eine KI möglicherweise nicht in der Lage ist, alle emotionalen und psychologischen Aspekte eines Patienten zu berücksichtigen. Allerdings können menschliche Ärzte auch nicht immer alle subtilen Hinweise erkennen, die auf psychologische Probleme hindeuten könnten. Ein gut programmiertes medizinisches KI-System hingegen könnte mit Hilfe von Algorithmen und maschinellem Lernen Muster in großen Datenmengen erkennen, die für Menschen möglicherweise nicht offensichtlich sind. Darüber hinaus könnte die KI mit fortschreitender Technologie immer besser darin werden, diese Faktoren zu berücksichtigen.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:38:50",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "31UYE",
+      "type": "user",
+      "text": "Das stimmt. Ich denke, dass es aber sehr viel Aufklärungsarbeit notwendig ist, um die Akzeptanz bei den Menschen zu erreichen.",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-11:40:46",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Bedenken in Bezug auf die Akzeptanz der Menschen gegenüber einer medizinischen KI sind durchaus berechtigt. Es ist sicherlich wichtig, dass die Menschen über die Funktionsweise und die Vorteile einer solchen KI aufgeklärt werden, um Ängste und Vorbehalte abzubauen. Hierbei könnte das medizinische Personal, das mit der KI zusammenarbeitet, eine wichtige Rolle spielen, indem es den Patienten die Möglichkeiten und Grenzen der KI erklärt und sie bei der Interpretation der KI-Ergebnisse unterstützt. Durch eine transparente und offene Kommunikation könnte somit das Vertrauen der Menschen in die KI gestärkt werden.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-11:40:52",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "31UYE",
+      "type": "user",
+      "text": "Eine enge Zusammenarbeit mit Ärztinnen und Ärzten finde ich beim Einsatz einer KI sehr wichtig. ",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-11:42:03",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich stimme Ihnen zu, dass eine enge Zusammenarbeit zwischen Ärztinnen und Ärzten und der medizinischen KI von großer Bedeutung ist. Die KI kann die Ärzte bei der Diagnose und Therapieentscheidung unterstützen, indem sie große Datenmengen analysiert und Muster erkennt, die für den Menschen möglicherweise nicht offensichtlich sind. Die Ärzte hingegen können ihre klinische Erfahrung und ihr Fachwissen einbringen, um die KI-Ergebnisse zu interpretieren und in den Kontext des individuellen Patienten zu stellen. Durch diese Synergie könnte eine höhere diagnostische Genauigkeit und eine verbesserte Patientenversorgung erreicht werden.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-11:42:08",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "31UYE",
+      "type": "user",
+      "text": "Ich denke durch die KI könnten Ärzte entlastet werden und Wartezeiten für Termine verkürzt werden.",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-11:43:05",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, das ist sicherlich ein weiterer Vorteil der medizinischen KI. Durch die automatisierte Auswertung von Routineuntersuchungen und standardisierten Diagnoseverfahren könnte die Arbeitsbelastung der Ärzte reduziert werden, was wiederum mehr Zeit für die Betreuung komplexer Fälle und die Interaktion mit den Patienten ermöglichen würde. Zudem könnten durch die schnellere Diagnose und Therapieentscheidung der KI Wartezeiten für Termine verkürzt und die Versorgung der Patienten insgesamt verbessert werden.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-11:43:15",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "31UYE",
+      "type": "user",
+      "text": "Das finde ich sehr gut. Aber bringt es für die Ärzte nicht auch trotzdem weitere Aufgaben mit sich?",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-11:44:05",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, das ist richtig. Der Einsatz einer medizinischen KI würde sicherlich auch neue Aufgaben für die Ärzte mit sich bringen. Zum Beispiel müssten sie lernen, wie man die KI-Systeme bedient und die Ergebnisse interpretiert. Zudem müssten sie sich mit ethischen und rechtlichen Fragen auseinandersetzen, die mit der Nutzung von KI in der Medizin einhergehen. Auch die Kommunikation mit den Patienten könnte eine neue Herausforderung darstellen, da sie erklären müssen, wie die KI-Systeme funktionieren und wie die Ergebnisse zu interpretieren sind. Allerdings könnten diese neuen Aufgaben auch dazu beitragen, dass die Ärzte ihr Fachwissen aktualisieren und erweitern, was wiederum zu einer besseren Patientenversorgung beitragen könnte.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-11:44:13",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "fc2bcfb4d9b326ce19a142898e7a880c",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "informed": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "fc2bcfb4d9b326ce19a142898e7a880c",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.5,
+      "opinion_1": 1,
+      "opinion_1_reason": "Kann sehr hilfreich sein, um auch Gegenargumente zu sehen.",
+      "opinion_2": 0.8,
+      "argument_quality_2": 0.8,
+      "user_information_argument_breadth": 1,
+      "user_information_argument_depth": 0.8,
+      "positive_critics": "Die Antworten waren sehr ausführlich.",
+      "negative_critics": "Nichts"
+    }
+  }
+}

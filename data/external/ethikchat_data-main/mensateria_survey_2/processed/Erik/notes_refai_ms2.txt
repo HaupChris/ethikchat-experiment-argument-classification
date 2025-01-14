@@ -1,0 +1,28 @@
+20230720_131153_930223	
+	
+	Ich verstehe in erster Linie nicht ganz wie eine KI alle Entscheidungen auf dem Platz treffen kann?
+	- FAQ gibt aber kein passendes Label
+	
+	
+20230720_133418_279839
+	
+	Ich denke eine KI kann nicht jede Situation so gut erfassen wie ein mensch
+	-  CON_NZARG
+	
+	
+20230720_141643_727159 - ganzer Chat besteht eigentlich nur aus Fragen
+	
+	Wie soll das umgesetzt werdne
+	- Allgemeine Frage ohne passendes Label (FAQ.G1)
+	
+	was ist mit menschlicher intuition und eingriff in streitfällen
+	- Zu spezifische Frage kein passendes Label (FAQ.G1)
+	
+	wie viele kameras hat die ki
+	- Zu spezifische Frage kein passendes Label (FAQ.G1)
+	
+	was ist wenn die ki keine klare entscheidung treffen kann
+	- Frage könnte FAQ.4 sein aber Antwort würde nicht passen
+	
+	okay und wie läuft das trainig ab?
+	- Zu spezifische Frage kein passendes Label (FAQ.G1)

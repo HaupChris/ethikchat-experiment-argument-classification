@@ -1,0 +1,456 @@
+{
+  "name": "20240207_111710_923555",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:17:10",
+  "end": "2024/02/07-11:18:03",
+  "utterances": [
+    {
+      "user": "Pia",
+      "type": "user",
+      "text": "Ersetzen menschliches Personal",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:17:30",
+      "true_labels": [
+        "Z.K14"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "Z.K14",
+          0.01879820580706429
+        ],
+        [
+          "Z.P1-1",
+          0.01863393697855704
+        ],
+        [
+          "Z.K8-1",
+          0.018223550723298915
+        ],
+        [
+          "Z.K1",
+          0.018188071651318548
+        ],
+        [
+          "Z.P6-1",
+          0.017480788846924344
+        ],
+        [
+          "Z.K2",
+          0.017435872412606385
+        ],
+        [
+          "Z.K7",
+          0.01728851028818819
+        ],
+        [
+          "Z.P4-1",
+          0.017112329615562725
+        ],
+        [
+          "NZ.K10",
+          0.016970885206525305
+        ],
+        [
+          "Z.K5",
+          0.016006822899015522
+        ],
+        [
+          "Z.K9",
+          0.01535954547391712
+        ],
+        [
+          "Z.P1-2",
+          0.014904773227392431
+        ],
+        [
+          "Z.K16",
+          0.014894731849931014
+        ],
+        [
+          "NZ.K1",
+          0.014529049435776858
+        ],
+        [
+          "Z.K10",
+          0.014457879784289716
+        ],
+        [
+          "Z.K6",
+          0.014404347445205821
+        ],
+        [
+          "NZ.K6",
+          0.014249893427636325
+        ],
+        [
+          "Z.K13",
+          0.013453509077248533
+        ],
+        [
+          "Z.K15",
+          0.013444761572476458
+        ],
+        [
+          "Z.P3-1",
+          0.013206976540340047
+        ],
+        [
+          "NZ.K8",
+          0.013011639628598349
+        ],
+        [
+          "NZ.K9",
+          0.012976360109906724
+        ],
+        [
+          "Z.K11",
+          0.012882832666253386
+        ],
+        [
+          "Z.K19",
+          0.012732187578587293
+        ],
+        [
+          "NZ.K3",
+          0.012426100859201265
+        ],
+        [
+          "Z.K18",
+          0.011673790195860798
+        ],
+        [
+          "Z.K8",
+          0.011482029907761124
+        ],
+        [
+          "NZ.K4",
+          0.011425350990826947
+        ],
+        [
+          "Z.P7-1",
+          0.010864073570435496
+        ],
+        [
+          "Z.K12",
+          0.010511207722288364
+        ],
+        [
+          "Z.P5-1",
+          0.010202753683586686
+        ],
+        [
+          "Z.K4",
+          0.009639828446539265
+        ],
+        [
+          "Z.K3",
+          0.009476384721049549
+        ],
+        [
+          "Z.K3-1-1",
+          0.009476384721049549
+        ],
+        [
+          "Z.P1",
+          0.0
+        ],
+        [
+          "Z.P1-1-1",
+          0.0
+        ],
+        [
+          "Z.P1-2-1",
+          0.0
+        ],
+        [
+          "Z.P4",
+          0.0
+        ],
+        [
+          "Z.P2",
+          0.0
+        ],
+        [
+          "Z.P3",
+          0.0
+        ],
+        [
+          "Z.P3-1-1",
+          0.0
+        ],
+        [
+          "Z.P6",
+          0.0
+        ],
+        [
+          "Z.P6-1-1",
+          0.0
+        ],
+        [
+          "Z.P5",
+          0.0
+        ],
+        [
+          "Z.P7",
+          0.0
+        ],
+        [
+          "Z.K1-1",
+          0.0
+        ],
+        [
+          "Z.K2-4",
+          0.0
+        ],
+        [
+          "Z.K4-1",
+          0.0
+        ],
+        [
+          "Z.K6-1",
+          0.0
+        ],
+        [
+          "Z.K15-1",
+          0.0
+        ],
+        [
+          "Z.K18-1",
+          0.0
+        ],
+        [
+          "Z.K3-1",
+          0.0
+        ],
+        [
+          "Z.K3-1-1-1",
+          0.0
+        ],
+        [
+          "Z.K3-2",
+          0.0
+        ],
+        [
+          "Z.K11-1",
+          0.0
+        ],
+        [
+          "Z.K12-1",
+          0.0
+        ],
+        [
+          "Z.K5-1",
+          0.0
+        ],
+        [
+          "Z.K7-1",
+          0.0
+        ],
+        [
+          "Z.K10-1",
+          0.0
+        ],
+        [
+          "Z.K10-2",
+          0.0
+        ],
+        [
+          "Z.K9-1",
+          0.0
+        ],
+        [
+          "Z.K13-1",
+          0.0
+        ],
+        [
+          "Z.K14-1",
+          0.0
+        ],
+        [
+          "Z.K16-1",
+          0.0
+        ],
+        [
+          "Z.K19-1",
+          0.0
+        ],
+        [
+          "NZ.K1-1",
+          0.0
+        ],
+        [
+          "NZ.K3-1",
+          0.0
+        ],
+        [
+          "NZ.K4-1",
+          0.0
+        ],
+        [
+          "NZ.K6-1",
+          0.0
+        ],
+        [
+          "NZ.K8-1",
+          0.0
+        ],
+        [
+          "NZ.K9-1",
+          0.0
+        ],
+        [
+          "NZ.K10-1",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true,
+      "user_selected_ground_truth": true
+    },
+    {
+      "user": "EthiBot",
+      "type": "bot",
+      "text": "Ich habe dich wohl nicht korrekt verstanden. Bitte wähle aus der folgenden Liste ein Argument aus, das deinen Standpunkt am besten repräsentiert. | medKI macht ärztliches Berufsbild überflüssig. |   Das ist ein gutes Argument. Andererseits: Medizinisches Personal zur korrekten Erhebung der Patientendaten und zur Kommunikation ist notwendig und erfordert weiterhin medizinisches Wissen, aber auch psychologische Fähigkeiten. Zudem sind Spitzenärzt:innen für Problemfälle und die Weiterentwicklung der medKI notwendig.  ",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:17:31",
+      "true_labels": [
+        "Z.K14",
+        "intro_46",
+        "Z.K14-1"
+      ],
+      "true_bounds": [],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_27",
+          "intro_23",
+          "intro_25",
+          "intro_28",
+          "intro_26",
+          "intro_24",
+          "intro_32",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.K14",
+        "introductions": [
+          "intro_46",
+          "intro_51",
+          "intro_50",
+          "intro_49",
+          "intro_48",
+          "intro_47",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59",
+          "intro_60",
+          "intro_61",
+          "intro_62",
+          "intro_63",
+          "intro_64",
+          "intro_65",
+          "intro_66",
+          "intro_67",
+          "intro_68"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_11",
+          "z_trans_2",
+          "z_trans_16",
+          "z_trans_9",
+          "z_trans_10",
+          "z_trans_13",
+          "z_trans_8",
+          "z_trans_1",
+          "z_trans_4",
+          "z_trans_12",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": false,
+        "first_arguments": [
+          "Z.K14-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.P1",
+          "Z.P2",
+          "Z.P4",
+          "Z.P3",
+          "Z.P5",
+          "Z.P6"
+        ],
+        "preselect_second_argument": false
+      }
+    }
+  ],
+  "start_survey": {
+    "name": "173d2d0f68dd091030438afe1b3139c9",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0.5
+    }
+  },
+  "end_survey": {
+    "name": "173d2d0f68dd091030438afe1b3139c9",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "opinion_1": 1,
+      "opinion_2": 1,
+      "argument_quality_2": 0.8,
+      "user_information_argument_breadth": 0.75,
+      "user_information_argument_depth": 0.8
+    }
+  }
+}

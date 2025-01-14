@@ -1,0 +1,22 @@
+id, author, utterance, arg_label, arg_label, arg_label
+17:29, 18:29
+0, kai.weisenberger, "Eine KI steht nicht unter Stress und liefert gleichbleibend gute Ergebnisse.", pro_4
+1, antonia.krause.stud-mail, "Bei dem Punkt würde ich zustimmen, allerdings führt der zunehmende Einsatz von KI auch zu einer Entmenschlichung und einem Vertrauensverlust im Radiologen-Patienten-Verhältnis.", con_12
+3, kai.weisenberger, "Radiologen beraten Fachärzte und bauen daher eher selten eine direkte Beziehung zum Patienten auf.", con_12.2
+4, antonia.krause.stud-mail, "Wir sprechen aber über eine KI die nicht beratend tätig wird, sondern die Entscheidung autonom trifft. Der Mensch würde in dem Prozess vollständig wegfallen.", con_13
+5, kai.weisenberger, "Die KI würde ihre Entscheidung lediglich an den behandelnden Arzt mitteilen. Der Radiologe würde mithin ersetzt, noch nicht alle Ärzte.", con_13.1.1.1
+6, antonia.krause.stud-mail, "Im Interesse einer Vielzahl von Patienten steht es jedoch, dass der sie behandelnde Arzt nicht nur übermittelt sondern mit der gesamten Sachlage und Entscheidungsfindung betraut ist. Denn sie sind diejenigen, die die Patienten schlussendlich behandeln., con_1
+7, kai.weisenberger, "Der behandelnde Arzt würde bei einem Radiologen allerdings auch die Entscheidung des Radiologen übermittelt bekommen, welche er wohl kaum in Frage stellen würde.", con_2.5
+8, antonia.krause.stud-mail, "Er hätte aber immerhin die Möglichkeit sich auszutauschen und gegebenenfalls Fragen oder Unklarheiten zu klären.", con_16
+9, kai.weisenberger, "Das wäre mit einer KI möglicherweise sogar schneller möglich, weil diese die Erklärung standardmäßig mitliefern könnte. Bei einem Menschen müsste dieser erst Zeit finden.", pro_12
+10, antonia.krause.stud-mail, "Besteht für den Berufsstand der Radiologen nicht dann generell die Gefahr der Reduktion des Bedarfs an Radiologen und einer damit verbundenen Arbeitsplatzreduzierung beim verstärkten Einsatz von KI?", con_13
+11, kai.weisenberger, "Dann würden in Zukunft sicherlich weniger Radiologen gebraucht. Auf der anderen Seite werden aber Personen benötigt, die die KI programmieren, pflegen und eventuell kontrollieren. Insgesamt sollten also keine Arbeitsplätze verloren gehen.", con_13, con_13.1
+12, antonia.krause.stud-mail, "Vielleicht gehen absolut gesehen keine Arbeitsplätze verloren, aber die Attraktivität des Berufsbildes des Radiologen sinkt erheblich.", con_13.1.1
+13, kai.weisenberger, "Das ist richtig. Dieser Wandel ist aber auch in vielen anderen Branchen zu beobachten. Letztendlich gewinnt in einer freien Marktwirtschaft die günstigere und bessere Alternative.", con_13.1.2., pro_5
+14, antonia.krause.stud-mail, "Wichtig sollte es allerdings sein die Bereich nicht völlig zu vernachlässigen bzw. unattraktiv zu gestalten. Denn gerade die Wissenschaft und Forschung in den jeweiligen Bereichen sollte weiterhin vorangetrieben werden.", unk
+15, kai.weisenberger, "Radiologen könnten weiterhin für die Verifikation und das Training der KI eingesetzt werden. Und die Forschung müsse davon natürlich unabhängig weitergeführt werden.", con_13.2
+16, antonia.krause.stud-mail, "Dann müsste aber auch das Studium beziehungsweise die Ausbildung insofern umgestaltet werden, als dass es ganz neue und andere Fähigkeiten bedarf.", con_13.2.1.
+17, kai.weisenberger, "Ich glaube nicht, dass die Fähigkeiten so unterschiedlich sind.", unk
+18, antonia.krause.stud-mail, "Ein Radiologe verfügt nicht unbedingt über technisches Spezialwissen dessen es bedarf, um eine KI entsprechend zu trainieren.", con_13.2.2.
+19, kai.weisenberger, "Die Schnittstelle zwischen KI und Radiologe müsste entweder ein Informatiker übernehmen oder man würde es entsprechend vereinfachen, um einem technischen Laien das Trainieren zu ermöglichen.", con_13.2.2.1.
+20, antonia.krause.stud-mail, "Es werden Fachkräfte benötigt, die sich speziell mit diesen Aufgaben auseinandersetzen.", con_13.1

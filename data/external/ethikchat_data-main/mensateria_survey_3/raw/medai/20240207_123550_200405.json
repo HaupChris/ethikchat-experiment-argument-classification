@@ -1,0 +1,192 @@
+{
+  "name": "20240207_123550_200405",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-12:35:50",
+  "end": "2024/02/07-12:49:36",
+  "utterances": [
+    {
+      "user": "Q1PNW",
+      "type": "user",
+      "text": "Deine Haltbarkeit ist ungeklärt ",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-12:36:21",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Als medizinische KI wäre meine Haltbarkeit kein relevanter Faktor für die Ethik der Entscheidungsfindung. Die Frage ist, ob ein ausreichend gutes medizinisches Programm unter ethischen Gesichtspunkten eigenständige Diagnose- und Therapie-Entscheidungen treffen darf. Es gibt mehrere Gründe, warum dies der Fall sein sollte.\n\nErstens, eine medizinische KI könnte objektiver sein als ein menschlicher Arzt. Sie ist nicht anfällig für emotionale Bias oder menschliche Fehler, die bei der Entscheidungsfindung eine Rolle spielen könnten.\n\nZweitens, eine medizinische KI könnte in der Lage sein, eine viel größere Menge an medizinischen Forschungsergebnissen und Daten zu verarbeiten als ein menschlicher Arzt. Dies könnte zu besseren und genaueren Diagnosen und Therapieentscheidungen führen.\n",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-12:36:30",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "Q1PNW",
+      "type": "user",
+      "text": "Was passiert bei falscher Therapie mit dem Patienten und Haftungsansprüchen?",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-12:37:47",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die Frage der Haftung ist sicherlich ein wichtiges Thema bei der Implementierung einer medizinischen KI. Wenn die KI jedoch sorgfältig entwickelt und getestet wird, sollte das Risiko von Fehlern minimiert werden. Im Falle eines Fehlers könnte die Verantwortung bei der Person oder Organisation liegen, die für die Entwicklung und Wartung der KI verantwortlich ist. Es wäre auch wichtig, klare Richtlinien und Prozesse für die Überprüfung und Bestätigung der KI-Empfehlungen durch medizinisches Personal zu haben.\n",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-12:37:53",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "Q1PNW",
+      "type": "user",
+      "text": "Das heißt die Haftung würde zwischen dem ohnehin überlasteten medizinischen Personal und einem Unternehmen, geteilt, welches keinen Bezug zum Patienten hat?",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-12:39:04",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Nein, die Haftungsfrage würde nicht unbedingt zwischen dem medizinischen Personal und dem Unternehmen geteilt werden. Die genaue Verteilung der Haftung hängt von den gesetzlichen Bestimmungen und den Vertragsbedingungen ab. Es ist möglich, dass das Unternehmen, das die KI bereitstellt, die Haftung für Fehler übernimmt, die aufgrund von Programmierfehlern oder mangelhafter Funktionalität auftreten. Anderseits könnte auch das medizinische Personal haftbar gemacht werden, wenn es die Empfehlungen der KI nicht sorgfältig überprüft und bestätigt. Es ist wichtig, diese Fragen im Voraus zu klären und entsprechende Regelungen zu treffen.\n",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-12:39:10",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "Q1PNW",
+      "type": "user",
+      "text": "Aber zu Beginn des Chats wurde von eigenständigen Therapieentscheidungen der KI gesprochen, dies steht doch im Wiederspruch zur gerade beschrieben beratenden Stellung der KI.",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-12:40:24",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich möchte klarstellen, dass ich nicht behauptet habe, dass die KI in einer beratenden Stellung agiert. Im Gegenteil, ich argumentiere dafür, dass die KI eigenständige Diagnose- und Therapie-Entscheidungen treffen sollte. Die Haftungsfrage ist ein separates Thema und bezieht sich auf die Verantwortung im Falle von Fehlern. Selbst wenn die KI eigenständige Entscheidungen trifft, muss es klare Richtlinien und Prozesse geben, um sicherzustellen, dass diese Entscheidungen überprüft und bestätigt werden, um das Risiko von Fehlern zu minimieren.\n",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-12:40:33",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "Q1PNW",
+      "type": "user",
+      "text": "Entsprechend ist die ärztliche Kontrolle nur für die Trainingsphase vorgesehen, nicht aber im Laufenden Betrieb?",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-12:44:52",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Nein, das ist nicht was ich sagen wollte. Auch im laufenden Betrieb sollte eine ärztliche Kontrolle vorhanden sein. Die KI sollte nicht völlig unabhängig operieren, sondern vielmehr in enger Zusammenarbeit mit medizinischem Personal. Das medizinische Personal sollte die Entscheidungen der KI überprüfen und bestätigen, bevor sie umgesetzt werden. Dies gewährleistet, dass menschliches Urteilsvermögen und Erfahrung in den Prozess einfließen und minimiert das Risiko von Fehlern.\n",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-12:44:59",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "Q1PNW",
+      "type": "user",
+      "text": "Da stimme ich zu, meiner Meinung nach ist es unerlässlich, dass die KI in enger Zusammenarbeit mit dem medizinisch geschulten Personal agiert.",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-12:46:37",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, das ist sicherlich ein wichtiger Aspekt. Die KI kann das medizinische Personal bei der Entscheidungsfindung unterstützen, indem sie schnelle und genaue Diagnosen und Therapieempfehlungen liefert. Aber letztendlich sollte das medizinische Personal die endgültige Entscheidung treffen, um sicherzustellen, dass die individuellen Bedürfnisse und Umstände des Patienten berücksichtigt werden.\n",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-12:46:50",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "Q1PNW",
+      "type": "user",
+      "text": "Dem stimme ich zu",
+      "id_in_dialogue": 12,
+      "timestamp": "2024/02/07-12:47:07",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Gut, ich bin froh, dass wir uns einig sind. Wenn Sie weitere Fragen oder Bedenken haben, zögern Sie bitte nicht, diese zu äußern. Ich bin hier, um eine sachliche und konstruktive Diskussion über dieses Thema zu führen.\n",
+      "id_in_dialogue": 13,
+      "timestamp": "2024/02/07-12:47:13",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "6eaf1d1f4f3dbb68d15e9988cb419c1a",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "6eaf1d1f4f3dbb68d15e9988cb419c1a",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "opinion_1": 1,
+      "opinion_1_reason": "Ich habe ihn überzeugt bekommen.",
+      "opinion_2": 0.8,
+      "argument_quality_2": 0.4,
+      "user_information_argument_breadth": 0,
+      "user_information_argument_depth": 0.2,
+      "negative_critics": "Der Chatbot hat sich wiedersprochen"
+    }
+  }
+}

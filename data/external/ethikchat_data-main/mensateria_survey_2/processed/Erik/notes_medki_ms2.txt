@@ -1,0 +1,141 @@
+20230720_110322_510789
+	
+	Wie wahrscheinlich ist eine falsche Entscheidung?
+	- Kein passendes FAQ Label gefunden
+	
+	
+20230720_110558_249273
+	
+	Was gibt das dann für Vorteile, wenn trotzdem menschliche Ärzt:innen das Gespräch überwachen müssen?
+	- Kein passendes FAQ Label gefunden
+	
+	Was meinst du denn mit ethisch?
+	- Kein passendes FAQ Label gefunden
+	
+
+20230720_113020_792461
+
+	Wenn aber dieser Faktor noch von Menschen abgedeckt wird, weshalb sollte es dann überhaupt nötig sein eine medizinische KI allein für Entscheidungen einzusetzen? Wenn der Mensch doch sowieso schon alles restliche übernimmt
+	- Kein passendes Label gefunden, deswegen CON_NZARG
+	
+	
+20230720_114256_442837
+	
+	Wie weit kann eine KI in Einzelfällen und Ausnahmefällen beurteilen? 
+	- Kein passendes FAQ Label gefunden
+	
+	
+20230720_115228_274101
+
+	Aber die Entscheidung über Diagnose und Therapie wird doch getroffen, bevor sich das Fachpersonal damit beschäftigt, wie kann dann noch darauf eingegangen werden?
+	- CON_NZARG
+	
+	
+20230720_115530_438100
+
+	Somit müsste der Kontakt mit persönlichen Ärzt:innen dann ja aber gar nichmehr stattfinden oder?
+	- Kein passendes FAQ Label gefunden
+	
+	Ärzt:innen sind also nur dazu da, die KIs zu speisen? 
+	- Kein passendes FAQ Label gefunden
+	
+	
+20230720_115900_700002
+	
+	Welche Aufgabe übernehmen Ärzte dann noch in deinem Szenario?
+	- Kein passendes FAQ Label gefunden
+	
+	
+20230720_120401_959445
+
+	Damit eine MedKI aber jegliche Krankheit behandeln könne, wäre ein enormes Netz an Programmierung notwendig.
+	- Kein passendes Label gefunden, deswegen CON_ZARG
+	
+	Wenn solche Umstände aber dich bereits durch Fachpersonal getroffen werden soll, macht es die MedKI nicht überflüssig
+	- Kein passendes FAQ Label gefunden
+	
+	
+20230720_120931_535747
+
+	Aber ist eine medKi auch weisungsbefugt?
+	- Kein passendes FAQ Label gefunden
+	
+	
+20230720_121321_305099
+
+	braucht es also medizinisch geschultes Fachpersonal, psychologisch geschultes Fachpersonal und Pflegepersonal?
+	- Kein passendes FAQ Label gefunden
+	
+	ist die KI dann nicht überflüssig, wenn bereist medizinisches Fachpersonal existiert?
+	- Kein passendes FAQ Label gefunden
+	
+	
+20230720_122056_421797
+
+	Allerdings würden die Ansprüche der ärzte fallen , da sie es gar nicht mehr für notwendig erachten sich fortzubilden 
+	- Kein passendes Label gefunden, deswegen CON_NZARG
+	
+	
+20230720_124507_955181
+
+	Inwieferb wäre denn die zulassung vergleichbar mit der von ärztinnen und warum ist eine nptwe dig?
+	- Kein passendes FAQ Label gefunden
+		
+	
+20230720_125144_517487
+	
+	Aver dem medizinischen Personal wird ja dann das Wissen abgesprochen. Es führt dann dazu das sie nicht mehr ernst genommen werden
+	- Kein passendes Label gefunden, deswegen Z.GK5
+	
+	Wie kann sichergestellt werden das auch die neusten Forschungsergebnisse in die Behandlung mit einfließt?
+	- Kein passendes FAQ Label gefunden
+	
+	
+20230720_125321_375247
+
+	Es könnte auch sein, dass das Bild von medizinischem Fachpersonal in der Öffentlichkeit schlechter wird, weil sie nur noch als Bediener der Maschinen gesehen werden und viele Patienten sich dadurch weniger gut behandelt fühlen
+	- Kein passendes Label gefunden, deswegen Z.GK5
+		
+	
+20230720_125923_230627
+
+	Also wird eigenverantwortliches handeln der KI ausgeschlossen?
+	- Kein passendes FAQ Label gefunden
+	
+	
+	
+20230720_130756_982033 - Komplett unsinnig
+	
+	
+20230720_134707_598344 - Komplett unsinnig
+
+
+20230720_133821_890550
+
+	Wie handelt der medKI?
+	- Kein passendes FAQ Label gefunden
+	
+	
+20230720_132307_992609
+
+	Wer würde in einem Schadenfall die Verantwortung tragen, derjenige der das Programm des KI geschrieben hat, das Krankenhaus wo das KI arbeitet oder eine einfache Versicherung?
+	
+	Und wer würde KI kontrollieren?
+	- Kein passendes FAQ Label gefunden
+	
+	
+20230720_135620_836404
+	
+	In wieweit kann die KI den Erfolg/Misserfolg einer Behandlung beurteilen?
+	- Kein passendes FAQ Label gefunden
+	
+	In wieweit berücksichtigt die KI den Willen des Patienten?
+	- Kein passendes FAQ Label gefunden
+	
+20230720_133501_618816
+
+	Für neu auftretende Erkrankungen, für sie es keine Daten gibt bisher, kann eine KI keine geeignete Entscheidungen treffen bezüglich einer Behandlung. Hier müssen reale Personen, die Situation einschätzen und bewerten.
+	- Kein passendes Label gefunden, deswegen Z.GK1
+	
+	
+20230720_133213_029833 - unsinnig

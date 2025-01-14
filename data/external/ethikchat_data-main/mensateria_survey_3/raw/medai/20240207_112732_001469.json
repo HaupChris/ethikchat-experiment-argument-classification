@@ -1,0 +1,145 @@
+{
+  "name": "20240207_112732_001469",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:27:32",
+  "end": "2024/02/07-11:35:57",
+  "utterances": [
+    {
+      "user": "1R4C5",
+      "type": "user",
+      "text": "Fehlende Empathie von Maschinen ",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:28:12",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe, dass Sie Bedenken hinsichtlich der mangelnden Empathie von Maschinen haben. Es ist wichtig zu beachten, dass die medizinische KI in diesem Szenario nicht ersetzen, sondern vielmehr unterstützen und entlasten soll. Durch die Übernahme routinemäßiger Aufgaben wie der Datenerhebung und -verarbeitung kann das medizinische Personal entlastet werden, was ihnen mehr Zeit für die direkte Patientenbetreuung ermöglicht.\nDennoch ist Ihre Bedenken hinsichtlich Empathie berechtigt. Daher ist es wichtig, dass das medizinische Personal weiterhin eine wichtige Rolle spielt, indem es die Entscheidungen der medKI erklärt und die Patient:innen begleitet. Die medKI kann zwar Diagnosen stellen und Therapieentscheidungen treffen, aber sie kann nicht die menschliche Verbindung und die emotionale Unterstützung bieten, die ein Mensch leisten kann.\nIch bin jedoch der Meinung, dass die Vorteile der Nutzung einer medizinischen KI in diesem Szenario überwiegen, da sie objektive Entscheidungen auf Grundlage von Daten und Fakten treffen kann, was zu einer verbesserten Patientenversorgung führen kann.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:28:26",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "1R4C5",
+      "type": "user",
+      "text": "Maschinelles Versagen",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-11:29:42",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken hinsichtlich des maschinellen Versagens. Es ist wichtig zu beachten, dass jede Technologie, einschließlich medizinischer KI, Fehler machen kann. Um jedoch das Risiko von Fehlern zu minimieren, werden die Algorithmen der medKI streng getestet und überwacht. Zudem werden sie ständig aktualisiert und verbessert, um sicherzustellen, dass sie auf dem neuesten Stand der medizinischen Forschung und Technologie sind.\nDarüber hinaus arbeitet die medKI in diesem Szenario nicht isoliert, sondern in enger Zusammenarbeit mit medizinischem Personal. Das Personal ist dafür verantwortlich, die Daten zu erheben und die Patient:innen zu betreuen, während die medKI die Diagnosen und Therapieentscheidungen trifft. Das medizinische Personal kann auch die Entscheidungen der medKI überprüfen und gegebenenfalls anpassen, wenn dies notwendig ist.\nEs ist auch wichtig zu beachten, dass maschinelle Fehler anders sind als menschliche Fehler. Maschinen machen Fehler aufgrund von Algorithmusfehlern oder unzureichenden Daten, während Menschen aufgrund von Müdigkeit, Ablenkung oder mangelndem Wissen Fehler machen können. Indem wir die Vorteile der Technologie nutzen und gleichzeitig die menschliche Expertise einbeziehen, können wir das Risiko von Fehlern minimieren und die Patientenversorgung verbessern.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-11:29:56",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "1R4C5",
+      "type": "user",
+      "text": "Fehlende Jobs im medizinischen Bereich ",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-11:31:06",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken hinsichtlich des möglichen Verlusts von Arbeitsplätzen im medizinischen Bereich. Es ist wichtig zu beachten, dass die Einführung von medizinischer KI nicht zwangsläufig zu einem Verlust von Arbeitsplätzen führen muss. Stattdessen kann sie dazu beitragen, die Arbeitsbelastung der Mitarbeiter zu reduzieren und ihnen mehr Zeit für die direkte Patientenversorgung zu geben.\nDurch die Übernahme routinemäßiger Aufgaben wie der Datenerhebung und -verarbeitung kann das medizinische Personal entlastet werden, was ihnen mehr Zeit für die Betreuung der Patient:innen ermöglicht. Zudem können die Mitarbeiter von den Vorteilen der medizinischen KI profitieren, indem sie objektive Entscheidungen auf Grundlage von Daten und Fakten treffen kann, was zu einer verbesserten Patientenversorgung führen kann.\nEs ist auch wichtig zu beachten, dass die Einführung von medizinischer KI auch neue Arbeitsplätze schaffen kann. Zum Beispiel werden Fachkräfte benötigt, die sich mit der Entwicklung, Implementierung und Überwachung der medizinischen KI beschäftigen. Daher kann die Einführung von medizinischer KI dazu beitragen, die Arbeitsplätze im medizinischen Bereich zu transformieren und zu verbessern, anstatt sie zu reduzieren.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-11:31:26",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "1R4C5",
+      "type": "user",
+      "text": "Zu starke Abhängigkeit von Maschinen ",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-11:32:43",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken hinsichtlich einer möglichen zu starken Abhängigkeit von Maschinen. Es ist wichtig, dass die medizinische KI als Unterstützung und Ergänzung zum medizinischen Personal eingesetzt wird, anstatt sie vollständig zu ersetzen.\nIn dem Szenario, das wir diskutieren, arbeitet die medizinische KI eng mit dem medizinischen Personal zusammen, um Diagnosen und Therapieentscheidungen zu treffen. Das medizinische Personal ist dafür verantwortlich, die Daten zu erheben und die Patient:innen zu betreuen, während die medizinische KI die Diagnosen und Therapieentscheidungen trifft.\nEs ist auch wichtig, dass das medizinische Personal die Entscheidungen der medizinischen KI überprüfen und gegebenenfalls anpassen kann, wenn dies notwendig ist. Auf diese Weise kann eine zu starke Abhängigkeit von Maschinen vermieden werden, und das medizinische Personal kann weiterhin seine Expertise und Erfahrung einbringen, um die Patientenversorgung zu verbessern.\nZudem kann eine zu starke Abhängigkeit von Maschinen vermieden werden, indem das medizinische Personal regelmäßig geschult wird, um sich mit den neuesten Entwicklungen und Technologien vertraut zu machen. Auf diese Weise kann das Personal sicherstellen, dass es die Vorteile der medizinischen KI nutzt, ohne dabei eine zu starke Abhängigkeit zu entwickeln.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-11:33:07",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "1R4C5",
+      "type": "user",
+      "text": "Menschen verlassen sich zu sehr",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-11:34:17",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken, dass Menschen sich möglicherweise zu sehr auf die medizinische KI verlassen. Es ist wichtig, dass das medizinische Personal die Entscheidungen der medizinischen KI überprüft und gegebenenfalls anpasst, wenn dies notwendig ist.\nDas medizinische Personal sollte die medizinische KI nicht als Ersatz für sein eigenes Urteilsvermögen und seine Expertise betrachten, sondern als Unterstützung und Ergänzung dazu. Die medizinische KI kann objektive Entscheidungen auf Grundlage von Daten und Fakten treffen, während das medizinische Personal die individuellen Umstände und Bedürfnisse der Patient:innen besser einschätzen kann.\nUm sicherzustellen, dass das medizinische Personal die Entscheidungen der medizinischen KI kritisch überprüft, ist es wichtig, dass es regelmäßig geschult wird und sich mit den neuesten Entwicklungen und Technologien vertraut macht. Auf diese Weise kann das Personal sicherstellen, dass es die Vorteile der medizinischen KI nutzt, ohne dabei eine unkritische Abhängigkeit zu entwickeln.\nDarüber hinaus sollte das medizinische Personal die Patient:innen über die Funktionsweise und die Grenzen der medizinischen KI aufklären, um sicherzustellen, dass sie die Entscheidungen der KI besser verstehen und einschätzen können. Auf diese Weise kann eine unkritische Abhängigkeit von der medizinischen KI vermieden werden, und das medizinische Personal kann weiterhin seine Expertise und Erfahrung einbringen, um die Patientenversorgung zu verbessern.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-11:34:37",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "549e2c82790dc202f517e2c26e9f6923",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "informed": 0.5
+    }
+  },
+  "end_survey": {
+    "name": "549e2c82790dc202f517e2c26e9f6923",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "opinion_1": 0,
+      "opinion_1_reason": "Häufige Wiederholung von ähnlichen Argumenten",
+      "opinion_2": 0.8,
+      "argument_quality_2": 0.4,
+      "user_information_argument_breadth": 0,
+      "user_information_argument_depth": 0.2
+    }
+  }
+}

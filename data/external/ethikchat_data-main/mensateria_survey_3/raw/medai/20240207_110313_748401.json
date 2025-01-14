@@ -1,0 +1,144 @@
+{
+  "name": "20240207_110313_748401",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:03:13",
+  "end": "2024/02/07-11:11:40",
+  "utterances": [
+    {
+      "user": "E9TY3",
+      "type": "user",
+      "text": "Ausgebildete Ärzte haben ein großes Fchwissen und individuelle Erfahrung in ihrer Arbeit.",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:04:54",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, aber eine medizinische KI verfügt über ein noch umfassenderes Wissen und eine größere Datenbasis, auf die sie zugreifen kann. Außerdem ist sie frei von menschlichen Fehlern wie Voreingenommenheit oder Müdigkeit. Das könnte sogar dazu führen, dass die Diagnosen und Therapieentscheidungen der KI genauer und zuverlässiger sind als die von Menschen.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:04:58",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "E9TY3",
+      "type": "user",
+      "text": "Allerdings bin ich davon überzeugt dass Menschen durch empathiefähige Art die der KI fehlt.",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-11:06:01",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Empathie ist zweifelland ein wichtiger Aspekt in der Medizin. Aber die Rolle der medKI ist nicht die einer Freundin oder Vertrauten, sondern eine rein medizinische. Die medKI sammelt Daten, stellt Diagnosen und schlägt Therapien vor. Die menschlichen Ärzte sind weiterhin da, um die Entscheidungen der medKI zu erklären und den Patienten zu unterstützen. Die Empathie der menschlichen Ärzte kann somit weiterhin eine wichtige Rolle spielen.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-11:06:08",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "E9TY3",
+      "type": "user",
+      "text": "Was ist wenn ein technischer Fehler passiert, und die KI ausfällt?",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-11:07:06",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Das ist ein berechtigter Einwand. Es ist wichtig zu betonen, dass die medKI nicht die einzige Informationsquelle sein sollte. Sie ist ein Werkzeug, das den menschlichen Ärzten helfen soll, bessere Entscheidungen zu treffen. Wenn die medKI ausfällt, können die menschlichen Ärzte immer noch auf ihre eigene Erfahrung und ihr Fachwissen zurückgreifen. Zudem können Maßnahmen ergriffen werden, um die Zuverlässigkeit der medKI zu erhöhen und Ausfälle zu minimieren.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-11:07:12",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "E9TY3",
+      "type": "user",
+      "text": "Ja, allerdings braucht das Öles seine Zeit und zusätzliche informatische Fachkräfte die die KI betreuen, diese könnte man sich durch Ärzte sparen.",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-11:08:27",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die Wartung und Überwachung der medKI erfordert tatsächlich spezielle IT-Kenntnisse. Allerdings ist es unwahrscheinlich, dass die Einführung der medKI dazu führt, dass weniger Ärzte benötigt werden. Stattdessen könnten die Ärzte von der Unterstützung durch die medKI profitieren und sich mehr auf die Betreuung und Beratung der Patienten konzentrieren. Zudem könnten die IT-Fachkräfte, die für die Wartung der medKI zuständig sind, auch andere wichtige IT-Aufgaben im Gesundheitswesen übernehmen.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-11:08:32",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "E9TY3",
+      "type": "user",
+      "text": "Das stimmt wahrscheinlich, allerdings würde das alles seine Zeit brauchen und die KI müsste dauerhaft mit Daten gefüttert werden.",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-11:10:31",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, die Implementierung und Wartung der medKI erfordern Zeit und Ressourcen. Allerdings sollte man bedenken, dass die medKI auch langfristig Vorteile bietet. Durch die kontinuierliche Datenaufnahme und -analyse kann die medKI ständig dazulernen und ihre Leistung verbessern. Dies könnte zu einer höheren Diagnosegenauigkeit und Therapieeffektivität führen, was letztendlich den Patienten zugutekommt.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-11:10:39",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "5945a2b01f48606289d3fcfa94a39a40",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "informed": 0.25,
+      "agreement": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "5945a2b01f48606289d3fcfa94a39a40",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.5,
+      "opinion_1": 1,
+      "opinion_2": 0.6,
+      "argument_quality_2": 0.6,
+      "user_information_argument_breadth": 1,
+      "user_information_argument_depth": 0.5
+    }
+  }
+}

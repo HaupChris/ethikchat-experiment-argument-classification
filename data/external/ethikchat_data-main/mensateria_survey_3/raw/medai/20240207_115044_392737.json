@@ -1,0 +1,28 @@
+{
+  "name": "20240207_115044_392737",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "None",
+  "start": "2024/02/07-11:50:44",
+  "end": "in progress",
+  "utterances": [
+    {
+      "user": "UKITI",
+      "type": "user",
+      "text": "Hallo \nHallo",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:50:58",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    }
+  ],
+  "start_survey": {
+    "name": "6ffe36ef2ba8040ccccff8799520258e",
+    "type": "StartSurvey",
+    "surveyOptionResults": {}
+  },
+  "end_survey": "not available"
+}

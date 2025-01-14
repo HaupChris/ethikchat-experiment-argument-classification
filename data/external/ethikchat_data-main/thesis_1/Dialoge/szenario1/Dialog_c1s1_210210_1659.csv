@@ -1,0 +1,14 @@
+﻿id, author, utterance, arg_label, arg_label, arg_label
+16:59, 17:29
+0, kai.weisenberger, "Eine KI betrachtet automatisch und ohne spürbar mehr Zeit in Anspruch zu nehmen auch andere Bereiche und kann damit besser unentdecktes aufdecken.", pro_14
+1, antonia.krause.stud-mail, "Auch ein Arzt mit jahrelanger Erfahrung lässt unbewusst oder bewusst seine Kenntnisse aus anderen Bereichen in seine Bewertung mit einfließen.", pro_14.2
+2, kai.weisenberger, "Eine KI könnte eine solche "jahrelange" Erfahrung aber noch übertreffen, denn in einer KI können theoretisch alle Untersuchungen - etwa in Deutschland - und deren Erfahrungen als Erfahrungsschatz genutzt werden.", pro_14.2.1
+3, antonia.krause.stud-mail, "Hierfür würden allerdings eine Menge an medizinischer Daten benötigt. Das hat zur Folge, dass Kliniken wesentlich interessanter für Hackerangriffe werden.", con_7
+4, kai.weisenberger, "Kliniken sind auch heute schon zahlreich Ziele von Hackerangriffen. Und in der Zukunft müssen ohnehin deutliche umfassendere Vorkehrungen für die IT-Sicherheit getroffen werden.", con_7.2
+5, antonia.krause.stud-mail, "Das mag vielleicht sein, aber zur Zeit trifft der Arzt immer noch ganz alleine eine subjektive Entscheidung. Sobald die KI diese Entscheidung übernimmt, hat der Mensch keinerlei Einfluss mehr darauf. Sollte das Ergebnis durch einen Hacker "verfälscht" sein, kommt es zu einer eventuell unbemerkten Fehldiagnose.", con_7
+6, kai.weisenberger, "Das ist tatsächlich bedenklich. Es müssten entsprechende Vorkehrungen getroffen werden, damit ein solcher Eingriff keinesfalls unbemerkt erfolgen könnte.", con_7.2
+7, antonia.krause.stud-mail, "Und was ist, wenn es durch die KI dann doch, ob durch Hackerangriff oder ohne, zu einem Schaden wegen Fehlentscheidung kommt?", con_5
+8, kai.weisenberger, "Dem könnte mit Haftungsfonds entgegengewirkt werden. Allerdings sind auch bei echten Ärzten Behandlungsfehler ein großes Problem, Menschen machen bekanntlich Fehler.", con_5.1, pro_3
+9, antonia.krause.stud-mail, "Im Falle eines Fehlers durch einen Arzt bestehen allerdings keinerlei Zweifel an der Verantwortlichkeit. Beim Fehler durch eine KI ist die Haftungsfrage wegen der Option mehrerer Verantwortlicher noch nicht abschließend geklärt.", con_21
+10, kai.weisenberger, "Die Frage des Verantwortlichen mag bei einem Arzt vielleicht geklärt sein, die Beweisschwierigkeiten sind dafür umso erheblicher. Bei einer KI könnte der Weg zur Entscheidung bei einem Fehler objektiv nachvollzogen werden, ohne dass sich die KI versucht einer Haftung zu entziehen, wie dies ein Mensch wohl würde. Aus diesem Fehler könnte in der Folge dann nicht nur ein Arzt lernen, sondern die ganze KI.", pro_3
+11, antonia.krause.stud-mail, "Bei dem Punkt würde ich zustimmen, da die Fehlerfolge deutlich einfacher zu identifizieren ist und ein konkreter Fehler somit eventuell nur ein einziges Mal gemacht werden würde." pro_3

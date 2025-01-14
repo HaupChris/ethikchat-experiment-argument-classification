@@ -1,0 +1,464 @@
+{
+  "name": "20240207_122311_608018",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-12:23:11",
+  "end": "in progress",
+  "utterances": [
+    {
+      "user": "YB7QJ",
+      "type": "user",
+      "text": "Liegt die Verantwortlichkeit bei der Firma oder wer übernimmt das?",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-12:24:05",
+      "true_labels": [
+        "Z.K3"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "Z.K3",
+          0.020792067674564367
+        ],
+        [
+          "NZ.K10",
+          0.02075887781733658
+        ],
+        [
+          "NZ.K6",
+          0.020754975425104356
+        ],
+        [
+          "NZ.K8",
+          0.020746457930221323
+        ],
+        [
+          "Z.K1",
+          0.02074025688338158
+        ],
+        [
+          "Z.K11",
+          0.02069460631192803
+        ],
+        [
+          "Z.K3-1-1",
+          0.020668185950811345
+        ],
+        [
+          "Z.K15",
+          0.02064924961859767
+        ],
+        [
+          "Z.P7-1",
+          0.020505907495722755
+        ],
+        [
+          "Z.K12",
+          0.020069817717961007
+        ],
+        [
+          "Z.P4-1",
+          0.019865523369955465
+        ],
+        [
+          "Z.K16",
+          0.019613440562368564
+        ],
+        [
+          "NZ.K9",
+          0.019190925623041505
+        ],
+        [
+          "Z.K2",
+          0.018588419870613136
+        ],
+        [
+          "Z.K7",
+          0.018551669741088295
+        ],
+        [
+          "Z.P1-1",
+          0.017179947567003306
+        ],
+        [
+          "Z.P3-1",
+          0.013490571385682323
+        ],
+        [
+          "Z.K5",
+          0.011852702062801587
+        ],
+        [
+          "Z.K6",
+          0.011653035379439496
+        ],
+        [
+          "NZ.K1",
+          0.010816038446989924
+        ],
+        [
+          "Z.K18",
+          0.010327732501384149
+        ],
+        [
+          "Z.K4",
+          0.01029537464295336
+        ],
+        [
+          "Z.K10",
+          0.009620594057593107
+        ],
+        [
+          "NZ.K3",
+          0.009616028771452538
+        ],
+        [
+          "Z.K19",
+          0.009490095249760999
+        ],
+        [
+          "Z.K13",
+          0.009279366003302706
+        ],
+        [
+          "NZ.K4",
+          0.008852988825271515
+        ],
+        [
+          "Z.P1-2",
+          0.00881443582989719
+        ],
+        [
+          "Z.P6-1",
+          0.008388329951435926
+        ],
+        [
+          "Z.P5-1",
+          0.0082133358272432
+        ],
+        [
+          "Z.K8",
+          0.008159444687866488
+        ],
+        [
+          "Z.K9",
+          0.007968467169873523
+        ],
+        [
+          "Z.K14",
+          0.007807455164314498
+        ],
+        [
+          "Z.K8-1",
+          0.007747120256783081
+        ],
+        [
+          "Z.P1",
+          0.0
+        ],
+        [
+          "Z.P1-1-1",
+          0.0
+        ],
+        [
+          "Z.P1-2-1",
+          0.0
+        ],
+        [
+          "Z.P4",
+          0.0
+        ],
+        [
+          "Z.P2",
+          0.0
+        ],
+        [
+          "Z.P3",
+          0.0
+        ],
+        [
+          "Z.P3-1-1",
+          0.0
+        ],
+        [
+          "Z.P6",
+          0.0
+        ],
+        [
+          "Z.P6-1-1",
+          0.0
+        ],
+        [
+          "Z.P5",
+          0.0
+        ],
+        [
+          "Z.P7",
+          0.0
+        ],
+        [
+          "Z.K1-1",
+          0.0
+        ],
+        [
+          "Z.K2-4",
+          0.0
+        ],
+        [
+          "Z.K4-1",
+          0.0
+        ],
+        [
+          "Z.K6-1",
+          0.0
+        ],
+        [
+          "Z.K15-1",
+          0.0
+        ],
+        [
+          "Z.K18-1",
+          0.0
+        ],
+        [
+          "Z.K3-1",
+          0.0
+        ],
+        [
+          "Z.K3-1-1-1",
+          0.0
+        ],
+        [
+          "Z.K3-2",
+          0.0
+        ],
+        [
+          "Z.K11-1",
+          0.0
+        ],
+        [
+          "Z.K12-1",
+          0.0
+        ],
+        [
+          "Z.K5-1",
+          0.0
+        ],
+        [
+          "Z.K7-1",
+          0.0
+        ],
+        [
+          "Z.K10-1",
+          0.0
+        ],
+        [
+          "Z.K10-2",
+          0.0
+        ],
+        [
+          "Z.K9-1",
+          0.0
+        ],
+        [
+          "Z.K13-1",
+          0.0
+        ],
+        [
+          "Z.K14-1",
+          0.0
+        ],
+        [
+          "Z.K16-1",
+          0.0
+        ],
+        [
+          "Z.K19-1",
+          0.0
+        ],
+        [
+          "NZ.K1-1",
+          0.0
+        ],
+        [
+          "NZ.K3-1",
+          0.0
+        ],
+        [
+          "NZ.K4-1",
+          0.0
+        ],
+        [
+          "NZ.K6-1",
+          0.0
+        ],
+        [
+          "NZ.K8-1",
+          0.0
+        ],
+        [
+          "NZ.K9-1",
+          0.0
+        ],
+        [
+          "NZ.K10-1",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "EthiBot",
+      "type": "bot",
+      "text": " Du sagst, dass unvermeidliche Fehlentscheidungen der medKI nicht akzeptiert werden. Das kann ich nachvollziehen. Direkt dazu: Fehlerfreie Entscheidungen sind in der Medizin unmöglich. Es geht darum, möglichst gut zu sein. Wenn eine medKI die gleiche Leistungsfähigkeit wie Fachärzt:innen nachweist, sollte sie wie diese Schadenersatz nur bei grober Fahrlässigkeit zahlen.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-12:24:10",
+      "true_labels": [
+        "intro_27",
+        "Z.K3",
+        "intro_48",
+        "Z.K3-2"
+      ],
+      "true_bounds": [
+        [
+          0,
+          15
+        ],
+        [
+          15,
+          84
+        ],
+        [
+          84,
+          126
+        ],
+        [
+          126,
+          372
+        ]
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_27",
+          "intro_32",
+          "intro_23",
+          "intro_25",
+          "intro_28",
+          "intro_24",
+          "intro_26",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.K3",
+        "introductions": [
+          "intro_48",
+          "intro_46",
+          "intro_50",
+          "intro_47",
+          "intro_49",
+          "intro_51",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59",
+          "intro_60",
+          "intro_61",
+          "intro_62",
+          "intro_63",
+          "intro_64",
+          "intro_65",
+          "intro_66",
+          "intro_67",
+          "intro_68"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_8",
+          "z_trans_10",
+          "z_trans_9",
+          "z_trans_13",
+          "z_trans_11",
+          "z_trans_2",
+          "z_trans_16",
+          "z_trans_1",
+          "z_trans_4",
+          "z_trans_12",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": false,
+        "first_arguments": [
+          "Z.K3-2",
+          "Z.K3-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.P1",
+          "Z.P2",
+          "Z.P4",
+          "Z.P3",
+          "Z.P5",
+          "Z.P6"
+        ],
+        "preselect_second_argument": false
+      }
+    }
+  ],
+  "start_survey": {
+    "name": "d20cd5cf96f9a6200c379b31f7c51c5b",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0.75
+    }
+  },
+  "end_survey": "not available"
+}

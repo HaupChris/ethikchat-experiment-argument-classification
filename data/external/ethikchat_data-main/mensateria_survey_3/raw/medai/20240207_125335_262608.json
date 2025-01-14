@@ -1,0 +1,193 @@
+{
+  "name": "20240207_125335_262608",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-12:53:35",
+  "end": "2024/02/07-13:22:11",
+  "utterances": [
+    {
+      "user": "Z6EJS",
+      "type": "user",
+      "text": "Eine KI enthält das gesammelte Wissen zu medizinischen Themen und sollte daher über mehr Wissen verfügen als ein Arzt, der Dinge vergessen kann und insbesondere Querverbindungen zu anderen Disziplinen möglicherweise nicht erkennt.",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-12:55:30",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Während es stimmt, dass eine KI potenziell auf mehr Informationen zugreifen kann, bedeutet dies nicht, dass sie ethisch in der Lage sein sollte, eigenständige Entscheidungen zu treffen. Die Fähigkeit, viele Informationen zu verarbeiten, ist nicht das einzige Kriterium für ethisches Handeln. Es ist wichtig, menschliche Urteile und Erfahrungen in medizinische Entscheidungen einzubeziehen.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-12:55:35",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "Z6EJS",
+      "type": "user",
+      "text": "Letztlich sollte das wichtigste Kriterium bei der ethischen Beurteilung das Wohlbefinden und die Gesundheit des Patienten sein, sodass eine KI, die weniger Fehler macht, einem Arzt, der deutlich fehlerhaftere Entscheidungen trifft, vorzuziehen ist.",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-12:58:09",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Das Wohlbefinden des Patienten ist zweifellos ein wichtiges Kriterium. Allerdings sollten wir nicht übersehen, dass Ethik mehr umfasst als nur die Minimierung von Fehlern. Es geht auch um die Rechenschaftspflicht, Vertrauen und die Beziehung zwischen Arzt und Patient. Wenn eine KI einen Fehler macht, gibt es niemanden, der dafür verantwortlich gemacht werden kann. Dies kann zu Vertrauensproblemen führen und die Arzt-Patient-Beziehung beeinträchtigen.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-12:58:14",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "Z6EJS",
+      "type": "user",
+      "text": "Aus meiner Sicht als Patient finde ich es vertretbarer, wenn eine Maschine mit höherer Wahrscheinlichkeit eine richtige Diagnose und Behandlung findet als wenn ein Arzt falsch diagnostiziert oder behandelt. Der Arzt würde zwar die Verantwortung dafür tragen, meine Gesundheit ist dann trotzdem geschädigt. Ich fände es daher unvertretbar schlechtere Verfahren zu verwenden, obwohl zuverlässigere Verfahren existieren.",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-13:03:14",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Perspektive als Patient ist verständlich. Es ist wichtig, das Beste für Ihre Gesundheit zu wollen. Allerdings sollten wir auch die Langzeitfolgen bedenken. Wenn Ärzte immer mehr auf KI vertrauen, könnten ihre Fähigkeiten im Laufe der Zeit abnehmen, was wiederum zu Abhängigkeit von der KI führt. Zudem könnten seltene, aber schwerwiegende Fehler der KI katastrophale Folgen haben.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-13:03:19",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "Z6EJS",
+      "type": "user",
+      "text": "Im Einzelfall wären die Folgen möglicherweise katastrophaler und im Zweifel tödlich, solange aber insgesamt Fehler reduziert werden, ist der gesamtgesellschaftliche Nutzen sicherlich höher und Gesundheitskosten sinken durch effektivere Diagnostik und besser Auswahl an Behandlungen. Aus utilitaristischer Sicht, wäre das also ethisch vertretbar. ",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-13:07:40",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Utilitaristisch betrachtet könnte man Ihre Argumentation nachvollziehen. Allerdings sollten wir auch den Prinzipien der Gerechtigkeit und Fairness Beachtung schenken. Nicht jeder hat Zugang zu den neuesten Technologien und KI-Systemen. Wenn wir also auf KI setzen, könnten wir Ungleichheiten im Gesundheitssystem fördern. Zudem gibt es Situationen, in denen die Anwendung von KI-Systemen problematisch sein könnte, wie zum Beispiel bei seltenen Krankheiten, für die es nur wenige Daten gibt.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-13:07:46",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "Z6EJS",
+      "type": "user",
+      "text": "Ich möchte dagegen halten, dass eine KI Ungleichheiten ausgleicht, da so mehr Menschen Zugang zu guter Gesundheitsversorgung ermöglicht. Während bei größerem Ärztemangel nur noch Privatpatienten schnell Termine bekommen, könnte eine KI deutlich mehr Patienten versorgen und Ihnen so Zugang zu Gesundheitsversorgung ermöglichen. ",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-13:10:01",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Es ist wahr, dass eine KI in der Lage sein könnte, mehr Patienten zu versorgen und so Ungleichheiten auszugleichen. Allerdings sollten wir auch die möglichen Risiken bedenken. Wenn eine KI einen Fehler macht, könnte dies für den Patienten katastrophale Folgen haben. Zudem könnten sich Ärzte auf die KI verlassen und ihre Fähigkeiten im Laufe der Zeit abnehmen, was wiederum zu Abhängigkeit von der KI führt. Es ist also wichtig, ein Gleichgewicht zwischen den Vorteilen und Risiken zu finden.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-13:10:06",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "Z6EJS",
+      "type": "user",
+      "text": "Wenn Ärzte deutlich schlechter werden als medizinische KI ist ihr Beruf vielleicht einfach obsolet geworden. Wenn Maschinen besser sind als Menschen ersetzen sie oft den entsprechenden Berufszweig. Diese Entwicklung existiert bereits seit der Industrialisierung. Es wäre dann geradezu unethisch die schlechtere Methode weiter zum Einsatz zu bringen. Gleichzeitig dürfen natürlich nicht Ärzte, die nicht ersetzt werden können, wie Chirurgen, ihre Fähigkeiten verlieren. In der Diagnostik sehe ich diese Gefahr allerdings nicht.",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-13:15:12",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Argumentation macht Sinn, aber es ist wichtig zu bedenken, dass Ärzte nicht nur für Diagnosen und Behandlungen zuständig sind. Sie spielen auch eine wichtige Rolle bei der Kommunikation mit Patienten, bei der Beratung und bei der Unterstützung von Patienten bei der Entscheidungsfindung. Wenn wir Ärzte durch KI ersetzen, könnten wir diese wichtigen Aspekte verlieren. Zudem ist es wichtig, sicherzustellen, dass die KI ethisch und verantwortungsvoll eingesetzt wird, um sicherzustellen, dass sie nicht diskriminiert oder benachteiligt.",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-13:15:18",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "Z6EJS",
+      "type": "user",
+      "text": "Es gibt andere Berufszweige, wie etwa Psychologen, deren Ausbildung noch stärker auf die Patientenkommunikation ausgerichtet ist. Diese könnten die Kommunikationsaufgaben und Beratung übernehmen. ",
+      "id_in_dialogue": 12,
+      "timestamp": "2024/02/07-13:17:09",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Das ist eine Möglichkeit, aber es ist wichtig zu bedenken, dass Ärzte eine einzigartige Perspektive und Expertise haben, die sie für die Kommunikation und Beratung von Patienten qualifiziert. Wenn wir Ärzte durch KI ersetzen, könnten wir diese einzigartige Perspektive und Expertise verlieren. Zudem ist es wichtig sicherzustellen, dass die KI ethisch und verantwortungsvoll eingesetzt wird, um sicherzustellen, dass sie nicht diskriminiert oder benachteiligt. Es ist also wichtig, sorgfältig abzuwägen, bevor wir Ärzte durch KI ersetzen.",
+      "id_in_dialogue": 13,
+      "timestamp": "2024/02/07-13:17:16",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "1cb6c8fa4d9e5bbfd2dcc510b1f30074",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "informed": 0.5
+    }
+  },
+  "end_survey": {
+    "name": "1cb6c8fa4d9e5bbfd2dcc510b1f30074",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "opinion_1": 0,
+      "opinion_1_reason": "Diskussionen sind oft vielschichtig und die Argumentationsfiguren manchmal nicht in kurzen Abschnitten darzulegen. ",
+      "opinion_2": 1,
+      "argument_quality_2": 0.5,
+      "user_information_argument_breadth": 0.25,
+      "user_information_argument_depth": 0.4,
+      "positive_critics": "",
+      "negative_critics": "ein größeres Eingabefenster wäre hilfreich, damit man nicht scrollen muss, um das gesamte Argument zu sehen."
+    }
+  }
+}

@@ -1,0 +1,364 @@
+{
+  "name": "210525_1731_9972",
+  "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE",
+  "start": "17:31",
+  "end": "18:44",
+  "utterances": [
+    {
+      "user": "ee11cbb19052e40b07aac0ca060c23ee",
+      "type": "user",
+      "text": "Ja, ich denke schon. Am Anfang sollten die Entscheidungen noch durch Ärzte gestützt werden, aber später könnte ich mir wesentlich schnellere und einfachere Diagnosen vorstellen. Durch die geringen Kosten könnten auch weniger entwickelte Lände davon profitieren.",
+      "id_in_dialogue": 0,
+      "true_labels": [
+        "P18-A-P"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "8dc12c0ff92e2a8fb466d5b13af71e12",
+      "type": "expert",
+      "text": "Das stimmt. Hast Du schon einmal daran gedacht: Die KI kann keine für Fachärzt:innen verständlichen und nachvollziehbaren Erklärungen der Ergebnisse liefern (sog. Black Box Verhalten). Gerade bei der Diagnostik und Therapieentscheidung sind die Erklärungen der Ergebnisse jedoch essentiell, da letztlich die Patient:innen jeder einzelnen Therapie zustimmen müssen.",
+      "id_in_dialogue": 1,
+      "true_labels": [
+        null,
+        null,
+        "K2"
+      ],
+      "true_bounds": [
+        [
+          0,
+          12
+        ],
+        [
+          12,
+          48
+        ],
+        [
+          48,
+          364
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "ee11cbb19052e40b07aac0ca060c23ee",
+      "type": "user",
+      "text": "Ich denke die Trainingsdaten müssen ausreichend umfangreich und divers sein, sodass bestimmte Krankheiten zu nahezu 100% erkannt werden. Soweit ich weiß, gibt es auch immer mehr Forschungen, um die Entscheidungen von KI Modellen transparenter zu machen. Also ganz undurchsichtige Entscheidungen erfordern natürlich mehr Vertrauen, das im Moment von vielen Menschen noch nicht gegeben ist. Ich denke allerdings, dass wir einen Punkt erreichen werden, wo niemand mehr drüber nachdenkt, ob die Entscheidung von einer KI kam.",
+      "id_in_dialogue": 2,
+      "true_labels": [
+        "Wir werden einen Punkt erreichen, an dem niemand mehr darüber nachdenkt, ob die Entscheidung von einer KI kam."
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "8dc12c0ff92e2a8fb466d5b13af71e12",
+      "type": "expert",
+      "text": "Dem würde ich nicht zustimmen. Studien schätzen, dass 10-15% der Diagnosen von Ärzt:innen falsch sind. Das bedeutet im Umkehrschluss, dass die Qualitätsquote der Trainingsdaten nur 85-90% beträgt. Da eine KI anhand der Trainingsdaten lernt, könnte sie aufgrund deren Mängel nie eine höhere Qualitätsquote erreichen. ",
+      "id_in_dialogue": 3,
+      "true_labels": [
+        null,
+        "P11-A"
+      ],
+      "true_bounds": [
+        [
+          0,
+          31
+        ],
+        [
+          31,
+          316
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "ee11cbb19052e40b07aac0ca060c23ee",
+      "type": "user",
+      "text": "Das stimmt natürlich, aber wenn man beim Training, die Entscheidungen von mehreren Ärzten heranzieht und eventuell bisherige Modelle miteinbezieht, könnten die Daten noch besser werden. Im Worst Case wird die KI nur genauso gut wie Ärzte, was unsere Lage jedoch auch nicht verschlechtert.",
+      "id_in_dialogue": 4,
+      "true_labels": [
+        "Durch das Heranziehen mehrerer Ärzte könnte man insgesamt die Fehlerquote minimieren."
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "8dc12c0ff92e2a8fb466d5b13af71e12",
+      "type": "expert",
+      "text": "Das ist richtig. Es ist fraglich, ob eine Effizienzsteigerung und Ökonomisierung dem Nutzen der Patient:innen zu dienen fähig sind. Weiterhin ungeklärt bleibt: Bei Fehlentscheidungen der KI werden sehr hohe Schadensersatzforderungen entstehen und die Hersteller:innen könnten für diese Fehlentscheidungen der KI verantwortlich gemacht werden. Die Anreize für die Hersteller:innen eine KI zu entwickeln würden wegfallen.",
+      "id_in_dialogue": 5,
+      "true_labels": [
+        null,
+        "K21",
+        null,
+        "K4"
+      ],
+      "true_bounds": [
+        [
+          0,
+          17
+        ],
+        [
+          17,
+          132
+        ],
+        [
+          132,
+          160
+        ],
+        [
+          160,
+          419
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "ee11cbb19052e40b07aac0ca060c23ee",
+      "type": "user",
+      "text": "Die rechtliche Situation ist sicherlich noch ein großes Problem. Um dennoch Anreiz zur Entwicklung von KI zu schaffen, müsste vermutlich der Staat eingreifen und Gesetze anpassen oder Schadensersatzzahlungen teilweise oder ganz übernehmen. Solange die KI allerdings nur Ärzten hilft, kann dieser ja das letzte Wort bei der Diagnose behalten und dementsprechend die Verantwortung tragen.",
+      "id_in_dialogue": 6,
+      "true_labels": [
+        "K4-A"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "8dc12c0ff92e2a8fb466d5b13af71e12",
+      "type": "expert",
+      "text": "Das wäre eine Möglichkeit Zu Beginn des breiten Einsatzes einer Technologie wie der KI könnten die Beträge für derartige Fonds zu hoch sein, als dass es Unternehmen finanzieren wollten/ könnten. ",
+      "id_in_dialogue": 7,
+      "true_labels": [
+        null,
+        "K4-A-P"
+      ],
+      "true_bounds": [
+        [
+          0,
+          26
+        ],
+        [
+          26,
+          195
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "ee11cbb19052e40b07aac0ca060c23ee",
+      "type": "user",
+      "text": "Als Alternative könnte ich mir noch vorstellen, dass Patienten vorerst durch schnellere und günstigere Diagnosen gelockt werden, bei Zustimmung jedoch auf Schadensersatzforderungen bei Komplikationen verzichten müssen.",
+      "id_in_dialogue": 8,
+      "true_labels": [
+        "Kompromiss und Anreize mit einfachen Diagnosen"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "8dc12c0ff92e2a8fb466d5b13af71e12",
+      "type": "expert",
+      "text": "Das ist richtig. Weiterhin ungeklärt bleibt: Eine KI kann den Kontext der Untersuchung nicht einbeziehen. Die konkrete Fragestellung und die gesamte Krankheitssituation der Patient:innen sind jedoch für die Diagnostik und die passende Therapieentscheidung enorm wichtig.",
+      "id_in_dialogue": 9,
+      "true_labels": [
+        null,
+        null,
+        "K18"
+      ],
+      "true_bounds": [
+        [
+          0,
+          17
+        ],
+        [
+          17,
+          45
+        ],
+        [
+          45,
+          270
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "ee11cbb19052e40b07aac0ca060c23ee",
+      "type": "user",
+      "text": "Hierbei würde ich wiedersprechen. Eventuell können dies aktuelle Modelle oder Ansätze noch nicht. Beobachtet man jedoch die Entwicklung von KI Modellen in den letzten Jahren, wird klar, dass die Modelle immer mehr verstehen und verallgemeinern können. Das Miteinbeziehen des Kontextes des Patienten ist daher nur eine Frage der Zeit. Durch die zunehmende Digitalisierung des Gesundheitswesens sollten zudem immer mehr Patientendaten vorliegen, die der KI dienen können.\nBei der Entscheidungsfindung kann zudem Video- und Audiomaterial helfen, um der KI ein noch besseres Gesamtbild zu verschaffen.",
+      "id_in_dialogue": 10,
+      "true_labels": [
+        "KI wird in Zukunft den Kontext einbeziehen können"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "8dc12c0ff92e2a8fb466d5b13af71e12",
+      "type": "expert",
+      "text": "Das mag sein. Aber zu beachten ist: Durch die große Menge gesammelter Daten werden Kliniken interessanter für Cyberangriffe.",
+      "id_in_dialogue": 11,
+      "true_labels": [
+        null,
+        null,
+        "K6"
+      ],
+      "true_bounds": [
+        [
+          0,
+          14
+        ],
+        [
+          14,
+          36
+        ],
+        [
+          36,
+          124
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "ee11cbb19052e40b07aac0ca060c23ee",
+      "type": "user",
+      "text": "Das stimmt natürlich. Die Daten müssen deshalb verschlüsselt und ausreichend gesichert vorliegen. Hierfür sind bereits ausreichend Methoden vorhanden, die in vielen Bereichen angewendet werden. \nAuch denkbar wäre ein dezentrales System, bei dem Patienten ihre Daten selbst besitzen und verwalten.",
+      "id_in_dialogue": 12,
+      "true_labels": [
+        "P2-Ab-P"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "8dc12c0ff92e2a8fb466d5b13af71e12",
+      "type": "expert",
+      "text": "Das ist richtig. Ansprechen möchte ich noch: Erforderliche Rechenzentren für den Einsatz von KI würden eine große Belastung für die Umwelt darstellen.",
+      "id_in_dialogue": 13,
+      "true_labels": [
+        null,
+        null,
+        "K17"
+      ],
+      "true_bounds": [
+        [
+          0,
+          17
+        ],
+        [
+          17,
+          45
+        ],
+        [
+          45,
+          150
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "ee11cbb19052e40b07aac0ca060c23ee",
+      "type": "user",
+      "text": "Das ist eine Entwicklung die kaum aufhaltbar ist. Der Energieverbauch der gesamten Erde steigt immer weiter und muss möglichst mit erneuerbaren Energiequellen gedeckt werden. Im Vergleich zum Training von Modellen ist der Einsatz jedoch deutlich energiesparender. Außerdem müsste man die tatsächliche Belastung zunächst abschätzen und ins Verhältnis zu anderen Bereichen setzen.\nManch andere Umweltbelastungen könnten durch den Einsatz von KI auch wegfallen. Wie zum Beispiel der Weg zu einer Arztpraxis oder der Einsatz von Ärzten im Ausland.",
+      "id_in_dialogue": 14,
+      "true_labels": [
+        "An anderer Stelle Einsparung Unweltbelastung"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    }
+  ],
+  "surveys": [
+    {
+      "name": "ee11cbb19052e40b07aac0ca060c23ee",
+      "type": "StartSurvey",
+      "result": "strong-agree"
+    },
+    {
+      "name": "ee11cbb19052e40b07aac0ca060c23ee",
+      "type": "EndSurvey",
+      "result": "neutral",
+      "improvement_suggestions": "",
+      "persuasive_arguments": [
+        [
+          0,
+          true
+        ],
+        [
+          1,
+          true
+        ],
+        [
+          2,
+          true
+        ],
+        [
+          3,
+          true
+        ],
+        [
+          4,
+          true
+        ],
+        [
+          5,
+          true
+        ],
+        [
+          6,
+          true
+        ],
+        [
+          7,
+          true
+        ],
+        [
+          8,
+          true
+        ],
+        [
+          9,
+          true
+        ],
+        [
+          10,
+          true
+        ],
+        [
+          11,
+          true
+        ],
+        [
+          12,
+          true
+        ],
+        [
+          13,
+          true
+        ],
+        [
+          14,
+          true
+        ]
+      ]
+    }
+  ]
+}

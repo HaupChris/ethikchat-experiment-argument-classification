@@ -1,0 +1,100 @@
+{
+  "name": "20240207_143422_780199",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-14:34:22",
+  "end": "2024/02/07-14:46:11",
+  "utterances": [
+    {
+      "user": "B0R7R",
+      "type": "user",
+      "text": "Die Entscheidungen der KI sind datenbasiert und hängt sehr davon ab, wie in ähnlichen Szenarien vorher entscheiden wurde. Sie ist noch nicht lange genug erforscht, um zu wissen, dass das immer bei der individuell richtigen Entscheidung führen würde.",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-14:37:12",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Vielen Dank für Ihre Bedenken. Ich verstehe Ihre Sorge, dass die KI aufgrund ihrer datenbasierten Entscheidungen möglicherweise nicht immer die individuell richtige Entscheidung trifft. Allerdings sollten wir bedenken, dass menschliche Ärzte auch auf ihre Erfahrungen und bisherigen Behandlungserfolge zurückgreifen, um Entscheidungen zu treffen. Die medKI wäre in der Lage, eine enorme Menge an medizinischen Daten zu verarbeiten und zu analysieren, was menschliche Ärzte einfach nicht in der gleichen Geschwindigkeit und Genauigkeit leisten können. Somit könnte die medKI sogar bessere Entscheidungen treffen als ein Mensch, da sie nicht an die Grenzen menschlicher Informationsverarbeitung gebunden ist.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-14:37:26",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "B0R7R",
+      "type": "user",
+      "text": "Das stimmt. Allerdings ist es gerade in Dilemma-Situationen, bei der nicht fachliche Argumente vllt eine zusätzliche Rolle spielen, schwierig, eine Maschine entscheiden zu lassen. Ihr fehlen wichtige menschliche Attribute",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-14:39:42",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Bedenken hinsichtlich der Fähigkeit der KI, menschliche Dilemmata zu bewältigen, sind verständlich. Es ist richtig, dass KI derzeit nicht über menschliche Emotionen oder ethische Überlegungen verfügt. Allerdings könnte man argumentieren, dass die medKI in diesen Situationen eine objektivere Entscheidung treffen würde, da sie nicht durch Emotionen oder persönliche Überzeugungen beeinflusst wird. Zudem könnte man der medKI ethische Richtlinien programmieren, nach denen sie ihre Entscheidungen trifft. Dadurch würde die medKI in ethischen Dilemmasituationen immer nach den gleichen, vorab festgelegten Regeln handeln.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-14:40:00",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "B0R7R",
+      "type": "user",
+      "text": "Hinsichtlich der Fehleranfälligkeit, welche aktuell einfach noch zu hoch bzw. Unübersichtlich ist, sehe ich die Gefahr von gefährlichen Aussetzern & Fehlentscheidungen seitens der KI",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-14:42:44",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Bedenken hinsichtlich der Fehleranfälligkeit von KI sind berechtigt. Es ist wichtig zu betonen, dass die Entwicklung von KI noch in den Kinderschuhen steckt und es noch viele Herausforderungen zu meistern gilt. Allerdings sollten wir auch bedenken, dass menschliche Fehler in der Medizin ein sehr ernstes Problem darstellen. Laut einer Studie der Weltgesundheitsorganisation (WHO) werden bis zu 10% aller Todesfälle weltweit durch menschliche Fehler in der Medizin verursacht. Ein gut entwickeltes und getestetes medizinisches KI-System könnte somit möglicherweise weniger fehleranfällig sein als menschliche Ärzte.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-14:43:01",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "6f2301e195444dd447788495aeb27603",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0.5
+    }
+  },
+  "end_survey": {
+    "name": "6f2301e195444dd447788495aeb27603",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.5,
+      "opinion_1": 1,
+      "opinion_1_reason": "Liefert Denkanstöße",
+      "opinion_2": 0.8,
+      "argument_quality_2": 0.8,
+      "user_information_argument_breadth": 1,
+      "user_information_argument_depth": 0.8,
+      "positive_critics": "Das anfänglich Eingehen auf das eigene Argument "
+    }
+  }
+}

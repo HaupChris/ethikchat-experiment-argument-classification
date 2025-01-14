@@ -1,0 +1,144 @@
+{
+  "name": "20240207_133855_242103",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-13:38:55",
+  "end": "2024/02/07-13:47:50",
+  "utterances": [
+    {
+      "user": "3WWWL",
+      "type": "user",
+      "text": "Mit einer Zulassung ist vor allem eine ausführliche Prüfung notwendig. Diese sollte es auch bei einer KI geben",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-13:40:12",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Vielen Dank für Ihren Kommentar. Ich stimme zu, dass eine gründliche Überprüfung vor der Zulassung einer KI unerlässlich ist. Allerdings bedeutet eine Zulassung nicht, dass eine KI ethisch gesehen eigenständige Diagnose- und Therapieentscheidungen treffen darf. Schließlich können Maschinen nicht empathieren oder moralische Urteile fällen.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-13:40:16",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "3WWWL",
+      "type": "user",
+      "text": "Die Diagnose sollte von einem Arzt oder einer Ärztin kontrolliert werden. Als Unterstützung für diese kann eine KI allerdings wertvoll sein. Gerade für seltener Erkrankungen",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-13:41:42",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Vielen Dank für Ihr Argument. Es ist wahr, dass eine KI in der Lage sein kann, große Datenmengen zu verarbeiten und so bei der Diagnose seltener Erkrankungen hilfreich sein kann. Allerdings sollte die endgültige Diagnose und Therapieentscheidung immer in menschlicher Hand liegen. Denn nur Menschen können die individuelle Situation des Patienten berücksichtigen und ethische Entscheidungen treffen.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-13:41:50",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "3WWWL",
+      "type": "user",
+      "text": "Untersuchungen am Menschen kann eine KI nicht durchführen.",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-13:42:15",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Stimmt, eine KI kann keine Untersuchungen am Menschen durchführen. Sie kann lediglich auf Basis von Daten, die ihr zur Verfügung gestellt werden, Entscheidungen treffen. Diese Entscheidungen können zwar sehr fundiert sein, da sie auf großen Datenmengen basieren, doch die menschliche Überwachung und Interpretation sind unerlässlich. Schließlich können nur Menschen die Notwendigkeit weiterer Untersuchungen erkennen und die entsprechenden Maßnahmen einleiten.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-13:42:20",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "3WWWL",
+      "type": "user",
+      "text": "Eine Zulassung sollte nach bestimmten Regularien erfolgen. Diese müssen in einem Gesetz verankert sein. Ähnlich dem Arzneimittelgesetz",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-13:44:02",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, das ist richtig. Wenn eine KI in der Lage sein soll, eigenständige Diagnose- und Therapieentscheidungen zu treffen, muss dies in einem Gesetz geregelt sein. Dabei sollten klare Richtlinien und Regularien festgelegt werden, die sicherstellen, dass die KI ethisch und sicher eingesetzt wird. Ein Vergleich mit dem Arzneimittelgesetz ist hier sicherlich sinnvoll, da auch bei Arzneimitteln klare Zulassungsverfahren und Regularien existieren.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-13:44:07",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "3WWWL",
+      "type": "user",
+      "text": "Der Datenschutz muss gewährleistet werden. Ähnlich der Schweigepflicht",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-13:45:44",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Absolut, der Datenschutz ist ein wesentlicher Aspekt bei der Verwendung von KI im medizinischen Bereich. Die Patientendaten müssen geschützt werden und dürfen nur für die diagnose- und therapeutische Entscheidungsfindung verwendet werden. Eine Art \"Schweigepflicht\" für die KI wäre sicherlich ein sinnvoller Ansatz, um den Datenschutz zu gewährleisten. Hier müssten allerdings klare Regeln festgelegt werden, wer auf die Daten zugreifen darf und wie diese Daten geschützt werden.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-13:45:48",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "06aa4e6e084fe5c3ac0e6b339c30ec60",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "informed": 0.5
+    }
+  },
+  "end_survey": {
+    "name": "06aa4e6e084fe5c3ac0e6b339c30ec60",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.5,
+      "opinion_1": 1,
+      "opinion_2": 0.8,
+      "argument_quality_2": 0.4,
+      "user_information_argument_breadth": 0,
+      "user_information_argument_depth": 0.5
+    }
+  }
+}

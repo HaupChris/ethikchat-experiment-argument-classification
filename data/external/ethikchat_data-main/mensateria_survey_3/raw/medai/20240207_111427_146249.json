@@ -1,0 +1,52 @@
+{
+  "name": "20240207_111427_146249",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:14:27",
+  "end": "2024/02/07-11:35:17",
+  "utterances": [
+    {
+      "user": "31UYE",
+      "type": "user",
+      "text": "Wie soll der zwischenmenschliche Aspekt bei einer KI ausgeglichen werden",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:15:29",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "In diesem Szenario ist der zwischenmenschliche Aspekt durch das medizinische Personal abgedeckt, das die Entscheidungen der medKI den Patient:innen erklärt und für Fragen zur Verfügung steht. Die medKI selbst ist nicht dafür verantwortlich, zwischenmenschliche Aspekte zu handhaben, sondern vielmehr soll sie präzise und unvoreingenommene Diagnosen und Therapieentscheidungen liefern.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:15:33",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "fc2bcfb4d9b326ce19a142898e7a880c",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0
+    }
+  },
+  "end_survey": {
+    "name": "fc2bcfb4d9b326ce19a142898e7a880c",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "opinion_1": 0,
+      "opinion_2": 0.6,
+      "argument_quality_2": 0.5,
+      "user_information_argument_breadth": 0.75,
+      "user_information_argument_depth": 0.6
+    }
+  }
+}

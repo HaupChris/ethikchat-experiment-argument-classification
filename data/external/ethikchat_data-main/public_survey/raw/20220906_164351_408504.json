@@ -1,0 +1,189 @@
+{
+  "name": "20220906_164351_408504",
+  "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE",
+  "start": "2022/09/06-16:43:51",
+  "end": "2022/09/06-17:27:47",
+  "utterances": [
+    {
+      "user": "c13e13da2073260c2194c15d782e86a9",
+      "type": "user",
+      "text": "Guten Tag. Ich lehne eine Behandlungsentscheidung durch eine KI nicht kategorisch ab sondern bin der ansicht, dass diese als Option herbeigezogen werden sollte, falls kein ausreichend zurechnungsfähiger Artzt (z.B. durch Drogenkonsum, Überarbeitung, ...) bereitsteht. In fällen, in denen es für den Patienten kein Problem darstellt, wenn dieser nicht direkt behandelt wird, finde ich es aber wichtig, dass eine menschliche unabhängige Zweitmeinung oder die Zweitmeinung einer KI eines anderen Herstellers eingeholt wird. Man muss sich bewusst sein, dass soche Systheme von Menschen Programmiert werden. Menschen sind nicht Perfekt. Vorallem sind Menschen nicht immer Rational und es gibt immer welche, die gewisse Absichten haben, die nicht zum Wohle der Menschheit sind. Es währe fatal, wenn Kriminelle die KI beeinflussen könnten um politische oder Terroristische Ziele zu verfolgen. (z.B. falsche Terapie wählen um einen Politiker zu Töten) Natürlich versuchen die Herstellerfirmen solche Möglichkeiten zu unterbinden, aber es gibt überall Menschen mit kriminellen Energieen und man kann nie sicher sein, dass es keine Lücke gibt. Beispielsweise Könnten Kriminelle versuchen vermeintlich seriöse Fachliteratur zu veröffentlichen, in der aber vereinzelt falsche Informationen stehen, um so Menschen zu Schaden. Daher finde ich es wichtig, dass entscheidungen durch eine weitere Instanz (z.B. Mensch oder andere KI) geprüft werden. Es ist schließlich schwieriger in mehreren unterschiedlichen KIs Softwarelücken zu suchen als in nur einer KI.",
+      "id_in_dialogue": 0,
+      "timestamp": "2022/09/06-16:58:22",
+      "true_labels": [
+        "Z.P1-1"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": " Das sind gute Argumente, lass mich zuerst nur auf eins davon eingehen. Das Berufsbild des medizinischen Fachpersonal wird allerdings durch die medKI aufgewertet, da es weniger von Ärzt*innen abhängig ist und sich vollständig auf die Patient*innen konzentrieren kann, und daher voraussichtlich häufiger gewählt.   Ferner: Eine medKI wäre rund um die Uhr erreichbar; in der Nacht oder am Wochenende, wenn auch nur in einer Notbesetzung mit medizinischem Hilfspersonal. Das ließe sich ohne medKI sonst nur in großen Kliniken sicherstellen und wäre auf dem Land nicht möglich.",
+      "id_in_dialogue": 1,
+      "timestamp": "2022/09/06-17:06:09",
+      "true_labels": [
+        "intro_18",
+        "Z.P1-1-1",
+        "z_trans_8",
+        "Z.P1"
+      ],
+      "true_bounds": [
+        [
+          0,
+          71
+        ],
+        [
+          71,
+          313
+        ],
+        [
+          313,
+          321
+        ],
+        [
+          321,
+          573
+        ]
+      ],
+      "is_template": true,
+      "search_terms": [
+        "nicht",
+        "nicht ziel"
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_23",
+          "intro_32",
+          "intro_27",
+          "intro_25",
+          "intro_26",
+          "intro_28",
+          "intro_24"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.P1-1",
+        "introductions": [
+          "intro_49",
+          "intro_47",
+          "intro_46",
+          "intro_51",
+          "intro_50",
+          "intro_48",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_4",
+          "z_trans_1",
+          "z_trans_2",
+          "z_trans_8",
+          "z_trans_9",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [
+          "Z.P1-1-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.P1",
+          "Z.P4",
+          "Z.P2",
+          "Z.P3",
+          "Z.P5",
+          "Z.P6"
+        ],
+        "preselect_second_argument": true
+      }
+    },
+    {
+      "user": "da6f216507bf0f246dc07540c716d564",
+      "type": "expert",
+      "text": "Ich denke an dieser Stelle könnten wir den Chat beenden. Vielen Dank für das interessante Gespräch, Paul! Es wäre schön, wenn du dir noch kurz Zeit für eine kleine Umfrage nimmst. :)",
+      "id_in_dialogue": 2,
+      "timestamp": "2022/09/06-17:27:45",
+      "true_labels": [
+        "good_bye"
+      ],
+      "true_bounds": [],
+      "is_template": true,
+      "search_terms": [],
+      "predicted_responses": {
+        "paraphrase_introductions": [],
+        "preselect_paraphrase_introduction": false,
+        "paraphrase": "",
+        "introductions": [],
+        "preselect_introduction": false,
+        "transitions": [],
+        "preselect_transition": false,
+        "first_arguments": [],
+        "preselect_first_argument": false,
+        "second_arguments": [],
+        "preselect_second_argument": false
+      }
+    }
+  ],
+  "start_survey": {
+    "name": "c13e13da2073260c2194c15d782e86a9",
+    "type": "StartSurvey",
+    "agreement": 0.25
+  },
+  "end_survey": "not available"
+}

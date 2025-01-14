@@ -1,0 +1,170 @@
+{
+  "name": "20240207_122717_896142",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-12:27:17",
+  "end": "2024/02/07-12:36:49",
+  "utterances": [
+    {
+      "user": "EU1X7",
+      "type": "user",
+      "text": "Sie haben keine medizinische Ausbildung absolviert haben ",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-12:27:47",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Vielen Dank für Ihren Hinweis. Es ist richtig, dass ich keine medizinische Ausbildung habe. Allerdings ist die medizinische KI, über die wir sprechen, ein computergestütztes System, das darauf trainiert wurde, medizinisches Wissen zu verarbeiten und Entscheidungen auf der Grundlage von Daten und Algorithmen zu treffen. Die Frage ist, ob ein ausreichend gutes medizinisches Programm aus ethischer Sicht selbstständig Diagnose- und Therapie-Entscheidungen treffen darf. Ich argumentiere dafür, dass dies der Fall sein sollte, da eine solche KI in der Lage wäre, konsistente und unvoreingenommene Entscheidungen zu treffen, die auf einer großen Menge an medizinischem Wissen und Daten beruhen.\n\nWas spricht Ihrer Meinung nach dagegen, dass eine medizinische KI eigenständige Entscheidungen trifft?",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-12:27:55",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "EU1X7",
+      "type": "user",
+      "text": "Was passiert, wenn das menschliche Personal Fehler bei der Dateneingabe macht ",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-12:29:13",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Das ist ein wichtiger Punkt. Es ist möglich, dass menschliches Personal Fehler bei der Dateneingabe macht, was sich auf die Entscheidungen der medizinischen KI auswirken könnte. Allerdings ist es auch möglich, dass menschliche Ärzte Fehler bei der Diagnose oder Behandlung von Patienten machen, sei es aufgrund von Müdigkeit, Stress, mangelndem Wissen oder anderen Faktoren.\nIn beiden Fällen ist es wichtig, Mechanismen zu haben, die solche Fehler minimieren und korrigieren können. Im Fall der medizinischen KI könnten dies beispielsweise Doppeleingaben, automatische Plausibilitätsprüfungen oder die Möglichkeit der Überprüfung und Korrektur durch andere Ärzte oder speziell geschulte Mitarbeiter sein.\nInsgesamt glaube ich, dass die Vorteile der Verwendung einer medizinischen KI, wie zum Beispiel die Möglichkeit, große Datenmengen schnell und präzise zu verarbeiten, die potenziellen Nachteile überwiegen.\nWas denken Sie dazu?",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-12:29:23",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "EU1X7",
+      "type": "user",
+      "text": "Bei der KI ist die soziale Kompetenz nicht gegeben",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-12:31:10",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sie haben Recht, dass eine KI nicht die gleiche soziale Kompetenz hat wie ein Mensch. Eine KI kann nicht auf die gleiche Weise mit Patienten kommunizieren, ihre Emotionen erkennen oder auf ihre individuellen Bedürfnisse und Wünsche eingehen. Allerdings ist es auch wichtig zu beachten, dass die medizinische KI in diesem Szenario nicht die einzige Quelle der Kommunikation mit den Patienten ist.\nDas medizinische Personal, das in den Untersuchungszentren arbeitet, ist weiterhin dafür verantwortlich, die Entscheidungen der medKI zu erklären und den Patienten zu helfen, sie zu verstehen. Die medizinische KI dient lediglich als Unterstützung bei der Diagnose und Therapie-Entscheidungen, während das medizinische Personal sich auf die soziale Interaktion mit den Patienten konzentrieren kann.\nDarüber hinaus könnte die Integration von natürlicher Sprachverarbeitung und maschinellem Lernen in die medizinische KI in Zukunft dazu beitragen, die soziale Kompetenz der KI zu verbessern und die Interaktion mit Patienten zu erleichtern.\nWas denken Sie über diesen Ansatz?",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-12:31:22",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "EU1X7",
+      "type": "user",
+      "text": "Das klingt gut, somit hat das Personal mehr Zeit um sich um den Patienten zu kümmern ",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-12:32:40",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, das ist richtig. Wenn die medizinische KI in der Lage ist, schnelle und präzise Diagnose- und Therapie-Entscheidungen zu treffen, hat das medizinische Personal mehr Zeit, sich auf die Bedürfnisse der Patienten zu konzentrieren. Das medizinische Personal kann sich auf die Kommunikation mit den Patienten, die Erklärung der Diagnose und Behandlung, die Überwachung des Gesundheitszustands der Patienten und die Bereitstellung von emotionaler Unterstützung konzentrieren.\nDies kann dazu beitragen, die Qualität der medizinischen Versorgung zu verbessern und das Wohlbefinden der Patienten zu erhöhen.\nEs ist jedoch wichtig zu beachten, dass die Einführung einer medizinischen KI nicht bedeutet, dass das medizinische Personal überflüssig wird. Vielmehr ermöglicht es dem Personal, seine Fähigkeiten und Kompetenzen besser zu nutzen und sich auf die Aspekte der medizinischen Versorgung zu konzentrieren, die am meisten von menschlicher Interaktion und Fürsorge profitieren.\nWas halten Sie von diesem Ansatz?",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-12:33:05",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "EU1X7",
+      "type": "user",
+      "text": "Was passiert mit Ärzt:innen wenn ihre Expertise nicht mehr benötigt und ersetzt wird durch KI",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-12:33:13",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die Einführung einer medizinischen KI in Untersuchungszentren wird nicht bedeuten, dass die Expertise von Ärztinnen und Ärzten überflüssig wird. Vielmehr wird die KI als Unterstützung für die Ärztinnen und Ärzte dienen, um ihre Arbeit zu erleichtern und die Qualität der medizinischen Versorgung zu verbessern.\nEs ist wichtig zu beachten, dass die medizinische KI nur so gut ist wie das Wissen und die Daten, die ihr zur Verfügung gestellt werden. Ärztinnen und Ärzte haben ein tiefgreifendes Verständnis von Medizin und Krankheiten, das durch jahrelange Ausbildung und Erfahrung erworben wurde. Diese Expertise ist unerlässlich, um die medizinische KI zu trainieren und zu überwachen.\nDarüber hinaus wird es immer Situationen geben, in denen die menschliche Expertise und Urteilsfähigkeit unerlässlich sind, um komplexe oder seltene medizinische Fälle zu diagnostizieren und zu behandeln.\nIn Zukunft könnte die Zusammenarbeit zwischen Ärztinnen und Ärzten und medizinischer KI zu einer personalisierteren und effektiveren medizinischen Versorgung führen, in der die Stärken beider Seiten genutzt werden.\nWas denken Sie über diese mögliche Zukunft der medizinischen Versorgung?",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-12:33:26",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "EU1X7",
+      "type": "user",
+      "text": "Kinder und ältere könnten sich gruseln ",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-12:34:04",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Es ist möglich, dass einige Patienten, insbesondere Kinder und ältere Menschen, sich vor der Verwendung einer medizinischen KI gruseln oder Angst haben. Es ist wichtig, diese Bedenken ernst zu nehmen und Maßnahmen zu ergreifen, um sicherzustellen, dass die Patienten sich wohl und sicher fühlen.\nDas medizinische Personal, das in den Untersuchungszentren arbeitet, kann eine wichtige Rolle dabei spielen, die Patienten zu beruhigen und ihnen zu erklären, wie die medizinische KI funktioniert und wie sie ihnen helfen kann. Durch eine offene und ehrliche Kommunikation können die Patienten besser verstehen, wie die KI eingesetzt wird und wie sie von ihr profitieren können.\nDarüber hinaus können Designelemente und Benutzeroberflächen der medizinischen KI so gestaltet werden, dass sie benutzerfreundlich und einladend sind. Zum Beispiel könnten die Geräte kinderfreundliche Designs und Farben haben oder die Benutzeroberfläche für ältere Menschen einfach und intuitiv gestaltet sein.\nEs ist wichtig, dass die Patienten sich wohl und sicher fühlen, wenn sie eine medizinische KI verwenden, und dass ihre Bedenken und Ängste ernst genommen und angegangen werden.\nWas denken Sie über diese Herangehensweise?",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-12:34:19",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "f9d6d98ffe5a8965a7f7475da58f6ef7",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "informed": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "f9d6d98ffe5a8965a7f7475da58f6ef7",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "opinion_1": 1,
+      "opinion_1_reason": "Antwortet schnell und findet viele Argumente, die sachlich beschrieben werden.",
+      "argument_quality_2": 0.6,
+      "opinion_2": 0.4,
+      "user_information_argument_breadth": 0.75,
+      "user_information_argument_depth": 0.8,
+      "positive_critics": "Schnelle Antworten, sachliche Beschreibung ",
+      "negative_critics": ""
+    }
+  }
+}

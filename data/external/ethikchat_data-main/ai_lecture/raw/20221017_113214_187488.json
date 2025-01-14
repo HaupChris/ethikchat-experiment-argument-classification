@@ -1,0 +1,369 @@
+{
+  "name": "20221017_113214_187488",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "start": "2022/10/17-11:32:14",
+  "end": "in progress",
+  "utterances": [
+    {
+      "user": "2b4d861cb86e631fced13c000c318323",
+      "type": "user",
+      "text": "Ki verfügt über gleiches oder mehr wissen als das menschliche Gehirn ",
+      "id_in_dialogue": 0,
+      "timestamp": "2022/10/17-11:34:46",
+      "true_labels": [
+        "clarify"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "FAQ.2",
+          0.014543140759239216
+        ],
+        [
+          "Z.P6",
+          0.014233512450894287
+        ],
+        [
+          "FAQ.3",
+          0.01368587996878701
+        ],
+        [
+          "Z.P2",
+          0.013678922983152667
+        ],
+        [
+          "Z.P3",
+          0.013589165987574963
+        ],
+        [
+          "Z.P7",
+          0.013299312264010061
+        ],
+        [
+          "FAQ.1",
+          0.01321047445424502
+        ],
+        [
+          "Z.P1",
+          0.01311687648143537
+        ],
+        [
+          "Z.P5",
+          0.01306138311878024
+        ],
+        [
+          "FAQ.4",
+          0.012563725833115175
+        ],
+        [
+          "Z.P4",
+          0.012497591574565866
+        ],
+        [
+          "FAQ.7",
+          0.012475835721334184
+        ],
+        [
+          "FAQ.6",
+          0.012189835366169733
+        ],
+        [
+          "FAQ.5",
+          0.012029709900964837
+        ],
+        [
+          "Z.P1-1",
+          0.0
+        ],
+        [
+          "Z.P1-1-1",
+          0.0
+        ],
+        [
+          "Z.P1-2",
+          0.0
+        ],
+        [
+          "Z.P1-2-1",
+          0.0
+        ],
+        [
+          "Z.P4-1",
+          0.0
+        ],
+        [
+          "Z.P3-1",
+          0.0
+        ],
+        [
+          "Z.P3-1-1",
+          0.0
+        ],
+        [
+          "Z.P6-1",
+          0.0
+        ],
+        [
+          "Z.P6-1-1",
+          0.0
+        ],
+        [
+          "Z.P5-1",
+          0.0
+        ],
+        [
+          "Z.P7-1",
+          0.0
+        ],
+        [
+          "Z.K1",
+          0.0
+        ],
+        [
+          "Z.K1-1",
+          0.0
+        ],
+        [
+          "Z.K2",
+          0.0
+        ],
+        [
+          "Z.K2-4",
+          0.0
+        ],
+        [
+          "Z.K4",
+          0.0
+        ],
+        [
+          "Z.K4-1",
+          0.0
+        ],
+        [
+          "Z.K6",
+          0.0
+        ],
+        [
+          "Z.K6-1",
+          0.0
+        ],
+        [
+          "Z.K15",
+          0.0
+        ],
+        [
+          "Z.K15-1",
+          0.0
+        ],
+        [
+          "Z.K18",
+          0.0
+        ],
+        [
+          "Z.K18-1",
+          0.0
+        ],
+        [
+          "Z.K3",
+          0.0
+        ],
+        [
+          "Z.K3-1",
+          0.0
+        ],
+        [
+          "Z.K3-1-1",
+          0.0
+        ],
+        [
+          "Z.K3-1-1-1",
+          0.0
+        ],
+        [
+          "Z.K3-2",
+          0.0
+        ],
+        [
+          "Z.K11",
+          0.0
+        ],
+        [
+          "Z.K11-1",
+          0.0
+        ],
+        [
+          "Z.K12",
+          0.0
+        ],
+        [
+          "Z.K12-1",
+          0.0
+        ],
+        [
+          "Z.K5",
+          0.0
+        ],
+        [
+          "Z.K5-1",
+          0.0
+        ],
+        [
+          "Z.K7",
+          0.0
+        ],
+        [
+          "Z.K7-1",
+          0.0
+        ],
+        [
+          "Z.K10",
+          0.0
+        ],
+        [
+          "Z.K10-1",
+          0.0
+        ],
+        [
+          "Z.K10-2",
+          0.0
+        ],
+        [
+          "Z.K9",
+          0.0
+        ],
+        [
+          "Z.K9-1",
+          0.0
+        ],
+        [
+          "Z.K13",
+          0.0
+        ],
+        [
+          "Z.K13-1",
+          0.0
+        ],
+        [
+          "Z.K14",
+          0.0
+        ],
+        [
+          "Z.K14-1",
+          0.0
+        ],
+        [
+          "Z.K16",
+          0.0
+        ],
+        [
+          "Z.K16-1",
+          0.0
+        ],
+        [
+          "Z.K19",
+          0.0
+        ],
+        [
+          "Z.K19-1",
+          0.0
+        ],
+        [
+          "NZ.K1",
+          0.0
+        ],
+        [
+          "NZ.K1-1",
+          0.0
+        ],
+        [
+          "NZ.K3",
+          0.0
+        ],
+        [
+          "NZ.K3-1",
+          0.0
+        ],
+        [
+          "NZ.K4",
+          0.0
+        ],
+        [
+          "NZ.K4-1",
+          0.0
+        ],
+        [
+          "NZ.K6",
+          0.0
+        ],
+        [
+          "NZ.K6-1",
+          0.0
+        ],
+        [
+          "NZ.K8",
+          0.0
+        ],
+        [
+          "NZ.K8-1",
+          0.0
+        ],
+        [
+          "NZ.K9",
+          0.0
+        ],
+        [
+          "NZ.K9-1",
+          0.0
+        ],
+        [
+          "NZ.K10",
+          0.0
+        ],
+        [
+          "NZ.K10-1",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "8c9dbc83875a87d20770fee78aa3aafc",
+      "type": "bot",
+      "text": " Ich bin mir nicht sicher, was du genau meinst. Kannst du das anders formulieren?",
+      "id_in_dialogue": 1,
+      "timestamp": "2022/10/17-11:34:46",
+      "true_labels": [
+        "intro_61"
+      ],
+      "true_bounds": [
+        [
+          0,
+          81
+        ]
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [],
+        "preselect_paraphrase_introduction": false,
+        "paraphrase": "",
+        "introductions": [
+          "intro_61",
+          "intro_62"
+        ],
+        "preselect_introduction": true,
+        "transitions": [],
+        "preselect_transition": false,
+        "first_arguments": [],
+        "preselect_first_argument": false,
+        "second_arguments": [],
+        "preselect_second_argument": false
+      }
+    }
+  ],
+  "start_survey": {
+    "name": "2b4d861cb86e631fced13c000c318323",
+    "type": "StartSurvey",
+    "agreement": 0.75
+  },
+  "end_survey": "not available"
+}

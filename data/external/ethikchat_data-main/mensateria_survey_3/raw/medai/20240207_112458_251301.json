@@ -1,0 +1,28 @@
+{
+  "name": "20240207_112458_251301",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "None",
+  "start": "2024/02/07-11:24:58",
+  "end": "in progress",
+  "utterances": [
+    {
+      "user": "3E1K5",
+      "type": "user",
+      "text": "Hallo\nRationales beurteilen",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:25:15",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    }
+  ],
+  "start_survey": {
+    "name": "a86bb3aaaef912597146f47b9854bdca",
+    "type": "StartSurvey",
+    "surveyOptionResults": {}
+  },
+  "end_survey": "not available"
+}

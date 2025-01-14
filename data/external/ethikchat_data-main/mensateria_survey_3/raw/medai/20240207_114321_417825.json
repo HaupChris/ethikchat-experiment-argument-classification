@@ -1,0 +1,41 @@
+{
+  "name": "20240207_114321_417825",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "None",
+  "start": "2024/02/07-11:43:21",
+  "end": "2024/02/07-11:52:53",
+  "utterances": [
+    {
+      "user": "K2KLH",
+      "type": "user",
+      "text": "Die KI kann ununterbrochen Arbeiten\nDie KI kann ununterbrochen arbeiten",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:43:59",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    }
+  ],
+  "start_survey": {
+    "name": "c6145a29e4f4fd75a29c1e0e61fbcb7c",
+    "type": "StartSurvey",
+    "surveyOptionResults": {}
+  },
+  "end_survey": {
+    "name": "c6145a29e4f4fd75a29c1e0e61fbcb7c",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "opinion_1": 0,
+      "opinion_1_reason": "Weil eine KI nicht denken kann.",
+      "opinion_2": 0.2,
+      "argument_quality_2": 0.5,
+      "user_information_argument_breadth": 0,
+      "user_information_argument_depth": 0.2,
+      "negative_critics": "Hat nicht geladen "
+    }
+  }
+}

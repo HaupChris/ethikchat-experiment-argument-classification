@@ -1,0 +1,91 @@
+{
+    "text": "Ja, ich finde, dass KI-gestützte Entscheidungsfindung in Zukunft für die Diagnose und Therapie hilfreich sein kann. Allerdings sollten es weiterhin die Menschen sein, welche die Therapie durchführen.\n\nMan kann es auch so sehen: Wenn die KI aber nur für solche Diagnosen eingesetzt würde, wäre ihr Anwendungsbereich deutlich geschmälert. \n\nPunkte, die für den Einsatz dieser Verfahren sprechen sind vielerlei: Eine KI kann in sekundenschnelle entscheiden, ob ein gutartiger oder bösartiger Tumor vorliegt. Dies kann frühzeitig und relativ sicher festgestellt werden. Sie ermüdet nicht und ist mittlerweile in Teilgebieten wir z.B. der Radiologie mindestens auf dem Niveau eines gutausgebildeten Arztes. \n\nDem würde ich nicht zustimmen. Ein niedriges Stresslevel bei den Anwender:innen der KI ist nicht garantiert, da elektronische Dokumentationssysteme kompliziert sein können. Hast Du schon einmal daran gedacht: Entsprechende Beratungsgespräche würden die Zeitersparnis durch KI allerdings wieder verringern.\n\nWelchem Teil meiner Argumentation stimmst du nicht zu? Dass der Einsatz von KI-Systemen kompliziert für die Anwender:innen sein kann, ist etwas, dem ich zustimme. Das Personal muss zunächst daraufhin trainiert werden, die neuen Systeme zu bedienen und zu interpretieren.\nZu deinem zweiten Punkt: Beratungsgespräche, die die Entscheidungsfindung bzg. der Therapie zum Gegenstand haben, werden mit Diagnostik durch die KI dann beschleunigt, wenn das Vertrauen in die KI seitens der Patienten entsprechend groß geworden ist.\nD.h., wenn die Patienten die Entscheidung der KI für gut oder sogar besser halten als die Entscheidung eines Arztes.\n\nDas ist richtig. Ansprechen möchte ich noch: Bei einer KI kann keine Zweitmeinung eingeholt werden, da die KI immer zum selben Ergebnis kommt. Eine Zweitmeinung kann jedoch für das Gefühl der Patient:innen, die richtige Entscheidung zu treffen, wichtig sein.\n\nJa, da sprichst du ein wichtiges Problem an. Das Verhalten der KI ist für den Beobachter nicht nachvollziehbar. Die Kriterien, anhand derer die KI ihre Entscheidungen trifft sind nicht transparent. Es bleibt also immer die Frage, ob man der Entscheidung der KI vertrauen kann. Auch bei großen Datenmengen und hoher Treffergenauigkeit kann es sein, dass sich die KI urplötzlich völlig unvorhersehbar verhält\n\nDas stimmt. Ferner: Durch die große Menge gesammelter Daten werden Kliniken interessanter für Cyberangriffe.\n\nFalls dies Technologie sich als dermaßen erfolgreich herausstellt, dass sie überall eingesetzt wird könnte es außerdem zu großen Asymmetrien in der Gesellschaft kommen, da sie einer kleinen Gruppe von Patenthaltern und Großinvestoren ein Vermögen beschwert während die große Mehrheit abhängig von solchen Diagnose und Therapieverfahren wird.\nLeider muss ich jetzt den Chat abbrechen, danke für das Gespräch\n\n",
+    "annotations": [
+        { "begin": 0, "end": 199, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 0, "user": "426f33ce864c49a31d568567d27c1524", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 0, "end": 199, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K14" } },
+        { "begin": 201, "end": 337, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 1, "user": "8dc12c0ff92e2a8fb466d5b13af71e12", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 201, "end": 228, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 228, "end": 337, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K18-A-P" } },
+        { "begin": 339, "end": 702, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 2, "user": "426f33ce864c49a31d568567d27c1524", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 339, "end": 702, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P13" } },
+        { "begin": 704, "end": 1009, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 3, "user": "8dc12c0ff92e2a8fb466d5b13af71e12", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 704, "end": 735, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 735, "end": 877, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P4-Aa" } },
+        { "begin": 877, "end": 913, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 913, "end": 1009, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K1-Aa-P" } },
+        { "begin": 1011, "end": 1649, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 4, "user": "426f33ce864c49a31d568567d27c1524", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 1011, "end": 1649, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "Schulung Personal für Zeitersparnis" } },
+        { "begin": 1651, "end": 1909, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 5, "user": "8dc12c0ff92e2a8fb466d5b13af71e12", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 1651, "end": 1668, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 1668, "end": 1696, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 1696, "end": 1909, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K1" } },
+        { "begin": 1911, "end": 2317, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 6, "user": "426f33ce864c49a31d568567d27c1524", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 1911, "end": 2317, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K2" } },
+        { "begin": 2319, "end": 2427, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 7, "user": "8dc12c0ff92e2a8fb466d5b13af71e12", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 2319, "end": 2331, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 2331, "end": 2339, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 2339, "end": 2427, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K6" } },
+        { "begin": 2429, "end": 2835, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 8, "user": "426f33ce864c49a31d568567d27c1524", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 2429, "end": 2835, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "Gefahr der Monopolisierung" } },
+        { "begin": 0, "end": 2837, "type": "de.uniwue.ethik-ki-chats.Dialogue", "features": { "name": "210527_1731_4995", "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE", "start": "2021/05/27-17:31:00", "end": "2021/05/27-18:19:00" } },
+        { "begin": 0, "end": 2837, "type": "de.uniwue.ethik-ki-chats.StartSurvey", "features": { "name": "426f33ce864c49a31d568567d27c1524", "agreement": 0.75 } },
+        { "begin": 0, "end": 2837, "type": "de.uniwue.ethik-ki-chats.EndSurvey", "features": { "name": "426f33ce864c49a31d568567d27c1524", "agreement": 0.75, "opinion": "", "text_like": "", "text_dislike": "" } }
+    ],
+    "types": [
+        {
+            "name": "de.uniwue.ethik-ki-chats.Template",
+            "features": [
+                { "name": "label", "range": "RANGE_PRIMITIVE" },
+                { "name": "incorrect", "range": "RANGE_PRIMITIVE" },
+                { "name": "difficult", "range": "RANGE_PRIMITIVE" },
+                { "name": "multiple", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        { "name": "de.uniwue.ethik-ki-chats.Introduction", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Transition", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Other", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Outro", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        {
+            "name": "de.uniwue.ethik-ki-chats.Dialogue",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "szenario", "range": "RANGE_PRIMITIVE" },
+                { "name": "start", "range": "RANGE_PRIMITIVE" },
+                { "name": "end", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.StartSurvey",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "agreement", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.EndSurvey",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "agreement", "range": "RANGE_PRIMITIVE" },
+                { "name": "opinion", "range": "RANGE_PRIMITIVE" },
+                { "name": "text_like", "range": "RANGE_PRIMITIVE" },
+                { "name": "text_dislike", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.UserUtterance",
+            "features": [
+                { "name": "id_in_dialogue", "range": "RANGE_PRIMITIVE" },
+                { "name": "user", "range": "RANGE_PRIMITIVE" },
+                { "name": "timestamp", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.ExpertUtterance",
+            "features": [
+                { "name": "id_in_dialogue", "range": "RANGE_PRIMITIVE" },
+                { "name": "user", "range": "RANGE_PRIMITIVE" },
+                { "name": "timestamp", "range": "RANGE_PRIMITIVE" }
+            ]
+        }
+    ]
+}

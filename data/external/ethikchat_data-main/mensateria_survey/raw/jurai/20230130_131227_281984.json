@@ -1,0 +1,1096 @@
+{
+  "name": "20230130_131227_281984",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.JURAI",
+  "start": "2023/01/30-13:12:27",
+  "end": "2023/01/30-13:22:26",
+  "utterances": [
+    {
+      "user": "xl22",
+      "type": "user",
+      "text": "Die KI hat nicht die Fähigkeit moralische Entscheidungen zu treffen und ethische Richtlinien zu berücksichtigen",
+      "id_in_dialogue": 0,
+      "timestamp": "2023/01/30-13:13:52",
+      "true_labels": [
+        "Z.K10"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "Z.K10",
+          0.06805180375183725
+        ],
+        [
+          "Z.K6",
+          0.034893808669116726
+        ],
+        [
+          "Z.K6-1-1",
+          0.03212528598625202
+        ],
+        [
+          "Z.K12",
+          0.031838706423260886
+        ],
+        [
+          "Z.P3-1",
+          0.030041195723333587
+        ],
+        [
+          "Z.K2",
+          0.019597385681579746
+        ],
+        [
+          "Z.P1-2",
+          0.018972831613829035
+        ],
+        [
+          "Z.K4",
+          0.018818638654074238
+        ],
+        [
+          "FAQ.5",
+          0.01866284801418036
+        ],
+        [
+          "FAQ.4",
+          0.018308975105124126
+        ],
+        [
+          "Z.P1-1",
+          0.018264662782468133
+        ],
+        [
+          "FAQ.2",
+          0.018116758197313936
+        ],
+        [
+          "Z.P4-1",
+          0.01790600120399185
+        ],
+        [
+          "Z.K11",
+          0.01771295770597591
+        ],
+        [
+          "FAQ.3",
+          0.01717270272336658
+        ],
+        [
+          "FAQ.1",
+          0.016924743969361555
+        ],
+        [
+          "Z.K9",
+          0.01630027464719139
+        ],
+        [
+          "Z.P5-1",
+          0.015867859275078527
+        ],
+        [
+          "Z.K7",
+          0.015503741653548916
+        ],
+        [
+          "Z.P1",
+          0.0
+        ],
+        [
+          "Z.P1-1-1",
+          0.0
+        ],
+        [
+          "Z.P3",
+          0.0
+        ],
+        [
+          "Z.P3-1-1",
+          0.0
+        ],
+        [
+          "Z.P3-1-2",
+          0.0
+        ],
+        [
+          "Z.P6",
+          0.0
+        ],
+        [
+          "Z.P6-1",
+          0.0
+        ],
+        [
+          "Z.P2",
+          0.0
+        ],
+        [
+          "Z.P2-1",
+          0.0
+        ],
+        [
+          "Z.P8",
+          0.0
+        ],
+        [
+          "Z.P8-1",
+          0.0
+        ],
+        [
+          "Z.P8-2",
+          0.0
+        ],
+        [
+          "Z.P4",
+          0.0
+        ],
+        [
+          "Z.P5",
+          0.0
+        ],
+        [
+          "Z.K6-1",
+          0.0
+        ],
+        [
+          "Z.K6-1-1-1",
+          0.0
+        ],
+        [
+          "Z.K6-2",
+          0.0
+        ],
+        [
+          "Z.K6-3",
+          0.0
+        ],
+        [
+          "Z.K10-1",
+          0.0
+        ],
+        [
+          "Z.K10-2",
+          0.0
+        ],
+        [
+          "Z.K2-1",
+          0.0
+        ],
+        [
+          "Z.K2-1-1",
+          0.0
+        ],
+        [
+          "Z.K2-1-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2-1",
+          0.0
+        ],
+        [
+          "Z.K4-1",
+          0.0
+        ],
+        [
+          "Z.K9-1",
+          0.0
+        ],
+        [
+          "Z.K11-1",
+          0.0
+        ],
+        [
+          "Z.K12-1",
+          0.0
+        ],
+        [
+          "Z.K7-1",
+          0.0
+        ],
+        [
+          "Z.K7-2",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "EthiBot",
+      "type": "bot",
+      "text": " Du sagst, dass KI sich irren kann. Das ist möglich, aber nicht sehr wahrscheinlich. Die jurKI wird außerdem Fälle, die sie nicht selbst beurteilen kann, an menschliche Richter:innen delegieren und würde aus diesen für zukünftige, ähnliche Fälle lernen.",
+      "id_in_dialogue": 1,
+      "timestamp": "2023/01/30-13:13:52",
+      "true_labels": [
+        "intro_27",
+        "Z.K10",
+        "intro_58",
+        "Z.K10-2"
+      ],
+      "true_bounds": [
+        [
+          0,
+          15
+        ],
+        [
+          15,
+          35
+        ],
+        [
+          35,
+          84
+        ],
+        [
+          84,
+          253
+        ]
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_27",
+          "intro_32",
+          "intro_24",
+          "intro_26",
+          "intro_28",
+          "intro_25",
+          "intro_23",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.K10",
+        "introductions": [
+          "intro_58",
+          "intro_59",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_60",
+          "intro_61",
+          "intro_62"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_9",
+          "z_trans_1",
+          "z_trans_4",
+          "z_trans_2",
+          "z_trans_8",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": false,
+        "first_arguments": [
+          "Z.K10-2",
+          "Z.K10-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.K6-1-1-1",
+          "Z.K6-1",
+          "Z.P1",
+          "Z.P4",
+          "Z.K2-1",
+          "Z.P3",
+          "Z.P6",
+          "Z.P2",
+          "Z.P5",
+          "Z.P8",
+          "Z.K4-1",
+          "Z.K7-1"
+        ],
+        "preselect_second_argument": false
+      }
+    },
+    {
+      "user": "xl22",
+      "type": "user",
+      "text": "Was den Menschen von der KI unterscheidet, ist, dass er einen Verstand besitzt. Er hat die Fähigkeit Philosophie zu betreiben. ",
+      "id_in_dialogue": 2,
+      "timestamp": "2023/01/30-13:17:53",
+      "true_labels": [
+        "Z.K6"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "Z.K6",
+          0.035936160981770666
+        ],
+        [
+          "Z.K9",
+          0.03451426668023254
+        ],
+        [
+          "Z.K6-1-1",
+          0.03346135838381707
+        ],
+        [
+          "Z.K2",
+          0.023334108985428276
+        ],
+        [
+          "Z.P1-1",
+          0.021360369894045907
+        ],
+        [
+          "Z.K11",
+          0.021220592025200838
+        ],
+        [
+          "Z.P4-1",
+          0.020023716614281796
+        ],
+        [
+          "Z.P1-2",
+          0.01970962901305609
+        ],
+        [
+          "FAQ.5",
+          0.019430857942517032
+        ],
+        [
+          "Z.K10",
+          0.019363679385998464
+        ],
+        [
+          "FAQ.3",
+          0.019220613030790604
+        ],
+        [
+          "Z.K7",
+          0.019161709555955024
+        ],
+        [
+          "FAQ.4",
+          0.019025772551665293
+        ],
+        [
+          "Z.K12",
+          0.018649168663358567
+        ],
+        [
+          "Z.P3-1",
+          0.018648223554489578
+        ],
+        [
+          "Z.K4",
+          0.018138354382342417
+        ],
+        [
+          "Z.P5-1",
+          0.01772473104391748
+        ],
+        [
+          "FAQ.1",
+          0.017718206353080662
+        ],
+        [
+          "FAQ.2",
+          0.01725591788133718
+        ],
+        [
+          "Z.P1",
+          0.0
+        ],
+        [
+          "Z.P1-1-1",
+          0.0
+        ],
+        [
+          "Z.P3",
+          0.0
+        ],
+        [
+          "Z.P3-1-1",
+          0.0
+        ],
+        [
+          "Z.P3-1-2",
+          0.0
+        ],
+        [
+          "Z.P6",
+          0.0
+        ],
+        [
+          "Z.P6-1",
+          0.0
+        ],
+        [
+          "Z.P2",
+          0.0
+        ],
+        [
+          "Z.P2-1",
+          0.0
+        ],
+        [
+          "Z.P8",
+          0.0
+        ],
+        [
+          "Z.P8-1",
+          0.0
+        ],
+        [
+          "Z.P8-2",
+          0.0
+        ],
+        [
+          "Z.P4",
+          0.0
+        ],
+        [
+          "Z.P5",
+          0.0
+        ],
+        [
+          "Z.K6-1",
+          0.0
+        ],
+        [
+          "Z.K6-1-1-1",
+          0.0
+        ],
+        [
+          "Z.K6-2",
+          0.0
+        ],
+        [
+          "Z.K6-3",
+          0.0
+        ],
+        [
+          "Z.K10-1",
+          0.0
+        ],
+        [
+          "Z.K10-2",
+          0.0
+        ],
+        [
+          "Z.K2-1",
+          0.0
+        ],
+        [
+          "Z.K2-1-1",
+          0.0
+        ],
+        [
+          "Z.K2-1-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2-1",
+          0.0
+        ],
+        [
+          "Z.K4-1",
+          0.0
+        ],
+        [
+          "Z.K9-1",
+          0.0
+        ],
+        [
+          "Z.K11-1",
+          0.0
+        ],
+        [
+          "Z.K12-1",
+          0.0
+        ],
+        [
+          "Z.K7-1",
+          0.0
+        ],
+        [
+          "Z.K7-2",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "EthiBot",
+      "type": "bot",
+      "text": " Du sagst, dass KI keine Werte befolgt. Darauf geht unser Szenario wie folgt ein: Die jurKI ist ein zertifizierter Service des Staates, der die moralischen Leitlinien und Regeln vorgibt. Hierfür werden insb. auch die Erkenntnisse der Philosophie und Computerwissenschaft hinzugezogen und z.B. in ein passendes Diskriminierungsgesetz übersetzt.",
+      "id_in_dialogue": 3,
+      "timestamp": "2023/01/30-13:17:53",
+      "true_labels": [
+        "intro_27",
+        "Z.K6",
+        "intro_55",
+        "Z.K6-1"
+      ],
+      "true_bounds": [
+        [
+          0,
+          15
+        ],
+        [
+          15,
+          39
+        ],
+        [
+          39,
+          81
+        ],
+        [
+          81,
+          343
+        ]
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_27",
+          "intro_24",
+          "intro_25",
+          "intro_23",
+          "intro_26",
+          "intro_28",
+          "intro_32",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.K6",
+        "introductions": [
+          "intro_55",
+          "intro_56",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_57",
+          "intro_58",
+          "intro_59",
+          "intro_60",
+          "intro_61",
+          "intro_62"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_4",
+          "z_trans_1",
+          "z_trans_9",
+          "z_trans_2",
+          "z_trans_8",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": false,
+        "first_arguments": [
+          "Z.K6-1",
+          "Z.K6-2",
+          "Z.K6-3"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.K6-1-1-1",
+          "Z.P1",
+          "Z.P4",
+          "Z.K2-1",
+          "Z.P3",
+          "Z.P6",
+          "Z.P2",
+          "Z.P5",
+          "Z.P8",
+          "Z.K4-1",
+          "Z.K7-1"
+        ],
+        "preselect_second_argument": false
+      }
+    },
+    {
+      "user": "xl22",
+      "type": "user",
+      "text": "Wie würde die KI dann in der Frage entscheiden, wer im folgenden Fall schuldig ist: voll besetztes Flugzeug fliegt auf mit Menschen gefüllte Arena zu. Darf es abgeschossen werden?",
+      "id_in_dialogue": 4,
+      "timestamp": "2023/01/30-13:20:45",
+      "true_labels": [
+        "FAQ.1"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "FAQ.1",
+          0.07330558664652236
+        ],
+        [
+          "Z.K6",
+          0.0328762543898198
+        ],
+        [
+          "Z.K6-1-1",
+          0.032588455528646094
+        ],
+        [
+          "Z.K9",
+          0.032027374189399785
+        ],
+        [
+          "FAQ.4",
+          0.020206126082708407
+        ],
+        [
+          "FAQ.2",
+          0.02002527826901266
+        ],
+        [
+          "FAQ.3",
+          0.019358249156505795
+        ],
+        [
+          "Z.K2",
+          0.01883617743993159
+        ],
+        [
+          "Z.K12",
+          0.018816658466488556
+        ],
+        [
+          "Z.K10",
+          0.018381485234618068
+        ],
+        [
+          "Z.P3-1",
+          0.01817081561697388
+        ],
+        [
+          "Z.K11",
+          0.018099436320574744
+        ],
+        [
+          "FAQ.5",
+          0.01804011519649767
+        ],
+        [
+          "Z.K4",
+          0.018020022229507653
+        ],
+        [
+          "Z.P4-1",
+          0.017719664600296753
+        ],
+        [
+          "Z.K7",
+          0.017640505946315277
+        ],
+        [
+          "Z.P1-2",
+          0.01736441466103332
+        ],
+        [
+          "Z.P5-1",
+          0.01723864222205682
+        ],
+        [
+          "Z.P1-1",
+          0.017191996142911878
+        ],
+        [
+          "Z.P1",
+          0.0
+        ],
+        [
+          "Z.P1-1-1",
+          0.0
+        ],
+        [
+          "Z.P3",
+          0.0
+        ],
+        [
+          "Z.P3-1-1",
+          0.0
+        ],
+        [
+          "Z.P3-1-2",
+          0.0
+        ],
+        [
+          "Z.P6",
+          0.0
+        ],
+        [
+          "Z.P6-1",
+          0.0
+        ],
+        [
+          "Z.P2",
+          0.0
+        ],
+        [
+          "Z.P2-1",
+          0.0
+        ],
+        [
+          "Z.P8",
+          0.0
+        ],
+        [
+          "Z.P8-1",
+          0.0
+        ],
+        [
+          "Z.P8-2",
+          0.0
+        ],
+        [
+          "Z.P4",
+          0.0
+        ],
+        [
+          "Z.P5",
+          0.0
+        ],
+        [
+          "Z.K6-1",
+          0.0
+        ],
+        [
+          "Z.K6-1-1-1",
+          0.0
+        ],
+        [
+          "Z.K6-2",
+          0.0
+        ],
+        [
+          "Z.K6-3",
+          0.0
+        ],
+        [
+          "Z.K10-1",
+          0.0
+        ],
+        [
+          "Z.K10-2",
+          0.0
+        ],
+        [
+          "Z.K2-1",
+          0.0
+        ],
+        [
+          "Z.K2-1-1",
+          0.0
+        ],
+        [
+          "Z.K2-1-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2-1",
+          0.0
+        ],
+        [
+          "Z.K4-1",
+          0.0
+        ],
+        [
+          "Z.K9-1",
+          0.0
+        ],
+        [
+          "Z.K11-1",
+          0.0
+        ],
+        [
+          "Z.K12-1",
+          0.0
+        ],
+        [
+          "Z.K7-1",
+          0.0
+        ],
+        [
+          "Z.K7-2",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "EthiBot",
+      "type": "bot",
+      "text": " Dir scheint also unklar zu sein, welche Art von Fällen diese KI verhandelt. Unsere jurKI ist auf zivilrechtliche Verfahren spezialisiert, wobei wir das Familienrecht als Teilgebiet explizit nicht hinzuzählen. Strafrechtliche Verfahren schließen wir in unserem Szenario ebenfalls aus. Um hier einen neuen Punkt in die Diskussion einzubringen: Durch den Einsatz der jurKI kann der Faktor Subjektivität bei Gerichtsurteilen ausgeräumt werden. Eine jurKI lässt sich nicht etwa durch Mitgefühl von den objektiven Fakten ablenken. Dies führt zu mehr Gerechtigkeit.",
+      "id_in_dialogue": 5,
+      "timestamp": "2023/01/30-13:20:45",
+      "true_labels": [
+        "intro_38",
+        "FAQ.1",
+        "FAQ.1-1",
+        "faq_trans_1",
+        "Z.P1"
+      ],
+      "true_bounds": [
+        [
+          0,
+          33
+        ],
+        [
+          33,
+          76
+        ],
+        [
+          76,
+          284
+        ],
+        [
+          284,
+          342
+        ],
+        [
+          342,
+          559
+        ]
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_38",
+          "intro_37",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "FAQ.1",
+        "introductions": [
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59",
+          "intro_60",
+          "intro_61",
+          "intro_62"
+        ],
+        "preselect_introduction": false,
+        "transitions": [
+          "faq_trans_1",
+          "faq_trans_3",
+          "faq_trans_2",
+          "z_trans_1",
+          "z_trans_2",
+          "z_trans_4",
+          "z_trans_8",
+          "z_trans_9",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [
+          "FAQ.1-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.P1",
+          "Z.K6-1-1-1",
+          "Z.P4",
+          "Z.K2-1",
+          "Z.P3",
+          "Z.P6",
+          "Z.P2",
+          "Z.P5",
+          "Z.P8",
+          "Z.K4-1",
+          "Z.K7-1"
+        ],
+        "preselect_second_argument": true
+      }
+    }
+  ],
+  "start_survey": {
+    "name": "349c9f707c0fd8571dda74c5006285da",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 1
+    }
+  },
+  "end_survey": {
+    "name": "349c9f707c0fd8571dda74c5006285da",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "opinion": 0.75,
+      "informative": 0.75,
+      "positive_critics": "Schnelle Antwort. Technisch läuft alles einwanfrei und sehr verständlich"
+    }
+  }
+}

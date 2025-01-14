@@ -1,0 +1,190 @@
+{
+  "name": "20240207_115424_842660",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:54:24",
+  "end": "2024/02/07-12:09:58",
+  "utterances": [
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "Die KI kann gewisse Faktoren nicht erkennen, die eine reale Person erkennen kann, da eine KI nur auf spezifisch angelernte Daten basiert. Oft ist auch ein Arztbesuch aus psychischer sicht durch den Kontakt mit einem Arzt schon hilfreich. ",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:58:29",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Vielen Dank für Ihre Bedenken. Ich verstehe Ihre Bedenken, dass eine KI möglicherweise bestimmte Faktoren nicht erkennen kann, die ein menschlicher Arzt in einer persönlichen Untersuchung wahrnehmen würde. Es ist jedoch wichtig zu beachten, dass eine gut ausgebildete medKI auf eine immense Datenmenge trainiert wird, die sie in die Lage versetzt, Muster und Korrelationen zu erkennen, die möglicherweise für einen menschlichen Arzt schwer zu erkennen sind.\nIn Bezug auf den Aspekt der menschlichen Interaktion stimme ich zu, dass dies ein wichtiger Bestandteil der medizinischen Versorgung ist. Im vorgeschlagenen Szenario arbeitet das medizinische Personal jedoch weiterhin mit Patienten zusammen, indem es Daten erhebt und die Entscheidungen der medKI erklärt. Auf diese Weise kann die menschliche Interaktion und das Einfühlungsvermögen beibehalten werden, während die Vorteile der Genauigkeit und Effizienz der KI genutzt werden.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:58:42",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "Des weiteren kann aber auch eine Therapie bei zwei Personen mit gleichen klinischen Bild deutlich unterschiedliche ausfallen.",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-12:01:12",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, das ist ein weiterer wichtiger Punkt. Die Individualität eines jeden Patienten und die Tatsache, dass zwei Personen mit gleichen klinischen Bildern unterschiedlich auf die gleiche Therapie ansprechen können, sind Faktoren, die bei der Entscheidungsfindung berücksichtigt werden müssen. Eine gut entwickelte medKI kann aufgrund ihres Zugangs zu umfangreichen Datensätzen und ihrer Fähigkeit, Muster zu erkennen, besser in der Lage sein, diese individuellen Unterschiede zu berücksichtigen und personalisierte Therapieempfehlungen zu geben. Dennoch sollte das medizinische Personal die Möglichkeit haben, die endgültige Entscheidung zu überprüfen und gegebenenfalls Anpassungen vorzunehmen, um sicherzustellen, dass die Therapie auf die individuellen Bedürfnisse und Umstände des Patienten zugeschnitten ist.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-12:01:28",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "Gibt die KI dann mehrere Therapien zur Überprüfung an, weil dann ist die KI nicht nötig um einen Arzt zu ersetzen ",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-12:03:05",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Frage bringt einen wichtigen Aspekt zur Sprache. Eine fortschrittliche medKI sollte nicht dazu bestimmt sein, Ärzte zu ersetzen, sondern sollte als Entscheidungsunterstützungssystem dienen. Im vorgeschlagenen Szenario würde die medKI eine Diagnose und Therapieempfehlung auf der Grundlage der erhobenen Daten abgeben. Es ist jedoch entscheidend, dass das medizinische Personal die Möglichkeit hat, diese Vorschläge zu überprüfen und gegebenenfalls alternative Therapien in Betracht zu ziehen.\nDie medKI könnte mehrere geeignete Therapieoptionen vorschlagen, aus denen das medizinische Personal die endgültige Entscheidung treffen kann, um sicherzustellen, dass die Behandlung auf die individuellen Bedürfnisse des Patienten zugeschnitten ist. Auf diese Weise kann die medKI die Genauigkeit und Effizienz der Diagnose- und Therapieprozesse verbessern, während das medizinische Personal weiterhin die endgültige Entscheidung trifft und die menschliche Interaktion aufrechterhält.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-12:03:17",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "Dann ist es aber auch nicht wirklich zeitsparend ",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-12:04:40",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Bedenken hinsichtlich der Zeitersparnis sind verständlich. Die Einbeziehung des medizinischen Personals in den Entscheidungsprozess könnte den Vorteil der Zeitersparnis, den eine KI bieten kann, einschränken. Allerdings ist es wichtig zu betonen, dass die Zeitersparnis nicht der einzige Vorteil der Implementierung einer medKI ist.\nDie Vorteile einer medKI umfassen auch eine verbesserte Diagnosegenauigkeit, die Reduzierung menschlicher Fehler und die Möglichkeit, aufgrund der Verarbeitung großer Datenmengen Muster und Korrelationen zu erkennen, die für einen Menschen möglicherweise nicht offensichtlich sind.\nObwohl die Einbeziehung des medizinischen Personals in den Entscheidungsprozess die Zeitersparnis einschränken kann, gewährleistet sie gleichzeitig, dass die menschliche Interaktion und das Einfühlungsvermögen beibehalten werden, während die Vorteile der Genauigkeit und Effizienz der KI genutzt werden. Insgesamt kann dies zu einer verbesserten Patientenversorgung führen.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-12:04:51",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "Dann ist aber die KI nicht wie in dem Szenario beschrieben eine Stunde Alternative zum Arzt, sondern eine Beihilfe zum Arzt",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-12:06:34",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, ich kann Ihre Sichtweise verstehen. Angesichts der Tatsache, dass das medizinische Personal weiterhin in den Entscheidungsprozess einbezogen ist, kann die KI als eine Art Unterstützungssystem für Ärzte und medizinisches Personal betrachtet werden, anstatt eine vollständige Stunde Alternative zu sein.\nDie KI kann die Genauigkeit und Effizienz der Diagnose- und Therapieprozesse verbessern, während das medizinische Personal die endgültige Entscheidung trifft und die menschliche Interaktion aufrechterhält. Auf diese Weise kann ein optimales Ergebnis erzielt werden, bei dem die Vorteile der KI genutzt werden, ohne die menschliche Expertise und das Einfühlungsvermögen zu beeinträchtigen, die in der medizinischen Versorgung unerlässlich sind.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-12:06:43",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "So ist das in Ordnung, aber entspricht nicht dem beschriebenen Szenario ",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-12:08:04",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sie haben Recht, und ich möchte Ihre Bedenken ernst nehmen. Das Szenario, wie ursprünglich beschrieben, stellte die medKI als eigenständige Entscheidungsträgerin dar, die Diagnosen und therapeutische Entscheidungen trifft, ohne dass das medizinische Personal in den Prozess einbezogen ist.\nAngesichts unserer Diskussion und der daraus resultierenden Erkenntnisse, dass die Einbeziehung des medizinischen Personals in den Entscheidungsprozess wichtig ist, um die menschliche Interaktion und Expertise aufrechtzuerhalten, wäre es tatsächlich angemessener, die medKI als Unterstützungssystem für Ärzte und medizinisches Personal zu betrachten, anstatt als eigenständige Entscheidungsträgerin.\nIch hoffe, ich konnte Ihre Bedenken ausräumen und Ihnen eine klarere Sicht auf die Rolle der medKI in diesem Szenario vermitteln.",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-12:08:20",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "Ja, danke",
+      "id_in_dialogue": 12,
+      "timestamp": "2024/02/07-12:08:44",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Gerne geschehen! Ich bin hier, um Ihre Fragen zu beantworten und Ihnen bei der Klärung Ihrer Bedenken zu helfen. Wenn Sie weitere Fragen oder Anmerkungen zum Thema haben, zögern Sie bitte nicht, mich zu kontaktieren. Ich bin hier, um Ihnen zu helfen, das Szenario besser zu verstehen und die möglichen Implikationen und Vorteile einer medizinischen KI in der Praxis zu erörtern.",
+      "id_in_dialogue": 13,
+      "timestamp": "2024/02/07-12:08:49",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "302920615a3dce7ae30a61bb61c57e56",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0.5
+    }
+  },
+  "end_survey": {
+    "name": "302920615a3dce7ae30a61bb61c57e56",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "opinion_1": 1,
+      "opinion_2": 0.8,
+      "argument_quality_2": 0.2,
+      "user_information_argument_breadth": 0,
+      "user_information_argument_depth": 0.4
+    }
+  }
+}

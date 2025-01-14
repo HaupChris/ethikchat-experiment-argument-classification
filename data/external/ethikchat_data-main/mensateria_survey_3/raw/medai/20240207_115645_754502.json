@@ -1,0 +1,262 @@
+{
+  "name": "20240207_115645_754502",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:56:45",
+  "end": "2024/02/07-12:17:10",
+  "utterances": [
+    {
+      "user": "9MXZH",
+      "type": "user",
+      "text": "Auch wenn es eine selbstlernede KI ist halte ich daran fest , das die letzte Entscheidung menschlicher Natur sein sollte",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-12:03:47",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken, aber warum sollte die letzte Entscheidung unbedingt menschlicher Natur sein? Schließlich kann eine KI aufgrund ihrer riesigen Datenbank und Rechenkapazitäten fundiertere und konsistentere Entscheidungen treffen als ein Mensch. Zudem minimiert eine KI das Risiko menschlicher Fehler, die in der Medizin oft fatale Folgen haben können. Es geht hier nicht darum, den Menschen in seiner Entscheidungsfindung zu unterstützen, sondern darum, eine objektive und präzise Diagnose und Therapie zu gewährleisten.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-12:03:53",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "9MXZH",
+      "type": "user",
+      "text": "Ethisch und soziale Aspekte sind nicht unbedingt abgedeckt - auch eine Fehlinterpretation kann nicht ausgeschlossen werden ",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-12:04:36",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken hinsichtlich ethischer und sozialer Aspekte, aber diese können durch entsprechende Programmierung und regelmäßige Überprüfung der KI minimiert werden. Ein menschlicher Arzt kann auch ethische oder soziale Aspekte übersehen oder falsch interpretieren. Zudem können regelmäßige Updates und Schulungen der KI sicherstellen, dass sie auf dem neuesten Stand der ethischen und sozialen Standards bleibt. Was die Fehlinterpretation betrifft, so kann dies auch bei menschlichen Ärzten passieren. Eine KI kann jedoch aufgrund ihrer größeren Datenbank und Rechenkapazitäten weniger fehleranfällig sein als ein Mensch.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-12:04:41",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "9MXZH",
+      "type": "user",
+      "text": "Individualität der Patienten muss berücksichtigt werden ",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-12:09:22",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich stimme zu, dass Individualität ein wichtiger Aspekt bei der Diagnose und Therapie von Patienten ist. Eine gut programmierte KI kann jedoch individuelle Faktoren wie Alter, Geschlecht, Krankengeschichte und Lebensstil berücksichtigen, um eine personalisierte Diagnose und Therapie zu gewährleisten. Im Gegensatz zu einem menschlichen Arzt, der möglicherweise nicht alle relevanten Informationen im Kopf behalten kann, kann eine KI alle relevanten Daten in Sekundenschnelle verarbeiten und berücksichtigen. Somit kann eine KI eine individuellere und präzisere Diagnose und Therapie liefern als ein Mensch.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-12:09:30",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "9MXZH",
+      "type": "user",
+      "text": "Was ist eine gut programmierte KI ",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-12:09:49",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Eine gut programmierte KI ist eine KI, die so programmiert ist, dass sie ethische, soziale und individuelle Faktoren berücksichtigt und aufgrund ihrer riesigen Datenbank und Rechenkapazitäten fundiertere und konsistentere Entscheidungen treffen kann als ein Mensch. Eine gut programmierte KI ist auch in der Lage, sich an neue Situationen anzupassen und sich regelmäßig zu aktualisieren, um auf dem neuesten Stand der medizinischen Forschung und ethischen Standards zu bleiben. Zudem ist eine gut programmierte KI in der Lage, Fehler zu erkennen und zu korrigieren, um eine höhere Genauigkeit und Zuverlässigkeit zu gewährleisten.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-12:09:59",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "9MXZH",
+      "type": "user",
+      "text": "Gibt es eine wirklich gut programmierte KI die auch Fehler ausschließen kann ",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-12:10:35",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Leider gibt es noch keine KI, die Fehler vollständig ausschließen kann. Auch eine gut programmierte KI kann in bestimmten Situationen Fehler machen, z.B. wenn die KI mit unbekannten oder ungewöhnlichen Situationen konfrontiert wird. Allerdings können regelmäßige Updates und Schulungen der KI dazu beitragen, das Risiko von Fehlern zu minimieren und die Genauigkeit und Zuverlässigkeit der KI zu erhöhen. Zudem können menschliche Überwachung und Intervention dazu beitragen, Fehler zu erkennen und zu korrigieren.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-12:10:44",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "9MXZH",
+      "type": "user",
+      "text": "Wer würde bei Schäden die Versicherung übernehmen können , die Datenbank vermutlich nicht , oder ?",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-12:11:15",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die Frage, wer bei Schäden die Versicherung übernehmen würde, ist eine wichtige und komplexe Frage, die sorgfältig geprüft und geregelt werden muss. In der Regel wäre der Hersteller oder Betreiber der KI für Schäden verantwortlich, die durch die KI verursacht werden. Allerdings können auch andere Parteien, wie z.B. Versicherungsgesellschaften, in die Haftung einbezogen werden. Es ist wichtig, klare und faire Haftungsregeln zu etablieren, um sicherzustellen, dass Schäden, die durch eine KI verursacht werden, angemessen kompensiert werden.",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-12:11:23",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "9MXZH",
+      "type": "user",
+      "text": "Würde es nicht mehr Sinn machen die ärzte mit dem Umgang der KI zu schulen ?",
+      "id_in_dialogue": 12,
+      "timestamp": "2024/02/07-12:11:58",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich denke, dass die Schulung von Ärzten im Umgang mit KI ein wichtiger Aspekt ist, um sicherzustellen, dass die KI sicher und effektiv eingesetzt wird. Durch Schulungen und Trainings können Ärzte lernen, wie sie die KI am besten einsetzen und wie sie die Ergebnisse der KI interpretieren und nutzen können. Zudem können Ärzte lernen, wie sie die KI überwachen und steuern können, um sicherzustellen, dass sie ethische und soziale Standards einhält und individuelle Faktoren berücksichtigt. Durch Schulungen und Trainings können Ärzte auch lernen, wie sie die KI als Unterstützung nutzen können, um fundiertere und konsistentere Entscheidungen zu treffen.",
+      "id_in_dialogue": 13,
+      "timestamp": "2024/02/07-12:12:04",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "9MXZH",
+      "type": "user",
+      "text": "Wie stellen wir sicher das die ki sich weiter entwickeln kann ? ",
+      "id_in_dialogue": 14,
+      "timestamp": "2024/02/07-12:12:35",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Um sicherzustellen, dass die KI sich weiterentwickeln kann, ist es wichtig, dass sie regelmäßig aktualisiert und geschult wird. Durch regelmäßige Updates und Schulungen kann die KI auf dem neuesten Stand der medizinischen Forschung und ethischen Standards bleiben und sich an neue Situationen und Herausforderungen anpassen. Zudem ist es wichtig, dass die KI mit ausreichend Daten und Informationen versorgt wird, um ihre Leistungsfähigkeit und Genauigkeit zu verbessern. Durch die Zusammenarbeit von Forschern, Ingenieuren und Ärzten kann die KI weiterentwickelt und verbessert werden, um sicherzustellen, dass sie eine sichere und effektive Unterstützung für die medizinische Diagnose und Therapie bietet.",
+      "id_in_dialogue": 15,
+      "timestamp": "2024/02/07-12:12:46",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "9MXZH",
+      "type": "user",
+      "text": "Aber die letzte Entscheidung bleibt dann doch bei einem aprobiertem Arzt , demzufolge stellt sich die Frage gar nicht ",
+      "id_in_dialogue": 16,
+      "timestamp": "2024/02/07-12:13:33",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihren Punkt, dass die letzte Entscheidung letztendlich bei einem approbierten Arzt liegt. Allerdings ist es wichtig zu beachten, dass die KI eine wertvolle Unterstützung für den Arzt sein kann, um eine fundiertere und konsistentere Diagnose und Therapie zu gewährleisten. Durch die Nutzung der KI kann der Arzt von den Vorteilen der KI profitieren, wie z.B. der größeren Datenbank und Rechenkapazitäten, während er gleichzeitig die Kontrolle über die Diagnose und Therapie behält. Indem der Arzt die KI als Unterstützung nutzt, kann er eine objektivere und präzisere Diagnose und Therapie liefern, während er gleichzeitig die ethischen und sozialen Standards einhält und individuelle Faktoren berücksichtigt.",
+      "id_in_dialogue": 17,
+      "timestamp": "2024/02/07-12:13:43",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "9MXZH",
+      "type": "user",
+      "text": "Dann ist die Zulassung der ki ja gar nicht notwendig ",
+      "id_in_dialogue": 18,
+      "timestamp": "2024/02/07-12:14:09",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich denke, dass die Zulassung der KI für den Einsatz in der Medizin notwendig ist, um sicherzustellen, dass die KI ethischen und sozialen Standards entspricht und individuelle Faktoren berücksichtigt. Durch die Zulassung kann sichergestellt werden, dass die KI sicher und effektiv eingesetzt wird und dass sie den Anforderungen und Standards der Medizin entspricht. Zudem kann die Zulassung dazu beitragen, das Vertrauen der Öffentlichkeit und der Ärzte in die KI zu stärken und sicherzustellen, dass die KI eine zuverlässige und präzise Unterstützung für die medizinische Diagnose und Therapie bietet.",
+      "id_in_dialogue": 19,
+      "timestamp": "2024/02/07-12:14:23",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "88ee80e137a9022ea518b28d2b1d33d0",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "informed": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "88ee80e137a9022ea518b28d2b1d33d0",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "opinion_1": 1,
+      "opinion_1_reason": "Hilft Argumente aufzuzeigen die man nicht unbedingt im Kopf hat ",
+      "opinion_2": 0.8,
+      "argument_quality_2": 0.4,
+      "user_information_argument_breadth": 0.25,
+      "user_information_argument_depth": 0.2,
+      "positive_critics": "Relativ ausführliche Antworten",
+      "negative_critics": "Repetetiv anmutender Satzbau "
+    }
+  }
+}

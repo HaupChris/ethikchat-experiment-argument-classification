@@ -1,0 +1,84 @@
+{
+    "text": "Nein, KI sollte niemals als Ersatz für Ärzt:innen dienen, sondern eher als Unterstützung, denn die Zwischenmenschlichkeit ist für Kommunikation sehr wichtig.\n\nAndererseits: Es ist davon auszugehen, dass das Vertrauen der Patient:innen mit steigender Leistung der KI ebenso steigen wird. Im Übrigen: Die KI kann sowohl effizienter mit vielen Daten umgehen als auch effizienter trainiert werden als Ärzt:innen.\n\nJa das ist richtig, das sind die Vorteile einer KI. Aber kann eine KI auch deine Hand halten oder dir ein Lächeln schenken?\n\nDas verstehe ich. Weiterhin ungeklärt bleibt: Eine KI liefert gleichbleibend gute Ergebnisse. Anders als Ärzt:innen steht sie nicht unter dem Einfluss äußerer Faktoren, wie zum Beispiel Stress.\n\nJa, und deswegen finde ich, dass eine KI durchaus als Entscheidungshilfe für Ärzt:innen dienen kann. Aber es ist noch schwer vorstellbar, dass die KI:in auch stets das richtige Maß an Meschlichkeit findet eine schwierige Diagnose zu überbringen\n\nDas verstehe ich. Fallen dir noch weitere Argumente ein? Der Einsatz von KI ist unter mehreren Gesichtspunkten kostengünstiger. Es können unter anderem Personalkosten eingespart werden, wenn die KI Arbeiten von Ärzt:innen übernehmen kann.\n\n",
+    "annotations": [
+        { "begin": 0, "end": 157, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 0, "user": "5b8606b26aa965a09936fc1e71c5a552", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 0, "end": 157, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K14" } },
+        { "begin": 159, "end": 408, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 1, "user": "8dc12c0ff92e2a8fb466d5b13af71e12", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 159, "end": 173, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 173, "end": 287, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K14-Aa" } },
+        { "begin": 287, "end": 299, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 299, "end": 408, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P2" } },
+        { "begin": 410, "end": 533, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 2, "user": "5b8606b26aa965a09936fc1e71c5a552", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 410, "end": 533, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K14" } },
+        { "begin": 535, "end": 728, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 3, "user": "8dc12c0ff92e2a8fb466d5b13af71e12", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 535, "end": 553, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 553, "end": 581, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 581, "end": 728, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P4" } },
+        { "begin": 730, "end": 974, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 4, "user": "5b8606b26aa965a09936fc1e71c5a552", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 730, "end": 974, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K14" } },
+        { "begin": 976, "end": 1214, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 5, "user": "8dc12c0ff92e2a8fb466d5b13af71e12", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 976, "end": 994, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 994, "end": 1033, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 1033, "end": 1214, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P5" } },
+        { "begin": 0, "end": 1216, "type": "de.uniwue.ethik-ki-chats.Dialogue", "features": { "name": "210525_1801_7319", "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE", "start": "2021/05/25-18:01:00", "end": "2021/05/25-18:42:00" } },
+        { "begin": 0, "end": 1216, "type": "de.uniwue.ethik-ki-chats.StartSurvey", "features": { "name": "5b8606b26aa965a09936fc1e71c5a552", "agreement": 1.0 } },
+        { "begin": 0, "end": 1216, "type": "de.uniwue.ethik-ki-chats.EndSurvey", "features": { "name": "5b8606b26aa965a09936fc1e71c5a552", "agreement": 0.25, "opinion": "", "text_like": "", "text_dislike": "die Chatplattform könnte schneller antworten. die wartezeiten waren etwas lang" } }
+    ],
+    "types": [
+        {
+            "name": "de.uniwue.ethik-ki-chats.Template",
+            "features": [
+                { "name": "label", "range": "RANGE_PRIMITIVE" },
+                { "name": "incorrect", "range": "RANGE_PRIMITIVE" },
+                { "name": "difficult", "range": "RANGE_PRIMITIVE" },
+                { "name": "multiple", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        { "name": "de.uniwue.ethik-ki-chats.Introduction", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Transition", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Other", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Outro", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        {
+            "name": "de.uniwue.ethik-ki-chats.Dialogue",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "szenario", "range": "RANGE_PRIMITIVE" },
+                { "name": "start", "range": "RANGE_PRIMITIVE" },
+                { "name": "end", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.StartSurvey",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "agreement", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.EndSurvey",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "agreement", "range": "RANGE_PRIMITIVE" },
+                { "name": "opinion", "range": "RANGE_PRIMITIVE" },
+                { "name": "text_like", "range": "RANGE_PRIMITIVE" },
+                { "name": "text_dislike", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.UserUtterance",
+            "features": [
+                { "name": "id_in_dialogue", "range": "RANGE_PRIMITIVE" },
+                { "name": "user", "range": "RANGE_PRIMITIVE" },
+                { "name": "timestamp", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.ExpertUtterance",
+            "features": [
+                { "name": "id_in_dialogue", "range": "RANGE_PRIMITIVE" },
+                { "name": "user", "range": "RANGE_PRIMITIVE" },
+                { "name": "timestamp", "range": "RANGE_PRIMITIVE" }
+            ]
+        }
+    ]
+}

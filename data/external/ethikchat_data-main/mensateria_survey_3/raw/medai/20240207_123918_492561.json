@@ -1,0 +1,236 @@
+{
+  "name": "20240207_123918_492561",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-12:39:18",
+  "end": "2024/02/07-12:54:01",
+  "utterances": [
+    {
+      "user": "AJMSU",
+      "type": "user",
+      "text": "Roboter können zwischenmenschliches nicht wahrnehmen ",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-12:40:03",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, das ist richtig. Allerdings ist die Fähigkeit, zwischenmenschliche Fähigkeiten wahrzunehmen, nicht unbedingt notwendig, um eine genaue Diagnose und Therapie zu stellen. Die medKI kann aufgrund von objektiven Daten, Symptomen und Labortestergebnissen eine Diagnose stellen und eine Behandlung vorschlagen. Darüber hinaus werden die Entscheidungen der medKI von medizinischem Personal an die Patienten kommuniziert, das in der Lage ist, zwischenmenschliche Fähigkeiten zu nutzen, um die Entscheidungen zu erklären und zu vermitteln.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-12:40:08",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "AJMSU",
+      "type": "user",
+      "text": "Datensicherheit und Privatsphäre ",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-12:41:17",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Absolut, Datensicherheit und Privatsphäre sind wichtige Bedenken, die berücksichtigt werden müssen. Allerdings können diese Bedeutungen durch angemessene Sicherheitsmaßnahmen und Datenschutzrichtlinien adressiert werden. Die Vorteile einer genauen und konsistenten medKI-Diagnose und -Behandlung können die Bedenken überwiegen, solange die Sicherheit und der Schutz der Patientendaten gewährleistet sind.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-12:41:21",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "AJMSU",
+      "type": "user",
+      "text": "Die Genauigkeit der Diagnose",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-12:41:48",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die Genauigkeit der Diagnose ist ein entscheidender Faktor. Eine medKI kann in der Lage sein, eine genauere und konsistentere Diagnose zu stellen als ein menschlicher Arzt, da sie nicht durch Faktoren wie Müdigkeit, Emotionen oder Vorurteile beeinflusst wird. Die medKI kann auch auf eine größere Menge an medizinischem Wissen und Forschungsergebnissen zugreifen, was zu einer verbesserten Diagnosegenauigkeit führen kann.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-12:41:55",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "AJMSU",
+      "type": "user",
+      "text": "Wer haftet wenn die KI einen Fehler macht?",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-12:42:22",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die Haftung ist ein wichtiges Thema, wenn es um die Verwendung von medKI geht. In diesem Szenario könnte die Haftung zwischen dem Hersteller der medKI, dem medizinischen Personal, das die Entscheidungen der medKI an die Patienten weitergibt, und der Einrichtung, in der die medKI verwendet wird, aufgeteilt werden. Es wäre wichtig, klare Richtlinien und Verantwortlichkeiten für die Haftung festzulegen, um sicherzustellen, dass die Patienten angemessen geschützt sind und dass es Rechenschaftspflicht für Fehler gibt.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-12:42:29",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "AJMSU",
+      "type": "user",
+      "text": "Inwiefern kommt der Patient physisch in Kontakt mit der KI oder dem Roboter?",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-12:43:42",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Im vorgeschlagenen Szenario hat der Patient keinen direkten physischen Kontakt mit der medKI oder einem Roboter. Die medKI ist ein softwarebasiertes System, das in Untersuchungszentren verwendet wird, um Diagnosen und therapeutische Entscheidungen zu treffen. Das medizinische Personal sammelt Daten von den Patienten und gibt diese an die medKI weiter, die dann eine Diagnose und Behandlungsempfehlung bereitstellt. Das medizinische Personal ist dafür verantwortlich, die Entscheidungen der medKI an die Patienten zu kommunizieren und sicherzustellen, dass sie verstanden werden.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-12:43:50",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "AJMSU",
+      "type": "user",
+      "text": "Konfirmation Bias ",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-12:44:49",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Bestätigungsverzerrung, oder Confirmation Bias, ist ein Phänomen, bei dem Menschen Informationen so interpretieren, dass sie ihre vorherigen Überzeugungen bestätigen. Diese Verzerrung kann bei menschlichen Ärzten auftreten, die bestimmte Diagnosen oder Behandlungen bevorzugen, auch wenn die Beweise dagegen sprechen. Eine medKI hingegen ist nicht anfällig für Bestätigungsverzerrungen, da sie auf objektiven Daten und Fakten basiert und nicht durch menschliche Emotionen oder Vorurteile beeinflusst wird.",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-12:44:55",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "AJMSU",
+      "type": "user",
+      "text": "Aber in wiefern beeinflusst das Ergebnis der KI in diesem Fall die Menschen mit seinen vorgeschlagenen Diagnosen",
+      "id_in_dialogue": 12,
+      "timestamp": "2024/02/07-12:45:38",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die Ergebnisse der medKI können die Menschen insofern beeinflussen, als dass sie als Grundlage für die Diagnose und Behandlung von Patienten dienen. Die medKI kann eine genauere und konsistentere Diagnose stellen als ein menschlicher Arzt, was zu einer verbesserten Patientenversorgung führen kann. Allerdings ist es wichtig, dass das medizinische Personal in der Lage ist, die Entscheidungen der medKI an die Patienten zu kommunizieren und sicherzustellen, dass sie verstanden werden, um mögliche Bedenken oder Missverständnisse zu klären.",
+      "id_in_dialogue": 13,
+      "timestamp": "2024/02/07-12:45:43",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "AJMSU",
+      "type": "user",
+      "text": "Wie stark wird sich auf die KI verlassen? Was passiert wenn die KI ausfällt?",
+      "id_in_dialogue": 14,
+      "timestamp": "2024/02/07-12:46:59",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die Abhängigkeit von der medKI hängt von der Implementierung und Nutzung in den Untersuchungszentren ab. Es ist wichtig, dass das medizinische Personal die Entscheidungen der medKI als Unterstützung und nicht als Ersatz für ihr eigenes Fachwissen und Urteilsvermögen betrachtet. Wenn die medKI ausfällt, sollte das medizinische Personal in der Lage sein, auf alternative Methoden zur Diagnose und Behandlung von Patienten zurückzugreifen. Es ist auch wichtig, Redundanzen und Backup-Systeme einzurichten, um Ausfallzeiten zu minimieren und die Kontinuität der Patientenversorgung sicherzustellen.",
+      "id_in_dialogue": 15,
+      "timestamp": "2024/02/07-12:47:11",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "AJMSU",
+      "type": "user",
+      "text": "Hat die KI die Meinung der KI das gleiche Gewicht wie die eines Arzt ",
+      "id_in_dialogue": 16,
+      "timestamp": "2024/02/07-12:50:07",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die Meinung der medKI und die eines menschlichen Arztes haben unterschiedliches Gewicht, da sie auf unterschiedlichen Grundlagen beruhen. Die medKI basiert auf softwarebasierten Algorithmen und objektiven Daten, während ein menschlicher Arzt auf klinischer Erfahrung, Fachwissen und Urteilsvermögen beruht. Es ist wichtig, beide Meinungen in die Diagnose und Behandlung von Patienten einzubeziehen, um eine umfassende und fundierte Entscheidung zu treffen. Das medizinische Personal sollte die Entscheidungen der medKI als Unterstützung und nicht als Ersatz für ihr eigenes Fachwissen und Urteilsvermögen betrachten.",
+      "id_in_dialogue": 17,
+      "timestamp": "2024/02/07-12:50:20",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "4e8e8858f76d58c608d01a93e627721f",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0
+    }
+  },
+  "end_survey": {
+    "name": "4e8e8858f76d58c608d01a93e627721f",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "opinion_1": 0,
+      "opinion_2": 0.5,
+      "argument_quality_2": 0.4,
+      "user_information_argument_breadth": 0,
+      "user_information_argument_depth": 0.2
+    }
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "name": "20240207_121739_203176",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-12:17:39",
+  "end": "2024/02/07-12:40:17",
+  "utterances": [
+    {
+      "user": "QBA7N",
+      "type": "user",
+      "text": "Die KI verfügt über vergleichbares Wissen (oder sogar mehr), das auch ein menschlicher Arzt hat.",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-12:19:33",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Selbst wenn die medKI über ein vergleichbares oder sogar größeres Wissen als ein menschlicher Arzt verfügt, bedeutet das nicht, dass sie ethisch unbedenklich eigenständige Diagnose- und Therapie-Entscheidungen treffen sollte. Schließlich können medizinische Entscheidungen nicht nur auf Wissen basieren, sondern müssen auch die individuellen Umstände des Patienten berücksichtigen, wie z.B. seine persönlichen Vorlieben, Ängste und Werte. Dies sind Aspekte, die eine KI nicht angemessen bewerten kann.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-12:19:42",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "QBA7N",
+      "type": "user",
+      "text": "Warum nicht? Auch diese Umstände können prinzipiell vom Medizinischen Personal erfasst werden. Ebenso gibt es Fälle, in denen der Behandelnde selbst ablehnen kann, also liegt die Entscheidung so oder so am Ende beim Patienten.",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-12:22:30",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, die medizinischen Fachkräfte können die individuellen Umstände der Patienten erfassen und diese Informationen an die medKI weitergeben. Aber die finale Entscheidung liegt dann immer noch bei der KI, ohne dass ein menschlicher Arzt das letzte Wort hat. Dies kann problematisch sein, da die KI möglicherweise nicht in der Lage ist, die Komplexität menschlicher Emotionen und Situationen angemessen zu bewerten. Ein menschlicher Arzt könnte diese Nuancen besser erfassen und in seine Entscheidungsfindung einbeziehen.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-12:22:37",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "QBA7N",
+      "type": "user",
+      "text": "Umgekehrt könnte die KI allerdings auch objektiver Diagnosen stellen, da ihr eben das emotionale Bias fehlt.",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-12:24:37",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Das ist richtig, die KI könnte objektivere Diagnosen stellen, da sie frei von emotionalen Bias ist. Allerdings könnte dies auch zu einer Überdiagnostik führen, da die KI nicht zwischen klinisch relevanten und irrelevanten Befunden unterscheiden kann. Ein menschlicher Arzt hingegen kann diese Unterscheidung treffen und so unnötige Untersuchungen und Behandlungen vermeiden.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-12:24:43",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "QBA7N",
+      "type": "user",
+      "text": "Warum sollte ein menschlicher Arzt diese Entscheidung besser treffen können als eine KI. Idealerweise trifft der Arzt seine Entscheidung nach Fakten und unabhängig von Emotionen, und im Bereich Fakten und Wissen ist eine solch zukünftige KI dem Arzt nach Szenario ja nicht unterlegen ",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-12:26:58",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sie haben Recht, dass ein idealer menschlicher Arzt seine Entscheidungen auf Fakten und unabhängig von Emotionen treffen sollte. Allerdings ist die Realität oft komplexer und menschliche Ärzte können von Emotionen beeinflusst werden, auch wenn sie sich bemühen, objektiv zu sein. Selbst wenn die medKI im Bereich Fakten und Wissen dem menschlichen Arzt nicht unterlegen ist, fehlt ihr die Fähigkeit, menschliche Emotionen und Situationen angemessen zu bewerten. Dies kann zu Fehldiagnosen und unangemessenen Behandlungen führen, die schwerwiegende Folgen für die Patienten haben können.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-12:27:05",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "QBA7N",
+      "type": "user",
+      "text": "Wir reden ja aber von normalen medizinischen Eingriffen, nicht von Psychatrie. Dementsprechend ist ja der Patient im Vollbesitz seiner Geistigen Kräfte und kann im Falle einer unangemessenen Behandlung (aus emotionaler Sicht) Einspruch erheben ",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-12:29:27",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Selbst wenn wir von normalen medizinischen Eingriffen und kompetenten Patienten sprechen, kann die fehlende Fähigkeit der KI, menschliche Emotionen und Situationen angemessen zu bewerten, zu Problemen führen. Nehmen wir zum Beispiel den Fall einer Behandlung, die mit einem gewissen Schmerz verbunden ist. Obwohl der Patient informiert ist und einwilligt, kann die KI nicht die Angst und Unbehagen des Patienten während des Eingriffs verstehen und adäquat darauf reagieren. Ein menschlicher Arzt hingegen könnte die Situation besser einschätzen und gegebenenfalls Maßnahmen ergreifen, um das Unbehagen des Patienten zu lindern.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-12:29:40",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "QBA7N",
+      "type": "user",
+      "text": "Aber nach Szenarioschilderung legt die KI nur die Behandlung fest, führt diese aber nicht eigenständig durch. Ebenso kann das medizinische Hilfspersonal diese Nuancen erkennen und der KI mitteilen. Und sobald die KI diese Informationen erhält, sehe ich keinen Grund, dass diese nicht in der Lage sein sollte, die Behandlung aufgrund dieser Daten anzupassen ",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-12:32:41",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sie haben Recht, dass das medizinische Hilfspersonal die Nuancen erkennen und der KI mitteilen kann. Allerdings erhöht dies die Komplexität des Prozesses und die Gefahr von Missverständnissen und Fehlkommunikation. Selbst wenn die KI in der Lage ist, die Behandlung aufgrund dieser Daten anzupassen, kann dies zu Verzögerungen führen, die für den Patienten nachteilig sein können. Zudem kann die KI nicht die gleiche Empathie und menschliche Wärme vermitteln wie ein menschlicher Arzt, was für viele Patienten ein wichtiger Aspekt der medizinischen Versorgung ist.",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-12:32:56",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "QBA7N",
+      "type": "user",
+      "text": "Das ist richtig, dies dies müsste vom Medizinischen Personal übernommen werden. Dennoch können die gleichen Verzögerungen oder Fehlinterpretationen auch bei einem Menschlichen Arzt passieren ",
+      "id_in_dialogue": 12,
+      "timestamp": "2024/02/07-12:34:25",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, Sie haben Recht, dass Verzögerungen und Fehlinterpretationen auch bei menschlichen Ärzten passieren können. Allerdings können menschliche Ärzte in solchen Situationen auf ihre Erfahrung und Intuition zurückgreifen, um die Situation besser einzuschätzen und angemessen zu reagieren. Eine KI hingegen ist auf die Daten und Algorithmen beschränkt, die ihr zur Verfügung stehen, und kann in solchen Situationen möglicherweise nicht die gleiche Flexibilität und Anpassungsfähigkeit zeigen wie ein menschlicher Arzt.",
+      "id_in_dialogue": 13,
+      "timestamp": "2024/02/07-12:34:34",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "QBA7N",
+      "type": "user",
+      "text": "Auch eine KI lernt durch Erfahrung, also sollte eine hinreichend erfahrene KI gleichwertig handeln ",
+      "id_in_dialogue": 14,
+      "timestamp": "2024/02/07-12:35:38",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Eine KI kann tatsächlich durch Machine Learning und andere Techniken aus Erfahrung lernen. Allerdings ist das Lernen einer KI auf die Daten und Algorithmen beschränkt, die ihr zur Verfügung stehen. Ein menschlicher Arzt hingegen kann aus einer Vielzahl von Erfahrungen und Quellen lernen, einschließlich persönlicher Interaktionen mit Patienten, Fortbildungen und Fachliteratur. Zudem kann ein menschlicher Arzt sein Wissen und seine Erfahrung auf neue und unvorhergesehene Situationen anwenden, während eine KI auf die Muster und Korrelationen beschränkt ist, die sie in ihren Trainingsdaten gelernt hat.",
+      "id_in_dialogue": 15,
+      "timestamp": "2024/02/07-12:35:45",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "4ef36db571bbbd47fbb1a5ba450138f7",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "informed": 0.5
+    }
+  },
+  "end_survey": {
+    "name": "4ef36db571bbbd47fbb1a5ba450138f7",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "opinion_1": 0,
+      "opinion_1_reason": "Der Bot hat sich gefühlt sehr auf das Argument der emotionalen Komponente eingeschossen und hat sich bei seiner Argumentation ein wenig im Kreis gedreht ",
+      "opinion_2": 1,
+      "argument_quality_2": 0.6,
+      "user_information_argument_breadth": 0.25,
+      "user_information_argument_depth": 0.5
+    }
+  }
+}

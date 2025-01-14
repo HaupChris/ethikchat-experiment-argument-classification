@@ -1,0 +1,232 @@
+{
+  "name": "210527_1731_4995",
+  "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE",
+  "start": "17:31",
+  "end": "18:19",
+  "utterances": [
+    {
+      "user": "426f33ce864c49a31d568567d27c1524",
+      "type": "user",
+      "text": "Ja, ich finde, dass KI-gestützte Entscheidungsfindung in Zukunft für die Diagnose und Therapie hilfreich sein kann. Allerdings sollten es weiterhin die Menschen sein, welche die Therapie durchführen.",
+      "id_in_dialogue": 0,
+      "true_labels": [
+        "K14"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "8dc12c0ff92e2a8fb466d5b13af71e12",
+      "type": "expert",
+      "text": "Man kann es auch so sehen: Wenn die KI aber nur für solche Diagnosen eingesetzt würde, wäre ihr Anwendungsbereich deutlich geschmälert. ",
+      "id_in_dialogue": 1,
+      "true_labels": [
+        null,
+        "K18-A-P"
+      ],
+      "true_bounds": [
+        [
+          0,
+          27
+        ],
+        [
+          27,
+          136
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "426f33ce864c49a31d568567d27c1524",
+      "type": "user",
+      "text": "Punkte, die für den Einsatz dieser Verfahren sprechen sind vielerlei: Eine KI kann in sekundenschnelle entscheiden, ob ein gutartiger oder bösartiger Tumor vorliegt. Dies kann frühzeitig und relativ sicher festgestellt werden. Sie ermüdet nicht und ist mittlerweile in Teilgebieten wir z.B. der Radiologie mindestens auf dem Niveau eines gutausgebildeten Arztes. ",
+      "id_in_dialogue": 2,
+      "true_labels": [
+        "P13",
+        "P4",
+        "P1"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "8dc12c0ff92e2a8fb466d5b13af71e12",
+      "type": "expert",
+      "text": "Dem würde ich nicht zustimmen. Ein niedriges Stresslevel bei den Anwender:innen der KI ist nicht garantiert, da elektronische Dokumentationssysteme kompliziert sein können. Hast Du schon einmal daran gedacht: Entsprechende Beratungsgespräche würden die Zeitersparnis durch KI allerdings wieder verringern.",
+      "id_in_dialogue": 3,
+      "true_labels": [
+        null,
+        "P4-Aa",
+        null,
+        "K1-Aa-P"
+      ],
+      "true_bounds": [
+        [
+          0,
+          31
+        ],
+        [
+          31,
+          173
+        ],
+        [
+          173,
+          209
+        ],
+        [
+          209,
+          305
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "426f33ce864c49a31d568567d27c1524",
+      "type": "user",
+      "text": "Welchem Teil meiner Argumentation stimmst du nicht zu? Dass der Einsatz von KI-Systemen kompliziert für die Anwender:innen sein kann, ist etwas, dem ich zustimme. Das Personal muss zunächst daraufhin trainiert werden, die neuen Systeme zu bedienen und zu interpretieren.\nZu deinem zweiten Punkt: Beratungsgespräche, die die Entscheidungsfindung bzg. der Therapie zum Gegenstand haben, werden mit Diagnostik durch die KI dann beschleunigt, wenn das Vertrauen in die KI seitens der Patienten entsprechend groß geworden ist.\nD.h., wenn die Patienten die Entscheidung der KI für gut oder sogar besser halten als die Entscheidung eines Arztes.",
+      "id_in_dialogue": 4,
+      "true_labels": [
+        "Schulung Personal für Zeitersparnis",
+        "K14-Aa",
+        "P1"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "8dc12c0ff92e2a8fb466d5b13af71e12",
+      "type": "expert",
+      "text": "Das ist richtig. Ansprechen möchte ich noch: Bei einer KI kann keine Zweitmeinung eingeholt werden, da die KI immer zum selben Ergebnis kommt. Eine Zweitmeinung kann jedoch für das Gefühl der Patient:innen, die richtige Entscheidung zu treffen, wichtig sein.",
+      "id_in_dialogue": 5,
+      "true_labels": [
+        null,
+        null,
+        "K1"
+      ],
+      "true_bounds": [
+        [
+          0,
+          17
+        ],
+        [
+          17,
+          45
+        ],
+        [
+          45,
+          258
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "426f33ce864c49a31d568567d27c1524",
+      "type": "user",
+      "text": "Ja, da sprichst du ein wichtiges Problem an. Das Verhalten der KI ist für den Beobachter nicht nachvollziehbar. Die Kriterien, anhand derer die KI ihre Entscheidungen trifft sind nicht transparent. Es bleibt also immer die Frage, ob man der Entscheidung der KI vertrauen kann. Auch bei großen Datenmengen und hoher Treffergenauigkeit kann es sein, dass sich die KI urplötzlich völlig unvorhersehbar verhält",
+      "id_in_dialogue": 6,
+      "true_labels": [
+        "K2"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "8dc12c0ff92e2a8fb466d5b13af71e12",
+      "type": "expert",
+      "text": "Das stimmt. Ferner: Durch die große Menge gesammelter Daten werden Kliniken interessanter für Cyberangriffe.",
+      "id_in_dialogue": 7,
+      "true_labels": [
+        null,
+        null,
+        "K6"
+      ],
+      "true_bounds": [
+        [
+          0,
+          12
+        ],
+        [
+          12,
+          20
+        ],
+        [
+          20,
+          108
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "426f33ce864c49a31d568567d27c1524",
+      "type": "user",
+      "text": "Falls dies Technologie sich als dermaßen erfolgreich herausstellt, dass sie überall eingesetzt wird könnte es außerdem zu großen Asymmetrien in der Gesellschaft kommen, da sie einer kleinen Gruppe von Patenthaltern und Großinvestoren ein Vermögen beschwert während die große Mehrheit abhängig von solchen Diagnose und Therapieverfahren wird.\nLeider muss ich jetzt den Chat abbrechen, danke für das Gespräch",
+      "id_in_dialogue": 8,
+      "true_labels": [
+        "Gefahr der Monopolisierung"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    }
+  ],
+  "surveys": [
+    {
+      "name": "426f33ce864c49a31d568567d27c1524",
+      "type": "StartSurvey",
+      "result": "weak-agree"
+    },
+    {
+      "name": "426f33ce864c49a31d568567d27c1524",
+      "type": "EndSurvey",
+      "result": "weak-agree",
+      "improvement_suggestions": "",
+      "persuasive_arguments": [
+        [
+          0,
+          true
+        ],
+        [
+          1,
+          true
+        ],
+        [
+          2,
+          true
+        ],
+        [
+          3,
+          true
+        ],
+        [
+          4,
+          true
+        ],
+        [
+          5,
+          true
+        ],
+        [
+          6,
+          true
+        ],
+        [
+          7,
+          true
+        ],
+        [
+          8,
+          true
+        ]
+      ]
+    }
+  ]
+}

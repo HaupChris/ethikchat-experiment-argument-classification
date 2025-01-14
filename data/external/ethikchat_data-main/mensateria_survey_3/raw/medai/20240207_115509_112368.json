@@ -1,0 +1,168 @@
+{
+  "name": "20240207_115509_112368",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:55:09",
+  "end": "2024/02/07-12:00:05",
+  "utterances": [
+    {
+      "user": "95OXF",
+      "type": "user",
+      "text": "Zugänglichkeit",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:56:04",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Danke für Ihr Interesse an diesem Szenario. Lassen Sie uns über Zugänglichkeit sprechen. Obwohl eine medizinische KI in der Lage sein könnte, unabhängige Diagnose- und Therapieentscheidungen zu treffen, gibt es bestimmte Aspekte der menschlichen Interaktion, die sie nicht ersetzen kann. Die Erklärung einer Diagnose und die Beratung über Therapiemöglichkeiten sind komplexe Prozesse, die Empathie, Einfühlungsvermögen und Fingerspitzengefühl erfordern. Eine KI könnte diese menschlichen Qualitäten nicht adäquat ersetzen. Was denken Sie dazu?",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:56:13",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "95OXF",
+      "type": "user",
+      "text": "Das stimmt, eine Kombination mit Fachpersonal wäre gut",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-11:56:39",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich stimme Ihnen zu, dass eine Kombination aus medizinischer KI und fachkundigem medizinischen Personal vorteilhaft sein könnte. Allerdings wirft dies auch ethische Fragen auf. Wer trägt die Verantwortung für Fehldiagnosen oder ungeeignete Behandlungen - die KI oder das medizinische Personal? Zudem könnte die Abhängigkeit von der KI dazu führen, dass das medizinische Personal seine Fähigkeiten und Urteilsvermögen im Laufe der Zeit verliert. Wie stehen Sie zu diesen Bedenken?",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-11:56:47",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "95OXF",
+      "type": "user",
+      "text": "Dilemma Situationen sind bekannt dafür, dass es keine richtige Entscheidung gibt ",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-11:57:38",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Gewiss, Dilemma-Situationen sind komplex und können schwer zu lösen sein. In Bezug auf das Szenario könnte man argumentieren, dass die Verantwortung geteilt werden muss. Das medizinische Personal, das die KI einsetzt, muss sich der Grenzen und Möglichkeiten der KI bewusst sein und die Entscheidungen der KI kritisch hinterfragen. Die KI wiederum muss so programmiert werden, dass sie die Grenzen ihrer Fähigkeiten kennt und situationsbedingt Rückmeldung an das medizinische Personal gibt. Dennoch bleibt die ethische Frage, wer im Falle einer Fehldiagnose oder ungeeigneten Behandlung die Verantwortung trägt. Was halten Sie von dieser Aufteilung der Verantwortung?",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-11:57:45",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "95OXF",
+      "type": "user",
+      "text": "Das Gesundheitswesen als Ganzes",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-11:58:10",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Anmerkung zum Gesundheitswesen als Ganzes ist interessant. In der Tat sollte die Einführung einer medizinischen KI, die unabhängige Diagnose- und Therapieentscheidungen trifft, im Kontext des gesamten Gesundheitssystems betrachtet werden. Es ist wichtig, die potenziellen Vorteile und Risiken abzuwägen und sicherzustellen, dass die Implementierung der KI die Qualität und Zugänglichkeit der medizinischen Versorgung nicht beeinträchtigt, sondern vielmehr verbessert.\nEs ist auch zu berücksichtigen, wie die Einführung einer KI die Arbeitsabläufe und die Rolle des medizinischen Personals verändern könnte. Die KI sollte als Werkzeug betrachtet werden, das die Arbeit des medizinischen Personals ergänzt und unterstützt, anstatt es zu ersetzen.\nWas denken Sie über die Bedeutung des Gesundheitswesens als Ganzes bei der Einführung einer medizinischen KI?",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-11:58:21",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "95OXF",
+      "type": "user",
+      "text": "Abhängigkeit von Tech Firmen",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-11:58:46",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die Abhängigkeit von Technologieunternehmen ist ein weiterer wichtiger Aspekt, den es zu berücksichtigen gilt. Wenn eine medizinische KI von einem Technologieunternehmen bereitgestellt wird, könnte dies zu Abhängigkeitsverhältnissen führen, die wiederum ethische Bedenken aufwerfen.\nEs ist wichtig, sicherzustellen, dass die Kontrolle über die medizinische Versorgung bei den medizinischen Fachkräften und den Patienten liegt und nicht bei den Technologieunternehmen. Die Unternehmen sollten lediglich als Dienstleister fungieren, die ihre Technologie zur Verfügung stellen, um die medizinische Versorgung zu verbessern.\nDie Abhängigkeit von Technologieunternehmen könnte auch die Offenlegung von Patientendaten und die Datensicherheit beeinträchtigen. Es müssen strenge Datenschutzrichtlinien implementiert werden, um sicherzustellen, dass die Patientendaten geschützt sind und nur für diagnostische und therapeutische Zwecke verwendet werden.\nWas halten Sie von den potenziellen Risiken der Abhängigkeit von Technologieunternehmen?<</ASSANT>>",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-11:58:58",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "95OXF",
+      "type": "user",
+      "text": "Sind abzuwägen",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-11:59:17",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, die potenziellen Risiken und Vorteile der Abhängigkeit von Technologieunternehmen müssen sorgfältig abgewogen werden. Es ist wichtig, sicherzustellen, dass die Implementierung einer medizinischen KI, die unabhängige Diagnose- und Therapieentscheidungen trifft, im Einklang mit ethischen Prinzipien und rechtlichen Bestimmungen erfolgt.\nDie Zusammenarbeit zwischen Technologieunternehmen, medizinischen Fachkräften und Regulierungsbehörden ist von entscheidender Bedeutung, um sicherzustellen, dass die medizinische Versorgung durch den Einsatz von KI verbessert wird, ohne die Patientenrechte und die medizinische Autonomie zu beeinträchtigen.\nEs ist auch wichtig, die Öffentlichkeit und die Patienten in den Entscheidungsprozess einzubeziehen, um sicherzustellen, dass ihre Bedenken und Anliegen berücksichtigt werden.\nWas denken Sie über die Bedeutung der Zusammenarbeit und der Beteiligung der Öffentlichkeit bei der Implementierung einer medizinischen KI?",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-11:59:26",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "5eab2ccc6cf9bba3998b8cc769372707",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 1,
+      "informed": 0.5
+    }
+  },
+  "end_survey": {
+    "name": "5eab2ccc6cf9bba3998b8cc769372707",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "opinion_1": 1,
+      "opinion_1_reason": "Neue Perspektiven",
+      "opinion_2": 0.6,
+      "argument_quality_2": 0.8,
+      "user_information_argument_breadth": 1,
+      "user_information_argument_depth": 0.8
+    }
+  }
+}

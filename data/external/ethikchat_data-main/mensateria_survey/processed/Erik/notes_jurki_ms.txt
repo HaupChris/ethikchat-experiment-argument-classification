@@ -1,0 +1,54 @@
+20230130_115812_386445
+
+	Menschen können besser beurteilen
+	- Kein passendes Label, deswegen CON_NZARG
+	
+20230130_120140_782797
+
+	Dafür könnte die KI benutzt werden, allerdings sollte sie nie ein Richter ersetzten, sonderm maximals als Hilfstool verwendet werden dürfen, um Vorurteile und Diskriminierung nicht zu berücksichtigen
+	- Kein passendes Label, deswegen PRO_ZARG
+	
+	Allerdings sind die Informationen, die der Bot zum urteil führen, auch von einem Menschen, die Vorurteile haben
+	- Evtl. Z.K6-1-1 gerade aber CON_ZARG
+	
+
+20230130_121229_258366
+
+	Eine KI würde ich nur als Unterstützungsmaßnahme der Entscheidungsfindung vom Richter akzeptieren
+	- CON_NZARG passt eigtl. zu NZ.K10 gibt es aber hier nicht
+	
+	
+20230130_121256_908288
+	
+	Dies ist eine modernere Lösung und Sie sollten mit dem Fortschritt gehen.
+	- PRO_NZARG da kein passendes Label
+	
+	KI macht das Leben einfacher
+	- PRO_NZARG da kein passendes Label
+	
+	
+20230130_123604_576952
+
+	Außerdem könnten sie eventuell auch konsultativ tätig sein. Also dass der Richter selbst ein Urteil bildet mit der Hilfe der ki.
+	- PRO_NZARG da kein passendes Label
+	
+	
+20230130_124412_728645
+
+	Höchstens zur Unterstützung der Prozesse sollte sie eingesetzt werden
+	- CON_NZARG passt eigtl. zu NZ.K10 gibt es aber hier nicht
+	
+	Deswegen sollte eine endgültige Entscheidung niemals von einer KI übernommen werden 
+	- CON_NZARG passt eigtl. zu NZ.K10 gibt es aber hier nicht
+	
+	
+20230130_133350_613308
+
+	Kompromiss: KI gemeinsam mit Richter:innen einsetzen und nicht entweder oder.
+	- CON_NZARG passt eigtl. zu NZ.K10 gibt es aber hier nicht
+	
+	
+20230130_140913_003081
+
+	Die Entscheidung der ki sollte nicht final gültig sein, ja sie sollte eher das Urteil menschlicher Richter unterstützen 
+	- CON_NZARG passt eigtl. zu NZ.K10 gibt es aber hier nicht

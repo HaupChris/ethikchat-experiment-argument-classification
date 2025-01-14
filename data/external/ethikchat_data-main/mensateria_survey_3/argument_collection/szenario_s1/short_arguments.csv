@@ -1,0 +1,72 @@
+,label,generative_text
+0,Z.P5,[MedKI | KI] ist [kostengünstiger | billiger | preiswerter | günstiger | wirtschaftlicher ] [- | als das [bisherige | aktuelle | derzeitige] [System | Gesundheitssystem | medizinische System]].
+1,Z.P5,[MedKI | KI] lastet [Ressourcen | Geräte | Personal] besser aus.
+2,Z.P5,[MedKI | KI] nutzt [Ressourcen | Geräte | Personal] besser.
+3,Z.P5,[MedKI | KI] [ermöglicht | bedeutet] nur eine [einzige | zentrale | - ] medizinische Anlaufstelle [für Patienten].
+4,Z.P5,[MedKI | KI] deckt die [ganze | gesamte] Medizin ab.
+5,Z.P5,[MedKI | KI] umfasst die [ganze | gesamte] Medizin.
+6,Z.P5,[MedKI | KI] unterstützt eine [ganzheitliche Medizin| ganzheitliche medizinische [Behandlung | Therapie]].
+7,Z.P5,[MedKI | KI] [erspart | vermeidet] [den Besuch | die Behandlung | die Therapie | Konsultationen] bei [verschiedenen | anderen | mehreren] [Ärzten | Fachärzten].
+8,Z.P5,[MedKI | KI] [erspart | vermeidet] Überweisungen an [verschiedene | andere | mehrere] [Ärzte | Fachärzte].
+9,Z.P5,[MedKI | KI] kennt alle Daten eines Patienten.
+10,Z.P5,Die Patientendaten sind nicht auf verschiedene Ärzte verteilt.
+11,Z.P1,[MedKI | KI] ist [rund um die Uhr | immer | jederzeit | auch nachts | auch am Wochenende] [verfügbar | erreichbar].
+12,Z.P4,[MedKI | KI] [vermeidet | verhindert | wirkt entgegen | ist Gegenmaßnahme zu | notwendig wegen] [Ärztemangel | medizinischem Engpass | schlechter medizinischer Versorgung] [- |[- |besonders| insbesondere] in ländlichen Regionen].
+13,Z.P4,[MedKI | KI] ist [notwendig wegen | Gegenmaßnahme zu] [dem demographischen Wandel | der Alterung der Gesellschaft | dem Anstieg der Patientenzahlen | der Zunahme der Patienten | der Zunahme von Krankheiten].
+14,Z.P4,[MedKI | KI] ist eine Antwort auf [ den demographischen Wandel | die Alterung der Gesellschaft | den Anstieg der Patientenzahlen | die Zunahme der Patienten | die Zunahme von Krankheiten].
+15,Z.P2,[MedKI | KI] ist [standardisiert | reproduzierbar | nicht gestresst].
+16,Z.P2,[MedKI | KI] ermüdet nicht.
+17,Z.P2,[MedKI | KI] [hat | kennt] [keinen Stress | keine Ermüdung].
+18,Z.P6,[MedKI | KI] [ist | diagnostiziert | behandelt | therapiert] besser als [durchschnittliche] Ärzte.
+19,Z.P6,[MedKI | KI] [liefert | produziert | berichtet] [genauere | präzisere| bessere] [Ergebnisse | Diagnosen | Therapien].
+20,Z.P6,[MedKI | KI] ist [überprüfbar | transparent].
+21,Z.P6,[MedKI | KI] lernt [ - | schnell] aus [- | ihren] Fehlern.
+22,Z.P6,[MedKI | KI] [garantiert | stellt sicher | gewährleistet | ermöglicht ] eine [qualitätsgesicherte | evidenzbasierte] [Patientenversorgung | Patientenbehandlung].
+23,Z.P3,[MedKI | KI] wird ständig aktualisiert.
+24,Z.P3,[MedKI | KI] ist immer auf dem Stand des aktuellen Wissens.
+25,Z.P3,[MedKI | KI] [empfiehlt | übernimmt] [schnell | jederzeit | immer] die [neusten | aktuellsten | aktuellen | besten | bewährtesten] [Behandlungsmöglichkeiten | Therapien | Behandlungen].
+26,Z.P3,[MedKI | KI] [garantiert | stellt sicher | gewährleistet | ermöglicht] eine auf dem aktuellen Wissensstand befindliche [Patientenversorgung | Patientenbehandlung].
+27,Z.P3,[MedKI | KI] [garantiert | stellt sicher | gewährleistet | ermöglicht] eine [Patientenversorgung | Patientenbehandlung] auf dem aktuellen Wissensstand.
+28,Z.K1,[MedKI | KI] [hat kein Einfühlungsvermögen | ist unpersönlich].
+29,Z.K1,[Maschinen | Computer] [haben kein Einfühlungsvermögen |sind unpersönlich].
+30,Z.K1,[Maschinen | Computer] können [[Kranke| -] Menschen | Patienten] nicht verstehen.
+31,Z.K1,[MedKI | KI] kann [[kranke| -] Menschen | Patienten] nicht verstehen.
+32,Z.K1,"Patienten fühlen sich [nicht verstanden, unverstanden, nicht geborgen] [durch [MedKI | KI | Computer | Maschinen] | -]."
+33,Z.K1,"[[Kranke| -] Menschen | Patienten | Senioren] benötigen [Einfühlungsvermögen |Anteilnahme | Verständnis | Mitgefühl], was [eine [MedKI | KI] | ein Computer | eine Maschine] nicht [vermitteln | erzeugen | bereitstellen | gewährleisten] kann."
+34,Z.K1,[Patienten | Senioren] [fühlen | erhalten | bekommen] keine [menschliche | - ] Zuwendung [durch [MedKI | KI] | Computer | Maschinen | -].
+35,Z.K1,Psychischer Beistand fehlt [bei [MedKI | KI] | bei Computern | bei Maschinen -].
+36,Z.K1,Persönlicher Kontakt [ist wichtig | hilft auch schon | wird erwartet]
+37,Z.K1,[Patienten | Senioren] haben kein Vertrauen [in [MedKI | KI] | Computer | Maschinen | -].
+38,Z.K1,[Patienten | Senioren] vertrauen [[einer | der] [MedKI | KI] | einem Computer | einer Maschine] nicht.
+39,Z.K1,[Menschliche | -] Zuwendung [fehlt | ist nicht vorhanden].
+40,Z.K1,Menschlicher Beistand [fehlt | ist nicht vorhanden].
+41,Z.K1,[Menschliches | -] Einfühlungsvermögen [fehlt | ist nicht vorhanden].
+42,Z.K2,[MedKI | KI] kann nicht alle Lebensumstände [einbeziehen | berücksichtigen | verstehen].
+43,Z.K2,[Computer | Maschinen] können nicht alle Lebensumstände [einbeziehen | berücksichtigen | verstehen].
+44,Z.K2,[Computer | Maschinen] können komplexe Lebensumstände nicht [einbeziehen | berücksichtigen | verstehen].
+45,Z.K2,[Eine [MedKI | KI] | Ein Computer | Eine Maschine] versteht [Patienten | [kranke| -] Menschen] nicht [ganzheitlich | vollständig |  -] in [ seinem | ihrem] Lebensumfeld.
+46,Z.K2,[Eine [MedKI | KI] | ein Computer | eine Maschine] [versteht | berücksichtigt] nicht [den psychischen Anteil von Krankheiten | die Psyche | die Lebensumstünde | das Lebensumfeld].
+47,Z.K3,[Unvermeidliche | Nicht vermeidbare | -] [Fehler | tödliche [Fehler | Fehlentscheidungen |Kunstfehler] | falsche Entscheidungen | Fehlentscheidungen | Kunstfehler] der [MedKI | KI] [ werden nicht akzeptiert | [[führen zu |bewirken] [Vertrauenslust | Skepsis]]].
+48,Z.K3,[Unvermeidliche | Nicht vermeidbare | -] [Fehler | tödliche [Fehler | Fehlentscheidungen |Kunstfehler] | falsche Entscheidungen | Fehlentscheidungen | Kunstfehler] diskreditieren die [MedKI | KI].
+49,Z.K3,[Unvermeidliche | Nicht vermeidbare | -] [Fehler | tödliche [Fehler | Fehlentscheidungen |Kunstfehler] | falsche Entscheidungen | Fehlentscheidungen | Kunstfehler] der [MedKI | KI] [führen zu |bewirken] [Schadenersatzklagen | Kunstfehlerprozesse | Prozesse | juristische [Prozesse | Streitigkeiten] mit [Haftung der [Hersteller | Entwickler] | Hersteller-Haftung | Entwickler-Haftung]].
+50,Z.K3,[Unvermeidliche | Nicht vermeidbare | -] [Fehler | tödliche [Fehler | Fehlentscheidungen |Kunstfehler] | falsche Entscheidungen | Fehlentscheidungen | Kunstfehler] der [MedKI | KI] können |wegen [Schadenersatzklagen | Kunstfehlerprozessen | Prozessen | juristische [Prozesse | Streitigkeiten]] [sehr | -] [teuer | kostspielig] werden.
+51,Z.K3,[Unvermeidliche | Nicht vermeidbare | -] [Fehler | falsche Entscheidungen | Fehlentscheidungen | Kunstfehler] der [MedKI | KI] können zu [sehr | -] [teuren | kostspieligen] [Schadenersatzklagen | Kunstfehlerprozessen | Prozessen | juristische [Prozesse | Streitigkeiten]] führen.
+52,Z.K4,[Fehler | falsche Entscheidungen | Fehlentscheidungen] der [MedKI | KI] [wiederholen sich | sind Strukturfehler | vervielfältigen sich | sind systematisch] [- | und daher [schlimmer | gravierender] als [menschliche | ärztliche] [Fehler | falsche Entscheidungen | Fehlentscheidungen]].
+53,Z.K4,"Wenn die [MedKI | KI] [Fehler | falsche Entscheidungen | Fehlentscheidungen] [macht | trifft], [wiederholen sie sich | sind sie systematisch] [- | und daher [schlimmer | gravierender] als [menschliche | ärztliche] [Fehler | falsche Entscheidungen | Fehlentscheidungen]]"
+54,Z.K5,Eine [MedKI | KI] kann ihre [Entscheidungen | Diagnosen | Therapien | Behandlungen] [nicht gut | schlecht] [erklären | erläutern | vermitteln | begründen].
+55,Z.K5,Eine [MedKI | KI] kann [bei | mit den] [Erklärungen | Erläuterungen | Begründungen] [- | seiner [Entscheidungen | Diagnosen | Therapien | Behandlungen]] nicht [individuell | persönlich] auf die [Patienten | kranken Menschen] eingehen.
+56,Z.K6,"Es ist [unmöglich | unwahrscheinlich], dass eine [MedKI | KI] [jemals | -] [ besser ist als [gute | -] [Ärzte | Mediziner, Doktoren] | [das [durchschnittliche | - ] Niveau | die [durchschnittlichen | -] [Fähigkeiten | Leistungen] ] von [Ärzten | Medizinern | Doktoren] übertrifft]."
+57,Z.K6,Die [MedKI | KI] wird [niemals | nicht] besser sein als [gute | - ] [Ärzte | Mediziner | Doktoren].
+58,Z.K6,Die [MedKI | KI] [muss | soll | sollte] von [Ärzten | Medizinern | Doktoren] überprüft werden.
+59,Z.K6,Die [Entscheidungen | Diagnosen | Therapien | Behandlungen] der [MedKI | KI] [müssen | sollen | sollten] von [Ärzten | Medizinern |Doktoren] überprüft werden.
+60,Z.K6,[MedKI | KI] [soll | darf] nur unterstützend [eingesetzt werden | tätig sein]
+61,Z.K9,Eine [MedKI | KI] ist anfällig für [Hacker | Cyber | böswillige ] [Angriffe | Attacken].
+62,Z.K9,Eine [MedKI | KI] kann nicht [- | dauerhaft] vor [Hacker | Cyber | böswilligen ] [Angriffen | Attacken] geschützt werden.
+63,Z.K9,Eine [MedKI | KI] ist ein [atttraktives | -] Ziel für [Hacker | [Hacker | Cyber | böswillige ] [Angriffe | Attacken] ].
+64,Z.K9,[Eine Manipulation der [MedKI | KI] | ein [Hacker- | Cyber- | böswilliger] Angriff auf die [MedKI | KI] | eine [Hacker- | Cyber- | böswillige] Attacke auf die [MedKI | KI]] hätte [fatale | katastrophale | tödliche | schwerwiegende] [Folgen | Konsequenzen].
+65,Z.K9,Ein [Datendiebstahl | Datenklau] [von Patientendaten | -] [ ist | wäre] [schwerwiegend | gravierend | schlimm | katastrophal].
+66,Z.K9,Die [Daten | Krankheitsdaten | medizinische Daten] von Patienten können [ausgespäht | gestohlen | nicht sicher geschützt] werden.
+67,Z.K18,Bei [[falscher | fehlerhafter] Dateneingabe | [falschem | fehlerhaftem] Input] [macht die [MedKI | KI] [schwerwiegende | gravierende | schlimme | katastrophale] [Fehler | Fehlentscheidungen]. | stellt die [MedKI | KI] [falsche | fehlerhafte] Diagnosen. | verordnet die [MedKI | KI] [falsche | fehlerhafte] [Therapien |Behandlungen]. | [behandelt |diagnostiziert | therapiert] die [MedKI | KI] Patienten [falsch | suboptimal]. | kommt die [MedKI | KI] zu [falschen | fehlerhaften |schlechten] [Diagnosen | Therapien | Ergebnissen | Behandlungen].]
+68,Z.K10,[Senioren | [ältere | viele | die meisten | manche | -] Patienten] [würden eine [MedKI | KI] nicht akzeptieren. | akzeptieren eine [MedKI | KI] nicht. | haben [prinzipielle | grundsätzliche | -] [Bedenken | Vorbehalte] gegenüber einer [MedKI | KI]. | wollen von Ärzten behandelt werden. | misstrauen einer [MedKI | KI]. | haben kein Vertrauen in eine [MedKI | KI]. | sind skeptisch gegenüber einer [MedKI | KI]. | lehnen eine [MedKI | KI] ab. ]
+69,Z.K14,Eine [MedKI | KI] [macht Ärzte arbeitslos | macht [das Berufsbild | den Job] von Ärzten überflüssig].
+70,Z.K16,Eine [MedKI | KI] [erzeugt | bewirkt] eine [fatale | -] Abhängigkeit von [Technik | Computern | Algorithmen | Künstlicher Intelligenz | Geräten | Maschinen | Blechkisten].

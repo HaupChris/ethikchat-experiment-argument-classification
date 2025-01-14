@@ -1,0 +1,209 @@
+{
+  "name": "210525_1747_7867",
+  "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE",
+  "start": "17:47",
+  "end": "19:05",
+  "utterances": [
+    {
+      "user": "aa1bc4cb23182381c914316c6ace6c7a",
+      "type": "user",
+      "text": "Bei Krankheiten gibt es verschiedenste aspekte zu berücksichtigen und entscheidungen zu treffen. Wenn es um die Entscheidung geht welche Patienten leben und welche sterben kann ein Manschlicher Arzt vielleicht sinnvollere entscheidungen treffen",
+      "id_in_dialogue": 0,
+      "true_labels": [
+        "K13"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "05500fb6d2684fc8a8cc6c696b9271c2",
+      "type": "expert",
+      "text": "Das ist richtig. Hast Du schon einmal daran gedacht: Die KI kann sowohl effizienter mit vielen Daten umgehen als auch effizienter trainiert werden als Ärzt:innen.",
+      "id_in_dialogue": 1,
+      "true_labels": [
+        null,
+        null,
+        "P2"
+      ],
+      "true_bounds": [
+        [
+          0,
+          17
+        ],
+        [
+          17,
+          53
+        ],
+        [
+          53,
+          162
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "aa1bc4cb23182381c914316c6ace6c7a",
+      "type": "user",
+      "text": "Ja, ich denke eine KI kann in der medizin durchaus sinnvoll sein und bei den Behandlungen helfen. Ich denke es ist trotzdem schwer alle Krankheiten korrekt zu deuten. Auch Ärzt:innen machen hier Fehler. Und wenn sich einige Parameter nicht so verhalten wie es für bestimmte Krankheiten üblich ist kann es ja zu einer Fehlinterpretation der KI kommen. ",
+      "id_in_dialogue": 2,
+      "true_labels": [
+        "K3"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "05500fb6d2684fc8a8cc6c696b9271c2",
+      "type": "expert",
+      "text": "Das verstehe ich. Fehlerhafte Entscheidungen von Ärzt:innen sind aber auch nicht immer nachvollziehbar, wenn z.B. einfach etwas übersehen oder in der Hektik übergangen wurde. Außerdem muss folgendes beachtet werden: Die erste systematische Meta-Analyse entsprechender Studien hat gezeigt, dass die KI hinsichtlich der Bilddiagnostik bereits auf Augenhöhe mit Ärzt:innen ist.",
+      "id_in_dialogue": 3,
+      "true_labels": [
+        null,
+        "K2-Ag",
+        null,
+        "P1-A-Pa"
+      ],
+      "true_bounds": [
+        [
+          0,
+          18
+        ],
+        [
+          18,
+          175
+        ],
+        [
+          175,
+          216
+        ],
+        [
+          216,
+          374
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "aa1bc4cb23182381c914316c6ace6c7a",
+      "type": "user",
+      "text": "Das ist natürlich ebenfalls richtig. Gerade wenn es darum geht Auffälligkeiten zu finden und zu analysieren kann eine KI sicherlich auf einem sehr hohen Level arbeiten. Nach und nach werden sicher auch viele Sonderfälle von der KI gelernt und gedeutet. Aber kann eine KI auch die Informationen aus Patientengesprächen aufnehmen und verarbeiten? Können Vorerkrankungen erkannt und einbezogen werden? Und wie entscheidet eine KI wie es bei Krankheiten reagiert die einen sehr ähnlichen Symptomverlauf haben aber unterschiedlich behandelt werden müssen?",
+      "id_in_dialogue": 4,
+      "true_labels": [
+        "K14"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "05500fb6d2684fc8a8cc6c696b9271c2",
+      "type": "expert",
+      "text": "Die Menschen werden nicht durch die KI behandelt. Die KI stellt eine Diagnose und empfiehlt eine Therapie. Die anschließende Therapie übernehmen weiterhin Ärzt:innen. Demnach ergibt sich das Problem nicht, dass die KI ein Patientengespräch zu deuten hat. Aufgrund der der KI umfassend zur Verfügung gestellten Daten könnte diese sicherlich auch Vorerkrankungen in die Analyse mit einbeziehen. Hierfür gibt es derzeit allerdings noch keine konkreten Lösungen. Hinsichtlich der unterschiedlichen Behandlungsweise trotz ähnlichem Symptomverlauf ist zu erwarten, dass die KI eine optimale Entscheidung trifft, das heißt sie wird trotz der großen Ähnlichkeiten die kleinen Unterschiede herauslesen können und so zu der jeweilig richtigen Behandlungsmethode kommen.",
+      "id_in_dialogue": 5,
+      "true_labels": [
+        "Einbeziehen von Vorerkrankungen",
+        "optimale Entscheidung bei ähnlichen Symptomen aber unterschiedlichen Behandlungsmethoden",
+        "",
+        ""
+      ],
+      "true_bounds": [],
+      "is_template": false
+    },
+    {
+      "user": "aa1bc4cb23182381c914316c6ace6c7a",
+      "type": "user",
+      "text": "Ich denke in der Zusammenarbeit mit Ärzt:innen ist das eine sehr gute Sache. Ich würde mich wahrscheinlich nur etwas unwohl fühlen wenn keiner die Ergebnisse der KI noch einmal überprüft. Daten können ja genauso fehlerhaft sein bzw. eventuell auch absichtlich oder unabsichtlich verändert werden. Eine Behandlungsempfehlung durch eine KI die durch Ärzt:innen bestätigt und durchgeführt werden kann ich mir jedoch gut vorstellen.",
+      "id_in_dialogue": 6,
+      "true_labels": [
+        "K19"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "05500fb6d2684fc8a8cc6c696b9271c2",
+      "type": "expert",
+      "text": "Dies kann man auch anders sehen. Eine KI ist bereits heute teilweise auf dem Niveau von Fachärzt:innen. Es ist zu erwarten, dass sie mit besser werdender Leistung das Niveau von Fachärzt:innen bald übertrifft. Außerdem muss folgendes beachtet werden: Die erste systematische Meta-Analyse entsprechender Studien hat gezeigt, dass die KI hinsichtlich der Bilddiagnostik bereits auf Augenhöhe mit Ärzt:innen ist.",
+      "id_in_dialogue": 7,
+      "true_labels": [
+        null,
+        "P1",
+        null,
+        "P1-A-Pa"
+      ],
+      "true_bounds": [
+        [
+          0,
+          33
+        ],
+        [
+          33,
+          210
+        ],
+        [
+          210,
+          251
+        ],
+        [
+          251,
+          409
+        ]
+      ],
+      "is_template": true
+    }
+  ],
+  "surveys": [
+    {
+      "name": "aa1bc4cb23182381c914316c6ace6c7a",
+      "type": "StartSurvey",
+      "result": "weak-disagree"
+    },
+    {
+      "name": "aa1bc4cb23182381c914316c6ace6c7a",
+      "type": "EndSurvey",
+      "result": "neutral",
+      "improvement_suggestions": "",
+      "persuasive_arguments": [
+        [
+          0,
+          true
+        ],
+        [
+          1,
+          true
+        ],
+        [
+          2,
+          true
+        ],
+        [
+          3,
+          false
+        ],
+        [
+          4,
+          true
+        ],
+        [
+          5,
+          true
+        ],
+        [
+          6,
+          true
+        ],
+        [
+          7,
+          false
+        ]
+      ]
+    }
+  ]
+}

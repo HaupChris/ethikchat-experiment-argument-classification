@@ -1,0 +1,15 @@
+id, author, utterance, arg_label, arg_label, arg_label
+14:01, 14:31
+0, christian.hauptmann.stud-mail, "In unserem heutigen Gesundheitssystem stehen Ärzte oft unter Stress. Eine KI kann keinen Stress empfinden und liefert daher ihre Ergebnisse auf eine konstanten Niveau. Deshalb sollte sie auch die Entscheidungen fällen.", pro_4
+1, justin.voelkel, "Aber kann die KI auch stets sichere Ergebnisse liefern? Wie sieht es aus, wenn sie eben nur zu einem unsicheren Ergebnis kommt? Soll sie dann trotzdem alleine entscheiden?", unk
+2, christian.hauptmann.stud-mail, "Ich denke hier sollten Wahrscheinlichkeiten mitgeliefert werden und bei einer zu geringen Wahrscheinlichkeit müsste eine zweite Meinung eingeholt werden.", pro_15
+3, justin.voelkel, "Die Frage wäre dann ab welcher Wahrscheinlichkeit eine zweite Meinung eingeholt werden sollte/müsste. Wer sagt, dass die Wahrscheinlichkeit ab bspw. 90% ausreicht, um sich auf das Erg. der KI zu stützen?", unk
+4, christian.hauptmann.stud-mail, "Dazu finden Studien vor einer Zulassung statt. So könnte dann ausgewertet werden, ab welcher Wahrscheinlichkeit die Beurteilung zuverlässig ist.", unk
+5, justin.voelkel, "Und wer haftet, wenn sich die als zuverlässig eingeschätzte Beurteilung im Nachhinein als Fehlerhaft erweist und dem Patienten ein Schaden zugefügt wird?", con_5
+6, christian.hauptmann.stud-mail, "Je nach Einsatzgebiet könnten für Krankenhäuser spezielle Fonds aufgebaut werden. Ebenso ist es denkbar, dass sich bei starker Ausbreitung derartiger KIs eine Sparte für die Versicherungsbranche ergibt.", con_5.1, con_5.2
+7, justin.voelkel, "Das wären Möglichkeiten, um die Hersteller von etwaigen KI nicht von vornherein abzuschrecken. Aber wie verlässlich sind die Ergebnisse der KI, wenn ihr vorab nicht alle Krankheitsbilder beigebracht werden? Die KI kann ja schlecht unbekannte Krankheiten erkennen.", con_8
+8, christian.hauptmann.stud-mail, "Wenn KI eingesetzt wird ist von vornherein klar auf welchen Krankheitsbildern diese trainiert wurde. Für außergewöhnliche Fälle, oder falls Zweifel bestehen, könnten immernoch Experten herangezogen werden.", con_3.1
+9, justin.voelkel, "Ab welchem Punkt ist dann das Ergebnis zuverlässig, ohne das es einer Überprüfung bedarf? Bzw. wie kann sichergestellt werden, dass die KI genügend Krankheitsbilder beigebracht bekommen hat, ohne das auch sehr verbreitete Krankheiten "übersehen" wurden, nur weil die KI eben solche nicht trainiert bekommen hat?", unk
+10, christian.hauptmann.stud-mail, "Ich denke, wie gesagt, dass dazu klinische Studien durchgeführt werden würden. Die Beurteilung, ob die KI zuverlässig genug ist, obliegt dann den Experten.", pro_2
+11, justin.voelkel, "Ok. Wie kann dann im Nachgang verhindert werden, dass die KI falsch dazulernt? Eine KI soll ja eben auch in neuen Situationen anhand der Erfahrungen sich entscheiden.", con_4
+12, christian.hauptmann.stud-mail, "Die ausgelieferten Systeme lernen in der Regel nicht im Betrieb dazu, werden durch neue Daten immer wieder schrittweise nachtrainiert. Dadurch werden nur die passenden Daten ausgewählt.", con_4.1, con_4.2

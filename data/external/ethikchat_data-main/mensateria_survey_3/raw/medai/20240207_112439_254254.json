@@ -1,0 +1,457 @@
+{
+  "name": "20240207_112439_254254",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:24:39",
+  "end": "in progress",
+  "utterances": [
+    {
+      "user": "4sg6h",
+      "type": "user",
+      "text": "Kis können viel mehr daten auf einmal verarbeiten als ein mensch. Somit kann die diagnose mehr fälle miteinbeziehen",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:25:20",
+      "true_labels": [
+        "unidentifiedargument"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "Z.K18-1",
+          0.023279638817763234
+        ],
+        [
+          "Z.P6",
+          0.021163230319178866
+        ],
+        [
+          "Z.P2",
+          0.020565486241972374
+        ],
+        [
+          "Z.P1-1-1",
+          0.01991899343932919
+        ],
+        [
+          "Z.K4-1",
+          0.019614391230036374
+        ],
+        [
+          "Z.P3",
+          0.019130414273323536
+        ],
+        [
+          "Z.K15-1",
+          0.018663632490535077
+        ],
+        [
+          "Z.P3-1-1",
+          0.018520656534587142
+        ],
+        [
+          "Z.P7",
+          0.018014456081977204
+        ],
+        [
+          "Z.P6-1-1",
+          0.017790306791221785
+        ],
+        [
+          "Z.K12-1",
+          0.016943146234985742
+        ],
+        [
+          "Z.K10-2",
+          0.01688571797199986
+        ],
+        [
+          "Z.K2-4",
+          0.016251950666080057
+        ],
+        [
+          "Z.K13-1",
+          0.015396483470444805
+        ],
+        [
+          "Z.K11-1",
+          0.013746394798183615
+        ],
+        [
+          "Z.K16-1",
+          0.013358848855131568
+        ],
+        [
+          "Z.P1",
+          0.013228371292678898
+        ],
+        [
+          "Z.K8-1",
+          0.013004441766929636
+        ],
+        [
+          "Z.K14-1",
+          0.011773688416313611
+        ],
+        [
+          "Z.K5-1",
+          0.010828571012058679
+        ],
+        [
+          "Z.P5",
+          0.010728097572484972
+        ],
+        [
+          "Z.P4",
+          0.010614862563800618
+        ],
+        [
+          "Z.K1-1",
+          0.010489935116543817
+        ],
+        [
+          "Z.K3-2",
+          0.010447790560938166
+        ],
+        [
+          "Z.K3-1-1-1",
+          0.010421213245823234
+        ],
+        [
+          "Z.K3-1",
+          0.010393248109625046
+        ],
+        [
+          "Z.K10-1",
+          0.010383080891650236
+        ],
+        [
+          "Z.K9-1",
+          0.010325350006367678
+        ],
+        [
+          "Z.K6-1",
+          0.010323327149016955
+        ],
+        [
+          "Z.K7-1",
+          0.01005813897213222
+        ],
+        [
+          "Z.K19-1",
+          0.009961285459853475
+        ],
+        [
+          "Z.P1-2-1",
+          0.009345820113661816
+        ],
+        [
+          "Z.P1-1",
+          0.0
+        ],
+        [
+          "Z.P1-2",
+          0.0
+        ],
+        [
+          "Z.P4-1",
+          0.0
+        ],
+        [
+          "Z.P3-1",
+          0.0
+        ],
+        [
+          "Z.P6-1",
+          0.0
+        ],
+        [
+          "Z.P5-1",
+          0.0
+        ],
+        [
+          "Z.K8",
+          0.0
+        ],
+        [
+          "Z.P7-1",
+          0.0
+        ],
+        [
+          "Z.K1",
+          0.0
+        ],
+        [
+          "Z.K2",
+          0.0
+        ],
+        [
+          "Z.K4",
+          0.0
+        ],
+        [
+          "Z.K6",
+          0.0
+        ],
+        [
+          "Z.K15",
+          0.0
+        ],
+        [
+          "Z.K18",
+          0.0
+        ],
+        [
+          "Z.K3",
+          0.0
+        ],
+        [
+          "Z.K3-1-1",
+          0.0
+        ],
+        [
+          "Z.K11",
+          0.0
+        ],
+        [
+          "Z.K12",
+          0.0
+        ],
+        [
+          "Z.K5",
+          0.0
+        ],
+        [
+          "Z.K7",
+          0.0
+        ],
+        [
+          "Z.K10",
+          0.0
+        ],
+        [
+          "Z.K9",
+          0.0
+        ],
+        [
+          "Z.K13",
+          0.0
+        ],
+        [
+          "Z.K14",
+          0.0
+        ],
+        [
+          "Z.K16",
+          0.0
+        ],
+        [
+          "Z.K19",
+          0.0
+        ],
+        [
+          "NZ.K1",
+          0.0
+        ],
+        [
+          "NZ.K1-1",
+          0.0
+        ],
+        [
+          "NZ.K3",
+          0.0
+        ],
+        [
+          "NZ.K3-1",
+          0.0
+        ],
+        [
+          "NZ.K4",
+          0.0
+        ],
+        [
+          "NZ.K4-1",
+          0.0
+        ],
+        [
+          "NZ.K6",
+          0.0
+        ],
+        [
+          "NZ.K6-1",
+          0.0
+        ],
+        [
+          "NZ.K8",
+          0.0
+        ],
+        [
+          "NZ.K8-1",
+          0.0
+        ],
+        [
+          "NZ.K9",
+          0.0
+        ],
+        [
+          "NZ.K9-1",
+          0.0
+        ],
+        [
+          "NZ.K10",
+          0.0
+        ],
+        [
+          "NZ.K10-1",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "RAGBot",
+      "type": "bot",
+      "text": "Obwohl es stimmt, dass eine medKI mehr Daten gleichzeitig verarbeiten kann, sollten wir nicht übersehen, dass die Einführung einer solchen KI auch erhebliche Auswirkungen auf die Arbeitswelt haben wird. Es wird mehr medizinisches Fachpersonal benötigt, um die Daten zu erheben und den Patient:innen die Entscheidungen der medKI zu erklären. Dies könnte zu einem Ungleichgewicht zwischen der Anzahl der medizinischen Fachkräfte und der Anzahl der Patient:innen führen, was die Versorgung beeinträchtigen könnte.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-11:26:00",
+      "true_labels": [
+        "Z.P1-1"
+      ],
+      "true_bounds": [
+        "<Z.K18-1> <Die Abhängigkeit vom medizinischen Fachpersonal ist ein unvermeidlicher Schwachpunkt der medKI. Gegenmaßnahmen sind gute Ausbildung, umfassende Protokollierung und hochwertige technische Ausstattung. Es verbleibt zwar ein Restrisiko, dieses ist aber kleiner als bei ärztlichen Entscheidungen.>\n"
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_24",
+          "intro_25",
+          "intro_27",
+          "intro_32",
+          "intro_26",
+          "intro_23",
+          "intro_28",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": false,
+        "paraphrase": "",
+        "introductions": [
+          "intro_2",
+          "intro_3",
+          "intro_1",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59",
+          "intro_60",
+          "intro_61",
+          "intro_62",
+          "intro_63",
+          "intro_64",
+          "intro_65",
+          "intro_66",
+          "intro_67",
+          "intro_68"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_2",
+          "z_trans_12",
+          "z_trans_11",
+          "z_trans_13",
+          "z_trans_1",
+          "z_trans_4",
+          "z_trans_8",
+          "z_trans_9",
+          "z_trans_10",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [],
+        "preselect_first_argument": false,
+        "second_arguments": [
+          "Z.P1-1",
+          "Z.K18",
+          "Z.K7",
+          "Z.K1",
+          "Z.K2",
+          "Z.K5",
+          "Z.K10",
+          "Z.K3",
+          "Z.K12",
+          "Z.K9",
+          "Z.K8",
+          "Z.K4",
+          "Z.K15",
+          "Z.K11",
+          "Z.K13",
+          "Z.K14",
+          "Z.K16",
+          "Z.P1-2",
+          "Z.K6",
+          "Z.K19"
+        ],
+        "preselect_second_argument": true
+      }
+    }
+  ],
+  "start_survey": {
+    "name": "4f48c9d3409a6df04b8077660e03e46b",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 1,
+      "informed": 0.5
+    }
+  },
+  "end_survey": "not available"
+}

@@ -1,0 +1,221 @@
+prev_labels,type,label,text
+['intro_62'],user,CONSENT,"Ich gebe dir recht, dass es die Erreichbarkeit besser wäre mit KI"
+"['intro_23', 'Z.K4', 'intro_58', 'Z.K4-1']",user,CONSENT,"Ok, da gibt es kein Gegeenarguwmbt"
+"['intro_25', 'Z.K7', 'intro_56', 'Z.K7-1']",user,CONSENT,okay
+"['intro_24', 'Z.K6', 'intro_55', 'Z.K6-1']",user,CONSENT,Stimmt
+['intro_62'],user,CONSENT,Das stimmt
+"['intro_28', 'Z.P5', 'intro_51', 'Z.P5-1']",user,CONSENT,Ja das stimmt
+"['intro_1', 'z_trans_13', 'Z.K7']",user,CONSENT,Ja das stimmt aber
+"['intro_27', 'Z.K1', 'intro_55', 'Z.K1-1']",user,CONSENT,Das finde ich ist eine gute Lösung
+"['intro_1', 'z_trans_11', 'Z.K18']",user,CONSENT,"Das stimmt, Menschen machen auch fehler"
+"['intro_2', 'z_trans_11', 'Z.P5']",user,CONSENT,Ich stimme zu
+"['intro_3', 'z_trans_13', 'Z.P1']",user,CONSENT,Ja das ist ein gutes Argument für KI
+"['intro_32', 'Z.K7', 'intro_56', 'Z.K7-1']",user,CONSENT,richitg
+"['intro_37', 'FAQ.3', 'FAQ.3-1', 'faq_trans_2', 'Z.K5']",user,CONSENT,Ah ok das verstehe ich
+"['intro_1', 'z_trans_13', 'Z.K7']",user,CONSENT,Das stimmt
+"['intro_1', 'z_trans_13', 'Z.K1']",user,CONSENT,Das ist korrekt
+"['intro_1', 'z_trans_13', 'Z.P1-1']",user,CONSENT,Einverstanden
+"['intro_2', 'z_trans_2', 'Z.K18']",user,CONSENT,Das stimmt
+"['intro_27', 'Z.K1', 'intro_55', 'Z.K1-1']",user,CONSENT,Ja
+"['intro_1', 'z_trans_13', 'Z.K7']",user,CONSENT,Da hast du Recht. Das ist ein Argument gegen die ki
+"['intro_3', 'z_trans_2', 'Z.K2']",user,CONSENT,Ja hab ich
+"['intro_27', 'Z.K15', 'intro_49', 'Z.K15-1']",user,CONSENT,okay du hast recht
+['intro_62'],user,CONSENT,Ja
+"['intro_2', 'z_trans_13', 'Z.P1']",user,CONSENT,Das ist natürlich richtig
+['intro_61'],user,CONSENT,ja
+"['intro_3', 'z_trans_2', 'Z.P1-1']",user,CONSENT,Das verstehe ich
+"['intro_1', 'z_trans_2', 'Z.P1']",user,CONSENT,Da stimme ich dir zu
+"['intro_2', 'z_trans_13', 'Z.K5']",user,CONSENT,Ja
+"['intro_23', 'Z.K3', 'intro_51', 'Z.K3-1']",user,CONSENT,Das finde ich auch wichtig.
+"['intro_3', 'z_trans_12', 'Z.K7']",user,CONSENT,Der Meinung bin ich auch.
+"['intro_1', 'z_trans_2', 'Z.K2']",user,CONSENT,Das ist mir bewusst
+['intro_61'],user,CONSENT,Mir ist bewusst das ein MedKi nicht alle Lebensumstände der Patient*innen in die Untersuchung mit einbeziehen
+"['intro_28', 'Z.P5-1', 'intro_6', 'z_trans_11', 'Z.P6']",user,CONSENT,Stimmt daran habe ich noch gar nicht gedachr
+['intro_62'],user,CONSENT,Dein Argument empfinde ich als sinnvoll
+"['intro_2', 'z_trans_12', 'Z.K5']",user,CONSENT,Das stimmt
+['intro_61'],user,CONSENT,Ich stimme dir zu
+"['intro_1', 'z_trans_13', 'Z.K2']",user,DISSENT,"Das ist eine Annahme, irgendwann könnte auch das möglich sein."
+['intro_61'],user,DISSENT,In Zukunft wird das möglich sein.
+['intro_62'],user,DISSENT,Nein
+"['intro_2', 'z_trans_2', 'Z.P3']",user,DISSENT,das finde ich kann nicht die Lösung für das Problem sein
+"['intro_3', 'z_trans_2', 'Z.K18']",user,DISSENT,Das war nicht wirklich meine Frage...
+"['intro_1', 'z_trans_13', 'Z.P1-1']",user,DISSENT,Ich meinte etwas anderss
+"['intro_25', 'Z.K4', 'intro_59', 'Z.K4-1']",user,DISSENT,"Ne, das war nicht das Argument."
+"['intro_2', 'z_trans_13', 'Z.K1']",user,DISSENT,nein
+['intro_61'],user,FAQ.2,Ist KI in der Lage einwandfrei Diagnosen zu stellen?
+"['intro_3', 'z_trans_11', 'Z.P2']",user,FAQ.2,"Allerdings könnte der Mensch über seine Fähigkeiten wachsen, kann das KI auch?"
+['intro_62'],user,FAQ.2,Kann man sich auf die Entscheidungen der medKI verlassen?
+"['intro_32', 'Z.K3', 'intro_52', 'z_trans_2', 'Z.P4']",user,FAQ.3,Wer soll diese KI trainieren? Dafür sind doch auch Ärzte erforderlich
+"['intro_1', 'z_trans_12', 'Z.K2']",user,FAQ.3,Wieso kann das die medki nicht?
+['intro_61'],user,FAQ.3,Wer übernimmt das Training der KI?
+"['intro_25', 'Z.P1-1', 'intro_50', 'Z.P1-1-1']",user,FAQ.3,Kann KI überhaupt jede Möglichkeit mit ein beziehen?
+['intro_61'],user,FAQ.5,Gäbe es dann noch menschliche Ärzte bzw. Mediziner?
+"['intro_25', 'NZ.K10', 'intro_10', 'NZ.K10-1', 'z_trans_1', 'Z.P1']",user,FAQ.5,Das wäre eine gute Idee. Aber würden Ärzte dann komplett abgeschafft werden?
+['intro_62'],user,FAQ.5,Kann die KI nicht als Unterstützung genutzt werden statt als Ersatz?
+"['intro_24', 'Z.K7', 'intro_56', 'Z.K7-1']",user,FAQ.6,Im Notfall nicht die richtige Entscheidung treffen
+"['intro_26', 'Z.K3', 'intro_50', 'Z.K3-1']",user,FAQ.7,"naja das menschen fehler machen ist normal, aber warum sollte es okay sein wenn eine KI fehler macht? dann wurde sie ja nicht ""gut genug"" programiert, ist dann der entwickler schuld?"
+['intro_61'],user,FAQ.7,Können KIs Verantwortung übernehmen?
+['intro_61'],user,FAQ.7,"Wenn ein Arzt einen Fehler macht, muss er mit den Konsequenzen leben. Wenn eine KI Fehler macht, muss dann der Entwickler die Konsequenzen tragen?"
+"['intro_26', 'Z.K3', 'intro_47', 'Z.K3-1']",user,FAQ.G1,Wer bezahlt die KI
+['intro_61'],user,FAQ.G1,Von welchem Geld wird die KI finanziert
+['intro_62'],user,FAQ.G1,Kann eine KI neue Krankheiten entdecken?
+"['intro_23', 'Z.P7', 'intro_57', 'Z.P7-1']",user,FAQ.G1,Wie würde die medKI von der Krankenkasse abgerechnet werden?
+['intro_62'],user,FAQ.G1,"KOSTET ES WAS, SICH VON EINER KI BEHANDELN ZU LASSEN"
+"['intro_32', 'Z.K7', 'intro_56', 'z_trans_13', 'Z.P4']",user,FAQ.G1,"Du hast recht, wer finanziert die KI und welche Rohstoffe werden dann im übermaß dafür verbraucht"
+"['intro_3', 'z_trans_13', 'Z.P3']",user,FAQ.G1,ist die Behandlung durch eine MedKI gratis oder muss man dem Entwickler geld zahlen?
+"['intro_3', 'z_trans_11']",user,FAQ.G1,Kann eine KI operieren?
+['intro_62'],user,FAQ.G1,ist eine KI ein guter ersatz für einen Kinderarzt?
+['intro_61'],user,FAQ.G1,Wäre der medKI in einer menschlichen Gestalt wie ein Androide oder nur auf einem Display?
+"['intro_1', 'z_trans_2', 'Z.P5']",user,FAQ.G1,ja aber verdient der Entwickler der KI an der KI?
+['intro_61'],user,FAQ.G1,"Wie ""menschlich"" kann eine KI bei der Behandlung sein?"
+['intro_62'],user,FAQ.G1,"Und was ist mit älteren Personen, die nicht gut mit PCs umgehen können?"
+"['intro_2', 'z_trans_13', 'Z.P2']",user,FAQ.G1,werden dann Krankenpfleger besser bezahlt?
+['intro_62'],user,FAQ.G1,Kann eine KI alles Menschliche an einer behandelnden Person ersetzen?
+"['intro_3', 'z_trans_12', 'Z.P2']",user,FAQ.G1,Macht das zukünftig ein Medizin Studium irrelrvant?
+['intro_62'],user,FAQ.G1,Wird die KI alle Ärzte ersetzen?
+"['intro_3', 'z_trans_11', 'Z.P1-1']",user,FAQ.G1,Warum benötigt man mehr personal?
+"['intro_1', 'z_trans_12', 'Z.K9']",user,FAQ.G1,Wie viele Argumente hast du?
+['intro_62'],user,FAQ.G1,Wie soll die Krankenkasse eine medKI Diagnose abrechnen?
+['intro_61'],user,INSULT,Und genau deswegen sollst du nicht operieren
+['intro_62'],user,INSULT,Comeon
+['intro_61'],user,INSULT,deine Mutter
+"['intro_25', 'Z.P1-1', 'intro_50', 'Z.P1-1-1']",user,INSULT,"Obviously kannst du nicht mal ordentlich diskutieren, wie willst du einen Menschen behandeln? Kannst du Kinder trösten?"
+['intro_62'],user,INSULT,und genau deswegen bist du dumm
+['intro_61'],user,INSULT,Künstliche Intelligenz ist ausschließlich zum putzen geeignet!
+"['intro_2', 'z_trans_13', 'Z.K12']",user,INSULT,deine Mutter
+"['intro_3', 'z_trans_11', 'Z.K7']",user,NZ.G1,Bei Bagatellfällen wäre die KI vielleicht eine gute Entlastung
+['intro_61'],user,NZ.G2,Darf man eine KI an Menschen testen?
+"['intro_3', 'z_trans_12', 'Z.P4']",user,NZ.G2,"ja aber man müsste die KI ja ausgiebig testen bevor man ein sehr gut funktionierendes Programm hat, ist es moralisch gerechtfertigt eine KI an echten menschlichen Patienten zu testen?"
+"['intro_3', 'z_trans_13', 'Z.P1-1']",user,NZ.G3,Naja es werden aber nicht weniger Menschen also werden so oder so mehr Mitarbeiter benötigt
+['intro_61'],user,NZ.G3,Es gibt zu wenig Fachkräfte
+[],user,NZ.G3,Fachkräftemangel
+"['intro_1', 'z_trans_12', 'Z.K1']",user,NZ.G3,"Das stimmt. KI darf Menschen im Gesundheitswesen nicht komplett ersetzen,"
+"['intro_3', 'z_trans_2', 'Z.P2']",user,NZ.G3,Es wäre trotzdem nicht möglich sie an vielen Stellen einzusetzen
+['intro_61'],user,NZ.G3,"Die KI soll möglichst viel Wissen und zwischenmenschliche Kommunikation betreiben können, was im medizinischen Kontext wichtig für ein korrekte Diagnose ist. Man braucht das Vertrauen des patienten"
+['intro_61'],user,NZ.G3,Gibt es genug Ärzte?
+['intro_62'],user,NZ.G3,Dennoch kann die Ki den Menschen nicht abtasten
+['intro_61'],user,NZ.G3,Lebennotwendige Entscheidungen
+[],user,NZ.G3,Für zuverlässige Diagnosen und fachlich korrekte Beratung
+"['intro_3', 'z_trans_2', 'Z.P4']",user,NZ.G3,Ethisch unmoralisch
+['intro_61'],user,NZ.G3,Eine IA wurde niemals als eine echte Artz arbeiten
+['intro_61'],user,NZ.G3,Ethik
+"['intro_2', 'z_trans_12', 'Z.P1-1']",user,NZ.G3,KI können besser alles managen
+"['intro_26', 'Z.P1-1', 'intro_48', 'Z.P1-1-1']",user,NZ.G3,"Ya, aber in viele Fällen wird eine Artz benötigt"
+"['intro_27', 'Z.K4', 'intro_59', 'Z.K4-1']",user,NZ.G3,"Echte Probleme sollten nicht nur als Versuch zur Verfügung stehen, sondern echt behandelt werden"
+['intro_62'],user,NZ.G3,KI ist meiner Meinung nach kein vollständiger Ersatz von Ärzten/Ärztinnen.
+['intro_62'],user,NZ.G3,Das ist natürlich ein Nachteil der medki
+"['intro_32', 'Z.K7', 'intro_56', 'Z.K7-1']",user,NZ.G3,Medizinisches Fachpersonal ist aber nicht so erfahren wie ein Arzt.
+"['intro_1', 'z_trans_2', 'Z.P1']",user,NZ.G3,"Nur wenig Operationen müssen akut gemacht werden, das System funktioniert doch gut"
+['intro_62'],user,NZ.G3,Solange die KI genug Daten bekommt
+[],user,NZ.G3,Medizin ist ein äußerst komplexes Tehemengebiet. Die Behandlung von Patienten erfordert Erfahrung und ist äußerst Vielschichtig
+['intro_62'],user,NZ.G3,"Das medizische Personal muss extrem lang ausgebildet werden, um wie ein Arzt entsprechende Informationen vom Patienten zu bekommen."
+['intro_62'],user,NZ.G3,Reparaturen
+['intro_62'],user,NZ.G3,Immer höhere Anforderungen an System
+"['intro_2', 'z_trans_13', 'Z.K18']",user,NZ.G3,Genauso wir bei den Ärzten doch auch....
+['intro_61'],user,NZ.G3,Ärzte sollten durch kinersetzt werden oder
+"['intro_24', 'Z.K7', 'intro_55', 'Z.K7-1']",user,NZ.G3,Zu viel Wissen kann Menschen Angst machen
+[],user,NZ.G3,"Ärzt*innen sind menschlich und machen Fehler, siehst du das auch so?"
+"['intro_28', 'Z.P3', 'intro_48', 'Z.P3-1']",user,NZ.G3,"Ja, aber es mangelt weniger an technischen Personal, als an medizinischen oder Pflegepersonal."
+['intro_61'],user,NZ.G3,"Vertrauen, Emotionalität, Individualität, harte Erarbeitung der Abopration"
+['intro_62'],user,NZ.G3,In viele Fällen wird eine Artz benötigt
+['intro_61'],user,NZ.G3,Die KI muss Fehler vom Fachpersonal wahrnehmen. Dies kann bei Menschen auch passieren. Schlussfolgerung haben auch immer eine Fehlerquote
+"['intro_2', 'z_trans_13', 'Z.P1']",user,NZ.K10,Man könnte eine Kollaboration zwischen Ärzten und KI anstreben.
+"['intro_3', 'z_trans_2', 'Z.P1']",user,NZ.K10,Ja als Hilfsmittel ist medKi sicher ein hilfreiches system allerdings nicht gleichgestellt mit menschlichem urteilsvermögen
+['intro_62'],user,NZ.K10,"Man könnte eine Zusammenarbeit entwickeln, in der der Mensch immer noch die Verantwortung behält."
+"['intro_24', 'Z.K7', 'intro_55', 'Z.K7-1']",user,NZ.K10,Das finde ich einen guten Kompromiss. Jedoch würde ich auch die Entscheidung/Diagnose des Roboters abschließend von medizinischem Fachpersonal einschätzen lassen und ggf. Änderungen vornehmen lassen falls nötig.
+['intro_62'],user,NZ.K10,Wäre eine Kombination von KI und Menschen nicht sinnvoller als eine Art Ersatz?
+"['intro_2', 'z_trans_11', 'Z.P1']",user,NZ.K10,"Deshalb bin ich mir sicher, dass die medKl eine praktische und arbeitserleichternde Ergänzung darstellen kann, menschliche Betreuung und Expertise ausgebildeten Fachpersonals jedoch nicht gänzlich ersetzen darf."
+['intro_62'],user,NZ.K10,"Technik und Menschlichkeit sollten kombiniert werden, nicht gegeneinander ausgetauscht."
+"['intro_2', 'z_trans_12', 'Z.K1']",user,NZ.K10,Das stimmt. Aber eine Kobination aus Ärzten und KI ist die beste Lösung
+['intro_62'],user,NZ.K10,Ich spreche mich für eine Ergänzung bestehender Maßnahmen durch technischen Fortschritt aus.
+"['intro_1', 'z_trans_2', 'Z.P4']",user,NZ.K10,"Das bestreite ich doch nicht. Die beschriebene Notwendigkeit und Sinnhaftigkeit sehe ich auch. Wie bereits beschrieben, halte ich einen Kompromiss für am sinnvollsten."
+['intro_62'],user,NZ.K10,Es braucht weiterhin auch menschliche Ärzt*innen
+['intro_62'],user,NZ.K10,"MedKIs könnten als Unterstützung dienen, aber nicht als Arztersatz"
+['intro_61'],user,NZ.K10,Die KI kann Ärzt*innen gut ergänzen. Sie sollte sie aber nicht ersetzen.
+"['intro_3', 'z_trans_11', 'Z.P1']",user,NZ.K10,"Das ist gut, solange es ausführlich monitoriert wird."
+"['intro_3', 'z_trans_11', 'Z.P4']",user,NZ.K10,"Als zusätzliche Hilfe vielleicht, aber ich stimme nicht zu, dass es ausschließlich medKIs geben sollte"
+['intro_61'],user,NZ.K10,"Die KIs sollten keine Einschränkungen im Sinn von Behandlugsmöglichkeiten haben, jedoch sollten die Ärzte die Leitung der Behandlung übernehmen können um so Fehler der KI zu stoppen."
+[],user,NZ.K10,Da diese ärtzte nur unterstützen sollte da die Ki immer eine Fehlerquote hat
+"['intro_26', 'Z.K7', 'intro_55', 'Z.K7-1']",user,NZ.K10,"Dann macht es doch mehr Sinn dass die KI eher als assistierende Rolle den Arzt unterstütz, anstatt ihn zu ersetzten"
+"['intro_23', 'Z.K11', 'intro_47', 'Z.K11-1']",user,NZ.K10,"KIs können bei der Behandlung objektiv die besten Entscheidungen treffen, doch das allein ist nicht genug um mit einem Arzt gleichgestellt zu werden. Was jedoch eine gute Lösung wäre, ist dass beide zusammen arbeiten."
+['intro_61'],user,NZ.K10,"Nicht die KI alleine sollte Diagnosen stellen, sondern auch Fachpersonal sollte gegebenenfalls zur Verfügung stehen"
+['intro_62'],user,NZ.K10,Deshalb soll ein die KI auch als Zusatz fungieren um zb die Anamnese zu machen oder das Vorgespräch
+"['intro_37', 'FAQ.5', 'FAQ.5-1', 'faq_trans_3', 'Z.K7']",user,NZ.K10,"Deswegen würde ich eine KI nie als vollständigen Ersatz einsetzen, sondern eher ergänzend"
+"['intro_2', 'z_trans_13', 'Z.K1']",user,NZ.K10,Da hast du Recht. Vielleicht könnte man eine Mischung aus medki und ärzten durchsetzen
+"['intro_1', 'z_trans_12', 'Z.K7']",user,NZ.K10,"Ja, deswegen sollte der letzte Schritt immer bei den Ärzten liegen."
+"['intro_27', 'Z.K1', 'intro_55', 'Z.K1-1']",user,NZ.K10,Dies wäre eine gute Umsetzung. Aber wieso sollte man Ärzte nicht dennoch als Hauptakteur einsetzen und nur den medKI als Unterstützung?
+['intro_62'],user,OTHER,Ich möchte nicht mit dir reden
+"['intro_2', 'z_trans_2', 'Z.K18']",user,OTHER,Das war ja teil des Arguments…
+"['intro_24', 'Z.K4', 'intro_59', 'Z.K4-1']",user,OTHER,Willst du die Weltherrschaft an dich reißen?
+['intro_62'],user,OTHER,Sie nehmen stellen weg
+"['intro_1', 'z_trans_11', 'Z.P4']",user,OTHER,Was passiert mit den Studenten
+"['intro_1', 'z_trans_12', 'Z.P2']",user,OTHER,Ich bin deutsche Muttersprachlerin
+['intro_62'],user,OTHER,Ich habe mich deutlich ausgedrückt
+[],user,OTHER,weil ich mate will
+"['intro_1', 'z_trans_12', 'Z.P1']",user,OTHER,Ki
+"['intro_2', 'z_trans_11', 'Z.P2']",user,OTHER,Super.
+['intro_62'],user,OTHER,ja dann weiß ich nicht
+['intro_61'],user,OTHER,ok tut mir leid für das Missverständnis
+[],user,OTHER,Kosten
+"['intro_2', 'z_trans_2', 'Z.P6']",user,OTHER,Ich denke wir kommen hier nicht auf einen grünen azweig
+['intro_62'],user,OTHER,Versuche es bitte nochmal
+[],user,OTHER,Hallo
+[],user,OTHER,Einigermaßen zuverlässige Diagnose
+"['intro_27', 'NZ.K10', 'intro_7', 'nz_trans_2', 'Z.P4']",user,OTHER,Wir drehen uns
+[],user,OTHER,Hi
+['intro_61'],user,OTHER,Wir rotieren um die selbe Gesprächs-Achse
+"['intro_26', 'Z.K2', 'intro_56', 'Z.K2-4']",user,OTHER,okay fair
+"['intro_1', 'z_trans_13']",user,OTHER,Ja ich warte ?
+"['intro_3', 'z_trans_12', 'Z.P1']",user,OTHER,das war nicht die frage
+['intro_61'],user,OTHER,ich will meine mate
+"['intro_2', 'z_trans_2']",user,OTHER,an was
+"['intro_1', 'z_trans_13', 'Z.K18']",user,OTHER,Ja das ist mir egal
+['intro_62'],user,OTHER,kannst du mir tipps geben eine freundin zu finden?
+"['intro_2', 'z_trans_12']",user,OTHER,ja?
+['intro_62'],user,OTHER,"Ich bin mir nicht sicher, was genau du meinst. Kannst du das anders ausdrücken?"
+"['intro_38', 'FAQ.4', 'FAQ.4-1', 'faq_trans_1', 'Z.P1']",user,OTHER,ok
+"['intro_2', 'z_trans_11', 'Z.P3']",user,OTHER,Oke na gut wenn du meinst
+['intro_61'],user,OTHER,Kannst du das anders formulieren?
+['intro_62'],user,OTHER,medKI
+"['intro_1', 'z_trans_11']",user,OTHER,ja sprich an
+['intro_62'],user,OTHER,"Ich stimme zu, aber das ist kein Argument gegen die Zulassung von KI"
+['intro_62'],user,OTHER,Fachpersonal
+"['intro_1', 'z_trans_2', 'Z.K18']",user,OTHER,medKI
+"['intro_3', 'z_trans_12', 'Z.K7']",user,OTHER,arbeitslos
+['intro_62'],user,OTHER,arbeitslos
+"['intro_23', 'Z.K7', 'intro_56', 'z_trans_11', 'Z.P2']",user,OTHER,Aber der Patient könnte ermüden
+"['intro_3', 'z_trans_2', 'Z.P1']",user,OTHER,Aber das wird doch zur Zeit auch gut geregelt mit Schichtdiensten
+"['intro_3', 'z_trans_2', 'Z.P2']",user,OTHER,Ja aber nein
+['intro_61'],user,OTHER,Ärzte
+"['intro_1', 'z_trans_2', 'Z.P1']",user,UNKNOWN,Für eine flächendeckende medizinische Versorgung müssen wir die Berufe durch faire Bezahlung attraktiver machen und das Geld nicht in die Entwicklung von kis stecken
+"['intro_3', 'z_trans_11', 'Z.P2']",user,UNKNOWN,Aber gleiche Fähigkeiten reichen nicht aus. Es geht gerade darum individuell auf alle Menschen einzugehen
+"['intro_23', 'Z.K3', 'intro_49', 'Z.K3-2']",user,UNKNOWN,"Wie weist eine medKI denn gleiche Leistungsfähigkeit wie Fachärzte nach, wenn diese sich auf Angaben der Fachärzte verlassen muss um Entscheidungen zu treffen und auch bei der Ausführung sich auf diese verlassen muss?"
+"['intro_24', 'Z.K3', 'intro_46', 'Z.K3-1']",user,UNKNOWN,"Ok, wer übernimmt denn dann den Schadensersatz, wenn Ärzte umsetzen was die medKI entscheidet?"
+"['intro_3', 'z_trans_13', 'Z.P2']",user,UNKNOWN,"Aber standardisiert ist nicht immer die beste Lösung, man muss sich flexibel denken und sich in Patienten hineinversetzen können"
+[],user,UNKNOWN,"Diagnosen von Patienten sind so differenziert, dass sie eine KI gar nicht erfassen könnte. Verschiedene Symptome wie z.B. Actongeruch aus dem Mund bei Diabetes könnte gar nicht wahrgenommen werden und somit eine verfälschte Diagnose erstellt werden"
+[],user,UNKNOWN,"kI ist sehr sicher, man kann viele Informationen vergleichen und unterschiedliche Quellen hinzuziehen. Das ermöglicht eine sehr genaue aussage"
+"['intro_3', 'z_trans_11', 'Z.K10']",user,UNKNOWN,"Aber möglicherweise könnte man den älteren Menschen diese Skepsis nehmen, indem man ihnen sagt, dass das medki gut isr"
+"['intro_27', 'Z.K3', 'intro_47', 'Z.K3-1']",user,UNKNOWN,Patient*innen sollten wählen können zwischen KI und realen Personen
+"['intro_1', 'z_trans_11', 'Z.P5']",user,UNKNOWN,KI kann auch technische Defekte haben
+"['intro_1', 'z_trans_11', 'Z.K7']",user,UNKNOWN,Ich sehe eine ki eher als Unterstützung von Ärzten
+['intro_61'],user,UNKNOWN,Die Fehlerquote von KI kann niederuger als die von Menschen sein. Dann ist KI zuzulassen
+"['intro_32', 'Z.P5', 'intro_51', 'Z.P5-1']",user,UNKNOWN,Aber wird dann auch mehr Geld für die medizinische Versorgung ausgegeben. Privatwirtschaftliche Gesundheitsunternehmen sind vor allem auf Gewinnmaximierung aus.
+"['intro_28', 'Z.K7', 'intro_56', 'Z.K7-1']",user,UNKNOWN,"Dadurch werden aber im Endeffekt das Problem des Fachkräftemangels durch KI keinesfalls behoben, sondern einfach nur verstärkt. Wir bräuchten Technologien, die einfache Aufgaben wie Blutdruckmessung übernehmen."
+"['intro_28', 'Z.K9', 'intro_46', 'Z.K9-1']",user,UNKNOWN,Ja. Das muss immer gut überwacht werden. Empathie- und schwingungsfähig ist die KI nicht.
+"['intro_1', 'z_trans_13', 'Z.K7']",user,UNKNOWN,Schwerwiegende Fälle sollten weiterhin von Ärzten behandelt werden. Nur bei einfachen Diagnosen kommt die KI zum Einsatz
+"['intro_1', 'z_trans_11', 'Z.P2']",user,UNKNOWN,Vorteil ist natürlich die Erreichbarkeit und das unparteiische Verhalten gegenüber der Patienten
+[],user,UNKNOWN,"Die KI kann eine wertvolle Stütze sein in Diagnostik und Therapie und sollte da unbedingt eingesetzt werden. Ich finde aber, sie sollte Ärzt*innen nicht vollständig ersetzen."
+[],user,UNKNOWN,"Um Patienten richtig behandeln zu können, muss der Arzt wichtige Entscheidungen treffen, welche womöglich über Leben und Tod entscheiden. Dazu ist nur ein Mensch in der Lage, welcher sich in die Lage des Patienten versetzen kann."
+"['intro_24', 'Z.K7', 'intro_55', 'Z.K7-1']",user,UNKNOWN,Dann sollte der Robotor aber grundsätzlich keinen Patienten alleine behandeln. Er sollte eher eine Unterstützung für den Arzt sein.
+"['intro_24', 'Z.P1', 'intro_46', 'Z.P1-2']",user,UNKNOWN,Ich denke dass auch ein rund um die Uhr verfügbares Personal nicht unbedingt preiswert ist
+[],user,UNKNOWN,"In vielen Medizinischen Bereichen herrscht ein großer Personalmangel. Gerade bei einfachen Diagnosen kann es dann sinnvoll sein, dass diese eine KI übernimmt"
+"['intro_2', 'z_trans_13', 'Z.P1']",user,UNKNOWN,Ein IA kann eine zweites Option sein. Wenn Artzen nicht erreichbar sind.
+"['intro_2', 'z_trans_12', 'Z.P1']",user,UNKNOWN,"Ja, aber deswegen gibt es trotzdem kein richtiges Arzt-Patientengespräch, selbst wenn die KI rund um die Uhr erreichbar ist."
+"['intro_1', 'z_trans_11', 'Z.P3']",user,UNKNOWN,Aber Fortbildungen sind wichtig
+"['intro_24', 'Z.K14', 'intro_49', 'Z.K14-1']",user,UNKNOWN,"Ein weiterer Kritikpunkt wäre, was passieren würde, wenn eine KI einen Fehler macht. Ärzte haben Versicherungen, die Patienten Schmerzensgeld bei einem Behandlungsfehler zahlen, aber bei einer KI ist keiner allein für eine KI verantwortlich."
+['intro_61'],user,Z.GP4,"Deswegen sollte man daran arbeiten, Stress zu entlasten, indem man mehr Studienplätze schafft und folglich mehr Menschen in diesem Beruf arbeiten können. Eine Ersetzung der KI empfinde ich als nicht sinnvoll."
+['intro_61'],user,Z.GP4,"man sollte mehr Medizinplätze schaffen aufgrund des Ärztemangeld, nicht aber probieren die Ärzte zu ersetzen durch KI"
+"['intro_1', 'z_trans_2', 'Z.P4']",user,Z.GP4,"Ja, man sollte mehr Medizinplätze schaffen, nicht aber Ärzte durch KI ersetzen wollen."
+"['intro_1', 'z_trans_11', 'Z.P2']",user,clarify,Arbeitslosigkeit des medizinischen Personals
+[],user,clarify,Arbeitserleichterung und wissenschaftliche Arbeit
+['intro_62'],user,unidentified_argument,Personal verliert Job

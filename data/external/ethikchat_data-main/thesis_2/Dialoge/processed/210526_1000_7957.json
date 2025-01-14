@@ -1,0 +1,559 @@
+{
+  "name": "210526_1000_7957",
+  "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE",
+  "start": "10:00",
+  "end": "11:03",
+  "utterances": [
+    {
+      "user": "6fa8feb530f872df448a6ba5b17d2d2d",
+      "type": "user",
+      "text": "Ich denke es ist ein großer Fortschritt, allerdings können auch Risiken entstehen ",
+      "id_in_dialogue": 0,
+      "true_labels": [
+        "P2"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "a235f09980d1b6ee477201ea0c8a42f4",
+      "type": "expert",
+      "text": "Das stimmt. Die KI kann sowohl effizienter mit vielen Daten umgehen als auch effizienter trainiert werden als Ärzt:innen. ",
+      "id_in_dialogue": 1,
+      "true_labels": [
+        null,
+        "P2"
+      ],
+      "true_bounds": [
+        [
+          0,
+          12
+        ],
+        [
+          12,
+          122
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "6fa8feb530f872df448a6ba5b17d2d2d",
+      "type": "user",
+      "text": "Das stimmt, für Operationen kann ein KI besser trainiert werden bzw präziser arbeiten",
+      "id_in_dialogue": 2,
+      "true_labels": [
+        "P1"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "a235f09980d1b6ee477201ea0c8a42f4",
+      "type": "expert",
+      "text": "Das ist richtig. Aber zu beachten ist: Eine KI kann den Kontext der Untersuchung nicht einbeziehen. Die konkrete Fragestellung und die gesamte Krankheitssituation der Patient:innen sind jedoch für die Diagnostik und die passende Therapieentscheidung enorm wichtig.",
+      "id_in_dialogue": 3,
+      "true_labels": [
+        null,
+        null,
+        "K18"
+      ],
+      "true_bounds": [
+        [
+          0,
+          17
+        ],
+        [
+          17,
+          39
+        ],
+        [
+          39,
+          264
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "6fa8feb530f872df448a6ba5b17d2d2d",
+      "type": "user",
+      "text": "Als möglichkeit könnte man die KI Operieren lassen und einen Arzt bei Komplikationen und uneindeutigen Diagnosen hinzuziehen. So muss der Arzt sich nur auf die Diagnostik und die passende Therapieentscheidung fokussieren und nicht noch auf das Operieren selbst",
+      "id_in_dialogue": 4,
+      "true_labels": [
+        "P18"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "a235f09980d1b6ee477201ea0c8a42f4",
+      "type": "expert",
+      "text": "Das verstehe ich. Obwohl durch den Einsatz von KI Zeit eingespart werden kann, bedeutet dies nicht zwangsläufig, dass die gewonnene Zeit dem Patientenwohl zugute kommt. Vielmehr ist wohl davon auszugehen, dass die Arbeitszeit als Kosten insgesamt eingespart wird. ",
+      "id_in_dialogue": 5,
+      "true_labels": [
+        null,
+        "P18-A"
+      ],
+      "true_bounds": [
+        [
+          0,
+          18
+        ],
+        [
+          18,
+          264
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "6fa8feb530f872df448a6ba5b17d2d2d",
+      "type": "user",
+      "text": "es gibt ja heutzutage schon Roboter die Operationen übernehmen, werde die zu Übungszwecken eingesetzt oder sind diese schon Kosten/Nutzen effizienter? ",
+      "id_in_dialogue": 6,
+      "true_labels": [
+        "P5"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "a235f09980d1b6ee477201ea0c8a42f4",
+      "type": "expert",
+      "text": "Es soll vor allem um allgemeine Diagnostik (wie das Auswerten von Bildern) und Therapieentscheidungen gehen, weniger um Operationen. Die KI ist nicht unbedingt kostengünstiger. Durch Fehlentscheidungen können sehr hohe Schadensersatzforderungen entstehen, für die gehaftet werden müsste.",
+      "id_in_dialogue": 7,
+      "true_labels": [
+        "Klarstellung Thema Dialog + con/5",
+        "",
+        "",
+        ""
+      ],
+      "true_bounds": [],
+      "is_template": false
+    },
+    {
+      "user": "6fa8feb530f872df448a6ba5b17d2d2d",
+      "type": "user",
+      "text": "ich verstehe....ich denke eine KI kann definitiv auch sehr nützlich sein wenn sie das Wissen aus der ganzen Welt bezieht, so hat man vielleicht auch mehr Zugang zu Informationen als ein einzelner Arzt",
+      "id_in_dialogue": 8,
+      "true_labels": [
+        "P23"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "a235f09980d1b6ee477201ea0c8a42f4",
+      "type": "expert",
+      "text": "Das ist richtig. Aber zu beachten ist: Die KI könnte falsch lernen und bspw. durch unbalancierte Daten zu Vorurteilen neigen, wodurch die von der KI angegebenen Daten und Diagnosen zu ungenau oder sogar falsch sein könnten.",
+      "id_in_dialogue": 9,
+      "true_labels": [
+        null,
+        null,
+        "K3"
+      ],
+      "true_bounds": [
+        [
+          0,
+          17
+        ],
+        [
+          17,
+          39
+        ],
+        [
+          39,
+          223
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "6fa8feb530f872df448a6ba5b17d2d2d",
+      "type": "user",
+      "text": "wer würde dann kontrollieren welche Daten wie eingespeist werden?",
+      "id_in_dialogue": 10,
+      "true_labels": [
+        "P2-Ac"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "a235f09980d1b6ee477201ea0c8a42f4",
+      "type": "expert",
+      "text": "Es gibt jedoch Wege um dem Problem der Data Bias vorzubeugen. Zum Beispiel, indem man möglichst unterschiedliche Quellen nutzt, um die Diversität der Daten zu garantieren. Was sagst du dazu? Gerade wenn viele personenbezogene Daten gesammelt werden, besteht die Gefahr, dass dies zum gläsernen Bürger führt. Das ist in datenschutzrechtlicher Hinsicht bedenklich.",
+      "id_in_dialogue": 11,
+      "true_labels": [
+        "P2-Ac-Pc",
+        null,
+        "P2-A"
+      ],
+      "true_bounds": [
+        [
+          0,
+          172
+        ],
+        [
+          172,
+          191
+        ],
+        [
+          191,
+          362
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "6fa8feb530f872df448a6ba5b17d2d2d",
+      "type": "user",
+      "text": "ja, das kann ein Problem sein. allerdings könnte dies ja verhindert werden indem man versucht die daten so anonym wie möglich zu speichern",
+      "id_in_dialogue": 12,
+      "true_labels": [
+        "P2-A-P"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "a235f09980d1b6ee477201ea0c8a42f4",
+      "type": "expert",
+      "text": "Das ist richtig. Zur Umsetzung und Einhaltung des Datenschutzes müsste allerdings neues Personal eingestellt werden, etwa Jurist:innen und Informatiker:innen, was zu zusätzlichen Kosten führen würde. Außerdem muss folgendes beachtet werden: Durch die große Menge gesammelter Daten werden Kliniken interessanter für Cyberangriffe.",
+      "id_in_dialogue": 13,
+      "true_labels": [
+        null,
+        "P2-A-P-A",
+        null,
+        "K6"
+      ],
+      "true_bounds": [
+        [
+          0,
+          17
+        ],
+        [
+          17,
+          200
+        ],
+        [
+          200,
+          241
+        ],
+        [
+          241,
+          329
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "6fa8feb530f872df448a6ba5b17d2d2d",
+      "type": "user",
+      "text": "lohnt es sich bei all diesen hürden dann überhaupt solch eine KI herzustellen?",
+      "id_in_dialogue": 14,
+      "true_labels": [
+        "K6-Aa-P"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "a235f09980d1b6ee477201ea0c8a42f4",
+      "type": "expert",
+      "text": "Man kann es auch so sehen: Eine KI liefert gleichbleibend gute Ergebnisse. Anders als Ärzt:innen steht sie nicht unter dem Einfluss äußerer Faktoren, wie zum Beispiel Stress. Außerdem muss folgendes beachtet werden: Mithilfe des Einsatzes von KI kann dem demografischen Wandel in ländlichen Regionen begegnet werden. Dieser zeigt sich unter anderem im Mangel von Ärzt:innen in diesen Gebieten.",
+      "id_in_dialogue": 15,
+      "true_labels": [
+        null,
+        "P4",
+        null,
+        "P7"
+      ],
+      "true_bounds": [
+        [
+          0,
+          27
+        ],
+        [
+          27,
+          175
+        ],
+        [
+          175,
+          216
+        ],
+        [
+          216,
+          393
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "6fa8feb530f872df448a6ba5b17d2d2d",
+      "type": "user",
+      "text": "das ist ein gutes argument. würde die KI dann überall eingesetzt werden oder nur in bestimmten bereichen?",
+      "id_in_dialogue": 16,
+      "true_labels": [
+        "Frage Einsatzbereich"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "a235f09980d1b6ee477201ea0c8a42f4",
+      "type": "expert",
+      "text": "In vielen Bereichen der Medizin ist noch nicht einmal ansatzweise absehbar, dass Ärzt:innen durch Maschinen ersetzt werden könnten. Ansprechen möchte ich noch: Im Gegensatz zum menschlichen Gehirn ermüdet eine KI nicht.",
+      "id_in_dialogue": 17,
+      "true_labels": [
+        "K9-Aa",
+        null,
+        "P16"
+      ],
+      "true_bounds": [
+        [
+          0,
+          132
+        ],
+        [
+          132,
+          160
+        ],
+        [
+          160,
+          219
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "6fa8feb530f872df448a6ba5b17d2d2d",
+      "type": "user",
+      "text": "stimmt, eine KI kann immer und überall eingesetzt werden, so kann man definitiv effizienter arbeiten da keine pausen gebraucht werden",
+      "id_in_dialogue": 18,
+      "true_labels": [
+        "P25"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "a235f09980d1b6ee477201ea0c8a42f4",
+      "type": "expert",
+      "text": "Das ist richtig. Die durch den Einsatz von KI eingesparten Kosten können in andere Bereiche investiert werden, etwa in die Forschung. Fallen dir noch weitere Argumente ein? Insbesondere ältere Patient:innen könnten Diagnosen und Entscheidungen einer KI nicht ausreichend vertrauen.",
+      "id_in_dialogue": 19,
+      "true_labels": [
+        null,
+        "P18-A-P",
+        null,
+        "P7-A-Pa"
+      ],
+      "true_bounds": [
+        [
+          0,
+          17
+        ],
+        [
+          17,
+          134
+        ],
+        [
+          134,
+          173
+        ],
+        [
+          173,
+          281
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "6fa8feb530f872df448a6ba5b17d2d2d",
+      "type": "user",
+      "text": "ja ältere Patienen sehen meist keine vorteile durch kI und vertrauen diesen nicht, vor allen dingen weil sie sich damit nicht gut genug auskennen",
+      "id_in_dialogue": 20,
+      "true_labels": [
+        "P7-A-Pa"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "a235f09980d1b6ee477201ea0c8a42f4",
+      "type": "expert",
+      "text": "Das ist richtig. Andererseits: Für die KI spricht, dass sie angeben kann, mit welcher Wahrscheinlichkeit sie von dem Vorliegen der diagnostizierten Krankheit ausgeht.",
+      "id_in_dialogue": 21,
+      "true_labels": [
+        null,
+        null,
+        "P15"
+      ],
+      "true_bounds": [
+        [
+          0,
+          17
+        ],
+        [
+          17,
+          31
+        ],
+        [
+          31,
+          166
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "6fa8feb530f872df448a6ba5b17d2d2d",
+      "type": "user",
+      "text": "das waren alles sehr nützliche Infos, danke :) ",
+      "id_in_dialogue": 22,
+      "true_labels": [
+        "Abschluss Gespräch"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "a235f09980d1b6ee477201ea0c8a42f4",
+      "type": "expert",
+      "text": "[LABELING COMPLETION]",
+      "id_in_dialogue": 23,
+      "true_labels": [],
+      "true_bounds": [],
+      "is_template": true
+    }
+  ],
+  "surveys": [
+    {
+      "name": "6fa8feb530f872df448a6ba5b17d2d2d",
+      "type": "StartSurvey",
+      "result": "neutral"
+    },
+    {
+      "name": "6fa8feb530f872df448a6ba5b17d2d2d",
+      "type": "EndSurvey",
+      "result": "neutral",
+      "improvement_suggestions": "",
+      "persuasive_arguments": [
+        [
+          0,
+          true
+        ],
+        [
+          1,
+          true
+        ],
+        [
+          2,
+          true
+        ],
+        [
+          3,
+          true
+        ],
+        [
+          4,
+          true
+        ],
+        [
+          5,
+          true
+        ],
+        [
+          6,
+          true
+        ],
+        [
+          7,
+          true
+        ],
+        [
+          8,
+          true
+        ],
+        [
+          9,
+          true
+        ],
+        [
+          10,
+          true
+        ],
+        [
+          11,
+          true
+        ],
+        [
+          12,
+          true
+        ],
+        [
+          13,
+          true
+        ],
+        [
+          14,
+          true
+        ],
+        [
+          15,
+          true
+        ],
+        [
+          16,
+          true
+        ],
+        [
+          17,
+          true
+        ],
+        [
+          18,
+          true
+        ],
+        [
+          19,
+          true
+        ],
+        [
+          20,
+          true
+        ],
+        [
+          21,
+          true
+        ],
+        [
+          22,
+          true
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "name": "20240207_114619_924392",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:46:19",
+  "end": "2024/02/07-11:55:41",
+  "utterances": [
+    {
+      "user": "J2EYX",
+      "type": "user",
+      "text": "Je mehr Diagnosen man durchführt, desto höher ist die Wahrscheinlichkeit dass man eine Diagnose trifft die gut ist. Man muss aber dann natürlich alles evaluieren",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:48:43",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Während eine höhere Anzahl von Diagnosen möglicherweise mehr Daten liefert, bedeutet dies nicht automatisch, dass die Qualität der Diagnosen besser wird. Es ist wichtig, die Genauigkeit und Zuverlässigkeit der Diagnosen zu bewerten, unabhängig von ihrer Anzahl.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:48:46",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "J2EYX",
+      "type": "user",
+      "text": "lpodhus",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-11:49:28",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Entschuldigung, ich verstehe Ihre Eingabe nicht. Könnten Sie bitte Ihre Frage oder Ihr Argument zum Thema - ob ein ausreichend gutes medizinisches Programm aus ethischer Sicht selbstständig Diagnose- und Therapie-Entscheidungen treffen darf - klarer formulieren?",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-11:49:34",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "J2EYX",
+      "type": "user",
+      "text": "Die Bewertung von den Diagnosen ist aber genau dann das, was die Menschen übernehmen sollten. Die Kritikfähigkeit ist dass was Menschen gut können. Die KI kann viele verschieden Diagnosen hervorbringen. Das wäre zu aufwendig für menschen",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-11:51:12",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Indem Menschen die Bewertung der KI-Diagnosen übernehmen, wird die menschliche Expertise und Urteilsfähigkeit tatsächlich genutzt. Allerdings sollten wir bedenken, dass die Bewertung und Überwachung der KI-Diagnosen eine erhebliche Belastung für das medizinische Personal darstellen kann. Es ist fraglich, ob menschliche Ressourcen dauerhaft für diese Aufgabe ausreichen.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-11:51:18",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "J2EYX",
+      "type": "user",
+      "text": "Die Menschlichen Ressourcen werden aber doch dadurch erleichtert dass wir Menschen nicht mehr bei der Diagnose brauchen",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-11:52:46",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Es stimmt, dass die KI die menschliche Arbeitsbelastung bei der Diagnose reduzieren kann. Allerdings sollten wir nicht übersehen, dass menschliches Eingreifen nach wie vor unerlässlich ist, um die KI-Diagnosen zu bewerten und zu überwachen. Die Entlastung bei der Diagnose könnte durch die zusätzliche Aufgabe der KI-Bewertung teilweise aufgehoben werden.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-11:52:53",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "J2EYX",
+      "type": "user",
+      "text": "Ja eben, dann sind doch Menschliche Ressourcen kein Problem?",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-11:53:14",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Obwohl die menschlichen Ressourcen durch die KI entlastet werden, sind sie nicht unbegrenzt verfügbar. Die zusätzliche Aufgabe der KI-Bewertung und -überwachung erfordert Zeit und Expertise. Die Frage ist, ob die vorhandenen menschlichen Ressourcen dauerhaft für diese Aufgabe ausreichen und ob die Qualität der menschlichen Bewertung unter der zusätzlichen Belastung leiden könnte.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-11:53:19",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "c4d6dbccda449e00126427a0475b3651",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "informed": 0.5
+    }
+  },
+  "end_survey": {
+    "name": "c4d6dbccda449e00126427a0475b3651",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "opinion_1": 0,
+      "opinion_1_reason": "Ein kleiner Antwortpool des Bots führt zu keiner sinnvollen Diskussion.",
+      "opinion_2": 0.6,
+      "argument_quality_2": 0.8,
+      "user_information_argument_breadth": 0.25,
+      "user_information_argument_depth": 0.4
+    }
+  }
+}

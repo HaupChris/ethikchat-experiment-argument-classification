@@ -1,0 +1,1 @@
+[{"event": "enter_view", "view": "subGraph", "user_with": "RAGBot", "timestamp": "2024/02/07-11:18:05"}, {"event": "switch_view", "from": "subGraph", "to": "fullGraph", "user_with": "RAGBot", "timestamp": "2024/02/07-11:18:10"}, {"event": "leave_view", "view": "fullGraph", "user_with": "RAGBot", "timestamp": "2024/02/07-11:18:29"}]

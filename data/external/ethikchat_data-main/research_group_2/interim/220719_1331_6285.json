@@ -1,0 +1,74 @@
+{
+    "text": "Solange eine KI nach der Statistik besser ist als der Arzt, sollte sie die Zulassung erhalten. \n\nDein Argument ist, dass die medKI genauere Ergebnisse liefert. Das ist ein gutes Argument. Direkt dazu: Allerdings überfordern Kosten/Nutzen-Abwägungen viele Patient:innen in für sie existiellen Situationen und können kontraproduktiv sein. Ferner: Eine medKI kann zwar den Ärztemangel lindern, aber dafür wird mehr medizinisches Fachpersonal (u.a.  Pflegeberufe, Praxishelfer:innen, medizinische Fachassistent:innnen usw.) einschl. neuer, ähnlicher Berufsbilder benötigt. \n\n",
+    "annotations": [
+        { "begin": 0, "end": 95, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 0, "user": "d22ce261bcaf9ef0fa1d5a8de4904bf8", "timestamp": "1900/01/01-13:35:34" } },
+        { "begin": 0, "end": 95, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "Z.P6" } },
+        { "begin": 97, "end": 569, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 1, "user": "a8555c7776033b1544cbaf9170d6fd7a", "timestamp": "1900/01/01-13:36:15" } },
+        { "begin": 97, "end": 120, "type": "de.uniwue.ethik-ki-chats.Introduction", "features": { "label": "intro_25" } },
+        { "begin": 120, "end": 159, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "Z.P6" } },
+        { "begin": 159, "end": 200, "type": "de.uniwue.ethik-ki-chats.Introduction", "features": { "label": "intro_47" } },
+        { "begin": 200, "end": 336, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "Z.P6-1" } },
+        { "begin": 336, "end": 344, "type": "de.uniwue.ethik-ki-chats.Transition", "features": { "label": "z_trans_8" } },
+        { "begin": 344, "end": 569, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "Z.P1-1" } },
+        { "begin": 0, "end": 571, "type": "de.uniwue.ethik-ki-chats.Dialogue", "features": { "name": "220719_1331_6285", "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE", "start": "2022/07/19-13:31:15", "end": "2022/07/19-13:53:00" } },
+        { "begin": 0, "end": 571, "type": "de.uniwue.ethik-ki-chats.StartSurvey", "features": { "name": "d22ce261bcaf9ef0fa1d5a8de4904bf8", "agreement": 1.0 } },
+        { "begin": 0, "end": 571, "type": "de.uniwue.ethik-ki-chats.EndSurvey", "features": { "name": "d22ce261bcaf9ef0fa1d5a8de4904bf8", "agreement": 0.25, "opinion": "", "text_like": "{}", "text_dislike": "{}" } }
+    ],
+    "types": [
+        {
+            "name": "de.uniwue.ethik-ki-chats.Template",
+            "features": [
+                { "name": "label", "range": "RANGE_PRIMITIVE" },
+                { "name": "incorrect", "range": "RANGE_PRIMITIVE" },
+                { "name": "difficult", "range": "RANGE_PRIMITIVE" },
+                { "name": "multiple", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        { "name": "de.uniwue.ethik-ki-chats.Introduction", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Transition", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Other", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Outro", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        {
+            "name": "de.uniwue.ethik-ki-chats.Dialogue",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "szenario", "range": "RANGE_PRIMITIVE" },
+                { "name": "start", "range": "RANGE_PRIMITIVE" },
+                { "name": "end", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.StartSurvey",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "agreement", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.EndSurvey",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "agreement", "range": "RANGE_PRIMITIVE" },
+                { "name": "opinion", "range": "RANGE_PRIMITIVE" },
+                { "name": "text_like", "range": "RANGE_PRIMITIVE" },
+                { "name": "text_dislike", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.UserUtterance",
+            "features": [
+                { "name": "id_in_dialogue", "range": "RANGE_PRIMITIVE" },
+                { "name": "user", "range": "RANGE_PRIMITIVE" },
+                { "name": "timestamp", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.ExpertUtterance",
+            "features": [
+                { "name": "id_in_dialogue", "range": "RANGE_PRIMITIVE" },
+                { "name": "user", "range": "RANGE_PRIMITIVE" },
+                { "name": "timestamp", "range": "RANGE_PRIMITIVE" }
+            ]
+        }
+    ]
+}

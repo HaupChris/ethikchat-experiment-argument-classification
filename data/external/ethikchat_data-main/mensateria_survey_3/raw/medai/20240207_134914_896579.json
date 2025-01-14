@@ -1,0 +1,144 @@
+{
+  "name": "20240207_134914_896579",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-13:49:14",
+  "end": "2024/02/07-14:01:11",
+  "utterances": [
+    {
+      "user": "PG1SX",
+      "type": "user",
+      "text": "Viele Erkrankungen sind komplex und benötigen eine genaue Untersuchung welche auch Sinneseindrücke wie Hören, Tasten und Sehen erfordert. So etwas kann eine KI nicht ",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-13:51:35",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Verstehe ich Sie richtig, dass Sie Bedenken haben, ob eine KI in der Lage ist, sinnliche Eindrücke wie einen Arzt zu verarbeiten und zu interpretieren? Wenn ja, ich kann Ihre Bedenken nachvollziehen. Allerdings ist es wichtig zu beachten, dass die medKI in diesem Szenario nicht eigenständig physische Untersuchungen durchführt, sondern die erhobenen Daten lediglich auswertet und interpretiert. Die Datenerhebung wird weiterhin vom medizinischen Personal durchgeführt, das über die notwendigen Fähigkeiten verfügt, um sinnliche Eindrücke zu erheben und zu verarbeiten. Die medKI ist lediglich ein Tool, das dabei hilft, die gesammelten Daten sorgfältiger und genauer zu analysieren, um eine genauere Diagnose und Therapie zu ermöglichen.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-13:51:42",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "PG1SX",
+      "type": "user",
+      "text": "Okay dann ist es ja ein Hilfsmittel. Aber das rechtfertigt meiner Meinung nicht, dass medKI eine ähnliche Zulassung als Ärztin erhalten soll",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-13:53:28",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken, aber es ist wichtig zu beachten, dass die Zulassung einer medKI nicht bedeutet, dass sie die gleichen Rechte und Pflichten wie ein menschlicher Arzt hat. Stattdessen würde eine Zulassung bedeuten, dass die medKI die gleichen Standards und Kriterien erfüllt wie ein menschlicher Arzt in Bezug auf Diagnose und Therapie. Dies würde bedeuten, dass die medKI in der Lage ist, eine genaue und zuverlässige Diagnose zu stellen und eine wirksame Behandlung zu empfehlen, was letztendlich zu besseren Ergebnissen für die Patienten führt.\nEs ist auch wichtig zu beachten, dass die medKI nicht die menschliche Note und Empathie ersetzen kann, die ein Arzt bringt. Die medKI ist lediglich ein Tool, das dazu beiträgt, die Genauigkeit und Effizienz der medizinischen Versorgung zu verbessern, während die menschlichen Ärzte weiterhin für die persönliche Betreuung und Unterstützung der Patienten verantwortlich sind.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-13:53:37",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "PG1SX",
+      "type": "user",
+      "text": "Vielen Dank für die Klarstellung. Dann ist es ja ganz praktisch und erleichtert Ärztinnen die Arbeit. Diese können ja auch Fehler machen",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-13:56:12",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, Sie haben Recht, Ärzte können Fehler machen, und eine medKI kann dazu beitragen, diese Fehler zu minimieren. Durch die Auswertung großer Datenmengen und die Anwendung von Algorithmen kann eine medKI Diagnosen und Therapieentscheidungen mit höherer Genauigkeit und Zuverlässigkeit treffen als ein Mensch. Darüber hinaus kann eine medKI auch kontinuierlich lernen und sich verbessern, was bedeutet, dass sie im Laufe der Zeit immer genauer und zuverlässiger wird.\nEs ist auch wichtig zu beachten, dass die medKI nicht willkürlich Entscheidungen trifft, sondern auf der Grundlage von wissenschaftlichen Erkenntnissen und medizinischen Leitlinien arbeitet. Die medKI ist so programmiert, dass sie die bestmögliche Diagnose und Therapieempfehlung auf der Grundlage der verfügbaren Daten trifft, was zu einer besseren Versorgung der Patienten führt.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-13:56:18",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "PG1SX",
+      "type": "user",
+      "text": "Okay und würde die KI auch regelmäßig \nvon Fachpersonal  überprüft werden? Wäre wichtig  ",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-13:59:29",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, Sie haben Recht, die regelmäßige Überprüfung und Überwachung der medKI durch Fachpersonal ist von entscheidender Bedeutung, um sicherzustellen, dass sie weiterhin genau und zuverlässig arbeitet. Die Überprüfung kann auf verschiedene Arten erfolgen, wie z.B. durch die Überprüfung der Algorithmen und Modelle, die von der medKI verwendet werden, oder durch die Überprüfung der Ergebnisse, die von der medKI generiert werden, im Vergleich zu den Ergebnissen, die von menschlichen Ärzten erzielt werden.\nDarüber hinaus ist es auch wichtig, dass die medKI regelmäßig aktualisiert und verbessert wird, um sicherzustellen, dass sie auf dem neuesten Stand der medizinischen Forschung und Entwicklung bleibt. Durch die regelmäßige Überprüfung und Überwachung durch Fachpersonal kann sichergestellt werden, dass die medKI weiterhin sicher und effektiv eingesetzt werden kann, um die Genauigkeit und Effizienz der medizinischen Versorgung zu verbessern.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-13:59:40",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "PG1SX",
+      "type": "user",
+      "text": "Okay vielen dank für das Gespräch. Das hat mich überzeugt ",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-14:00:01",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich bin sehr zufrieden zu hören, dass ich Ihre Bedenken zerstreuen konnte und dass Sie nun von den Vorteilen einer medizinischen KI überzeugt sind. Ich hoffe, ich konnte Ihnen zeigen, dass eine medKI ein wertvolles Werkzeug sein kann, um die Genauigkeit und Effizienz der medizinischen Versorgung zu verbessern, während menschliche Ärzte weiterhin für die persönliche Betreuung und Unterstützung der Patienten verantwortlich sind. Wenn Sie weitere Fragen haben, zögern Sie bitte nicht, mich zu kontaktieren. Ich bin hier, um Ihnen zu helfen.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-14:00:14",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "4b2f1e8595097113b4f7dc74516e0362",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "4b2f1e8595097113b4f7dc74516e0362",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "opinion_1": 1,
+      "opinion_2": 0.8,
+      "argument_quality_2": 0.6,
+      "user_information_argument_breadth": 0.25,
+      "user_information_argument_depth": 0.4
+    }
+  }
+}

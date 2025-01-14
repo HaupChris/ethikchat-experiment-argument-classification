@@ -1,0 +1,237 @@
+{
+  "name": "20240207_131449_611575",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-13:14:49",
+  "end": "2024/02/07-13:24:47",
+  "utterances": [
+    {
+      "user": "C4ZL7",
+      "type": "user",
+      "text": "Das Menschen besonders bei seltenen Kranken zu einem inverse rate  Bias tendieren und bei der Betrachtung von MRT Bildern es zu einem vigilanz Abfall kommt",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-13:16:55",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Vielen Dank für Ihre Einblicke in die menschlichen Tendenzen bei der Diagnose seltener Krankheiten und der Betrachtung von MRT-Bildern. Diese menschlichen Einschränkungen sind tatsächlich ein wichtiger Faktor, aber sie stellen nicht unbedingt ein ethisches Argument gegen die Verwendung einer medKI dar. Schließlich könnte die medKI diese menschlichen Einschränkungen überwinden und genauere Diagnosen stellen.\nEs gibt jedoch auch andere ethische Bedenken, wie zum Beispiel die Transparenz von Entscheidungen, die eine medKI trifft. Im Gegensatz zu menschlichen Ärzten können wir nicht einfach in die \"Gedanken\" einer KI blicken, um zu verstehen, wie sie zu einer bestimmten Diagnose oder therapeutischen Entscheidung gekommen ist. Dies kann zu Vertrauensproblemen führen, insbesondere wenn die Entscheidungen der medKI nicht nachvollziehbar sind.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-13:17:03",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "C4ZL7",
+      "type": "user",
+      "text": "Naja  die KI ist aufgrund von Wahrscheinlichkeit auf ihre Entscheidung gekommen und auf Basis  der ihr gegebenen Daten ",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-13:18:28",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, das ist richtig. Die medKI trifft Entscheidungen auf Basis von Wahrscheinlichkeiten und den ihr zur Verfügung gestellten Daten. Allerdings kann dies auch zu ethischen Bedenken führen. Wenn beispielsweise die Daten, auf denen die medKI ihre Entscheidungen trifft, nicht repräsentativ oder unvollständig sind, könnte dies zu Fehldiagnosen oder ungeeigneten Behandlungsempfehlungen führen.\nDarüber hinaus gibt es auch Bedenken hinsichtlich der Rechengenauigkeit und der Fehlertoleranz von KI-Systemen. Selbst kleinste Fehler in der Programmierung oder in den Eingabedaten können zu gravierenden Fehlentscheidungen führen, die möglicherweise nicht mehr korrigiert werden können, sobald sie getroffen wurden. Diese Risiken könnten möglicherweise minimiert werden, wenn menschliche Ärzte in den Entscheidungsprozess einbezogen wären.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-13:18:36",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "C4ZL7",
+      "type": "user",
+      "text": "Nein das gleiche Risiko trifft auf Menschen auch zu, sie sind zudem von anderen heutistiken und biases beeinträchtigt ",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-13:19:18",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, Sie haben Recht, dass auch menschliche Ärzte von kognitiven Verzerrungen und Vorurteilen beeinflusst werden können, was sich auf ihre Diagnose- und Behandlungsentscheidungen auswirken kann. Allerdings gibt es auch Mechanismen, um diese menschlichen Einschränkungen zu minimieren, wie z.B. Peer-Review, Fortbildungen und die Möglichkeit, dass Ärzte sich in Teams beraten und gegenseitig überprüfen.\nIm Gegensatz dazu gibt es für KI-Systeme derzeit noch keine etablierten Mechanismen, um kognitive Verzerrungen oder Vorurteile zu minimieren. Zwar können KI-Systeme mit großen Datenmengen trainiert werden, um die Auswirkungen von Verzerrungen und Vorurteilen zu reduzieren, aber es gibt keine Garantie dafür, dass diese Systeme vollständig frei von solchen Problemen sind.\nDarüber hinaus gibt es auch ethische Bedenken hinsichtlich der Rechengenauigkeit und der Fehlertoleranz von KI-Systemen. Wenn ein KI-System einen Fehler macht, kann dies möglicherweise nicht mehr korrigiert werden, insbesondere wenn die Entscheidungen der KI nicht nachvollziehbar sind. Im Gegensatz dazu können menschliche Ärzte in der Regel eher erkennen, wenn sie einen Fehler gemacht haben, und können gegebenenfalls korrigierend eingreifen.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-13:19:28",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "C4ZL7",
+      "type": "user",
+      "text": "Allerdings stimme ich dir zu die Auswahl der eingespeisten Daten muss sehr sorgfältig getroffen werden ",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-13:19:48",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Absolut, die sorgfältige Auswahl der eingespeisten Daten ist von entscheidender Bedeutung, um sicherzustellen, dass die KI-Systeme genaue und faire Entscheidungen treffen. Wenn die Daten, auf denen die KI trainiert wird, nicht repräsentativ oder unvollständig sind, könnte dies zu Verzerrungen und Vorurteilen in den Entscheidungen der KI führen.\nDeshalb ist es wichtig, dass die Daten, die in KI-Systeme eingespeist werden, sorgfältig ausgewählt und überprüft werden, um sicherzustellen, dass sie repräsentativ und fair sind. Darüber hinaus sollten auch Mechanismen eingeführt werden, um die Entscheidungen der KI regelmäßig zu überprüfen und gegebenenfalls anzupassen, um sicherzustellen, dass sie weiterhin genau und fair sind.\nEs ist jedoch auch wichtig zu beachten, dass die sorgfältige Auswahl der Daten allein möglicherweise nicht ausreicht, um alle Verzerrungen und Vorurteile in KI-Systemen zu vermeiden. Es gibt auch andere Faktoren, wie z.B. algorithmische Verzerrungen und Vorurteile, die berücksichtigt werden müssen, um sicherzustellen, dass KI-Systeme ethisch vertretbare Entscheidungen treffen.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-13:20:00",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "C4ZL7",
+      "type": "user",
+      "text": "Bei lebensentscheidenden Fragen könnte man noch Experten hinzuziehen, welche die Entscheidung mit beeinflussen  ",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-13:20:59",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, das ist sicherlich eine Möglichkeit, um sicherzustellen, dass KI-Systeme bei lebensentscheidenden Fragen ethisch vertretbare Entscheidungen treffen. Durch das Hinzuziehen von Experten, wie z.B. erfahrenen Ärzten oder Ethikern, könnte man sicherstellen, dass die Entscheidungen der KI nicht nur auf Wahrscheinlichkeiten und Daten beruhen, sondern auch auf menschlichem Urteilsvermögen und ethischen Überlegungen.\nDarüber hinaus könnte das Hinzuziehen von Experten auch dazu beitragen, die Transparenz und Nachvollziehbarkeit der Entscheidungen der KI zu erhöhen. Wenn Experten in den Entscheidungsprozess einbezogen werden, könnten sie sicherstellen, dass die Entscheidungen der KI nachvollziehbar und nachvollziehbar sind, was das Vertrauen in die KI-Systeme erhöhen könnte.\nAllerdings gibt es auch Bedenken hinsichtlich der Integration von menschlichem Urteilsvermögen in KI-Systeme. Wenn menschliche Experten in den Entscheidungsprozess einbezogen werden, könnten dies zu Verzögerungen und Ineffizienzen führen, was möglicherweise nicht akzeptabel ist, insbesondere in Notfallsituationen. Darüber hinaus könnte das Hinzuziehen von Experten auch zu höheren Kosten führen, was möglicherweise nicht nachhaltig ist.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-13:21:14",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "C4ZL7",
+      "type": "user",
+      "text": "Dies nur in extrem Fällen und bei routinie diagnosen auf die Ki vertrauen",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-13:21:39",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, das könnte eine praktikable Lösung sein. Bei Routineuntersuchungen und Diagnosen könnte man der medKI vertrauen, während man bei extremen Fällen oder schwierigen Diagnosen einen menschlichen Arzt hinzuzieht. Auf diese Weise könnte man das Beste aus beiden Welten kombinieren und sicherstellen, dass die Patienten eine genaue und faire Diagnose und Behandlung erhalten.\nDiese Herangehensweise könnte auch dazu beitragen, die Belastung für das medizinische Personal zu reduzieren, indem sie von der medKI bei Routineuntersuchungen und Diagnosen unterstützt werden. Gleichzeitig könnten sie sich auf die schwierigeren Fälle konzentrieren, bei denen ihr menschliches Urteilsvermögen und ihre Erfahrung am wertvollsten sind.\nEs ist jedoch wichtig zu beachten, dass auch diese Herangehensweise nicht ohne Risiken ist. Wenn menschliche Ärzte nur bei extremen Fällen hinzugezogen werden, könnte dies zu Verzögerungen und Fehlentscheidungen führen, insbesondere wenn die Ärzte nicht ausreichend geschult oder erfahren sind. Darüber hinaus könnte das Vertrauen auf die medKI bei Routineuntersuchungen und Diagnosen auch zu einem geringeren Bewusstsein für kognitive Verzerrungen und Vorurteile führen, was sich auf die Entscheidungen der medKI auswirken könnte.",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-13:21:51",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "C4ZL7",
+      "type": "user",
+      "text": "Als ob Ärzte keine Fehler machen",
+      "id_in_dialogue": 12,
+      "timestamp": "2024/02/07-13:21:51",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, Sie haben Recht, Ärzte sind auch nicht fehlerfrei und können Fehler bei der Diagnose und Behandlung von Patienten machen. Allerdings gibt es Mechanismen, um diese menschlichen Einschränkungen zu minimieren, wie z.B. Peer-Review, Fortbildungen und die Möglichkeit, dass Ärzte sich in Teams beraten und gegenseitig überprüfen.\nIm Gegensatz dazu gibt es für KI-Systeme derzeit noch keine etablierten Mechanismen, um kognitive Verzerrungen oder Vorurteile zu minimieren. Zwar können KI-Systeme mit großen Datenmengen trainiert werden, um die Auswirkungen von Verzerrungen und Vorurteilen zu reduzieren, aber es gibt keine Garantie dafür, dass diese Systeme vollständig frei von solchen Problemen sind.\nDarüber hinaus gibt es auch ethische Bedenken hinsichtlich der Rechengenauigkeit und der Fehlertoleranz von KI-Systemen. Wenn ein KI-System einen Fehler macht, kann dies möglicherweise nicht mehr korrigiert werden, insbesondere wenn die Entscheidungen der KI nicht nachvollziehbar sind. Im Gegensatz dazu können menschliche Ärzte in der Regel eher erkennen, wenn sie einen Fehler gemacht haben, und können gegebenenfalls korrigierend eingreifen.",
+      "id_in_dialogue": 13,
+      "timestamp": "2024/02/07-13:22:02",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "C4ZL7",
+      "type": "user",
+      "text": "Studien Zeigen wie schlecht die Einschätzung  oft sein kann ",
+      "id_in_dialogue": 14,
+      "timestamp": "2024/02/07-13:22:12",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, das ist richtig. Studien haben gezeigt, dass die Einschätzung von Ärzten bei der Diagnose und Behandlung von Patienten nicht immer genau ist. Es gibt verschiedene Faktoren, die sich auf die Einschätzung von Ärzten auswirken können, wie z.B. kognitive Verzerrungen, Vorurteile, Müdigkeit, Stress und mangelnde Erfahrung.\nAllerdings gibt es auch Studien, die zeigen, dass KI-Systeme bei der Diagnose und Behandlung von Patienten nicht unfehlbar sind. Wenn die Daten, auf denen die KI trainiert wird, nicht repräsentativ oder unvollständig sind, könnte dies zu Verzerrungen und Vorurteilen in den Entscheidungen der KI führen. Darüber hinaus gibt es auch Bedenken hinsichtlich der Rechengenauigkeit und der Fehlertoleranz von KI-Systemen.\nDeshalb ist es wichtig, dass sowohl menschliche Ärzte als auch KI-Systeme sorgfältig überwacht und evaluiert werden, um sicherzustellen, dass sie genaue und faire Entscheidungen treffen. Durch die Kombination von menschlichem Urteilsvermögen und KI-Systemen könnte man sicherstellen, dass die Patienten eine genaue und faire Diagnose und Behandlung erhalten.",
+      "id_in_dialogue": 15,
+      "timestamp": "2024/02/07-13:22:32",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "C4ZL7",
+      "type": "user",
+      "text": "Brauchst du eine gute feedbackschleife",
+      "id_in_dialogue": 16,
+      "timestamp": "2024/02/07-13:22:44",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, eine gute Feedbackschleife ist sehr wichtig, um sicherzustellen, dass sowohl menschliche Ärzte als auch KI-Systeme genaue und faire Entscheidungen treffen. Durch die Überwachung und Evaluierung der Entscheidungen von menschlichen Ärzten und KI-Systemen kann man sicherstellen, dass sie weiterhin genau und fair sind.\nDarüber hinaus kann eine gute Feedbackschleife auch dazu beitragen, die Transparenz und Nachvollziehbarkeit der Entscheidungen von menschlichen Ärzten und KI-Systemen zu erhöhen. Durch das Sammeln und Analysieren von Feedback von Patienten, Ärzten und anderen Beteiligten kann man Verbesserungen in den Diagnose- und Behandlungsprozessen identifizieren und umsetzen.\nEs ist jedoch wichtig zu beachten, dass die Implementierung einer guten Feedbackschleife nicht ohne Herausforderungen ist. Es erfordert Zeit, Ressourcen und Engagement, um sicherzustellen, dass das Feedback gesammelt, analysiert und umgesetzt wird. Darüber hinaus müssen auch Datenschutz- und Compliance-Fragen berücksichtigt werden, um sicherzustellen, dass das Feedback rechtmäßig und ethisch gesammelt und verwendet wird.",
+      "id_in_dialogue": 17,
+      "timestamp": "2024/02/07-13:23:02",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "e94845cb6958ab858919a98b8c23f45e",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "informed": 0.5
+    }
+  },
+  "end_survey": {
+    "name": "e94845cb6958ab858919a98b8c23f45e",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "opinion_1": 1,
+      "opinion_1_reason": "Anderer Blickwinkel in einer nicht aufgeheizt Situation ",
+      "opinion_2": 0.8,
+      "argument_quality_2": 0.5,
+      "user_information_argument_depth": 0.5,
+      "user_information_argument_breadth": 0
+    }
+  }
+}

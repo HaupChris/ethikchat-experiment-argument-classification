@@ -1,0 +1,448 @@
+{
+  "name": "20230130_121637_429783",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2023/01/30-12:16:37",
+  "end": "in progress",
+  "utterances": [
+    {
+      "user": "Kek",
+      "type": "user",
+      "text": "Hallo Chat ich finde dieses Thema nicht vertretbar, weil die Ki keinerlei direkte Kontrolle über Menschenleben erhalten sollte.",
+      "id_in_dialogue": 0,
+      "timestamp": "2023/01/30-12:17:49",
+      "true_labels": [
+        "Z.K16"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "Z.K16",
+          0.34965430117316726
+        ],
+        [
+          "FAQ.4",
+          0.012015709966993587
+        ],
+        [
+          "NZ.K10",
+          0.011624898654473505
+        ],
+        [
+          "Z.K9",
+          0.010865891896992181
+        ],
+        [
+          "Z.K6",
+          0.01058538623457935
+        ],
+        [
+          "NZ.K6",
+          0.010554373602594315
+        ],
+        [
+          "Z.K13",
+          0.010358191678477669
+        ],
+        [
+          "NZ.K4",
+          0.010204629409397927
+        ],
+        [
+          "Z.K14",
+          0.010033493297817409
+        ],
+        [
+          "Z.K2",
+          0.009996597282245908
+        ],
+        [
+          "Z.K10",
+          0.009914493042593047
+        ],
+        [
+          "Z.K1",
+          0.009909868006858552
+        ],
+        [
+          "Z.K7",
+          0.009804827366767788
+        ],
+        [
+          "Z.P1-1",
+          0.009790363963071638
+        ],
+        [
+          "Z.K3",
+          0.00977672854399474
+        ],
+        [
+          "Z.K5",
+          0.009751585014268399
+        ],
+        [
+          "FAQ.5",
+          0.00962289118309648
+        ],
+        [
+          "NZ.K1",
+          0.00950453399488109
+        ],
+        [
+          "Z.K4",
+          0.0094952291480851
+        ],
+        [
+          "FAQ.1",
+          0.009382767783891756
+        ],
+        [
+          "NZ.K8",
+          0.009349283131215226
+        ],
+        [
+          "FAQ.2",
+          0.009334195935015817
+        ],
+        [
+          "FAQ.3",
+          0.00926358222736065
+        ],
+        [
+          "Z.K19",
+          0.009150963288586701
+        ],
+        [
+          "NZ.K3",
+          0.009140325876377465
+        ],
+        [
+          "Z.P1-2",
+          0.00885906736049394
+        ],
+        [
+          "Z.K18",
+          0.008851644512149736
+        ],
+        [
+          "NZ.K9",
+          0.008710370166334375
+        ],
+        [
+          "FAQ.7",
+          0.008665383181357572
+        ],
+        [
+          "Z.K15",
+          0.008600229535963764
+        ],
+        [
+          "FAQ.6",
+          0.008572225321190141
+        ],
+        [
+          "Z.K11",
+          0.008488670002362942
+        ],
+        [
+          "Z.K12",
+          0.008346870840004829
+        ],
+        [
+          "Z.P1",
+          0.0
+        ],
+        [
+          "Z.P1-1-1",
+          0.0
+        ],
+        [
+          "Z.P1-2-1",
+          0.0
+        ],
+        [
+          "Z.P4",
+          0.0
+        ],
+        [
+          "Z.P4-1",
+          0.0
+        ],
+        [
+          "Z.P2",
+          0.0
+        ],
+        [
+          "Z.P3",
+          0.0
+        ],
+        [
+          "Z.P3-1",
+          0.0
+        ],
+        [
+          "Z.P3-1-1",
+          0.0
+        ],
+        [
+          "Z.P6",
+          0.0
+        ],
+        [
+          "Z.P6-1",
+          0.0
+        ],
+        [
+          "Z.P6-1-1",
+          0.0
+        ],
+        [
+          "Z.P5",
+          0.0
+        ],
+        [
+          "Z.P5-1",
+          0.0
+        ],
+        [
+          "Z.P7",
+          0.0
+        ],
+        [
+          "Z.P7-1",
+          0.0
+        ],
+        [
+          "Z.K1-1",
+          0.0
+        ],
+        [
+          "Z.K2-4",
+          0.0
+        ],
+        [
+          "Z.K4-1",
+          0.0
+        ],
+        [
+          "Z.K6-1",
+          0.0
+        ],
+        [
+          "Z.K15-1",
+          0.0
+        ],
+        [
+          "Z.K18-1",
+          0.0
+        ],
+        [
+          "Z.K3-1",
+          0.0
+        ],
+        [
+          "Z.K3-1-1",
+          0.0
+        ],
+        [
+          "Z.K3-1-1-1",
+          0.0
+        ],
+        [
+          "Z.K3-2",
+          0.0
+        ],
+        [
+          "Z.K11-1",
+          0.0
+        ],
+        [
+          "Z.K12-1",
+          0.0
+        ],
+        [
+          "Z.K5-1",
+          0.0
+        ],
+        [
+          "Z.K7-1",
+          0.0
+        ],
+        [
+          "Z.K10-1",
+          0.0
+        ],
+        [
+          "Z.K10-2",
+          0.0
+        ],
+        [
+          "Z.K9-1",
+          0.0
+        ],
+        [
+          "Z.K13-1",
+          0.0
+        ],
+        [
+          "Z.K14-1",
+          0.0
+        ],
+        [
+          "Z.K16-1",
+          0.0
+        ],
+        [
+          "Z.K19-1",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "EthiBot",
+      "type": "bot",
+      "text": " Du argumentierst, dass Menschen abhängig von der medKI werden. Dein Argument ist nicht spezifisch bzgl. der medKI sondern gilt für viele fortgeschrittliche Innovationen. In unserem Szenario wird die medKI von Fachärtzt:innen in Kompetenzzentren weiterentwickelt und überwacht. Ein \"Aussterben\" menschlicher Ärzt:innen ist nicht vorgesehen, und die volle Funktionsfähigkeit der medKI kann jederzeit unter menschlicher Aufsicht gewährleistet werden.",
+      "id_in_dialogue": 1,
+      "timestamp": "2023/01/30-12:17:49",
+      "true_labels": [
+        "intro_26",
+        "Z.K16",
+        "intro_57",
+        "Z.K16-1"
+      ],
+      "true_bounds": [
+        [
+          0,
+          23
+        ],
+        [
+          23,
+          63
+        ],
+        [
+          63,
+          170
+        ],
+        [
+          170,
+          448
+        ]
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_26",
+          "intro_25",
+          "intro_28",
+          "intro_24",
+          "intro_23",
+          "intro_32",
+          "intro_27",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.K16",
+        "introductions": [
+          "intro_57",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_58",
+          "intro_59",
+          "intro_60",
+          "intro_61",
+          "intro_62"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_16",
+          "z_trans_8",
+          "z_trans_11",
+          "z_trans_9",
+          "z_trans_10",
+          "z_trans_13",
+          "z_trans_2",
+          "z_trans_1",
+          "z_trans_4",
+          "z_trans_12",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": false,
+        "first_arguments": [
+          "Z.K16-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.P1",
+          "Z.P2",
+          "Z.P4",
+          "Z.P3",
+          "Z.P5",
+          "Z.P6"
+        ],
+        "preselect_second_argument": false
+      }
+    }
+  ],
+  "start_survey": {
+    "name": "61781de468fab1da888c6624f39f5e1a",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "informed": 0.5
+    }
+  },
+  "end_survey": "not available"
+}

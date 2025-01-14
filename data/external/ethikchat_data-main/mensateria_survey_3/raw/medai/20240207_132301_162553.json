@@ -1,0 +1,147 @@
+{
+  "name": "20240207_132301_162553",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-13:23:01",
+  "end": "2024/02/07-13:30:03",
+  "utterances": [
+    {
+      "user": "DFMOH",
+      "type": "user",
+      "text": "Die haben Gefühle ",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-13:23:24",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe, dass Sie die Bedeutung und Wichtigkeit von menschlichen Gefühlen betonen möchten. In unserem Szenario geht es jedoch nicht um Emotionen, sondern um die Fähigkeit einer medizinischen KI, eigenständige Diagnose- und Therapie-Entscheidungen zu treffen. Auch wenn eine KI keine Gefühle haben kann, kann sie dennoch in der Lage sein, präzise und effiziente medizinische Entscheidungen zu treffen, die auf fundierten Daten und Fakten beruhen. Das könnte sogar dazu beitragen, menschliche Fehler zu minimieren und die Patientenversorgung zu verbessern. Dennoch wäre es wichtig, die KI so zu gestalten, dass sie ethische und moralische Aspekte berücksichtigt, um ungewollte Folgen zu vermeiden.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-13:23:33",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "DFMOH",
+      "type": "user",
+      "text": " Sie können auf jeden Fall helfen, aber können zum Beispiel nicjt Leuten bei Übungen helfen und unterstützen im Alltag",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-13:24:17",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": " Ich verstehe Ihren Punkt, aber in unserem Szenario geht es nicht um die Unterstützung im Alltag oder bei Übungen. Stellen Sie sich vor, die medizinische KI wäre ein hochspezialisiertes Werkzeug, das ausschließlich in Untersuchungszentren eingesetzt wird, um Patient:innen eine schnelle und genaue Diagnose zu stellen und therapeutische Empfehlungen zu geben.\nDie KI würde nicht die Rolle eines menschlichen Unterstützers übernehmen, sondern vielmehr eine unabhängige Entscheidungskompetenz besitzen, die auf umfangreichen medizinischen Daten und Algorithmen basiert.\nDiese Art von Spezialisierung und Fokussierung auf medizinische Entscheidungen könnte dazu beitragen, die Genauigkeit und Effizienz der Patientenversorgung zu erhöhen, da die KI in der Lage wäre, eine große Menge an medizinischen Informationen in kürzerer Zeit zu verarbeiten und zu analysieren als ein Mensch. ",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-13:24:25",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "DFMOH",
+      "type": "user",
+      "text": "Es schauen aber nicht mehrere Menschen zsm nochmal drauf und kontrollieren als Gruppe aus verschiedenen Faxhrichtungen, ob die Diagnose Gehalt hat",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-13:25:39",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sie haben Recht, dass die Prüfung und Bestätigung von Diagnosen durch eine Gruppe von Fachleuten mit unterschiedlichen Hintergründen ein wichtiger Aspekt der medizinischen Versorgung ist. In unserem Szenario würde die medizinische KI jedoch nicht isoliert arbeiten, sondern als Teil eines größeren Versorgungssystems.\nDie KI würde die Daten erheben und die Diagnose stellen, während das medizinische Personal die Entscheidungen der KI erklären und die Patient:innen weiter betreuen würde. Dieses Personal könnte auch die Möglichkeit haben, die Entscheidungen der KI zu überprüfen und gegebenenfalls anzufechten, wenn sie Zweifel haben.\nDarüber hinaus könnte das System so gestaltet werden, dass die KI-Entscheidungen regelmäßig von unabhängigen Expert:innen überprüft werden, um sicherzustellen, dass sie den aktuellen Standards und Leitlinien entsprechen.\nDiese Art von Überprüfungs- und Feedback-Mechanismen würden dazu beitragen, die Zuverlässigkeit und Genauigkeit der KI-Entscheidungen zu gewährleisten und sicherzustellen, dass sie den Bedürfnissen und Wünschen der Patient:innen gerecht werden. ",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-13:25:52",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "DFMOH",
+      "type": "user",
+      "text": "Für die Ki ist alles rational und haben kein Menschenverständnis oder eigene Erfahrungen mit denen sie Ihre E Scheidungen abgleichen können",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-13:26:26",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sie haben Recht, dass eine KI nicht über menschliche Emotionen oder persönliche Erfahrungen verfügt, die sie bei der Entscheidungsfindung berücksichtigen kann. Allerdings ist die medizinische Diagnose und Therapie ein Bereich, in dem eine rational und datengesteuerte Entscheidungsfindung von Vorteil sein kann.\nDie KI würde in unserem Szenario auf fundierten medizinischen Daten und Algorithmen basieren, um Diagnosen zu stellen und therapeutische Empfehlungen zu geben. Diese Art von Entscheidungsfindung könnte dazu beitragen, menschliche Fehler zu minimieren und die Patientenversorgung zu verbessern.\nDarüber hinaus könnte das System so gestaltet werden, dass die KI-Entscheidungen regelmäßig von unabhängigen Expert:innen überprüft werden, um sicherzustellen, dass sie den aktuellen Standards und Leitlinien entsprechen und ethische und moralische Aspekte berücksichtigen.\nEs ist wichtig zu beachten, dass die KI nicht die menschliche Komponente der medizinischen Versorgung ersetzen soll, sondern vielmehr ein hochspezialisiertes Werkzeug sein soll, das den Fachkräften zur Verfügung steht, um ihre Arbeit zu unterstützen und die Patientenversorgung zu verbessern. ",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-13:26:37",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "DFMOH",
+      "type": "user",
+      "text": "Trotzdem ist es eventuell für echte Menschen schwieriger sich mit ihren Problemen Robotern anzuvertrauen als einem lebendigen Gegenüber",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-13:27:29",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sie haben Recht, dass es für manche Menschen schwieriger sein könnte, sich mit ihren Problemen einem Roboter oder einer KI anzuvertrauen als einem lebendigen Gegenüber. Die menschliche Komponente der medizinischen Versorgung ist von unschätzbarem Wert, und die Beziehung zwischen Patient:innen und Fachkräften ist ein wichtiger Aspekt der Gesundheitsversorgung.\nIn unserem Szenario würde die medizinische KI jedoch nicht die menschliche Komponente der Versorgung ersetzen, sondern vielmehr eine unabhängige Entscheidungskompetenz besitzen, die auf fundierten medizinischen Daten und Algorithmen basiert. Das medizinische Personal würde weiterhin eine wichtige Rolle spielen, indem es die Entscheidungen der KI erklärt und die Patient:innen weiter betreut.\nDarüber hinaus könnte das System so gestaltet werden, dass die Patient:innen die Möglichkeit haben, die KI-Entscheidungen zu hinterfragen und gegebenenfalls eine zweite Meinung einzuholen, um sicherzustellen, dass sie sich mit den Empfehlungen wohl fühlen und Vertrauen in die Versorgung haben.\nEs ist wichtig, die Bedenken und Vorbehalte von Patient:innen ernst zu nehmen und sicherzustellen, dass sie sich in der Versorgung wohl und unterstützt fühlen, unabhängig davon, ob sie mit einem Menschen oder einer KI interagieren. ",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-13:27:44",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "1d019bfa0580f4e6d64f84c85ffdf1f3",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "1d019bfa0580f4e6d64f84c85ffdf1f3",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "opinion_1": 0,
+      "opinion_1_reason": "Die Antoworten klingen zu lang  und nicht auf die Fragen eingehend",
+      "opinion_2": 0.4,
+      "argument_quality_2": 0.4,
+      "user_information_argument_breadth": 0.25,
+      "user_information_argument_depth": 0.4,
+      "positive_critics": "Sehr schnelle Antowrt",
+      "negative_critics": "Zu lange Antworteb"
+    }
+  }
+}

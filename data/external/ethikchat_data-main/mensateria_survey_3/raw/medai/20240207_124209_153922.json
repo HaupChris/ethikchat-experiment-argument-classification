@@ -1,0 +1,461 @@
+{
+  "name": "20240207_124209_153922",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-12:42:09",
+  "end": "2024/02/07-12:46:11",
+  "utterances": [
+    {
+      "user": "INMVO",
+      "type": "user",
+      "text": "Ki ist noch zu sprunghaft um Standhafte Diagnosen zu erstellen.",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-12:43:27",
+      "true_labels": [
+        "NZ.K3"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "Z.P3-1",
+          0.01940526692077881
+        ],
+        [
+          "Z.P6-1",
+          0.0192921450370911
+        ],
+        [
+          "NZ.K9",
+          0.018812237643425916
+        ],
+        [
+          "Z.P1-1",
+          0.018149546402400435
+        ],
+        [
+          "NZ.K3",
+          0.0178510568377482
+        ],
+        [
+          "Z.P4-1",
+          0.01776868570694735
+        ],
+        [
+          "NZ.K6",
+          0.017733824456305714
+        ],
+        [
+          "Z.K2",
+          0.017229718979256386
+        ],
+        [
+          "Z.K18",
+          0.016891380670480925
+        ],
+        [
+          "Z.P7-1",
+          0.016124790736403067
+        ],
+        [
+          "NZ.K8",
+          0.015863744931114695
+        ],
+        [
+          "Z.K4",
+          0.015653340635199586
+        ],
+        [
+          "Z.K1",
+          0.0152982708772788
+        ],
+        [
+          "Z.P1-2",
+          0.015237967082899873
+        ],
+        [
+          "Z.K10",
+          0.015204234875406172
+        ],
+        [
+          "NZ.K4",
+          0.015082097891359506
+        ],
+        [
+          "NZ.K1",
+          0.015055674121139251
+        ],
+        [
+          "Z.K15",
+          0.01481219029136986
+        ],
+        [
+          "Z.K16",
+          0.014682040430517572
+        ],
+        [
+          "Z.K19",
+          0.014540759665636671
+        ],
+        [
+          "Z.K6",
+          0.014003775245040375
+        ],
+        [
+          "Z.K5",
+          0.013702806451560239
+        ],
+        [
+          "Z.K14",
+          0.013436937478321129
+        ],
+        [
+          "NZ.K10",
+          0.013031797289876027
+        ],
+        [
+          "Z.K8-1",
+          0.012801259742552914
+        ],
+        [
+          "Z.K12",
+          0.012423346682084524
+        ],
+        [
+          "Z.K13",
+          0.012415376277597815
+        ],
+        [
+          "Z.K8",
+          0.012042050278002028
+        ],
+        [
+          "Z.K7",
+          0.011808185821625253
+        ],
+        [
+          "Z.K11",
+          0.010885269764718264
+        ],
+        [
+          "Z.K9",
+          0.010452304350177008
+        ],
+        [
+          "Z.P5-1",
+          0.010440665577166247
+        ],
+        [
+          "Z.K3",
+          0.010207629084218461
+        ],
+        [
+          "Z.K3-1-1",
+          0.0100527660355513
+        ],
+        [
+          "Z.P1",
+          0.0
+        ],
+        [
+          "Z.P1-1-1",
+          0.0
+        ],
+        [
+          "Z.P1-2-1",
+          0.0
+        ],
+        [
+          "Z.P4",
+          0.0
+        ],
+        [
+          "Z.P2",
+          0.0
+        ],
+        [
+          "Z.P3",
+          0.0
+        ],
+        [
+          "Z.P3-1-1",
+          0.0
+        ],
+        [
+          "Z.P6",
+          0.0
+        ],
+        [
+          "Z.P6-1-1",
+          0.0
+        ],
+        [
+          "Z.P5",
+          0.0
+        ],
+        [
+          "Z.P7",
+          0.0
+        ],
+        [
+          "Z.K1-1",
+          0.0
+        ],
+        [
+          "Z.K2-4",
+          0.0
+        ],
+        [
+          "Z.K4-1",
+          0.0
+        ],
+        [
+          "Z.K6-1",
+          0.0
+        ],
+        [
+          "Z.K15-1",
+          0.0
+        ],
+        [
+          "Z.K18-1",
+          0.0
+        ],
+        [
+          "Z.K3-1",
+          0.0
+        ],
+        [
+          "Z.K3-1-1-1",
+          0.0
+        ],
+        [
+          "Z.K3-2",
+          0.0
+        ],
+        [
+          "Z.K11-1",
+          0.0
+        ],
+        [
+          "Z.K12-1",
+          0.0
+        ],
+        [
+          "Z.K5-1",
+          0.0
+        ],
+        [
+          "Z.K7-1",
+          0.0
+        ],
+        [
+          "Z.K10-1",
+          0.0
+        ],
+        [
+          "Z.K10-2",
+          0.0
+        ],
+        [
+          "Z.K9-1",
+          0.0
+        ],
+        [
+          "Z.K13-1",
+          0.0
+        ],
+        [
+          "Z.K14-1",
+          0.0
+        ],
+        [
+          "Z.K16-1",
+          0.0
+        ],
+        [
+          "Z.K19-1",
+          0.0
+        ],
+        [
+          "NZ.K1-1",
+          0.0
+        ],
+        [
+          "NZ.K3-1",
+          0.0
+        ],
+        [
+          "NZ.K4-1",
+          0.0
+        ],
+        [
+          "NZ.K6-1",
+          0.0
+        ],
+        [
+          "NZ.K8-1",
+          0.0
+        ],
+        [
+          "NZ.K9-1",
+          0.0
+        ],
+        [
+          "NZ.K10-1",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true,
+      "user_selected_ground_truth": true
+    },
+    {
+      "user": "EthiBot",
+      "type": "bot",
+      "text": "Ich habe dich wohl nicht korrekt verstanden. Bitte wähle aus der folgenden Liste ein Argument aus, das deinen Standpunkt am besten repräsentiert. | mangelnde Qualität der Trainingsdaten sorgt für unzureichende Leistungsfähigkeit der KI. |   Das ist eher unwahrscheinlich. In unserem Szenario erhält die KI nicht nur empirische Trainingsdaten, die aus bisher existierenden Fällen stammen, sondern lernt beispielsweise auch aus der medizinischen Literatur. Zudem sollte man hier auch Folgendes berücksichtigen: Eine medKI wäre rund um die Uhr erreichbar; in der Nacht oder am Wochenende, wenn auch nur in einer Notbesetzung mit medizinischem Hilfspersonal. Das ließe sich ohne medKI sonst nur in großen Kliniken sicherstellen und wäre auf dem Land nicht möglich.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-12:43:27",
+      "true_labels": [
+        "NZ.K3",
+        "intro_7",
+        "NZ.K3-1",
+        "z_trans_4",
+        "Z.P1"
+      ],
+      "true_bounds": [],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_23",
+          "intro_25",
+          "intro_24",
+          "intro_26",
+          "intro_28",
+          "intro_27",
+          "intro_32",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.P3-1",
+        "introductions": [
+          "intro_3",
+          "intro_2",
+          "intro_1",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59",
+          "intro_60",
+          "intro_61",
+          "intro_62",
+          "intro_63",
+          "intro_64",
+          "intro_65",
+          "intro_66",
+          "intro_67",
+          "intro_68"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_4",
+          "z_trans_1",
+          "z_trans_9",
+          "z_trans_2",
+          "z_trans_8",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": false,
+        "first_arguments": [
+          "Z.P3-1-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.P2",
+          "Z.P3",
+          "Z.P6",
+          "Z.P1",
+          "Z.P4",
+          "Z.P5"
+        ],
+        "preselect_second_argument": false
+      }
+    }
+  ],
+  "start_survey": {
+    "name": "afb1670e972b8f6a64c3ac8b5b62799d",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "afb1670e972b8f6a64c3ac8b5b62799d",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "opinion_1": 0,
+      "opinion_1_reason": "Sehr schwer zu bedienen",
+      "opinion_2": 0.4,
+      "argument_quality_2": 0.6,
+      "user_information_argument_breadth": 0.25,
+      "user_information_argument_depth": 0.6,
+      "positive_critics": "",
+      "negative_critics": "Ich will nicht mit einem Computer diskutieren"
+    }
+  }
+}

@@ -1,0 +1,192 @@
+{
+  "name": "20240207_115239_397759",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:52:39",
+  "end": "2024/02/07-12:09:05",
+  "utterances": [
+    {
+      "user": "YL7O1",
+      "type": "user",
+      "text": "Bei innen Verletzungen kann eine Ki zwar bestimmte Röntgen Bilder oder MRT Aufnahmen auswerten. Sie kann aber nicht den Patienten berühren zum Beispiel bei einer Brust untersuchen ist abtasten sehr wichtig.",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:54:37",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken, aber es geht in diesem Szenario nicht darum, wie die medKI physische Untersuchungen durchführen soll, sondern darüber, ob sie eigenständig Diagnose- und Therapie-Entscheidungen auf der Grundlage von medizinischen Daten treffen darf. Die physische Untersuchung kann weiterhin vom medizinischen Personal durchgeführt werden, während die medKI die erfassten Daten analysiert und die geeigneten Entscheidungen trifft.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:54:41",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "YL7O1",
+      "type": "user",
+      "text": "Ja dennoch, fehlt dann ja dieser Aspekt in der Einbeziehung der Diagnose. ",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-11:56:48",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Grundsätzlich ist Ihre Bedenken, dass die medKI den Aspekt der physischen Untersuchung nicht einbeziehen kann, verständlich. Allerdings sollten wir auch bedenken, dass die medKI in diesem Szenario nicht die einzige Informationsquelle ist. Das medizinische Personal, das den Patienten untersucht, kann die medKI über die Ergebnisse der physischen Untersuchung informieren, und die medKI kann diese Informationen in ihre Entscheidungsfindung einbeziehen. Somit kann der Aspekt der physischen Untersuchung indirekt in die Diagnose einfließen.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-11:56:57",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "YL7O1",
+      "type": "user",
+      "text": "Dann kann die Ki aber alleine nicht die selbe Zulassung wie ein Arzt oder eine Ärztin erreich wenn zusätzlich medizinisches Fachpersonal benötigt wird. ",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-11:58:35",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Auch hier möchte ich Ihre Bedenken verstehen, aber es ist wichtig zu beachten, dass die Zulassung von Ärztinnen und Ärzten nicht nur auf ihre Fähigkeit zur Diagnose und Therapieentscheidung beschränkt ist. Es umfasst auch andere Faktoren wie medizinische Ausbildung, praktische Erfahrung und ethische Verantwortung. Die medKI in unserem Szenario ist ein Instrument, das bei der Diagnose und Therapieentscheidung hilft, und es ist nicht unbedingt erforderlich, dass sie die gleiche Zulassung wie ein Arzt oder eine Ärztin erreicht. Vielmehr geht es darum, die Vorteile der Automatisierung und der präzisen Datenanalyse zu nutzen, um die Qualität der medizinischen Versorgung zu verbessern.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-11:58:46",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "YL7O1",
+      "type": "user",
+      "text": "Aber das ist ja nicht die Frage gewesen ",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-11:59:51",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe, dass Sie möchten, dass wir zur ursprünglichen Frage zurückkehren, ob ein ausreichend gutes medizinisches Programm aus ethischer Sicht selbstständig Diagnose- und Therapie-Entscheidungen treffen darf. Wenn wir über die Zulassung von Ärztinnen und Ärzten sprechen, dann geht es darum, die Rolle der medKI im Vergleich zu menschlichen Ärztinnen und Ärzten zu betrachten. Die medKI ist ein Instrument, das bei der Diagnose und Therapieentscheidung hilft, und es ist nicht notwendig, dass sie die gleiche Zulassung wie ein Arzt oder eine Ärztin hat. Vielmehr sollten wir die Frage aus der Perspektive der ethischen Vertretbarkeit und der potenziellen Vorteile für die Patienten betrachten. Die medKI kann in der Lage sein, eine genauere und schnellere Diagnose zu stellen, und kann auch dazu beitragen, die Kosten der medizinischen Versorgung zu senken, was letztendlich den Patienten zugutekommt.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-12:00:05",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "YL7O1",
+      "type": "user",
+      "text": "Die Automatisierung ist durchaus sinnvoll dennoch ist bei der Jo bedenklich das gewisse ethische Grundsätze eingeladen werden müssen und empathisches handeln wichtig ist ",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-12:01:38",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Bedenken hinsichtlich der Einhaltung ethischer Grundsätze bei der Verwendung von medKI sind sehr wichtig. Die Automatisierung und die präzise Datenanalyse durch die medKI sollten nicht auf Kosten der ethischen Verantwortung und des empathischen Handelns gehen. In unserem Szenario ist das medizinische Personal dafür verantwortlich, die Entscheidungen der medKI zu überwachen und sicherzustellen, dass sie ethischen Grundsätzen entsprechen. Das medizinische Personal kann auch die menschliche Seite der medizinischen Versorgung gewährleisten, wie z.B. die Kommunikation mit den Patienten und die Berücksichtigung ihrer persönlichen Umstände und Bedürfnisse. Daher ist es wichtig, dass das medizinische Personal und die medKI als ein Team zusammenarbeiten, um eine optimale Versorgung zu gewährleisten.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-12:01:53",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "YL7O1",
+      "type": "user",
+      "text": "Als kombinierte Lösung ist es durchaus sinnvoll. Jedoch kommen dann die Zweifel auf ob sich die Ärztinnen nicht auf der Ki ausruhen und ihren Beruf vernachlässigen und somit die generelle Diagnose an Qualität leidet ",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-12:03:33",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Bedenken hinsichtlich der potenziellen Vernachlässigung des Berufs durch Ärztinnen und Ärzte aufgrund der Unterstützung durch die medKI sind verständlich. Es ist wichtig, sicherzustellen, dass die Ärztinnen und Ärzte ihre Fähigkeiten und ihr Wissen weiterhin aktualisieren und sich nicht auf die medKI allein verlassen. Die medKI sollte als ein Instrument betrachtet werden, das die Ärztinnen und Ärzte bei der Diagnose und Therapieentscheidung unterstützt, aber nicht ersetzt. Daher ist es wichtig, dass das medizinische Personal angemessen geschult wird, um die medKI richtig zu verwenden und ihre Entscheidungen zu überwachen. Durch eine angemessene Schulung und Überwachung können wir sicherstellen, dass die Ärztinnen und Ärzte ihre Fähigkeiten und ihr Wissen weiterhin einsetzen und die Qualität der Diagnose nicht leidet.",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-12:03:45",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "YL7O1",
+      "type": "user",
+      "text": "In dieser Hinsicht könnte es vielleicht in Zukunft Sinn ergeben aber momentan gibt es noch zu wenig Forschung um dies Umzusetzen ",
+      "id_in_dialogue": 12,
+      "timestamp": "2024/02/07-12:05:17",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Meinung, dass es in Zukunft Sinn machen könnte, eine kombinierte Lösung aus medKI und medizinischem Personal einzusetzen, aber dass es derzeit noch zu wenig Forschung gibt, um dies umzusetzen, ist sehr interessant. Es ist wichtig, dass wir weiterhin in Forschung und Entwicklung investieren, um die Potenziale und Risiken der medKI besser zu verstehen und um sicherzustellen, dass sie ethischen Grundsätzen und den Bedürfnissen der Patienten entspricht. Durch weitere Forschung und Entwicklung können wir auch die Zuverlässigkeit und Genauigkeit der medKI verbessern und sicherstellen, dass sie als ein zuverlässiges Instrument für die Diagnose und Therapieentscheidung eingesetzt werden kann. Daher ist es wichtig, dass wir die Forschung und Entwicklung in diesem Bereich weiterhin fördern und unterstützen.",
+      "id_in_dialogue": 13,
+      "timestamp": "2024/02/07-12:05:29",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "cfbc915479f7195781d96188a01750ea",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "informed": 0.25,
+      "agreement": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "cfbc915479f7195781d96188a01750ea",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "user_information_argument_breadth": 0,
+      "user_information_argument_depth": 0.6,
+      "positive_critics": "Respektvoll ",
+      "negative_critics": "",
+      "agreement": 0.25,
+      "opinion_1": 1,
+      "opinion_2": 0.8,
+      "argument_quality_2": 0.5
+    }
+  }
+}

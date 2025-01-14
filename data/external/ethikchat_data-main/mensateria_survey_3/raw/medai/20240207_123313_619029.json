@@ -1,0 +1,31 @@
+{
+  "name": "20240207_123313_619029",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-12:33:13",
+  "end": "in progress",
+  "utterances": [
+    {
+      "user": "9XKPJ",
+      "type": "user",
+      "text": "Weißt du wer Jesse Ratzkin ist?",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-12:33:27",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    }
+  ],
+  "start_survey": {
+    "name": "e7a2e339d73a25a5175b58568b094164",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "informed": 0.5,
+      "agreement": 0.25
+    }
+  },
+  "end_survey": "not available"
+}

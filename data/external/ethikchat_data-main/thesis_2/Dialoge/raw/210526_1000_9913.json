@@ -1,0 +1,517 @@
+{
+  "name": "210526_1000_9913",
+  "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE",
+  "start": "10:00",
+  "end": "11:20",
+  "utterances": [
+    {
+      "user": "1a191e3d2dd0011568e30e898b81bab6",
+      "type": "user",
+      "text": "Ja, sie sollten sie meiner Ansicht nach in einigen medizinischen Bereichen ersetzen. Vor allem im Bereich der Diagnose und Früherkennung von Krankheitsbildern (Radiologie, Onkologie) sehe ich die KI aufgrund der Fähigkeit mehr Datenmengen als der Mensch zu verarbeiten, als diesem überlegen an. Im Bereich der Therapie lege ich hohen Wert auf die Sorge und Betreuung eines Arztes. Daher würde ich in diesem Bereich, nicht für die Anwendung der KI plädieren.",
+      "id_in_dialogue": 0,
+      "true_labels": [
+        "K2-Ac"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "b4831fd34e3021ddd9d2d446e2f0042d",
+      "type": "expert",
+      "text": "Das stimmt. Nur eine KI ist in der Lage, verborgene Muster in den großen Datenmengen zu erkennen und kann so den Ärzt:innen eine wertvolle Unterstützung für Prognose- und Therapieentscheidungen sein. Die Menschen werden nicht durch die KI behandelt. Die KI stellt eine Diagnose und empfiehlt eine Therapie. Die anschließende Therapie übernehmen weiterhin Ärzt:innen.",
+      "id_in_dialogue": 1,
+      "true_labels": [
+        null,
+        "K2-Ac",
+        "K14-A"
+      ],
+      "true_bounds": [
+        [
+          0,
+          12
+        ],
+        [
+          12,
+          200
+        ],
+        [
+          200,
+          366
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "1a191e3d2dd0011568e30e898b81bab6",
+      "type": "user",
+      "text": "In diesem Fall sollten KI in Zukunft auch im Bereich der Therapie zum Einsatz kommen. ",
+      "id_in_dialogue": 2,
+      "true_labels": [
+        "P2"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "b4831fd34e3021ddd9d2d446e2f0042d",
+      "type": "expert",
+      "text": "Hast Du schon einmal daran gedacht: Gerade wenn viele personenbezogene Daten gesammelt werden, besteht die Gefahr, dass dies zum gläsernen Bürger führt. Das ist in datenschutzrechtlicher Hinsicht bedenklich. ",
+      "id_in_dialogue": 3,
+      "true_labels": [
+        null,
+        "P2-A"
+      ],
+      "true_bounds": [
+        [
+          0,
+          36
+        ],
+        [
+          36,
+          208
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "1a191e3d2dd0011568e30e898b81bab6",
+      "type": "user",
+      "text": "Ist die Frage spezifisch auf das Beispiel der KI in der Medizin bezogen?",
+      "id_in_dialogue": 4,
+      "true_labels": [
+        "unknown"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "b4831fd34e3021ddd9d2d446e2f0042d",
+      "type": "expert",
+      "text": "Ja. Fallen dir noch weitere Argumente ein? ",
+      "id_in_dialogue": 5,
+      "true_labels": [
+        null,
+        null
+      ],
+      "true_bounds": [
+        [
+          0,
+          4
+        ],
+        [
+          4,
+          43
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "1a191e3d2dd0011568e30e898b81bab6",
+      "type": "user",
+      "text": "Sicherlich ist das Sammeln von personenbezogenen Daten ein großes Problem. Bezüglich des Einsatzes der KI in der Medizin vertraue ich zum Einen darauf, dass die gesammelten Daten vertraulich behandelt werden müssen, zum Anderen, erachte ich den Nutzen hinsichtlich einer Früherkennung von Krankheitsbildern, als den Kosten überlegen. ",
+      "id_in_dialogue": 6,
+      "true_labels": [
+        "P11-A-P",
+        "P2-A-P"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "b4831fd34e3021ddd9d2d446e2f0042d",
+      "type": "expert",
+      "text": "Das ist richtig. Die Daten werden üblicherweise nur anonymisiert gesammelt, daher bestehen in dieser Hinsicht keine datenschutzrechtlichen Bedenken. Weiterhin ungeklärt bleibt: Zufallsbefunde, sogenannte incidental findings, könnten zu einer Vielzahl von Diagnosen aufgrund unwichtig wirkender Kleinigkeiten führen. Dies würde wiederum einen vermehrten Arbeitsaufwand für das Fachpersonal bedeuten.",
+      "id_in_dialogue": 7,
+      "true_labels": [
+        null,
+        "P2-A-P",
+        null,
+        "P24-A"
+      ],
+      "true_bounds": [
+        [
+          0,
+          17
+        ],
+        [
+          17,
+          149
+        ],
+        [
+          149,
+          177
+        ],
+        [
+          177,
+          398
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "1a191e3d2dd0011568e30e898b81bab6",
+      "type": "user",
+      "text": "Das war mir nicht bewusst. Mit welcher Häufigkeit treten diese Zufallsbefunde auf? ",
+      "id_in_dialogue": 8,
+      "true_labels": [
+        "unknown"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "b4831fd34e3021ddd9d2d446e2f0042d",
+      "type": "expert",
+      "text": "Das muss wohl erst belegt werden. Hinsichtlich anderer Aspekte liegen bereits Studienergebnisse vor. Der KI muss die Möglichkeit gegeben werden, sich zu erproben. Aber zu beachten ist: Die Anwendung einer KI ist standardisiert und reproduzierbar. Sie hängt nicht von den unterschiedlichen Fähigkeiten oder der Tagesform der behandelnden Ärzt:innen ab.",
+      "id_in_dialogue": 9,
+      "true_labels": [
+        null,
+        "P1-A-P",
+        null,
+        "P3"
+      ],
+      "true_bounds": [
+        [
+          0,
+          101
+        ],
+        [
+          101,
+          163
+        ],
+        [
+          163,
+          185
+        ],
+        [
+          185,
+          351
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "1a191e3d2dd0011568e30e898b81bab6",
+      "type": "user",
+      "text": "Das ist sicherlich ein großer Vorteil. Bei mir wurde im Rahmen einer radiologischen Untersuchung ein MRT schon einmal eine Fehldiagnose gestellt. Eine KI könnte helfen dieses Fehlerpotenzial in Zukunft minimieren. Ein weiterer Vorteil, den die KI im Medizinbereich bieten könnte, wäre das den Ärtz*innen durch das Sparen von Zeit in der Diagnose mehr Zeit für die spezifische Sorge des Patienten hätten. Im heutigen Medizingeschäft sind Ärtz*innen derart überlastet, dass pro Patient*in nur wenig Zeit bleibt. Eine KI könnte helfen dieser Überlastung entgegenzuwirken.",
+      "id_in_dialogue": 10,
+      "true_labels": [
+        "P11",
+        "P18"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "b4831fd34e3021ddd9d2d446e2f0042d",
+      "type": "expert",
+      "text": "Studien schätzen, dass etwa 10-15% der von Ärzt:innen gestellten Diagnosen falsch sind. Dem würde ich nicht zustimmen. Obwohl durch den Einsatz von KI Zeit eingespart werden kann, bedeutet dies nicht zwangsläufig, dass die gewonnene Zeit dem Patientenwohl zugute kommt. Vielmehr ist wohl davon auszugehen, dass die Arbeitszeit als Kosten insgesamt eingespart wird.",
+      "id_in_dialogue": 11,
+      "true_labels": [
+        "P11",
+        null,
+        "K15-A-P"
+      ],
+      "true_bounds": [
+        [
+          0,
+          88
+        ],
+        [
+          88,
+          119
+        ],
+        [
+          119,
+          364
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "1a191e3d2dd0011568e30e898b81bab6",
+      "type": "user",
+      "text": "Das stimmt sicherlich. Ein Gesundheitssystem, dass auf Gewinnmaximierung ausgerichtet ist wird höchstwahrscheinlich so vorgehen. Daher müsste politisch die Entscheidung getroffen werden, dass der Gesundheitsbereich so gestützt wird, das Hausärzte und Krankenhäuser nicht zwangsläufig wirtschaftlich rentabel sind. Dieses Problem bezieht sich nicht ausschließlich auf den Einsatz der KI im Medizinbereich.",
+      "id_in_dialogue": 12,
+      "true_labels": [
+        "K1-Aa-P"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "b4831fd34e3021ddd9d2d446e2f0042d",
+      "type": "expert",
+      "text": "Ansprechen möchte ich noch: Eine KI liefert gleichbleibend gute Ergebnisse. Anders als Ärzt:innen steht sie nicht unter dem Einfluss äußerer Faktoren, wie zum Beispiel Stress. Was sagst du dazu? ",
+      "id_in_dialogue": 13,
+      "true_labels": [
+        null,
+        "P4",
+        null
+      ],
+      "true_bounds": [
+        [
+          0,
+          28
+        ],
+        [
+          28,
+          176
+        ],
+        [
+          176,
+          195
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "1a191e3d2dd0011568e30e898b81bab6",
+      "type": "user",
+      "text": "Das stimmt sicherlich. Welche Argumente sprechen denn deiner Ansicht nach gegen den Einsatz der KI in der Medizin?",
+      "id_in_dialogue": 14,
+      "true_labels": [
+        "unknown"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "b4831fd34e3021ddd9d2d446e2f0042d",
+      "type": "expert",
+      "text": "Ärztliche Diagnosen werden in Zeiten des digitalen Wandels überflüssig und das Berufsbild von Ärzt:innen allgemein könnte dadurch als nicht zukunftssicher gelten, wenn davon auszugehen ist, dass die KI das Niveau von Fachärzt:innen aktuell oder zumindest im Laufe der Zeit übertreffen wird. ",
+      "id_in_dialogue": 15,
+      "true_labels": [
+        "K9"
+      ],
+      "true_bounds": [
+        [
+          0,
+          291
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "1a191e3d2dd0011568e30e898b81bab6",
+      "type": "user",
+      "text": "Würden Ärtz*innen in einer solchen Zeit \nWürden Ärtz*innen in einer solchen Zeit dann nur noch als Überbringer oder Vermittler der Diagnosen fungieren?",
+      "id_in_dialogue": 16,
+      "true_labels": [
+        "unknown"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "b4831fd34e3021ddd9d2d446e2f0042d",
+      "type": "expert",
+      "text": "Für die Überprüfung, Bestätigung oder gegebenenfalls Verwerfung der Hypothese seitens der KI sind die behandelnden Ärzt:innen auch weiterhin unerlässlich. Dies gilt ebenso für die Behandlungseinleitung. Man kann es auch so sehen: Dieser Wandel ist in gewissem Maße auch in vielen anderen Branchen zu beobachten.",
+      "id_in_dialogue": 17,
+      "true_labels": [
+        "K9-A",
+        null,
+        "K9-Ac"
+      ],
+      "true_bounds": [
+        [
+          0,
+          203
+        ],
+        [
+          203,
+          230
+        ],
+        [
+          230,
+          311
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "1a191e3d2dd0011568e30e898b81bab6",
+      "type": "user",
+      "text": "Sicherlich. Dieser Wandel muss im gesellschaftlichen Diskurs vollzogen werden und die Gesellschaft muss entscheiden, wie dieser Wandel zu ihrem Nutzen stattfinden kann. Der Gewinn, der durch das Einführen von KI in bestimmte Wirtschaftszweige entsteht, muss auch zum Wohle der Bevölkerung verteilt werden.",
+      "id_in_dialogue": 18,
+      "true_labels": [
+        "unknown"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "b4831fd34e3021ddd9d2d446e2f0042d",
+      "type": "expert",
+      "text": "Fallen dir noch weitere Argumente ein? Es ist fraglich, ob eine Effizienzsteigerung und Ökonomisierung dem Nutzen der Patient:innen zu dienen fähig sind. ",
+      "id_in_dialogue": 19,
+      "true_labels": [
+        null,
+        "K21"
+      ],
+      "true_bounds": [
+        [
+          0,
+          39
+        ],
+        [
+          39,
+          154
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "1a191e3d2dd0011568e30e898b81bab6",
+      "type": "user",
+      "text": "Nein. Das bleibt weiter fraglich. Grundsätzlich bietet die KI viel Potenzial zur Optimierung in den meisten Branchen.  Ich würde mich verabschieden.  ",
+      "id_in_dialogue": 20,
+      "true_labels": [
+        "P1-A"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "b4831fd34e3021ddd9d2d446e2f0042d",
+      "type": "expert",
+      "text": "Die erste systematische Meta-Analyse entsprechender Studien hat gezeigt, dass die KI hinsichtlich der Bilddiagnostik bereits auf Augenhöhe mit Ärzt:innen ist. ",
+      "id_in_dialogue": 21,
+      "true_labels": [
+        "P1-A-Pa"
+      ],
+      "true_bounds": [
+        [
+          0,
+          159
+        ]
+      ],
+      "is_template": true
+    }
+  ],
+  "surveys": [
+    {
+      "name": "1a191e3d2dd0011568e30e898b81bab6",
+      "type": "StartSurvey",
+      "result": "weak-agree"
+    },
+    {
+      "name": "1a191e3d2dd0011568e30e898b81bab6",
+      "type": "EndSurvey",
+      "result": "weak-agree",
+      "improvement_suggestions": "Sehr interessantes Format. Der abschließende Fragebogen war schwer zu beantworten, da jede Frequenz als Argument wahrgenommen wurde. Siehe Zustimmung: \"In diesem Fall sollten KI in Zukunft auch im Bereich der Therapie zum Einsatz kommen.\" ",
+      "persuasive_arguments": [
+        [
+          0,
+          true
+        ],
+        [
+          1,
+          true
+        ],
+        [
+          2,
+          false
+        ],
+        [
+          3,
+          false
+        ],
+        [
+          4,
+          false
+        ],
+        [
+          5,
+          false
+        ],
+        [
+          6,
+          true
+        ],
+        [
+          7,
+          true
+        ],
+        [
+          8,
+          false
+        ],
+        [
+          9,
+          true
+        ],
+        [
+          10,
+          true
+        ],
+        [
+          11,
+          false
+        ],
+        [
+          12,
+          true
+        ],
+        [
+          13,
+          true
+        ],
+        [
+          14,
+          true
+        ],
+        [
+          15,
+          true
+        ],
+        [
+          16,
+          true
+        ],
+        [
+          17,
+          true
+        ],
+        [
+          18,
+          true
+        ],
+        [
+          19,
+          true
+        ],
+        [
+          20,
+          true
+        ],
+        [
+          21,
+          true
+        ]
+      ]
+    }
+  ]
+}

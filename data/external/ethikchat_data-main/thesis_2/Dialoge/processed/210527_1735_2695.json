@@ -1,0 +1,273 @@
+{
+  "name": "210527_1735_2695",
+  "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE",
+  "start": "17:35",
+  "end": "18:39",
+  "utterances": [
+    {
+      "user": "1d932b28221f16279cfbdc3364f1e2c9",
+      "type": "user",
+      "text": "Nein, da Maschinen dumm sind",
+      "id_in_dialogue": 0,
+      "true_labels": [
+        "K2"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "05500fb6d2684fc8a8cc6c696b9271c2",
+      "type": "expert",
+      "text": "Fehlerhafte Entscheidungen von Ärzt:innen sind aber auch nicht immer nachvollziehbar, wenn z.B. einfach etwas übersehen oder in der Hektik übergangen wurde. Fallen dir noch weitere Argumente ein? ",
+      "id_in_dialogue": 1,
+      "true_labels": [
+        "K2-Ag",
+        null
+      ],
+      "true_bounds": [
+        [
+          0,
+          157
+        ],
+        [
+          157,
+          196
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "1d932b28221f16279cfbdc3364f1e2c9",
+      "type": "user",
+      "text": "ja, maschinen können unerwartete technische probleme haben und plötzlich ausfallen; eine reparatur ist zeitaufwändig und auch können im worst case dramatische fehlentscheidungen getroffen werden",
+      "id_in_dialogue": 2,
+      "true_labels": [
+        "K3"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "05500fb6d2684fc8a8cc6c696b9271c2",
+      "type": "expert",
+      "text": "Das stimmt. Bei Fehlentscheidungen der KI werden sehr hohe Schadensersatzforderungen entstehen und die Hersteller:innen könnten für diese Fehlentscheidungen der KI verantwortlich gemacht werden. Die Anreize für die Hersteller:innen eine KI zu entwickeln würden wegfallen. Hast Du schon einmal daran gedacht: Eine KI liefert gleichbleibend gute Ergebnisse. Anders als Ärzt:innen steht sie nicht unter dem Einfluss äußerer Faktoren, wie zum Beispiel Stress.",
+      "id_in_dialogue": 3,
+      "true_labels": [
+        null,
+        "K4",
+        null,
+        "P4"
+      ],
+      "true_bounds": [
+        [
+          0,
+          12
+        ],
+        [
+          12,
+          272
+        ],
+        [
+          272,
+          308
+        ],
+        [
+          308,
+          455
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "1d932b28221f16279cfbdc3364f1e2c9",
+      "type": "user",
+      "text": "ja das ist richtig. insofern wäre eine KI als Entscheidungshilfe ideal; so könnte die Hauptarbeit von der Maschine übernommen werden und der Mensch kann in weniger Zeit die Entscheidung der Maschine überprüfen und freigeben; so wäre das ganze ein sicheres system",
+      "id_in_dialogue": 4,
+      "true_labels": [
+        "P2",
+        "P4-Aa-P"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "05500fb6d2684fc8a8cc6c696b9271c2",
+      "type": "expert",
+      "text": "Das wäre eine Möglichkeit Problematisch ist, dass die rechtlichen Rahmenbedingungen, insbesondere hinsichtlich des Datenschutzes, noch nicht hinreichend geklärt sind. Außerdem muss folgendes beachtet werden: Gerade wenn viele personenbezogene Daten gesammelt werden, besteht die Gefahr, dass dies zum gläsernen Bürger führt. Das ist in datenschutzrechtlicher Hinsicht bedenklich.",
+      "id_in_dialogue": 5,
+      "true_labels": [
+        null,
+        "P2-Ad",
+        null,
+        "P2-A"
+      ],
+      "true_bounds": [
+        [
+          0,
+          26
+        ],
+        [
+          26,
+          167
+        ],
+        [
+          167,
+          208
+        ],
+        [
+          208,
+          379
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "1d932b28221f16279cfbdc3364f1e2c9",
+      "type": "user",
+      "text": "Eine Möglichkeit wäre es, die Daten immer lokal auf dem Gerät des Patienten zu speichern. Dieser kann dann nach nach eigener Entscheidung seine Daten an beliebige Gesundheitsdienstleister freigeben. Somit wäre die Macht immer in der Hand des Eigentümers",
+      "id_in_dialogue": 6,
+      "true_labels": [
+        "P2-Ab-P"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "05500fb6d2684fc8a8cc6c696b9271c2",
+      "type": "expert",
+      "text": "Man kann es auch so sehen: Die Daten werden üblicherweise nur anonymisiert gesammelt, daher bestehen in dieser Hinsicht keine datenschutzrechtlichen Bedenken. Weiterhin ungeklärt bleibt: Es könnte zu dem Problem der Data Bias, auf deutsch der Voreingenommenheit der Daten, kommen. Die KI könnte zu Vorurteilen neigen, wenn sie mit vorurteilsbehafteten Daten lernt.",
+      "id_in_dialogue": 7,
+      "true_labels": [
+        null,
+        "P2-A-P",
+        null,
+        "P2-Ac"
+      ],
+      "true_bounds": [
+        [
+          0,
+          27
+        ],
+        [
+          27,
+          159
+        ],
+        [
+          159,
+          187
+        ],
+        [
+          187,
+          364
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "1d932b28221f16279cfbdc3364f1e2c9",
+      "type": "user",
+      "text": "beachte den Unterschied zwischen anonymisiert und pseudonymisiert; meistens werden Daten pseudonymisiert gespeichert. Trotzdem kann man mit genügend Daten auf einzelne Personen schließen. Z.B. wenn bestimmte Krankheitsbilder, die in einer Region sehr selten vorkommen gespeichert werden, ist eine Rückverfolgung u.U. sehr leicht. \nZu dem Daten Bias: um dieses Problem zu beheben braucht es eine unheimliche Menge an Daten, die am besten alle möglichen Auffälligkeiten kennt. für Randfälle könnte ein Arzt herangezogen wrden",
+      "id_in_dialogue": 8,
+      "true_labels": [
+        "P2-A-P"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "05500fb6d2684fc8a8cc6c696b9271c2",
+      "type": "expert",
+      "text": "Zur Umsetzung und Einhaltung des Datenschutzes müsste allerdings neues Personal eingestellt werden, etwa Jurist:innen und Informatiker:innen, was zu zusätzlichen Kosten führen würde. Andererseits: Ärzt:innen sind jedoch ebenso nicht frei von Vorurteilen.",
+      "id_in_dialogue": 9,
+      "true_labels": [
+        "P2-A-P-A",
+        null,
+        "P2-Ac-P"
+      ],
+      "true_bounds": [
+        [
+          0,
+          183
+        ],
+        [
+          183,
+          197
+        ],
+        [
+          197,
+          254
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "1d932b28221f16279cfbdc3364f1e2c9",
+      "type": "user",
+      "text": "ja, der Datenschutz ist ein Thema, welches sehr viel Kapazitäten einfordert. allerdings ein sehr wichtiges Thema, wo es sich durchaus lohnt die Kapazitäten dafür auchzubringen\n😂😂",
+      "id_in_dialogue": 10,
+      "true_labels": [
+        "P2-A-P-A"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "05500fb6d2684fc8a8cc6c696b9271c2",
+      "type": "expert",
+      "text": "Das ist richtig. Ansprechen möchte ich noch: Der Einsatz von KI ist unter mehreren Gesichtspunkten kostengünstiger. Es können unter anderem Personalkosten eingespart werden, wenn die KI Arbeiten von Ärzt:innen übernehmen kann.",
+      "id_in_dialogue": 11,
+      "true_labels": [
+        null,
+        null,
+        "P5"
+      ],
+      "true_bounds": [
+        [
+          0,
+          17
+        ],
+        [
+          17,
+          45
+        ],
+        [
+          45,
+          226
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "1d932b28221f16279cfbdc3364f1e2c9",
+      "type": "user",
+      "text": "langfristig denke ich das auch. kurzfristig muss erst einmal geld investiert werden. allerdings müssen ki systeme auch immer weiterentwickelt werden, was auch wartungs und personalkosten erfordert\ndie vor allem hochqualifiziert sein müssen",
+      "id_in_dialogue": 12,
+      "true_labels": [
+        "P2-A-P-A"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    }
+  ],
+  "surveys": [
+    {
+      "name": "1d932b28221f16279cfbdc3364f1e2c9",
+      "type": "StartSurvey",
+      "result": "weak-disagree"
+    }
+  ]
+}

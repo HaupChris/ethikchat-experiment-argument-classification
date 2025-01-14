@@ -1,0 +1,169 @@
+{
+  "name": "210525_1801_7319",
+  "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE",
+  "start": "18:01",
+  "end": "18:42",
+  "utterances": [
+    {
+      "user": "5b8606b26aa965a09936fc1e71c5a552",
+      "type": "user",
+      "text": "Nein, KI sollte niemals als Ersatz für Ärzt:innen dienen, sondern eher als Unterstützung, denn die Zwischenmenschlichkeit ist für Kommunikation sehr wichtig.",
+      "id_in_dialogue": 0,
+      "true_labels": [
+        "K14"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "8dc12c0ff92e2a8fb466d5b13af71e12",
+      "type": "expert",
+      "text": "Andererseits: Es ist davon auszugehen, dass das Vertrauen der Patient:innen mit steigender Leistung der KI ebenso steigen wird. Im Übrigen: Die KI kann sowohl effizienter mit vielen Daten umgehen als auch effizienter trainiert werden als Ärzt:innen.",
+      "id_in_dialogue": 1,
+      "true_labels": [
+        null,
+        "K14-Aa",
+        null,
+        "P2"
+      ],
+      "true_bounds": [
+        [
+          0,
+          14
+        ],
+        [
+          14,
+          128
+        ],
+        [
+          128,
+          140
+        ],
+        [
+          140,
+          249
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "5b8606b26aa965a09936fc1e71c5a552",
+      "type": "user",
+      "text": "Ja das ist richtig, das sind die Vorteile einer KI. Aber kann eine KI auch deine Hand halten oder dir ein Lächeln schenken?",
+      "id_in_dialogue": 2,
+      "true_labels": [
+        "K14"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "8dc12c0ff92e2a8fb466d5b13af71e12",
+      "type": "expert",
+      "text": "Das verstehe ich. Weiterhin ungeklärt bleibt: Eine KI liefert gleichbleibend gute Ergebnisse. Anders als Ärzt:innen steht sie nicht unter dem Einfluss äußerer Faktoren, wie zum Beispiel Stress.",
+      "id_in_dialogue": 3,
+      "true_labels": [
+        null,
+        null,
+        "P4"
+      ],
+      "true_bounds": [
+        [
+          0,
+          18
+        ],
+        [
+          18,
+          46
+        ],
+        [
+          46,
+          193
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "5b8606b26aa965a09936fc1e71c5a552",
+      "type": "user",
+      "text": "Ja, und deswegen finde ich, dass eine KI durchaus als Entscheidungshilfe für Ärzt:innen dienen kann. Aber es ist noch schwer vorstellbar, dass die KI:in auch stets das richtige Maß an Meschlichkeit findet eine schwierige Diagnose zu überbringen",
+      "id_in_dialogue": 4,
+      "true_labels": [
+        "K14"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "8dc12c0ff92e2a8fb466d5b13af71e12",
+      "type": "expert",
+      "text": "Das verstehe ich. Fallen dir noch weitere Argumente ein? Der Einsatz von KI ist unter mehreren Gesichtspunkten kostengünstiger. Es können unter anderem Personalkosten eingespart werden, wenn die KI Arbeiten von Ärzt:innen übernehmen kann.",
+      "id_in_dialogue": 5,
+      "true_labels": [
+        null,
+        null,
+        "P5"
+      ],
+      "true_bounds": [
+        [
+          0,
+          18
+        ],
+        [
+          18,
+          57
+        ],
+        [
+          57,
+          238
+        ]
+      ],
+      "is_template": true
+    }
+  ],
+  "surveys": [
+    {
+      "name": "5b8606b26aa965a09936fc1e71c5a552",
+      "type": "StartSurvey",
+      "result": "strong-agree"
+    },
+    {
+      "name": "5b8606b26aa965a09936fc1e71c5a552",
+      "type": "EndSurvey",
+      "result": "weak-disagree",
+      "improvement_suggestions": "die Chatplattform könnte schneller antworten. die wartezeiten waren etwas lang",
+      "persuasive_arguments": [
+        [
+          0,
+          true
+        ],
+        [
+          1,
+          true
+        ],
+        [
+          2,
+          true
+        ],
+        [
+          3,
+          true
+        ],
+        [
+          4,
+          true
+        ],
+        [
+          5,
+          true
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+﻿id, author, utterance, arg_label, arg_label, arg_label
+18:24, 18:39
+0, kai.weisenberger, "Eine KI könnte Fehler lernen und so zahlreiche Fehldiagnosen auslösen.", con/4
+1, antonia.krause.stud-mail, "KI-Systeme, die erstmal als Medizinprodukt zugelassen werden, lernen in der Regel während ihres Einsatzes nicht mehr dazu. Sollte die KI einen Fehler machen hat das auf das eine fehlerhafte Ergebnis Auswirkungen, allerdings nicht auf die nachfolgenden.", con/4.1
+2, kai.weisenberger, "Wesen einer KI ist aber doch gerade, dass sie eine Intelligenz hat und dazu lernt. Sie soll im Verlauf der Nutzung immer besser werden und auch neu auftretende Krankheiten erkennen."
+3, antonia.krause.stud-mail, "Das Dazulernen und Erkennen neuer Krankheiten muss nicht dadurch ausgeschlossen sein, dass die KI sich diese Ergebnisse nicht direkt 'merkt'. Sie erkennt Unstimmigkeiten oder auch Auffälligkeiten die ihr unbekannt sind. Allein der Hinweis reicht aus neue Krankheiten zu finden und diese in einem neuen KI-System einzubauen., unk
+4, kai.weisenberger, "Die Idee wäre es aber doch, dass die KI selbstständig derartige neu auftretende bzw leicht veränderte Muster einordnen kann.",
+5, antonia.krause.stud-mail, "Die KI kann nur damit arbeiten was sie auch kennt. Das was sie nicht kennt ordnet sie als fremd ein und teilt das auch mit. Bereits aus dieser Tatsache kann die Wissenschaft lernen. Würde man der KI bei neuen und unbekannten Befunden so viel Spielraum überlassen, dass sie neue und unbekannte Krankheiten selbst diagnostizieren könnte, würde dies zu Problemen der Erklärbarkeit führen, da die KI nun mehr wissen würde als der Mensch. Wer erklärt dem Menschen die neue Krankheit? Die KI kann sich selbst nicht erklären.", unk

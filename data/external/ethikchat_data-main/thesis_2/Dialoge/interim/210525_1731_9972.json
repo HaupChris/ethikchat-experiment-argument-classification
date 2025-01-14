@@ -1,0 +1,108 @@
+{
+    "text": "Ja, ich denke schon. Am Anfang sollten die Entscheidungen noch durch Ärzte gestützt werden, aber später könnte ich mir wesentlich schnellere und einfachere Diagnosen vorstellen. Durch die geringen Kosten könnten auch weniger entwickelte Lände davon profitieren.\n\nDas stimmt. Hast Du schon einmal daran gedacht: Die KI kann keine für Fachärzt:innen verständlichen und nachvollziehbaren Erklärungen der Ergebnisse liefern (sog. Black Box Verhalten). Gerade bei der Diagnostik und Therapieentscheidung sind die Erklärungen der Ergebnisse jedoch essentiell, da letztlich die Patient:innen jeder einzelnen Therapie zustimmen müssen.\n\nIch denke die Trainingsdaten müssen ausreichend umfangreich und divers sein, sodass bestimmte Krankheiten zu nahezu 100% erkannt werden. Soweit ich weiß, gibt es auch immer mehr Forschungen, um die Entscheidungen von KI Modellen transparenter zu machen. Also ganz undurchsichtige Entscheidungen erfordern natürlich mehr Vertrauen, das im Moment von vielen Menschen noch nicht gegeben ist. Ich denke allerdings, dass wir einen Punkt erreichen werden, wo niemand mehr drüber nachdenkt, ob die Entscheidung von einer KI kam.\n\nDem würde ich nicht zustimmen. Studien schätzen, dass 10-15% der Diagnosen von Ärzt:innen falsch sind. Das bedeutet im Umkehrschluss, dass die Qualitätsquote der Trainingsdaten nur 85-90% beträgt. Da eine KI anhand der Trainingsdaten lernt, könnte sie aufgrund deren Mängel nie eine höhere Qualitätsquote erreichen. \n\nDas stimmt natürlich, aber wenn man beim Training, die Entscheidungen von mehreren Ärzten heranzieht und eventuell bisherige Modelle miteinbezieht, könnten die Daten noch besser werden. Im Worst Case wird die KI nur genauso gut wie Ärzte, was unsere Lage jedoch auch nicht verschlechtert.\n\nDas ist richtig. Es ist fraglich, ob eine Effizienzsteigerung und Ökonomisierung dem Nutzen der Patient:innen zu dienen fähig sind. Weiterhin ungeklärt bleibt: Bei Fehlentscheidungen der KI werden sehr hohe Schadensersatzforderungen entstehen und die Hersteller:innen könnten für diese Fehlentscheidungen der KI verantwortlich gemacht werden. Die Anreize für die Hersteller:innen eine KI zu entwickeln würden wegfallen.\n\nDie rechtliche Situation ist sicherlich noch ein großes Problem. Um dennoch Anreiz zur Entwicklung von KI zu schaffen, müsste vermutlich der Staat eingreifen und Gesetze anpassen oder Schadensersatzzahlungen teilweise oder ganz übernehmen. Solange die KI allerdings nur Ärzten hilft, kann dieser ja das letzte Wort bei der Diagnose behalten und dementsprechend die Verantwortung tragen.\n\nDas wäre eine Möglichkeit Zu Beginn des breiten Einsatzes einer Technologie wie der KI könnten die Beträge für derartige Fonds zu hoch sein, als dass es Unternehmen finanzieren wollten/ könnten. \n\nAls Alternative könnte ich mir noch vorstellen, dass Patienten vorerst durch schnellere und günstigere Diagnosen gelockt werden, bei Zustimmung jedoch auf Schadensersatzforderungen bei Komplikationen verzichten müssen.\n\nDas ist richtig. Weiterhin ungeklärt bleibt: Eine KI kann den Kontext der Untersuchung nicht einbeziehen. Die konkrete Fragestellung und die gesamte Krankheitssituation der Patient:innen sind jedoch für die Diagnostik und die passende Therapieentscheidung enorm wichtig.\n\nHierbei würde ich wiedersprechen. Eventuell können dies aktuelle Modelle oder Ansätze noch nicht. Beobachtet man jedoch die Entwicklung von KI Modellen in den letzten Jahren, wird klar, dass die Modelle immer mehr verstehen und verallgemeinern können. Das Miteinbeziehen des Kontextes des Patienten ist daher nur eine Frage der Zeit. Durch die zunehmende Digitalisierung des Gesundheitswesens sollten zudem immer mehr Patientendaten vorliegen, die der KI dienen können.\nBei der Entscheidungsfindung kann zudem Video- und Audiomaterial helfen, um der KI ein noch besseres Gesamtbild zu verschaffen.\n\nDas mag sein. Aber zu beachten ist: Durch die große Menge gesammelter Daten werden Kliniken interessanter für Cyberangriffe.\n\nDas stimmt natürlich. Die Daten müssen deshalb verschlüsselt und ausreichend gesichert vorliegen. Hierfür sind bereits ausreichend Methoden vorhanden, die in vielen Bereichen angewendet werden. \nAuch denkbar wäre ein dezentrales System, bei dem Patienten ihre Daten selbst besitzen und verwalten.\n\nDas ist richtig. Ansprechen möchte ich noch: Erforderliche Rechenzentren für den Einsatz von KI würden eine große Belastung für die Umwelt darstellen.\n\nDas ist eine Entwicklung die kaum aufhaltbar ist. Der Energieverbauch der gesamten Erde steigt immer weiter und muss möglichst mit erneuerbaren Energiequellen gedeckt werden. Im Vergleich zum Training von Modellen ist der Einsatz jedoch deutlich energiesparender. Außerdem müsste man die tatsächliche Belastung zunächst abschätzen und ins Verhältnis zu anderen Bereichen setzen.\nManch andere Umweltbelastungen könnten durch den Einsatz von KI auch wegfallen. Wie zum Beispiel der Weg zu einer Arztpraxis oder der Einsatz von Ärzten im Ausland.\n\n",
+    "annotations": [
+        { "begin": 0, "end": 261, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 0, "user": "ee11cbb19052e40b07aac0ca060c23ee", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 0, "end": 261, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P18-A-P" } },
+        { "begin": 263, "end": 627, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 1, "user": "8dc12c0ff92e2a8fb466d5b13af71e12", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 263, "end": 275, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 275, "end": 311, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 311, "end": 627, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K2" } },
+        { "begin": 629, "end": 1150, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 2, "user": "ee11cbb19052e40b07aac0ca060c23ee", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 629, "end": 1150, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "Wir werden einen Punkt erreichen, an dem niemand mehr darüber nachdenkt, ob die Entscheidung von einer KI kam." } },
+        { "begin": 1152, "end": 1468, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 3, "user": "8dc12c0ff92e2a8fb466d5b13af71e12", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 1152, "end": 1183, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 1183, "end": 1468, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P11-A" } },
+        { "begin": 1470, "end": 1758, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 4, "user": "ee11cbb19052e40b07aac0ca060c23ee", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 1470, "end": 1758, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "Durch das Heranziehen mehrerer Ärzte könnte man insgesamt die Fehlerquote minimieren." } },
+        { "begin": 1760, "end": 2179, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 5, "user": "8dc12c0ff92e2a8fb466d5b13af71e12", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 1760, "end": 1777, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 1777, "end": 1892, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K21" } },
+        { "begin": 1892, "end": 1920, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 1920, "end": 2179, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K4" } },
+        { "begin": 2181, "end": 2567, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 6, "user": "ee11cbb19052e40b07aac0ca060c23ee", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 2181, "end": 2567, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K4-A" } },
+        { "begin": 2569, "end": 2764, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 7, "user": "8dc12c0ff92e2a8fb466d5b13af71e12", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 2569, "end": 2595, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 2595, "end": 2764, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K4-A-P" } },
+        { "begin": 2766, "end": 2984, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 8, "user": "ee11cbb19052e40b07aac0ca060c23ee", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 2766, "end": 2984, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "Kompromiss und Anreize mit einfachen Diagnosen" } },
+        { "begin": 2986, "end": 3256, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 9, "user": "8dc12c0ff92e2a8fb466d5b13af71e12", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 2986, "end": 3003, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 3003, "end": 3031, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 3031, "end": 3256, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K18" } },
+        { "begin": 3258, "end": 3855, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 10, "user": "ee11cbb19052e40b07aac0ca060c23ee", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 3258, "end": 3855, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "KI wird in Zukunft den Kontext einbeziehen können" } },
+        { "begin": 3857, "end": 3981, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 11, "user": "8dc12c0ff92e2a8fb466d5b13af71e12", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 3857, "end": 3871, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 3871, "end": 3893, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 3893, "end": 3981, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K6" } },
+        { "begin": 3983, "end": 4279, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 12, "user": "ee11cbb19052e40b07aac0ca060c23ee", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 3983, "end": 4279, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P2-Ab-P" } },
+        { "begin": 4281, "end": 4431, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 13, "user": "8dc12c0ff92e2a8fb466d5b13af71e12", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 4281, "end": 4298, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 4298, "end": 4326, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 4326, "end": 4431, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K17" } },
+        { "begin": 4433, "end": 4976, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 14, "user": "ee11cbb19052e40b07aac0ca060c23ee", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 4433, "end": 4976, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "An anderer Stelle Einsparung Unweltbelastung" } },
+        { "begin": 0, "end": 4978, "type": "de.uniwue.ethik-ki-chats.Dialogue", "features": { "name": "210525_1731_9972", "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE", "start": "2021/05/25-17:31:00", "end": "2021/05/25-18:44:00" } },
+        { "begin": 0, "end": 4978, "type": "de.uniwue.ethik-ki-chats.StartSurvey", "features": { "name": "ee11cbb19052e40b07aac0ca060c23ee", "agreement": 1.0 } },
+        { "begin": 0, "end": 4978, "type": "de.uniwue.ethik-ki-chats.EndSurvey", "features": { "name": "ee11cbb19052e40b07aac0ca060c23ee", "agreement": 0.5, "opinion": "", "text_like": "", "text_dislike": "" } }
+    ],
+    "types": [
+        {
+            "name": "de.uniwue.ethik-ki-chats.Template",
+            "features": [
+                { "name": "label", "range": "RANGE_PRIMITIVE" },
+                { "name": "incorrect", "range": "RANGE_PRIMITIVE" },
+                { "name": "difficult", "range": "RANGE_PRIMITIVE" },
+                { "name": "multiple", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        { "name": "de.uniwue.ethik-ki-chats.Introduction", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Transition", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Other", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Outro", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        {
+            "name": "de.uniwue.ethik-ki-chats.Dialogue",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "szenario", "range": "RANGE_PRIMITIVE" },
+                { "name": "start", "range": "RANGE_PRIMITIVE" },
+                { "name": "end", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.StartSurvey",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "agreement", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.EndSurvey",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "agreement", "range": "RANGE_PRIMITIVE" },
+                { "name": "opinion", "range": "RANGE_PRIMITIVE" },
+                { "name": "text_like", "range": "RANGE_PRIMITIVE" },
+                { "name": "text_dislike", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.UserUtterance",
+            "features": [
+                { "name": "id_in_dialogue", "range": "RANGE_PRIMITIVE" },
+                { "name": "user", "range": "RANGE_PRIMITIVE" },
+                { "name": "timestamp", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.ExpertUtterance",
+            "features": [
+                { "name": "id_in_dialogue", "range": "RANGE_PRIMITIVE" },
+                { "name": "user", "range": "RANGE_PRIMITIVE" },
+                { "name": "timestamp", "range": "RANGE_PRIMITIVE" }
+            ]
+        }
+    ]
+}

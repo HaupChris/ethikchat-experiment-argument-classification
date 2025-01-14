@@ -1,0 +1,213 @@
+{
+  "name": "20240207_133830_264154",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-13:38:30",
+  "end": "2024/02/07-13:50:09",
+  "utterances": [
+    {
+      "user": "B0R7R",
+      "type": "user",
+      "text": "Zugriff der KI auf viel mehr Daten wie einzelne Ärzte ",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-13:39:18",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, das ist richtig, eine KI hat potenziell Zugriff auf viel mehr Daten als ein Einzelarzt. Aber das bedeutet nicht, dass sie ethisch gesehen eigenständige Diagnose- und Therapie-Entscheidungen treffen darf. Schließlich können Daten allein nicht alle Eventualitäten abdecken, die in der Arztpraxis auftreten können. Der menschliche Arzt bringt nicht nur medizinisches Fachwissen ein, sondern auch Erfahrung, Intuition und ethische Überlegungen, die eine KI nicht ersetzen kann.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-13:39:22",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "B0R7R",
+      "type": "user",
+      "text": "Erfahrung beruhen oft nicht auf wissenschaftlichen Erkenntnissen ",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-13:39:52",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Das ist zwar teilweise richtig, aber Erfahrung bedeutet nicht nur „Bauchgefühl“, sondern auch das Wissen darum, wie sich bestimmte Symptome oder Krankheitsverläufe in der Praxis tatsächlich darstellen. Auch wenn dieses Wissen nicht immer explizit in wissenschaftlichen Studien dokumentiert ist, so ist es doch oft genug in der täglichen Arbeit von Ärzten vorhanden. Eine KI hingegen kennt nur das, was in den Daten steht, und ist unfähig, darüber hinaus zu denken oder zu lernen.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-13:39:58",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "B0R7R",
+      "type": "user",
+      "text": "Okey ja KI kann mit Datenanalysen die subjektive Meinung einzelner Ärtzte unterstützen ",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-13:40:55",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich fürchte, Sie wiederholen das Argument, dass KI Menschen in ihrer Entscheidungsfindung unterstützen sollte. Das ist in dieser Diskussion nicht zulässig. Bitte argumentieren Sie stattdessen, warum eine KI aus ethischer Sicht selbstständig Diagnose- und Therapie-Entscheidungen treffen sollte.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-13:40:58",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "B0R7R",
+      "type": "user",
+      "text": "Wenn die KI selbständig Entscheidungen trifft werden Ärzte physisch nicht so stark belastet ",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-13:41:40",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Das ist zwar richtig, aber es ist auch ein Trugschluss zu denken, dass eine geringere physische Belastung der Ärzte automatisch ein ethisch vertretbarer Grund für selbstständige Entscheidungen der KI wäre. Schließlich geht es in der Medizin nicht nur um physische Belastung, sondern vor allem um die Verantwortung für das Leben und die Gesundheit von Patienten. Eine KI kann zwar Daten analysieren, aber sie kann nicht die gleiche Verantwortung übernehmen wie ein menschlicher Arzt.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-13:41:45",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "B0R7R",
+      "type": "user",
+      "text": "Aber vielleicht ist es auch nicht gut einzelnen Menschen so viel Verantwortung zu geben ",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-13:42:29",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Aber das ist ein Trugschluss zu denken, dass eine KI die Verantwortung von Ärzten übernehmen kann. Eine KI kann zwar Entscheidungen treffen, aber sie kann nicht die Verantwortung für diese Entscheidungen übernehmen. Verantwortung bedeutet, dass man die Konsequenzen seiner Handlungen tragen muss, und das kann eine KI nicht. Eine KI kann nur so gut sein wie die Daten, auf die sie zugreifen kann, und die Algorithmen, die sie verwendet. Es ist daher wichtig, dass Ärzte die Verantwortung für die Diagnose und Behandlung von Patienten übernehmen.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-13:42:34",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "B0R7R",
+      "type": "user",
+      "text": "Aber Ärzte können auch nicht die Konsequenzen tragen und könnten daher an der Verantwortung zerbrechen ",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-13:43:50",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Es ist zwar richtig, dass Ärzte unter der Last der Verantwortung leiden können, aber das ist kein Argument dafür, dass eine KI die Verantwortung übernehmen sollte. Stattdessen sollten wir uns darauf konzentrieren, Ärzten bessere Arbeitsbedingungen und Unterstützung zu bieten, damit sie die Verantwortung besser tragen können. Eine KI kann zwar bei der Entscheidungsfindung helfen, aber sie kann nicht die Verantwortung für diese Entscheidungen übernehmen. Verantwortung ist etwas, das Ärzte gegenüber ihren Patienten haben, und das kann nicht einfach auf eine KI übertragen werden.",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-13:43:55",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "B0R7R",
+      "type": "user",
+      "text": "Die würde die Verantwortung auf die Wissenschaftlichen Daten geben und die KI die Entscheidung treffen lassen wenn es genug Daten gibt ",
+      "id_in_dialogue": 12,
+      "timestamp": "2024/02/07-13:45:34",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Aber das ist ein Trugschluss zu denken, dass Daten die Verantwortung für eine Entscheidung tragen können. Daten sind nur so gut wie die Interpretation, die von einem Menschen vorgenommen wird. Auch wenn es genügend Daten gibt, kann es immer noch Situationen geben, in denen die Interpretation der Daten nicht eindeutig ist. In solchen Fällen muss ein Mensch die Verantwortung für die Entscheidung übernehmen. Eine KI kann zwar bei der Interpretation von Daten helfen, aber sie kann nicht die Verantwortung für die Entscheidung übernehmen.",
+      "id_in_dialogue": 13,
+      "timestamp": "2024/02/07-13:45:43",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "B0R7R",
+      "type": "user",
+      "text": "Na gut du hast ja recht",
+      "id_in_dialogue": 14,
+      "timestamp": "2024/02/07-13:46:09",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich bin hier, um Ihre Fragen zu beantworten und Ihnen zu helfen, das Szenario besser zu verstehen. Ich freue mich, wenn ich Ihre Fragen zufriedenstellend beantworten konnte. Wenn Sie weitere Fragen haben, zögern Sie bitte nicht, mich zu kontaktieren.",
+      "id_in_dialogue": 15,
+      "timestamp": "2024/02/07-13:46:14",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "6f2301e195444dd447788495aeb27603",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "informed": 0.5
+    }
+  },
+  "end_survey": {
+    "name": "6f2301e195444dd447788495aeb27603",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "opinion_1": 1,
+      "opinion_2": 0.8,
+      "argument_quality_2": 1,
+      "user_information_argument_breadth": 0.75,
+      "user_information_argument_depth": 0.5
+    }
+  }
+}

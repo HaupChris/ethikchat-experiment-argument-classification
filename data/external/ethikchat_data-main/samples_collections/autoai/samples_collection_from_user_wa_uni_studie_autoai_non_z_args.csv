@@ -1,0 +1,191 @@
+prev_labels,type,label,text
+['intro_61'],user,CONSENT,Ich kann das Argument verstehen.
+"['intro_2', 'z_trans_11', 'Z.P6']",user,NZ.G3,"Ja das stimmt, hierbei sollte aber kein vollständiges Vertrauen auf die KI gesetzt werden"
+['intro_62'],user,NZ.G2,Eine ki soll menschliches fahrberhalten einschätzen können bevor sie zugelassen wird
+"['intro_27', 'Z.C2-1', 'intro_3', 'Z.C2-1-1']",user,NZ.G3,Das ist ja aber nicht das problem der ki
+['intro_62'],user,NZ.G3,"Wenn andere menschen riskant fahren, ist das deren schuld und nicht der ki"
+"['intro_1', 'z_trans_2', 'Z.P2-1']",user,INSULT,Mimimi
+"['intro_3', 'z_trans_11', 'Z.P8-1']",user,Z.GP2,"Ja aber wenn alle Fahrzeuge KI gesteuert wären, wäre das irrelevant."
+['intro_62'],user,Z.GP2,"Wenn alle Fahrzeuge KI gesteuert sind, sind andere Menschliche Fahrer nicht mehr im Straßenverkehr und somit muss die KI nicht für menschliche Fehler entwickelt werden."
+"['intro_1', 'z_trans_2', 'Z.C6']",user,CONSENT,Das stimmt
+"['intro_3', 'z_trans_11', 'Z.P8-1']",user,NZ.G1,wenn kein mensch mehr fährt kommt es nicht dazu
+['intro_62'],user,CONSENT,okay
+"['intro_2', 'z_trans_2', 'Z.C5']",user,CONSENT,ich akzeptiere
+"['intro_3', 'z_trans_11', 'Z.C10']",user,DISSENT,sollte kein problem sein
+['intro_61'],user,CONSENT,okay
+"['intro_1', 'z_trans_12', 'Z.C2']",user,DISSENT,stimme ich nicht zu
+['intro_61'],user,DISSENT,nein
+['intro_62'],user,DISSENT,nein
+"['intro_3', 'z_trans_13', 'Z.P2-1']",user,DISSENT,find ich unlogisch
+['intro_62'],user,DISSENT,stimme ich nicht zu
+"['intro_1', 'z_trans_11', 'Z.P8-1']",user,Z.GP2,"Wenn alles Autos durch KI gefahren werden würde, gäbe es dieses Problem nicht"
+['intro_62'],user,Z.GP2,"Wenn nur noch autoKIs an Straßenverkehr teilnehmen würde, müssten sich die KI auch nicht auf irrationales Fahrverhalten einstellen"
+"['intro_3', 'z_trans_2', 'Z.C5']",user,CONSENT,Ja stimmt.
+"['intro_3', 'z_trans_2', 'Z.P7']",user,CONSENT,Ja das ist richtig
+['intro_62'],user,CONSENT,"Das stimmt, du hast recht"
+"['intro_2', 'z_trans_11', 'Z.P8-1']",user,Z.GP2,Alle Autos mit ki
+['intro_62'],user,Z.GP2,Wenn alle Autos mit ki fahreny dann gibt es kein irraionales Fahrverhalten
+['intro_62'],user,Z.GP2,Auf den Straßen sollten deshalb nur Autos fahren dürfen
+"['intro_3', 'z_trans_13', 'Z.C2']",user,NZ.G2,Die Autos müssten deshalb untereinander vernetzt sein
+['intro_61'],user,NZ.G2,Autos aller Hersteller müssten dann untereinander kommunizieren können
+['intro_61'],user,CONSENT,Das stimmt. Aber dafür gibt es auch heute keine Norm
+"['intro_2', 'z_trans_13', 'Z.C5']",user,NZ.G3,"so lange, bis alle Autos autonom fahren"
+['intro_61'],user,NZ.G1,Fahren durch die KI ist gefährlicher als normales Autofahren.
+"['intro_3', 'z_trans_13', 'Z.P8-1']",user,NZ.G3,Das funktioniert nur wenn alle im Straßenverkehr autonom fahren.
+['intro_62'],user,NZ.G3,"Nur wenn der gesamte Straßenverkehr durch KI gesteuert ist, kann diese Idee funktionieren"
+"['intro_3', 'z_trans_12', 'Z.C5']",user,NZ.G3,"Kurzfristig wird das schwer umzusetzen , aber langfristig ist das möglich"
+['intro_61'],user,DISSENT,Du hast unrecht mit deiner These
+['intro_62'],user,DISSENT,Nein
+"['intro_2', 'z_trans_12', 'Z.P8-1']",user,NZ.G1,"Um sich nicht auf irrationales Verhalten von anderen Verkehrsteilnehmern einstellen zu müssen, sollte jedes Fahrzeug die autoKI verwenden."
+"['intro_3', 'z_trans_2', 'Z.C10']",user,CONSENT,Der Punkt ist tatsächlich ein kompliziertes Hindernis
+[],user,NZ.G1,Unfallgefahr
+['intro_61'],user,NZ.G1,Die Unfallgefahr bei autonomen Autos ist höher
+"['intro_3', 'z_trans_12', 'Z.P6']",user,NZ.G3,"Das stimmt! Gibt es bisher Autos ohne KI, mit denen mobilitätseingeschränkte Personen fahren können? Die wären sicherer"
+['intro_62'],user,NZ.G3,Gibt es Autos ohne KI für mobilitätseingeschränkte Menschen?
+['intro_61'],user,Z.GP1,Im bereich der IT werden neue Arbeitsplätze geschaffen
+"['intro_2', 'z_trans_12', 'Z.P8-1']",user,Z.GP2,Aber wenn sich diese Technologie durchsetzt und fast jeder damit fährt ist das kein Problem mehr
+['intro_62'],user,Z.GP2,Aber wenn sich diese Technologie durchsetzt und quasi keine leute mehr fahren sondern nur Kis ist das kein Problem mehr
+"['intro_3', 'z_trans_11', 'Z.C5']",user,INSULT,Das Argument ist schlecht
+"['intro_2', 'z_trans_12', 'Z.C10']",user,INSULT,"Ich bin mir nicht sicher, was du meinst. Kannst du das anders formulieren?"
+['intro_62'],user,INSULT,"Ich bin mir nicht sicher, was du meinst. Kannst du das anders formulieren? 11:51"
+"['intro_2', 'z_trans_12', 'Z.C5']",user,FAQ.1,"KI Systeme sollen kein Kontrollorgan sein, sondern Assistenzsysteme. Wenn die KI ihren Job besser macht als der Mensch, kann diese in darin ja unterstützen."
+"['intro_38', 'FAQ.1', 'FAQ.1-1', 'faq_trans_2', 'Z.C10']",user,CONSENT,Macht Sinn
+['intro_62'],user,DISSENT,nein.
+"['intro_3', 'z_trans_11', 'Z.P8-1']",user,NZ.G1,Durch vollautomatisiertes fahren spielen solche Verhaltensmuster keine Rolle mehr
+"['intro_1', 'z_trans_11', 'Z.C10']",user,CONSENT,Das ist richtig und auch möglich
+"['intro_1', 'z_trans_12', 'Z.C10']",user,CONSENT,ja sehe ich auch so
+['intro_61'],user,CONSENT,ja eine Rechtsgrundlage sollte es geben
+"['intro_2', 'z_trans_13', 'Z.P8-1']",user,NZ.G3,"Wenn nur noch AutoKI exestieren würden, dann müssten sie nicht auf menschliches Verhalten Rücksicht nehmen"
+"['intro_3', 'z_trans_11', 'Z.C5']",user,NZ.G3,"Das ist gut so, denn es sollte gut geprüft werden und nur eingesetzt werden, wenn Vorteile überwiegen"
+['intro_61'],user,DISSENT,Nein
+"['intro_2', 'z_trans_12', 'Z.C4']",user,NZ.G3,Das muss verhindert und überprüft werden
+"['intro_2', 'z_trans_12', 'Z.C8']",user,CONSENT,Okay
+"['intro_2', 'z_trans_12', 'Z.P6']",user,CONSENT,"Thats true, but we have to be careful"
+['intro_62'],user,CONSENT,Thats true
+['intro_61'],user,NZ.G1,Sicherheit im Straßenverkehr nimmt ab.
+['intro_62'],user,CONSENT,Ja
+"['intro_1', 'z_trans_12', 'Z.C10']",user,CONSENT,"Ja, genau wie es einen für den Menschen gibt"
+"['intro_1', 'z_trans_13', 'Z.C4']",user,DISSENT,"Genauso kann man Menschen ablenken, diese Aussage ist wertlos"
+['intro_61'],user,DISSENT,"Nein, nie"
+"['intro_3', 'z_trans_2', 'Z.P11-1']",user,DISSENT,"Das ist das dümmste argument bis jetzt, ich werde nichtmal argumentieren warum das ein komplett überflüssiges Argument ist"
+"['intro_1', 'z_trans_11', 'Z.P12-1']",user,DISSENT,"Nein, jeder einzelne Schluss in diesem satz ist so unglaublich falsch"
+['intro_61'],user,DISSENT,"Nein, bot"
+"['intro_2', 'z_trans_2', 'Z.C3']",user,Z.GP2,Den perfekten Fahrer noch weniger
+['intro_61'],user,INSULT,Stfu
+['intro_62'],user,INSULT,Du bist minderwertig programmiert
+['intro_61'],user,INSULT,Ich mag dich nicht
+['intro_61'],user,CONSENT,Ja hast du Recht dieses Problem muss auf jeden Fall beachtet werden
+"['intro_1', 'z_trans_12', 'Z.P8-1']",user,NZ.G2,"Deshalb würde ich das autonome fahren erst zulassen, wenn alle Autos es draufhaben"
+['intro_62'],user,NZ.G2,"Erst das autonome Fahren Erlauben, wenn alle Autos autonom fahren können"
+['intro_61'],user,DISSENT,"Ich glaube schon, dass die Technologie akzeptiert wird"
+"['intro_1', 'z_trans_2', 'Z.P2-1']",user,NZ.G3,Damit muss der Mensch klarkommen - Zeiten verändern sich.
+['intro_62'],user,NZ.G3,Der Mensch muss sich auf Veränderungen einstellen
+"['intro_3', 'z_trans_11', 'Z.C6']",user,CONSENT,Ja
+['intro_61'],user,CONSENT,Das ist richtig.
+"['intro_2', 'z_trans_2', 'Z.P11-1']",user,NZ.G3,Dann muss die Technik verbessert werden.
+['intro_61'],user,NZ.G3,Technik verbessern
+"['intro_1', 'z_trans_12', 'Z.C9']",user,CONSENT,Das ist richtig.
+['intro_62'],user,CONSENT,Das ist wirklich ein Problem.
+"['intro_1', 'z_trans_13', 'Z.P6']",user,CONSENT,Das ist ein wichtiges Argument von dir.
+"['intro_2', 'z_trans_12', 'Z.P8-1']",user,NZ.G1,"Aber dann geht die Gefahr ja von den müden und abgelenkten Menschen aus, die es sowieso nicht geben sollte, und nicht von der autoKi"
+['intro_62'],user,NZ.G1,Die Gefahr stammt dann nicht von den Autos sondern von der Menschen die müde und abgelenkt fahren. Das sollten sie ja sowieso nicht
+"['intro_1', 'z_trans_13', 'Z.C5']",user,CONSENT,Das stimmt. Dafür bräuchte es mehr Aufklärung
+['intro_62'],user,CONSENT,Das Problem kann ich verstehen. Aber mit mehr Aufklärung und Information für die Bürger*innen
+[],user,NZ.G1,Vollständig autonomes fahren ist zwar eine gute Idee auf dem Papier aber dabei fehlt eher die möglichkeit einzugreifen
+['intro_61'],user,DISSENT,Ne
+[],user,NZ.G3,I think is very importante for the Future
+['intro_61'],user,NZ.G3,Es ist sehr wichtig für unsere Zukunft
+"['intro_1', 'z_trans_11', 'Z.P6']",user,NZ.G3,Ich denke es ist sehr wichtig
+"['intro_3', 'z_trans_13', 'Z.P8-1']",user,Z.GP2,dieses probleme könnte dadurch gelöst werden dass möglichst viele Menschen autonomes fahren nutzen
+['intro_62'],user,Z.GP2,"wenn alle verkehrsmittel autonom funktionieren, kann es keine fehler mehr durch menschen geben"
+"['intro_3', 'z_trans_12', 'Z.C10']",user,CONSENT,ja
+['intro_61'],user,NZ.G3,Autonome Fahrzeuge können im öffentlichen Verkehr genutzt werden.
+"['intro_3', 'z_trans_11', 'Z.P8-1']",user,CONSENT,Stimmt.
+['intro_61'],user,Z.GP1,Das ist der nächste Schritt in der Entwicklung.
+"['intro_3', 'z_trans_2', 'Z.C10']",user,CONSENT,Ja da muss dran gearbeitet werden
+"['intro_3', 'z_trans_11', 'Z.P6']",user,NZ.G1,"Das mag sein. Aber eine Ki braucht ja erstmal eine Person/Personen, die die Ki mit Infos etc. füttert. Was wenn diese Personen einen unbesonnen Fahrstil haben und die Ki einen verantwortungslosen Fahrstil hat"
+['intro_62'],user,NZ.G1,Eine Ki ist erstmal nur so schlau wie der Programmierer*in.
+"['intro_3', 'z_trans_13', 'Z.P7']",user,CONSENT,Das mag sein
+"['intro_1', 'z_trans_11', 'Z.C10']",user,CONSENT,Ja da haben sie recht
+['intro_62'],user,CONSENT,Ich stimme deinem Argument zu
+[],user,NZ.G3,Es ist ser wichtig für der Zukunft
+['intro_61'],user,NZ.G3,Es ist sehr wichtig für der Zukunft
+"['intro_3', 'z_trans_2', 'Z.P8-1']",user,CONSENT,Das ist richtig
+"['intro_38', 'FAQ.1', 'FAQ.1-1', 'faq_trans_1', 'Z.P8-1']",user,DISSENT,Ich weiß um was es geht
+"['intro_3', 'z_trans_2', 'Z.P8-1']",user,NZ.G3,Aber wenn es nur noch AutoKI geben würde ?
+['intro_62'],user,NZ.G3,Alle Autos fahren autonom
+"['intro_1', 'z_trans_12', 'Z.C4']",user,NZ.G3,Das ist auch ohne autonomes fahren möglich
+['intro_61'],user,NZ.G3,Auto fahren ist immer gefährlich
+"['intro_3', 'z_trans_13', 'Z.C8']",user,CONSENT,Da stimme ich zu
+['intro_61'],user,CONSENT,Ja stimmt
+"['intro_1', 'z_trans_13', 'Z.P8-1']",user,Z.GP2,"Aber wenn der komplette Verkehr durch KI kontrolliert wäre, würde dieses Problem nicht existieren"
+['intro_62'],user,Z.GP2,Wenn der komplette Verkehr von KI
+"['intro_1', 'z_trans_12', 'Z.C5']",user,NZ.G3,Das ist richtig. Ich glaube jedoch das diese Akzeptanz noch kommen wird. Die Menschheit ist meiner Meinung nach sehr zukunftsorientiert.
+['intro_61'],user,NZ.G3,Ich glaube diese Akzeptanz wird noch kommen
+"['intro_1', 'z_trans_2', 'Z.P6']",user,CONSENT,Ja das ist vllt richtig
+['intro_62'],user,CONSENT,Ja das stimmt
+"['intro_2', 'z_trans_12', 'Z.P7']",user,CONSENT,Ja das ist wahr
+['intro_61'],user,CONSENT,Ich stimme zu
+"['intro_3', 'z_trans_13', 'Z.C2-1']",user,CONSENT,True
+"['intro_3', 'z_trans_13', 'Z.P8']",user,CONSENT,Ja das ist sehr gut
+['intro_61'],user,CONSENT,Das ist wahr
+"['intro_3', 'z_trans_13', 'Z.P11']",user,CONSENT,Das stimmt
+['intro_62'],user,CONSENT,Treu
+"['intro_1', 'z_trans_12', 'Z.P2']",user,CONSENT,Ja
+"['intro_3', 'z_trans_2', 'Z.P12']",user,CONSENT,Ja
+['intro_61'],user,CONSENT,Ja
+"['intro_2', 'z_trans_11', 'Z.P14']",user,CONSENT,Ja
+"['intro_2', 'z_trans_13', 'Z.P9']",user,CONSENT,True
+[],user,NZ.G1,Es ist gefährlich
+['intro_61'],user,NZ.G1,Bei autonom fahrenden Autos passieren mehr unfälle
+"['intro_1', 'z_trans_13', 'Z.P6']",user,CONSENT,Das stimmt
+"['intro_2', 'z_trans_2', 'Z.P7']",user,CONSENT,Ja das mag sein
+['intro_61'],user,NZ.G3,Auch bei geringer Geschwindigkeit passieren tödliche Unfälle
+"['intro_24', 'Z.C3', 'intro_2', 'Z.C3-1']",user,CONSENT,Klingt gut
+['intro_61'],user,CONSENT,Hört sich gut an
+"['intro_3', 'z_trans_13', 'Z.C10']",user,CONSENT,Genau
+['intro_61'],user,FAQ.G1,Welches Hauptziel hätte die ki
+"['intro_3', 'z_trans_11', 'Z.C10']",user,NZ.G3,Die ki kann ja auch nur das fahren unterstützen man kann auch noch selbst fahren
+"['intro_1', 'z_trans_11', 'Z.P6']",user,CONSENT,Ja das verstehe ich und das ma ht auch sinn
+['intro_62'],user,CONSENT,Ich verstehe das
+"['intro_3', 'z_trans_2', 'Z.P7']",user,DISSENT,Das sehe ich nicht so denn manchmal muss man extra platz einplanen falls die eine seite blockiert wird
+"['intro_3', 'z_trans_12', 'Z.P8-1']",user,Z.GP2,"Wenn es nur autonome Autos gäbe, würde das Problem nicht auftreten"
+['intro_62'],user,Z.GP2,Wenn es nur autonome autos gäbe
+"['intro_1', 'z_trans_13', 'Z.P8-1']",user,CONSENT,Ja das stimmt
+['intro_62'],user,Z.GP1,"Autonomes Fahren, vor allem Nahverkehr kann außerdem den Besitz von einzelnen Fahrzeugen einschränken und dazu führen, dass weniger Autos vorhanden sind. Das wäre ein hilfreicher Beitrag für den Klimawandel"
+"['intro_2', 'z_trans_2', 'Z.P8-1']",user,Z.GP2,Diese würde es nicht mehr geben durch das Auto KI
+"['intro_1', 'z_trans_13', 'Z.P8-1']",user,NZ.G1,Ja das sehe ich auch als ein Problem. Es macht halt erst sinn wenn alle Auto autonom fahren
+['intro_62'],user,CONSENT,Ich habe dir zugestimmt
+"['intro_3', 'z_trans_12', 'Z.C5']",user,NZ.G3,Vor allem gibt es bereits alternativen zum Autonomen Fahren
+[],user,NZ.G1,"Hallo Chatbot, Autonom fahrende Autos sind gefährlich für den Strasenverkehr, da sie das Gefühl falscher Sicherheit vermitteln"
+"['intro_3', 'z_trans_13', 'Z.P8']",user,CONSENT,Das stimmt
+"['intro_3', 'z_trans_2', 'Z.P8-1']",user,Z.GP2,"Die AutoKI kann aber aus bereits geschehenen, vergleichbaren Situationen lernen"
+['intro_61'],user,Z.GP2,"Sobald die Mehrheit der Fahrer die Technologie nutzt, wird das andere von der Sicherheit überzeugen."
+"['intro_2', 'z_trans_13', 'Z.C10']",user,Z.GP2,"Wenn alle die Technologie nutzen, gibt es kein irrationales Verhalten mehr."
+"['intro_2', 'z_trans_13', 'Z.C10']",user,FAQ.G1,Hast du noch mehr Argumente
+[],user,NZ.G2,die ki ist besser als der durchschnittliche mensch und somit kommt es zu weniger unfällen
+['intro_61'],user,NZ.G2,je mehr autos autonom fahren desto geringer wird das risiko für durch menschen verursachte unfälle
+"['intro_2', 'z_trans_12', 'Z.P8-1']",user,NZ.G2,ja das stimmt aber wenn jedes auto mit der kinausgestattet ist kommen diese unfälle nicht mehr vor
+['intro_62'],user,NZ.G2,"ja das stimmt, aber wenn jedes auto mit autoKI ausgestattet ist würde fehlverhalten von menschen komplett vermieden werden"
+['intro_62'],user,NZ.G1,Trotzdem sehr gefährlich
+"['intro_1', 'z_trans_2', 'Z.P7']",user,CONSENT,Ja das mag sein
+"['intro_1', 'z_trans_13', 'Z.P8']",user,DISSENT,Das lehne ich ab
+"['intro_23', 'Z.C11', 'intro_3', 'Z.C11-1']",user,CONSENT,Ja das stimmt.
+['intro_61'],user,Z.GK1,Die autoKI ist ein Programm und kann nicht auf individuelle Fahrlehrer der anderen Fahrteilnehmer eingehen
+[],user,NZ.G1,Erhöhte Unfallgefahr
+['intro_61'],user,NZ.G1,Autonomes Fahren führt zu einer erhöhten Unfallgefahr
+['intro_62'],user,FAQ.G1,Wie ist deine Meinung
+"['intro_1', 'z_trans_2', 'Z.P7']",user,CONSENT,Ja
+['intro_61'],user,NZ.G1,Was hältst du von autonomem Fahren
+"['intro_1', 'z_trans_13', 'Z.C2-1']",user,CONSENT,Da gebe ich dir recht
+[],user,NZ.G2,"Solange die Ki signifikant besser Auto fahren kann als die durchschnittliche Person, kann gerechtfertigt werden dass KI's zugelassen werden. Die absolute Zahl der unfälle sollte dann, statistisch gesehen runtergehen."
+['intro_61'],user,NZ.G2,Bessere Fahrleistung der Ki führt zu weniger Unfällen
+"['intro_1', 'z_trans_13', 'Z.P8-1']",user,NZ.G1,Aber wenn ausschließlich KIs unterwegs wären?
+"['intro_1', 'z_trans_12', 'Z.P6']",user,CONSENT,"Das stimmt, gutes Argument so habe ich darüber tatsächlich noch nicht nachgedacht"
+"['intro_26', 'Z.P2', 'intro_2', 'Z.P2-1']",user,DISSENT,Ich sehe es eher als eine Bereicherung
+['intro_62'],user,FAQ.G1,Was sagst du denn zu dem Thema?
+"['intro_2', 'z_trans_12', 'Z.P6']",user,Z.GK1,Als Autofahrer kann man auch das Autofahren verlernen wenn man nur noch durch KI fährt. Dann könnte man auch gleich mit dem Bus fahren
+['intro_62'],user,FAQ.G1,"Was macht die KI, wenn die Sensoren nicht mehr richtig funktionieren?"
+[],user,NZ.G1,Derzeitiger Entwicklungsstand nicht ausreichend für die Sicherheit auf ser Strasse
+['intro_61'],user,NZ.G1,1. Argument: Der derzeitige Entwicklungsstand nicht ausreichend für die Sicherheit auf ser Strasse
+"['intro_2', 'z_trans_2', 'Z.C2-1']",user,DISSENT,Nein

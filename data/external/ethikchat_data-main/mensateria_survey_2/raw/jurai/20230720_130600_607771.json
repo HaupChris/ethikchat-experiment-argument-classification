@@ -1,0 +1,823 @@
+{
+  "name": "20230720_130600_607771",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.JURAI",
+  "start": "2023/07/20-13:06:00",
+  "end": "2023/07/20-13:11:25",
+  "utterances": [
+    {
+      "user": "I6T6",
+      "type": "user",
+      "text": "KI lässt sich nicht von Sympathie beeinflussen.",
+      "id_in_dialogue": 0,
+      "timestamp": "2023/07/20-13:08:15",
+      "true_labels": [
+        "Z.P1"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "Z.K6-1",
+          0.024088256050984205
+        ],
+        [
+          "Z.P1",
+          0.01754375237943346
+        ],
+        [
+          "Z.K6-1-1-1",
+          0.015284410185439476
+        ],
+        [
+          "Z.K4-1",
+          0.014914697863247554
+        ],
+        [
+          "Z.K2-1",
+          0.014626215288104764
+        ],
+        [
+          "Z.P4",
+          0.01332751511883928
+        ],
+        [
+          "Z.P8",
+          0.013048328830652602
+        ],
+        [
+          "Z.P3",
+          0.01286364935182561
+        ],
+        [
+          "Z.P2",
+          0.01286364935182561
+        ],
+        [
+          "Z.P5",
+          0.01286364935182561
+        ],
+        [
+          "Z.K7-1",
+          0.01286364935182561
+        ],
+        [
+          "Z.P1-1",
+          0.0
+        ],
+        [
+          "Z.P1-2",
+          0.0
+        ],
+        [
+          "Z.P1-1-1",
+          0.0
+        ],
+        [
+          "Z.P3-1",
+          0.0
+        ],
+        [
+          "Z.P3-1-1",
+          0.0
+        ],
+        [
+          "Z.P3-1-2",
+          0.0
+        ],
+        [
+          "Z.P2-1",
+          0.0
+        ],
+        [
+          "Z.P2-2",
+          0.0
+        ],
+        [
+          "Z.P2-2-1",
+          0.0
+        ],
+        [
+          "Z.P8-1",
+          0.0
+        ],
+        [
+          "Z.P8-2",
+          0.0
+        ],
+        [
+          "Z.P4-1",
+          0.0
+        ],
+        [
+          "Z.P5-1",
+          0.0
+        ],
+        [
+          "Z.K6",
+          0.0
+        ],
+        [
+          "Z.K6-1-1",
+          0.0
+        ],
+        [
+          "Z.K6-2",
+          0.0
+        ],
+        [
+          "Z.K6-3",
+          0.0
+        ],
+        [
+          "Z.K10",
+          0.0
+        ],
+        [
+          "Z.K10-1",
+          0.0
+        ],
+        [
+          "Z.K10-2",
+          0.0
+        ],
+        [
+          "Z.K2",
+          0.0
+        ],
+        [
+          "Z.K2-1-1",
+          0.0
+        ],
+        [
+          "Z.K2-1-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2-1",
+          0.0
+        ],
+        [
+          "Z.K4",
+          0.0
+        ],
+        [
+          "Z.K9",
+          0.0
+        ],
+        [
+          "Z.K9-1",
+          0.0
+        ],
+        [
+          "Z.K11",
+          0.0
+        ],
+        [
+          "Z.K11-1",
+          0.0
+        ],
+        [
+          "Z.K12",
+          0.0
+        ],
+        [
+          "Z.K12-1",
+          0.0
+        ],
+        [
+          "Z.K13",
+          0.0
+        ],
+        [
+          "Z.K13-1",
+          0.0
+        ],
+        [
+          "Z.K3",
+          0.0
+        ],
+        [
+          "Z.K3-1",
+          0.0
+        ],
+        [
+          "Z.K3-2",
+          0.0
+        ],
+        [
+          "Z.K7",
+          0.0
+        ],
+        [
+          "Z.K7-2",
+          0.0
+        ],
+        [
+          "Z.K5",
+          0.0
+        ],
+        [
+          "Z.K5-1",
+          0.0
+        ],
+        [
+          "Z.K8",
+          0.0
+        ],
+        [
+          "Z.K8-1",
+          0.0
+        ],
+        [
+          "Z.K15",
+          0.0
+        ],
+        [
+          "Z.K15-1",
+          0.0
+        ],
+        [
+          "Z.K14",
+          0.0
+        ],
+        [
+          "Z.K14-1",
+          0.0
+        ],
+        [
+          "NZ.K1",
+          0.0
+        ],
+        [
+          "NZ.K1-1",
+          0.0
+        ],
+        [
+          "NZ.K2",
+          0.0
+        ],
+        [
+          "NZ.K2-1",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true,
+      "user_selected_ground_truth": true
+    },
+    {
+      "user": "EthiBot",
+      "type": "bot",
+      "text": "Ich bin mir nicht sicher, was du meinst. Bitte wähle aus der folgenden Liste ein Argument aus, das deinen Standpunkt am besten repräsentiert. | keine subjektiven Urteile; mehr Gerechtigkeit; Objektivität der KI |   Das verstehe ich. Direkt dazu: Die Richter:innen sind immer unterschiedliche Personen und entscheiden dementsprechend unterschiedlich. Dies ist für ein funktionierendes Rechtssystem von großer Bedeutung, da unterschiedliche Urteile auch das Ergebnis verschiedener an sich richtiger Abwägungen sein können.  ",
+      "id_in_dialogue": 1,
+      "timestamp": "2023/07/20-13:08:15",
+      "true_labels": [
+        "Z.P1",
+        "intro_51",
+        "Z.P1-2"
+      ],
+      "true_bounds": [],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_24",
+          "intro_27",
+          "intro_25",
+          "intro_32",
+          "intro_28",
+          "intro_26",
+          "intro_23",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.K6-1",
+        "introductions": [
+          "intro_51",
+          "intro_48",
+          "intro_47",
+          "intro_49",
+          "intro_46",
+          "intro_50",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59",
+          "intro_60",
+          "intro_61",
+          "intro_62",
+          "intro_63",
+          "intro_64",
+          "intro_65",
+          "intro_66",
+          "intro_67",
+          "intro_68"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_4",
+          "z_trans_1",
+          "z_trans_9",
+          "z_trans_2",
+          "z_trans_8",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": false,
+        "first_arguments": [
+          "Z.K6-1-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.K6",
+          "Z.K4",
+          "Z.K10",
+          "Z.K2",
+          "Z.K9",
+          "Z.K7",
+          "Z.P1-1",
+          "Z.P1-2",
+          "Z.P3-1",
+          "Z.K11",
+          "Z.K5",
+          "Z.K14",
+          "Z.P4-1",
+          "Z.K12",
+          "Z.K8",
+          "Z.P5-1",
+          "Z.K13",
+          "Z.K15"
+        ],
+        "preselect_second_argument": false
+      }
+    },
+    {
+      "user": "I6T6",
+      "type": "user",
+      "text": "je nach Lernmaterial könnte die KI diskriminierend Urteilen",
+      "id_in_dialogue": 2,
+      "timestamp": "2023/07/20-13:10:03",
+      "true_labels": [
+        "Z.K6-1-1-1"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "Z.K4-1",
+          0.02056483909907108
+        ],
+        [
+          "Z.K6-1",
+          0.01839354442303876
+        ],
+        [
+          "Z.K6-1-1-1",
+          0.015999038250748034
+        ],
+        [
+          "Z.K2-1",
+          0.014825350537522297
+        ],
+        [
+          "Z.P1",
+          0.013252517651278556
+        ],
+        [
+          "Z.K7-1",
+          0.012897363832900724
+        ],
+        [
+          "Z.P3",
+          0.012700367582449482
+        ],
+        [
+          "Z.P2",
+          0.012445540642627586
+        ],
+        [
+          "Z.P8",
+          0.012445540642627586
+        ],
+        [
+          "Z.P4",
+          0.012445540642627586
+        ],
+        [
+          "Z.P5",
+          0.012445540642627586
+        ],
+        [
+          "Z.P1-1",
+          0.0
+        ],
+        [
+          "Z.P1-2",
+          0.0
+        ],
+        [
+          "Z.P1-1-1",
+          0.0
+        ],
+        [
+          "Z.P3-1",
+          0.0
+        ],
+        [
+          "Z.P3-1-1",
+          0.0
+        ],
+        [
+          "Z.P3-1-2",
+          0.0
+        ],
+        [
+          "Z.P2-1",
+          0.0
+        ],
+        [
+          "Z.P2-2",
+          0.0
+        ],
+        [
+          "Z.P2-2-1",
+          0.0
+        ],
+        [
+          "Z.P8-1",
+          0.0
+        ],
+        [
+          "Z.P8-2",
+          0.0
+        ],
+        [
+          "Z.P4-1",
+          0.0
+        ],
+        [
+          "Z.P5-1",
+          0.0
+        ],
+        [
+          "Z.K6",
+          0.0
+        ],
+        [
+          "Z.K6-1-1",
+          0.0
+        ],
+        [
+          "Z.K6-2",
+          0.0
+        ],
+        [
+          "Z.K6-3",
+          0.0
+        ],
+        [
+          "Z.K10",
+          0.0
+        ],
+        [
+          "Z.K10-1",
+          0.0
+        ],
+        [
+          "Z.K10-2",
+          0.0
+        ],
+        [
+          "Z.K2",
+          0.0
+        ],
+        [
+          "Z.K2-1-1",
+          0.0
+        ],
+        [
+          "Z.K2-1-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2-1",
+          0.0
+        ],
+        [
+          "Z.K4",
+          0.0
+        ],
+        [
+          "Z.K9",
+          0.0
+        ],
+        [
+          "Z.K9-1",
+          0.0
+        ],
+        [
+          "Z.K11",
+          0.0
+        ],
+        [
+          "Z.K11-1",
+          0.0
+        ],
+        [
+          "Z.K12",
+          0.0
+        ],
+        [
+          "Z.K12-1",
+          0.0
+        ],
+        [
+          "Z.K13",
+          0.0
+        ],
+        [
+          "Z.K13-1",
+          0.0
+        ],
+        [
+          "Z.K3",
+          0.0
+        ],
+        [
+          "Z.K3-1",
+          0.0
+        ],
+        [
+          "Z.K3-2",
+          0.0
+        ],
+        [
+          "Z.K7",
+          0.0
+        ],
+        [
+          "Z.K7-2",
+          0.0
+        ],
+        [
+          "Z.K5",
+          0.0
+        ],
+        [
+          "Z.K5-1",
+          0.0
+        ],
+        [
+          "Z.K8",
+          0.0
+        ],
+        [
+          "Z.K8-1",
+          0.0
+        ],
+        [
+          "Z.K15",
+          0.0
+        ],
+        [
+          "Z.K15-1",
+          0.0
+        ],
+        [
+          "Z.K14",
+          0.0
+        ],
+        [
+          "Z.K14-1",
+          0.0
+        ],
+        [
+          "NZ.K1",
+          0.0
+        ],
+        [
+          "NZ.K1-1",
+          0.0
+        ],
+        [
+          "NZ.K2",
+          0.0
+        ],
+        [
+          "NZ.K2-1",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true,
+      "user_selected_ground_truth": true
+    },
+    {
+      "user": "EthiBot",
+      "type": "bot",
+      "text": "Ich bin mir nicht sicher, was du meinst. Bitte wähle aus der folgenden Liste ein Argument aus, das deinen Standpunkt am besten repräsentiert. | Lernt aus selektierten Daten aus vorurteils- und diskriminierungsfreien Fällen |   Das verstehe ich.  Aber zu beachten ist: Die Entwicklung von KI ist bisher nahezu keinen moralischen Leitlinien und Regeln unterworfen und kann nicht werten. Richter:innen hingegen bekennen sich zu Werten durch die Ausübung ihres Berufs und des rechtlichen Rahmens.",
+      "id_in_dialogue": 3,
+      "timestamp": "2023/07/20-13:10:03",
+      "true_labels": [
+        "Z.K6-1-1-1",
+        "intro_54",
+        "z_trans_12",
+        "Z.K6"
+      ],
+      "true_bounds": [],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_27",
+          "intro_32",
+          "intro_23",
+          "intro_28",
+          "intro_26",
+          "intro_25",
+          "intro_24",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.K4-1",
+        "introductions": [
+          "intro_5",
+          "intro_4",
+          "intro_6",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59",
+          "intro_60",
+          "intro_61",
+          "intro_62",
+          "intro_63",
+          "intro_64",
+          "intro_65",
+          "intro_66",
+          "intro_67",
+          "intro_68"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_1",
+          "z_trans_16",
+          "z_trans_12",
+          "z_trans_2",
+          "z_trans_4",
+          "z_trans_8",
+          "z_trans_9",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_13",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [],
+        "preselect_first_argument": false,
+        "second_arguments": [
+          "Z.K6",
+          "Z.K4",
+          "Z.K6-1-1",
+          "Z.K10",
+          "Z.K2",
+          "Z.K9",
+          "Z.K7",
+          "Z.P1-1",
+          "Z.P3-1",
+          "Z.K11",
+          "Z.K5",
+          "Z.K14",
+          "Z.P4-1",
+          "Z.K12",
+          "Z.K8",
+          "Z.P5-1",
+          "Z.K13",
+          "Z.K15"
+        ],
+        "preselect_second_argument": true
+      }
+    }
+  ],
+  "start_survey": {
+    "name": "8d663864cb1f07100252d002f22286e2",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "informed": 0,
+      "agreement": 0.75
+    }
+  },
+  "end_survey": {
+    "name": "8d663864cb1f07100252d002f22286e2",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "opinion": 0.5,
+      "informative": 0.5
+    }
+  }
+}

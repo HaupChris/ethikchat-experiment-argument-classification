@@ -1,0 +1,455 @@
+{
+  "name": "20240207_130032_487659",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-13:00:32",
+  "end": "in progress",
+  "utterances": [
+    {
+      "user": "AJMSU",
+      "type": "user",
+      "text": "Ki macht weniger fehler",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-13:00:54",
+      "true_labels": [
+        "Z.K15-1"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "Z.K15-1",
+          0.022163802795875626
+        ],
+        [
+          "Z.P3-1-1",
+          0.0221196943006346
+        ],
+        [
+          "Z.K12-1",
+          0.020707768898488996
+        ],
+        [
+          "Z.P6",
+          0.019879774962632397
+        ],
+        [
+          "Z.P2",
+          0.019057167734618474
+        ],
+        [
+          "Z.K18-1",
+          0.01890443439926624
+        ],
+        [
+          "Z.K4-1",
+          0.01796310328975974
+        ],
+        [
+          "Z.P7",
+          0.01757006684387134
+        ],
+        [
+          "Z.P1",
+          0.01702910922154966
+        ],
+        [
+          "Z.P5",
+          0.01698050721031165
+        ],
+        [
+          "Z.P6-1-1",
+          0.016858597351664305
+        ],
+        [
+          "Z.P1-1-1",
+          0.016718678412726198
+        ],
+        [
+          "Z.K16-1",
+          0.0163672826487822
+        ],
+        [
+          "Z.K8-1",
+          0.01625634331509648
+        ],
+        [
+          "Z.K5-1",
+          0.01593439754538261
+        ],
+        [
+          "Z.P4",
+          0.015670037417735906
+        ],
+        [
+          "Z.K14-1",
+          0.01534937200807975
+        ],
+        [
+          "Z.K10-2",
+          0.015204042405612513
+        ],
+        [
+          "Z.K1-1",
+          0.01448156347784883
+        ],
+        [
+          "Z.P3",
+          0.014154396692994568
+        ],
+        [
+          "Z.K10-1",
+          0.013859479131986312
+        ],
+        [
+          "Z.K11-1",
+          0.013017648724547708
+        ],
+        [
+          "Z.K3-1",
+          0.011612703500742583
+        ],
+        [
+          "Z.P1-2-1",
+          0.010129624290725581
+        ],
+        [
+          "Z.K2-4",
+          0.009767435312788758
+        ],
+        [
+          "Z.K3-1-1-1",
+          0.009519815190566952
+        ],
+        [
+          "Z.K6-1",
+          0.00914243624967201
+        ],
+        [
+          "Z.K19-1",
+          0.00904561331237626
+        ],
+        [
+          "Z.K7-1",
+          0.008945516489190126
+        ],
+        [
+          "Z.K3-2",
+          0.00872155101578244
+        ],
+        [
+          "Z.K13-1",
+          0.008587761117011426
+        ],
+        [
+          "Z.K9-1",
+          0.00841567896418323
+        ],
+        [
+          "Z.P1-1",
+          0.0
+        ],
+        [
+          "Z.P1-2",
+          0.0
+        ],
+        [
+          "Z.P4-1",
+          0.0
+        ],
+        [
+          "Z.P3-1",
+          0.0
+        ],
+        [
+          "Z.P6-1",
+          0.0
+        ],
+        [
+          "Z.P5-1",
+          0.0
+        ],
+        [
+          "Z.K8",
+          0.0
+        ],
+        [
+          "Z.P7-1",
+          0.0
+        ],
+        [
+          "Z.K1",
+          0.0
+        ],
+        [
+          "Z.K2",
+          0.0
+        ],
+        [
+          "Z.K4",
+          0.0
+        ],
+        [
+          "Z.K6",
+          0.0
+        ],
+        [
+          "Z.K15",
+          0.0
+        ],
+        [
+          "Z.K18",
+          0.0
+        ],
+        [
+          "Z.K3",
+          0.0
+        ],
+        [
+          "Z.K3-1-1",
+          0.0
+        ],
+        [
+          "Z.K11",
+          0.0
+        ],
+        [
+          "Z.K12",
+          0.0
+        ],
+        [
+          "Z.K5",
+          0.0
+        ],
+        [
+          "Z.K7",
+          0.0
+        ],
+        [
+          "Z.K10",
+          0.0
+        ],
+        [
+          "Z.K9",
+          0.0
+        ],
+        [
+          "Z.K13",
+          0.0
+        ],
+        [
+          "Z.K14",
+          0.0
+        ],
+        [
+          "Z.K16",
+          0.0
+        ],
+        [
+          "Z.K19",
+          0.0
+        ],
+        [
+          "NZ.K1",
+          0.0
+        ],
+        [
+          "NZ.K1-1",
+          0.0
+        ],
+        [
+          "NZ.K3",
+          0.0
+        ],
+        [
+          "NZ.K3-1",
+          0.0
+        ],
+        [
+          "NZ.K4",
+          0.0
+        ],
+        [
+          "NZ.K4-1",
+          0.0
+        ],
+        [
+          "NZ.K6",
+          0.0
+        ],
+        [
+          "NZ.K6-1",
+          0.0
+        ],
+        [
+          "NZ.K8",
+          0.0
+        ],
+        [
+          "NZ.K8-1",
+          0.0
+        ],
+        [
+          "NZ.K9",
+          0.0
+        ],
+        [
+          "NZ.K9-1",
+          0.0
+        ],
+        [
+          "NZ.K10",
+          0.0
+        ],
+        [
+          "NZ.K10-1",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "RAGBot",
+      "type": "bot",
+      "text": "Vielen Dank für Ihren Kommentar. Es ist wahr, dass eine medizinische KI potenziell weniger Fehler bei der Diagnose machen könnte als ein Mensch, da sie in der Lage ist, eine enorme Menge an medizinischen Informationen schnell und präzise zu verarbeiten. Allerdings gibt es ethische Bedenken hinsichtlich der Autonomie von Patienten und der Verantwortung für Fehler. ",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-13:01:03",
+      "true_labels": [],
+      "true_bounds": [
+        "<Z.K15-1> <Allerdings sind Fehler bei einer KI deutlich unwahrscheinlicher als bei Ärzt:innen, da sie bei jedem Update ausführlich und automatisch getestet würde.>\n<Z.P3-1-1> <Die Fachärzt:innen und Informatiker:innen, die die Weiterentwicklung der medKI steuern, können sie sich vollständig darauf konzentrieren. Dies führt zu weniger Fehlern, als eine nebenberufliche Weiterbildung von Ärzt:innen.>\n<Z.K12-1> <Auch wenn die unterschiedliche Akzeptanz zumindest für den Beginn plausibel erscheint, ist diese als irrational anzusehen, und es kann damit gerechnet werden, dass sich im Laufe der Zeit, die Akzeptanz bezüglich der Fehler angleichen wird.>\n"
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_32",
+          "intro_28",
+          "intro_23",
+          "intro_26",
+          "intro_25",
+          "intro_24",
+          "intro_27",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.K15-1",
+        "introductions": [
+          "intro_5",
+          "intro_6",
+          "intro_4",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59",
+          "intro_60",
+          "intro_61",
+          "intro_62",
+          "intro_63",
+          "intro_64",
+          "intro_65",
+          "intro_66",
+          "intro_67",
+          "intro_68"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_1",
+          "z_trans_12",
+          "z_trans_16",
+          "z_trans_2",
+          "z_trans_4",
+          "z_trans_8",
+          "z_trans_9",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_13",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [],
+        "preselect_first_argument": false,
+        "second_arguments": [
+          "Z.K18",
+          "Z.K2",
+          "Z.K4",
+          "Z.K15",
+          "Z.K6",
+          "Z.P1-1",
+          "Z.K7",
+          "Z.K1",
+          "Z.K5",
+          "Z.K10",
+          "Z.K3",
+          "Z.K12",
+          "Z.K9",
+          "Z.K8",
+          "Z.K11",
+          "Z.K13",
+          "Z.K14",
+          "Z.K16",
+          "Z.P1-2",
+          "Z.K19"
+        ],
+        "preselect_second_argument": true
+      }
+    }
+  ],
+  "start_survey": {
+    "name": "4e8e8858f76d58c608d01a93e627721f",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "informed": 0.25
+    }
+  },
+  "end_survey": "not available"
+}

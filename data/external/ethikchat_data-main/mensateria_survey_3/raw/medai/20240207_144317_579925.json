@@ -1,0 +1,144 @@
+{
+  "name": "20240207_144317_579925",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-14:43:17",
+  "end": "2024/02/07-14:53:14",
+  "utterances": [
+    {
+      "user": "KS4Y1",
+      "type": "user",
+      "text": "Das ist gefährlich für den Datenschutz",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-14:44:54",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken hinsichtlich des Datenschutzes, aber es ist wichtig zu beachten, dass die medizinische KI (medKI) nur auf die Daten zugreifen würde, die von medizinischem Personal erhoben wurden. Die medKI würde nicht auf willkürliche Weise auf Patientendaten zugreifen. Zusätzlich könnten strenge Sicherheitsmaßnahmen implementiert werden, um sicherzustellen, dass die Daten der Patienten geschützt sind.\nAber das Szenario bezieht sich nicht nur auf den Datenschutz. Es geht auch darum, ob eine ausreichend gute medizinische KI in der Lage sein sollte, eigenständige diagnostische und therapeutische Entscheidungen zu treffen. Können Sie mir sagen, warum Sie der Meinung sind, dass dies nicht der Fall sein sollte?",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-14:45:12",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "KS4Y1",
+      "type": "user",
+      "text": "Da fehlt der Interpretationsspielraum für mich, ein Arzt kann auch sehr seltene Krankheiten finden",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-14:46:16",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken hinsichtlich der Interpretationsfähigkeit eines Arztes bei seltenen Krankheiten. Es ist jedoch wichtig zu beachten, dass eine ausreichend gute medizinische KI auf einer umfangreichen Datenbank mit medizinischen Informationen basieren würde, die es ihr ermöglichen würde, auch seltene Krankheiten zu diagnostizieren und entsprechende Therapien vorzuschlagen. Darüber hinaus könnte die medKI ständig aktualisiert und verbessert werden, um sicherzustellen, dass sie auf dem neuesten Stand der medizinischen Forschung bleibt.\nAber das Argument der Interpretationsfähigkeit eines Arztes bei seltenen Krankheiten ist nicht das einzige Argument gegen eine medizinische KI, die eigenständige diagnostische und therapeutische Entscheidungen trifft. Gibt es andere Gründe, warum Sie der Meinung sind, dass dies nicht der Fall sein sollte?",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-14:46:37",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "KS4Y1",
+      "type": "user",
+      "text": "Es gibt viele Möglichkeiten für Fehlinterpretationen",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-14:48:07",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken hinsichtlich der Möglichkeit von Fehlinterpretationen durch eine medizinische KI. Es ist jedoch wichtig zu beachten, dass eine ausreichend gute medizinische KI auf einer umfangreichen Datenbank mit medizinischen Informationen basieren würde und dass sie mit fortschreitender Technologie immer genauer werden könnte. Zusätzlich könnten strenge Qualitätskontrollen implementiert werden, um sicherzustellen, dass die medizinische KI so genau wie möglich arbeitet.\nAber das Argument der Möglichkeit von Fehlinterpretationen ist nicht das einzige Argument gegen eine medizinische KI, die eigenständige diagnostische und therapeutische Entscheidungen trifft. Gibt es andere Gründe, warum Sie der Meinung sind, dass dies nicht der Fall sein sollte?",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-14:48:20",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "KS4Y1",
+      "type": "user",
+      "text": "Ausstellen von falscheb Rezepten ",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-14:49:30",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken hinsichtlich der Möglichkeit, dass eine medizinische KI falsche Rezepte ausstellt. Es ist jedoch wichtig zu beachten, dass eine ausreichend gute medizinische KI auf einer umfangreichen Datenbank mit medizinischen Informationen basieren würde und dass sie mit fortschreitender Technologie immer genauer werden könnte. Zusätzlich könnten strenge Qualitätskontrollen implementiert werden, um sicherzustellen, dass die medizinische KI so genau wie möglich arbeitet und dass sie nur Rezepte für Medikamente ausstellt, die für die jeweilige Diagnose geeignet sind.\nAber das Argument der Möglichkeit, dass eine medizinische KI falsche Rezepte ausstellt, ist nicht das einzige Argument gegen eine medizinische KI, die eigenständige diagnostische und therapeutische Entscheidungen trifft. Gibt es andere Gründe, warum Sie der Meinung sind, dass dies nicht der Fall sein sollte?",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-14:49:52",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "KS4Y1",
+      "type": "user",
+      "text": "Nein ",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-14:50:19",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Verstehe. Ich möchte noch einmal betonen, dass ich Ihre Bedenken hinsichtlich der Implementierung einer medizinischen KI verstehe, die eigenständige diagnostische und therapeutische Entscheidungen trifft. Es ist wichtig, sorgfältig abzuwägen, ob die Vorteile einer solchen Technologie die potenziellen Risiken überwiegen.\nAber ich möchte auch darauf hinweisen, dass eine ausreichend gute medizinische KI auf einer umfangreichen Datenbank mit medizinischen Informationen basieren würde und dass sie mit fortschreitender Technologie immer genauer werden könnte. Zusätzlich könnten strenge Qualitätskontrollen implementiert werden, um sicherzustellen, dass die medizinische KI so genau wie möglich arbeitet und dass sie nur Rezepte für Medikamente ausstellt, die für die jeweilige Diagnose geeignet sind.\nIch denke, dass eine medizinische KI, die eigenständige diagnostische und therapeutische Entscheidungen trifft, in der Lage wäre, die Genauigkeit und Effizienz der medizinischen Versorgung zu verbessern, indem sie eine schnellere und genauere Diagnose und Behandlung ermöglicht. Darüber hinaus könnte sie dazu beitragen, die Kosten der medizinischen Versorgung zu senken, indem sie die Notwendigkeit reduziert, dass Patienten zu mehreren Terminen bei verschiedenen Spezialisten gehen müssen.\nIch hoffe, ich konnte Ihre Bedenken etwas ausräumen und Ihnen zeigen, dass eine medizinische KI, die eigenständige diagnostische und therapeutische Entscheidungen trifft, in der Lage sein könnte, die medizinische Versorgung zu verbessern. Sollten Sie weitere Fragen oder Bedenken haben, zögern Sie bitte nicht, mich zu kontaktieren.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-14:51:14",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "7405fa31e5a8a638b609c47d0ac04815",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0
+    }
+  },
+  "end_survey": {
+    "name": "7405fa31e5a8a638b609c47d0ac04815",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "opinion_1": 0,
+      "opinion_2": 0.6,
+      "argument_quality_2": 0.6,
+      "user_information_argument_breadth": 0.25,
+      "user_information_argument_depth": 0.5
+    }
+  }
+}

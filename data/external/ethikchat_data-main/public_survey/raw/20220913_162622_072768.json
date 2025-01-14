@@ -1,0 +1,663 @@
+{
+  "name": "20220913_162622_072768",
+  "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE",
+  "start": "2022/09/13-16:26:22",
+  "end": "2022/09/13-17:13:45",
+  "utterances": [
+    {
+      "user": "6cf4ee5381533704cae9a30ca14cc433",
+      "type": "user",
+      "text": "Nennen sie mir die Gründe warum sie sie bekommen sollte \nBei vielen Sachen ist ki ja gut aber am Ende entscheidet ja der Mensch die Frage ist\nWie weit die Befugnisse gehen",
+      "id_in_dialogue": 0,
+      "timestamp": "2022/09/13-16:27:30",
+      "true_labels": [
+        "NZ.K10"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "b859b314e6dc3d6d2c2c52bdac47bad3",
+      "type": "expert",
+      "text": "Dein Argument ist, dass kI nur unterstützend tätig sein sollte. Dem würde ich eher nicht zustimmen. Die Unterstützung von Ärzten durch KI ist  ethisch relativ unproblematisch und findet bereits heute Anwendung. Allerdings wollen wir hier die weitergehende Frage diskutieren, ob eine KI auch die Entscheidungen von Ärzten ersetzen kann. Zudem sollte man hier auch Folgendes berücksichtigen: Eine medKI wäre rund um die Uhr erreichbar; in der Nacht oder am Wochenende, wenn auch nur in einer Notbesetzung mit medizinischem Hilfspersonal. Das ließe sich ohne medKI sonst nur in großen Kliniken sicherstellen und wäre auf dem Land nicht möglich.",
+      "id_in_dialogue": 1,
+      "timestamp": "2022/09/13-16:29:10",
+      "true_labels": [
+        "intro_25",
+        "NZ.K10",
+        "intro_8",
+        "NZ.K10-1",
+        "z_trans_4",
+        "Z.P1"
+      ],
+      "true_bounds": [
+        [
+          0,
+          23
+        ],
+        [
+          23,
+          63
+        ],
+        [
+          63,
+          99
+        ],
+        [
+          99,
+          335
+        ],
+        [
+          335,
+          389
+        ],
+        [
+          389,
+          641
+        ]
+      ],
+      "is_template": true,
+      "search_terms": [],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_25",
+          "intro_28",
+          "intro_23",
+          "intro_26",
+          "intro_27",
+          "intro_24",
+          "intro_32",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "NZ.K10",
+        "introductions": [
+          "intro_8",
+          "intro_9",
+          "intro_11",
+          "intro_10",
+          "intro_7",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_4",
+          "z_trans_1",
+          "z_trans_2",
+          "z_trans_8",
+          "z_trans_9",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [
+          "NZ.K10-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.P1",
+          "Z.P2",
+          "Z.P4",
+          "Z.P3",
+          "Z.P5",
+          "Z.P6"
+        ],
+        "preselect_second_argument": true
+      }
+    },
+    {
+      "user": "6cf4ee5381533704cae9a30ca14cc433",
+      "type": "user",
+      "text": "Ja nur ist die Ki im Hintergrund trotzdem noch an z.b. Uni angegliedert das sozusagen die knifflichen fragen dann an Menschen weiter gereicht werden ?\nIch bin sehr für ki ich finde aber es braucht sozusagen ein gutes Backup ",
+      "id_in_dialogue": 2,
+      "timestamp": "2022/09/13-16:31:33",
+      "true_labels": [
+        "Vertiefung"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "b859b314e6dc3d6d2c2c52bdac47bad3",
+      "type": "expert",
+      "text": " Ich denke damit liegst du richtig. Ich glaube dein Argument stellt sich in unserem Szenario nicht, da wir von den festen Rahmenbedingungen ausgehen. Diese findest du in der Beschreibung oben. Wie ist denn deine Meinung zu Folgendem: Eine medKI kann zwar den Ärztemangel lindern, aber dafür wird mehr medizinisches Fachpersonal (u.a.  Pflegeberufe, Praxishelfer:innen, medizinische Fachassistent:innnen usw.) einschl. neuer, ähnlicher Berufsbilder benötigt. ",
+      "id_in_dialogue": 3,
+      "timestamp": "2022/09/13-16:37:26",
+      "true_labels": [
+        "intro_5",
+        "nz_trans_3",
+        "Z.P1-1"
+      ],
+      "true_bounds": [
+        [
+          0,
+          35
+        ],
+        [
+          35,
+          233
+        ],
+        [
+          233,
+          458
+        ]
+      ],
+      "is_template": true,
+      "search_terms": [
+        "unterstütz",
+        "unterstütz",
+        "prüfung",
+        "schwierig"
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_26",
+          "intro_24",
+          "intro_28",
+          "intro_25",
+          "intro_23",
+          "intro_27",
+          "intro_32",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": false,
+        "paraphrase": "",
+        "introductions": [
+          "intro_3",
+          "intro_2",
+          "intro_1",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_1",
+          "z_trans_2",
+          "z_trans_4",
+          "z_trans_8",
+          "z_trans_9",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [],
+        "preselect_first_argument": false,
+        "second_arguments": [
+          "Z.P1-1",
+          "Z.K18",
+          "Z.K7",
+          "Z.K1",
+          "Z.K2",
+          "Z.K5",
+          "Z.K10",
+          "Z.K3",
+          "Z.K12",
+          "Z.K9",
+          "Z.K4",
+          "Z.K15",
+          "Z.K11",
+          "Z.K13",
+          "Z.K14",
+          "Z.K16",
+          "Z.P1-2",
+          "Z.K6",
+          "Z.K19"
+        ],
+        "preselect_second_argument": true
+      }
+    },
+    {
+      "user": "6cf4ee5381533704cae9a30ca14cc433",
+      "type": "user",
+      "text": "Und was mich auch noch interessieren würde ist wie gut kann die ki Zebras erkennen also Krankheiten sie auf dem ersten blick wie eine bekannte Erkrankung ausieht aber zwecks zusätzlichen kleinen varieanten Mann Wüste es ist eindeutig eine seltene Krankheit \nIch bin sehr für die komiunetie Schwester und jedem Stadtteil und auch für mehr Befugnisse für den Rettungsdienst ",
+      "id_in_dialogue": 4,
+      "timestamp": "2022/09/13-16:40:27",
+      "true_labels": [
+        "FAQ.2"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "b859b314e6dc3d6d2c2c52bdac47bad3",
+      "type": "expert",
+      "text": "Wenn ich richtig verstanden habe, fragst du  wie KI so gute Ergebnisse liefern wie Expert:innen kann. Diese Frage wird sich erst in der Zukunft vollständig beantworten lassen. In Teilgebieten wie der Analyse von Bildern ist es bereits heute Realität. Wir gehen in diesem Szenario aber davon aus, dass es so ist und wollen die entstehenden ethischen Fragen diskutieren. Was sagst du denn noch zu Folgendem: Die Anwendung einer medKI ist standardisiert und reproduzierbar. Sie hängt nicht von den unterschiedlichen Fähigkeiten oder der Tagesform der behandelnden Ärzt:innen ab. Stattdessen liefert sie gleichbleibend gute Ergebnisse und ermüdet im Gegensatz zum menschlichen Gehirn nicht.",
+      "id_in_dialogue": 5,
+      "timestamp": "2022/09/13-16:44:47",
+      "true_labels": [
+        "intro_37",
+        "FAQ.2",
+        "FAQ.2-1",
+        "faq_trans_3",
+        "Z.P2"
+      ],
+      "true_bounds": [
+        [
+          0,
+          44
+        ],
+        [
+          44,
+          101
+        ],
+        [
+          101,
+          368
+        ],
+        [
+          368,
+          405
+        ],
+        [
+          405,
+          686
+        ]
+      ],
+      "is_template": true,
+      "search_terms": [
+        "schwierig",
+        "schwierig",
+        "schwierig",
+        "selten",
+        "selten",
+        "selten"
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_37",
+          "intro_38",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "FAQ.2",
+        "introductions": [
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59"
+        ],
+        "preselect_introduction": false,
+        "transitions": [
+          "faq_trans_3",
+          "faq_trans_1",
+          "faq_trans_2",
+          "z_trans_1",
+          "z_trans_2",
+          "z_trans_4",
+          "z_trans_8",
+          "z_trans_9",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [
+          "FAQ.2-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.P2",
+          "Z.P4",
+          "Z.P3",
+          "Z.P5",
+          "Z.P6"
+        ],
+        "preselect_second_argument": true
+      }
+    },
+    {
+      "user": "6cf4ee5381533704cae9a30ca14cc433",
+      "type": "user",
+      "text": "Nein mir geht es ehr darum wie weitreichend die Kinder gebaut wird nur für Standard Erkrankungen die leicht zu erkennen sind oder auch erkennt wo ihre Grenzen sind und das Symptom nicht zusammen passen also kann sie nicht entscheiden \nnatürlich glaube ich das ki viele kleine Zipperlein mit einer erfahrenen kanenpfleger*in ohne Probleme lösen und fände es auch sehr gut wen Hausärzte durch solche ki entlastet würden b.z.w. Ersetzt weil es nun mal auf dem Land immer weniger werden \nMich würde aber auch interessiert wie viel Haftung dan die krankenpflegekraft tragen muss wenn die ki falsch entscheiden würde und sie es nicht erkennt ",
+      "id_in_dialogue": 6,
+      "timestamp": "2022/09/13-16:47:49",
+      "true_labels": [
+        "Z.P1"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "b859b314e6dc3d6d2c2c52bdac47bad3",
+      "type": "expert",
+      "text": "Du sprichst hier mehrere Argumente an. Ich möchte zunächst darauf eingehen, dass du sagst, dass die medKI die medizinische Versorgung verbessert. Das kann ich nachvollziehen. Direkt dazu: Eine rund um die Uhr erreichbare medKI wäre allerdings sehr teuer, da in dem Untersuchungszentrum viel medizinisches Personal erforderlich ist. Im Übrigen: Wenn Fehler vom Fachpersonal in den Datenerhebungszentren gemacht werden, kommt die medKI zu falschen Schlussfolgerungen. Daher kann man sich auf die Entscheidungen nicht verlassen.",
+      "id_in_dialogue": 7,
+      "timestamp": "2022/09/13-16:51:35",
+      "true_labels": [
+        "intro_33",
+        "Z.P1",
+        "intro_48",
+        "Z.P1-2",
+        "z_trans_10",
+        "Z.K18"
+      ],
+      "true_bounds": [
+        [
+          0,
+          95
+        ],
+        [
+          95,
+          145
+        ],
+        [
+          145,
+          187
+        ],
+        [
+          187,
+          331
+        ],
+        [
+          331,
+          343
+        ],
+        [
+          343,
+          525
+        ]
+      ],
+      "is_template": true,
+      "search_terms": [
+        "selten"
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_23",
+          "intro_24",
+          "intro_28",
+          "intro_32",
+          "intro_26",
+          "intro_27",
+          "intro_25",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.P1",
+        "introductions": [
+          "intro_48",
+          "intro_50",
+          "intro_49",
+          "intro_51",
+          "intro_46",
+          "intro_47",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_10",
+          "z_trans_8",
+          "z_trans_1",
+          "z_trans_2",
+          "z_trans_4",
+          "z_trans_9",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [
+          "Z.P1-2"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.K18",
+          "Z.K7",
+          "Z.K1",
+          "Z.K2",
+          "Z.K5",
+          "Z.K10",
+          "Z.K3",
+          "Z.K12",
+          "Z.K9",
+          "Z.K4",
+          "Z.K15",
+          "Z.K11",
+          "Z.K13",
+          "Z.K14",
+          "Z.K16",
+          "Z.K6",
+          "Z.K19"
+        ],
+        "preselect_second_argument": true
+      }
+    }
+  ],
+  "start_survey": {
+    "name": "6cf4ee5381533704cae9a30ca14cc433",
+    "type": "StartSurvey",
+    "agreement": 0.75
+  },
+  "end_survey": {
+    "name": "6cf4ee5381533704cae9a30ca14cc433",
+    "type": "EndSurvey",
+    "agreement": 0.75,
+    "opinion": 4,
+    "text_like": "",
+    "text_dislike": "Es wird nicht erkannt wenn Mann etwas abgesendet hat und noch was dazu dann schreibt \nUnd die Antworten sind oft zu allgemein und teilweise sogar unpassend "
+  }
+}

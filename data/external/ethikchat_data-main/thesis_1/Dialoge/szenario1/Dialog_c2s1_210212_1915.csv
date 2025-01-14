@@ -1,0 +1,9 @@
+﻿id, author, utterance, arg_label, arg_label, arg_label
+19:15, 19:30
+0, kai.weisenberger, "Bei Fehlentscheidungen der KI könnten hohe Schadensersatzforderungen entstehen.", con_5
+1, antonia.krause.stud-mail, "Das Problem wurde erkannt und man könnte diesem durch sogenannte Haftungsfonds entgegenwirken.", con_5.1
+2, kai.weisenberger, "Aber gerade in der Anfangszeit könnten die Forderungen insgesamt das übersteigen, was die Hersteller bereit sind in einen solchen Fond einzuzahlen.", con_5.1.1
+3, antonia.krause.stud-mail, "Dem stimme ich zu, deshalb steht ebenso eine allgemeine Versicherungspflicht für die KI im Raum. Dieser Ansatz erscheint gerade in der Anfangszeit als die realistischere Ansatzweise.", con_5.2
+4, kai.weisenberger, "Aber die dann zu zahlenden Versicherungsbeiträge könnten ebenso insgesamt das übersteigen, was Hersteller zahlen können oder wollen.", con_5.2.1
+5, antonia.krause.stud-mail, "Bis sich die KI im medizinischen Bereich vollständig etabliert hat wird es zu diesen Problemen zwangsläufig kommen. Entweder muss der Staat in diesem Sektor finanzieller Unterstützer sein, da gerade dieser auch ein Interesse am Fortschritt und der Entwicklung verfolgt oder man nimmt die Krankenhäuser in die Pflicht, so wie es sich auch bisher bei der Haftung für ärztliches Verschulden verhielt.", con_5.2.1.1
+6, kai.weisenberger, "Das wäre wohl das richtige Vorgehen.", unk

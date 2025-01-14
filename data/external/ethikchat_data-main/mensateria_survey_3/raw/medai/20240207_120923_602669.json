@@ -1,0 +1,31 @@
+{
+  "name": "20240207_120923_602669",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-12:09:23",
+  "end": "in progress",
+  "utterances": [
+    {
+      "user": "YL701",
+      "type": "user",
+      "text": "Entalstung des Gesundheitsystems und Minderung der Kosten ",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-12:09:56",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    }
+  ],
+  "start_survey": {
+    "name": "d8be36f8ea5767fe96ef8e640aa26081",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 1,
+      "informed": 0.25
+    }
+  },
+  "end_survey": "not available"
+}

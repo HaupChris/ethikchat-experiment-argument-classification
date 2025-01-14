@@ -1,0 +1,133 @@
+{
+    "text": "Ich denke es ist ein großer Fortschritt, allerdings können auch Risiken entstehen \n\nDas stimmt. Die KI kann sowohl effizienter mit vielen Daten umgehen als auch effizienter trainiert werden als Ärzt:innen. \n\nDas stimmt, für Operationen kann ein KI besser trainiert werden bzw präziser arbeiten\n\nDas ist richtig. Aber zu beachten ist: Eine KI kann den Kontext der Untersuchung nicht einbeziehen. Die konkrete Fragestellung und die gesamte Krankheitssituation der Patient:innen sind jedoch für die Diagnostik und die passende Therapieentscheidung enorm wichtig.\n\nAls möglichkeit könnte man die KI Operieren lassen und einen Arzt bei Komplikationen und uneindeutigen Diagnosen hinzuziehen. So muss der Arzt sich nur auf die Diagnostik und die passende Therapieentscheidung fokussieren und nicht noch auf das Operieren selbst\n\nDas verstehe ich. Obwohl durch den Einsatz von KI Zeit eingespart werden kann, bedeutet dies nicht zwangsläufig, dass die gewonnene Zeit dem Patientenwohl zugute kommt. Vielmehr ist wohl davon auszugehen, dass die Arbeitszeit als Kosten insgesamt eingespart wird. \n\nes gibt ja heutzutage schon Roboter die Operationen übernehmen, werde die zu Übungszwecken eingesetzt oder sind diese schon Kosten/Nutzen effizienter? \n\nEs soll vor allem um allgemeine Diagnostik (wie das Auswerten von Bildern) und Therapieentscheidungen gehen, weniger um Operationen. Die KI ist nicht unbedingt kostengünstiger. Durch Fehlentscheidungen können sehr hohe Schadensersatzforderungen entstehen, für die gehaftet werden müsste.\n\nich verstehe....ich denke eine KI kann definitiv auch sehr nützlich sein wenn sie das Wissen aus der ganzen Welt bezieht, so hat man vielleicht auch mehr Zugang zu Informationen als ein einzelner Arzt\n\nDas ist richtig. Aber zu beachten ist: Die KI könnte falsch lernen und bspw. durch unbalancierte Daten zu Vorurteilen neigen, wodurch die von der KI angegebenen Daten und Diagnosen zu ungenau oder sogar falsch sein könnten.\n\nwer würde dann kontrollieren welche Daten wie eingespeist werden?\n\nEs gibt jedoch Wege um dem Problem der Data Bias vorzubeugen. Zum Beispiel, indem man möglichst unterschiedliche Quellen nutzt, um die Diversität der Daten zu garantieren. Was sagst du dazu? Gerade wenn viele personenbezogene Daten gesammelt werden, besteht die Gefahr, dass dies zum gläsernen Bürger führt. Das ist in datenschutzrechtlicher Hinsicht bedenklich.\n\nja, das kann ein Problem sein. allerdings könnte dies ja verhindert werden indem man versucht die daten so anonym wie möglich zu speichern\n\nDas ist richtig. Zur Umsetzung und Einhaltung des Datenschutzes müsste allerdings neues Personal eingestellt werden, etwa Jurist:innen und Informatiker:innen, was zu zusätzlichen Kosten führen würde. Außerdem muss folgendes beachtet werden: Durch die große Menge gesammelter Daten werden Kliniken interessanter für Cyberangriffe.\n\nlohnt es sich bei all diesen hürden dann überhaupt solch eine KI herzustellen?\n\nMan kann es auch so sehen: Eine KI liefert gleichbleibend gute Ergebnisse. Anders als Ärzt:innen steht sie nicht unter dem Einfluss äußerer Faktoren, wie zum Beispiel Stress. Außerdem muss folgendes beachtet werden: Mithilfe des Einsatzes von KI kann dem demografischen Wandel in ländlichen Regionen begegnet werden. Dieser zeigt sich unter anderem im Mangel von Ärzt:innen in diesen Gebieten.\n\ndas ist ein gutes argument. würde die KI dann überall eingesetzt werden oder nur in bestimmten bereichen?\n\nIn vielen Bereichen der Medizin ist noch nicht einmal ansatzweise absehbar, dass Ärzt:innen durch Maschinen ersetzt werden könnten. Ansprechen möchte ich noch: Im Gegensatz zum menschlichen Gehirn ermüdet eine KI nicht.\n\nstimmt, eine KI kann immer und überall eingesetzt werden, so kann man definitiv effizienter arbeiten da keine pausen gebraucht werden\n\nDas ist richtig. Die durch den Einsatz von KI eingesparten Kosten können in andere Bereiche investiert werden, etwa in die Forschung. Fallen dir noch weitere Argumente ein? Insbesondere ältere Patient:innen könnten Diagnosen und Entscheidungen einer KI nicht ausreichend vertrauen.\n\nja ältere Patienen sehen meist keine vorteile durch kI und vertrauen diesen nicht, vor allen dingen weil sie sich damit nicht gut genug auskennen\n\nDas ist richtig. Andererseits: Für die KI spricht, dass sie angeben kann, mit welcher Wahrscheinlichkeit sie von dem Vorliegen der diagnostizierten Krankheit ausgeht.\n\ndas waren alles sehr nützliche Infos, danke :) \n\n[LABELING COMPLETION]\n\n",
+    "annotations": [
+        { "begin": 0, "end": 82, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 0, "user": "6fa8feb530f872df448a6ba5b17d2d2d", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 0, "end": 82, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P2" } },
+        { "begin": 84, "end": 206, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 1, "user": "a235f09980d1b6ee477201ea0c8a42f4", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 84, "end": 96, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 96, "end": 206, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P2" } },
+        { "begin": 208, "end": 293, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 2, "user": "6fa8feb530f872df448a6ba5b17d2d2d", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 208, "end": 293, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P1" } },
+        { "begin": 295, "end": 559, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 3, "user": "a235f09980d1b6ee477201ea0c8a42f4", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 295, "end": 312, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 312, "end": 334, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 334, "end": 559, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K18" } },
+        { "begin": 561, "end": 821, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 4, "user": "6fa8feb530f872df448a6ba5b17d2d2d", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 561, "end": 821, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P18" } },
+        { "begin": 823, "end": 1087, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 5, "user": "a235f09980d1b6ee477201ea0c8a42f4", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 823, "end": 841, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 841, "end": 1087, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P18-A" } },
+        { "begin": 1089, "end": 1240, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 6, "user": "6fa8feb530f872df448a6ba5b17d2d2d", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 1089, "end": 1240, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P5" } },
+        { "begin": 1242, "end": 1529, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 7, "user": "a235f09980d1b6ee477201ea0c8a42f4", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 1242, "end": 1529, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "Klarstellung Thema Dialog + con/5" } },
+        { "begin": 1531, "end": 1731, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 8, "user": "6fa8feb530f872df448a6ba5b17d2d2d", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 1531, "end": 1731, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P23" } },
+        { "begin": 1733, "end": 1956, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 9, "user": "a235f09980d1b6ee477201ea0c8a42f4", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 1733, "end": 1750, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 1750, "end": 1772, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 1772, "end": 1956, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K3" } },
+        { "begin": 1958, "end": 2023, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 10, "user": "6fa8feb530f872df448a6ba5b17d2d2d", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 1958, "end": 2023, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P2-Ac" } },
+        { "begin": 2025, "end": 2387, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 11, "user": "a235f09980d1b6ee477201ea0c8a42f4", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 2025, "end": 2197, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P2-Ac-Pc" } },
+        { "begin": 2197, "end": 2216, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 2216, "end": 2387, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P2-A" } },
+        { "begin": 2389, "end": 2527, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 12, "user": "6fa8feb530f872df448a6ba5b17d2d2d", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 2389, "end": 2527, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P2-A-P" } },
+        { "begin": 2529, "end": 2858, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 13, "user": "a235f09980d1b6ee477201ea0c8a42f4", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 2529, "end": 2546, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 2546, "end": 2729, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P2-A-P-A" } },
+        { "begin": 2729, "end": 2770, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 2770, "end": 2858, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K6" } },
+        { "begin": 2860, "end": 2938, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 14, "user": "6fa8feb530f872df448a6ba5b17d2d2d", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 2860, "end": 2938, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K6-Aa-P" } },
+        { "begin": 2940, "end": 3333, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 15, "user": "a235f09980d1b6ee477201ea0c8a42f4", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 2940, "end": 2967, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 2967, "end": 3115, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P4" } },
+        { "begin": 3115, "end": 3156, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 3156, "end": 3333, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P7" } },
+        { "begin": 3335, "end": 3440, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 16, "user": "6fa8feb530f872df448a6ba5b17d2d2d", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 3335, "end": 3440, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "Frage Einsatzbereich" } },
+        { "begin": 3442, "end": 3661, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 17, "user": "a235f09980d1b6ee477201ea0c8a42f4", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 3442, "end": 3574, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "K9-Aa" } },
+        { "begin": 3574, "end": 3602, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 3602, "end": 3661, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P16" } },
+        { "begin": 3663, "end": 3796, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 18, "user": "6fa8feb530f872df448a6ba5b17d2d2d", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 3663, "end": 3796, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P25" } },
+        { "begin": 3798, "end": 4079, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 19, "user": "a235f09980d1b6ee477201ea0c8a42f4", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 3798, "end": 3815, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 3815, "end": 3932, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P18-A-P" } },
+        { "begin": 3932, "end": 3971, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 3971, "end": 4079, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P7-A-Pa" } },
+        { "begin": 4081, "end": 4226, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 20, "user": "6fa8feb530f872df448a6ba5b17d2d2d", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 4081, "end": 4226, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P7-A-Pa" } },
+        { "begin": 4228, "end": 4394, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 21, "user": "a235f09980d1b6ee477201ea0c8a42f4", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 4228, "end": 4245, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 4245, "end": 4259, "type": "de.uniwue.ethik-ki-chats.Other", "features": { "label": "" } },
+        { "begin": 4259, "end": 4394, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "P15" } },
+        { "begin": 4396, "end": 4443, "type": "de.uniwue.ethik-ki-chats.UserUtterance", "features": { "id_in_dialogue": 22, "user": "6fa8feb530f872df448a6ba5b17d2d2d", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 4396, "end": 4443, "type": "de.uniwue.ethik-ki-chats.Template", "features": { "label": "Abschluss Gespräch" } },
+        { "begin": 4445, "end": 4466, "type": "de.uniwue.ethik-ki-chats.ExpertUtterance", "features": { "id_in_dialogue": 23, "user": "a235f09980d1b6ee477201ea0c8a42f4", "timestamp": "2022/09/20-15:53:11" } },
+        { "begin": 0, "end": 4468, "type": "de.uniwue.ethik-ki-chats.Dialogue", "features": { "name": "210526_1000_7957", "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE", "start": "2021/05/26-10:00:00", "end": "2021/05/26-11:03:00" } },
+        { "begin": 0, "end": 4468, "type": "de.uniwue.ethik-ki-chats.StartSurvey", "features": { "name": "6fa8feb530f872df448a6ba5b17d2d2d", "agreement": 0.5 } },
+        { "begin": 0, "end": 4468, "type": "de.uniwue.ethik-ki-chats.EndSurvey", "features": { "name": "6fa8feb530f872df448a6ba5b17d2d2d", "agreement": 0.5, "opinion": "", "text_like": "", "text_dislike": "" } }
+    ],
+    "types": [
+        {
+            "name": "de.uniwue.ethik-ki-chats.Template",
+            "features": [
+                { "name": "label", "range": "RANGE_PRIMITIVE" },
+                { "name": "incorrect", "range": "RANGE_PRIMITIVE" },
+                { "name": "difficult", "range": "RANGE_PRIMITIVE" },
+                { "name": "multiple", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        { "name": "de.uniwue.ethik-ki-chats.Introduction", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Transition", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Other", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        { "name": "de.uniwue.ethik-ki-chats.Outro", "features": [{ "name": "label", "range": "RANGE_PRIMITIVE" }] },
+        {
+            "name": "de.uniwue.ethik-ki-chats.Dialogue",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "szenario", "range": "RANGE_PRIMITIVE" },
+                { "name": "start", "range": "RANGE_PRIMITIVE" },
+                { "name": "end", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.StartSurvey",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "agreement", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.EndSurvey",
+            "features": [
+                { "name": "name", "range": "RANGE_PRIMITIVE" },
+                { "name": "agreement", "range": "RANGE_PRIMITIVE" },
+                { "name": "opinion", "range": "RANGE_PRIMITIVE" },
+                { "name": "text_like", "range": "RANGE_PRIMITIVE" },
+                { "name": "text_dislike", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.UserUtterance",
+            "features": [
+                { "name": "id_in_dialogue", "range": "RANGE_PRIMITIVE" },
+                { "name": "user", "range": "RANGE_PRIMITIVE" },
+                { "name": "timestamp", "range": "RANGE_PRIMITIVE" }
+            ]
+        },
+        {
+            "name": "de.uniwue.ethik-ki-chats.ExpertUtterance",
+            "features": [
+                { "name": "id_in_dialogue", "range": "RANGE_PRIMITIVE" },
+                { "name": "user", "range": "RANGE_PRIMITIVE" },
+                { "name": "timestamp", "range": "RANGE_PRIMITIVE" }
+            ]
+        }
+    ]
+}

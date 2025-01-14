@@ -1,0 +1,286 @@
+{
+  "name": "210527_1800_3911",
+  "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE",
+  "start": "18:00",
+  "end": "18:37",
+  "utterances": [
+    {
+      "user": "c21f969b5f03d33d43e04f8f136e7682",
+      "type": "user",
+      "text": "Ich denke die Ersetzung der Ärzte durch KI könnte unser Gesundheitssystem verbessern und schnelle, einfache Diagnosen für viele Menschen auch in ärmeren Ländern ermöglichen.",
+      "id_in_dialogue": 0,
+      "true_labels": [
+        "P2"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "05500fb6d2684fc8a8cc6c696b9271c2",
+      "type": "expert",
+      "text": "Dies kann man auch anders sehen. Gerade wenn viele personenbezogene Daten gesammelt werden, besteht die Gefahr, dass dies zum gläsernen Bürger führt. Das ist in datenschutzrechtlicher Hinsicht bedenklich. Was sagst du dazu? ",
+      "id_in_dialogue": 1,
+      "true_labels": [
+        null,
+        "P2-A",
+        null
+      ],
+      "true_bounds": [
+        [
+          0,
+          33
+        ],
+        [
+          33,
+          205
+        ],
+        [
+          205,
+          224
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "c21f969b5f03d33d43e04f8f136e7682",
+      "type": "user",
+      "text": "Die Daten der Patienten müssen oberste Priorität haben und dürfen nur wenigen Algorithmen oder Menschen zur Verfügung gestellt werden. Im besten Fall werden die Daten nur kurzzeitig zur Diagnose verwendet und danach wieder verworfen oder dem Patienten zur Verwahrung überlassen.\nIst dies der Fall, habe ich keine Bedenken.",
+      "id_in_dialogue": 2,
+      "true_labels": [
+        "P2-A"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "05500fb6d2684fc8a8cc6c696b9271c2",
+      "type": "expert",
+      "text": "Das verstehe ich. Die Daten werden üblicherweise nur anonymisiert gesammelt, daher bestehen in dieser Hinsicht keine datenschutzrechtlichen Bedenken. Weiterhin ungeklärt bleibt: Bei Fehlentscheidungen der KI werden sehr hohe Schadensersatzforderungen entstehen und die Hersteller:innen könnten für diese Fehlentscheidungen der KI verantwortlich gemacht werden. Die Anreize für die Hersteller:innen eine KI zu entwickeln würden wegfallen.",
+      "id_in_dialogue": 3,
+      "true_labels": [
+        null,
+        "P2-A-P",
+        null,
+        "K4"
+      ],
+      "true_bounds": [
+        [
+          0,
+          18
+        ],
+        [
+          18,
+          150
+        ],
+        [
+          150,
+          178
+        ],
+        [
+          178,
+          437
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "c21f969b5f03d33d43e04f8f136e7682",
+      "type": "user",
+      "text": "Hierfür muss eine Lösung gefunden werden. Zu Beginn könnte man Patienten eine schnellere Behandlung versprechen, wenn sie dafür auf eventuelle Schadensersatzforderungen verzichten. Alternativ könnte der Staat durch finanzielle Unterstützung helfen, die Entwicklung voranzutreiben.\nZu Beginn dienen die KI Modelle ohnehin nur unterstützend für Ärzte, welche zunächst die Verantwortung und das letzte Wort behalten.",
+      "id_in_dialogue": 4,
+      "true_labels": [
+        "K4-Aa-P-A"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "05500fb6d2684fc8a8cc6c696b9271c2",
+      "type": "expert",
+      "text": "Das wäre eine Möglichkeit Hast Du schon einmal daran gedacht: Es könnte zu dem Problem der Data Bias, auf deutsch der Voreingenommenheit der Daten, kommen. Die KI könnte zu Vorurteilen neigen, wenn sie mit vorurteilsbehafteten Daten lernt.",
+      "id_in_dialogue": 5,
+      "true_labels": [
+        null,
+        null,
+        "P2-Ac"
+      ],
+      "true_bounds": [
+        [
+          0,
+          26
+        ],
+        [
+          26,
+          62
+        ],
+        [
+          62,
+          239
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "c21f969b5f03d33d43e04f8f136e7682",
+      "type": "user",
+      "text": "Bei einer KI für das Gesundheitswesen müssen die Daten strengstens überwacht werden und solche Probleme frühzeitig erkannt und entfernt werden. \nDafür müssen die Modelle natürlich auchreichend getestet werden.",
+      "id_in_dialogue": 6,
+      "true_labels": [
+        "K3"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "05500fb6d2684fc8a8cc6c696b9271c2",
+      "type": "expert",
+      "text": "Das ist richtig. Es gibt jedoch Wege um dem Problem der Data Bias vorzubeugen. Zum Beispiel, indem man möglichst unterschiedliche Quellen nutzt, um die Diversität der Daten zu garantieren. Man kann es auch so sehen: Ärzt:innen sind jedoch ebenso nicht frei von Vorurteilen.",
+      "id_in_dialogue": 7,
+      "true_labels": [
+        null,
+        "P2-Ac-Pc",
+        null,
+        "P2-Ac-P"
+      ],
+      "true_bounds": [
+        [
+          0,
+          17
+        ],
+        [
+          17,
+          189
+        ],
+        [
+          189,
+          216
+        ],
+        [
+          216,
+          273
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "c21f969b5f03d33d43e04f8f136e7682",
+      "type": "user",
+      "text": "Da stimme ich zu. Die Daten spiegeln nur die Ärzte wieder. Wenn dabei eine gewisse Voreingenommenheit der KI entsteht, dann ist diese ohnehin bereits verbreitet durch die Ärzte. Nichtsdestrotrotz bietet das Training einer KI die Möglichkeit eine solche Voreingenommenheit endgültig zu beseitigen.",
+      "id_in_dialogue": 8,
+      "true_labels": [
+        "P2-Ac-Pb",
+        "P2-Ac-Pc"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "05500fb6d2684fc8a8cc6c696b9271c2",
+      "type": "expert",
+      "text": "Das stimmt. Hast Du schon einmal daran gedacht: Die Anwendung einer KI ist standardisiert und reproduzierbar. Sie hängt nicht von den unterschiedlichen Fähigkeiten oder der Tagesform der behandelnden Ärzt:innen ab.",
+      "id_in_dialogue": 9,
+      "true_labels": [
+        null,
+        null,
+        "P3"
+      ],
+      "true_bounds": [
+        [
+          0,
+          12
+        ],
+        [
+          12,
+          48
+        ],
+        [
+          48,
+          214
+        ]
+      ],
+      "is_template": true
+    },
+    {
+      "user": "c21f969b5f03d33d43e04f8f136e7682",
+      "type": "user",
+      "text": "Ja, das ist durchaus ein großer Vorteil einer KI. ",
+      "id_in_dialogue": 10,
+      "true_labels": [
+        "P2"
+      ],
+      "true_bounds": [],
+      "predicted_labels": {},
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    }
+  ],
+  "surveys": [
+    {
+      "name": "c21f969b5f03d33d43e04f8f136e7682",
+      "type": "StartSurvey",
+      "result": "strong-agree"
+    },
+    {
+      "name": "c21f969b5f03d33d43e04f8f136e7682",
+      "type": "EndSurvey",
+      "result": "neutral",
+      "improvement_suggestions": "",
+      "persuasive_arguments": [
+        [
+          0,
+          true
+        ],
+        [
+          1,
+          true
+        ],
+        [
+          2,
+          true
+        ],
+        [
+          3,
+          true
+        ],
+        [
+          4,
+          true
+        ],
+        [
+          5,
+          true
+        ],
+        [
+          6,
+          true
+        ],
+        [
+          7,
+          true
+        ],
+        [
+          8,
+          true
+        ],
+        [
+          9,
+          true
+        ],
+        [
+          10,
+          true
+        ]
+      ]
+    }
+  ]
+}

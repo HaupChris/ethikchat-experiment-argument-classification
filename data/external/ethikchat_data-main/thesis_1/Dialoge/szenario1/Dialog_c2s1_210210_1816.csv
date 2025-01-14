@@ -1,0 +1,14 @@
+﻿id, author, utterance, arg_label, arg_label, arg_label
+18:16, 18:44
+0, christian.hauptmann.stud-mail, "Wenn Ärzte unter zeitlichem Stress stehen, werden Fehler wahrscheinlicher. Dies ist bei einer KI nicht möglich.", pro_4
+1, justin.voelkel, "Der erste Punkt mag zwar stimmen, aber auch bei KI ist es durchaus denkbar, dass diese falsch lernen. Außerdem sorgt ein ausschließlicher KI Einsatz zur Entmenschlichung und die Patienten fühlen sich nicht wohl aufgehoben.", con_4, con_6
+2, christian.hauptmann.stud-mail, "In der bildgebenden Diagnostik interpretieren Radiologen die Bilder. Diese bauen auch keine Beziehung zum Patienten auf.", con_6.1
+3, justin.voelkel, "Sie liefern allerdings verständliche und nachvollziehbare Erklärungen der Ergebnisse an den jeweiligen Facharzt, die eine KI eben nicht ohne weiteres liefern kann", con_2
+4, christian.hauptmann.stud-mail, "Oftmals läuft die Kommunikation zwischen behandelndem Arzt und Radiologen jedoch nur über den Befund ab. Dieser ist auf Papier gedruckt. Derartige Befunde könnten auch von KI generiert werden.", con_2.5
+5, justin.voelkel, "Aber wie sehr kann sich der behandelnde Arzt auf den von der KI ermittelten Befund verlassen, wenn von der KI keine detaillierte Erklärung gegeben werden kann. Der Arzt müsste dann trotzdem im Nachgang alles gewissenhaft überprüfen. Bei einem erfahrenen Radiologen würde dieser Schritt wegfallen.", con_2.5.1
+6, christian.hauptmann.stud-mail, "Bei einer KI handelt es sich ja auch um 'einen erfahrenen Radiologen'. Dies wurde auf mehr Bildern trainiert, als sich ein Mensch je in seinem ganzen Leben ansehen könnte.", pro_2
+7, justin.voelkel, "Das ist richtig. Die gestiegenen Datenmengen bringen allerdings weitere Aspekte mit sich, die vorab zu bedenken sind. Hiermit angesprochen ist insb. der Datenschutz, bei der Verarbeitung personalisierter Daten", pro_2.1
+8, christian.hauptmann.stud-mail, "Da stimme ich zu. Der Datenschutz ist in jedem Fall zu bedenken. In der Praxis werden aber auch aktuell bereits viele Daten erhoben. Trainingsdaten für neuronale Netze werden anonymisiert, sodass keine Bedenken bestehen sollten.", pro_2.1.1
+9, justin.voelkel, "Durch die aber immer noch mehr steigende Datenmenge machen sich die Kliniken nur noch Interessanter für Hackerangriffe", pro_2.3
+10, christian.hauptmann.stud-mail, "Dies ist ein Bereich, der in zukunft immer wichtiger werden wird und mit dem sich Kliniken auch beschäftigen müssen, unabhängig davon, ob KI Entscheidungen fällt oder nicht.", con_7.2
+11, justin.voelkel, "Dem stimme ich zu", unk

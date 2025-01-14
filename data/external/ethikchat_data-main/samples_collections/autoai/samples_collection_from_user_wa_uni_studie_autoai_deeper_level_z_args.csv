@@ -1,0 +1,213 @@
+prev_labels,type,label,text
+"['intro_2', 'z_trans_2', 'Z.P8-1']",user,Z.P8-1-1,"Ja, das kann ich verstehen. Aber auch Menschen sind nicht immer darin erfolgreich, sich auf das Verhalten anderer Verkehrsteilnehmer einzustellen."
+['intro_62'],user,Z.P8-1-1,"Auch Menschen können Probleme damit haben, sich auf irrationales Fahrverhalten von Menschen einzustellen."
+['intro_61'],user,Z.P8-1,Die KI kann reagiert falsch auf unvorhersehbare Szenarien
+"['intro_1', 'z_trans_12', 'Z.C2-1']",user,Z.P8-1,"Auf andere Verkehrsteilnehmer kann die KI aber nicht entsprechend reagieren, da sie die Gefühle und folgende Verhaltensweisen der Fahrer nicht vorhersagen kann"
+"['intro_3', 'z_trans_2', 'Z.P8-1']",user,Z.P8-1-1,Ja das mag sein aber auch wir Menschen tun uns schwer auf dieses irrationale Fahrverhalten von anderen zu reagieren
+['intro_62'],user,Z.P8-1-1,Menschen können das nicht besser als die künstliche Intelligenz
+"['intro_3', 'z_trans_12', 'Z.C5']",user,Z.C5-1,Das ist der Lauf der zeit und auch kritiker werden das akzeptieren. Am anfang waren viele menschen auch gegen die antibaby pille
+['intro_62'],user,Z.C5-3,"Wenn menschen merken, dass etwas funktioniert, werden sie es auch akzeptieren"
+"['intro_2', 'z_trans_2', 'Z.C10']",user,Z.C10-1,"Natürlich aber das land hat ja viele juristen. Und wie sagt man so schön:"" viele hände schnelles ende""."
+[],user,Z.P12-1-2,Man braucht dann weniger autos und kann besser carsharing betreiben
+['intro_61'],user,Z.P12-1-2,"Wenn autos von selber fahren, können sie zu einem kommen und das auch immer wieder für andere machen"
+"['intro_2', 'z_trans_11', 'Z.P8-1']",user,Z.P8-1-1,"Aber wir reden ja von einem szenario in der zukunft. Ich gehe davon aus, dass dieses problem gelöst ist, bevor sowas zugelassen wird"
+"['intro_3', 'z_trans_2', 'Z.C10']",user,Z.C10-1,"Wenn auto kis zugelassen werden, gibt es ja einen rechtsrahmen"
+['intro_61'],user,Z.C10-1,Eine zulassung ist ein rechtsrahmen
+"['intro_3', 'z_trans_12', 'Z.C2']",user,Z.C2-1,Geschwindigkeitsbegrenuzungen verlangsamen den verkehr in der regel nicht
+"['intro_2', 'z_trans_13', 'Z.C4']",user,Z.C4-1,Das kann man ja aber durch eine gute firewall absichern
+['intro_62'],user,Z.C4-1,Das kann man sicher machen
+"['intro_3', 'z_trans_2', 'Z.C8']",user,Z.C8-1,Das kann man lösen indem keine daten gespeichert werden
+['intro_61'],user,Z.C8-1,Daten nicht speichern
+[],user,Z.C2-1,KI könnte das Fahren sicherer machen.
+['intro_62'],user,Z.C2-1,Tempolimits werden eingehalten.
+"['intro_1', 'z_trans_11', 'Z.C2']",user,Z.C2-1,"Wenn alle Fahrzeuge mit KI fahren würden wäre das kein Problem, da die Systeme untereinander kommunizieren könnten und die Fahrzeiten sich dadurch verringern würden, sowie Staus und Unfälle."
+"['intro_1', 'z_trans_2', 'Z.C4']",user,Z.C4-1,durch sensoren im auto die kollisionen vermeiden sollen könnte man das verhindern
+"['intro_1', 'z_trans_11', 'Z.P6']",user,Z.P6-1,"Das stimmt, aber es gibt auch Angebote für diese Menschen, die von Nicht-KI-gesteuerten Fahrzeugen gefahren werden"
+['intro_62'],user,Z.P6-1,Nicht-autonome Fahrzeuge können genau so genutzt wrrden
+"['intro_1', 'z_trans_11', 'Z.C2-1']",user,Z.P9-1,"ja, aber KI ist nicht so sicher wie von Menschen gesteuerte Fahrzeuge"
+"['intro_1', 'z_trans_12', 'Z.C5']",user,Z.C5-2,Dafür muss mehr Akzeptanz in der Gesellschaft geschaffen werden
+"['intro_27', 'Z.C5-2', 'intro_5', 'z_trans_1', 'Z.C4']",user,Z.C4-1,Abschottung der Straßen von anderen Verkehrsteilnehmern
+"['intro_2', 'z_trans_2', 'Z.C8']",user,Z.C8-1,Dafür gibt es Datenschutzgesetze
+"['intro_3', 'z_trans_11', 'Z.P8-1']",user,Z.C6-1,"Ich denke, dass es für das Programm keinen Unterschied zwischen müden und aufmerksamen Fahrern gibt. Da auch aufmerksame Fahrer Fehler machen können"
+"['intro_2', 'z_trans_2', 'Z.C5']",user,Z.P1-1,"Menschen finden es generell positiv, wenn ihnen Arbeit abgenommen wird. Wenn man als Beruf Auto fährt wird man das aber schlecht finden"
+"['intro_3', 'z_trans_13', 'Z.C10']",user,Z.C6-3-1,In diesem Fall sind die Entwickler für die Fehler des Autos verantwortlich
+['intro_61'],user,Z.C6-3-1,Die Entwickler tragen die Verantwortung für die Autos
+"['intro_1', 'z_trans_11', 'Z.C8']",user,Z.C8-1,"Nicht, wenn es dezentralisiert eine Peer-To-Peer Verbindung zwischen den Autos gibt und but anonymisierter Daten zur Verkehrsoptimierung an einen zentralen Server geschickt werden"
+['intro_61'],user,Z.C8-1,"Nicht, wenn es dezentralisiert eine Peer-To-Peer Verbindung zwischen den Autos"
+"['intro_3', 'z_trans_11', 'Z.P11-1']",user,Z.P11-1-1,Das kann man von einem Server abfragen
+['intro_61'],user,Z.P11-1-1,"Wenn sich das Auto nicht sicher ist, soll es einen Server abfragen"
+"['intro_1', 'z_trans_2', 'Z.P8-1']",user,Z.C5-1-1-1,"es muss mit Übergangs Autos angefangen werden, die nicht komplett selbstfahren und der Mensch trotzdem immer aufmerksam bleiben, bis alle Autos autonom fahren"
+['intro_62'],user,Z.C5-1-1-1,"zuerst sollte der Fahrer/ Fahrerin trotzdem aufmerksam sein und regelmäßig eingreifen können, wenn das Auto trotzdem autonom fahren würde"
+['intro_62'],user,Z.C5-2,"es wird immer Menschen geben, die skeptisch sind, dennoch kann das die Gesellschaft nicht von neuen Technologien abhalten"
+"['intro_25', 'Z.P4', 'intro_1', 'Z.P4-1']",user,Z.P8-1,Ist es nicht gefährlich wenn die KI zu spät realisiert das ein Unfall bevorsteht.
+"['intro_3', 'z_trans_11', 'Z.C5']",user,Z.P2-1,Der Mensch ist nicht bereit sich zu ändern. Denn Auto fahren ist auch ein Lifestyle.
+['intro_61'],user,Z.P2-1,Menschen gefällt es selbst zu fahren.
+"['intro_3', 'z_trans_13', 'Z.C10']",user,Z.P10-1,Viele Menschen würden ihre Arbeit verlieren.
+['intro_61'],user,Z.P10-1,Busfahrer werden arbeitslos.
+['intro_61'],user,Z.C5-1-1-1,Menschen sollten die Kontrolle trotz der Zulassung behalten
+"['intro_1', 'z_trans_2', 'Z.C10']",user,Z.C11-1,Der kann geschaffen werden .
+['intro_61'],user,Z.C11-1,Menschen können die Gesetze machen das ist kein Problem
+"['intro_1', 'z_trans_13', 'Z.C5']",user,Z.C5-2,"Die Gesellschaft muss langsam an die neue Technologie herangeführt werden, um Vertrauen aufzubauen. Dies geschieht bereits mit beispielsweise dem Spurhalteassistenten und ähnlichen Hilfsmitteln"
+['intro_61'],user,Z.C5-2,"Um über die Skepsis der Gesellschaft hinwegzukommen, muss die autoKI Schritt für Schritt etabliert werden, damit die Menschen Zeit haben, sich daran zu gewöhnen und Vertrauen aufzubauen"
+['intro_61'],user,Z.C11-1,"Die Menschheit hat früher schon für neue Technologien rechtliche Rahmen geschaffen, das sollte auch wieder möglich sein."
+['intro_61'],user,Z.P4-1,Weniger Selbststeuerung
+"['intro_1', 'z_trans_2', 'Z.P6']",user,Z.P8-1,Gefahren werden zu spät erkannt
+['intro_62'],user,Z.P11-1,Neue Straßenführungen werden nicht erkannt
+['intro_61'],user,Z.P2-1,Menschheit wird faul
+[],user,Z.P8-1,"Menschenleben sollten nicht davon abhängen, ob eine KI ""gut trainiert"" wurde bzw. die Situation im Straßenverkehr sicher einschätzt"
+['intro_61'],user,Z.P8-1,KIs können Situationen im Straßenverkehr nicht gut einschätzen und dies kann zu Toten führen
+"['intro_3', 'Z.P7', 'z_trans_13', 'Z.C2-1']",user,Z.C2-1,"Ok, aber du bringst einige Themen ein, die nicht auf die KI beim Autofahren selbst bezogen sind. Geschwindigkeitsbegrenzungen machen den Verkehr sicherer, KI nicht. Genauso sind Mechanismen, wie Parkassistenten (wie in der Aufgabe vorhin besprochen), nicht Teil des Themas, das wir hier diskutieren sollen."
+"['intro_32', 'Z.P10', 'intro_1', 'Z.P10-1']",user,Z.P10-1,Dafür werden aber neue geschaffen und es hilft gegen den Fachkräftemangel
+"['intro_32', 'Z.C11', 'intro_2', 'Z.C11-1']",user,Z.P12-2,"Es muss muss mehr Technik verbaut werden, die kaputt gehen kann"
+['intro_61'],user,Z.P12-2,Es entstehen neue verschleißanfällige Teile im Auto die defekt sein können
+"['intro_1', 'z_trans_2', 'Z.P6']",user,Z.P10-1,Bei Zulassung von Auto KI beispielsweise im öffentlichen Nahverkehr oder Gütertransport gehen Arbeitsplätze verloren
+['intro_62'],user,Z.P10-1,Arbeitsplätze gehen verloren
+['intro_61'],user,Z.P4-1,Verlorengehen vom Orientierungssinn der Menschen
+"['intro_3', 'z_trans_11', 'Z.C2-1']",user,Z.P4-1,Selbstbestimmung geht verloren
+['intro_61'],user,Z.P4-1,Die Selbstbestimmung des Menschen beim Autofahren geht durch Auto KI verloren
+"['intro_2', 'z_trans_11', 'Z.C2']",user,Z.C2-1,Aber es gibt in anderen Länder sowieso striktere Geschwindigkeitsbegrenzungen also sollte das kein größeres Problem sein
+['intro_62'],user,Z.C2-1,In anderen Ländern gibt es schon striktere Geschwindigkeitsbegrenzungen und das funktioniert dort auch
+"['intro_27', 'Z.P10', 'intro_3', 'Z.P10-1']",user,Z.P10-1-1,"Das habe ich zwar nicht gemeint, aber gut. Arbeitsplätze fallen zwar insofern weg, dass man keine LKW-Fahrer mehr bezahlen muss, allerdings entstehen durch den Einsatz von KI in der Automobilbrange auch neue Arbeitsplätze. Beispielsweiße die Einrichtung des KI Systems, deren Auswertung und Optimierung. Arbeiter müssen nur umgeschult werden."
+"['intro_24', 'Z.P10-1-1', 'intro_4', 'z_trans_16', 'Z.C7']",user,Z.C7-1,"Die Ungerechtigkeitsproblematik resultiert allerdings aus dem kapitalistischen System, in dem wir leben, und nicht an der Nutzung von KI Systemen. Man kann sich nicht vor dem Fortschritt verschließen, nur weil es Anfangs für manche zu teuer ist."
+['intro_61'],user,Z.C7-1,"Es ist zwar ungerecht, aber dennoch sinnvoll."
+"['intro_1', 'z_trans_13', 'Z.P8-1']",user,Z.C3-2,Die KI Systeme werden diesbezüglich allerdings lernen und sich verbessern. Damit sich die KI verbessert muss man sie allerdings auch im Straßenverkehr testen.
+['intro_62'],user,Z.C3-2,"Die KI wird besser, wenn man sie im Straßenverkehr einführt."
+"['intro_1', 'z_trans_2', 'Z.C5']",user,Z.C5-2,"Jede große technologische Neuerung, stößt zunächst auf Widerstand. Im Laufe der Zeit werden sich die Menschen daran gewöhne."
+['intro_61'],user,Z.C5-2,Jede große technologische Neuerung stößt zunächst auf Widerstand. Im Laufe der Zeit werden sich die Menschen daran gewöhnen.
+"['intro_1', 'z_trans_12', 'Z.C8']",user,Z.P4-1,"Ist eine Einschränkung der Privatsphhäre nicht gerechtfertigt, wenn es darum geht Menschenleben zu retten?"
+"['intro_1', 'z_trans_13', 'Z.P2-1']",user,Z.P2-1,Warum ist Akzeptanz hier wichtig?
+"['intro_1', 'z_trans_13', 'Z.C6']",user,Z.C6-1,Aber offt ist es wichtig dass eine Entscheidung schnell getroffen wird. Das langsame Reagieren von Menschen ist auch problematisch.
+['intro_61'],user,Z.C6-1,"Es ist besser wenn in Dilemmasituationen ein Computer entscheidet, da dieser schneller reagiert und so im Durchschnitt mehr Menschen rettet."
+"['intro_2', 'z_trans_11', 'Z.P11-1']",user,Z.P11-1-1,Soetwas ließe sich durch online Datenbanken von Straßen und Straßenschildern vermeiden.
+"['intro_2', 'z_trans_11', 'Z.C5']",user,Z.C5-2,Da muss die Autoindustrie durch Aufklärung vorangehen
+['intro_62'],user,Z.C5-2,Aufklärung würde den Menschen mehr Sicherheit geben
+['intro_61'],user,Z.C11-1,Dieser Rahmen muss geschaffen werden sollte allerdings im Rahmen des möglichen liegen
+"['intro_2', 'z_trans_11', 'Z.P8-1']",user,Z.P4-1,"Das ist korrekt. Aus diesem Grund sollte es bis zu dem Zeitpunkt, an dem es fehlerfrei möglich ist, eine künstliche Intelligenz zu verwenden, allerdings sollte es dem Fahrer möglich sein, in das Fahrverhalten einzugreifen."
+"['intro_1', 'z_trans_11', 'Z.P8-1']",user,Z.P8-1,Muss dann durch Tests spezifiziert und dann angepasst werden
+['intro_62'],user,Z.P8-1,Die Grenzen der KI können ja durch umfangreiche Tests erweitert werden
+"['intro_3', 'z_trans_2', 'Z.C2']",user,Z.C2-1,"Wenn alle Fahrzeuge aufeinander abgestimmt sind dann denke ich nicht dass die Fahrzeiten sich verlängern, Staus und Ähnliches könnten vermieden werden"
+"['intro_1', 'z_trans_13', 'Z.P8-1']",user,Z.P8-1,Kann man die autoKI nicht auch damit füttern?
+['intro_62'],user,Z.C3-2,Die Ki kann vielleicht irrationales Fahrverhalten lernen
+"['intro_1', 'z_trans_2', 'Z.C10']",user,Z.C11-1,"Der könnte ermöglicht werden, wenn die Sicherheit gewährleistet ist"
+[],user,Z.P12-2,I think that we need to be more careful with the Cars and the polution
+"['intro_1', 'z_trans_13', 'Z.C2-1']",user,Z.C2-1,Ist dies statistisch bewiesen
+['intro_61'],user,Z.C2-1,Gibt es Statistiken für autonomes Fahren welche die Sicherheit beleuchten
+['intro_62'],user,Z.C5-1-1-1,Man sollte menschliche Fâhigkeiten und System kombinieren
+[],user,Z.C3-2,"Wenn ein Mensch einen Fehler macht lernt nur dieser ein Mensch und macht ihn nicht wieder. Ein autonomes Auto kann Fehler direk an alle weitergeben, sodass alle davon lernen, jeder Fehler sollte nur ein einziges mal gemacht werden"
+"['intro_2', 'z_trans_2', 'Z.P8-1']",user,Z.P8-1,"Dann sollten wir keine menschliche Fahrer oder keinen inneffizienten Personenverkehr per Auto haben, sondern optimierte Strecken selbstfahrender öffentlichen Verkehrsmittel"
+"['intro_1', 'z_trans_2', 'Z.C8']",user,Z.C8-1,"Nein, warum sollte es? Diese Aussage ist falsch, man kann anonymisiert daten über fahrtweg austauschen ohne gesamte fahrpläne freizugeben"
+"['intro_3', 'z_trans_11', 'Z.P2-1']",user,Z.P2-1,"Autos sind überflüssig und autofahrer wertlos, das ist ein Plus"
+"['intro_2', 'z_trans_11', 'Z.C7']",user,Z.C7-1,"In einer Zukunft mit selbstfahrenden Autos braucht man keinen privatbesitz von Autos, man greift auf Flotten von Verkehrsdienstleister zurück"
+"['intro_3', 'z_trans_11', 'Z.C9']",user,Z.C8-1,Dann macht man Syteme die diese Daten nicht teilen
+"['intro_2', 'z_trans_13', 'Z.P1-1']",user,Z.P1-1,"Gut, bedingungsloses Grundeinkommen ist eh fällig"
+"['intro_32', 'Z.C8-1', 'intro_5', 'z_trans_16', 'Z.C9']",user,Z.C8-1,"Auch die Speicherung der Daten durch das Autounternehmen muss geregelt werden, sodass diese die Daten nicht an dritte weitergeben"
+"['intro_2', 'z_trans_2', 'Z.P8-1']",user,Z.P8-1-1,"Autofahrer sind darin aber doch nicht unbedingt besser, oder?"
+['intro_62'],user,Z.P8-1-1,Autofahrer können das aber auch nicht besser
+"['z_trans_13', 'Z.C10']",user,Z.C10-1,Den kann man ja schaffen.
+['intro_62'],user,Z.C10-1,Den Rechtsrahmen kann man ja entwerfen.
+"['intro_1', 'z_trans_13', 'Z.C2']",user,Z.P12-1-2,Das glaube ich nicht - gleichmäßiges Tempo führt ja auch zu weniger Staus
+"['intro_1', 'z_trans_2', 'Z.C8']",user,Z.C8-1,"Das ist richtig, ich finde, hier braucht es entsprechende Gesetze."
+['intro_61'],user,Z.C8-1,Das muss man durch Gesetze verhindern.
+"['intro_3', 'z_trans_13', 'Z.C7']",user,Z.C7-1,Dann ist der Kapitalismus das Problem.
+"['intro_1', 'z_trans_12', 'Z.C11']",user,Z.C6-3-1,"Ja, dann müssen wohl die Entwickler haften."
+['intro_62'],user,Z.C6-3-1,Entwickler sind schuld.
+[],user,Z.P4-1,Autonomens fahren mindert die eigene Kontrolle über das Fahrzeug.
+['intro_61'],user,Z.P4-1,"Fährt ein Auto autonom, so kann ich selber nicht mehr darüber entscheiden. Was das Auto macht."
+"['intro_2', 'z_trans_11', 'Z.C2-1']",user,Z.C2-1,Aber so etwas kann doch trotzdem passieren?
+['intro_61'],user,Z.P2-1,Ich denke autonomes fahren mindert den Reiz am Autofahren
+"['intro_1', 'z_trans_11', 'Z.P8']",user,Z.P2-1,Das autonome Fahren mit KI macht keinen Spaß mehr
+"['intro_2', 'z_trans_2', 'Z.C10']",user,Z.C10-1,"Diese Rechtsrahmen kann ja von der Regierung beschlossen werden. Wahrscheinlich bräuchte es eine Expertenberatung dazu, aber dann ist das gut umsetzbar"
+['intro_62'],user,Z.C10-1,Der rechtliche Rahme lässt sich ja von der Regierung beschließen. Die Verantwortung müsste allerdings darin geklärt sein. Die Verantwortung sollte von den Entwicklern der autoKi übernommen werden.
+"['intro_2', 'z_trans_2', 'Z.C5']",user,Z.C5-1-1-1-1,"Klar, ich finde allerdings dass diese Skepsis gerechtfertigt ist, da andernfalls jede Situation zu einer bloßen Abrechnung von Nutzen wird"
+['intro_61'],user,Z.C5-1-1-1-1,Der Mensch als Person wird dabei nur zur Sache dessen wert gegen andere hochgerechnet wird
+"['intro_2', 'z_trans_11', 'Z.C10']",user,Z.P2-1,Wenn eine K.I. eine rechtsperson wird besteht aber auch das Problem das sin anderen Feldern Menschen verdrängt werden zum Beispiel in der Kunstbracnche
+['intro_62'],user,Z.P1-1,K.I. als fahrer mit rechten udn Pflichten ermöglichen leider auch unterbezqhlte Arbeiter anderer Felder zu ersetzen
+"['intro_1', 'z_trans_12', 'Z.C2']",user,Z.P1-1,Schnell ist allerdings nicht gleich effizient
+['intro_62'],user,Z.C2-1,"Je schneller menschen fahren desto mehr unfälle entstehen, logischerweise bedeutet eine reduzierung des Tempolimits nicht dass fahrten ineffizienter werden sondern wenn dann eher sicherer"
+"['intro_1', 'z_trans_13', 'Z.C5']",user,Z.C5-2,das stimmt. aber diese furcht vor neuem und unbekannten ist ja meist immer vorhanden. ich denke nach einem gewissen gewöhnungsprozess wird sich autonomes fahren aufgrund der vorteile durchsetzen
+"['intro_3', 'z_trans_12', 'Z.C4']",user,Z.C4-1,das ist richtig. trotzdem gibt es mittlerweile schon systeme mit extrem hoher sicherheit
+"['intro_25', 'Z.C3', 'intro_2', 'Z.C3-1']",user,Z.C3-1,Aber wenn es keine Möglichkeit gibt an den Seitenstreifen zu fahren
+['intro_61'],user,Z.C3-1,Z.B. im Stau oder anderen Verkehrssituationen in denen es keine Möglichkeit gibt an den Seitenstreifen zu fahren
+"['intro_27', 'Z.C5', 'intro_3', 'Z.C5-2']",user,Z.P8-1,"Außerdem ist es doch sehr schwer einen müden oder anderweitig beeinträchtigen Autofahrer zu simulieren, damit die KI sich auf entsprechende Situationen vorbereiten kann"
+"['intro_2', 'z_trans_2', 'Z.C5']",user,Z.C5-1-1-2,Teilweise autonome Autos werden bereits von der Gesellschaft akzeptiert. Es ist alles eine Frage der Zeit
+"['intro_2', 'z_trans_2', 'Z.C10']",user,Z.P11-1-1,Technologie kann sofort an die neusten Regeln und Karten angepasst werden
+"['intro_3', 'z_trans_2', 'Z.C2']",user,Z.P12-1-2,"Aber es gibt weniger staus, da effizienter gefahren wird"
+"['intro_28', 'Z.P10', 'intro_2', 'Z.P10-1']",user,Z.P10-1-1,Dann kann man das Personal umschulen
+['intro_61'],user,Z.P8-1,Wenn es um Raktionsfähigkeit und Spontanität im Straßenverkehr geht sind wir Menschen einer Ki immernoch überlegen
+['intro_61'],user,Z.P9-1,Aber Menschen sind immer noch präziser und können sich auf neue Situationen einstellen
+"['intro_32', 'Z.C11', 'intro_2', 'Z.C11-1']",user,Z.P12-2,Die KI benötigt mehr technische Ausstattung weshalb mehr Ressourcen benötigt werden
+['intro_61'],user,Z.P12-2,Durch die KI wird ein erhöhtes Maß an Rohstoffen benötigt und das ist schlecht für die Umwelt
+"['intro_32', 'Z.P6-1', 'intro_4', 'z_trans_1', 'Z.P7']",user,Z.P12-2,"Die KI benötigt im Straßenverkehr mehr Sensoren, die wiederum mehr Rohstoffe benötigen und das ist schlecht für die Umwelt"
+['intro_62'],user,Z.C2-1,"Striktere Geschwindigkeitsbegrenzungen könnten auch jetzt schon, ohne die KI durchgesetzt werden und würden dann zu einem sichereren Verkehr führen"
+"['intro_2', 'z_trans_12', 'Z.P6']",user,Z.P6-1,Für diese kleinen Gruppen die nicht selbständig mobil sind können Fahrdienste eingesetzt werden. Zudem sind im urbanen Raum sowieso ausreichend ÖPNV Angebote Bereits vorhanden
+['intro_62'],user,Z.P6-1,Mobilitätseingeschränkte Personen können Fahrdienste nutzen
+"['intro_2', 'z_trans_11', 'Z.C2-1']",user,Z.C2-1,Geschwindigkeitsbeschränkungen haben nur bedingt etwas mit autoKI zu tun. Geschwindigkeitsbegrenzungen im Allgemeinen verbessern die Sicherheit
+['intro_61'],user,Z.C2-1,Geschwindigkeitsbegrenzungen fördern so oder so die Sicherheit
+"['intro_1', 'z_trans_12', 'Z.P8-1']",user,Z.C3-1,Man kann notfallpläne programmieren
+['intro_62'],user,Z.C3-1,"Man könnte Notfallprogramme erstellen, damit in solchen fällen immer ein vorgefertigtes verhalten aktiviert wird"
+"['intro_2', 'z_trans_2', 'Z.C5']",user,Z.C5-2,"Das ist wahr , aber sollte man deswegen den Fortschritt stoppen? Ich denke wenn man in kleinen schritten die Menschen daran gewöhnt ist alles möglich"
+"['intro_3', 'z_trans_12', 'Z.C5']",user,Z.C5-1,"Ich denke, dass die jüngere Generation durchaus ihren Zuspruch geben wird"
+['intro_61'],user,Z.C5-1,Und so eine Idee befürwortet
+"['intro_1', 'z_trans_12', 'Z.C2']",user,Z.C2-1,Das Tempolimit sollte so oder so eingefphrt werden. Dadurch haben wir einen weiteren grund diese KI zu benutzen
+['intro_61'],user,Z.C5-2,Es wird etwas dauern aber der Vorteil ist vorhanden
+"['intro_1', 'z_trans_13', 'Z.C10']",user,Z.C11-1,Eine Anpassung des Gesetzes wäre sicher möglich. Wenn die Menschen es mehr akzeptieren
+['intro_61'],user,Z.C11-1,Das Gesetz anpassen
+"['intro_1', 'z_trans_12', 'Z.C2']",user,Z.C2-1,Die Geschwindigkeit anpassen
+['intro_61'],user,Z.C2-1,Eine Einheit Geschwindigkeit für alle Autos
+"['intro_26', 'Z.P11', 'intro_3', 'Z.P11-1']",user,Z.P11-1,Auch normale Autofahrer können witterungsbedingt Verkehrszeichen teilweise nicht erkennen
+['intro_61'],user,Z.P11-1,Ich denke nicht nur die autoKI hat Probleme Verkehrszeichen bei schlechtem Wetter zu erkennen.
+['intro_62'],user,Z.C3-2,Mit mehr Erfahrung wird die autoKI sicherlich auch in diesem Fall besser.
+"['intro_1', 'z_trans_2', 'Z.C10']",user,Z.C11-1,Diesen Rechtsrahmen zu erstellen ist ein losbares Problem der Politik.
+['intro_61'],user,Z.C11-1,Die Politik kann den Rechtsrahmen erstellen
+['intro_61'],user,Z.P9-1,Nicht normgetreue Hindernisse die Menschen einfach umfahren könnten vllt schwierig
+[],user,Z.P8-1,Gibt immer unvorhersehbare Situationen oder technische Fehler
+['intro_62'],user,Z.C5-3,Für mich überwiegt ein Menschenleben allen anderen Vorteilen
+"['intro_1', 'z_trans_13', 'Z.P6']",user,Z.P10-1,Das stimmt es gehen aber auch Arbeitsplätze verloren
+['intro_62'],user,Z.P10-1,Arbeitsplätze für Taxifahrer gehen verloren
+"['intro_1', 'z_trans_13', 'Z.P7']",user,Z.P12-1,Individualverkehr mit Autos ist im Sinne der Energiewende nicht die richtige Richtung
+['intro_61'],user,Z.P12-1,Es sollte lieber in öffentliche Verkehrsmittel investiert werden anstatt in Autos
+"['intro_3', 'z_trans_2', 'Z.C2-1']",user,Z.P12-2,Aber es verbraucht immer noch sehr viele Ressourcen
+['intro_61'],user,Z.P12-2,"Unter Ressourcen sind vor allem natürliche Ressourcen gemeint. Humankapital ist hier weniger ein Thema. Hilft dir das weiter, mein liebes"
+[],user,Z.P8-1,KI kann noch nicht auf plötzliche Probleme im Straßenverkehr reagieren
+['intro_62'],user,Z.P12-1,Ein weiteres Argument wäre die Umweltbelastung. Es würden noch mehr Autos fahren
+"['intro_1', 'z_trans_13', 'Z.C5']",user,Z.C5-1,Das passiert bereits jetzt
+"['intro_2', 'z_trans_12', 'Z.C5']",user,Z.P10-2,Die Technologie ist bestimmt sehr teuer.
+['intro_62'],user,Z.P12-1-2,Autos könnten schneller fahren mit KI
+"['intro_28', 'Z.P1', 'intro_1', 'Z.P1-1']",user,Z.P1-1,welche soziale Probleme?
+"['intro_2', 'z_trans_12', 'Z.C10']",user,Z.C10-1,Der Rechtsrahmen kann geschaffen werden
+"['intro_3', 'z_trans_11', 'Z.P8-1']",user,Z.P8-1,"da bin ich mir nicht sicher, denn die Automobilindustrie ist sehr stark ausgeprägt & entwickelt & deshalb gehe ich nicht davon ja das es an ihre Greznen stoßen wird"
+['intro_62'],user,Z.P8-1-1,die KI wird so entwickelt das sie einen Menschen ersetzen kann & so auch auf das Fahrverhalten eingehen
+"['intro_2', 'z_trans_11', 'Z.C5']",user,Z.C5-1-1-1,"ja sie werden angenommen & akzepiert, da es schon Autos gibt die Spurhalteassistentwn besitzen & da auch sehr viel möglich ist"
+['intro_61'],user,Z.C5-1,"solche Autos werden von der Gesellschaft akzeptiert & auch angenommen, da Autos mit den verscheidenen Systemen schon auf der Straße fahren"
+['intro_62'],user,Z.C6-3-1,die Verantwortung liegt beim Hersteller des Autos & somit ist es möglich den Regelbetrieb aufzunehmen
+['intro_62'],user,Z.C2-1,"Geschwindigkeitsbegrenzungen sind schon in Planung deshalb ist es vollkommen ok, wenn das passieren wird"
+"['intro_2', 'z_trans_2', 'Z.P8-1']",user,Z.P8-1-1,Das stimmt aber jetzt gibt's ja auch schon Autos die alleine fahren lenken und ausweichen können
+"['intro_1', 'z_trans_11', 'Z.C10']",user,Z.C10-1,Ja das umzusetzen ist ja nur eine Sache der Politik das müsste doch relativ schnell durchgehen
+"['intro_3', 'z_trans_11', 'Z.P6']",user,Z.P4-1,"Menschen die nicht manuel im Notfall eingreifen können, sollten meiner Meinung nach niemals Fahrzeugführer sein. Die Verantwortliche Person muss auch in der Lage sein dieser Verantwortung gerecht zu werden."
+['intro_62'],user,Z.P4-1,"Na, dass du als mobilitätseingeschränkte Person ja dennoch in der Lage sein solltest ein Fahrzeug zu führen, da du im Notfall in der Lage sein solltest im falschen Fahrverhalten der KI eingreifen zu können."
+"['intro_1', 'z_trans_11', 'Z.C2-1']",user,Z.P2-1,"naja, aber der Mensch will gerne auch selbst Sachen tun, wie zum Beispiel Autos fahren. Was soll denn der Mensch aktiv machen, wenn alles übernommen wird von KI?"
+['intro_62'],user,Z.P4-1,KI behindert den Menschen selbstbestimmt zu leben.
+['intro_62'],user,Z.C3-2,Die AutoKI kann aus vergleichbaren Situationen lernen und so lernen mit irrationalem Verhalten umzugehen.
+"['intro_2', 'z_trans_12', 'Z.C5']",user,Z.C5-3,"Ich denke sobald es in der Gesellschaft anerkannt ist, dass weniger Unfälle passieren, wird sich die Technologie durchsetzen."
+"['intro_25', 'Z.P14', 'intro_2', 'Z.P1-1']",user,Z.P1-1,"In Deutschland gibt es viele freie Arbeitsstellen. Umschulungen sind notwendig, aber das ist machbar."
+['intro_62'],user,Z.P1-1,In Deutschland gibt es viele freie Arbeitsplätze
+"['intro_3', 'z_trans_2', 'Z.C5']",user,Z.C5-2,Das stimmt bleibt aber eine offene Frage da wir noch nicht an dem Punkt angelangt sind. Wir entwickeln uns mit der Technik und nutzen diese zu unserem Vorteil. Deswegen werden wir früher oder später auch autonomes Fahren integrieren
+"['intro_28', 'Z.P11', 'intro_1', 'Z.P11-1']",user,Z.C2-1,Autonomes macht lange Strecken bequemer und sicherer
+"['intro_2', 'z_trans_13', 'Z.C10']",user,Z.C6-3-1,"da kein eingreifen der menschen möglich ist, müsste der programmierer der KI rechtlich für das handeln des KIs sein"
+['intro_61'],user,Z.C6-3-1,da die menschen nicht eingreifen können muss der hersteller der KI verantwortung für das handeln der KI tragen
+"['intro_2', 'z_trans_13', 'Z.C2']",user,Z.P12-1-2,"da menschliches fehlverhalten kein problem mehr ist werden verzögerungen durch unfälle vermieden, so kann der verkehr effizienter werden"
+"['intro_26', 'Z.P10', 'intro_3', 'Z.P10-1']",user,Z.P1-1,durch die modernisierung des arbeitsmarkts durch KIs werden viele arbeitsplätze verschwinden
+"['intro_3', 'z_trans_11', 'Z.C2-1']",user,Z.P8-1,Und wenn sich andere Fahrer nicht daran halten? Auto KI müsste auf individuelle Fehler anderer Fahrer reagieren
+['intro_61'],user,Z.P8-1,Andere Fahrer machen auch Fehler. Wie kann Auto KI darauf reagieren
+['intro_62'],user,Z.P12-1-2,"Effizienteres fahren möglich, wenn alle Autos KI gesteuert werden ( gleichzeitiges anfahren bei Roten Ampeln, Staus, bessere Verkehrsregulierung bei Unfällen )"
+"['intro_1', 'z_trans_12', 'Z.C5']",user,Z.P4-1,In einer Autofanatischen Gesellschaft wie der unseren sicherlich
+['intro_62'],user,Z.C5-1,"Ich denke, es wird angenommen"
+"['intro_2', 'z_trans_13', 'Z.C10']",user,Z.C10-1,Den Rechtsrahmen kann man schaffen. Sobald es das gibt und zugelassen wird
+['intro_62'],user,Z.P10-2,"Fraglich ist nur ob sich die Personen denen durch Inklusion geholfen werden könnte, solche KI Technik leisten können"
+"['intro_1', 'z_trans_12', 'Z.P7']",user,Z.P10-2,"Das ist schon gut, aber trotzdem bezweifle ich, dass die Vorteile die KI bringt von der breiten Masse auch genutzt werden können"
+['intro_61'],user,Z.P10-2,"KI Technik ist wahrscheinlich teuer, weshalb sich nur wenige solche Vorteile leisten können"
+"['intro_2', 'z_trans_12', 'Z.C2-1']",user,Z.P9-1,"Ich glaube immernoch nicht, dass dadurch der Straßenverkehr sicherer wird"
+"['intro_1', 'z_trans_2', 'Z.P8-1']",user,Z.P8-1-1,"Es wäre aber eine doppelte Sicherheit, da zum einen der Mensch eingreifen kann und zum anderen das Auto sehr viel selbst macht"
+['intro_61'],user,Z.P8-1,"Ein weiterer Punkt ist, dass viele unvorhersehbare Situationen im Straßen verkehr passieren können, zu welchen man intuitiv agieren muss."
+['intro_62'],user,Z.P1-1,4. Argument: Taxifahrer werden arbeitslos
+"['intro_2', 'z_trans_2', 'Z.P6']",user,Z.P4-1,Man hat keine Kontrolle über Auto

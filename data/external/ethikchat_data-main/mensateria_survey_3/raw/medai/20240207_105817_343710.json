@@ -1,0 +1,98 @@
+{
+  "name": "20240207_105817_343710",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-10:58:17",
+  "end": "2024/02/07-11:23:19",
+  "utterances": [
+    {
+      "user": "NVOY7",
+      "type": "user",
+      "text": "Ich denke eine gut entwickelte KI kann genau so gut wenn nicht noch besser als ein Mensch Entscheidungen treffen, da sie in gewissen Szenarien nüchterner und objektiver entschieden kann.",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:00:08",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Während es stimmt, dass eine gut entwickelte KI in der Lage sein könnte, präzise und objektive Entscheidungen zu treffen, gibt es dennoch ethische Bedenken hinsichtlich der Autonomie von Patienten und der Verantwortung für Fehler. Wenn die KI einen Fehler bei der Diagnose oder Therapieempfehlung macht, wer ist dann dafür verantwortlich? Außerdem könnte die Abhängigkeit von einer KI dazu führen, dass das medizinische Personal weniger kritisch denkt und weniger eigenständig Entscheidungen trifft.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:00:19",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "NVOY7",
+      "type": "user",
+      "text": "was ist wenn man die Verantwortung in die Hände des Patienten legt. Das also der Patient entscheidet ob er eine Diagnose von einer KI nimmt oder eines Arztes. Oder das der Arzt die KI nur als „Kontrolle“ verwendet um seine Entscheidung möglicherweise nochmal zu überdenken?",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-11:20:04",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Auch in diesem Fall gibt es ethische Bedenken. Selbst wenn der Patient die Entscheidungsbefugnis hat, kann er möglicherweise die Tragweite der Entscheidung nicht vollständig verstehen. Dies könnte zu uninformierten Entscheidungen führen, die sich nachteilig auf die Gesundheit des Patienten auswirken. Was den Arzt betrifft, so könnte die Abhängigkeit von der KI dazu führen, dass er seine eigenen Fähigkeiten und Urteilsvermögen nicht mehr vollständig nutzt. Dies könnte zu einer Degeneration der Fähigkeiten führen und die Qualität der medizinischen Versorgung beeinträchtigen.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-11:20:17",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "NVOY7",
+      "type": "user",
+      "text": "Also keine KI in diesem Bereich?",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-11:21:02",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Das ist nicht was ich sagen will. KI hat definitiv das Potenzial, die medizinische Versorgung zu verbessern, insbesondere bei der Datenanalyse und Mustererkennung. Allerdings sollte sie nicht als Ersatz für menschliche Ärzte eingesetzt werden, sondern als Unterstützung. Die endgültigen Entscheidungen sollten immer von qualifizierten Ärzten getroffen werden, die das Urteilsvermögen und die Erfahrung haben, die notwendig sind, um die bestmögliche Versorgung zu gewährleisten.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-11:21:06",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "83f8e7ffc357d4e55e72e8ebc98d9849",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "informed": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "83f8e7ffc357d4e55e72e8ebc98d9849",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "opinion_1": 1,
+      "opinion_2": 0.8,
+      "argument_quality_2": 0.8,
+      "user_information_argument_breadth": 1,
+      "user_information_argument_depth": 0.8
+    }
+  }
+}

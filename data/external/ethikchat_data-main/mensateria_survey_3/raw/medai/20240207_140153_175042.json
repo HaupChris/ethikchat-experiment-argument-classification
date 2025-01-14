@@ -1,0 +1,170 @@
+{
+  "name": "20240207_140153_175042",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-14:01:53",
+  "end": "2024/02/07-14:10:08",
+  "utterances": [
+    {
+      "user": "7L1ST",
+      "type": "user",
+      "text": "Was kann ich gegen Erkältung machen",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-14:02:41",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich nehme an, Sie fragen nicht spezifisch im Hinblick auf unser Diskussionsthema, aber ich werde trotzdem darauf eingehen. Gegen eine Erkältung können Sie häufiges Händewaschen, ausreichend Schlaf und die Einnahme von Schmerzmitteln oder Hustenstillern praktizieren, um die Symptome zu lindern.\nNun möchte ich das Thema auf die Diskussion des Szenarios mit der medizinischen KI (medKI) lenken. Die medKI könnte in der Lage sein, Diagnosen und Therapieentscheidungen für verschiedene Krankheiten, einschließlich Erkältungen, zu treffen und zu erklären. Dies könnte dazu beitragen, die Genauigkeit und Effizienz der Behandlungen zu verbessern.\nIch bin der Meinung, dass ein ausreichend gutes medizinisches Programm wie die medKI in der Lage sein sollte, eigenständige diagnostische und therapeutische Entscheidungen zu treffen, da es mehrere Vorteile gegenüber menschlichen Entscheidungsträgern bieten kann, wie z.B. eine größere Datenverarbeitungskapazität, weniger Fehler bei der Diagnose und Behandlung und eine schnellere Reaktionszeit.\nIch bin gespannt auf Ihre Gedanken und Argumente zu diesem Thema.\n",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-14:03:01",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "7L1ST",
+      "type": "user",
+      "text": "Da keiner die Antworten der Ki prüft",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-14:03:54",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Bedenken sind verständlich, aber ich möchte darauf hinweisen, dass die medizinische KI (medKI) in unserem Szenario nicht unüberprüft bleibt. Die medKI arbeitet in den Untersuchungszentren zusammen mit medizinischem Personal, das für die Datenerhebung und die Erklärung der Entscheidungen der medKI an die Patient:innen verantwortlich ist.\nDie medizinischen Fachkräfte können die Antworten der medKI überprüfen und gegebenenfalls anpassen, wenn sie der Meinung sind, dass dies erforderlich ist. Darüber hinaus kann die medKI so programmiert werden, dass sie ihre Entscheidungen und Empfehlungen regelmäßig überprüft und aktualisiert, um sicherzustellen, dass sie auf dem neuesten Stand der medizinischen Forschung und Praxis bleibt.\nIch denke, dass die Zusammenarbeit zwischen der medKI und dem medizinischen Personal in den Untersuchungszentren eine gute Möglichkeit ist, sicherzustellen, dass die Entscheidungen der medKI überprüft und angepasst werden, wenn dies erforderlich ist.\nWas halten Sie davon? Haben Sie weitere Bedenken oder Einwände gegen die medKI?\n",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-14:04:06",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "7L1ST",
+      "type": "user",
+      "text": "Also ist es nicht so gedacht, dass der Gang zum Arzt durch die Ki ersetzt wird?",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-14:05:07",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Im Szenario, das wir diskutieren, ist die medizinische KI (medKI) nicht dazu gedacht, den Besuch beim Arzt oder bei medizinischem Fachpersonal vollständig zu ersetzen. Die medKI soll vielmehr eine Ergänzung zum bestehenden medizinischen Personal sein und dazu beitragen, die Genauigkeit und Effizienz der Diagnosen und Behandlungen zu verbessern.\nDie medKI kann in den Untersuchungszentren eingesetzt werden, um die Datenerhebung und -verarbeitung zu beschleunigen und die Entscheidungsfindung zu unterstützen. Das medizinische Personal kann jedoch weiterhin für die körperliche Untersuchung und die Interaktion mit den Patient:innen zuständig sein.\nDurch die Zusammenarbeit zwischen der medKI und dem medizinischen Personal können die Vorteile beider Seiten genutzt werden, um eine bessere Versorgung der Patient:innen zu gewährleisten.\nIch hoffe, das verdeutlicht meine Position zu diesem Thema. Ich bin gespannt auf Ihre Gedanken und Argumente dazu.\n",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-14:05:15",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "7L1ST",
+      "type": "user",
+      "text": "Darf das Programm auch Medikament Empfehlungen geben, diese könnten doch durch dritte beeinflusst werden (Geld)",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-14:06:28",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Bedenken hinsichtlich der Unabhängigkeit der Medikamentenempfehlungen durch die medizinische KI (medKI) sind verständlich. Um sicherzustellen, dass die Medikamentenempfehlungen unvoreingenommen und auf der Grundlage der besten verfügbaren Beweise sind, kann die medKI so programmiert werden, dass sie unabhängig von Dritten ist und keine finanziellen Anreize von Pharmaunternehmen oder anderen Interessengruppen erhält.\nDarüber hinaus können die Medikamentenempfehlungen der medKI regelmäßig überprüft und aktualisiert werden, um sicherzustellen, dass sie auf dem neuesten Stand der medizinischen Forschung und Praxis bleiben. Die medKI kann auch so programmiert werden, dass sie die evidenzbasierten Leitlinien und Richtlinien der medizinischen Fachgesellschaften einhält, um die Qualität und Konsistenz der Medikamentenempfehlungen zu gewährleisten.\nIch denke, dass diese Maßnahmen dazu beitragen können, sicherzustellen, dass die Medikamentenempfehlungen der medKI unvoreingenommen und auf der Grundlage der besten verfügbaren Beweise sind, und dass sie nicht durch Dritte beeinflusst werden.\nWas halten Sie davon? Haben Sie weitere Bedenken oder Einwände gegen die medKI?\n",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-14:06:39",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "7L1ST",
+      "type": "user",
+      "text": "Können passiert bei Falschmedikation weil ein anderer Mitarbeiter das Programm falsch verwendet hat?",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-14:07:47",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Bedenken hinsichtlich der Fehlmedikation durch eine falsche Verwendung der medizinischen KI (medKI) sind verständlich. Um sicherzustellen, dass die medKI korrekt und sicher verwendet wird, kann das medizinische Personal entsprechend geschult werden, um sich mit der Bedienung und den Funktionen der medKI vertraut zu machen.\nDarüber hinaus kann die medKI so programmiert werden, dass sie nur von autorisiertem Personal verwendet werden kann und dass sie eine benutzerfreundliche Oberfläche hat, um Fehler bei der Eingabe von Daten oder der Interpretation der Ergebnisse zu minimieren.\nDie medKI kann auch so programmiert werden, dass sie eine Überprüfung und Bestätigung der Medikamentenempfehlungen durch das medizinische Personal erfordert, um sicherzustellen, dass die Empfehlungen korrekt und sicher sind.\nIch denke, dass diese Maßnahmen dazu beitragen können, sicherzustellen, dass die medKI korrekt und sicher verwendet wird, und dass das Risiko von Fehlmedikationen minimiert wird.\nWas halten Sie davon? Haben Sie weitere Bedenken oder Einwände gegen die medKI?\n",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-14:08:00",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "7L1ST",
+      "type": "user",
+      "text": "Wird mit dem Programm Geld verdient?",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-14:08:23",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "In unserem Szenario ist es möglich, dass mit der medizinischen KI (medKI) Geld verdient wird, indem sie in den Untersuchungszentren eingesetzt wird und Diagnosen und Therapieentscheidungen trifft. Die Einnahmen könnten beispielsweise aus den Gebühren für die Untersuchungen oder aus Lizenzgebühren für die Nutzung der medKI stammen.\nEs ist jedoch wichtig zu beachten, dass die medKI unabhängig und unvoreingenommen sein sollte und dass sie keine finanziellen Anreize von Dritten erhält, um bestimmte Diagnosen oder Therapien zu bevorzugen.\nUm sicherzustellen, dass die medKI unabhängig und unvoreingenommen ist, kann sie so programmiert werden, dass sie keine finanziellen Anreize von Dritten erhält und dass sie die evidenzbasierten Leitlinien und Richtlinien der medizinischen Fachgesellschaften einhält.\nIch denke, dass diese Maßnahmen dazu beitragen können, sicherzustellen, dass die medKI unabhängig und unvoreingenommen ist und dass sie keine finanziellen Anreize von Dritten erhält.\nWas halten Sie davon? Haben Sie weitere Bedenken oder Einwände gegen die medKI?\n",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-14:08:35",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "dbe2d8ec986e48e34ed8efdf5248d4ce",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0.75
+    }
+  },
+  "end_survey": {
+    "name": "dbe2d8ec986e48e34ed8efdf5248d4ce",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.5,
+      "opinion_1": 1,
+      "opinion_1_reason": "Interessante Gespräche ",
+      "opinion_2": 1,
+      "argument_quality_2": 0.8,
+      "user_information_argument_breadth": 0.25,
+      "user_information_argument_depth": 1,
+      "positive_critics": "Sehr gut",
+      "negative_critics": "Manchmal waren die Antworten zu ausführlich "
+    }
+  }
+}

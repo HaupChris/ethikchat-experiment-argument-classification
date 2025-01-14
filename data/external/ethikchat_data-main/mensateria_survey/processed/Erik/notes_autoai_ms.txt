@@ -1,0 +1,119 @@
+20230130_131100_134273
+
+	Es ist ser wichtig für der Zukunft
+	- Kein passendes Label gefunden deswegen PRO_NZARG
+	
+	Es ist sehr wichtig für der Zukunft
+	- Kein passendes Label gefunden deswegen PRO_NZARG
+	
+	
+20230130_130939_782136
+
+	Es ist sehr wichtig für unsere Zukunft
+	- Kein passendes Label gefunden deswegen PRO_NZARG
+	
+	Ich denke es ist sehr wichtig
+	- Kein passendes Label gefunden deswegen PRO_NZARG
+	
+	
+20230130_122728_171201
+
+	Es ist gefährlich
+	- Kein passendes Label gefunden deswegen CON_NZARG
+	
+	Bei autonom fahrenden Autos passieren mehr unfälle
+	- Kein passendes Label gefunden deswegen CON_NZARG
+	
+	
+20230130_120704_481751
+
+	Man hat keine Kontrolle über Auto
+	- Kein passendes Label gefunden deswegen CON_NZARG
+
+	
+20230130_122411_897762
+
+	Die Unfallgefahr bei autonomen Autos ist höher
+	- Kein passendes Label gefunden deswegen CON_NZARG
+	
+	
+20230130_123408_803109
+
+	Erhöhte Unfallgefahr
+	- Kein passendes Label gefunden deswegen CON_NZARG
+	
+	Autonomes Fahren führt zu einer erhöhten Unfallgefahr
+	- Kein passendes Label gefunden deswegen CON_NZARG
+	
+	
+20230130_121906_997391
+
+	Aber eine Ki braucht ja erstmal eine Person/Personen, die die Ki mit Infos etc. füttert. Was wenn diese Personen einen unbesonnen Fahrstil haben und die Ki einen verantwortungslosen Fahrstil hat 
+	- Kein passendes Label gefunden deswegen CON_NZARG
+	
+	Eine Ki ist erstmal nur so schlau wie der Programmierer/in.
+	- Kein passendes Label gefunden deswegen CON_NZARG
+
+
+20230130_114340_358350
+
+	Eine ki soll menschliches fahrberhalten einschätzen können bevor sie zugelassen wird
+	- Kein passendes Label gefunden deswegen PRO_ZARG
+	
+	
+20230130_121906_724426
+
+	Aber es ist ein Problem wenn die ki sich als Ziel setzt dass sie das Auto möglichst wenig beschädigt
+	- Kein passendes Label gefunden deswegen CON_NZARG
+	
+	
+20230130_123809_009386
+
+	Die Technik kann sich weigern das Fahrzeug zu starten
+	- Kein passendes Label gefunden deswegen CON_NZARG
+	
+	
+20230130_123804_786610
+	
+	Menschen könnten gefährdet werden
+	- Kein passendes Label gefunden deswegen CON_NZARG
+	
+	
+20230130_132525_939811
+
+	Fahren durch die KI ist gefährlicher als normales Autofahren.
+	- Kein passendes Label gefunden deswegen CON_NZARG
+	
+	
+20230130_132621_334127
+
+	Auto fahren ist immer gefährlich
+	- Kein passendes Label gefunden deswegen PRO_NZARG
+	
+	
+20230130_135938_461284
+
+	Das ist gut so, denn es sollte gut geprüft werden und nur eingesetzt werden, wenn Vorteile überwiegen
+	- Kein passendes Label gefunden deswegen CON_NZARG
+
+
+20230130_131444_915994
+
+	Die Zulassung ist wichtig für innovativen Transport in der Zukunft !
+	- Kein passendes Label gefunden deswegen PRO_ZARG
+	
+	
+20230130_140941_433640
+
+	Auch normale Autofahrer können witterungsbedingt Verkehrszeichen teilweise nicht erkennen
+	- Kein passendes Label gefunden deswegen PRO_ZARG
+	
+	Ich denke nicht nur die autoKI hat Probleme Verkehrszeichen bei schlechtem Wetter zu erkennen.
+	- Kein passendes Label gefunden deswegen PRO_ZARG
+	
+	
+20230130_123623_920783
+
+	Gibt es Statistiken für autonomes Fahren welche die Sicherheit beleuchten 
+	- Kein passendes FAQ Label gefunden
+

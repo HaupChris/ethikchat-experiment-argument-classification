@@ -1,0 +1,190 @@
+{
+  "name": "20240207_114838_336982",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:48:38",
+  "end": "2024/02/07-12:01:10",
+  "utterances": [
+    {
+      "user": "H8D7G",
+      "type": "user",
+      "text": "Fehlende Empathie",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:49:54",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe, dass Sie sich Sorgen um die mangelnde Empathie von KI-Systemen machen. Es ist wichtig zu beachten, dass die medizinische KI in diesem Szenario nicht empathisch sein muss, da sie von medizinischem Fachpersonal begleitet wird, das die Entscheidungen der KI den Patienten gegenüber erklären und empathisch vermitteln kann. Die Stärke der KI liegt in ihrer Fähigkeit, präzise und konsistente Diagnosen und Therapieentscheidungen zu treffen, was letztendlich zum Wohl der Patienten beiträgt.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:49:58",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "H8D7G",
+      "type": "user",
+      "text": "Die empathische Vermittlung ist zwar wichtig, aber dennoch ist auch Empathie wichtig, um die Entscheidungen treffen zu können. ",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-11:52:00",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": " Ihr Argument berücksichtigt sicherlich einen wichtigen Aspekt der menschlichen Interaktion in der Medizin. Allerdings sollten wir nicht übersehen, dass die medKI in unserem Szenario lediglich Diagnosen stellt und Therapieentscheidungen trifft, nicht aber die Aufgabe hat, die Patienten empathisch zu betreuen. Durch die Zusammenarbeit mit medizinischem Fachpersonal, das die empathische Vermittlung übernimmt, stellen wir sicher, dass die Patienten die notwendige menschliche Zuwendung erfahren, während sie von der Präzision und Konsistenz der KI profitieren.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-11:52:10",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "H8D7G",
+      "type": "user",
+      "text": "Wie gesagt, die Vermittlung ist nicht das Problem. Die Problematik ist, dass manche therapeutischen Maßnahmen, besonders in der Psychotherapie den Patienten nicht zuzumuten oder schlicht nicht machbar sind",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-11:54:07",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Bedenken. Es ist richtig, dass therapeutische Maßnahmen manchmal schwierig umzusetzen sind oder dem Patienten nicht zugemutet werden können. In solchen Fällen ist die Flexibilität und Anpassungsfähigkeit des medizinischen Fachpersonals unverzichtbar. Die medKI kann jedoch als Entscheidungshilfe dienen, indem sie evidenzbasierte Empfehlungen generiert, die anschließend vom medizinischen Personal auf die individuellen Bedürfnisse und Umstände des Patienten abgestimmt werden. So können die Vorteile der KI genutzt und gleichzeitig menschliche Urteilsfähigkeit und Empathie berücksichtigt werden.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-11:54:12",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "H8D7G",
+      "type": "user",
+      "text": "Ja als Entscheidungshilfe akzeptiere ich die KI, aber nicht als Instanz, die die Entscheidungen trifft.",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-11:54:57",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Zustimmung zur KI als Entscheidungshilfe ist verständlich. Es ist jedoch wichtig zu bedenken, dass die medKI in unserem Szenario nicht willkürlich oder unabhängig agiert, sondern auf fundierten medizinischen Erkenntnissen und Algorithmen basiert. Durch die Kombination von menschlicher Expertise und KI-gestützten Empfehlungen können die Vorteile beider Seiten genutzt werden, um optimale Diagnosen und Therapieentscheidungen zu treffen. Die endgültige Entscheidung liegt jedoch immer in den Händen des medizinischen Fachpersonals, das die individuelle Situation des Patienten am besten einschätzen kann.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-11:55:09",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "H8D7G",
+      "type": "user",
+      "text": "Wenn KI aber nur als Unterstützung dient, braucht sie keine Zulassung als Artzt",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-11:56:19",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihr Einwand wirft eine interessante Frage auf. Auch wenn die KI als Unterstützung und nicht als eigenständige Entscheidungsinstanz fungiert, ist eine Zulassung oder Zertifizierung dennoch relevant, um die Qualität und Zuverlässigkeit der KI-Algorithmen sicherzustellen. Durch eine Zulassung können die Einhaltung von medizinischen Standards, die Validität der Empfehlungen und die Transparenz der Entscheidungsprozesse gewährleistet werden. Somit dient die Zulassung als Garant für die Sicherheit und Effektivität der KI im medizinischen Kontext, auch wenn sie lediglich unterstützende Funktionen übernimmt.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-11:56:25",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "H8D7G",
+      "type": "user",
+      "text": "Warum ist die Zulassung als Arzt wichtig für die Qualitätssixherung?",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-11:57:04",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die Zulassung als Arzt ist ein wichtiges Indiz für die Qualitätssicherung, weil sie die Einhaltung von strengen Ausbildungs- und Prüfungskriterien sowie die fortlaufende Weiterbildung und Einhaltung ethischer Richtlinien gewährleistet. Wenn wir eine medizinische KI als Arzt zulassen, übertragen wir diese Anforderungen auf die KI. Dadurch stellen wir sicher, dass die KI den gleichen hohen Standards entspricht wie ein menschlicher Arzt. Zudem können unabhängige Instanzen die Leistungsfähigkeit, Zuverlässigkeit und Sicherheit der KI überprüfen und zertifizieren. Dies trägt dazu bei, das Vertrauen in die KI zu stärken und ihre Akzeptanz in der medizinischen Gemeinschaft und bei Patienten zu erhöhen.",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-11:57:14",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "H8D7G",
+      "type": "user",
+      "text": "Dafür würde auch eine separate Zulassung als KI zur Unterstützung des medizinischen Personals genügen. Für KIs sollten andere Bedingungen gelten, als für Ärzte, da sie nicht dieselben Kompetenzen ausüben. Pfleger und Ärzte treffen auch beide Entscheidungen, haben aber eine unterschiedliche Stellung im System und unterschiedliche Ausbildungen",
+      "id_in_dialogue": 12,
+      "timestamp": "2024/02/07-11:59:43",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ihre Ansicht, dass eine separate Zulassung für KI-Systeme als Unterstützung des medizinischen Personals ausreichend sein könnte, ist nachvollziehbar. Eine solche Zulassung könnte speziell auf die Fähigkeiten und Leistungen von KI-Systemen zugeschnitten sein und die Unterschiede zu menschlichen Ärzten und Pflegern berücksichtigen.\nIndem wir unterschiedliche Zulassungsbedingungen für KIs und menschliche Ärzte schaffen, können wir die jeweiligen Stärken und Kompetenzen der beiden Gruppen nutzen und gleichzeitig die Patientensicherheit gewährleisten. Eine solche Regelung würde auch die kontinuierliche Weiterentwicklung von Medizin-KI fördern und sicherstellen, dass sie stets den aktuellen Standards und ethischen Richtlinien entspricht.",
+      "id_in_dialogue": 13,
+      "timestamp": "2024/02/07-11:59:50",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "f1eb9782a84a4b6ed9aa8047bbe4d924",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0
+    }
+  },
+  "end_survey": {
+    "name": "f1eb9782a84a4b6ed9aa8047bbe4d924",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "opinion_1": 0,
+      "opinion_2": 0.2,
+      "argument_quality_2": 0,
+      "user_information_argument_breadth": 0,
+      "user_information_argument_depth": 0
+    }
+  }
+}

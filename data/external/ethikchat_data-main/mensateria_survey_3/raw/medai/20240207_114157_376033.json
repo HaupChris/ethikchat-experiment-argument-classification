@@ -1,0 +1,122 @@
+{
+  "name": "20240207_114157_376033",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:41:57",
+  "end": "2024/02/07-11:56:02",
+  "utterances": [
+    {
+      "user": "I16AM",
+      "type": "user",
+      "text": "Keine Beziehung zu den Patienten aufbauen",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:46:30",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Selbst wenn eine medizinische KI in der Lage ist, eigenständige Diagnose- und Therapie-Entscheidungen zu treffen, würde sie keine Beziehung zu den Patienten aufbauen. Das medizinische Personal, das die Daten erhebt und den Patienten die Entscheidungen der KI erklärt, ist weiterhin dafür verantwortlich, eine menschliche und unterstützende Beziehung zu den Patienten aufzubauen. Die KI würde lediglich eine unterstützende Rolle in der medizinischen Diagnose und Therapie einnehmen.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:46:38",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "I16AM",
+      "type": "user",
+      "text": "wer haftet bei falscher Diagnose?",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-11:47:20",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Im Szenario, in dem eine medizinische KI eigenständige Diagnose- und Therapie-Entscheidungen trifft, wäre die Haftung bei einer falschen Diagnose klar geregelt. Die Verantwortung läge bei den Herstellern und Betreibern der KI, da sie für die Funktion und Zuverlässigkeit der KI verantwortlich sind. Das medizinische Personal, das die Daten erhebt und den Patienten die Entscheidungen der KI erklärt, trifft keine Entscheidungen und ist daher nicht haftbar zu machen. Eine klare Regelung der Haftung ist wichtig, um die Akzeptanz und den Einsatz von medizinischen KI-Systemen zu fördern.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-11:47:26",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "I16AM",
+      "type": "user",
+      "text": "Aber die Patienten würden ja trotzdem ihren Frust am Fachpersonal auslassen",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-11:48:27",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Es ist möglich, dass Patienten bei einer falschen Diagnose ihrem Frust am medizinischen Personal auslassen, auch wenn dieses keine Entscheidungen getroffen hat. Um dies zu vermeiden, ist es wichtig, dass das medizinische Personal gut geschult ist und in der Lage ist, den Patienten die Funktionsweise und die Grenzen der KI zu erklären. Durch eine offene und transparente Kommunikation kann das Verständnis der Patienten für den Einsatz der KI gesteigert und Frustrationen vorgebeugt werden. Zudem können klare Prozesse und Verantwortlichkeiten im Umgang mit falschen Diagnosen helfen, Konflikte zu vermeiden und die Zufriedenheit der Patienten zu erhöhen.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-11:48:39",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "I16AM",
+      "type": "user",
+      "text": "Würde dann der Beruf des Arztes verschwinden? Und gerade auf dem Land würde dieser Wechsel sehr lange dauern",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-11:49:51",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Nein, der Beruf des Arztes wird nicht verschwinden, auch nicht in einem Szenario, in dem eine medizinische KI eigenständige Diagnose- und Therapie-Entscheidungen trifft. Die KI kann das medizinische Personal lediglich unterstützen und entlasten, indem sie Routine-Aufgaben übernimmt und schnelle und zuverlässige Diagnosen liefert. Das medizinische Personal ist jedoch weiterhin für die Erhebung von Daten, die Erklärung der Diagnosen und Therapien und die Betreuung der Patienten verantwortlich.\nWas den ländlichen Raum betrifft, so ist es richtig, dass der Wechsel zu einer stärkeren Nutzung von KI in der Medizin dort möglicherweise länger dauern wird. Dies liegt daran, dass der Zugang zu Technologie und Breitband-Internet auf dem Land oft eingeschränkt ist und das medizinische Personal möglicherweise nicht ausreichend geschult ist, um die KI zu nutzen. Um dieses Problem zu lösen, müssen gezielte Anstrengungen unternommen werden, um den Zugang zu Technologie und Breitband-Internet auf dem Land zu verbessern und das medizinische Personal entsprechend zu schulen. Auch die Entwicklung von KI-Systemen, die an die Bedürfnisse des ländlichen Raums angepasst sind, kann dazu beitragen, den Wechsel zu beschleunigen.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-11:50:08",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "da25556c2acbcb1404c1ed9178ce9483",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "da25556c2acbcb1404c1ed9178ce9483",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "opinion_1": 0,
+      "opinion_2": 0.6,
+      "argument_quality_2": 0.8,
+      "user_information_argument_breadth": 0.75,
+      "user_information_argument_depth": 0.5,
+      "negative_critics": "Wiederholte Antwort"
+    }
+  }
+}

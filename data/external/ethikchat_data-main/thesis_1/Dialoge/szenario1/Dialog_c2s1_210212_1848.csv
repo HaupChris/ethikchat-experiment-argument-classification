@@ -1,0 +1,16 @@
+﻿id, author, utterance, arg_label, arg_label, arg_label
+18:48, 19:15
+0, kai.weisenberger, "Eine KI kann den Kontext der Untersuchung nicht mit einbeziehen. Beim Menschen hängen sehr viele Symptome mit anderen Bereichen des Körpers zusammen.", con_1
+1, antonia.krause.stud-mail, "Da stimme ich dir zu, jedoch ist der Kontext nicht für alle Diagnosen von Relevanz. Oft ist allein das bildgebende Material zu beurteilen.", con_1.1
+2, kai.weisenberger, "Wenn die KI aber nur für solche Diagnosen eingesetzt würde, wäre ihr Anwendungsbereich deutlich geschmälert.", con_1.1.1
+3, antonia.krause.stud-mail, "Das muss nicht zwangsläufig der Fall sein. Dadurch dass die KI automatisch bestimmte Krankheitsbilder mit tausenden Datenpunkten abgleichen kann, besteht sozusagen etwas wie das Einbeziehen des Kontextes vieler Fallbeispiele. Ein Arzt kann diese Menge nicht bewältigen und muss sich deshalb auf den Kontext im konkreten Fall des Patienten beziehen.", con_1.2
+4, kai.weisenberger, "Aber es ist ja gerade der konkrete Kontext des Patienten maßgeblich und nicht der des durchschnittlichen Patienten. Nicht jeder Mensch ist gleich.", con_1
+5, antonia.krause.stud-mail, "Das mag sein, doch sind gerade viele Krankheitsbilder ähnlich zueinander und können miteinander verglichen werden.", con_1.1
+6, kai.weisenberger, "Jedoch würden so ungewöhnliche Krankheitsbilder übergangen. Schon heute ist es zuweilen schwer einen Arzt zu finden, der sich spezifisch auf ein besonderes Problem einlässt. Diese Problematik würde damit verstärkt.", con_8
+7, antonia.krause.stud-mail, "Ich sehe die KI eher als eine Chance gerade den Fortschritt zu ermöglichen. Durch die Möglichkeit des Vergleichens bestimmter Krankheitsbilder mit vielen Datenpunkten würden ungewöhnlich, neuartige Dinge entdeckt, da die Vergleichsgruppe um einiges größer ist. Das Ergebnis ist um einiges präzisier und spezifischer.", pro_2
+8, kai.weisenberger, "Viele Daten über den Patienten gelangen aber erst gar nicht in die KI. Die KI kann diese dann auch nicht in die Entscheidung einbeziehen.", con_11
+9, antonia.krause.stud-mail, "Da ist es an den Entwicklern ein Konzept zu erarbeiten, dass sicherstellt, dass die KI mit einer größtmögliche Zahl an Daten sukzessiv 'gefüttert'wird. ", unk
+10, kai.weisenberger, "Viele derartiger Daten kommen aber nur in einem individuellen Gespräch zum Vorschein. Gerade ältere Patienten werden kein "Gespräch" mit einer KI führen wollen.", unk
+11, antonia.krause.stud-mail, "Möglicherweise könnte diesem Problem durch die digitale Patientenakte begegnet werden. Auf diesem Weg würden Details der jeweiligen Untersuchungen, Gespräche etc. erfasst und der KI zugänglich gemacht werden können.", con_11.1
+12, kai.weisenberger, "Diese Digitalisierung müsse aber erst noch vollzogen werden. Die Digitalisierung althergebrachter Branchen in Deutschland erweist sich als sehr schleppend und fehleranfällig, wie etwa die Juristerei am Beispiel des digitalen Anwaltspostfachs zeigt.", con_11.1.1
+13, antonia.krause.stud-mail, "Das stimmt. Bis dieses Konzept einsatzbereit ist und den gewünschten Effekt zeigt, wird es noch einige Zeit dauern.", unk

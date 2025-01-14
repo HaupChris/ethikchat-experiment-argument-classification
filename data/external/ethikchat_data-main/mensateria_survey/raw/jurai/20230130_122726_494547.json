@@ -1,0 +1,1341 @@
+{
+  "name": "20230130_122726_494547",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.JURAI",
+  "start": "2023/01/30-12:27:26",
+  "end": "2023/01/30-12:31:13",
+  "utterances": [
+    {
+      "user": "userL4W1",
+      "type": "user",
+      "text": "Im Falle eines Präzedenzfalles kann eine Ki nicht differenziert entscheiden, da es vorher noch keinen solchen Fall gab ",
+      "id_in_dialogue": 0,
+      "timestamp": "2023/01/30-12:28:31",
+      "true_labels": [
+        "FAQ.1"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "FAQ.1",
+          0.26325472497477886
+        ],
+        [
+          "Z.K6-1-1",
+          0.022664630319267236
+        ],
+        [
+          "Z.K10",
+          0.022458463491750128
+        ],
+        [
+          "Z.K6",
+          0.02192105913722068
+        ],
+        [
+          "FAQ.5",
+          0.016637436495515582
+        ],
+        [
+          "Z.K4",
+          0.016610884216602437
+        ],
+        [
+          "Z.P1-2",
+          0.016281342421221697
+        ],
+        [
+          "FAQ.3",
+          0.015907379016747644
+        ],
+        [
+          "FAQ.2",
+          0.015250017746257075
+        ],
+        [
+          "Z.K12",
+          0.015090697429948537
+        ],
+        [
+          "Z.K9",
+          0.01503571792020703
+        ],
+        [
+          "Z.P4-1",
+          0.014799304473384936
+        ],
+        [
+          "Z.P3-1",
+          0.01473382935329712
+        ],
+        [
+          "Z.K2",
+          0.0142704934076026
+        ],
+        [
+          "FAQ.4",
+          0.013910007397441339
+        ],
+        [
+          "Z.K11",
+          0.013567136727288818
+        ],
+        [
+          "Z.P5-1",
+          0.01354787266305033
+        ],
+        [
+          "Z.P1-1",
+          0.013500326059027795
+        ],
+        [
+          "Z.K7",
+          0.013344738398012156
+        ],
+        [
+          "Z.P1",
+          0.0
+        ],
+        [
+          "Z.P1-1-1",
+          0.0
+        ],
+        [
+          "Z.P3",
+          0.0
+        ],
+        [
+          "Z.P3-1-1",
+          0.0
+        ],
+        [
+          "Z.P3-1-2",
+          0.0
+        ],
+        [
+          "Z.P6",
+          0.0
+        ],
+        [
+          "Z.P6-1",
+          0.0
+        ],
+        [
+          "Z.P2",
+          0.0
+        ],
+        [
+          "Z.P2-1",
+          0.0
+        ],
+        [
+          "Z.P8",
+          0.0
+        ],
+        [
+          "Z.P8-1",
+          0.0
+        ],
+        [
+          "Z.P8-2",
+          0.0
+        ],
+        [
+          "Z.P4",
+          0.0
+        ],
+        [
+          "Z.P5",
+          0.0
+        ],
+        [
+          "Z.K6-1",
+          0.0
+        ],
+        [
+          "Z.K6-1-1-1",
+          0.0
+        ],
+        [
+          "Z.K6-2",
+          0.0
+        ],
+        [
+          "Z.K6-3",
+          0.0
+        ],
+        [
+          "Z.K10-1",
+          0.0
+        ],
+        [
+          "Z.K10-2",
+          0.0
+        ],
+        [
+          "Z.K2-1",
+          0.0
+        ],
+        [
+          "Z.K2-1-1",
+          0.0
+        ],
+        [
+          "Z.K2-1-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2-1",
+          0.0
+        ],
+        [
+          "Z.K4-1",
+          0.0
+        ],
+        [
+          "Z.K9-1",
+          0.0
+        ],
+        [
+          "Z.K11-1",
+          0.0
+        ],
+        [
+          "Z.K12-1",
+          0.0
+        ],
+        [
+          "Z.K7-1",
+          0.0
+        ],
+        [
+          "Z.K7-2",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "EthiBot",
+      "type": "bot",
+      "text": " Dir scheint also unklar zu sein, welche Art von Fällen diese KI verhandelt. Unsere jurKI ist auf zivilrechtliche Verfahren spezialisiert, wobei wir das Familienrecht als Teilgebiet explizit nicht hinzuzählen. Strafrechtliche Verfahren schließen wir in unserem Szenario ebenfalls aus. Um hier einen neuen Punkt in die Diskussion einzubringen: Durch den Einsatz der jurKI kann der Faktor Subjektivität bei Gerichtsurteilen ausgeräumt werden. Eine jurKI lässt sich nicht etwa durch Mitgefühl von den objektiven Fakten ablenken. Dies führt zu mehr Gerechtigkeit.",
+      "id_in_dialogue": 1,
+      "timestamp": "2023/01/30-12:28:31",
+      "true_labels": [
+        "intro_38",
+        "FAQ.1",
+        "FAQ.1-1",
+        "faq_trans_1",
+        "Z.P1"
+      ],
+      "true_bounds": [
+        [
+          0,
+          33
+        ],
+        [
+          33,
+          76
+        ],
+        [
+          76,
+          284
+        ],
+        [
+          284,
+          342
+        ],
+        [
+          342,
+          559
+        ]
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_38",
+          "intro_37",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "FAQ.1",
+        "introductions": [
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59",
+          "intro_60",
+          "intro_61",
+          "intro_62"
+        ],
+        "preselect_introduction": false,
+        "transitions": [
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_1",
+          "z_trans_2",
+          "z_trans_4",
+          "z_trans_8",
+          "z_trans_9",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [
+          "FAQ.1-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.P1",
+          "Z.K6-1-1-1",
+          "Z.P4",
+          "Z.K6-1",
+          "Z.K2-1",
+          "Z.P3",
+          "Z.P6",
+          "Z.P2",
+          "Z.P5",
+          "Z.P8",
+          "Z.K4-1",
+          "Z.K7-1"
+        ],
+        "preselect_second_argument": true
+      }
+    },
+    {
+      "user": "userL4W1",
+      "type": "user",
+      "text": "Aber eine Ki kann auch durch die subjektivität weniger menschlich entscheiden und so die Situation von Menschen drastisch verschlechtern ",
+      "id_in_dialogue": 2,
+      "timestamp": "2023/01/30-12:29:29",
+      "true_labels": [
+        "Z.K11"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "Z.K11",
+          0.035763844476707614
+        ],
+        [
+          "Z.K6",
+          0.03482094721182059
+        ],
+        [
+          "Z.K7",
+          0.03327094777115324
+        ],
+        [
+          "Z.K9",
+          0.03288524878810342
+        ],
+        [
+          "Z.K6-1-1",
+          0.032048645614970436
+        ],
+        [
+          "Z.P1-1",
+          0.021395865245193494
+        ],
+        [
+          "Z.P1-2",
+          0.021395865245193494
+        ],
+        [
+          "Z.K2",
+          0.021385865245193494
+        ],
+        [
+          "Z.P4-1",
+          0.019125989107433926
+        ],
+        [
+          "Z.P5-1",
+          0.0185836259886821
+        ],
+        [
+          "Z.K4",
+          0.018446243891438913
+        ],
+        [
+          "FAQ.5",
+          0.01805764603198709
+        ],
+        [
+          "Z.P3-1",
+          0.017946190891415865
+        ],
+        [
+          "Z.K10",
+          0.017909814563520754
+        ],
+        [
+          "Z.K12",
+          0.017895529555396875
+        ],
+        [
+          "FAQ.3",
+          0.01761446122174081
+        ],
+        [
+          "FAQ.2",
+          0.017193501455132508
+        ],
+        [
+          "FAQ.4",
+          0.01696353012597175
+        ],
+        [
+          "FAQ.1",
+          0.016840352313265288
+        ],
+        [
+          "Z.P1",
+          0.0
+        ],
+        [
+          "Z.P1-1-1",
+          0.0
+        ],
+        [
+          "Z.P3",
+          0.0
+        ],
+        [
+          "Z.P3-1-1",
+          0.0
+        ],
+        [
+          "Z.P3-1-2",
+          0.0
+        ],
+        [
+          "Z.P6",
+          0.0
+        ],
+        [
+          "Z.P6-1",
+          0.0
+        ],
+        [
+          "Z.P2",
+          0.0
+        ],
+        [
+          "Z.P2-1",
+          0.0
+        ],
+        [
+          "Z.P8",
+          0.0
+        ],
+        [
+          "Z.P8-1",
+          0.0
+        ],
+        [
+          "Z.P8-2",
+          0.0
+        ],
+        [
+          "Z.P4",
+          0.0
+        ],
+        [
+          "Z.P5",
+          0.0
+        ],
+        [
+          "Z.K6-1",
+          0.0
+        ],
+        [
+          "Z.K6-1-1-1",
+          0.0
+        ],
+        [
+          "Z.K6-2",
+          0.0
+        ],
+        [
+          "Z.K6-3",
+          0.0
+        ],
+        [
+          "Z.K10-1",
+          0.0
+        ],
+        [
+          "Z.K10-2",
+          0.0
+        ],
+        [
+          "Z.K2-1",
+          0.0
+        ],
+        [
+          "Z.K2-1-1",
+          0.0
+        ],
+        [
+          "Z.K2-1-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2-1",
+          0.0
+        ],
+        [
+          "Z.K4-1",
+          0.0
+        ],
+        [
+          "Z.K9-1",
+          0.0
+        ],
+        [
+          "Z.K11-1",
+          0.0
+        ],
+        [
+          "Z.K12-1",
+          0.0
+        ],
+        [
+          "Z.K7-1",
+          0.0
+        ],
+        [
+          "Z.K7-2",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "EthiBot",
+      "type": "bot",
+      "text": " Mit anderen Worten, die subjektive Wirkung leidet. Das ist möglich. In Deutschland sitzen die Menschen bereits durchschnittlich über 10h am Tag vor einem Bildschirm. Das zeigt, dass die Menschen keine echte Persönlichkeit vor sich brauchen, auch nicht bei Entscheidungen. Der menschliche Aspekt wird immer weiter in den Hintergrund gedrängt.",
+      "id_in_dialogue": 3,
+      "timestamp": "2023/01/30-12:29:29",
+      "true_labels": [
+        "intro_32",
+        "Z.K11",
+        "intro_2",
+        "Z.K11-1"
+      ],
+      "true_bounds": [
+        [
+          0,
+          20
+        ],
+        [
+          20,
+          51
+        ],
+        [
+          51,
+          68
+        ],
+        [
+          68,
+          342
+        ]
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_32",
+          "intro_23",
+          "intro_27",
+          "intro_24",
+          "intro_25",
+          "intro_28",
+          "intro_26",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.K11",
+        "introductions": [
+          "intro_2",
+          "intro_1",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59",
+          "intro_60",
+          "intro_61",
+          "intro_62"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_9",
+          "z_trans_4",
+          "z_trans_1",
+          "z_trans_2",
+          "z_trans_8",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": false,
+        "first_arguments": [
+          "Z.K11-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.K4-1",
+          "Z.K6-1-1-1",
+          "Z.P4",
+          "Z.K6-1",
+          "Z.K2-1",
+          "Z.P3",
+          "Z.P6",
+          "Z.P2",
+          "Z.P5",
+          "Z.P8",
+          "Z.K7-1"
+        ],
+        "preselect_second_argument": false
+      }
+    },
+    {
+      "user": "userL4W1",
+      "type": "user",
+      "text": "Aber die Menschen die 10h vor dem Bildschirm sitzen interagieren trotzdem menschlich ",
+      "id_in_dialogue": 4,
+      "timestamp": "2023/01/30-12:30:09",
+      "true_labels": [
+        "Z.K9"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "Z.K9",
+          0.035907314977855924
+        ],
+        [
+          "Z.P1-2",
+          0.021213403682125057
+        ],
+        [
+          "Z.K2",
+          0.021135072301943197
+        ],
+        [
+          "Z.K4",
+          0.020473217067373185
+        ],
+        [
+          "Z.K11",
+          0.02021113444804913
+        ],
+        [
+          "Z.K10",
+          0.020097257217990522
+        ],
+        [
+          "Z.P4-1",
+          0.020004747165002397
+        ],
+        [
+          "Z.P3-1",
+          0.01992578482800235
+        ],
+        [
+          "Z.P1-1",
+          0.019647996841156156
+        ],
+        [
+          "FAQ.5",
+          0.019462044384571553
+        ],
+        [
+          "FAQ.1",
+          0.01936393708487373
+        ],
+        [
+          "FAQ.3",
+          0.019141078185120786
+        ],
+        [
+          "FAQ.4",
+          0.019038754999285364
+        ],
+        [
+          "Z.K6",
+          0.018938274338015787
+        ],
+        [
+          "FAQ.2",
+          0.01874662631953844
+        ],
+        [
+          "Z.K6-1-1",
+          0.01862583598841705
+        ],
+        [
+          "Z.K12",
+          0.01847715327363668
+        ],
+        [
+          "Z.P5-1",
+          0.01835131165594249
+        ],
+        [
+          "Z.K7",
+          0.0180490623593689
+        ],
+        [
+          "Z.P1",
+          0.0
+        ],
+        [
+          "Z.P1-1-1",
+          0.0
+        ],
+        [
+          "Z.P3",
+          0.0
+        ],
+        [
+          "Z.P3-1-1",
+          0.0
+        ],
+        [
+          "Z.P3-1-2",
+          0.0
+        ],
+        [
+          "Z.P6",
+          0.0
+        ],
+        [
+          "Z.P6-1",
+          0.0
+        ],
+        [
+          "Z.P2",
+          0.0
+        ],
+        [
+          "Z.P2-1",
+          0.0
+        ],
+        [
+          "Z.P8",
+          0.0
+        ],
+        [
+          "Z.P8-1",
+          0.0
+        ],
+        [
+          "Z.P8-2",
+          0.0
+        ],
+        [
+          "Z.P4",
+          0.0
+        ],
+        [
+          "Z.P5",
+          0.0
+        ],
+        [
+          "Z.K6-1",
+          0.0
+        ],
+        [
+          "Z.K6-1-1-1",
+          0.0
+        ],
+        [
+          "Z.K6-2",
+          0.0
+        ],
+        [
+          "Z.K6-3",
+          0.0
+        ],
+        [
+          "Z.K10-1",
+          0.0
+        ],
+        [
+          "Z.K10-2",
+          0.0
+        ],
+        [
+          "Z.K2-1",
+          0.0
+        ],
+        [
+          "Z.K2-1-1",
+          0.0
+        ],
+        [
+          "Z.K2-1-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2-1",
+          0.0
+        ],
+        [
+          "Z.K4-1",
+          0.0
+        ],
+        [
+          "Z.K9-1",
+          0.0
+        ],
+        [
+          "Z.K11-1",
+          0.0
+        ],
+        [
+          "Z.K12-1",
+          0.0
+        ],
+        [
+          "Z.K7-1",
+          0.0
+        ],
+        [
+          "Z.K7-2",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "EthiBot",
+      "type": "bot",
+      "text": " Du sagst, dass die KI nicht akzeptiert wird. Dein Argument ist nicht spezifisch bzgl. der jurKI sondern gilt für viele fortgeschrittliche Innovationen. Die Pandemie hat bereits dafür gesorgt, dass die Technik viel mehr an Akzeptanz gewinnt. Warum die jurKI als Richter:in nicht an Akzeptanz hinzugewinnen sollte, ist nicht ersichtlich.",
+      "id_in_dialogue": 5,
+      "timestamp": "2023/01/30-12:30:09",
+      "true_labels": [
+        "intro_27",
+        "Z.K9",
+        "intro_57",
+        "Z.K9-1"
+      ],
+      "true_bounds": [
+        [
+          0,
+          15
+        ],
+        [
+          15,
+          45
+        ],
+        [
+          45,
+          152
+        ],
+        [
+          152,
+          336
+        ]
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_27",
+          "intro_25",
+          "intro_24",
+          "intro_23",
+          "intro_26",
+          "intro_32",
+          "intro_28",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.K9",
+        "introductions": [
+          "intro_57",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_58",
+          "intro_59",
+          "intro_60",
+          "intro_61",
+          "intro_62"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_1",
+          "z_trans_9",
+          "z_trans_4",
+          "z_trans_2",
+          "z_trans_8",
+          "z_trans_10",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": false,
+        "first_arguments": [
+          "Z.K9-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.K4-1",
+          "Z.K6-1-1-1",
+          "Z.P4",
+          "Z.K6-1",
+          "Z.K2-1",
+          "Z.P3",
+          "Z.P6",
+          "Z.P2",
+          "Z.P5",
+          "Z.P8",
+          "Z.K7-1"
+        ],
+        "preselect_second_argument": false
+      }
+    },
+    {
+      "user": "userL4W1",
+      "type": "user",
+      "text": "Weil es trotzdem manipulierbar ist durch beispielsweise Hacker ",
+      "id_in_dialogue": 6,
+      "timestamp": "2023/01/30-12:30:40",
+      "true_labels": [
+        "clarify"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "Z.K12",
+          0.022070098895418624
+        ],
+        [
+          "Z.K2",
+          0.021674810964224994
+        ],
+        [
+          "Z.P3-1",
+          0.021035536307146822
+        ],
+        [
+          "FAQ.1",
+          0.020875969896632526
+        ],
+        [
+          "Z.P4-1",
+          0.020629074353702655
+        ],
+        [
+          "FAQ.3",
+          0.020316832337832436
+        ],
+        [
+          "FAQ.2",
+          0.020247875723939865
+        ],
+        [
+          "Z.P5-1",
+          0.020145735256766842
+        ],
+        [
+          "Z.K10",
+          0.019948118951999952
+        ],
+        [
+          "Z.K11",
+          0.019940475331428346
+        ],
+        [
+          "FAQ.4",
+          0.019908216761159836
+        ],
+        [
+          "Z.K9",
+          0.019852365839867457
+        ],
+        [
+          "Z.K7",
+          0.019803377919575517
+        ],
+        [
+          "Z.K4",
+          0.019669027696251187
+        ],
+        [
+          "Z.K6-1-1",
+          0.01964183763052174
+        ],
+        [
+          "Z.K6",
+          0.019594637121036755
+        ],
+        [
+          "FAQ.5",
+          0.019491874578050575
+        ],
+        [
+          "Z.P1-1",
+          0.019468563027119388
+        ],
+        [
+          "Z.P1-2",
+          0.018833971264861124
+        ],
+        [
+          "Z.P1",
+          0.0
+        ],
+        [
+          "Z.P1-1-1",
+          0.0
+        ],
+        [
+          "Z.P3",
+          0.0
+        ],
+        [
+          "Z.P3-1-1",
+          0.0
+        ],
+        [
+          "Z.P3-1-2",
+          0.0
+        ],
+        [
+          "Z.P6",
+          0.0
+        ],
+        [
+          "Z.P6-1",
+          0.0
+        ],
+        [
+          "Z.P2",
+          0.0
+        ],
+        [
+          "Z.P2-1",
+          0.0
+        ],
+        [
+          "Z.P8",
+          0.0
+        ],
+        [
+          "Z.P8-1",
+          0.0
+        ],
+        [
+          "Z.P8-2",
+          0.0
+        ],
+        [
+          "Z.P4",
+          0.0
+        ],
+        [
+          "Z.P5",
+          0.0
+        ],
+        [
+          "Z.K6-1",
+          0.0
+        ],
+        [
+          "Z.K6-1-1-1",
+          0.0
+        ],
+        [
+          "Z.K6-2",
+          0.0
+        ],
+        [
+          "Z.K6-3",
+          0.0
+        ],
+        [
+          "Z.K10-1",
+          0.0
+        ],
+        [
+          "Z.K10-2",
+          0.0
+        ],
+        [
+          "Z.K2-1",
+          0.0
+        ],
+        [
+          "Z.K2-1-1",
+          0.0
+        ],
+        [
+          "Z.K2-1-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2",
+          0.0
+        ],
+        [
+          "Z.K2-1-2-1",
+          0.0
+        ],
+        [
+          "Z.K4-1",
+          0.0
+        ],
+        [
+          "Z.K9-1",
+          0.0
+        ],
+        [
+          "Z.K11-1",
+          0.0
+        ],
+        [
+          "Z.K12-1",
+          0.0
+        ],
+        [
+          "Z.K7-1",
+          0.0
+        ],
+        [
+          "Z.K7-2",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true
+    },
+    {
+      "user": "EthiBot",
+      "type": "bot",
+      "text": " Ich bin mir nicht sicher, was du genau meinst. Kannst du das anders formulieren?",
+      "id_in_dialogue": 7,
+      "timestamp": "2023/01/30-12:30:40",
+      "true_labels": [
+        "intro_61"
+      ],
+      "true_bounds": [
+        [
+          0,
+          81
+        ]
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [],
+        "preselect_paraphrase_introduction": false,
+        "paraphrase": "",
+        "introductions": [
+          "intro_61",
+          "intro_62"
+        ],
+        "preselect_introduction": true,
+        "transitions": [],
+        "preselect_transition": false,
+        "first_arguments": [],
+        "preselect_first_argument": false,
+        "second_arguments": [],
+        "preselect_second_argument": false
+      }
+    }
+  ],
+  "start_survey": {
+    "name": "9ad2b2e185d095ecb5e139165aa2a3c9",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "informed": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "9ad2b2e185d095ecb5e139165aa2a3c9",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "opinion": 0.5,
+      "informative": 0.25,
+      "positive_critics": "Neue Infos bekommen ",
+      "negative_critics": "Die Ki ist sehr uneinsichtig gewesen "
+    }
+  }
+}

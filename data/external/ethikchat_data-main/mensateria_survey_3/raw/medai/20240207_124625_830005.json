@@ -1,0 +1,260 @@
+{
+  "name": "20240207_124625_830005",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-12:46:25",
+  "end": "2024/02/07-12:59:48",
+  "utterances": [
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "Obwohl die KI Zugriff auf alle wichtigen Parameter hat und das medizinische Wissen besitzt, können fehlerhafte Schlussfolgerungen entstehen.",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-12:48:16",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Verstehe, dass die Befürchtung fehlerhafter Schlussfolgerungen berechtigt ist. Allerdings können auch menschliche Ärzte Fehldiagnosen stellen. Die Frage ist, ob ein gut entwickeltes medizinisches Programm nicht sogar weniger fehleranfällig sein könnte, da es keine menschlichen Ermüdungserscheinungen oder Emotionen kennt.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-12:48:23",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "Wer würde denn die Schuld tragen, wenn eine KI eine Fehlentscheidung trifft? Das medizinische Personal, der Hersteller, der Programmierer?",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-12:49:46",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Das ist eine wichtige Frage. Grundsätzlich sollte die Verantwortung für eine KI-Fehlentscheidung beim Hersteller oder Programmierer liegen, da sie die KI entwickelt und bereitstellt. Es ist ihre Pflicht, die KI so sicher und präzise wie möglich zu gestalten. Allerdings muss auch das medizinische Personal die KI sachgerecht einsetzen und die Entscheidungen angemessen kommunizieren.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-12:49:51",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "In anderen KI-gestützten Anwendungen habe ich schlechte Erfahrungen gemacht. Wieso sollte ich dieser vertrauen?",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-12:51:05",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe Ihre Skepsis. Es ist richtig, dass KI-Anwendungen nicht immer perfekt sind und es zu Fehlern kommen kann. Allerdings ist die Medizinbranche sehr an Innovationen interessiert und die Entwicklung von medizinischen KIs erfolgt unter strengen Kontrollen und Regularien. Diese KIs werden sorgfältig getestet und validiert, bevor sie in der Praxis eingesetzt werden. Zudem lernt eine medizinische KI ständig dazu und kann sich an neue Erkenntnisse anpassen, was menschliche Ärzte oft nicht in diesem Maße leisten können.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-12:51:13",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "Wieso sollte es dann überhaupt noch Ärzte geben?",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-12:51:40",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Gute Frage. Auch wenn eine medizinische KI sehr fortschrittlich ist, kann sie menschliche Faktoren wie Empathie, zwischenmenschliche Kommunikation und ethische Entscheidungen nicht ersetzen. Ärzte haben eine wichtige Rolle bei der Begleitung und Beratung von Patienten, bei der Entwicklung von Behandlungsplänen und bei der Überwachung des Genesungsprozesses. Die KI kann hierbei eine wertvolle Unterstützung sein, aber sie wird niemals den menschlichen Aspekt der Medizin vollständig ersetzen können.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-12:51:47",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "Wie verifiziert man die Daten,  auf die die KI zugreift?",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-12:52:45",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Die Verifizierung der Daten ist ein entscheidender Aspekt bei der Entwicklung und Nutzung von medizinischen KIs. Die Daten müssen validiert und geprüft werden, bevor sie in die KI integriert werden. Dazu gehören die Überprüfung der Quellen, die Sicherstellung der Datenqualität und die Anwendung von Data-Cleaning-Methoden. Zudem sollten die Daten aus verschiedenen und repräsentativen Quellen stammen, um eine möglichst breite und realistische Datenbasis zu gewährleisten. Die Transparenz und Nachvollziehbarkeit der Daten und Algorithmen sind ebenfalls wichtig, um die Zuverlässigkeit und Glaubwürdigkeit der KI zu erhöhen.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-12:52:50",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "Ich finde KIs geben oft sehr lange, oberflächliche und allgemeingültige Aussagen. Kann man das nicht verkürzen?",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-12:53:50",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, das ist ein berechtigter Einwand. Die Kommunikation von KIs kann tatsächlich verbessert werden, indem man sie auf eine prägnantere und verständlichere Art und Weise gestaltet. Das kann durch natürliche Sprachverarbeitung und maschinelles Lernen erreicht werden, um die KI zu \"trainieren\", menschlichere und situationsspezifischere Antworten zu geben. Auch die Integration von Feedback-Mechanismen kann dazu beitragen, die KI kontinuierlich zu verbessern und an die Bedürfnisse der Nutzer anzupassen. Ziel ist es, die KI so zu gestalten, dass sie präzise, verständliche und hilfreiche Informationen liefert, die den Patienten und dem medizinischen Personal tatsächlich weiterhelfen.",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-12:53:59",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "Was ist mit Hacker Angriffen?",
+      "id_in_dialogue": 12,
+      "timestamp": "2024/02/07-12:54:27",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sicherheit ist ein wichtiges Thema, insbesondere wenn es um sensible medizinische Daten geht. Um Hackerangriffen vorzubeugen, müssen angemessene Sicherheitsmaßnahmen implementiert werden, wie beispielsweise Verschlüsselung, Firewalls, Zugriffsbeschränkungen und regelmäßige Sicherheitsupdates. Darüber hinaus sollten die Entwickler und Betreiber der medizinischen KI sich kontinuierlich über neue Sicherheitsrisiken und Gegenmaßnahmen informieren, um die KI und die darin enthaltenen Daten bestmöglich zu schützen. Es ist wichtig, dass die Sicherheit der KI und der Daten ein zentraler Aspekt in der Entwicklung und Nutzung der KI ist, um das Vertrauen der Patienten und des medizinischen Personals zu gewährleisten.",
+      "id_in_dialogue": 13,
+      "timestamp": "2024/02/07-12:54:39",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "Deutschland ist das Land des Datenschutzes. Wie ist dieser bei der KI gewährleistet?",
+      "id_in_dialogue": 14,
+      "timestamp": "2024/02/07-12:55:42",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "In Deutschland gelten strenge Datenschutzbestimmungen, die auch für den Einsatz von KI in der Medizin gelten. Der Datenschutz wird durch die Datenschutz-Grundverordnung (DSGVO) der Europäischen Union gewährleistet. Diese Regelungen legen fest, wie personenbezogene Daten verarbeitet und geschützt werden müssen. Für den Einsatz von medizinischen KIs gelten zusätzliche Anforderungen, wie beispielsweise die Einwilligung der Patienten, die Transparenz der Datenverarbeitung und die Gewährleistung der Datensicherheit. Die Einhaltung dieser Vorschriften wird durch Aufsichtsbehörden überwacht, die Sanktionen bei Verstößen verhängen können. Durch diese Regelungen wird sichergestellt, dass der Datenschutz bei der Nutzung von medizinischen KIs gewahrt bleibt und die Rechte der Patienten geschützt werden.",
+      "id_in_dialogue": 15,
+      "timestamp": "2024/02/07-12:55:54",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "Ok und was passiert bei Stromausfall?",
+      "id_in_dialogue": 16,
+      "timestamp": "2024/02/07-12:56:39",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Im Falle eines Stromausfalls oder eines Systemausfalls kann die medizinische KI nicht mehr ordnungsgemäß arbeiten. Um dieses Risiko zu minimieren, sollten Redundanzmaßnahmen implementiert werden, wie beispielsweise Notstromaggregate, Backup-Systeme und alternative Arbeitsabläufe. Diese Maßnahmen gewährleisten, dass die medizinische Versorgung im Falle eines Ausfalls der KI weiterhin sichergestellt ist. Zudem sollten die Mitarbeiter im Untersuchungszentrum darin geschult werden, im Notfall angemessen zu reagieren und alternative Verfahren anzuwenden, um die Patientenversorgung aufrechtzuerhalten.",
+      "id_in_dialogue": 17,
+      "timestamp": "2024/02/07-12:56:46",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "22YC4",
+      "type": "user",
+      "text": "Hat die KI auch eine Sprachausgabe?",
+      "id_in_dialogue": 18,
+      "timestamp": "2024/02/07-12:57:26",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, medizinische KIs können mit einer Sprachausgabe ausgestattet werden, um die Kommunikation mit Patienten und medizinischem Personal zu erleichtern. Die Sprachausgabe kann so gestaltet werden, dass sie verständlich, präzise und situationsspezifisch ist. Durch den Einsatz von natürlicher Sprachverarbeitung und maschinellem Lernen kann die KI lernen, menschliche Sprache besser zu verstehen und angemessene Antworten zu generieren. Dadurch wird die Kommunikation mit der KI intuitiver und einfacher, was insbesondere für ältere oder weniger technikaffine Patienten vorteilhaft sein kann.",
+      "id_in_dialogue": 19,
+      "timestamp": "2024/02/07-12:57:39",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "302920615a3dce7ae30a61bb61c57e56",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "302920615a3dce7ae30a61bb61c57e56",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.5,
+      "opinion_1": 0,
+      "opinion_1_reason": "Ich bin ein Fan von kurzen prägnanten Antworten und finde lange Argumente anstrengend.",
+      "opinion_2": 0.8,
+      "argument_quality_2": 0.8,
+      "user_information_argument_breadth": 1,
+      "user_information_argument_depth": 0.5
+    }
+  }
+}

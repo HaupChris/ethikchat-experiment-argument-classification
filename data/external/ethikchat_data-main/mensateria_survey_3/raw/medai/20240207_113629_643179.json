@@ -1,0 +1,121 @@
+{
+  "name": "20240207_113629_643179",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:36:29",
+  "end": "2024/02/07-11:46:34",
+  "utterances": [
+    {
+      "user": "EQQML",
+      "type": "user",
+      "text": "KIs sollten unterstützdend wirken, aber zunächst keine Entscheidungen treffen. Es sei denn die Datenlage lässt keine anderen Schlüsse zu",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:37:53",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Vielen Dank für Ihre Einblicke. Ich möchte jedoch darauf hinweisen, dass das Szenario voraussetzt, dass die medizinische KI (medKI) in der Lage ist, eigenständige Diagnose- und Therapie-Entscheidungen zu treffen. Das Ziel ist es, zu diskutieren, ob dies aus ethischer Sicht gerechtfertigt ist.\nEs gibt mehrere Gründe, warum eine eigenständige medKI ethisch vertretbar sein könnte. Zunächst einmal könnte sie in der Lage sein, eine größere Menge an medizinischen Informationen zu verarbeiten und zu analysieren als ein Mensch. Dadurch könnte sie präzisere Diagnosen stellen und effektivere Behandlungspläne entwickeln.\nZweitens könnte eine eigenständige medKI dazu beitragen, menschliche Fehler zu minimieren. Auch die erfahrensten Ärzte können Fehler machen, wenn sie unter Druck stehen oder wenn sie mit komplexen medizinischen Fällen konfrontiert werden. Eine medKI hingegen würde nicht unter Druck stehen und könnte sich auf ihre Programmierung verlassen, um eine genaue Diagnose und Behandlung zu gewährleisten.\nDrittens könnte eine eigenständige medKI dazu beitragen, die Ungleichheit im Zugang zur Gesundheitsversorgung zu verringern. In vielen Teilen der Welt gibt es einen Mangel an qualifiziertem medizinischen Personal, was dazu führt, dass viele Menschen keinen angemessenen Zugang zu medizinischer Versorgung haben. Eine medKI könnte dazu beitragen, diese Lücke zu schließen, indem sie eine konsistente und zuverlässige medizinische Versorgung in abgelegenen Gebieten bereitstellt.\nIch verstehe Ihre Bedenken hinsichtlich der Unterstützung durch KI, aber im Kontext dieses Szenarios argumentiere ich dafür, dass eine eigenständige medKI die ob",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:38:08",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "EQQML",
+      "type": "user",
+      "text": "Weiter? Der letzte Satz  ist unvollständig ",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-11:43:06",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Tut mir leid für die Verwirrung. Ich argumentiere dafür, dass eine eigenständige medKI die oben genannten Vorteile bieten könnte, wie eine präzisere Diagnose, Minimierung menschlicher Fehler und Verringerung der Ungleichheit im Zugang zur Gesundheitsversorgung. Diese Vorteile könnten dazu beitragen, die Qualität der medizinischen Versorgung zu verbessern und letztendlich das Wohlergehen der Patient:innen zu fördern. Deshalb denke ich, dass ein ausreichend gutes medizinisches Programm aus ethischer Sicht selbstständig Diagnose- und Therapie-Entscheidungen treffen sollte.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-11:43:21",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "EQQML",
+      "type": "user",
+      "text": "Ok, das ist auch meine Meinung ",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-11:43:47",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Das freut mich zu hören! Es ist wichtig, dass wir offen über solche Themen diskutieren, um ein besseres Verständnis dafür zu entwickeln, wie wir die Vorteile von KI in der Medizin am besten nutzen können, um die Versorgung der Patient:innen zu verbessern. Gibt es noch weitere Fragen oder Aspekte, die Sie gerne in diesem Zusammenhang besprechen möchten?",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-11:43:51",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "EQQML",
+      "type": "user",
+      "text": "Nein",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-11:44:05",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Gut, dann beenden wir hier die Diskussion. Ich hoffe, ich konnte Ihre Fragen zum Thema medizinische KI beantworten und Ihnen eine klarere Vorstellung davon vermitteln, wie sie in Zukunft eingesetzt werden könnte. Wenn Sie weitere Fragen haben, zögern Sie bitte nicht, mich erneut zu kontaktieren. Ich bin hier, um zu helfen und zu diskutieren.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-11:44:11",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "101d82e9f8e02f3277081739c565ac40",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "informed": 0.5,
+      "agreement": 0.25
+    }
+  },
+  "end_survey": {
+    "name": "101d82e9f8e02f3277081739c565ac40",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "opinion_1": 1,
+      "opinion_2": 0.8,
+      "argument_quality_2": 1,
+      "user_information_argument_breadth": 0.75,
+      "user_information_argument_depth": 0.8
+    }
+  }
+}

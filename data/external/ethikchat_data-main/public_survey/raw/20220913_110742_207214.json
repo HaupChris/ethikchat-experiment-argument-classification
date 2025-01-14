@@ -1,0 +1,286 @@
+{
+  "name": "20220913_110742_207214",
+  "szenario": "DialogueSzenario.STD_EXPERT_RESP_TEMPLATE",
+  "start": "2022/09/13-11:07:42",
+  "end": "2022/09/13-12:14:33",
+  "utterances": [
+    {
+      "user": "7ec89177f19552e5ff31290e874fd94b",
+      "type": "user",
+      "text": "Wenn sich die KI irrt. Eine Maschine ist kein Mensch, der sich Wissen angeeignet hat.",
+      "id_in_dialogue": 0,
+      "timestamp": "2022/09/13-11:09:58",
+      "true_labels": [
+        "Z.K15"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false
+    },
+    {
+      "user": "8151c5a9bdf8854319cb7313ce658a17",
+      "type": "expert",
+      "text": "Du argumentierst, dass die medKI schwerwiegende Fehler macht. Das ist ein gutes Argument. Andererseits: Allerdings sind Fehler bei einer KI deutlich unwahrscheinlicher als bei Ärzt:innen, da sie bei jedem Update ausführlich und automatisch getestet würde. Im Übrigen: Eine medKI wäre rund um die Uhr erreichbar; in der Nacht oder am Wochenende, wenn auch nur in einer Notbesetzung mit medizinischem Hilfspersonal. Das ließe sich ohne medKI sonst nur in großen Kliniken sicherstellen und wäre auf dem Land nicht möglich.",
+      "id_in_dialogue": 1,
+      "timestamp": "2022/09/13-11:12:11",
+      "true_labels": [
+        "intro_26",
+        "Z.K15",
+        "intro_46",
+        "Z.K15-1",
+        "z_trans_10",
+        "Z.P1"
+      ],
+      "true_bounds": [
+        [
+          0,
+          22
+        ],
+        [
+          22,
+          61
+        ],
+        [
+          61,
+          103
+        ],
+        [
+          103,
+          255
+        ],
+        [
+          255,
+          267
+        ],
+        [
+          267,
+          519
+        ]
+      ],
+      "is_template": true,
+      "search_terms": [],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_26",
+          "intro_27",
+          "intro_28",
+          "intro_23",
+          "intro_24",
+          "intro_32",
+          "intro_25",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.K15",
+        "introductions": [
+          "intro_46",
+          "intro_51",
+          "intro_48",
+          "intro_47",
+          "intro_50",
+          "intro_49",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_10",
+          "z_trans_8",
+          "z_trans_1",
+          "z_trans_2",
+          "z_trans_4",
+          "z_trans_9",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [
+          "Z.K15-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.P1",
+          "Z.P2",
+          "Z.P4",
+          "Z.P3",
+          "Z.P5",
+          "Z.P6"
+        ],
+        "preselect_second_argument": true
+      }
+    },
+    {
+      "user": "8151c5a9bdf8854319cb7313ce658a17",
+      "type": "expert",
+      "text": "Ich denke an dieser Stelle könnten wir den Chat beenden. Vielen Dank für das interessante Gespräch, MONA! Es wäre schön, wenn du dir noch kurz Zeit für eine kleine Umfrage nimmst. :)",
+      "id_in_dialogue": 2,
+      "timestamp": "2022/09/13-12:14:31",
+      "true_labels": [
+        "good_bye"
+      ],
+      "true_bounds": [],
+      "is_template": true,
+      "search_terms": [],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_26",
+          "intro_27",
+          "intro_28",
+          "intro_23",
+          "intro_24",
+          "intro_32",
+          "intro_25",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.K15",
+        "introductions": [
+          "intro_46",
+          "intro_51",
+          "intro_48",
+          "intro_47",
+          "intro_50",
+          "intro_49",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_10",
+          "z_trans_8",
+          "z_trans_1",
+          "z_trans_2",
+          "z_trans_4",
+          "z_trans_9",
+          "z_trans_11",
+          "z_trans_12",
+          "z_trans_13",
+          "z_trans_16",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": true,
+        "first_arguments": [
+          "Z.K15-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.P1",
+          "Z.P2",
+          "Z.P4",
+          "Z.P3",
+          "Z.P5",
+          "Z.P6"
+        ],
+        "preselect_second_argument": true
+      }
+    }
+  ],
+  "start_survey": {
+    "name": "7ec89177f19552e5ff31290e874fd94b",
+    "type": "StartSurvey",
+    "agreement": 0.25
+  },
+  "end_survey": "not available"
+}

@@ -1,0 +1,463 @@
+{
+  "name": "20230720_130411_589599",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2023/07/20-13:04:11",
+  "end": "in progress",
+  "utterances": [
+    {
+      "user": "G8R7",
+      "type": "user",
+      "text": "KI sollte keine Entscheidungen treffen können weil sie keine Empathie haben ",
+      "id_in_dialogue": 0,
+      "timestamp": "2023/07/20-13:05:06",
+      "true_labels": [
+        "Z.K7"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "Z.K7",
+          0.02600493593806141
+        ],
+        [
+          "Z.P1-1",
+          0.026003864742199366
+        ],
+        [
+          "NZ.K10",
+          0.025918944436000648
+        ],
+        [
+          "Z.K1",
+          0.02588596741233893
+        ],
+        [
+          "Z.K11",
+          0.025323613657692146
+        ],
+        [
+          "Z.K5",
+          0.021619434675364126
+        ],
+        [
+          "Z.K10",
+          0.02127427610679657
+        ],
+        [
+          "Z.K2",
+          0.017916806548508364
+        ],
+        [
+          "Z.K14",
+          0.015745248353785466
+        ],
+        [
+          "NZ.K1",
+          0.013476250719850641
+        ],
+        [
+          "NZ.K8",
+          0.010518967908408129
+        ],
+        [
+          "NZ.K4",
+          0.009954367035340651
+        ],
+        [
+          "Z.K19",
+          0.009924529909978297
+        ],
+        [
+          "Z.K15",
+          0.009901131988476381
+        ],
+        [
+          "Z.K6",
+          0.00977559333102977
+        ],
+        [
+          "Z.K18",
+          0.00974847875363592
+        ],
+        [
+          "Z.K13",
+          0.009721017028648074
+        ],
+        [
+          "Z.P1-2",
+          0.009681316367146437
+        ],
+        [
+          "NZ.K9",
+          0.00968077896540495
+        ],
+        [
+          "Z.K8",
+          0.009671182717142159
+        ],
+        [
+          "Z.K9",
+          0.009665515335223682
+        ],
+        [
+          "Z.K12",
+          0.009655468155071605
+        ],
+        [
+          "NZ.K3",
+          0.009654075191906236
+        ],
+        [
+          "Z.K16",
+          0.009592364952905557
+        ],
+        [
+          "Z.K4",
+          0.009588501155999633
+        ],
+        [
+          "Z.K3",
+          0.009568571212187819
+        ],
+        [
+          "NZ.K6",
+          0.009568571212187819
+        ],
+        [
+          "Z.P1",
+          0.0
+        ],
+        [
+          "Z.P1-1-1",
+          0.0
+        ],
+        [
+          "Z.P1-2-1",
+          0.0
+        ],
+        [
+          "Z.P4",
+          0.0
+        ],
+        [
+          "Z.P4-1",
+          0.0
+        ],
+        [
+          "Z.P2",
+          0.0
+        ],
+        [
+          "Z.P3",
+          0.0
+        ],
+        [
+          "Z.P3-1",
+          0.0
+        ],
+        [
+          "Z.P3-1-1",
+          0.0
+        ],
+        [
+          "Z.P6",
+          0.0
+        ],
+        [
+          "Z.P6-1",
+          0.0
+        ],
+        [
+          "Z.P6-1-1",
+          0.0
+        ],
+        [
+          "Z.P5",
+          0.0
+        ],
+        [
+          "Z.P5-1",
+          0.0
+        ],
+        [
+          "Z.K8-1",
+          0.0
+        ],
+        [
+          "Z.P7",
+          0.0
+        ],
+        [
+          "Z.P7-1",
+          0.0
+        ],
+        [
+          "Z.K1-1",
+          0.0
+        ],
+        [
+          "Z.K2-4",
+          0.0
+        ],
+        [
+          "Z.K4-1",
+          0.0
+        ],
+        [
+          "Z.K6-1",
+          0.0
+        ],
+        [
+          "Z.K15-1",
+          0.0
+        ],
+        [
+          "Z.K18-1",
+          0.0
+        ],
+        [
+          "Z.K3-1",
+          0.0
+        ],
+        [
+          "Z.K3-1-1",
+          0.0
+        ],
+        [
+          "Z.K3-1-1-1",
+          0.0
+        ],
+        [
+          "Z.K3-2",
+          0.0
+        ],
+        [
+          "Z.K11-1",
+          0.0
+        ],
+        [
+          "Z.K12-1",
+          0.0
+        ],
+        [
+          "Z.K5-1",
+          0.0
+        ],
+        [
+          "Z.K7-1",
+          0.0
+        ],
+        [
+          "Z.K10-1",
+          0.0
+        ],
+        [
+          "Z.K10-2",
+          0.0
+        ],
+        [
+          "Z.K9-1",
+          0.0
+        ],
+        [
+          "Z.K13-1",
+          0.0
+        ],
+        [
+          "Z.K14-1",
+          0.0
+        ],
+        [
+          "Z.K16-1",
+          0.0
+        ],
+        [
+          "Z.K19-1",
+          0.0
+        ],
+        [
+          "NZ.K1-1",
+          0.0
+        ],
+        [
+          "NZ.K3-1",
+          0.0
+        ],
+        [
+          "NZ.K4-1",
+          0.0
+        ],
+        [
+          "NZ.K6-1",
+          0.0
+        ],
+        [
+          "NZ.K8-1",
+          0.0
+        ],
+        [
+          "NZ.K9-1",
+          0.0
+        ],
+        [
+          "NZ.K10-1",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "EthiBot",
+      "type": "bot",
+      "text": " Du merkst an, dass die medKI kein Einfühlungsvermögen zB für verzweifelte Patient:innen hat. Das ist im Szenario bereits berücksichtigt: Da der medKI echtes Einfühlungsvermögen fehlt, sollte das medizinische Fachpersonal in den Untersuchungszentren die Kommunikation insbesondere bei schwierigen Situationen übernehmen.",
+      "id_in_dialogue": 1,
+      "timestamp": "2023/07/20-13:05:06",
+      "true_labels": [
+        "intro_28",
+        "Z.K7",
+        "intro_56",
+        "Z.K7-1"
+      ],
+      "true_bounds": [
+        [
+          0,
+          19
+        ],
+        [
+          19,
+          93
+        ],
+        [
+          93,
+          137
+        ],
+        [
+          137,
+          320
+        ]
+      ],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_28",
+          "intro_32",
+          "intro_24",
+          "intro_23",
+          "intro_27",
+          "intro_25",
+          "intro_26",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.K7",
+        "introductions": [
+          "intro_56",
+          "intro_55",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_46",
+          "intro_47",
+          "intro_48",
+          "intro_49",
+          "intro_50",
+          "intro_51",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_57",
+          "intro_58",
+          "intro_59",
+          "intro_60",
+          "intro_61",
+          "intro_62",
+          "intro_63",
+          "intro_64",
+          "intro_65",
+          "intro_66",
+          "intro_67",
+          "intro_68"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_11",
+          "z_trans_8",
+          "z_trans_2",
+          "z_trans_13",
+          "z_trans_10",
+          "z_trans_9",
+          "z_trans_16",
+          "z_trans_1",
+          "z_trans_4",
+          "z_trans_12",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": false,
+        "first_arguments": [
+          "Z.K7-1"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.P1",
+          "Z.P2",
+          "Z.P4",
+          "Z.P3",
+          "Z.P5",
+          "Z.P6"
+        ],
+        "preselect_second_argument": false
+      }
+    }
+  ],
+  "start_survey": {
+    "name": "8851d1a3445e06d006a3499f68be1130",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 0.25
+    }
+  },
+  "end_survey": "not available"
+}

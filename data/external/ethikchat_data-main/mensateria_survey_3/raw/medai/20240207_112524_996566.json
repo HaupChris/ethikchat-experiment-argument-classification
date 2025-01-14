@@ -1,0 +1,54 @@
+{
+  "name": "20240207_112524_996566",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:25:24",
+  "end": "in progress",
+  "utterances": [
+    {
+      "user": "DG11A",
+      "type": "user",
+      "text": "KI kann sich nicht in Menschen hineinversetzen, weil sie keine Gefühle hat",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:26:08",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Vielen Dank für Ihr Argument. Es ist wahr, dass KI nicht in der Lage ist, Emotionen zu empfinden, aber das bedeutet nicht, dass sie nicht in der Lage ist, eigenständige diagnostische und therapeutische Entscheidungen zu treffen. Die Fähigkeit, Emotionen zu empfinden, ist nicht unbedingt notwendig, um eine korrekte Diagnose zu stellen oder eine wirksame Behandlung zu empfehlen. Im Gegenteil, eine medKI könnte objektiver und konsistenter sein als ein menschlicher Arzt, da sie nicht von Emotionen beeinflusst wird.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:26:17",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "DG11A",
+      "type": "user",
+      "text": "Was wenn es kaputt geht? Wie kann man davon ausgehen, dass es immer die richtigen Antworten liefert?",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-11:27:09",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    }
+  ],
+  "start_survey": {
+    "name": "5da393d0390cb52b531ee2e9aa3660dc",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "informed": 0,
+      "agreement": 0.25
+    }
+  },
+  "end_survey": "not available"
+}

@@ -1,0 +1,192 @@
+{
+  "name": "20240207_115633_182192",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:56:33",
+  "end": "2024/02/07-12:24:09",
+  "utterances": [
+    {
+      "user": "7E94M",
+      "type": "user",
+      "text": "Gute KI ist besser als Mensch ",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-12:10:34",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Während eine fortschrittliche KI möglicherweise genauere Diagnosen stellen kann als ein Mensch, bedeutet dies nicht, dass sie ethisch vertretbar ist, unabhängige Entscheidungen zu treffen. Es gibt wichtige Aspekte der menschlichen Pflege und Unterstützung, die eine KI nicht ersetzen kann.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-12:10:39",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "7E94M",
+      "type": "user",
+      "text": "Muss ja nicht alle Ärzte ersetzen. Aber zum Beispiel in Regionen wo es keinen Arzt gibt zur Verfügung stehen",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-12:11:53",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Auch in unterversorgten Regionen sollte die Entscheidungsgewalt über medizinische Versorgung bei menschlichen Fachkräften liegen, die eine persönliche Beziehung zu den Patienten aufbauen und ethische Entscheidungen im Kontext individueller Bedürfnisse und kultureller Sensibilitäten treffen können. ",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-12:11:57",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "7E94M",
+      "type": "user",
+      "text": "Okay, vielleicht sollte KI eher als Unterstützung dienen ",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-12:13:55",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": " Selbst wenn die KI als Unterstützung für medizinisches Personal eingesetzt wird, besteht die ethische Frage, ob es angemessen ist, menschliche Entscheidungen in Bezug auf Diagnosen und Therapien an eine KI auszulagern, die möglicherweise nicht die gleichen moralischen und ethischen Prinzipien versteht wie ein Mensch. ",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-12:13:59",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "7E94M",
+      "type": "user",
+      "text": "Das stimmt. Das ist ein allgemeines Problem von KI, auch zum Beispiel bei selbst fahrenden Autos. \nHier müsste man der KI beibringen was ethisch richtig ist und was nicht.. das ist aber sehr komplex. Dazu müsste man die moralischen Dinge erstmal komplett durchdringen und Muster finden. ",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-12:15:28",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Genau, die Festlegung ethischer Richtlinien für KI ist ein komplexes Problem, und es ist unklar, ob eine KI jemals in der Lage sein wird, menschliche Ethik und Moral in all ihrer Komplexität und Subjektivität zu verstehen. Selbst wenn dies der Fall wäre, bliebe die Frage, ob eine KI überhaupt ethische Entscheidungen treffen sollte oder ob dies eine unveräußerliche menschliche Verantwortung ist. ",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-12:15:32",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "7E94M",
+      "type": "user",
+      "text": "Ja, das sollte stets ein Mensch nochmal überwachen bzw. die Entscheidungen bestätigen. ",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-12:17:08",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Auch wenn ein Mensch die endgültige Entscheidungsgewalt behält, gibt es ethische Bedenken hinsichtlich der Verantwortlichkeit und Rechenschaftspflicht. Wenn ein Fehler auftritt, wer ist verantwortlich – die KI, das medizinische Personal, das die KI überwacht, oder die Entwickler der KI? Diese Fragen müssen gründlich untersucht und geklärt werden, bevor eine KI in die medizinische Versorgung integriert wird. ",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-12:17:14",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "7E94M",
+      "type": "user",
+      "text": "Das stimmt. Hier muss man sich ein ausgeklügeltes System überlegen ",
+      "id_in_dialogue": 10,
+      "timestamp": "2024/02/07-12:18:04",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ja, ein ausgeklügeltes System der Verantwortlichkeit und Rechenschaftspflicht muss entwickelt werden, um sicherzustellen, dass die Integration von KI in die medizinische Versorgung ethisch vertretbar ist. Dazu könnten klare Richtlinien und Prozesse gehören, die festlegen, wie Fehler gemeldet und untersucht werden, wie das medizinische Personal geschult wird, um mit der KI zu interagieren, und wie die Entscheidungsprozesse zwischen Mensch und KI abgestimmt werden. ",
+      "id_in_dialogue": 11,
+      "timestamp": "2024/02/07-12:18:09",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "7E94M",
+      "type": "user",
+      "text": "Genau ",
+      "id_in_dialogue": 12,
+      "timestamp": "2024/02/07-12:18:26",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Es ist wichtig, sorgfältig abzuwägen und die potenziellen Vorteile und Risiken der Integration von KI in die medizinische Versorgung zu berücksichtigen. Obwohl KI möglicherweise die Genauigkeit und Effizienz der medizinischen Versorgung verbessern kann, müssen wir sicherstellen, dass die Integration dieser Technologie ethische Grundsätze respektiert und die Rechte und Würde der Patienten schützt. ",
+      "id_in_dialogue": 13,
+      "timestamp": "2024/02/07-12:18:31",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "3ddb2d7a189312836acf4e94893da259",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.75,
+      "informed": 0.5
+    }
+  },
+  "end_survey": {
+    "name": "3ddb2d7a189312836acf4e94893da259",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.5,
+      "opinion_1": 1,
+      "opinion_1_reason": "Ist angenehm und interessant ",
+      "opinion_2": 0.8,
+      "argument_quality_2": 1,
+      "user_information_argument_breadth": 1,
+      "user_information_argument_depth": 0.8,
+      "positive_critics": "Gut auf Argumente eingegangen"
+    }
+  }
+}

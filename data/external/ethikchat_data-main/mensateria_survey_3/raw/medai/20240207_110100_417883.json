@@ -1,0 +1,75 @@
+{
+  "name": "20240207_110100_417883",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:01:00",
+  "end": "2024/02/07-11:02:59",
+  "utterances": [
+    {
+      "user": "I3C1D",
+      "type": "user",
+      "text": "K.I. Nimmt Jobs mit und kann kein Vollzeit Studium ersetzen",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:01:47",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe, dass Sie besorgt sind, dass eine medizinische KI potenziell Arbeitsplätze im Gesundheitswesen ersetzen könnte. Es ist wichtig zu beachten, dass die Rolle der medKI nicht darin besteht, menschliche Arbeitskräfte zu ersetzen, sondern vielmehr eine Ergänzung zum medizinischen Personal sein soll. Die medKI kann die Arbeitsbelastung des medizinischen Personals verringern, indem sie Routineaufgaben übernimmt, und gleichzeitig die Genauigkeit und Effizienz der Diagnose- und Therapieprozesse verbessern.\nDas Szenario, das wir diskutieren, beinhaltet ausdrücklich, dass medizinisches Personal weiterhin in den Untersuchungszentren arbeitet, um Daten zu erheben und die Entscheidungen der medKI zu erklären. Die medKI soll nicht den menschlichen Arzt ersetzen, sondern eine Entlastung sein, um die Qualität der medizinischen Versorgung zu verbessern.\nIch lade Sie ein, weitere Gedanken oder Einwände zu diesem Thema zu teilen, damit wir die Diskussion fortsetzen können.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:01:56",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "I3C1D",
+      "type": "user",
+      "text": "Und fühlen sich Mitarbeiter in der Medizin nicht dadurch betrogen?",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-11:02:32",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich kann Ihre Bedenken hinsichtlich des Gefühls der Betrogenheit seitens des medizinischen Personals verstehen. Es ist wichtig zu betonen, dass die Einführung einer medizinischen KI nicht bedeutet, dass das Fachwissen und die Erfahrung des medizinischen Personals obsolet werden. Ganz im Gegenteil, die medKI soll das Personal in ihrer täglichen Arbeit unterstützen und entlasten.\nDie medizinischen Fachkräfte werden weiterhin eine entscheidende Rolle bei der Erhebung von Patientendaten, der Kommunikation mit Patienten und der Umsetzung der Therapieentscheidungen spielen. Zusätzlich werden sie durch die Unterstützung der medKI in der Lage sein, ihre Fähigkeiten und ihr Wissen effizienter und zielgerichteter einzusetzen.\nDie Zusammenarbeit zwischen Mensch und Maschine kann dazu beitragen, die Patientenversorgung zu verbessern und gleichzeitig die Arbeitszufriedenheit des medizinischen Personals zu erhalten. Es ist wichtig, das Potenzial der Zusammenarbeit zwischen Mensch und KI anstelle von Konkurrenz zu sehen, um die bestmöglichen Ergebnisse für alle Beteiligten zu erzielen.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-11:02:44",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "70cdd2fda6d0b40d42af2d5216a666b2",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0,
+      "informed": 0
+    }
+  },
+  "end_survey": {
+    "name": "70cdd2fda6d0b40d42af2d5216a666b2",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "opinion_1": 1,
+      "agreement": 1,
+      "opinion_2": 1,
+      "argument_quality_2": 1,
+      "user_information_argument_breadth": 1,
+      "user_information_argument_depth": 0.8
+    }
+  }
+}

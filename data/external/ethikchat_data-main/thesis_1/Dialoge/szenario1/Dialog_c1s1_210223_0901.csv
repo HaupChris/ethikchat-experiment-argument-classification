@@ -1,0 +1,12 @@
+id, author, utterance, arg_label, arg_label, arg_label
+09:01, 09:25
+0, antonia.krause.stud-mail, "Durch den Einsatz von KI würden radiologische Arbeitsabläufe vereinfacht werden, was zu einer erheblichen Arbeitserleichterung führen könnte.", pro_9
+1, antonia.zierz.stud-mail, "Das stimmt. Jedoch kann die KI keine für die Fachärzte nachvollziehbaren Entscheidungen treffen. Es kann nicht rekonstruiert werden, weshalb die Diagnose gestellt wurde.", con_2
+2, antonia.krause.stud-mail, "Das muss nicht zwingend der Fall sein. Die KI könnte beispielsweise Zwischenschritte angeben, auf denen die Diagnose aufgebaut ist und ebenso Unsicherheiten und ungeklärte Fragen anzeigen, sollten diese bestehen.", con_2.1
+3, antonia.zierz.stud-mail, "Auch die Zwischenergebnisse können aber nicht nachvollzogen werden. Es ist auch fraglich, inwieweit bei der Diagnose eines spezifischen Krankheitsbildes überhaupt ein Zwischenergebnis existiert. Außerdem sind selbst die neuesten Methoden technisch dazu nicht in der Lage.", con_2.1.1, con_2.1.2
+4, antonia.krause.stud-mail, "Momentan ist das wahrscheinlich noch der Fall. Allerdings diagnostiziert der Arzt nur eine Krankheit oder tut Sies nicht. Patienten wissen oft nicht, wie unsicher so etwas ist. Die KI könnte im Gegenzug Confidence mitliefern.", pro_19
+5, antonia.zierz.stud-mail, "Dem stimme ich nicht zu. Ein Arzt kann im Detail erklären, woraus die Diagnose resultiert (Zusammenspiel aus Laborergebnissen; Färbungen/Schattierungen bei der Bildgebung auch dem Patienten zeigen...). Gerade wenn der Patient interessiert ist, können vertiefte Gespräche mit dem Patienten geführt werden. Das wirkt sich widerum positiv auf die Compliance aus.", unk
+6, antonia.krause.stud-mail, "Für das Arzt-Patienten-Verhältnis ist das bestimmt positiv zu bewerten. Allerdings sind solche Erklärungen bzw. Gespräche nicht immer nötig. Oft ist allein das Ergebnis entscheidend.
+Und hierfür ist die objektive Bewertung durch die KI sicherlich vorteilhaft.", con_2.3
+7, antonia.zierz.stud-mail, "In Studien wurde gezeigt, dass ein besseres Arzt-Patienten-Verhältnis positive Auswirkungen auf das Outcome der Krankheit hat, z.B. bei langfährigen Krebsbehandlungen.", con_6
+8, antonia.krause.stud-mail, "Betrachtet man die KI im Kontext der Bildinterpretation und vergleicht man dies mit der Arbeitsweise eines Radiologen ist kaum ein Unterscheid beim Verhältnis zum Patienten festzustellen. Radiologen beraten Fachärzte und bauen daher selten eine direkte Beziehung zum Patienten auf.", con_6.1

@@ -1,0 +1,15 @@
+﻿id, author, utterance, arg_label, arg_label, arg_label
+21:43, 22:14
+0, kai.weisenberger, "Ein großer Vorteil bei der Nutzung von KI für die Bildinterpretation ist die Mitlieferung von Wahrscheinlichkeiten. Ein Arzt sagt nur ja oder nein.", pro/15, pro/19
+1, antonia.krause.stud-mail, "Der Meinung bin ich nicht. Die Sicherheit eines Arztes bei der Diagnose ist ebenso dadurch bestimmt, wie eindeutig oder uneindeutig das Bildmaterial Aufschluss gibt. Das wird von Fall zu Fall unterschiedlich sein.", unk
+2, kai.weisenberger, "Aber für den Patienten kann es sehr hilfreich sein zu sehen, ob das Problem zu 60% oder 89% vorliegt. Ein Arzt wird nur eine Diagnose geben, wobei der Patient nicht weiß, ob der Arzt selbst zweifelt. Ferner kann in ungewissen Fällen ein Arzt das Ergebnis überprüfen.", unk
+3, antonia.krause.stud-mail, "Meiner Meinung nach wird auch ein Arzt auf Wunsch des Patienten seine Vermutung in Relation stellen. Zwar mag diese nicht so exakt wie die einer KI ausfallen, dennoch wird die subjektive Einschätzung deutlich.", unk
+4, kai.weisenberger, "Einen Arzt zu fragen, wie sicher er sich bei seiner Diagnose sei, ist aber wohl eher theoretischer Natur. Damit wird der Arzt mit seiner Entscheidung indirekt in Frage gestellt.", unk
+5, antonia.krause.stud-mail, "Dem würde ich nicht zustimmen. Gerade bei Diagnosen, bei denen der Patient schlussendlich über den weiteren Verlauf der Behandlung entscheidet, weil ihm mehrere Optionen zur Verfügung stehen, sollten dem Patienten etwaige Unsicherheiten beziehungsweise Wahrscheinlichkeiten mitgeteilt werden.", unk
+6, kai.weisenberger, "Theoretisch sollten sie das. Fraglich ist allerdings, ob der menschliche Stolz das zulässt.", unk
+7, antonia.krause.stud-mail, "Problematisch erscheint mir in diesem Zusammenhang allerdings auf was sich die KI bei der Berechnung der Wahrscheinlichkeiten stützt. Die KI kann keine für Fachärzte verständliche und nachvollziehbare Erklärungen der konkreten Ergebnisse liefern.", con/2
+8, kai.weisenberger, "Die KI könnte so programmiert werden, dass sie die Fähigkeit zur Selbstkritik besitzt und Unsicherheiten und ungeklärte Fragen anzeigt.", con/2.1
+9, antonia.krause.stud-mail, "Dann müsste dieser Prozess allerdings soweit gestaltet sein, dass man den "Gedankengang" der KI nachverfolgen kann, um zu verstehen wie die KI an diese ungeklärten Fragen gelangt und welche Überlegungen sie hierzu angestellt hat. Nur auf die ungeklärte Frage aufmerksam gemacht zu werden scheint in diesem Zusammenhang ohne ausführliche Erläuterung wenig zielführend.", con/2.1.1
+10, kai.weisenberger, "Es wäre sicher auch möglich der KI beizubringen jeweilig Erklärungen zu liefern.", exp/3,
+11, antonia.krause.stud-mail, "Lässt sich an dieser Stelle dann aber nicht bezweifeln, dass die KI insoweit eine große Unterstützung ist, wenn sie vor die gleichen Probleme gestellt werden wie Ärzte?", unk
+12, kai.weisenberger, "Sie wäre aber dennoch beispielsweise billiger.", pro/5

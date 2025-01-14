@@ -1,0 +1,144 @@
+{
+  "name": "20240207_115339_310839",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2024/02/07-11:53:39",
+  "end": "2024/02/07-11:58:19",
+  "utterances": [
+    {
+      "user": "I1Q1S",
+      "type": "user",
+      "text": "Unterstützung für Ärzte",
+      "id_in_dialogue": 0,
+      "timestamp": "2024/02/07-11:54:10",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich verstehe, dass Sie Bedenken haben, was die Unabhängigkeit der medKI angeht und möchten Sie daran erinnern, dass unsere Diskussion sich ausschließlich auf das Szenario bezieht, in dem die medKI eigenständige Entscheidungen trifft. Das Argument, dass die KI den Menschen in seiner Entscheidungsfindung unterstützen soll, ist in diesem Kontext nicht relevant.\nEin Gegenargument zu Ihrer Position könnte sein, dass die medKI in der Lage ist, eine größere Menge an medizinischen Informationen in kürzerer Zeit zu verarbeiten als ein Mensch. Dadurch kann sie präzisere Diagnosen stellen und effektivere Therapien vorschlagen. Dies könnte insbesondere in Notfallsituationen oder bei komplexen Krankheitsbildern von Vorteil sein.",
+      "id_in_dialogue": 1,
+      "timestamp": "2024/02/07-11:54:17",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "I1Q1S",
+      "type": "user",
+      "text": "Genauigkeit der Diagnose ",
+      "id_in_dialogue": 2,
+      "timestamp": "2024/02/07-11:55:31",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Ich sehe, dass Sie die Genauigkeit der Diagnose ansprechen. In der Tat ist die medKI in der Lage, eine höhere Genauigkeit bei Diagnosen zu erreichen als ein Mensch. Das liegt daran, dass die medKI in der Lage ist, eine viel größere Menge an medizinischen Informationen zu verarbeiten und zu berücksichtigen als ein Mensch. Darüber hinaus ist die medKI frei von menschlichen Fehlern wie Müdigkeit, Ablenkung oder Emotionen, die sich auf die Diagnosegenauigkeit auswirken können. Daher kann die medKI eine objektivere und genauere Diagnose stellen als ein Mensch.",
+      "id_in_dialogue": 3,
+      "timestamp": "2024/02/07-11:55:36",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "I1Q1S",
+      "type": "user",
+      "text": "Stromausfall",
+      "id_in_dialogue": 4,
+      "timestamp": "2024/02/07-11:55:52",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sie haben das Thema Stromausfall angesprochen. Ich verstehe, dass Sie sich Sorgen machen, was passiert, wenn die medKI nicht in der Lage ist, Diagnosen und Therapieentscheidungen zu treffen, wenn der Strom ausfällt.\nEs ist jedoch wichtig zu beachten, dass in einem modernen Untersuchungszentrum viele wichtige Geräte und Systeme von Strom abhängig sind, wie z.B. Röntgenapparate, Computertomographen und andere medizinische Geräte. Daher ist es unerlässlich, dass ein Backup-Stromversorgungssystem vorhanden ist, um diese Geräte und Systeme im Falle eines Stromausfalls weiter betreiben zu können.\nIn diesem Zusammenhang ist es auch wichtig, dass die medKI mit einem Backup-Stromversorgungssystem ausgestattet ist, um sicherzustellen, dass sie weiterhin Diagnosen und Therapieentscheidungen treffen kann, wenn der Strom ausfällt. Somit ist die medKI nicht mehr anfällig für Stromausfälle als andere wichtige Geräte und Systeme im Untersuchungszentrum.",
+      "id_in_dialogue": 5,
+      "timestamp": "2024/02/07-11:56:03",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "I1Q1S",
+      "type": "user",
+      "text": "Technischer Defekt",
+      "id_in_dialogue": 6,
+      "timestamp": "2024/02/07-11:56:21",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sie haben das Thema technischer Defekt angesprochen. Ich verstehe, dass Sie sich Sorgen machen, was passiert, wenn die medKI aufgrund eines technischen Defekts nicht in der Lage ist, Diagnosen und Therapieentscheidungen zu treffen.\nEs ist jedoch wichtig zu beachten, dass die medKI in einem Untersuchungszentrum nicht isoliert arbeitet, sondern Teil eines größeren Systems ist, das auch das medizinische Personal umfasst. Im Falle eines technischen Defekts der medKI kann das medizinische Personal weiterhin Diagnosen und Therapieentscheidungen treffen, indem es auf seine eigene medizinische Expertise und Erfahrung zurückgreift.\nDarüber hinaus ist es wichtig, dass die medKI regelmäßig gewartet und überprüft wird, um sicherzustellen, dass sie immer in einwandfreiem Zustand ist und dass technische Defekte minimiert werden. Somit ist die medKI nicht mehr anfällig für technische Defekte als andere wichtige Geräte und Systeme im Untersuchungszentrum.",
+      "id_in_dialogue": 7,
+      "timestamp": "2024/02/07-11:56:30",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    },
+    {
+      "user": "I1Q1S",
+      "type": "user",
+      "text": "Weitere Entwicklungen ",
+      "id_in_dialogue": 8,
+      "timestamp": "2024/02/07-11:56:46",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_labels": [],
+      "predicted_bounds": [],
+      "uncertain_labeling": false,
+      "user_selected_ground_truth": false
+    },
+    {
+      "user": "GenBot",
+      "type": "bot",
+      "text": "Sie haben das Thema weitere Entwicklungen angesprochen. Ich verstehe, dass Sie sich Sorgen machen, was passiert, wenn es in Zukunft weitere Entwicklungen in der Medizin gibt, die von der medKI nicht berücksichtigt werden können.\nEs ist jedoch wichtig zu beachten, dass die medKI in der Lage ist, kontinuierlich zu lernen und sich an neue Entwicklungen in der Medizin anzupassen. Durch die Integration von maschinellem Lernen und künstlicher Intelligenz kann die medKI kontinuierlich neue Informationen und Erkenntnisse verarbeiten und in ihre Diagnosen und Therapieentscheidungen einbeziehen.\nDarüber hinaus ist es wichtig, dass die medKI in einem Untersuchungszentrum nicht isoliert arbeitet, sondern Teil eines größeren Systems ist, das auch das medizinische Personal umfasst. Im Falle von neuen Entwicklungen in der Medizin, die von der medKI nicht berücksichtigt werden können, kann das medizinische Personal weiterhin Diagnosen und Therapieentscheidungen treffen, indem es auf seine eigene medizinische Expertise und Erfahrung zurückgreift.\nSomit ist die medKI in der Lage, sich an neue Entwicklungen in der Medizin anzupassen und ist nicht mehr anfällig für neue Entwicklungen als andere wichtige Geräte und Systeme im Untersuchungszentrum.",
+      "id_in_dialogue": 9,
+      "timestamp": "2024/02/07-11:57:02",
+      "true_labels": [],
+      "true_bounds": [],
+      "predicted_responses": ""
+    }
+  ],
+  "start_survey": {
+    "name": "72eb07b73508fe2e65940dcda0529560",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "informed": 1
+    }
+  },
+  "end_survey": {
+    "name": "72eb07b73508fe2e65940dcda0529560",
+    "type": "EndSurvey",
+    "surveyOptionResults": {
+      "agreement": 0.25,
+      "opinion_1": 1,
+      "opinion_2": 0.8,
+      "argument_quality_2": 0.8,
+      "user_information_argument_breadth": 0.25,
+      "user_information_argument_depth": 0.6
+    }
+  }
+}

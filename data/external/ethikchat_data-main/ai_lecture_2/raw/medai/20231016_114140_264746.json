@@ -1,0 +1,458 @@
+{
+  "name": "20231016_114140_264746",
+  "szenario": "DialogueSzenario.STD_BOT",
+  "discussion_szenario": "DiscussionSzenario.MEDAI",
+  "start": "2023/10/16-11:41:40",
+  "end": "in progress",
+  "utterances": [
+    {
+      "user": "Anni",
+      "type": "user",
+      "text": "Fairness",
+      "id_in_dialogue": 0,
+      "timestamp": "2023/10/16-11:42:18",
+      "true_labels": [
+        "Z.P2"
+      ],
+      "true_bounds": [],
+      "predicted_labels": [
+        [
+          "Z.P2",
+          0.017374735856016822
+        ],
+        [
+          "Z.P7",
+          0.016349628454979986
+        ],
+        [
+          "Z.P5",
+          0.016339455106179675
+        ],
+        [
+          "Z.P1",
+          0.01632223108238237
+        ],
+        [
+          "Z.P4",
+          0.016065576810137396
+        ],
+        [
+          "Z.P6",
+          0.015428153948689818
+        ],
+        [
+          "Z.P3",
+          0.010986207556837975
+        ],
+        [
+          "Z.P1-1",
+          0.0
+        ],
+        [
+          "Z.P1-1-1",
+          0.0
+        ],
+        [
+          "Z.P1-2",
+          0.0
+        ],
+        [
+          "Z.P1-2-1",
+          0.0
+        ],
+        [
+          "Z.P4-1",
+          0.0
+        ],
+        [
+          "Z.P3-1",
+          0.0
+        ],
+        [
+          "Z.P3-1-1",
+          0.0
+        ],
+        [
+          "Z.P6-1",
+          0.0
+        ],
+        [
+          "Z.P6-1-1",
+          0.0
+        ],
+        [
+          "Z.P5-1",
+          0.0
+        ],
+        [
+          "Z.K8",
+          0.0
+        ],
+        [
+          "Z.K8-1",
+          0.0
+        ],
+        [
+          "Z.P7-1",
+          0.0
+        ],
+        [
+          "Z.K1",
+          0.0
+        ],
+        [
+          "Z.K1-1",
+          0.0
+        ],
+        [
+          "Z.K2",
+          0.0
+        ],
+        [
+          "Z.K2-4",
+          0.0
+        ],
+        [
+          "Z.K4",
+          0.0
+        ],
+        [
+          "Z.K4-1",
+          0.0
+        ],
+        [
+          "Z.K6",
+          0.0
+        ],
+        [
+          "Z.K6-1",
+          0.0
+        ],
+        [
+          "Z.K15",
+          0.0
+        ],
+        [
+          "Z.K15-1",
+          0.0
+        ],
+        [
+          "Z.K18",
+          0.0
+        ],
+        [
+          "Z.K18-1",
+          0.0
+        ],
+        [
+          "Z.K3",
+          0.0
+        ],
+        [
+          "Z.K3-1",
+          0.0
+        ],
+        [
+          "Z.K3-1-1",
+          0.0
+        ],
+        [
+          "Z.K3-1-1-1",
+          0.0
+        ],
+        [
+          "Z.K3-2",
+          0.0
+        ],
+        [
+          "Z.K11",
+          0.0
+        ],
+        [
+          "Z.K11-1",
+          0.0
+        ],
+        [
+          "Z.K12",
+          0.0
+        ],
+        [
+          "Z.K12-1",
+          0.0
+        ],
+        [
+          "Z.K5",
+          0.0
+        ],
+        [
+          "Z.K5-1",
+          0.0
+        ],
+        [
+          "Z.K7",
+          0.0
+        ],
+        [
+          "Z.K7-1",
+          0.0
+        ],
+        [
+          "Z.K10",
+          0.0
+        ],
+        [
+          "Z.K10-1",
+          0.0
+        ],
+        [
+          "Z.K10-2",
+          0.0
+        ],
+        [
+          "Z.K9",
+          0.0
+        ],
+        [
+          "Z.K9-1",
+          0.0
+        ],
+        [
+          "Z.K13",
+          0.0
+        ],
+        [
+          "Z.K13-1",
+          0.0
+        ],
+        [
+          "Z.K14",
+          0.0
+        ],
+        [
+          "Z.K14-1",
+          0.0
+        ],
+        [
+          "Z.K16",
+          0.0
+        ],
+        [
+          "Z.K16-1",
+          0.0
+        ],
+        [
+          "Z.K19",
+          0.0
+        ],
+        [
+          "Z.K19-1",
+          0.0
+        ],
+        [
+          "NZ.K1",
+          0.0
+        ],
+        [
+          "NZ.K1-1",
+          0.0
+        ],
+        [
+          "NZ.K3",
+          0.0
+        ],
+        [
+          "NZ.K3-1",
+          0.0
+        ],
+        [
+          "NZ.K4",
+          0.0
+        ],
+        [
+          "NZ.K4-1",
+          0.0
+        ],
+        [
+          "NZ.K6",
+          0.0
+        ],
+        [
+          "NZ.K6-1",
+          0.0
+        ],
+        [
+          "NZ.K8",
+          0.0
+        ],
+        [
+          "NZ.K8-1",
+          0.0
+        ],
+        [
+          "NZ.K9",
+          0.0
+        ],
+        [
+          "NZ.K9-1",
+          0.0
+        ],
+        [
+          "NZ.K10",
+          0.0
+        ],
+        [
+          "NZ.K10-1",
+          0.0
+        ]
+      ],
+      "predicted_bounds": [],
+      "uncertain_labeling": true,
+      "user_selected_ground_truth": true
+    },
+    {
+      "user": "EthiBot",
+      "type": "bot",
+      "text": "Ich bin mir nicht sicher, was du meinst. Bitte wähle aus der folgenden Liste ein Argument aus, das deinen Standpunkt am besten repräsentiert. | die medKI ist standardisiert und reproduzierbar. |   Das ist ein gutes Argument. Direkt dazu: Probleme einer medKI sind grundsätzlicher Art, wie Strukturfehler im System. Während Fehler von einzelnen Ärzt:innen gemacht werden, wird eine fehlerhafte medKI an zahlreichen Standorten eingesetzt, wodurch Fehler deutlich gravierender ausfallen können.  ",
+      "id_in_dialogue": 1,
+      "timestamp": "2023/10/16-11:42:18",
+      "true_labels": [
+        "Z.P2",
+        "intro_47",
+        "Z.K4"
+      ],
+      "true_bounds": [],
+      "predicted_responses": {
+        "paraphrase_introductions": [
+          "intro_23",
+          "intro_32",
+          "intro_25",
+          "intro_26",
+          "intro_28",
+          "intro_24",
+          "intro_27",
+          "intro_33",
+          "intro_34"
+        ],
+        "preselect_paraphrase_introduction": true,
+        "paraphrase": "Z.P2",
+        "introductions": [
+          "intro_47",
+          "intro_49",
+          "intro_51",
+          "intro_50",
+          "intro_46",
+          "intro_48",
+          "intro_1",
+          "intro_2",
+          "intro_3",
+          "intro_4",
+          "intro_5",
+          "intro_6",
+          "intro_7",
+          "intro_8",
+          "intro_9",
+          "intro_10",
+          "intro_11",
+          "intro_12",
+          "intro_13",
+          "intro_14",
+          "intro_15",
+          "intro_16",
+          "intro_17",
+          "intro_18",
+          "intro_19",
+          "intro_20",
+          "intro_21",
+          "intro_22",
+          "intro_39",
+          "intro_40",
+          "intro_41",
+          "intro_42",
+          "intro_43",
+          "intro_44",
+          "intro_45",
+          "intro_52",
+          "intro_53",
+          "intro_54",
+          "intro_55",
+          "intro_56",
+          "intro_57",
+          "intro_58",
+          "intro_59",
+          "intro_60",
+          "intro_61",
+          "intro_62",
+          "intro_63",
+          "intro_64",
+          "intro_65",
+          "intro_66",
+          "intro_67",
+          "intro_68"
+        ],
+        "preselect_introduction": true,
+        "transitions": [
+          "z_trans_2",
+          "z_trans_16",
+          "z_trans_8",
+          "z_trans_10",
+          "z_trans_13",
+          "z_trans_9",
+          "z_trans_11",
+          "z_trans_1",
+          "z_trans_4",
+          "z_trans_12",
+          "z_trans_17",
+          "z_trans_18",
+          "z_trans_19",
+          "nz_trans_1",
+          "nz_trans_2",
+          "nz_trans_3",
+          "faq_u_trans_1",
+          "faq_u_trans_2",
+          "faq_trans_1",
+          "faq_trans_2",
+          "faq_trans_3",
+          "z_trans_7",
+          "z_trans_14",
+          "z_trans_15"
+        ],
+        "preselect_transition": false,
+        "first_arguments": [
+          "Z.K4"
+        ],
+        "preselect_first_argument": true,
+        "second_arguments": [
+          "Z.P1-1",
+          "Z.K18",
+          "Z.K7",
+          "Z.K1",
+          "Z.K2",
+          "Z.K5",
+          "Z.K10",
+          "Z.K3",
+          "Z.K12",
+          "Z.K9",
+          "Z.K8",
+          "Z.K15",
+          "Z.K11",
+          "Z.K13",
+          "Z.K14",
+          "Z.K16",
+          "Z.P1-2",
+          "Z.K6",
+          "Z.K19"
+        ],
+        "preselect_second_argument": false
+      }
+    }
+  ],
+  "start_survey": {
+    "name": "2e728b34ac8b2061a3b20273fd93dcac",
+    "type": "StartSurvey",
+    "surveyOptionResults": {
+      "agreement": 1,
+      "informed": 0.25
+    }
+  },
+  "end_survey": "not available"
+}
