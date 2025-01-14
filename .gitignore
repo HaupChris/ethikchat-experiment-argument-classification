@@ -65,6 +65,7 @@ target/
 
 # Pycharm
 .idea
+.idea/
 # all files within the .idea folder
 .idea/*
 
