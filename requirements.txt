@@ -1,5 +1,7 @@
 # project internal requirements
-git+https://gitlab+deploy-token-107:GEnez321wGXqyezVboo8@gitlab2.informatik.uni-wuerzburg.de/de_uniwue_ethikchat/ethikchat_evaluators.git@1.0.0
+git+https://gitlab+deploy-token-107:GEnez321wGXqyezVboo8@gitlab2.informatik.uni-wuerzburg.de/de_uniwue_ethikchat/ethikchat_evaluators.git@1.0.5
+
+
 # external requirements
 
 

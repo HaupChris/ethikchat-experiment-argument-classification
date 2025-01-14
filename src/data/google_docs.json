@@ -1,0 +1,52 @@
+{
+    "s1": {
+        "doc_id": "1_I0-evYDFuXI87xcCQ-OXzm_qM2k8uMsvgtTT1LkaJo",
+        "sheet_ids": {
+            "introductions": "1302484269",
+            "transitions": "1607596226",
+            "groups": "26321734",
+            "zargs": "0",
+            "nzargs": "1829117582",
+            "faq": "1908378371",
+            "samples": "145072895"
+        }
+    },
+    "s2": {
+        "doc_id": "1qd8ntY1hQzpFD65bOmqCZLmM3n3N_LLBLMZW2nRKTtA",
+        "sheet_ids": {
+            "introductions": "1302484269",
+            "transitions": "1607596226",
+            "groups": "26321734",
+            "zargs": "0",
+            "nzargs": "1829117582",
+            "faq": "1908378371",
+            "samples": "145072895"
+        }
+    },
+
+    "s3": {
+        "doc_id": "1ag6Nr9Cypoe6waHbAfd2lK9_NPepCrZJW758Xt-DhXo",
+        "sheet_ids": {
+            "introductions": "1302484269",
+            "transitions": "1607596226",
+            "groups": "26321734",
+            "zargs": "0",
+            "nzargs": "1829117582",
+            "faq": "1908378371",
+            "samples": "145072895"
+        }
+    },
+
+    "s4": {
+        "doc_id": "1djJkM_xQvZs1vBTyMTx54scPNhKR3hSc7LXvVa-1tPY",
+        "sheet_ids": {
+            "introductions": "1302484269",
+            "transitions": "1607596226",
+            "groups": "26321734",
+            "zargs": "2124684069",
+            "nzargs": "1829117582",
+            "faq": "1908378371",
+            "samples": "145072895"
+        }
+    }
+}
