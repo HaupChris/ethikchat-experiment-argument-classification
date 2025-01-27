@@ -1,0 +1,158 @@
+{
+  "name": "REFAI",
+  "title": "Soll KI als autonomer Schiedsrichter im Profifußball eingesetzt werden?",
+  "description": "Bei Profi-Fußballspielen werden alle Schiedsrichter-Entscheidungen von einer sehr guten KI (Künstlichen Intelligenz) auf Basis der Videos verschiedener Kameras im Stadion in Echtzeit getroffen, die umfangreich mit Videos früherer Spiele trainiert wurde. Die KI-Entscheidungen werden vom einem menschlichen Schiedsrichter auf dem Platz nur noch kommuniziert.",
+  "question": "Würden Sie eine solche Schiri-KI begrüßen?",
+  "welcomeMessage": "Deine Meinung ist, dass in unserem [Szenario] KI die Entscheidungen [nicht] allein treffen sollte. Bitte nenne zunächst das wichtigste Argument für deine Meinung.",
+  "surveyOptions": {
+    "start": [
+      {
+        "label": "agreement",
+        "type": "SingleChoice",
+        "question": "Sollte die in unserem Szenario angenommene KI die Entscheidungen auf dem Platz allein treffen?",
+        "options": [
+          {
+            "text": "Stimme vollständig zu",
+            "value": "1."
+          },
+          {
+            "text": "Stimme eher zu",
+            "value": "0.75"
+          },
+          {
+            "text": "Lehne eher ab",
+            "value": "0.25"
+          },
+          {
+            "text": "Lehne vollständig ab",
+            "value": "0"
+          }
+        ],
+        "required": true
+      },
+      {
+        "label": "informed",
+        "type": "SingleChoice",
+        "question": "Wie sehr hast du dich mit diesem oder ähnlichen Themen bisher beschäftigt?",
+        "options": [
+          {
+            "text": "Sehr viel",
+            "value": "1."
+          },
+          {
+            "text": "Viel",
+            "value": "0.75"
+          },
+          {
+            "text": "Mittel",
+            "value": "0.5"
+          },
+          {
+            "text": "Wenig",
+            "value": "0.25"
+          },
+          {
+            "text": "Sehr wenig",
+            "value": "0"
+          }
+        ],
+        "required": true
+      }
+    ],
+    "end": [
+      {
+        "label": "agreement",
+        "type": "SingleChoice",
+        "question": "Sollte die in unserem Szenario angenommene KI die Entscheidungen auf dem Platz allein treffen?",
+        "options": [
+          {
+            "text": "Stimme vollständig zu",
+            "value": "1."
+          },
+          {
+            "text": "Stimme eher zu",
+            "value": "0.75"
+          },
+          {
+            "text": "Lehne eher ab",
+            "value": "0.25"
+          },
+          {
+            "text": "Lehne vollständig ab",
+            "value": "0"
+          }
+        ],
+        "required": true
+      },
+      {
+        "label": "opinion",
+        "type": "SingleChoice",
+        "question": "Wie hat dir die Diskussion mit dem Bot gefallen?",
+        "options": [
+          {
+            "text": "Sehr gut",
+            "value": "1."
+          },
+          {
+            "text": "Gut",
+            "value": "0.75"
+          },
+          {
+            "text": "Mittel",
+            "value": "0.5"
+          },
+          {
+            "text": "Schlecht",
+            "value": "0.25"
+          },
+          {
+            "text": "Sehr schlecht",
+            "value": "0"
+          }
+        ],
+        "required": true
+      },
+      {
+        "label": "informative",
+        "type": "SingleChoice",
+        "question": "Wie sehr konnte der Bot dazu beitragen dir neue Informationen begzüglich des Themas zu liefern?",
+        "options": [
+          {
+            "text": "Sehr viel",
+            "value": "1."
+          },
+          {
+            "text": "Viel",
+            "value": "0.75"
+          },
+          {
+            "text": "Mittel",
+            "value": "0.5"
+          },
+          {
+            "text": "Wenig",
+            "value": "0.25"
+          },
+          {
+            "text": "Gar nicht",
+            "value": "0"
+          }
+        ],
+        "required": true
+      },
+
+      {
+        "label": "positive_critics",
+        "type": "FreeText",
+        "question": "Was hat dir gut gefallen? (inhaltlich oder technisch)",
+        "required": false
+      },
+      {
+        "label": "negative_critics",
+        "type": "FreeText",
+        "question": "Was hat dir weniger gut gefallen? (inhaltlich oder technisch)",
+        "required": false
+      }
+    ]
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "name": "AUTOAI",
+  "title": "Sollen selbstfahrende Autos zugelassen werden?",
+  "description": "Wir gehen von einem zukünftigen Szenario aus, indem eine KI autonom ein Fahrzeug steuert (AutoKI) und vollkommen ohne mögliches Eingreifen eines Menschen im Straßenverkehr agiert.",
+  "question": "Darf ein intelligentes Programm (autoKI) die Fahrzeugführung übernehmen, wenn es im öffentlichen Straßenverkehr komplett selbständig zurechtkommt und besser als ein:e durchschnittliche:r Fahrer:in ist?",
+  "welcomeMessage": "Deine Meinung ist, dass in unserem [Szenario] die AutoKI für den Straßenverkehr [nicht] zugelassen werden sollten. Bitte nenne zunächst das wichtigste Argument für deine Meinung.",
+  "surveyOptions": {
+    "start": [
+      {
+        "label": "agreement",
+        "type": "SingleChoice",
+        "question": "Sollte die in unserem Szenario angenommene AutoKI eine Zulassung für den Straßenverkehr erhalten?",
+        "options": [
+          {
+            "text": "Stimme vollständig zu",
+            "value": "1."
+          },
+          {
+            "text": "Stimme eher zu",
+            "value": "0.75"
+          },
+          {
+            "text": "Lehne eher ab",
+            "value": "0.25"
+          },
+          {
+            "text": "Lehne vollständig ab",
+            "value": "0"
+          }
+        ],
+        "required": true
+      },
+      {
+        "label": "informed",
+        "type": "SingleChoice",
+        "question": "Wie sehr hast du dich mit diesem oder ähnlichen Themen bisher beschäftigt?",
+        "options": [
+          {
+            "text": "Sehr viel",
+            "value": "1."
+          },
+          {
+            "text": "Viel",
+            "value": "0.75"
+          },
+          {
+            "text": "Mittel",
+            "value": "0.5"
+          },
+          {
+            "text": "Wenig",
+            "value": "0.25"
+          },
+          {
+            "text": "Sehr wenig",
+            "value": "0"
+          }
+        ],
+        "required": true
+      }
+    ],
+    "end": [
+      {
+        "label": "agreement",
+        "type": "SingleChoice",
+        "question": "Sollte die in unserem Szenario angenommene AutoKI eine Zulassung für den Straßenverkehr erhalten?",
+        "options": [
+          {
+            "text": "Stimme vollständig zu",
+            "value": "1."
+          },
+          {
+            "text": "Stimme eher zu",
+            "value": "0.75"
+          },
+          {
+            "text": "Lehne eher ab",
+            "value": "0.25"
+          },
+          {
+            "text": "Lehne vollständig ab",
+            "value": "0"
+          }
+        ],
+        "required": true
+      },
+      {
+        "label": "opinion",
+        "type": "SingleChoice",
+        "question": "Wie hat dir die Diskussion mit dem Bot gefallen?",
+        "options": [
+          {
+            "text": "Sehr gut",
+            "value": "1."
+          },
+          {
+            "text": "Gut",
+            "value": "0.75"
+          },
+          {
+            "text": "Mittel",
+            "value": "0.5"
+          },
+          {
+            "text": "Schlecht",
+            "value": "0.25"
+          },
+          {
+            "text": "Sehr schlecht",
+            "value": "0"
+          }
+        ],
+        "required": true
+      },
+      {
+        "label": "informative",
+        "type": "SingleChoice",
+        "question": "Wie sehr konnte der Bot dazu beitragen dir neue Informationen begzüglich des Themas zu liefern?",
+        "options": [
+          {
+            "text": "Sehr viel",
+            "value": "1."
+          },
+          {
+            "text": "Viel",
+            "value": "0.75"
+          },
+          {
+            "text": "Mittel",
+            "value": "0.5"
+          },
+          {
+            "text": "Wenig",
+            "value": "0.25"
+          },
+          {
+            "text": "Gar nicht",
+            "value": "0"
+          }
+        ],
+        "required": true
+      },
+
+      {
+        "label": "positive_critics",
+        "type": "FreeText",
+        "question": "Was hat dir gut gefallen? (inhaltlich oder technisch)",
+        "required": false
+      },
+      {
+        "label": "negative_critics",
+        "type": "FreeText",
+        "question": "Was hat dir weniger gut gefallen? (inhaltlich oder technisch)",
+        "required": false
+      }
+    ]
+  }
+}
