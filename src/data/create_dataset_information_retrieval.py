@@ -128,6 +128,9 @@ def utterance_contains_noisy_data(utterance: Utterance) -> bool:
     if "aus der folgenden Liste" in utterance.text:
         return True
 
+    if "Ich bin mir nicht sicher, was du genau meinst." in utterance.text:
+        return True
+
 
 def load_dataset_from_excel_file(file_path: str, discussion_scenario: DiscussionSzenario) -> List[Dialogue]:
     """
@@ -219,6 +222,7 @@ def build_context(dialogue_turns, num_previous_turns, sep_token, include_role):
 
 def preprocess_dataset(dialogues: List[Dialogue],
                        num_previous_turns: int,
+                       utterance_type: UtteranceType,
                        sep_token: str = "[SEP]",
                        include_role: bool = False):
     labels_list = []
@@ -238,6 +242,12 @@ def preprocess_dataset(dialogues: List[Dialogue],
                 "User" if utterance.is_from_user() else "Bot",
                 preprocess_text(utterance.text, gender_language_tools)
             ))
+
+            if utterance_type == UtteranceType.User and not utterance.is_from_user():
+                continue
+
+            if utterance_type == UtteranceType.Bot and utterance.is_from_user():
+                continue
 
             if utterance_contains_noisy_data(utterance):
                 continue
@@ -293,8 +303,8 @@ def create_dataset() -> DatasetDict:
     # utterance_type = config.utterance_type
     project_dir = "../../"
 
-    path_mensateria_survey_1 = os.path.join(project_dir, "data", "ethikchat_data", "ethikchat_data-main", "mensateria_survey", "processed", "curated")
-    path_mensateria_survey_2 = os.path.join(project_dir, "data", "ethikchat_data", "ethikchat_data-main", "mensateria_survey_2", "processed", "curated")
+    path_mensateria_survey_1 = os.path.join(project_dir, "data", "external", "ethikchat_data-main", "mensateria_survey", "processed", "curated")
+    path_mensateria_survey_2 = os.path.join(project_dir, "data", "external", "ethikchat_data-main", "mensateria_survey_2", "processed", "curated")
 
     m1_dialogues_medai = load_dataset_from_excel_file(
         os.path.join(path_mensateria_survey_1, "mensateria_survey_medai_curated_dialogues.xlsx"),
@@ -332,12 +342,12 @@ def create_dataset() -> DatasetDict:
     dialogues = (m1_dialogues_medai + m1_dialogues_jurai + m1_dialogues_autoai
                  + m2_dialogues_medai + m2_dialogues_jurai + m2_dialogues_autoai + m2_dialogues_refai)
 
-    labels, texts, bounds, contexts, topics = preprocess_dataset(dialogues, 2, "\n", True)
+    labels, texts, bounds, contexts, topics = preprocess_dataset(dialogues, 2, UtteranceType.User, "\n", True)
 
-    rtc_med = load_response_template_collection("s1")
-    rtc_jur = load_response_template_collection("s2")
-    rtc_auto = load_response_template_collection("s3")
-    rtc_ref = load_response_template_collection("s4")
+    # rtc_med = load_response_template_collection("s1")
+    # rtc_jur = load_response_template_collection("s2")
+    # rtc_auto = load_response_template_collection("s3")
+    # rtc_ref = load_response_template_collection("s4")
 
 
 if __name__ == "__main__":
