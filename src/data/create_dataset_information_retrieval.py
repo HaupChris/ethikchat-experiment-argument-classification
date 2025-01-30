@@ -1,8 +1,11 @@
 import ast
+import json
 import os
 import pandas as pd
 import re
 import warnings
+import random
+from torch.utils.data import DataLoader
 
 from dataclasses import dataclass
 from datasets import DatasetDict, Dataset, load_from_disk
@@ -40,23 +43,33 @@ class DatasetConfig:
 
     Attributes:
     ----------
-    model_name_or_path : str
-        The name or path of the pre-trained model (e.g., Huggingface model) to be used for tokenization.
     dataset_path : str
         The path to the directory where the created dataset will be saved.
     project_dir : str
         The directory head directory of the project from which will be infered where the dialogue files for the dataset creation are stored.
-    with_context : bool, optional
-        A flag indicating whether to include the previous utterance in the dialogue as context.
+    num_previous_turns: int
+        The amount of previous utterance turns to be included in the conversation context. A single turn is considered as one utterance,
+        e.g., for num_previous_turns = 1 the previous bot message would be included as context for every user message and vice versa.
+    include_role: bool
+        Specifies whether the speaker's role (e.g., [Bot] or [User]) should be included for each utterance in the context.
+    sep_token: str, optional
+        The token used to seperate between different utterances in the conversation context field (default is "\n").
     utterance_type : UtteranceType, optional
         The type of utterance that should be used for segmentation or classification. It can be either user or bot
         utterances, or both (default is UtteranceType.UserAndBot).
+    eval_size: float, optional
+        The size of the validation + test split compared to the train split (default is 0.2).
+    validation_test_ratio: float, optional
+        The ratio of test to validation split (default is 0.5 for validation and test splits of the same size).
     """
-    model_name_or_path: Optional[str]
     dataset_path: str
     project_dir: str
     num_previous_turns: int
+    include_role: bool
+    sep_token: str = "\n"
     utterance_type: UtteranceType = UtteranceType.UserAndBot
+    eval_size: float = 0.2
+    validation_test_ratio: float = 0.5
 
 
 def load_response_template_collection(topic: str) -> ResponseTemplateCollection:
@@ -223,8 +236,8 @@ def build_context(dialogue_turns, num_previous_turns, sep_token, include_role):
 def preprocess_dataset(dialogues: List[Dialogue],
                        num_previous_turns: int,
                        utterance_type: UtteranceType,
-                       sep_token: str = "[SEP]",
-                       include_role: bool = False):
+                       sep_token: str,
+                       include_role: bool):
     labels_list = []
     text_list = []
     bounds_list = []
@@ -289,19 +302,29 @@ def extract_negative_passages(labels: List[str], rtc: ResponseTemplateCollection
     return negative_passages
 
 
-def extract_hard_negative_passages():
-    pass
+def extract_hard_negative_passages(labels: List[str], rtc: ResponseTemplateCollection) -> List[str]:
+    allowed_labels = rtc.z_arguments_labels.union(rtc.nz_arguments_labels)
+
+    hard_negative_passages = []
+    for label in labels:
+        if label in allowed_labels:
+            template = rtc.get_template_for_label(label)
+
+            for counter_template in template.child_templates:
+                hard_negative_passages.extend([counter_template.summary, counter_template.full_text])
+
+    return hard_negative_passages
 
 
-def create_dataset() -> DatasetDict:
-    """
-    Returns:
-    """
-    # save_path = config.dataset_path
-    # project_dir = config.project_dir
-    # num_previous_turns = config.num_previous_turns
-    # utterance_type = config.utterance_type
-    project_dir = "../../"
+def create_dataset(config: DatasetConfig) -> None:
+    save_path = config.dataset_path
+    project_dir = config.project_dir
+    num_previous_turns = config.num_previous_turns
+    include_role = config.include_role
+    sep_token = config.sep_token
+    utterance_type = config.utterance_type
+    eval_size = config.eval_size
+    validation_test_ratio = config.validation_test_ratio
 
     path_mensateria_survey_1 = os.path.join(project_dir, "data", "external", "ethikchat_data-main", "mensateria_survey", "processed", "curated")
     path_mensateria_survey_2 = os.path.join(project_dir, "data", "external", "ethikchat_data-main", "mensateria_survey_2", "processed", "curated")
@@ -334,23 +357,130 @@ def create_dataset() -> DatasetDict:
         os.path.join(path_mensateria_survey_2, "mensateria_survey_2_refai_curated_dialogues.xlsx"),
         DiscussionSzenario.REFAI
     )
-    # m3_dialogues_medai = DialogueLoader.from_directory(
-    #     dialogues_directory_path=os.path.join(project_dir, "data", "ethikchat_data", "ethikchat_data-main", "mensateria_survey_3", "processed", "medai"),
-    #     version="webathen"
-    # )
+    m3_dialogues_medai = DialogueLoader.from_directory(
+        dialogues_directory_path=os.path.join(project_dir, "data", "external", "ethikchat_data-main", "mensateria_survey_3", "processed", "medai"),
+        version="webathen"
+    )
+
+    for m3_dialogue in m3_dialogues_medai:
+        m3_dialogue.discussion_szenario = DiscussionSzenario.MEDAI
 
     dialogues = (m1_dialogues_medai + m1_dialogues_jurai + m1_dialogues_autoai
-                 + m2_dialogues_medai + m2_dialogues_jurai + m2_dialogues_autoai + m2_dialogues_refai)
+                 + m2_dialogues_medai + m2_dialogues_jurai + m2_dialogues_autoai + m2_dialogues_refai
+                 + m3_dialogues_medai)
 
-    labels, texts, bounds, contexts, topics = preprocess_dataset(dialogues, 2, UtteranceType.User, "\n", True)
+    labels, texts, bounds, contexts, topics = preprocess_dataset(dialogues,
+                                                                 num_previous_turns,
+                                                                 utterance_type,
+                                                                 sep_token,
+                                                                 include_role)
 
-    # rtc_med = load_response_template_collection("s1")
-    # rtc_jur = load_response_template_collection("s2")
-    # rtc_auto = load_response_template_collection("s3")
-    # rtc_ref = load_response_template_collection("s4")
+    rtc_med = load_response_template_collection("s1")
+    rtc_jur = load_response_template_collection("s2")
+    rtc_auto = load_response_template_collection("s3")
+    rtc_ref = load_response_template_collection("s4")
+
+    positive_passages = []
+    negative_passages = []
+    for label, topic in zip(labels, topics):
+        if topic == DiscussionSzenario.MEDAI:
+            rtc = rtc_med
+        elif topic == DiscussionSzenario.JURAI:
+            rtc = rtc_jur
+        elif topic == DiscussionSzenario.AUTOAI:
+            rtc = rtc_auto
+        elif topic == DiscussionSzenario.REFAI:
+            rtc = rtc_ref
+        else:
+            raise Exception(f"Invalid discussion topic: {topic}")
+
+        positive_passages.append(extract_positive_passages(label, rtc))
+        negative_passages.append(extract_negative_passages(label, rtc))
+
+    data = []
+    for utterance, context, positive_passages, negative_passages in zip(texts, contexts, positive_passages, negative_passages):
+        data.append({
+            "utterance": utterance,
+            "context": context,
+            "positive_passages": positive_passages,
+            "negative_passages": negative_passages
+        })
+
+    train_data, evaluation = train_test_split(data, test_size=eval_size)
+    validation_data, test_data = train_test_split(evaluation, test_size=validation_test_ratio)
+
+    splits_save_path = os.path.join(save_path, "splits")
+
+    if not os.path.exists(splits_save_path):
+        os.makedirs(splits_save_path)
+
+    with open(os.path.join(splits_save_path, "train.json"), "w", encoding="utf-8") as train_file:
+        json.dump(train_data, train_file, ensure_ascii=False, indent=4)
+
+    with open(os.path.join(splits_save_path, "validation.json"), "w", encoding="utf-8") as validation_file:
+        json.dump(validation_data, validation_file, ensure_ascii=False, indent=4)
+
+    with open(os.path.join(splits_save_path, "test.json"), "w", encoding="utf-8") as test_file:
+        json.dump(test_data, test_file, ensure_ascii=False, indent=4)
+
+    train_dataset = Dataset.from_list(train_data)
+    eval_dataset = Dataset.from_list(validation_data)
+    test_dataset = Dataset.from_list(test_data)
+
+    hf_dataset = DatasetDict({"train": train_dataset, "validation": eval_dataset, "test": test_dataset})
+    hf_dataset.save_to_disk(save_path)
 
 
 if __name__ == "__main__":
-    # TODO: Dynamically change version of ResponseTemplateCollection depending on the survey as some older labels do not exist on newer versions.
-    #       Implement logic for extracting hard negatives.
-    create_dataset()
+    pass
+    # Beispiel zum erstellen eines Datensatzes. Mögliche Optionen von DatasetConfig sind im DocString beschrieben.
+    # create_dataset(
+    #     DatasetConfig(
+    #         dataset_path="dummy_dataset",
+    #         project_dir="../../",
+    #         num_previous_turns=3,
+    #         include_role=True,
+    #         sep_token="[SEP]",
+    #         utterance_type=UtteranceType.User,
+    #         eval_size=0.5,
+    #         validation_test_ratio=0.5
+    #     )
+    # )
+
+    # Beispiel zum Laden des Datensatzes + collate_function des DataLoaders um dynamisch ein Subset der negative passages zu laden.
+    hf_dataset = load_from_disk("dummy_dataset")
+
+    def collate_fn(batch, num_negative_samples: int):
+        utterances = []
+        contexts = []
+        positive_passages = []
+        negative_passages = []
+
+        for item in batch:
+            utterances.append(item["utterance"])
+            contexts.append(item["context"])
+            positive_passages.append(item["positive_passages"])
+
+            negative_passage_pool = item["negative_passages"]
+            sampled_negatives = random.sample(negative_passage_pool, min(num_negative_samples, len(negative_passage_pool)))
+            negative_passages.append(sampled_negatives)
+
+        return {
+            "utterances": utterances,
+            "contexts": contexts,
+            "positive_passages": positive_passages,
+            "negative_passages": negative_passages
+        }
+
+    train_loader = DataLoader(
+        hf_dataset["train"],
+        batch_size = 2,
+        shuffle=True,
+        collate_fn=lambda batch: collate_fn(batch, num_negative_samples=2)
+    )
+
+    for batch in train_loader:
+        print(f"Utterances: {batch['utterances']}")
+        print(f"Contexts: {batch['contexts']}")
+        print(f"Positive Passages: {batch['positive_passages']}")
+        print(f"Negative Passages: {batch['negative_passages']}\n")
