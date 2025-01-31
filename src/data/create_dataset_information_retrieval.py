@@ -23,10 +23,6 @@ from ethikchat_argtoolkit.Preprocessing.gender_language_tools import GenderLangu
 from ethikchat_argtoolkit.Dialogue.dialogue import Dialogue, UserUtterance, BotUtterance
 from ethikchat_argtoolkit.Dialogue.dialogue_szenario import DialogueSzenario
 
-# Define the label mapping
-label_list = ['O', 'B-ARG', 'I-ARG', 'X']
-label2id = {label: idx for idx, label in enumerate(label_list)}
-id2label = {idx: label for label, idx in label2id.items()}
 
 class UtteranceType(Enum):
     User = "user"
