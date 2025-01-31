@@ -3,5 +3,7 @@ git+https://gitlab+deploy-token-107:GEnez321wGXqyezVboo8@gitlab2.informatik.uni-
 
 
 # external requirements
+pandas ~= 2.2.3
+openpyxl ~= 3.1.3
 
 
