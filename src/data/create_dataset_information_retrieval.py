@@ -275,26 +275,29 @@ def preprocess_dataset(dialogues: List[Dialogue],
 
 
 def extract_positive_passages(labels: List[str], rtc: ResponseTemplateCollection) -> List[str]:
-    allowed_labels = rtc.z_arguments_labels.union(rtc.nz_arguments_labels)
+    allowed_labels = rtc.arguments_labels
+    labels = [label for label in labels if label in allowed_labels]
 
     positive_passages = []
     for label in labels:
-        if label in allowed_labels:
-            template = rtc.get_template_for_label(label)
-            positive_passages.extend([template.summary, template.full_text])
+        template = rtc.get_template_for_label(label)
+        positives = [template.summary, template.full_text]
+        positives.extend(template.samples)
+        positive_passages.extend(positives)
 
     return positive_passages
 
 
 def extract_negative_passages(labels: List[str], rtc: ResponseTemplateCollection) -> List[str]:
-    label_pool = rtc.z_arguments_labels.union(rtc.nz_arguments_labels)
-
+    label_pool = rtc.arguments_labels
     label_pool.difference_update(labels)
 
     negative_passages = []
     for label in label_pool:
         template = rtc.get_template_for_label(label)
-        negative_passages.extend([template.summary, template.full_text])
+        negatives = [template.summary, template.full_text]
+        negatives.extend(template.samples)
+        negative_passages.extend(negatives)
 
     return negative_passages
 
@@ -377,6 +380,9 @@ def create_dataset(config: DatasetConfig) -> None:
     rtc_auto = load_response_template_collection("s3")
     rtc_ref = load_response_template_collection("s4")
 
+
+    # TODO: is here a possible source for bugs? A lot of utterances come
+    #  without any positive passages which means they dont have a label from the rtc. Feels not right.
     positive_passages = []
     negative_passages = []
     for label, topic in zip(labels, topics):
@@ -472,7 +478,7 @@ if __name__ == "__main__":
 
     train_loader = DataLoader(
         hf_dataset["train"],
-        batch_size = 2,
+        batch_size = 1,
         shuffle=True,
         collate_fn=lambda batch: collate_fn(batch, num_negative_samples=2)
     )
