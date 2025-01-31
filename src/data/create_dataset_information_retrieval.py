@@ -3,23 +3,20 @@ import json
 import os
 import pandas as pd
 import re
-import warnings
 import random
+
 from torch.utils.data import DataLoader
 
 from dataclasses import dataclass
 from datasets import DatasetDict, Dataset, load_from_disk
 from datetime import datetime
 from enum import Enum
-from typing import List, Optional, Tuple, Literal
+from typing import List, Tuple
 
 from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
-from huggingface_hub import repo_exists
+
 from sklearn.model_selection import train_test_split
-from transformers import PreTrainedTokenizerFast, AutoTokenizer, RobertaTokenizerFast
-from transformers.utils import PaddingStrategy
 from ethikchat_argtoolkit.Dialogue.utterance import Utterance
-from ethikchat_argtoolkit.ArgumentGraph.stance import Stance
 from ethikchat_argtoolkit.Dialogue.discussion_szenario import DiscussionSzenario
 from ethikchat_argtoolkit.Loading.dialogue_loader import DialogueLoader
 from ethikchat_argtoolkit.Preprocessing.gender_language_tools import GenderLanguageTools
@@ -114,7 +111,7 @@ def preprocess_text(text: str, gender_language_tools: GenderLanguageTools) -> st
     return text
 
 
-def check_bounds_correctness(utterance: Utterance, dialogue_id) -> None:
+def check_bounds_correctness(utterance: Utterance, dialogue_id: int) -> None:
     """
     Checks for a given utterance if:
         - All text of the utterance is included within the bounds
@@ -189,7 +186,7 @@ def load_dataset_from_excel_file(file_path: str, discussion_scenario: Discussion
 
 def preprocess_utterance(
         utterance: Utterance,
-        gender_language_tools: GenderLanguageTools):
+        gender_language_tools: GenderLanguageTools) -> Tuple[str, List[str], List[Tuple[int, int]]]:
     """
     Preprocesses a single utterance by applying text normalization and updating bounds.
     """
@@ -222,7 +219,7 @@ def preprocess_utterance(
     return utterance.text, utterance.true_labels, utterance.true_bounds
 
 
-def build_context(dialogue_turns, num_previous_turns, sep_token, include_role):
+def build_context(dialogue_turns: List[Tuple[str, str]], num_previous_turns: int, sep_token: str, include_role: bool) -> str:
     selected_turns = dialogue_turns[-(num_previous_turns + 1):-1]
 
     if include_role:
@@ -432,20 +429,21 @@ def create_dataset(config: DatasetConfig) -> None:
 
 
 if __name__ == "__main__":
-    pass
-    # Beispiel zum erstellen eines Datensatzes. Mögliche Optionen von DatasetConfig sind im DocString beschrieben.
-    # create_dataset(
-    #     DatasetConfig(
-    #         dataset_path="dummy_dataset",
-    #         project_dir="../../",
-    #         num_previous_turns=3,
-    #         include_role=True,
-    #         sep_token="[SEP]",
-    #         utterance_type=UtteranceType.User,
-    #         eval_size=0.5,
-    #         validation_test_ratio=0.5
-    #     )
-    # )
+
+    if not os.path.exists("dummy_dataset"):
+        # Beispiel zum erstellen eines Datensatzes. Mögliche Optionen von DatasetConfig sind im DocString beschrieben.
+        create_dataset(
+            DatasetConfig(
+                dataset_path="dummy_dataset",
+                project_dir="../../",
+                num_previous_turns=3,
+                include_role=True,
+                sep_token="[SEP]",
+                utterance_type=UtteranceType.User,
+                eval_size=0.5,
+                validation_test_ratio=0.5
+            )
+        )
 
     # Beispiel zum Laden des Datensatzes + collate_function des DataLoaders um dynamisch ein Subset der negative passages zu laden.
     hf_dataset = load_from_disk("dummy_dataset")
