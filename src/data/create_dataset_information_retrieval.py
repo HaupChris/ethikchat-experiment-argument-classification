@@ -230,7 +230,7 @@ def preprocess_dataset(dialogues: List[Dialogue],
                        num_previous_turns: int,
                        utterance_type: UtteranceType,
                        sep_token: str,
-                       include_role: bool):
+                       include_role: bool) -> Tuple[List[List[str]], List[str], List[List[Tuple[int, int]]], List[str], List[DiscussionSzenario]]:
     labels_list = []
     text_list = []
     bounds_list = []
@@ -285,8 +285,7 @@ def extract_positive_passages(labels: List[str], rtc: ResponseTemplateCollection
 
 
 def extract_negative_passages(labels: List[str], rtc: ResponseTemplateCollection) -> List[str]:
-    label_pool = rtc.arguments_labels
-    label_pool.difference_update(labels)
+    label_pool = rtc.arguments_labels.difference(labels)
 
     negative_passages = []
     for label in label_pool:
@@ -376,9 +375,6 @@ def create_dataset(config: DatasetConfig) -> None:
     rtc_auto = load_response_template_collection("s3")
     rtc_ref = load_response_template_collection("s4")
 
-
-    # TODO: is here a possible source for bugs? A lot of utterances come
-    #  without any positive passages which means they dont have a label from the rtc. Feels not right.
     positive_passages = []
     negative_passages = []
     for label, topic in zip(labels, topics):
