@@ -65,9 +65,9 @@ target/
 
 # Pycharm
 .idea
-.idea/
+.idea
 # all files within the .idea folder
-.idea/*
+.idea/**
 
 
 # VS Code
