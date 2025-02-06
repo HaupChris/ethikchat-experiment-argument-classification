@@ -54,7 +54,7 @@ def create_dataset_for_multiple_negatives_ranking_loss(
 
 
 if __name__=="__main__":
-    corpus_ds = load_from_disk("../data/dummy_dataset")
+    corpus_ds = load_from_disk("../../data/processed/corpus_dataset_experiment_v0")
     split_ds = create_splits_from_corpus_dataset(corpus_ds, DatasetSplitType.Simple)
     pos_ds_train = create_dataset_for_multiple_negatives_ranking_loss(split_ds["train"])
     print(pos_ds_train)

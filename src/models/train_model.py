@@ -26,7 +26,7 @@ model = SentenceTransformer(model_name)
 loss = MultipleNegativesRankingLoss(model=model)
 
 # Load an example training dataset that works with our loss function:
-dataset = load_from_disk("../data/dummy_dataset")
+dataset = load_from_disk("../../data/processed/corpus_dataset_experiment_v0")
 splitted_dataset = create_splits_from_corpus_dataset(dataset, DatasetSplitType.Simple)
 
 train_dataset = splitted_dataset["train"]

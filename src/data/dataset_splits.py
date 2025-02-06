@@ -191,11 +191,13 @@ def create_splits_from_corpus_dataset(
 
 if __name__ == "__main__":
 
-    if not os.path.exists("dummy_dataset"):
+    dataset_path = "../../data/processed/corpus_dataset_experiment_v0"
+
+    if not os.path.exists(dataset_path):
         # Beispiel zum Erstellen eines Datensatzes. Mögliche Optionen von DatasetConfig sind im DocString beschrieben.
         create_dataset(
             DatasetConfig(
-                dataset_path="dummy_dataset",
+                dataset_path=dataset_path,
                 project_dir="../../",
                 num_previous_turns=3,
                 include_role=True,
@@ -207,7 +209,7 @@ if __name__ == "__main__":
         )
 
     # Beispiel zum Laden des Datensatzes + collate_function des DataLoaders um dynamisch ein Subset der negative passages zu laden.
-    hf_dataset = load_from_disk("dummy_dataset")
+    hf_dataset = load_from_disk(dataset_path)
     simple_split = create_splits_from_corpus_dataset(hf_dataset, DatasetSplitType.Simple)
     split_by_scenario = create_splits_from_corpus_dataset(hf_dataset, DatasetSplitType.ByDiscussionSzenario, test_scenario=DiscussionSzenario.JURAI)
     kfold_split = create_splits_from_corpus_dataset(hf_dataset, DatasetSplitType.kFold, None, 5)
