@@ -17,5 +17,5 @@ update-repo:
   stage: update-repo
   only:
     - main
-script:
-  - ssh -o "ProxyJump=hauptmann@login6.informatik.uni-wuerzburg.de" hauptmann@slurmmaster-ls6 "cd /home/ls6/hauptmann/ethikchat-experiment-argument-classification && git pull origin main"
+  script:
+    - ssh -o ProxyJump=hauptmann@login6.informatik.uni-wuerzburg.de hauptmann@slurmmaster-ls6 "cd /home/ls6/hauptmann/ethikchat-experiment-argument-classification && git pull origin main"
