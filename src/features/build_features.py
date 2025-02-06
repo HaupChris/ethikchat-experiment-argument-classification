@@ -1,76 +1,60 @@
 import random
-
-from datasets import Dataset, DatasetDict, load_from_disk
 from typing import Optional
+from datasets import Dataset, DatasetDict, load_from_disk
+
+from src.data.create_corpus_dataset import DatasetSplitType
+from src.data.dataset_splits import create_splits_from_corpus_dataset
 
 
-def build_contrastive_dataset(hf_dataset: DatasetDict, max_ratio_negatives_to_positives: Optional[int] = None) -> DatasetDict:
+def create_dataset_for_multiple_negatives_ranking_loss(
+    split_dataset: DatasetDict,
+    max_positives_per_query: Optional[int] = None
+) -> Dataset:
     """
-    Transform your dataset from:
-      {
-        "utterance": str,
-        "context": str,
-        "positive_passages": List[str],
-        "negative_passages": List[str]
-      }
-    into:
-      {
-        "anchor": str,
-        "passage": str,
-        "label": int  # 1 = positive, 0 = negative
-      }
+    Given a split_dataset with:
+      - "queries": has columns ["id", "text", ...]
+      - "passages": has columns ["id", "text", ...]
+      - "queries_relevant_passages_mapping": columns ["query_id", "passages_ids"]
 
-    :param hf_dataset: A DatasetDict with splits (train, validation, test).
-    :param max_ratio_negatives_to_positives: The maximum ratio of negative to positives examples to keep. Since the negatives
-        are usually much more than positives, we'll randomly sample a number of negatives depending on this ratio to the positives.
-    :return: A new DatasetDict in contrastive pair format.
+    Return a HF Dataset with only (query, positive).
+
+    This serves as input to the MultipleNegativesRankingLoss.
+    According to the docs (https://www.sbert.net/docs/sentence_transformer/training_overview.html#dataset-format)
+    the order of the columns is important: "anchor" is the query, "positive" is the positive passage. The names
+    of the columns is not taken into account by the loss function, only the order.
+
+
     """
-    def to_contrastive_rows(example):
-        # We'll store expanded data in lists
-        anchors = []
-        passages = []
-        labels = []
+    queries = split_dataset["queries"].to_list()   # each item: {"id", "text", ...}
+    passages = split_dataset["passages"].to_list() # each item: {"id", "text", ...}
+    mapping  = split_dataset["queries_relevant_passages_mapping"].to_list()
 
-        # Anchor is always the utterance
-        anchor_text = example["utterance"]
+    # Build lookups
+    query_id_to_text = {q["id"]: q["text"] for q in queries}
+    passage_id_to_text = {p["id"]: p["text"] for p in passages}
 
-        num_positives = len(example["positive_passages"])
-        if max_ratio_negatives_to_positives is not None:
-            num_negatives = min(len(example["negative_passages"]), max_ratio_negatives_to_positives * num_positives)
-        else:
-            num_negatives = len(example["negative_passages"])
+    examples = []
+    for row in mapping:
+        q_id = row["query_id"]
+        relevant_pids = row["passages_ids"]
+        # optionally limit the positives to reduce dataset size
+        if max_positives_per_query is not None:
+            random.shuffle(relevant_pids)
+            relevant_pids = relevant_pids[:max_positives_per_query]
 
-        # Expand positives
-        for pos_passage in example["positive_passages"]:
-            anchors.append(anchor_text)
-            passages.append(pos_passage)
-            labels.append(1)
+        for pid in relevant_pids:
+            if pid not in passage_id_to_text:
+                continue
+            examples.append({
+                "query": query_id_to_text[q_id],
+                "positive": passage_id_to_text[pid]
+            })
 
-        # Expand negatives
-        negative_passages = random.sample(example["negative_passages"], num_negatives)
-        for neg_passage in negative_passages:
-            anchors.append(anchor_text)
-            passages.append(neg_passage)
-            labels.append(0)
-
-        return {"anchor": anchors, "passage": passages, "label": labels}
-
-    # Convert each split
-    new_splits = {}
-    for split_name in ["train", "validation", "test"]:
-        # "map" will transform each example in the split into multiple examples
-        new_dataset = hf_dataset[split_name].map(
-            to_contrastive_rows,
-            batched=True,
-            remove_columns=hf_dataset[split_name].column_names
-        )
-        new_splits[split_name] = new_dataset
-
-    return DatasetDict(new_splits)
+    return Dataset.from_list(examples)
 
 
-
-if __name__ =="__main__":
-    hf_dataset = load_from_disk("../data/dummy_dataset")
-    contrastive_dataset = build_contrastive_dataset(hf_dataset, max_ratio_negatives_to_positives=None)
-    print(contrastive_dataset)
+if __name__=="__main__":
+    corpus_ds = load_from_disk("../data/dummy_dataset")
+    split_ds = create_splits_from_corpus_dataset(corpus_ds, DatasetSplitType.Simple)
+    pos_ds_train = create_dataset_for_multiple_negatives_ranking_loss(split_ds["train"])
+    print(pos_ds_train)
