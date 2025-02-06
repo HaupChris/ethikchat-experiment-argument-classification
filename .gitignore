@@ -90,3 +90,5 @@ target/
 .mypy_cache/
 
 venv/
+/git-filter-repo/
+/models/
