@@ -75,7 +75,7 @@ for dataset_index in "${!dataset_names[@]}"; do
 
 
         # Ensure output directory exists
-        mkdir -p "model_run_dir"
+        mkdir -p "${model_run_dir}"
 
         # Define log file path
         log_file="${model_run_dir}/slurm_output.log"
