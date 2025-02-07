@@ -96,3 +96,6 @@ venv/
 /src/models/wandb/*
 /src/models/wandb/**
 
+# ignore .env file
+.env
+
