@@ -33,7 +33,6 @@ source /home/ls6/hauptmann/ethikchat-experiment-argument-classification/venv/bin
 
 model_names=(
   "airnicco8/xlm-roberta-de"
-  "google-bert/bert-base-german-cased"
 )
 
 # List of dataset names
