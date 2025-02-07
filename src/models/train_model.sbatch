@@ -115,9 +115,9 @@ python train_model.py \
   --model_name_escaped "$model_name_escaped" \
   --learning_rate "$lr" \
   --batch_size "$batch_size" \
-  --model_run_dir "$model_run_dir"
-  --dataset_split_type "$dataset_split_type"
-  --num_epochs "$num_epochs"
+  --model_run_dir "$model_run_dir" \
+  --dataset_split_type "$dataset_split_type" \
+  --num_epochs "$num_epochs" \
   --loss_function "$loss_function"
 
 # Print job completion message
