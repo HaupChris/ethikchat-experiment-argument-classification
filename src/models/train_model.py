@@ -84,22 +84,21 @@ def main(exp_config: ExperimentConfig):
 
     train_args = SentenceTransformerTrainingArguments(
         output_dir=exp_config.model_run_dir,
-        num_train_epochs=1,
-        per_device_train_batch_size=int(exp_config.batch_size),
-        per_device_eval_batch_size=int(exp_config.batch_size),
+        num_train_epochs=exp_config.num_epochs,
+        auto_find_batch_size=True,
         learning_rate=exp_config.learning_rate,
         warmup_ratio=0.1,
         fp16=False,
         bf16=False,
         batch_sampler=BatchSamplers.NO_DUPLICATES,
-        eval_strategy="steps",
-        eval_steps=20,
-        save_strategy="steps",
+        eval_strategy="epoch",
+        save_strategy="epoch",
         save_steps=100,
         save_total_limit=2,
         logging_steps=29,
         run_name=f"{exp_config.model_name_escaped}_lr{exp_config.learning_rate}_bs{exp_config.batch_size}_{exp_config.run_time}",  # Sync run name with wandb
-        load_best_model_at_end=True
+        load_best_model_at_end=True,
+
     )
     trainer = SentenceTransformerTrainer(
         model=model,
@@ -118,7 +117,7 @@ def main(exp_config: ExperimentConfig):
 
     # Save model to wandb as an artifact
 
-    artifact = wandb.Artifact(name=f"{exp_config.model_run_dir}", type="model")
+    artifact = wandb.Artifact(name=f"{exp_config.model_name_escaped}_lr{exp_config.learning_rate}_bs{exp_config.batch_size}_{exp_config.run_time}", type="model")
     artifact.add_dir(exp_config.model_run_dir)
     wandb.log_artifact(artifact)
 
