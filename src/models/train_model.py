@@ -31,6 +31,9 @@ def main(exp_config: ExperimentConfig):
     Args:
         exp_config: ExperimentConfig
     """
+    # login to wandb
+    wandb.login()
+
     # Initialize wandb
     wandb.init(
         project="argument-classification",
