@@ -36,7 +36,6 @@ def main(exp_config: ExperimentConfig):
     load_dotenv(exp_config.project_root + "/.env")
     api_key=os.getenv("WANDB_API_KEY")
 
-    print(f"Logging in to wandb with API key: {api_key}")
     wandb.login(key=api_key)
 
     # Initialize wandb
