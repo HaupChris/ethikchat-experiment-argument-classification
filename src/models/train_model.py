@@ -131,6 +131,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     sys.path.append("/home/ls6/hauptmann/ethikchat-experiment-argument-classification")
+    print(sys.path)
 
     expirment_timestamp_start = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
