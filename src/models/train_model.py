@@ -32,7 +32,8 @@ def main(exp_config: ExperimentConfig):
         exp_config: ExperimentConfig
     """
     # login to wandb
-    wandb.login()
+    api_key = os.getenv("WANDB_API_KEY")
+    wandb.login(key=api_key)
 
     # Initialize wandb
     wandb.init(
