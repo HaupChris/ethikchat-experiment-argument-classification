@@ -1,7 +1,15 @@
 #!/bin/bash
 
 # Set the output directory name here
-OUTPUT_DIR_NAME="output_crf_experiment_no_german_chars_correct_context"
+project_root_dir="/home/ls6/hauptmann/ethikchat-experiment-argument-classification"
+experiment_dir="${project_root_dir}/experiments_outputs"
+experiment_run="v0"
+experiment_run_dir="${experiment_dir}/${experiment_run}"
+dataset_dir="${project_root_dir}/data/processed"
+dataset_split_type="simple"
+num_epochs=5
+loss_function="MultipleNegativesRankingLoss"
+
 
 # Initialize mode flags
 TEST_MODE=0
@@ -15,7 +23,7 @@ elif [[ "$1" == "--cont" ]]; then
 fi
 
 # Activate the virtual environment
-source ~/ethikchat-experiment-argument-classification/venv/bin/activate
+source /home/ls6/hauptmann/ethikchat-experiment-argument-classification/venv/bin/activate
 
 model_names=(
   "airnicco8/xlm-roberta-de"
@@ -32,44 +40,49 @@ learning_rates=(
   "1e-5"
 )
 
+batch_sizes=(
+  "32"
+)
+
 # Initialize job counter
 JOB_COUNTER=0
 
 # Loop over each dataset name
 for dataset_index in "${!dataset_names[@]}"; do
   dataset_name="${dataset_names[$dataset_index]}"
-  # Inner loop over each model name
-  for model_index in "${!model_names[@]}"; do
-    model_name="${model_names[$model_index]}"
-    # Innermost loop over each learning rate
-    for lr_index in "${!learning_rates[@]}"; do
-      lr="${learning_rates[$lr_index]}"
+  for batch_size_index in "${!batch_sizes[@]}"; do # Inner loop over each model name
+    batch_size="${batch_sizes[$batch_size_index]}"
+    for model_index in "${!model_names[@]}"; do
+      model_name="${model_names[$model_index]}"
+      # Innermost loop over each learning rate
+      for lr_index in "${!learning_rates[@]}"; do
+        lr="${learning_rates[$lr_index]}"
 
-      # Increment job counter
-      JOB_COUNTER=$((JOB_COUNTER + 1))
+        # Increment job counter
+        JOB_COUNTER=$((JOB_COUNTER + 1))
 
-      # Skip the first job if in continuation mode
-      if [[ $CONT_MODE -eq 1 ]] && [[ $JOB_COUNTER -eq 1 ]]; then
-        echo "Skipping the first job in continuation mode."
-        continue
-      fi
+        # Skip the first job if in continuation mode
+        if [[ $CONT_MODE -eq 1 ]] && [[ $JOB_COUNTER -eq 1 ]]; then
+          echo "Skipping the first job in continuation mode."
+          continue
+        fi
 
-      # Create a sanitized model name for the job name (replace '/' with '_')
-      sanitized_model_name=$(echo "$model_name" | sed 's/\//_/g')
+        # Create a sanitized model name for the job name (replace '/' with '_')
+        model_name_escaped=$(echo "$model_name" | sed 's/\//_/g')
 
-      # Define output directory
-      output_dir="${OUTPUT_DIR_NAME}/${dataset_name}/${sanitized_model_name}/lr${lr}"
+        # Define output directory
+        model_run_dir="${experiment_run_dir}/${model_name_escaped}/lr${lr}/bs${batch_size}"
 
-      # Ensure output directory exists
-      mkdir -p "$output_dir"
-      mkdir -p "${output_dir}/train_data_eval"
 
-      # Define log file path
-      log_file="${output_dir}/slurm_output.log"
+        # Ensure output directory exists
+        mkdir -p "model_run_dir"
 
-      sbatch <<EOF
+        # Define log file path
+        log_file="${model_run_dir}/slurm_output.log"
+
+        sbatch <<EOF
 #!/bin/bash
-#SBATCH --job-name=${moel_index}-${dataset_index}-${lr_index}d
+#SBATCH --job-name=${model_index}-${dataset_index}-${lr_index}d
 #SBATCH --partition=ls6prio
 #SBATCH --time=02:00:00
 #SBATCH --ntasks=1
@@ -88,18 +101,32 @@ echo "Running on node: \$(hostname)"
 echo "Current directory: \$(pwd)"
 
 # Run the training script with the current model name, dataset name, learning rate, and combined output directory
-python train_model.py --model_name "$model_name" --dataset_name "$dataset_name" --learning_rate "$lr" --output_dir "$output_dir"
+# Run the training script with all necessary parameters
+python train_model.py \
+  --project_root "$project_root_dir" \
+  --experiment_dir "$experiment_dir" \
+  --experiment_run "$experiment_run" \
+  --dataset_dir "$dataset_dir" \
+  --dataset_name "$dataset_name" \
+  --model_name "$model_name" \
+  --model_name_escaped "$model_name_escaped" \
+  --learning_rate "$lr" \
+  --batch_size "$batch_size" \
+  --model_run_dir "$model_run_dir"
+  --dataset_split_type "$dataset_split_type"
+  --num_epochs "$num_epochs"
+  --loss_function "$loss_function"
 
 # Print job completion message
 echo "Job completed at: \$(date)"
 EOF
 
-      # If in test mode, exit after submitting one job
-      if [[ $TEST_MODE -eq 1 ]]; then
-        echo "Test job submitted. Exiting."
-        exit 0
-      fi
-
+        # If in test mode, exit after submitting one job
+        if [[ $TEST_MODE -eq 1 ]]; then
+          echo "Test job submitted. Exiting."
+          exit 0
+        fi
+      done
     done
   done
 done
