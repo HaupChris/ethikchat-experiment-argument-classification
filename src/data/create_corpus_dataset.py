@@ -73,6 +73,16 @@ class DatasetSplitType(Enum):
     ByDiscussionSzenario = "by_discussion_szenario"
     kFold = "k_fold"
 
+    @classmethod
+    def from_str(cls, value: str):
+        if value == "simple":
+            return cls.Simple
+        if value == "by_discussion_szenario":
+            return cls.ByDiscussionSzenario
+        if value == "k_fold":
+            return cls.kFold
+        raise ValueError(f"Unknown DatasetSplitType: {value}")
+
 
 def load_response_template_collection(topic: str) -> ResponseTemplateCollection:
     return ResponseTemplateCollection.from_csv_files(
