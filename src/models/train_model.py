@@ -1,5 +1,6 @@
 import argparse
 import os
+import sys
 from datetime import datetime
 
 import wandb
@@ -128,6 +129,8 @@ if __name__ == "__main__":
     parser.add_argument('--learning_rate', type=float, help='Learning rate.')
     parser.add_argument('--batch_size', type=str, help='Batch size.')
     args = parser.parse_args()
+
+    sys.path.append("/home/ls6/hauptmann/ethikchat-experiment-argument-classification")
 
     expirment_timestamp_start = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
