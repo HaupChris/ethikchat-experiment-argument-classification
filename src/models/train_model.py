@@ -6,6 +6,7 @@ from datetime import datetime
 import wandb
 
 from datasets import load_from_disk
+from dotenv import load_dotenv
 from sentence_transformers import (
     SentenceTransformer,
     SentenceTransformerTrainer,
@@ -31,8 +32,10 @@ def main(exp_config: ExperimentConfig):
     Args:
         exp_config: ExperimentConfig
     """
-    # login to wandb
-    api_key = os.getenv("WANDB_API_KEY")
+    # login to wandb by loading the API key from the .env file
+    load_dotenv(exp_config.project_root + "/.env")
+    api_key=os.getenv("WANDB_API_KEY")
+
     print(f"Logging in to wandb with API key: {api_key}")
     wandb.login(key=api_key)
 

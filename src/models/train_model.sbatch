@@ -13,9 +13,6 @@ loss_function="MultipleNegativesRankingLoss"
 # add project root directory to python path
 export PYTHONPATH="${project_root_dir}:${PYTHONPATH}"
 
-# load environment variables
-source "${project_root_dir}/.env"
-
 
 # Initialize mode flags
 TEST_MODE=0
