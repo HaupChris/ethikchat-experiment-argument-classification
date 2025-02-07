@@ -123,11 +123,19 @@ def main(exp_config: ExperimentConfig):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Train sentence transformer model.')
-    parser.add_argument('--model_name', type=str, help='Name of the model to train.')
+    parser.add_argument('--project_root', type=str, help='Path to the project root.')
+    parser.add_argument('--experiment_dir', type=str, help='Path to the experiments directory.')
+    parser.add_argument('--experiment_run', type=str, help='Name of the experiment run.')
+    parser.add_argument('--dataset_dir', type=str, help='Path to the dataset directory.')
     parser.add_argument('--dataset_name', type=str, help='Path to the dataset.')
-    parser.add_argument('--output_dir', type=str, help='Path to the output directory.')
+    parser.add_argument('--dataset_split_type', type=str, help='Type of dataset split to use.')
+    parser.add_argument('--model_name', type=str, help='Name of the model to train.')
+    parser.add_argument('--model_name_escaped', type=str, help='Name of the model to train with "/" replaced by "-".')
+    parser.add_argument('--model_run_dir', type=str, help='Path to the model run directory.')
     parser.add_argument('--learning_rate', type=float, help='Learning rate.')
     parser.add_argument('--batch_size', type=str, help='Batch size.')
+    parser.add_argument('--num_epochs', type=int, help='Number of epochs.')
+    parser.add_argument('--loss_function', type=str, help='Name of the loss function to use.')
     args = parser.parse_args()
 
     sys.path.append("/home/ls6/hauptmann/ethikchat-experiment-argument-classification")
