@@ -18,6 +18,7 @@ from sentence_transformers.training_args import BatchSamplers
 
 from src.data.create_corpus_dataset import DatasetSplitType
 from src.data.dataset_splits import create_splits_from_corpus_dataset
+from src.evaluation.excluding_information_retrieval_evaluator import ExcludingInformationRetrievalEvaluator
 from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss
 from src.models.experiment_config import ExperimentConfig
 
@@ -70,6 +71,8 @@ def main(exp_config: ExperimentConfig):
     eval_queries = {row["id"]: row["text"] for row in eval_dataset["queries"]}
     eval_relevant_passages = {row["query_id"]: set(row["passages_ids"])
                               for row in eval_dataset["queries_relevant_passages_mapping"]}
+    eval_trivial_passages = {row["query_id"]: set(row["passages_ids"])
+                                for row in eval_dataset["queries_trivial_passages_mapping"]}
 
     ir_evaluator_eval = InformationRetrievalEvaluator(
         corpus=eval_corpus,
@@ -79,7 +82,16 @@ def main(exp_config: ExperimentConfig):
         write_csv=True,
     )
 
-    ir_evaluator_eval(model)
+    excluding_ir_evaluator_eval = ExcludingInformationRetrievalEvaluator(
+        corpus=eval_corpus,
+        queries=eval_queries,
+        relevant_docs=eval_relevant_passages,
+        excluded_docs=eval_trivial_passages,
+        show_progress_bar=True,
+        write_csv=True,
+    )
+
+    excluding_ir_evaluator_eval(model)
 
 
     train_args = SentenceTransformerTrainingArguments(
@@ -106,13 +118,13 @@ def main(exp_config: ExperimentConfig):
         train_dataset=train_pos,
         eval_dataset=eval_pos,
         loss=loss,
-        evaluator=ir_evaluator_eval
+        evaluator=excluding_ir_evaluator_eval
     )
 
     trainer.train()
 
     # Run final evaluation
-    final_eval_results = ir_evaluator_eval(model)
+    final_eval_results = excluding_ir_evaluator_eval(model)
     wandb.log(final_eval_results)
 
     # Save model to wandb as an artifact
@@ -151,7 +163,6 @@ if __name__ == "__main__":
 
     if args.model_name is None:
         print("Starting training in testing mode...")
-
 
         args_project_root = "/home/christian/PycharmProjects/ethikchat-experiment-argument-classification"
         args_experiment_run = "v0"
