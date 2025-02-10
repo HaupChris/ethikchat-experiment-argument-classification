@@ -82,12 +82,16 @@ def create_splits_from_corpus_dataset(
         sub_passages = deepcopy(corpus_dataset["passages"])
 
         # Subset queries_relevant_passages_mapping
-        sub_mapping = subset_by_query_ids(corpus_dataset["queries_relevant_passages_mapping"], query_ids_set, True)
+        sub_mapping_relevants = subset_by_query_ids(corpus_dataset["queries_relevant_passages_mapping"], query_ids_set, True)
+
+        # Subset queries_trivial_passages_mapping
+        sub_mapping_trivial = subset_by_query_ids(corpus_dataset["queries_trivial_passages_mapping"], query_ids_set, True)
 
         return DatasetDict({
             "queries": sub_queries,
             "passages": sub_passages,
-            "queries_relevant_passages_mapping": sub_mapping
+            "queries_relevant_passages_mapping": sub_mapping_relevants,
+            "queries_trivial_passages_mapping": sub_mapping_trivial
         })
 
     # Extract the relevant columns from the corpus

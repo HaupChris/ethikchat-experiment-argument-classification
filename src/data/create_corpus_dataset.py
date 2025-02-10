@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from datasets import DatasetDict, Dataset, load_from_disk
 from datetime import datetime
 from enum import Enum
-from typing import List, Tuple, Dict
+from typing import List, Tuple, Dict, Optional
 
 from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
 
@@ -23,6 +23,45 @@ class UtteranceType(Enum):
     User = "user"
     Bot = "bot"
     UserAndBot = "user_and_bot"
+
+
+@dataclass
+class ProcessedUtterance:
+    """
+    Dataclass for a processed utterance in the dataset.
+    """
+    id: int
+    text: str
+    labels: List[str]
+    bounds: List[Tuple[int, int]]
+    context: str
+    discussion_scenario: DiscussionSzenario
+
+
+@dataclass
+class Passage:
+    """
+    Dataclass for a passage in the dataset. It contains an id, the text, the label, and the discussion scenario.
+    The retrieved_query_id is optional and is used to link the passage to the query from which`s text it was retrieved.
+    That means that the passage is relevant to the query but in a trivial way. Because it is part of the query itself.
+
+    """
+    id: Optional[int]
+    text: str
+    label: str
+    discussion_scenario: str
+    retrieved_query_id: Optional[int] = None
+
+
+@dataclass
+class Query:
+    """
+    Dataclass for a query in the dataset.
+    """
+    id: int
+    text: str
+    labels: List[str]
+    discussion_scenario: str
 
 
 @dataclass
@@ -187,7 +226,7 @@ def load_dataset_from_excel_file(file_path: str, discussion_scenario: Discussion
                     true_labels=ast.literal_eval(row['true_labels']),
                     true_bounds=ast.literal_eval(row['true_bounds'])
                 )
-            check_bounds_correctness(utterance, dialogue_id)
+            check_bounds_correctness(utterance, int(dialogue_id))
             utterances.append(utterance)
 
         dialogue = Dialogue(
@@ -252,16 +291,18 @@ def preprocess_dataset(dialogues: List[Dialogue],
                        num_previous_turns: int,
                        utterance_type: UtteranceType,
                        sep_token: str,
-                       include_role: bool) -> Tuple[
-    List[List[str]], List[str], List[List[Tuple[int, int]]], List[str], List[DiscussionSzenario]]:
-    labels_list = []
-    utterance_texts_list = []
-    bounds_list = []
-    previous_context_list = []
-    topics_list = []
+                       include_role: bool) -> List[ProcessedUtterance]:
+    """
+    Preprocesses a dataset by applying text normalization and updating bounds.
+    Returns a list of ProcessedUtterance objects.
+    """
+
+    processed_utterances = []
 
     gender_language_tools = GenderLanguageTools()
 
+
+    id_counter = 0
     for dialogue in dialogues:
         dialogue_turns = []
         for utterance in dialogue.utterances:
@@ -285,13 +326,18 @@ def preprocess_dataset(dialogues: List[Dialogue],
                                                                                                 gender_language_tools)
             previous_context = build_context(dialogue_turns, num_previous_turns, sep_token, include_role)
 
-            labels_list.append(processed_labels)
-            utterance_texts_list.append(processed_utterance_text)
-            bounds_list.append(processed_bounds)
-            previous_context_list.append(previous_context)
-            topics_list.append(dialogue.discussion_szenario)
+            processed_utterances.append(ProcessedUtterance(
+                id=id_counter,
+                text=processed_utterance_text,
+                labels=processed_labels,
+                bounds=processed_bounds,
+                context=previous_context,
+                discussion_scenario=dialogue.discussion_szenario
+            ))
+            id_counter += 1
 
-    return labels_list, utterance_texts_list, bounds_list, previous_context_list, topics_list
+
+    return processed_utterances
 
 
 def extract_positive_passages(labels: List[str], rtc: ResponseTemplateCollection) -> List[str]:
@@ -335,61 +381,76 @@ def extract_hard_negative_passages(labels: List[str], rtc: ResponseTemplateColle
     return hard_negative_passages
 
 
-def create_queries_split(utterances: List[str], discussion_szenario: DiscussionSzenario) -> List[Tuple[int, str]]:
+def create_queries_split(processed_utterances: List[ProcessedUtterance]) -> List[Query]:
     """
     Creates a split that contains utterances and an id. This is the "queries" split.
     """
-    return [(idx, utterance, discussion_szenario.value) for idx, utterance in enumerate(utterances)]
+
+    return [Query(utt.id, utt.text, utt.labels, utt.discussion_scenario) for utt in processed_utterances]
 
 
-def create_queries_relevant_passages_mapping_split(queries_labels: List[List[str]],
-                                                   queries_discussion_scenarios: List[DiscussionSzenario],
-                                                   passages_split: List[Tuple[int, str, str, str]]) -> Dict[
-    int, List[int]]:
+def create_queries_relevant_passages_mapping_split(queries: List[Query], passages: List[Passage]) -> Dict[int, List[int]]:
     """
     Creates a mapping from query ids to relevant passage ids. This is the "queries_relevant_passages_mapping" split.
     """
-    if len(queries_labels) != len(queries_discussion_scenarios):
-        raise ValueError("Queries labels and discussion scenarios should have the same length.")
-
 
     queries_relevant_passages_mapping = {}
-    for query_idx, (query_labels, query_discussion_scenario) in enumerate(zip(queries_labels, queries_discussion_scenarios)):
+    for query in queries:
         relevant_passages = []
-        for passage_idx, passage_text, passage_label, passage_discussion_scenario in passages_split:
-            if passage_label in query_labels and query_discussion_scenario == passage_discussion_scenario:
-                relevant_passages.append(passage_idx)
-        queries_relevant_passages_mapping[query_idx] = relevant_passages
+        for passage in passages:
+            if passage.label in query.labels and query.discussion_scenario == passage.discussion_scenario:
+                relevant_passages.append(passage.id)
+        queries_relevant_passages_mapping[query.id] = relevant_passages
 
     return queries_relevant_passages_mapping
 
 
-def create_passages_from_utterances(utterances: List[str],
-                                    bounds: List[List[Tuple[int, int]]],
-                                    labels: List[List[str]],
-                                    utterances_discussion_scenarios: List[DiscussionSzenario]) -> List[Tuple[str, str]]:
+def create_passages_from_utterances(processed_utterances: List[ProcessedUtterance]) -> List[Passage]:
     """
     Creates passages from utterances.
     """
     passages = []
-    for utterance, utterance_bounds, utterance_labels, utterance_discussion_scenario in zip(utterances, bounds, labels, utterances_discussion_scenarios):
-        for idx, (start, end) in enumerate(utterance_bounds):
-            passage = utterance[start:end]
-            passages.append((passage, utterance_labels[idx], utterance_discussion_scenario.value))
+
+    for pu in processed_utterances:
+        for idx, (start, end) in enumerate(pu.bounds):
+            passage_text = pu.text[start:end]
+            passages.append(Passage(id=None,
+                                    text=passage_text,
+                                    label=pu.labels[idx],
+                                    discussion_scenario=pu.discussion_scenario.value,
+                                    retrieved_query_id=pu.id))
     return passages
 
 
-def create_passages_from_argument_graph(argument_graph: ResponseTemplateCollection, discussion_scenario: DiscussionSzenario) -> List[Tuple[str, str]]:
+def create_passages_from_argument_graph(argument_graph: ResponseTemplateCollection,
+                                        discussion_scenario: DiscussionSzenario) -> List[Passage]:
     """
     Creates passages from the argument graph.
     """
     passages = []
 
     for template in argument_graph.arguments_templates:
-        passages.append((template.summary, template.label, discussion_scenario.value))
-        passages.append((template.full_text, template.label, discussion_scenario.value))
-        passages.extend([(sample, template.label, discussion_scenario.value) for sample in template.samples])
+        passages.append(Passage(None, template.summary, template.label, discussion_scenario.value, None))
+        passages.append(Passage(None, template.full_text, template.label, discussion_scenario.value, None))
+        passages.extend([Passage(None, sample, template.label, discussion_scenario.value, None) for sample in template.samples])
     return passages
+
+
+def create_queries_trivial_passages_mapping_split(queries: List[Query], passages: List[Passage]) -> Dict[int, List[int]]:
+    """
+    Creates a mapping from query ids to trivial passage ids. A trivial passage is a passage that was extracted from the
+    query itself. And is therefore partly or fully identical to the query.
+    """
+    queries_trivial_passages_mapping = {}
+
+    for query in queries:
+        trivial_passages = []
+        for passage in passages:
+            if passage.retrieved_query_id == query.id:
+                trivial_passages.append(passage.id)
+        queries_trivial_passages_mapping[query.id] = trivial_passages
+
+    return queries_trivial_passages_mapping
 
 
 def create_dataset_splits(dialogues: List[Dialogue],
@@ -398,40 +459,41 @@ def create_dataset_splits(dialogues: List[Dialogue],
                           sep_token: str,
                           utterance_type: UtteranceType,
                           argument_graphs: Dict[DiscussionSzenario, ResponseTemplateCollection]) \
-        -> Tuple[List[Tuple[int, str, str]],
-        List[Tuple[int, str, str, str]],
-        Dict[int, List[int]]]:
+        -> Tuple[List[Query], List[Passage], Dict[int, List[int]], Dict[int, List[int]]]:
     """
-    Creates the dataset splits for the information retrieval task.
+    Creates the dataset splits for the information retrieval task. This consists of the following splits:
+    - queries: A split containing the queries.
+    - passages: A split containing the passages.
+    - queries_relevant_passages_mapping: A mapping from query ids to relevant passage ids.
+    - queries_trivial_passages_mapping: A mapping from query ids to trivial passage ids. (Passages that are part of the query itself)
     """
-    utterance_labels, utterance_texts, utterance_bounds, contexts, utterances_discussion_scenarios = preprocess_dataset(
+    processed_utterances = preprocess_dataset(
         dialogues,
         num_previous_turns,
         utterance_type,
         sep_token,
         include_role)
-    # discussion_scenario is known for every utterance
 
     # create passages from utterances
-    utterances_passages = create_passages_from_utterances(utterance_texts, utterance_bounds, utterance_labels, utterances_discussion_scenarios)
+    utterances_passages = create_passages_from_utterances(processed_utterances)
 
     argument_graphs_passages = []
     for discussion_scenario, argument_graph in argument_graphs.items():
         argument_graphs_passages.extend(create_passages_from_argument_graph(argument_graph, discussion_scenario))
 
-
     # TODO: currently, queries are only an utterance. This should be extended to include the context as well.
-    queries_split = [(idx, utterance, utterance_scenario.value) for idx, (utterance, utterance_scenario) in
-                     enumerate(zip(utterance_texts, utterances_discussion_scenarios))]
+    # im queries split hat jede query_id die riehenfolge der processed_utterances.
+    queries = create_queries_split(processed_utterances)
 
-    passages_split = [(idx, passage, label, discussion_scenario) for idx, (passage, label, discussion_scenario) in
+
+    # im passages_split entsprechen die retrieved_query_ids auch
+    passages = [Passage(idx, passage.text, passage.label, passage.discussion_scenario, passage.retrieved_query_id) for idx, passage in
                       enumerate(utterances_passages + argument_graphs_passages)]
 
-    queries_relevant_passages_mapping_split = create_queries_relevant_passages_mapping_split(
-        utterance_labels, utterances_discussion_scenarios, passages_split
-    )
+    queries_relevant_passages_mapping = create_queries_relevant_passages_mapping_split(queries, passages)
+    queries_trivial_passages_mapping = create_queries_trivial_passages_mapping_split(queries, passages)
 
-    return queries_split, passages_split, queries_relevant_passages_mapping_split
+    return queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping
 
 
 def create_dataset(config: DatasetConfig) -> None:
@@ -504,10 +566,8 @@ def create_dataset(config: DatasetConfig) -> None:
         DiscussionSzenario.REFAI: argument_graph_ref
     }
 
-
-    queries, passages, queries_relevant_passages_mapping = create_dataset_splits(
+    queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping = create_dataset_splits(
         all_dialogues, include_role, num_previous_turns, sep_token, utterance_type, argument_graphs)
-
 
     # medai_queries, medai_passages, medai_queries_relevant_passages_mapping = create_dataset_splits(
     #     dialogues_medai, include_role, num_previous_turns, sep_token, utterance_type, argument_graph_med,
@@ -535,18 +595,20 @@ def create_dataset(config: DatasetConfig) -> None:
 
     # create hf dataset
     hf_dataset = DatasetDict({
-        "queries": Dataset.from_dict({"id": [query_id for query_id, _, _ in queries],
-                                      "text": [query_text for _, query_text, _ in queries],
-                                      "discussion_scenario": [discussion_scenario for _, _, discussion_scenario in
-                                                              queries]}),
-        "passages": Dataset.from_dict({"id": [passage_id for passage_id, _, _, _ in passages],
-                                       "text": [passage_text for _, passage_text, _, _ in passages],
-                                       "label": [passage_label for _, _, passage_label, _ in passages],
-                                       "discussion_scenario": [discussion_scenario for _, _, _, discussion_scenario in
-                                                               passages]}),
+        "queries": Dataset.from_dict({"id": [query.id for query in queries],
+                                      "text": [query.text for query in queries],
+                                      "discussion_scenario": [query.discussion_scenario for query in queries]}),
+        "passages": Dataset.from_dict({"id": [passage.id for passage in passages],
+                                       "text": [passage.text for passage in passages],
+                                       "label": [passage.label for passage in passages],
+                                       "discussion_scenario": [passage.discussion_scenario for passage in passages]}),
         "queries_relevant_passages_mapping": Dataset.from_dict({
             "query_id": [id for id, _ in queries_relevant_passages_mapping.items()],
             "passages_ids": [ids for _, ids in queries_relevant_passages_mapping.items()]
+        }),
+        "queries_trivial_passages_mapping": Dataset.from_dict({
+            "query_id": [id for id, _ in queries_trivial_passages_mapping.items()],
+            "passages_ids": [ids for _, ids in queries_trivial_passages_mapping.items()]
         })
     })
 
