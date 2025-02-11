@@ -12,6 +12,7 @@ from torch import Tensor
 from tqdm import trange
 
 import wandb  # Needed for logging tables
+from wandb.wandb_run import Run
 
 from sentence_transformers.evaluation.SentenceEvaluator import SentenceEvaluator
 from sentence_transformers.similarity_functions import SimilarityFunction
@@ -68,6 +69,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         corpus_prompt_name: str | None = None,
         excluded_docs: Optional[dict[str, set[str]]] = None,
         log_top_k_predictions: int = 0,  # New param: how many predictions to log per query to wandb
+        run: Run = None,
     ) -> None:
         super().__init__()
         # Filter queries so we only keep the ones that have relevant docs
@@ -109,6 +111,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
 
         # How many top docs to log to wandb for each query
         self.log_top_k_predictions = log_top_k_predictions
+        self.run = run
 
         if name:
             name = "_" + name
@@ -512,4 +515,5 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
                     )
 
             # Log to wandb
-            wandb.log({f"{self.name}_{score_func_name}_top{top_k}_predictions": table})
+            if self.run:
+                self.run.log({f"{self.name}_{score_func_name}_top{top_k}_predictions": table})

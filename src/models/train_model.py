@@ -88,6 +88,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         show_progress_bar=True,
         write_csv=True,
         log_top_k_predictions=5,  # log the top 5 docs per query
+        run=run
     )
 
     excluding_ir_evaluator_eval(model)
