@@ -22,10 +22,8 @@ from src.evaluation.excluding_information_retrieval_evaluator import ExcludingIn
 from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss
 from src.models.experiment_config import ExperimentConfig
 
-IS_TEST_RUN = True
 
-
-def main(exp_config: ExperimentConfig):
+def main(exp_config: ExperimentConfig, is_test_run=False):
     """
     Train a sentence transformer model with the given parameters and log the results
     to wandb.
@@ -40,9 +38,9 @@ def main(exp_config: ExperimentConfig):
     wandb.login(key=api_key)
 
     # Initialize wandb
-    wandb.init(
+    run = wandb.init(
         project="argument-classification",
-        name=exp_config.model_run_dir,
+        name=f"{exp_config.model_name_escaped}_lr{exp_config.learning_rate}_bs{exp_config.batch_size}_{exp_config.run_time}",  # Sync run name with wandb
         config=exp_config.model_dump(),
     )
 
@@ -56,7 +54,7 @@ def main(exp_config: ExperimentConfig):
     dataset = load_from_disk(f"{exp_config.project_root}/{exp_config.dataset_dir}/{exp_config.dataset_name}")
     splitted_dataset = create_splits_from_corpus_dataset(dataset, exp_config.dataset_split_type)
 
-    if IS_TEST_RUN:
+    if is_test_run:
         train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"], 1)
         eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"], 1)
         train_pos = train_pos.shuffle(seed=42).select(range(10))
@@ -90,7 +88,6 @@ def main(exp_config: ExperimentConfig):
         show_progress_bar=True,
         write_csv=True,
         log_top_k_predictions=5,  # log the top 5 docs per query
-
     )
 
     excluding_ir_evaluator_eval(model)
@@ -125,18 +122,18 @@ def main(exp_config: ExperimentConfig):
 
     # Run final evaluation
     final_eval_results = excluding_ir_evaluator_eval(model)
-    wandb.log(final_eval_results)
+    run.log(final_eval_results)
 
     # Save model to wandb as an artifact
 
     artifact = wandb.Artifact(name=f"{exp_config.model_name_escaped}_lr{exp_config.learning_rate}_bs{exp_config.batch_size}_{exp_config.run_time}", type="model")
     artifact.add_dir(exp_config.model_run_dir)
-    wandb.log_artifact(artifact)
+    run.log_artifact(artifact)
 
     # save the slurm output to wandb
 
     # Finish wandb run
-    wandb.finish()
+    run.finish()
 
 
 if __name__ == "__main__":
@@ -200,7 +197,7 @@ if __name__ == "__main__":
             os.makedirs(args_model_run_dir)
 
         print(f"Running test training for model {args_model_name}")
-        main(experiment_config)
+        main(experiment_config, is_test_run=True)
     else:
         args_batch_size = int(args.batch_size)
         args_learning_rate = float(args.learning_rate)

@@ -117,6 +117,8 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         self.csv_headers = ["epoch", "steps"]
         self._append_csv_headers(self.score_function_names)
 
+
+
     def _append_csv_headers(self, score_function_names):
         for score_name in score_function_names:
             for k in self.accuracy_at_k:
