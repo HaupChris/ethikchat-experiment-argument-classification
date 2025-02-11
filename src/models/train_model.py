@@ -89,6 +89,8 @@ def main(exp_config: ExperimentConfig):
         excluded_docs=eval_trivial_passages,
         show_progress_bar=True,
         write_csv=True,
+        log_top_k_predictions=5,  # log the top 5 docs per query
+
     )
 
     excluding_ir_evaluator_eval(model)
@@ -105,9 +107,7 @@ def main(exp_config: ExperimentConfig):
         batch_sampler=BatchSamplers.NO_DUPLICATES,
         eval_strategy="epoch",
         save_strategy="epoch",
-        save_steps=100,
         save_total_limit=2,
-        logging_steps=29,
         run_name=f"{exp_config.model_name_escaped}_lr{exp_config.learning_rate}_bs{exp_config.batch_size}_{exp_config.run_time}",  # Sync run name with wandb
         load_best_model_at_end=True,
 
