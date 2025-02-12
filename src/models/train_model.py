@@ -93,11 +93,14 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
 
     excluding_ir_evaluator_eval(model)
 
+    is_auto_batch_size = exp_config.batch_size == "auto"
 
     train_args = SentenceTransformerTrainingArguments(
         output_dir=exp_config.model_run_dir,
         num_train_epochs=exp_config.num_epochs,
-        auto_find_batch_size=True,
+        per_device_train_batch_size=exp_config.batch_size if not is_auto_batch_size else None,
+        per_device_eval_batch_size=exp_config.batch_size if not is_auto_batch_size else None,
+        auto_find_batch_size=is_auto_batch_size,
         learning_rate=exp_config.learning_rate,
         warmup_ratio=0.1,
         fp16=True,
@@ -111,7 +114,6 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         load_best_model_at_end=True,
         lr_scheduler_type="linear",
         gradient_accumulation_steps=1,
-
     )
     trainer = SentenceTransformerTrainer(
         model=model,
@@ -203,7 +205,10 @@ if __name__ == "__main__":
         print(f"Running test training for model {args_model_name}")
         main(experiment_config, is_test_run=True)
     else:
-        args_batch_size = int(args.batch_size)
+        if args.batch_size == "auto":
+            args_batch_size = "auto"
+        else:
+            args_batch_size = int(args.batch_size)
         args_learning_rate = float(args.learning_rate)
 
         experiment_config = {
