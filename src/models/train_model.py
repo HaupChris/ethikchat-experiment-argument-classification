@@ -37,7 +37,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     api_key=os.getenv("WANDB_API_KEY")
 
     wandb.login(key=api_key)
-    gradient_accumulation_steps = 4
+    gradient_accumulation_steps = 8
 
     run_name = f"{exp_config.model_name_escaped}_lr{exp_config.learning_rate}_bs{exp_config.batch_size}_gas{gradient_accumulation_steps}_{exp_config.run_time}"
 

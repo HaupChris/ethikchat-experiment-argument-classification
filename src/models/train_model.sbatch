@@ -3,7 +3,7 @@
 # Set the output directory name here
 project_root_dir="/home/ls6/hauptmann/ethikchat-experiment-argument-classification"
 experiment_dir="${project_root_dir}/experiments_outputs"
-experiment_run="v0_test_gas_4"
+experiment_run="v0_test_gas_8"
 experiment_run_dir="${experiment_dir}/${experiment_run}"
 dataset_dir="data/processed"
 dataset_split_type="simple"
@@ -100,7 +100,6 @@ for dataset_index in "${!dataset_names[@]}"; do
 #SBATCH --gres=gpu:1
 #SBATCH --output=${log_file}
 #SBATCH --error=${log_file}
-#SBATCH --exclude=gpu8a
 
 # Activate the virtual environment
 source ~/ethikchat-experiment-argument-classification/venv/bin/activate
