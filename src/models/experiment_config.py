@@ -1,3 +1,5 @@
+from typing import Union
+
 from pydantic import BaseModel
 
 from src.data.create_corpus_dataset import DatasetSplitType
@@ -19,7 +21,7 @@ class ExperimentConfig(BaseModel):
         model_name_escaped: str (model name with "/" replaced by "-")
         model_run_dir: str (absolute path to the model run directory, e.g. /home/user/my_experiments/this_experiment/experiments_outputs/v0/airnicco8-xlm-roberta-de_lr2e-05_bs4)
         learning_rate: float
-        batch_size: int
+        batch_size: int or str ("auto")
         num_epochs: int
         loss_function: str (name of the loss function to use, does not change anything but only for logging)
         run_time: str (timestamp of the start of the experiment run)
@@ -34,7 +36,7 @@ class ExperimentConfig(BaseModel):
     model_name_escaped: str
     model_run_dir: str
     learning_rate: float
-    batch_size: int
+    batch_size: Union[int, str]
     num_epochs: int
     loss_function: str
     run_time: str
