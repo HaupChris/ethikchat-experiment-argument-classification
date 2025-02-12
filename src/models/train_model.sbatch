@@ -29,7 +29,7 @@ fi
 source /home/ls6/hauptmann/ethikchat-experiment-argument-classification/venv/bin/activate
 
 model_names=(
-  "airnicco8/xlm-roberta-de"
+  "google-bert/bert-base-uncased"
 )
 
 # List of dataset names
@@ -86,13 +86,13 @@ for dataset_index in "${!dataset_names[@]}"; do
 #!/bin/bash
 #SBATCH --job-name=${model_index}-${dataset_index}-${lr_index}d
 #SBATCH --partition=ls6prio
-#SBATCH --time=02:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:1
 #SBATCH --output=${log_file}
 #SBATCH --error=${log_file}
+#SBATCH --exclude=gpu8a
 
 # Activate the virtual environment
 source ~/ethikchat-experiment-argument-classification/venv/bin/activate
