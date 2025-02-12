@@ -3,7 +3,7 @@
 # Set the output directory name here
 project_root_dir="/home/ls6/hauptmann/ethikchat-experiment-argument-classification"
 experiment_dir="${project_root_dir}/experiments_outputs"
-experiment_run="v0_test_gas_8"
+experiment_run="v0_test_gas_16"
 experiment_run_dir="${experiment_dir}/${experiment_run}"
 dataset_dir="data/processed"
 dataset_split_type="simple"
