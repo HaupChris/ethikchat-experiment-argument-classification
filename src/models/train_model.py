@@ -12,7 +12,7 @@ from sentence_transformers import (
     SentenceTransformerTrainer,
     SentenceTransformerTrainingArguments
 )
-from sentence_transformers.evaluation import InformationRetrievalEvaluator
+
 from sentence_transformers.losses import MultipleNegativesRankingLoss
 from sentence_transformers.training_args import BatchSamplers
 
@@ -30,6 +30,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
 
     Args:
         exp_config: ExperimentConfig
+        is_test_run: bool, defines if the training is a test run and only a small subset of the data is used
     """
     # login to wandb by loading the API key from the .env file
     load_dotenv(exp_config.project_root + "/.env")
@@ -72,14 +73,6 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     eval_trivial_passages = {row["query_id"]: set(row["passages_ids"])
                                 for row in eval_dataset["queries_trivial_passages_mapping"]}
 
-    ir_evaluator_eval = InformationRetrievalEvaluator(
-        corpus=eval_corpus,
-        queries=eval_queries,
-        relevant_docs=eval_relevant_passages,
-        show_progress_bar=True,
-        write_csv=True,
-    )
-
     excluding_ir_evaluator_eval = ExcludingInformationRetrievalEvaluator(
         corpus=eval_corpus,
         queries=eval_queries,
@@ -98,8 +91,6 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     train_args = SentenceTransformerTrainingArguments(
         output_dir=exp_config.model_run_dir,
         num_train_epochs=exp_config.num_epochs,
-        per_device_train_batch_size=exp_config.batch_size if not is_auto_batch_size else None,
-        per_device_eval_batch_size=exp_config.batch_size if not is_auto_batch_size else None,
         auto_find_batch_size=is_auto_batch_size,
         learning_rate=exp_config.learning_rate,
         warmup_ratio=0.1,
