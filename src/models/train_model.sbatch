@@ -39,11 +39,11 @@ dataset_names=(
 
 # List of learning rates
 learning_rates=(
-  "1e-5"
+  "2e-5"
 )
 
 batch_sizes=(
-  "32"
+  "auto"
 )
 
 # Initialize job counter

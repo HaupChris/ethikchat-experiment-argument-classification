@@ -100,14 +100,17 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         auto_find_batch_size=True,
         learning_rate=exp_config.learning_rate,
         warmup_ratio=0.1,
-        fp16=False,
+        fp16=True,
         bf16=False,
         batch_sampler=BatchSamplers.NO_DUPLICATES,
-        eval_strategy="epoch",
+        eval_strategy="steps",
+        eval_steps=4000,
         save_strategy="epoch",
         save_total_limit=2,
         run_name=f"{exp_config.model_name_escaped}_lr{exp_config.learning_rate}_bs{exp_config.batch_size}_{exp_config.run_time}",  # Sync run name with wandb
         load_best_model_at_end=True,
+        lr_scheduler_type="linear",
+        gradient_accumulation_steps=1,
 
     )
     trainer = SentenceTransformerTrainer(
