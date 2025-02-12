@@ -31,12 +31,12 @@ source /home/ls6/hauptmann/ethikchat-experiment-argument-classification/venv/bin
 model_names=(
 #  "google-bert/bert-base-uncased"
   "aari1995/German_Semantic_STS_V2"
-  "aari1995/German_Semantic_V3b"
-  "T-Systems-onsite/cross-en-de-roberta-sentence-transformer"
-  "T-Systems-onsite/german-roberta-sentence-transformer-v2"
-  "JoBeer/german-semantic-base"
-  "deutsche-telekom/gbert-large-paraphrase-euclidea"
-  "jinaai/jina-embeddings-v2-base-de"
+#  "aari1995/German_Semantic_V3b"
+#  "T-Systems-onsite/cross-en-de-roberta-sentence-transformer"
+#  "T-Systems-onsite/german-roberta-sentence-transformer-v2"
+#  "JoBeer/german-semantic-base"
+#  "deutsche-telekom/gbert-large-paraphrase-euclidea"
+#  "jinaai/jina-embeddings-v2-base-de"
 )
 
 # List of dataset names
