@@ -53,6 +53,7 @@ batch_sizes=(
   "auto"
 )
 
+
 # Initialize job counter
 JOB_COUNTER=0
 

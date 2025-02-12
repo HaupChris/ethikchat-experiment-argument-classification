@@ -105,7 +105,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         run_name=f"{exp_config.model_name_escaped}_lr{exp_config.learning_rate}_bs{exp_config.batch_size}_{exp_config.run_time}",  # Sync run name with wandb
         load_best_model_at_end=True,
         lr_scheduler_type="linear",
-        gradient_accumulation_steps=1,
+        gradient_accumulation_steps=2,
     )
     trainer = SentenceTransformerTrainer(
         model=model,
@@ -195,7 +195,7 @@ if __name__ == "__main__":
             os.makedirs(args_model_run_dir)
 
         print(f"Running test training for model {args_model_name}")
-        main(experiment_config, is_test_run=True)
+        main(experiment_config, is_test_run=False)
     else:
         if args.batch_size == "auto":
             args_batch_size = "auto"
