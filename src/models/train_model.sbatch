@@ -7,7 +7,7 @@ experiment_run="v0_test_gas"
 experiment_run_dir="${experiment_dir}/${experiment_run}"
 dataset_dir="data/processed"
 dataset_split_type="simple"
-num_epochs=8
+num_epochs=7
 loss_function="MultipleNegativesRankingLoss"
 
 # add project root directory to python path
@@ -104,6 +104,7 @@ for dataset_index in "${!dataset_names[@]}"; do
 #SBATCH --gres=gpu:1
 #SBATCH --output=${log_file}
 #SBATCH --error=${log_file}
+#SBATCH --exlude=gpu8a
 
 # Activate the virtual environment
 source ~/ethikchat-experiment-argument-classification/venv/bin/activate
