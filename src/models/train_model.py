@@ -37,7 +37,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     api_key=os.getenv("WANDB_API_KEY")
 
     wandb.login(key=api_key)
-    gradient_accumulation_steps = 16
+    gradient_accumulation_steps = exp_config.batch_size // 8
 
     run_name = f"{exp_config.model_name_escaped}_lr{exp_config.learning_rate}_bs{exp_config.batch_size}_gas{gradient_accumulation_steps}_{exp_config.run_time}"
 
@@ -89,12 +89,12 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
 
     excluding_ir_evaluator_eval(model)
 
-    is_auto_batch_size = exp_config.batch_size == "auto"
 
     train_args = SentenceTransformerTrainingArguments(
         output_dir=exp_config.model_run_dir,
         num_train_epochs=exp_config.num_epochs,
-        auto_find_batch_size=is_auto_batch_size,
+        per_device_train_batch_size=8,
+        per_device_eval_batch_size=8,
         learning_rate=exp_config.learning_rate,
         warmup_ratio=0.1,
         fp16=True,
