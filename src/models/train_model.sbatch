@@ -7,7 +7,7 @@ experiment_run="v0_test_gas"
 experiment_run_dir="${experiment_dir}/${experiment_run}"
 dataset_dir="data/processed"
 dataset_split_type="simple"
-num_epochs=10
+num_epochs=8
 loss_function="MultipleNegativesRankingLoss"
 
 # add project root directory to python path
