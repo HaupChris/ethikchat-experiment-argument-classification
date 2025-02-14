@@ -3,11 +3,11 @@
 # Set the output directory name here
 project_root_dir="/home/ls6/hauptmann/ethikchat-experiment-argument-classification"
 experiment_dir="${project_root_dir}/experiments_outputs"
-experiment_run="v0_test_gas"
+experiment_run="v1_pre_param_study"
 experiment_run_dir="${experiment_dir}/${experiment_run}"
 dataset_dir="data/processed"
 dataset_split_type="simple"
-num_epochs=7
+num_epochs=8
 loss_function="MultipleNegativesRankingLoss"
 
 # add project root directory to python path
@@ -29,19 +29,19 @@ fi
 source /home/ls6/hauptmann/ethikchat-experiment-argument-classification/venv/bin/activate
 
 model_names=(
-#  "google-bert/bert-base-uncased"
+  "google-bert/bert-base-uncased"
   "aari1995/German_Semantic_STS_V2"
-#  "aari1995/German_Semantic_V3b"
-#  "T-Systems-onsite/cross-en-de-roberta-sentence-transformer"
-#  "T-Systems-onsite/german-roberta-sentence-transformer-v2"
-#  "JoBeer/german-semantic-base"
-#  "deutsche-telekom/gbert-large-paraphrase-euclidea"
-#  "jinaai/jina-embeddings-v2-base-de"
+  "aari1995/German_Semantic_V3b"
+  "T-Systems-onsite/cross-en-de-roberta-sentence-transformer"
+  "T-Systems-onsite/german-roberta-sentence-transformer-v2"
+  "JoBeer/german-semantic-base"
+  "deutsche-telekom/gbert-large-paraphrase-euclidea"
+  "jinaai/jina-embeddings-v2-base-de"
 )
 
 # List of dataset names
 dataset_names=(
-  "corpus_dataset_experiment_v0"
+  "corpus_dataset_experiment_v1"
 )
 
 # List of learning rates
@@ -50,10 +50,7 @@ learning_rates=(
 )
 
 batch_sizes=(
-  "16"
-  "32"
   "64"
-  "128"
 )
 
 
@@ -129,6 +126,7 @@ python train_model.py \
   --dataset_split_type "$dataset_split_type" \
   --num_epochs "$num_epochs" \
   --loss_function "$loss_function"
+  $([[ $TEST_MODE -eq 1 ]] && echo "--is_test_run")  # Add the flag if TEST_MODE is 1
 
 # Print job completion message
 echo "Job completed at: \$(date)"

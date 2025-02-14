@@ -34,7 +34,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     """
     # login to wandb by loading the API key from the .env file
     load_dotenv(exp_config.project_root + "/.env")
-    api_key=os.getenv("WANDB_API_KEY")
+    api_key = os.getenv("WANDB_API_KEY")
 
     wandb.login(key=api_key)
     gradient_accumulation_steps = exp_config.batch_size // 8
@@ -44,7 +44,8 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     # Initialize wandb
     run = wandb.init(
         project="argument-classification",
-        name=f"{exp_config.model_name_escaped}_lr{exp_config.learning_rate}_bs{exp_config.batch_size}_{exp_config.run_time}",  # Sync run name with wandb
+        name=f"{exp_config.model_name_escaped}_lr{exp_config.learning_rate}_bs{exp_config.batch_size}_{exp_config.run_time}",
+        # Sync run name with wandb
         config=exp_config.model_dump(),
     )
 
@@ -69,26 +70,33 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
 
     # Prepare evaluation data
     eval_dataset = splitted_dataset["validation"]
-    eval_corpus = {row["id"]: row["text"] for row in eval_dataset["passages"]}
+    eval_passages = {row["id"]: row["text"] for row in eval_dataset["passages"]}
     eval_queries = {row["id"]: row["text"] for row in eval_dataset["queries"]}
     eval_relevant_passages = {row["query_id"]: set(row["passages_ids"])
                               for row in eval_dataset["queries_relevant_passages_mapping"]}
     eval_trivial_passages = {row["query_id"]: set(row["passages_ids"])
-                                for row in eval_dataset["queries_trivial_passages_mapping"]}
+                             for row in eval_dataset["queries_trivial_passages_mapping"]}
 
     excluding_ir_evaluator_eval = ExcludingInformationRetrievalEvaluator(
-        corpus=eval_corpus,
+        corpus=eval_passages,
         queries=eval_queries,
         relevant_docs=eval_relevant_passages,
         excluded_docs=eval_trivial_passages,
         show_progress_bar=True,
         write_csv=True,
         log_top_k_predictions=5,  # log the top 5 docs per query
-        run=run
+        run=run,
+        query_labels={row["id"]: row["labels"] for row in eval_dataset["queries"]},
+        doc_labels={row["id"]: row["label"] for row in eval_dataset["passages"]},
+        log_label_confusion=True,
+        log_fp_fn=True,
+        log_rank_histogram=True,
+        log_multilabel_coverage=True,
+        log_tsne_embeddings=True,
+        tsne_sample_size=True,
     )
 
     excluding_ir_evaluator_eval(model)
-
 
     train_args = SentenceTransformerTrainingArguments(
         output_dir=exp_config.model_run_dir,
@@ -152,6 +160,7 @@ if __name__ == "__main__":
     parser.add_argument('--batch_size', type=str, help='Batch size.')
     parser.add_argument('--num_epochs', type=int, help='Number of epochs.')
     parser.add_argument('--loss_function', type=str, help='Name of the loss function to use.')
+    parser.add_argument('--is_test_run', action='store_true', help='Run training in test mode.')
     args = parser.parse_args()
 
     sys.path.append("/home/ls6/hauptmann/ethikchat-experiment-argument-classification")
@@ -171,8 +180,8 @@ if __name__ == "__main__":
         args_model_name_escaped = args_model_name.replace("/", "-")
         args_learning_rate = 2e-05
         args_batch_size = 4
-        args_model_run_dir = os.path.join(args_project_root, args_experiment_dir, args_experiment_run, f"{args_model_name_escaped}_lr{args_learning_rate}_bs{args_batch_size}")
-
+        args_model_run_dir = os.path.join(args_project_root, args_experiment_dir, args_experiment_run,
+                                          f"{args_model_name_escaped}_lr{args_learning_rate}_bs{args_batch_size}")
 
         experiment_config = {
             "project_root": args_project_root,
@@ -192,7 +201,6 @@ if __name__ == "__main__":
         }
 
         experiment_config = ExperimentConfig(**experiment_config)
-
 
         if not os.path.exists(args_model_run_dir):
             os.makedirs(args_model_run_dir)
@@ -225,4 +233,4 @@ if __name__ == "__main__":
 
         experiment_config = ExperimentConfig(**experiment_config)
 
-        main(experiment_config)
+        main(experiment_config, is_test_run=args.is_test_run)
