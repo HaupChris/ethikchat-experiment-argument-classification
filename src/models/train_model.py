@@ -93,7 +93,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         log_rank_histogram=True,
         log_multilabel_coverage=True,
         log_tsne_embeddings=True,
-        tsne_sample_size=True,
+        tsne_sample_size=1000,
     )
 
     excluding_ir_evaluator_eval(model)
@@ -172,10 +172,10 @@ if __name__ == "__main__":
         print("Starting training in testing mode...")
 
         args_project_root = "/home/christian/PycharmProjects/ethikchat-experiment-argument-classification"
-        args_experiment_run = "v0"
+        args_experiment_run = "v1"
         args_experiment_dir = "experiments_outputs"
         args_dataset_dir = "data/processed"
-        args_dataset_name = "corpus_dataset_experiment_v0"
+        args_dataset_name = "corpus_dataset_experiment_v1"
         args_model_name = "airnicco8/xlm-roberta-de"
         args_model_name_escaped = args_model_name.replace("/", "-")
         args_learning_rate = 2e-05
