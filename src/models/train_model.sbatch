@@ -13,7 +13,6 @@ loss_function="MultipleNegativesRankingLoss"
 # add project root directory to python path
 export PYTHONPATH="${project_root_dir}:${PYTHONPATH}"
 
-
 # Initialize mode flags
 TEST_MODE=0
 CONT_MODE=0
@@ -29,7 +28,6 @@ fi
 source /home/ls6/hauptmann/ethikchat-experiment-argument-classification/venv/bin/activate
 
 model_names=(
-  "google-bert/bert-base-uncased"
   "aari1995/German_Semantic_STS_V2"
   "aari1995/German_Semantic_V3b"
   "T-Systems-onsite/cross-en-de-roberta-sentence-transformer"
@@ -37,6 +35,7 @@ model_names=(
   "JoBeer/german-semantic-base"
   "deutsche-telekom/gbert-large-paraphrase-euclidea"
   "jinaai/jina-embeddings-v2-base-de"
+  "google-bert/bert-base-uncased"
 )
 
 # List of dataset names
@@ -52,7 +51,6 @@ learning_rates=(
 batch_sizes=(
   "64"
 )
-
 
 # Initialize job counter
 JOB_COUNTER=0
@@ -82,7 +80,6 @@ for dataset_index in "${!dataset_names[@]}"; do
 
         # Define output directory
         model_run_dir="${experiment_run_dir}/${model_name_escaped}/lr${lr}/bs${batch_size}"
-
 
         # Ensure output directory exists
         mkdir -p "${model_run_dir}"
