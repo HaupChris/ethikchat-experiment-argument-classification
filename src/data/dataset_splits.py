@@ -5,8 +5,7 @@ from copy import deepcopy
 from datasets import DatasetDict, Dataset, load_from_disk
 from ethikchat_argtoolkit.Dialogue.discussion_szenario import DiscussionSzenario
 
-from src.data.create_corpus_dataset import DatasetSplitType, create_dataset, DatasetConfig
-from src.data.make_dataset import UtteranceType
+from src.data.create_corpus_dataset import DatasetSplitType, create_dataset, DatasetConfig, UtteranceType
 
 
 def create_splits_from_corpus_dataset(
@@ -195,7 +194,7 @@ def create_splits_from_corpus_dataset(
 
 if __name__ == "__main__":
 
-    dataset_path = "../../data/processed/corpus_dataset_experiment_v0"
+    dataset_path = "../../data/processed/corpus_dataset_experiment_v1"
 
     if not os.path.exists(dataset_path):
         # Beispiel zum Erstellen eines Datensatzes. Mögliche Optionen von DatasetConfig sind im DocString beschrieben.
@@ -215,8 +214,8 @@ if __name__ == "__main__":
     # Beispiel zum Laden des Datensatzes + collate_function des DataLoaders um dynamisch ein Subset der negative passages zu laden.
     hf_dataset = load_from_disk(dataset_path)
     simple_split = create_splits_from_corpus_dataset(hf_dataset, DatasetSplitType.Simple)
-    split_by_scenario = create_splits_from_corpus_dataset(hf_dataset, DatasetSplitType.ByDiscussionSzenario, test_scenario=DiscussionSzenario.JURAI)
-    kfold_split = create_splits_from_corpus_dataset(hf_dataset, DatasetSplitType.kFold, None, 5)
+    # split_by_scenario = create_splits_from_corpus_dataset(hf_dataset, DatasetSplitType.ByDiscussionSzenario, test_scenario=DiscussionSzenario.JURAI)
+    # kfold_split = create_splits_from_corpus_dataset(hf_dataset, DatasetSplitType.kFold, None, 5)
     print("done")
 
 

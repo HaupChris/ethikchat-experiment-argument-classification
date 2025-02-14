@@ -26,6 +26,35 @@ class UtteranceType(Enum):
 
 
 @dataclass
+class DatasetConfig:
+    """
+    Configuration class for dataset creation.
+
+    Attributes:
+    ----------
+    model_name_or_path : str
+        The name or path of the pre-trained model (e.g., Huggingface model) to be used for tokenization.
+    dataset_path : str
+        The path to the directory where the created dataset will be saved.
+    project_dir : str
+        The directory head directory of the project from which will be infered where the dialogue files for the dataset creation are stored.
+    with_context : bool, optional
+        A flag indicating whether to include the previous utterance in the dialogue as context.
+    utterance_type : UtteranceType, optional
+        The type of utterance that should be used for segmentation or classification. It can be either user or bot
+        utterances, or both (default is UtteranceType.UserAndBot).
+    downsample_ratio: float = 1.0
+        The ratio by which the instances in the dataset with number_of_true_labels == 1 should be downsampled.
+    """
+
+    dataset_path: str
+    project_dir: str
+    with_context: bool
+    utterance_type: UtteranceType
+    downsample_ratio: float
+
+
+@dataclass
 class ProcessedUtterance:
     """
     Dataclass for a processed utterance in the dataset.
@@ -597,6 +626,7 @@ def create_dataset(config: DatasetConfig) -> None:
     hf_dataset = DatasetDict({
         "queries": Dataset.from_dict({"id": [query.id for query in queries],
                                       "text": [query.text for query in queries],
+                                      "labels": [query.labels for query in queries],
                                       "discussion_scenario": [query.discussion_scenario for query in queries]}),
         "passages": Dataset.from_dict({"id": [passage.id for passage in passages],
                                        "text": [passage.text for passage in passages],

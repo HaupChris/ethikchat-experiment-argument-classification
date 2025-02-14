@@ -16,15 +16,14 @@ def create_dataset_for_multiple_negatives_ranking_loss(
       - "passages": has columns ["id", "text", ...]
       - "queries_relevant_passages_mapping": columns ["query_id", "passages_ids"]
 
-    Return a HF Dataset with only (query, positive).
+    Returns an HF Dataset with only (query, positive).
 
     This serves as input to the MultipleNegativesRankingLoss.
     According to the docs (https://www.sbert.net/docs/sentence_transformer/training_overview.html#dataset-format)
     the order of the columns is important: "anchor" is the query, "positive" is the positive passage. The names
     of the columns is not taken into account by the loss function, only the order.
-
-
     """
+
     queries = split_dataset["queries"].to_list()   # each item: {"id", "text", ...}
     passages = split_dataset["passages"].to_list() # each item: {"id", "text", ...}
     mapping  = split_dataset["queries_relevant_passages_mapping"].to_list()
