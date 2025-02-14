@@ -100,7 +100,6 @@ for dataset_index in "${!dataset_names[@]}"; do
 #SBATCH --gres=gpu:1
 #SBATCH --output=${log_file}
 #SBATCH --error=${log_file}
-#SBATCH --exclude=gpu8a
 
 # Activate the virtual environment
 source ~/ethikchat-experiment-argument-classification/venv/bin/activate
