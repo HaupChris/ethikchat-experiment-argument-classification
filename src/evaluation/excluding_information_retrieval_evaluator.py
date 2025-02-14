@@ -662,14 +662,13 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
 
     def _log_first_relevant_rank_histogram(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
         """
-        Plots a histogram of the rank of the first relevant doc for each query.
-        E.g., how many queries find the 1st relevant doc at rank=1, rank=2, etc.
+        Plots a histogram of the rank of the first relevant doc for each query
+        using the newer wandb.plot.histogram() API, which requires passing a wandb.Table.
         """
         if not self.run:
             return
 
-        # We'll pick the first score function as reference or do all.
-        # For simplicity, do for the first:
+        # We'll pick the first score function as reference (or do multiple if you prefer)
         score_func_name = next(iter(queries_result_list.keys()))
         hits_for_score = queries_result_list[score_func_name]
         top_k = max(
@@ -693,8 +692,20 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
                 found_rank = top_k + 1
             ranks.append(found_rank)
 
-        # Log a histogram to wandb
-        self.run.log({f"{self.name}_first_relevant_rank_histogram": wandb.plot.histogram(np.array(ranks), nbins=top_k+1)})
+        # Build a wandb.Table to hold the rank data
+        table = wandb.Table(columns=["rank"])
+        for r in ranks:
+            table.add_data(r)
+
+        # Construct a histogram from the table
+        histogram_plot = wandb.plot.histogram(
+            table,
+            value="rank",
+            title="First Relevant Document Rank Distribution"
+        )
+
+        # Log the histogram object to W&B
+        self.run.log({f"{self.name}_first_relevant_rank_histogram": histogram_plot})
 
     def _log_multilabel_coverage(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
         """
