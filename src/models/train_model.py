@@ -13,7 +13,7 @@ from sentence_transformers import (
     SentenceTransformerTrainingArguments
 )
 
-from sentence_transformers.losses import MultipleNegativesRankingLoss, CachedMultipleNegativesRankingLoss
+from sentence_transformers.losses import CachedMultipleNegativesRankingLoss
 from sentence_transformers.training_args import BatchSamplers
 
 from src.data.create_corpus_dataset import DatasetSplitType
@@ -38,7 +38,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
 
     wandb.login(key=api_key)
 
-    run_name = f"{exp_config.model_name_escaped}_lr{exp_config.learning_rate}_bs{exp_config.batch_size}_gas{gradient_accumulation_steps}_{exp_config.run_time}"
+    run_name = f"{exp_config.model_name_escaped}_lr{exp_config.learning_rate}_bs{exp_config.batch_size}_{exp_config.run_time}"
 
     # Initialize wandb
     run = wandb.init(
