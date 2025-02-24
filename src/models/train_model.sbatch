@@ -33,7 +33,7 @@ model_names=(
   "T-Systems-onsite/cross-en-de-roberta-sentence-transformer"
   "T-Systems-onsite/german-roberta-sentence-transformer-v2"
   "JoBeer/german-semantic-base"
-  "deutsche-telekom/gbert-large-paraphrase-euclidea"
+  "deutsche-telekom/gbert-large-paraphrase-euclidean"
   "jinaai/jina-embeddings-v2-base-de"
   "google-bert/bert-base-uncased"
 )
@@ -49,7 +49,7 @@ learning_rates=(
 )
 
 batch_sizes=(
-  "64"
+  "8"
 )
 
 # Initialize job counter

@@ -13,7 +13,7 @@ from sentence_transformers import (
     SentenceTransformerTrainingArguments
 )
 
-from sentence_transformers.losses import MultipleNegativesRankingLoss
+from sentence_transformers.losses import MultipleNegativesRankingLoss, CachedMultipleNegativesRankingLoss
 from sentence_transformers.training_args import BatchSamplers
 
 from src.data.create_corpus_dataset import DatasetSplitType
@@ -37,7 +37,6 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     api_key = os.getenv("WANDB_API_KEY")
 
     wandb.login(key=api_key)
-    gradient_accumulation_steps = exp_config.batch_size // 8
 
     run_name = f"{exp_config.model_name_escaped}_lr{exp_config.learning_rate}_bs{exp_config.batch_size}_gas{gradient_accumulation_steps}_{exp_config.run_time}"
 
@@ -53,7 +52,9 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     model = SentenceTransformer(exp_config.model_name)
 
     # Define loss
-    loss = MultipleNegativesRankingLoss(model=model)
+    loss = CachedMultipleNegativesRankingLoss(model=model,
+                                              show_progress_bar=True,
+                                              mini_batch_size=256)
 
     # Load dataset
     dataset = load_from_disk(f"{exp_config.project_root}/{exp_config.dataset_dir}/{exp_config.dataset_name}")
@@ -116,8 +117,9 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         run_name=run_name,  # Sync run name with wandb
         load_best_model_at_end=True,
         lr_scheduler_type="linear",
-        gradient_accumulation_steps=gradient_accumulation_steps,
     )
+
+    # TODO: Check if training data is shuffled. If not, is this problematic for the loss function?
     trainer = SentenceTransformerTrainer(
         model=model,
         args=train_args,
@@ -176,7 +178,7 @@ if __name__ == "__main__":
         args_experiment_dir = "experiments_outputs"
         args_dataset_dir = "data/processed"
         args_dataset_name = "corpus_dataset_experiment_v1"
-        args_model_name = "airnicco8/xlm-roberta-de"
+        args_model_name = "deutsche-telekom/gbert-large-paraphrase-euclidean"
         args_model_name_escaped = args_model_name.replace("/", "-")
         args_learning_rate = 2e-05
         args_batch_size = 4
