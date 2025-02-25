@@ -788,3 +788,45 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             table.add_data(did, "doc", float(x), float(y))
 
         self.run.log({f"{self.name}_tsne": table})
+
+    def _log_top1_classification(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
+        """
+        Logs a wandb.Table with details about each query and its top-1 classification result.
+
+        The table includes the following columns:
+        - `query_id`: Unique identifier for the query
+        - `query_text`: Text of the query
+        - `query_labels`: Ground truth labels for the query
+        - `top1_id`: Identifier of the highest-rated passage
+        - `top1_text`: Text of the highest-rated passage
+        - `top1_label`: Label of the highest-rated passage
+        - `score`: Similarity score between the query and the top-1 passage
+        - `match`: Boolean indicating whether the top-1 passage is among the relevant passages for the query
+        """
+        # TODO: add potential filters
+        if not self.run:
+            return
+
+        top1_classification_table = wandb.Table(
+            columns=["query_id", "query_text", "query_labels",
+                     "top1_id", "top1_text", "top1_label",
+                     "score", "match"]
+        )
+
+        score_func_name = next(iter(queries_result_list.keys()))
+
+        for q_idx, top_hits in enumerate(queries_result_list[score_func_name]):
+            query_id = self.queries_ids[q_idx]
+            query_text = self.queries[q_idx]
+            query_labels = self.query_labels[query_id]
+            query_relevant_docs = self.relevant_docs[query_id]
+
+            score, doc_id = top_hits[0]
+            doc_text = self.corpus_map[doc_id]
+            doc_label = self.doc_labels[doc_id]
+
+            correct_prediction = doc_id in query_relevant_docs
+
+            top1_classification_table.add_data(query_id, query_text, query_labels, doc_id, doc_text, doc_label, score, correct_prediction)
+
+        self.run.log({f"{self.name}_top1_classification": top1_classification_table})
