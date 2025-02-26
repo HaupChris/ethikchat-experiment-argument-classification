@@ -127,6 +127,7 @@ class DatasetConfig:
     utterance_type: UtteranceType = UtteranceType.UserAndBot
     eval_size: float = 0.2
     validation_test_ratio: float = 0.5
+    noisy_labels= ['OTHER', "Z_ARG", "NZ_ARG", "CON_NZARG", "CON_ZARG","PRO_NZARG", "PRO_ZARG"]
 
 
 class DatasetSplitType(Enum):
@@ -215,7 +216,7 @@ def check_bounds_correctness(utterance: Utterance, dialogue_id: int) -> None:
         )
 
 
-def utterance_contains_noisy_data(utterance: Utterance) -> bool:
+def utterance_contains_noisy_data(utterance: Utterance, noisy_labels) -> bool:
     """
     Function that checks if certain utterances would introduce noisy data into the dataset.
     """
@@ -227,8 +228,11 @@ def utterance_contains_noisy_data(utterance: Utterance) -> bool:
         print(f"Flagged utterance with 'bot uttering not understanding': {utterance.text} as noisy data.")
         return True
 
-    if utterance.true_labels == ['OTHER']:
-        print(f"Flagged utterance with OTHER label: {utterance.text}, {utterance.true_labels} as noisy data.")
+    ## remove duplicates from labels
+    true_labels = list(set(utterance.true_labels))
+
+    if len(true_labels) == 1 and true_labels[0] in noisy_labels:
+        print(f"Flagged utterance with noisy label: {utterance.text}, {utterance.true_labels} as noisy data.")
         return True
 
 
@@ -326,7 +330,8 @@ def preprocess_dataset(dialogues: List[Dialogue],
                        num_previous_turns: int,
                        utterance_type: UtteranceType,
                        sep_token: str,
-                       include_role: bool) -> List[ProcessedUtterance]:
+                       include_role: bool,
+                       noisy_labels: List[str]) -> List[ProcessedUtterance]:
     """
     Preprocesses a dataset by applying text normalization and updating bounds.
     Returns a list of ProcessedUtterance objects.
@@ -354,7 +359,7 @@ def preprocess_dataset(dialogues: List[Dialogue],
             if utterance_type == UtteranceType.Bot and utterance.is_from_user():
                 continue
 
-            if utterance_contains_noisy_data(utterance):
+            if utterance_contains_noisy_data(utterance, noisy_labels):
                 continue
 
             processed_utterance_text, processed_labels, processed_bounds = preprocess_utterance(utterance,
@@ -463,7 +468,8 @@ def create_dataset_splits(dialogues: List[Dialogue],
                           num_previous_turns: int,
                           sep_token: str,
                           utterance_type: UtteranceType,
-                          argument_graphs: Dict[DiscussionSzenario, ResponseTemplateCollection]) \
+                          argument_graphs: Dict[DiscussionSzenario, ResponseTemplateCollection],
+                          noisy_labels: List[str]) \
         -> Tuple[List[Query], List[Passage], Dict[int, List[int]], Dict[int, List[int]]]:
     """
     Creates the dataset splits for the information retrieval task. This consists of the following splits:
@@ -472,18 +478,18 @@ def create_dataset_splits(dialogues: List[Dialogue],
     - queries_relevant_passages_mapping: A mapping from query ids to relevant passage ids.
     - queries_trivial_passages_mapping: A mapping from query ids to trivial passage ids. (Passages that are part of the query itself)
     """
+
     processed_utterances = preprocess_dataset(
         dialogues,
         num_previous_turns,
         utterance_type,
         sep_token,
-        include_role)
+        include_role,
+        noisy_labels
+    )
 
-    # create passages from utterances
-    # define labels that should not be used for training
-    excluded_labels = ['OTHER']
 
-    utterances_passages = create_passages_from_utterances(processed_utterances)
+    utterances_passages = create_passages_from_utterances(processed_utterances, noisy_labels)
 
     argument_graphs_passages = []
     for discussion_scenario, argument_graph in argument_graphs.items():
@@ -578,8 +584,7 @@ def create_dataset(config: DatasetConfig) -> None:
     }
 
     queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping = create_dataset_splits(
-        all_dialogues, include_role, num_previous_turns, sep_token, utterance_type, argument_graphs)
-
+        all_dialogues, include_role, num_previous_turns, sep_token, utterance_type, argument_graphs, config.noisy_labels)
 
     # create hf dataset
     hf_dataset = DatasetDict({
