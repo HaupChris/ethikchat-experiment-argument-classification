@@ -449,6 +449,15 @@ def create_queries_trivial_passages_mapping_split(queries: List[Query], passages
     return queries_trivial_passages_mapping
 
 
+def check_for_missing_passages(queries_relevant_passages_mapping: Dict[int, List[int]]) -> None:
+    """
+    Checks for missing passages in the queries_relevant_passages_mapping split.
+    """
+    for query_id, relevant_passages in queries_relevant_passages_mapping.items():
+        if len(relevant_passages) == 0:
+           raise ValueError(f"Query {query_id} has no relevant passages.")
+
+
 def create_dataset_splits(dialogues: List[Dialogue],
                           include_role: bool,
                           num_previous_turns: int,
@@ -471,6 +480,9 @@ def create_dataset_splits(dialogues: List[Dialogue],
         include_role)
 
     # create passages from utterances
+    # define labels that should not be used for training
+    excluded_labels = ['OTHER']
+
     utterances_passages = create_passages_from_utterances(processed_utterances)
 
     argument_graphs_passages = []
@@ -488,6 +500,9 @@ def create_dataset_splits(dialogues: List[Dialogue],
 
     queries_relevant_passages_mapping = create_queries_relevant_passages_mapping_split(queries, passages)
     queries_trivial_passages_mapping = create_queries_trivial_passages_mapping_split(queries, passages)
+
+    check_for_missing_passages(queries_relevant_passages_mapping)
+    check_for_missing_passages(queries_trivial_passages_mapping)
 
     return queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping
 
