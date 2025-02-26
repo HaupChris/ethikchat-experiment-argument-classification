@@ -369,47 +369,6 @@ def preprocess_dataset(dialogues: List[Dialogue],
     return processed_utterances
 
 
-def extract_positive_passages(labels: List[str], rtc: ResponseTemplateCollection) -> List[str]:
-    allowed_labels = rtc.arguments_labels
-    labels = [label for label in labels if label in allowed_labels]
-
-    positive_passages = []
-    for label in labels:
-        template = rtc.get_template_for_label(label)
-        positives = [template.summary, template.full_text]
-        positives.extend(template.samples)
-        positive_passages.extend(positives)
-
-    return positive_passages
-
-
-def extract_negative_passages(labels: List[str], rtc: ResponseTemplateCollection) -> List[str]:
-    label_pool = rtc.arguments_labels.difference(labels)
-
-    negative_passages = []
-    for label in label_pool:
-        template = rtc.get_template_for_label(label)
-        negatives = [template.summary, template.full_text]
-        negatives.extend(template.samples)
-        negative_passages.extend(negatives)
-
-    return negative_passages
-
-
-def extract_hard_negative_passages(labels: List[str], rtc: ResponseTemplateCollection) -> List[str]:
-    allowed_labels = rtc.z_arguments_labels.union(rtc.nz_arguments_labels)
-
-    hard_negative_passages = []
-    for label in labels:
-        if label in allowed_labels:
-            template = rtc.get_template_for_label(label)
-
-            for counter_template in template.child_templates:
-                hard_negative_passages.extend([counter_template.summary, counter_template.full_text])
-
-    return hard_negative_passages
-
-
 def create_queries_split(processed_utterances: List[ProcessedUtterance]) -> List[Query]:
     """
     Creates a split that contains utterances and an id. This is the "queries" split.
