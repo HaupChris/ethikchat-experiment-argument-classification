@@ -580,29 +580,6 @@ def create_dataset(config: DatasetConfig) -> None:
     queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping = create_dataset_splits(
         all_dialogues, include_role, num_previous_turns, sep_token, utterance_type, argument_graphs)
 
-    # medai_queries, medai_passages, medai_queries_relevant_passages_mapping = create_dataset_splits(
-    #     dialogues_medai, include_role, num_previous_turns, sep_token, utterance_type, argument_graph_med,
-    #     DiscussionSzenario.MEDAI
-    # )
-    # jurai_queries, jurai_passages, jurai_queries_relevant_passages_mapping = create_dataset_splits(
-    #     dialogues_jurai, include_role, num_previous_turns, sep_token, utterance_type, argument_graph_jur,
-    #     DiscussionSzenario.JURAI
-    # )
-    # autoai_queries, autoai_passages, autoai_queries_relevant_passages_mapping = create_dataset_splits(
-    #     dialogues_autoai, include_role, num_previous_turns, sep_token, utterance_type, argument_graph_auto,
-    #     DiscussionSzenario.AUTOAI
-    # )
-    # refai_queries, refai_passages, refai_queries_relevant_passages_mapping = create_dataset_splits(
-    #     dialogues_refai, include_role, num_previous_turns, sep_token, utterance_type, argument_graph_ref,
-    #     DiscussionSzenario.REFAI
-    # )
-
-    # queries = medai_queries + jurai_queries + autoai_queries + refai_queries
-    # passages = medai_passages + jurai_passages + autoai_passages + refai_passages
-    # queries_relevant_passages_mapping = {**medai_queries_relevant_passages_mapping,
-    #                                      **jurai_queries_relevant_passages_mapping,
-    #                                      **autoai_queries_relevant_passages_mapping,
-    #                                      **refai_queries_relevant_passages_mapping}
 
     # create hf dataset
     hf_dataset = DatasetDict({
