@@ -220,9 +220,15 @@ def utterance_contains_noisy_data(utterance: Utterance) -> bool:
     Function that checks if certain utterances would introduce noisy data into the dataset.
     """
     if "aus der folgenden Liste" in utterance.text:
+        print(f"Flagged utterance with 'aus der folgenden Liste' in text: {utterance.text} as noisy data.")
         return True
 
     if "Ich bin mir nicht sicher, was du genau meinst." in utterance.text:
+        print(f"Flagged utterance with 'bot uttering not understanding': {utterance.text} as noisy data.")
+        return True
+
+    if utterance.true_labels == ['OTHER']:
+        print(f"Flagged utterance with OTHER label: {utterance.text}, {utterance.true_labels} as noisy data.")
         return True
 
 
@@ -393,7 +399,7 @@ def create_queries_relevant_passages_mapping_split(queries: List[Query], passage
     return queries_relevant_passages_mapping
 
 
-def create_passages_from_utterances(processed_utterances: List[ProcessedUtterance]) -> List[Passage]:
+def create_passages_from_utterances(processed_utterances: List[ProcessedUtterance], excluded_labels: List[str]) -> List[Passage]:
     """
     Creates passages from utterances.
     """
@@ -402,11 +408,13 @@ def create_passages_from_utterances(processed_utterances: List[ProcessedUtteranc
     for pu in processed_utterances:
         for idx, (start, end) in enumerate(pu.bounds):
             passage_text = pu.text[start:end]
-            passages.append(Passage(id=None,
-                                    text=passage_text,
-                                    label=pu.labels[idx],
-                                    discussion_scenario=pu.discussion_scenario.value,
-                                    retrieved_query_id=pu.id))
+
+            if pu.labels[idx] not in excluded_labels:
+                passages.append(Passage(id=None,
+                                        text=passage_text,
+                                        label=pu.labels[idx],
+                                        discussion_scenario=pu.discussion_scenario.value,
+                                        retrieved_query_id=pu.id))
     return passages
 
 
