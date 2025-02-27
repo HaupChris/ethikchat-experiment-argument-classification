@@ -56,7 +56,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     # Define loss
     loss = CachedMultipleNegativesRankingLoss(model=model,
                                               show_progress_bar=False,
-                                              mini_batch_size=512)
+                                              mini_batch_size=16)
 
     # Load dataset
     dataset = load_from_disk(f"{exp_config.project_root}/{exp_config.dataset_dir}/{exp_config.dataset_name}")
@@ -131,7 +131,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     train_args = SentenceTransformerTrainingArguments(
         output_dir=exp_config.model_run_dir,
         num_train_epochs=exp_config.num_epochs,
-        per_device_train_batch_size=8,
+        per_device_train_batch_size=256,
         per_device_eval_batch_size=8,
         learning_rate=exp_config.learning_rate,
         warmup_ratio=0.1,
