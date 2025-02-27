@@ -140,7 +140,6 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         learning_rate=exp_config.learning_rate,
         warmup_ratio=0.1,
         fp16=(not is_test_run),
-        bf16=(not is_test_run),
         batch_sampler=BatchSamplers.NO_DUPLICATES,
         eval_strategy="steps",
         eval_steps=4000,
