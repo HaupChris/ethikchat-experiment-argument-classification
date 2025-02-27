@@ -33,45 +33,45 @@ class NoDuplicateLabelsBatchSampler(BatchSampler):
         self._create_batches()
 
     def _create_batches(self):
-        """ Partition self.indices into label-disjoint batches. """
+        print(f"[NoDuplicateLabelsBatchSampler] Creating batches for {len(self.dataset)} items...")
         used = [False] * len(self.dataset)
-        idx_ptr = 0  # We'll iterate over self.indices in a loop
 
-        # We keep looping until we cannot form any more batches
+        batch_count = 0
         while True:
             used_labels = set()
             current_batch = []
-            # Try to fill up to batch_size
+
             for idx in self.indices:
                 if used[idx]:
                     continue
-                # Extract labels from the dataset. Adjust as needed if your dataset has a different structure.
-                # Assuming each row is (anchor, text, labels).
                 example_labels = set(self.dataset[idx]["labels"])
 
-                # Check if there's an intersection with already-used labels
                 if used_labels.intersection(example_labels):
-                    continue  # can't add this example, it conflicts with the current batch
+                    continue
 
-                # Otherwise, add it
                 current_batch.append(idx)
                 used[idx] = True
                 used_labels.update(example_labels)
 
                 if len(current_batch) >= self.batch_size:
-                    # batch is 'full'
+                    # Batch is 'full'
                     break
 
             if not current_batch:
-                # no new example could be placed => we are done
+                print(f"[NoDuplicateLabelsBatchSampler] No more items could be batched. Exiting loop.")
                 break
 
             self.batches.append(current_batch)
+            batch_count += 1
+            print(f"[NoDuplicateLabelsBatchSampler] Created batch {batch_count} with {len(current_batch)} items.")
 
-        # If drop_last=True, remove the last batch if it's not exactly batch_size
+        # If drop_last=True, remove the last batch if it's smaller than batch_size
         if self.drop_last and len(self.batches):
             if len(self.batches[-1]) < self.batch_size:
+                print("[NoDuplicateLabelsBatchSampler] Dropping last underfilled batch.")
                 self.batches.pop()
+
+        print(f"[NoDuplicateLabelsBatchSampler] Finished creating {len(self.batches)} batches total.")
 
     def __iter__(self):
         """
