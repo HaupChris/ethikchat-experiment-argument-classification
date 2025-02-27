@@ -4,15 +4,12 @@ import sys
 from datetime import datetime
 
 import wandb
-
 from datasets import load_from_disk
 from dotenv import load_dotenv
 from sentence_transformers import (
     SentenceTransformer,
-    SentenceTransformerTrainer,
     SentenceTransformerTrainingArguments
 )
-
 from sentence_transformers.losses import CachedMultipleNegativesRankingLoss
 from sentence_transformers.training_args import BatchSamplers
 
@@ -34,52 +31,83 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         exp_config: ExperimentConfig
         is_test_run: bool, defines if the training is a test run and only a small subset of the data is used
     """
-    # login to wandb by loading the API key from the .env file
-    load_dotenv(exp_config.project_root + "/.env")
-    api_key = os.getenv("WANDB_API_KEY")
+    print("=== MAIN START ===")
+    print(f"Experiment config:\n{exp_config}")
+    print(f"Is test run? {is_test_run}")
 
+    # Load environment variables
+    env_path = exp_config.project_root + "/.env"
+    print(f"Loading environment variables from {env_path}")
+    load_dotenv(env_path)
+    api_key = os.getenv("WANDB_API_KEY")
+    print("W&B API Key found?" if api_key else "W&B API Key NOT found!")
+
+    print("Logging into Weights & Biases...")
     wandb.login(key=api_key)
+    print("W&B login complete.")
 
     run_name = f"{exp_config.model_name_escaped}_lr{exp_config.learning_rate}_bs{exp_config.batch_size}_{exp_config.run_time}"
+    print(f"Constructed run name: {run_name}")
 
-    # Initialize wandb
+    print("Initializing wandb run...")
     run = wandb.init(
         project="argument-classification",
-        name=f"{exp_config.model_name_escaped}_lr{exp_config.learning_rate}_bs{exp_config.batch_size}_{exp_config.run_time}",
-        # Sync run name with wandb
+        name=run_name,
         config=exp_config.model_dump(),
     )
+    print("Wandb run initialized.")
 
     # Load model
+    print(f"Loading model: {exp_config.model_name}")
     model = SentenceTransformer(exp_config.model_name)
+    print("Model loaded successfully.")
 
     # Define loss
-    loss = CachedMultipleNegativesRankingLoss(model=model,
-                                              show_progress_bar=False,
-                                              mini_batch_size=16)
+    print("Defining CachedMultipleNegativesRankingLoss...")
+    loss = CachedMultipleNegativesRankingLoss(
+        model=model,
+        show_progress_bar=False,
+        mini_batch_size=16
+    )
+    print("Loss defined.")
 
     # Load dataset
-    dataset = load_from_disk(f"{exp_config.project_root}/{exp_config.dataset_dir}/{exp_config.dataset_name}")
+    dataset_path = f"{exp_config.project_root}/{exp_config.dataset_dir}/{exp_config.dataset_name}"
+    print(f"Loading dataset from: {dataset_path}")
+    dataset = load_from_disk(dataset_path)
+    print("Dataset loaded.")
+    print("Creating dataset splits...")
     splitted_dataset = create_splits_from_corpus_dataset(dataset, exp_config.dataset_split_type)
+    print("Dataset splits created.")
 
+    # Prepare train and eval datasets
+    print("Preparing train_pos and eval_pos...")
     if is_test_run:
         train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"], 1)
         eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"], 1)
-        # train_pos = train_pos.shuffle(seed=42).select(range(10))
-        # eval_pos = eval_pos.shuffle(seed=42).select(range(10))
+        print("Using small subset for test run.")
     else:
         train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"])
         eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"])
+        print("Full dataset used for training/validation.")
+
+    print("Train/Eval datasets prepared.")
 
     # Prepare evaluation data
+    print("Preparing evaluation data structures...")
     eval_dataset = splitted_dataset["validation"]
     eval_passages = {row["id"]: row["text"] for row in eval_dataset["passages"]}
     eval_queries = {row["id"]: row["text"] for row in eval_dataset["queries"]}
-    eval_relevant_passages = {row["query_id"]: set(row["passages_ids"])
-                              for row in eval_dataset["queries_relevant_passages_mapping"]}
-    eval_trivial_passages = {row["query_id"]: set(row["passages_ids"])
-                             for row in eval_dataset["queries_trivial_passages_mapping"]}
+    eval_relevant_passages = {
+        row["query_id"]: set(row["passages_ids"])
+        for row in eval_dataset["queries_relevant_passages_mapping"]
+    }
+    eval_trivial_passages = {
+        row["query_id"]: set(row["passages_ids"])
+        for row in eval_dataset["queries_trivial_passages_mapping"]
+    }
 
+    print("Instantiating ExcludingInformationRetrievalEvaluator for eval...")
     excluding_ir_evaluator_eval = ExcludingInformationRetrievalEvaluator(
         corpus=eval_passages,
         queries=eval_queries,
@@ -87,7 +115,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         excluded_docs=eval_trivial_passages,
         show_progress_bar=True,
         write_csv=True,
-        log_top_k_predictions=5,  # log the top 5 docs per query
+        log_top_k_predictions=5,
         run=run,
         query_labels={row["id"]: row["labels"] for row in eval_dataset["queries"]},
         doc_labels={row["id"]: row["label"] for row in eval_dataset["passages"]},
@@ -98,17 +126,23 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         log_tsne_embeddings=False,
         tsne_sample_size=1000,
     )
+    print("ExcludingInformationRetrievalEvaluator for eval created.")
 
-    # prepare test data
+    # Prepare test data
+    print("Preparing test data structures...")
     test_dataset = splitted_dataset["test"]
     test_passages = {row["id"]: row["text"] for row in test_dataset["passages"]}
     test_queries = {row["id"]: row["text"] for row in test_dataset["queries"]}
-    test_relevant_passages = {row["query_id"]: set(row["passages_ids"])
-                                for row in test_dataset["queries_relevant_passages_mapping"]}
-    test_trivial_passages = {row["query_id"]: set(row["passages_ids"])
-                                for row in test_dataset["queries_trivial_passages_mapping"]}
+    test_relevant_passages = {
+        row["query_id"]: set(row["passages_ids"])
+        for row in test_dataset["queries_relevant_passages_mapping"]
+    }
+    test_trivial_passages = {
+        row["query_id"]: set(row["passages_ids"])
+        for row in test_dataset["queries_trivial_passages_mapping"]
+    }
 
-
+    print("Instantiating ExcludingInformationRetrievalEvaluator for test...")
     excluding_ir_evaluator_test = ExcludingInformationRetrievalEvaluator(
         corpus=test_passages,
         queries=test_queries,
@@ -116,7 +150,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         excluded_docs=test_trivial_passages,
         show_progress_bar=True,
         write_csv=True,
-        log_top_k_predictions=5,  # log the top 5 docs per query
+        log_top_k_predictions=5,
         run=run,
         query_labels={row["id"]: row["labels"] for row in test_dataset["queries"]},
         doc_labels={row["id"]: row["label"] for row in test_dataset["passages"]},
@@ -127,7 +161,9 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         log_tsne_embeddings=False,
         tsne_sample_size=1000,
     )
+    print("ExcludingInformationRetrievalEvaluator for test created.")
 
+    print("Setting up training arguments...")
     train_args = SentenceTransformerTrainingArguments(
         output_dir=exp_config.model_run_dir,
         num_train_epochs=exp_config.num_epochs,
@@ -142,12 +178,13 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         save_strategy="steps",
         save_steps=4000,
         save_total_limit=2,
-        run_name=run_name,  # Sync run name with wandb
+        run_name=run_name,
         load_best_model_at_end=True,
         lr_scheduler_type="linear",
     )
+    print("Training arguments set.")
 
-
+    print("Initializing CustomSentenceTransformerTrainer...")
     trainer = CustomSentenceTransformerTrainer(
         model=model,
         args=train_args,
@@ -157,27 +194,31 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         evaluator=excluding_ir_evaluator_eval,
         data_collator=CustomSentenceTransformerDataCollator(tokenize_fn=model.tokenize, skip_columns=["labels"]),
     )
+    print("Trainer initialized.")
 
+    print("Starting training...")
     trainer.train()
+    print("Training complete.")
 
-    # Run final evaluation
+    print("Running final evaluation on validation set...")
     final_eval_results = excluding_ir_evaluator_eval(model)
+    print("Final evaluation results:", final_eval_results)
     run.log(final_eval_results)
 
-    # Run test evaluation
+    print("Running evaluation on test set...")
     test_eval_results = excluding_ir_evaluator_test(model)
+    print("Test evaluation results:", test_eval_results)
     run.log(test_eval_results)
 
-    # Save model to wandb as an artifact
-
+    print("Saving model as W&B artifact...")
     artifact = wandb.Artifact(name=run_name, type="model")
     artifact.add_dir(exp_config.model_run_dir)
     run.log_artifact(artifact)
+    print("Artifact logged.")
 
-    # save the slurm output to wandb
-
-    # Finish wandb run
+    print("Finishing wandb run...")
     run.finish()
+    print("=== MAIN END ===")
 
 
 if __name__ == "__main__":
@@ -199,7 +240,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     sys.path.append("/home/ls6/hauptmann/ethikchat-experiment-argument-classification")
-    print(sys.path)
+    print("Extended PYTHONPATH:", sys.path)
 
     expirment_timestamp_start = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
@@ -215,8 +256,12 @@ if __name__ == "__main__":
         args_model_name_escaped = args_model_name.replace("/", "-")
         args_learning_rate = 2e-05
         args_batch_size = 4
-        args_model_run_dir = os.path.join(args_project_root, args_experiment_dir, args_experiment_run,
-                                          f"{args_model_name_escaped}_lr{args_learning_rate}_bs{args_batch_size}")
+        args_model_run_dir = os.path.join(
+            args_project_root,
+            args_experiment_dir,
+            args_experiment_run,
+            f"{args_model_name_escaped}_lr{args_learning_rate}_bs{args_batch_size}"
+        )
 
         experiment_config = {
             "project_root": args_project_root,
@@ -243,6 +288,7 @@ if __name__ == "__main__":
         print(f"Running test training for model {args_model_name}")
         main(experiment_config, is_test_run=True)
     else:
+        print("Starting training in standard mode...")
         if args.batch_size == "auto":
             args_batch_size = "auto"
         else:
