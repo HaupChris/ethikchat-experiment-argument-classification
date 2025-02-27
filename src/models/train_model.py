@@ -56,7 +56,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     # Define loss
     loss = CachedMultipleNegativesRankingLoss(model=model,
                                               show_progress_bar=False,
-                                              mini_batch_size=256)
+                                              mini_batch_size=512)
 
     # Load dataset
     dataset = load_from_disk(f"{exp_config.project_root}/{exp_config.dataset_dir}/{exp_config.dataset_name}")
@@ -95,10 +95,9 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         log_fp_fn=True,
         log_rank_histogram=True,
         log_multilabel_coverage=True,
-        log_tsne_embeddings=True,
+        log_tsne_embeddings=False,
         tsne_sample_size=1000,
     )
-
 
     # prepare test data
     test_dataset = splitted_dataset["test"]
@@ -125,12 +124,9 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         log_fp_fn=True,
         log_rank_histogram=True,
         log_multilabel_coverage=True,
-        log_tsne_embeddings=True,
+        log_tsne_embeddings=False,
         tsne_sample_size=1000,
     )
-
-    pre_run_eval_results = excluding_ir_evaluator_eval(model)
-    run.log(pre_run_eval_results)
 
     train_args = SentenceTransformerTrainingArguments(
         output_dir=exp_config.model_run_dir,
