@@ -16,8 +16,10 @@ from sentence_transformers import (
 from sentence_transformers.losses import CachedMultipleNegativesRankingLoss
 from sentence_transformers.training_args import BatchSamplers
 
+from src.custom_trainer.custom_sentence_transformer_trainer import CustomSentenceTransformerTrainer
 from src.data.create_corpus_dataset import DatasetSplitType
 from src.data.dataset_splits import create_splits_from_corpus_dataset
+from src.data_collation.custom_sentence_transformer_data_collator import CustomSentenceTransformerDataCollator
 from src.evaluation.excluding_information_retrieval_evaluator import ExcludingInformationRetrievalEvaluator
 from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss
 from src.models.experiment_config import ExperimentConfig
@@ -53,7 +55,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
 
     # Define loss
     loss = CachedMultipleNegativesRankingLoss(model=model,
-                                              show_progress_bar=True,
+                                              show_progress_bar=False,
                                               mini_batch_size=256)
 
     # Load dataset
@@ -63,8 +65,8 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     if is_test_run:
         train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"], 1)
         eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"], 1)
-        train_pos = train_pos.shuffle(seed=42).select(range(10))
-        eval_pos = eval_pos.shuffle(seed=42).select(range(10))
+        # train_pos = train_pos.shuffle(seed=42).select(range(10))
+        # eval_pos = eval_pos.shuffle(seed=42).select(range(10))
     else:
         train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"])
         eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"])
@@ -97,7 +99,38 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         tsne_sample_size=1000,
     )
 
-    excluding_ir_evaluator_eval(model)
+
+    # prepare test data
+    test_dataset = splitted_dataset["test"]
+    test_passages = {row["id"]: row["text"] for row in test_dataset["passages"]}
+    test_queries = {row["id"]: row["text"] for row in test_dataset["queries"]}
+    test_relevant_passages = {row["query_id"]: set(row["passages_ids"])
+                                for row in test_dataset["queries_relevant_passages_mapping"]}
+    test_trivial_passages = {row["query_id"]: set(row["passages_ids"])
+                                for row in test_dataset["queries_trivial_passages_mapping"]}
+
+
+    excluding_ir_evaluator_test = ExcludingInformationRetrievalEvaluator(
+        corpus=test_passages,
+        queries=test_queries,
+        relevant_docs=test_relevant_passages,
+        excluded_docs=test_trivial_passages,
+        show_progress_bar=True,
+        write_csv=True,
+        log_top_k_predictions=5,  # log the top 5 docs per query
+        run=run,
+        query_labels={row["id"]: row["labels"] for row in test_dataset["queries"]},
+        doc_labels={row["id"]: row["label"] for row in test_dataset["passages"]},
+        log_label_confusion=True,
+        log_fp_fn=True,
+        log_rank_histogram=True,
+        log_multilabel_coverage=True,
+        log_tsne_embeddings=True,
+        tsne_sample_size=1000,
+    )
+
+    pre_run_eval_results = excluding_ir_evaluator_eval(model)
+    run.log(pre_run_eval_results)
 
     train_args = SentenceTransformerTrainingArguments(
         output_dir=exp_config.model_run_dir,
@@ -106,8 +139,8 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         per_device_eval_batch_size=8,
         learning_rate=exp_config.learning_rate,
         warmup_ratio=0.1,
-        fp16=True,
-        bf16=False,
+        fp16=(not is_test_run),
+        bf16=(not is_test_run),
         batch_sampler=BatchSamplers.NO_DUPLICATES,
         eval_strategy="steps",
         eval_steps=4000,
@@ -119,14 +152,15 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         lr_scheduler_type="linear",
     )
 
-    # TODO: Check if training data is shuffled. If not, is this problematic for the loss function?
-    trainer = SentenceTransformerTrainer(
+
+    trainer = CustomSentenceTransformerTrainer(
         model=model,
         args=train_args,
         train_dataset=train_pos,
         eval_dataset=eval_pos,
         loss=loss,
-        evaluator=excluding_ir_evaluator_eval
+        evaluator=excluding_ir_evaluator_eval,
+        data_collator=CustomSentenceTransformerDataCollator(tokenize_fn=model.tokenize, skip_columns=["labels"]),
     )
 
     trainer.train()
@@ -134,6 +168,10 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     # Run final evaluation
     final_eval_results = excluding_ir_evaluator_eval(model)
     run.log(final_eval_results)
+
+    # Run test evaluation
+    test_eval_results = excluding_ir_evaluator_test(model)
+    run.log(test_eval_results)
 
     # Save model to wandb as an artifact
 
@@ -208,7 +246,7 @@ if __name__ == "__main__":
             os.makedirs(args_model_run_dir)
 
         print(f"Running test training for model {args_model_name}")
-        main(experiment_config, is_test_run=False)
+        main(experiment_config, is_test_run=True)
     else:
         if args.batch_size == "auto":
             args_batch_size = "auto"
