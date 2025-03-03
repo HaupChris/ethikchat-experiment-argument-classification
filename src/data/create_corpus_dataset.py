@@ -140,9 +140,6 @@ class DatasetConfig:
 class DatasetSplitType(Enum):
     """
     Enum class for different dataset splits.
-    Simple is a simple train, validation, test split in the ratio 80:10:10.
-    ByDiscussionSzenario leaves out one discussion szenario for Test and uses the other ones for Train and Validation.
-    kFold splits the dataset into k folds for cross-validation.
     InDistribution makes sure that each label in the valid or test set is also present in the training set but not with the same anchors.
     OutOfDistributionSimple splits the dataset so that the valid and test set contain labels that are not present in the training set but other labels from the same discussion scenario are in the training set.
     OutOfDistributionHard leaves out all labels from a selected discussion scenario in the training set.
