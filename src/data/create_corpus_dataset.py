@@ -67,6 +67,13 @@ class ProcessedUtterance:
     discussion_scenario: DiscussionSzenario
 
 
+class PassageSource(Enum):
+    UserUtterance = "user_utterance"
+    ArgumentgraphSummary = "argumentgraph_summary"
+    ArgumentgraphFullText = "argumentgraph_full_text"
+    ArgumentgraphSample = "argumentgraph_sample"
+
+
 @dataclass
 class Passage:
     """
@@ -79,7 +86,9 @@ class Passage:
     text: str
     label: str
     discussion_scenario: str
+    passage_source: PassageSource
     retrieved_query_id: Optional[int] = None
+
 
 
 @dataclass
@@ -127,26 +136,37 @@ class DatasetConfig:
     utterance_type: UtteranceType = UtteranceType.UserAndBot
     eval_size: float = 0.2
     validation_test_ratio: float = 0.5
+    noisy_labels= ['OTHER',
+                   "Z_ARG", "PRO_ZARG", "CON_ZARG",
+                   "NZ_ARG", "PRO_NZARG", "CON_NZARG", "NZ.G1", "NZ.G2", "NZ.G3",
+                   "FAQ.G1",
+                   "Z.GK1", "Z.GK2", "Z.GK3", "Z.GK4", "Z.GK5", "Z.GK6", "Z.GK7", "Z.GK8", "Z.GK9", "Z.GK10",
+                   "Z.GP1", "Z.GP2", "Z.GP3", "Z.GP4", "Z.GP5", "Z.GP6", "Z.GP7", "Z.GP8", "Z.GP9", "Z.GP10",
+                   "NZ.G1", "NZ.G2", "NZ.G3", "NZ.G4",
+                   "CONSENT", "DISSENT"]
 
 
 class DatasetSplitType(Enum):
     """
     Enum class for different dataset splits.
-    Simple is a simple train, validation, test split in the ratio 80:10:10.
-    ByDiscussionSzenario leaves out one discussion szenario for Test and uses the other ones for Train and Validation.
-    kFold splits the dataset into k folds for cross-validation.
+    InDistribution makes sure that each label in the valid or test set is also present in the training set but not with the same anchors.
+    OutOfDistributionSimple splits the dataset so that the valid and test set contain labels that are not present in the training set but other labels from the same discussion scenario are in the training set.
+    OutOfDistributionHard leaves out all labels from a selected discussion scenario in the training set.
 
     """
-    Simple = "simple"
-    ByDiscussionSzenario = "by_discussion_szenario"
+    InDistribution = "in_distribution"
+    OutOfDistributionSimple = "out_of_distribution_easy"
+    OutOfDistributionHard = "out_of_distribution_hard"
     kFold = "k_fold"
 
     @classmethod
     def from_str(cls, value: str):
-        if value == "simple":
-            return cls.Simple
-        if value == "by_discussion_szenario":
-            return cls.ByDiscussionSzenario
+        if value == "in_distribution":
+            return cls.InDistribution
+        if value == "out_of_distribution_easy":
+            return cls.OutOfDistributionSimple
+        if value == "out_of_distribution_hard":
+            return cls.OutOfDistributionHard
         if value == "k_fold":
             return cls.kFold
         raise ValueError(f"Unknown DatasetSplitType: {value}")
@@ -215,15 +235,27 @@ def check_bounds_correctness(utterance: Utterance, dialogue_id: int) -> None:
         )
 
 
-def utterance_contains_noisy_data(utterance: Utterance) -> bool:
+def utterance_contains_noisy_data(utterance: Utterance, noisy_labels) -> Tuple[bool, str]:
     """
     Function that checks if certain utterances would introduce noisy data into the dataset.
     """
     if "aus der folgenden Liste" in utterance.text:
-        return True
+        print(f"Flagged utterance with 'aus der folgenden Liste' in text: {utterance.text} as noisy data.")
+        return True, "aus der folgenden Liste"
 
     if "Ich bin mir nicht sicher, was du genau meinst." in utterance.text:
-        return True
+        print(f"Flagged utterance with 'bot uttering not understanding': {utterance.text} as noisy data.")
+        return True, "Ich bin mir nicht sicher, was du genau meinst."
+
+    ## remove duplicates from labels
+    true_labels = list(set(utterance.true_labels))
+
+    # check if utterance exclusively contains noisy labels
+    if set(true_labels).issubset(set(noisy_labels)):
+        print(f"Flagged utterance with noisy labels: {utterance.text}, {utterance.true_labels} as noisy data.")
+        return True, "contains only noisy labels"
+
+    return False, ""
 
 
 def load_dataset_from_excel_file(file_path: str, discussion_scenario: DiscussionSzenario) -> List[Dialogue]:
@@ -320,13 +352,15 @@ def preprocess_dataset(dialogues: List[Dialogue],
                        num_previous_turns: int,
                        utterance_type: UtteranceType,
                        sep_token: str,
-                       include_role: bool) -> List[ProcessedUtterance]:
+                       include_role: bool,
+                       noisy_labels: List[str]) -> Tuple[List[ProcessedUtterance], List[Tuple[Utterance, str]]]:
     """
     Preprocesses a dataset by applying text normalization and updating bounds.
     Returns a list of ProcessedUtterance objects.
     """
 
     processed_utterances = []
+    excluded_noisy_utterances = []
 
     gender_language_tools = GenderLanguageTools()
 
@@ -348,7 +382,9 @@ def preprocess_dataset(dialogues: List[Dialogue],
             if utterance_type == UtteranceType.Bot and utterance.is_from_user():
                 continue
 
-            if utterance_contains_noisy_data(utterance):
+            ucnd, reason = utterance_contains_noisy_data(utterance, noisy_labels)
+            if ucnd:
+                excluded_noisy_utterances.append((utterance, reason))
                 continue
 
             processed_utterance_text, processed_labels, processed_bounds = preprocess_utterance(utterance,
@@ -366,48 +402,7 @@ def preprocess_dataset(dialogues: List[Dialogue],
             id_counter += 1
 
 
-    return processed_utterances
-
-
-def extract_positive_passages(labels: List[str], rtc: ResponseTemplateCollection) -> List[str]:
-    allowed_labels = rtc.arguments_labels
-    labels = [label for label in labels if label in allowed_labels]
-
-    positive_passages = []
-    for label in labels:
-        template = rtc.get_template_for_label(label)
-        positives = [template.summary, template.full_text]
-        positives.extend(template.samples)
-        positive_passages.extend(positives)
-
-    return positive_passages
-
-
-def extract_negative_passages(labels: List[str], rtc: ResponseTemplateCollection) -> List[str]:
-    label_pool = rtc.arguments_labels.difference(labels)
-
-    negative_passages = []
-    for label in label_pool:
-        template = rtc.get_template_for_label(label)
-        negatives = [template.summary, template.full_text]
-        negatives.extend(template.samples)
-        negative_passages.extend(negatives)
-
-    return negative_passages
-
-
-def extract_hard_negative_passages(labels: List[str], rtc: ResponseTemplateCollection) -> List[str]:
-    allowed_labels = rtc.z_arguments_labels.union(rtc.nz_arguments_labels)
-
-    hard_negative_passages = []
-    for label in labels:
-        if label in allowed_labels:
-            template = rtc.get_template_for_label(label)
-
-            for counter_template in template.child_templates:
-                hard_negative_passages.extend([counter_template.summary, counter_template.full_text])
-
-    return hard_negative_passages
+    return processed_utterances, excluded_noisy_utterances
 
 
 def create_queries_split(processed_utterances: List[ProcessedUtterance]) -> List[Query]:
@@ -434,7 +429,7 @@ def create_queries_relevant_passages_mapping_split(queries: List[Query], passage
     return queries_relevant_passages_mapping
 
 
-def create_passages_from_utterances(processed_utterances: List[ProcessedUtterance]) -> List[Passage]:
+def create_passages_from_utterances(processed_utterances: List[ProcessedUtterance], excluded_labels: List[str]) -> List[Passage]:
     """
     Creates passages from utterances.
     """
@@ -443,11 +438,14 @@ def create_passages_from_utterances(processed_utterances: List[ProcessedUtteranc
     for pu in processed_utterances:
         for idx, (start, end) in enumerate(pu.bounds):
             passage_text = pu.text[start:end]
-            passages.append(Passage(id=None,
-                                    text=passage_text,
-                                    label=pu.labels[idx],
-                                    discussion_scenario=pu.discussion_scenario.value,
-                                    retrieved_query_id=pu.id))
+
+            if pu.labels[idx] not in excluded_labels:
+                passages.append(Passage(id=None,
+                                        text=passage_text,
+                                        label=pu.labels[idx],
+                                        discussion_scenario=pu.discussion_scenario.value,
+                                        passage_source=PassageSource.UserUtterance,
+                                        retrieved_query_id=pu.id))
     return passages
 
 
@@ -459,9 +457,9 @@ def create_passages_from_argument_graph(argument_graph: ResponseTemplateCollecti
     passages = []
 
     for template in argument_graph.arguments_templates:
-        passages.append(Passage(None, template.summary, template.label, discussion_scenario.value, None))
-        passages.append(Passage(None, template.full_text, template.label, discussion_scenario.value, None))
-        passages.extend([Passage(None, sample, template.label, discussion_scenario.value, None) for sample in template.samples])
+        passages.append(Passage(None, template.summary, template.label, discussion_scenario.value, PassageSource.ArgumentgraphSummary, None))
+        passages.append(Passage(None, template.full_text, template.label, discussion_scenario.value, PassageSource.ArgumentgraphFullText, None))
+        passages.extend([Passage(None, sample, template.label, discussion_scenario.value, PassageSource.ArgumentgraphSample, None) for sample in template.samples])
     return passages
 
 
@@ -482,13 +480,23 @@ def create_queries_trivial_passages_mapping_split(queries: List[Query], passages
     return queries_trivial_passages_mapping
 
 
+def check_for_missing_passages(queries_relevant_passages_mapping: Dict[int, List[int]]) -> None:
+    """
+    Checks for missing passages in the queries_relevant_passages_mapping split.
+    """
+    for query_id, relevant_passages in queries_relevant_passages_mapping.items():
+        if len(relevant_passages) == 0:
+           raise ValueError(f"Query {query_id} has no relevant passages.")
+
+
 def create_dataset_splits(dialogues: List[Dialogue],
                           include_role: bool,
                           num_previous_turns: int,
                           sep_token: str,
                           utterance_type: UtteranceType,
-                          argument_graphs: Dict[DiscussionSzenario, ResponseTemplateCollection]) \
-        -> Tuple[List[Query], List[Passage], Dict[int, List[int]], Dict[int, List[int]]]:
+                          argument_graphs: Dict[DiscussionSzenario, ResponseTemplateCollection],
+                          noisy_labels: List[str]) \
+        -> Tuple[List[Query], List[Passage], Dict[int, List[int]], Dict[int, List[int]], List[Tuple[Utterance, str]]]:
     """
     Creates the dataset splits for the information retrieval task. This consists of the following splits:
     - queries: A split containing the queries.
@@ -496,15 +504,18 @@ def create_dataset_splits(dialogues: List[Dialogue],
     - queries_relevant_passages_mapping: A mapping from query ids to relevant passage ids.
     - queries_trivial_passages_mapping: A mapping from query ids to trivial passage ids. (Passages that are part of the query itself)
     """
-    processed_utterances = preprocess_dataset(
+
+    processed_utterances, excluded_utterances = preprocess_dataset(
         dialogues,
         num_previous_turns,
         utterance_type,
         sep_token,
-        include_role)
+        include_role,
+        noisy_labels
+    )
 
-    # create passages from utterances
-    utterances_passages = create_passages_from_utterances(processed_utterances)
+
+    utterances_passages = create_passages_from_utterances(processed_utterances, noisy_labels)
 
     argument_graphs_passages = []
     for discussion_scenario, argument_graph in argument_graphs.items():
@@ -516,13 +527,16 @@ def create_dataset_splits(dialogues: List[Dialogue],
 
 
     # im passages_split entsprechen die retrieved_query_ids auch
-    passages = [Passage(idx, passage.text, passage.label, passage.discussion_scenario, passage.retrieved_query_id) for idx, passage in
+    passages = [Passage(idx, passage.text, passage.label, passage.discussion_scenario, passage.passage_source, passage.retrieved_query_id) for idx, passage in
                       enumerate(utterances_passages + argument_graphs_passages)]
 
     queries_relevant_passages_mapping = create_queries_relevant_passages_mapping_split(queries, passages)
     queries_trivial_passages_mapping = create_queries_trivial_passages_mapping_split(queries, passages)
 
-    return queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping
+    check_for_missing_passages(queries_relevant_passages_mapping)
+    check_for_missing_passages(queries_trivial_passages_mapping)
+
+    return queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping, excluded_utterances
 
 
 def create_dataset(config: DatasetConfig) -> None:
@@ -595,54 +609,36 @@ def create_dataset(config: DatasetConfig) -> None:
         DiscussionSzenario.REFAI: argument_graph_ref
     }
 
-    queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping = create_dataset_splits(
-        all_dialogues, include_role, num_previous_turns, sep_token, utterance_type, argument_graphs)
-
-    # medai_queries, medai_passages, medai_queries_relevant_passages_mapping = create_dataset_splits(
-    #     dialogues_medai, include_role, num_previous_turns, sep_token, utterance_type, argument_graph_med,
-    #     DiscussionSzenario.MEDAI
-    # )
-    # jurai_queries, jurai_passages, jurai_queries_relevant_passages_mapping = create_dataset_splits(
-    #     dialogues_jurai, include_role, num_previous_turns, sep_token, utterance_type, argument_graph_jur,
-    #     DiscussionSzenario.JURAI
-    # )
-    # autoai_queries, autoai_passages, autoai_queries_relevant_passages_mapping = create_dataset_splits(
-    #     dialogues_autoai, include_role, num_previous_turns, sep_token, utterance_type, argument_graph_auto,
-    #     DiscussionSzenario.AUTOAI
-    # )
-    # refai_queries, refai_passages, refai_queries_relevant_passages_mapping = create_dataset_splits(
-    #     dialogues_refai, include_role, num_previous_turns, sep_token, utterance_type, argument_graph_ref,
-    #     DiscussionSzenario.REFAI
-    # )
-
-    # queries = medai_queries + jurai_queries + autoai_queries + refai_queries
-    # passages = medai_passages + jurai_passages + autoai_passages + refai_passages
-    # queries_relevant_passages_mapping = {**medai_queries_relevant_passages_mapping,
-    #                                      **jurai_queries_relevant_passages_mapping,
-    #                                      **autoai_queries_relevant_passages_mapping,
-    #                                      **refai_queries_relevant_passages_mapping}
+    queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping, excluded_utterances = create_dataset_splits(
+        all_dialogues, include_role, num_previous_turns, sep_token, utterance_type, argument_graphs, config.noisy_labels)
 
     # create hf dataset
-    hf_dataset = DatasetDict({
+    corpus_dataset = DatasetDict({
         "queries": Dataset.from_dict({"id": [query.id for query in queries],
                                       "text": [query.text for query in queries],
                                       "labels": [query.labels for query in queries],
-                                      "discussion_scenario": [query.discussion_scenario for query in queries]}),
+                                      "discussion_scenario": [query.discussion_scenario for query in queries]
+                                      }),
         "passages": Dataset.from_dict({"id": [passage.id for passage in passages],
                                        "text": [passage.text for passage in passages],
                                        "label": [passage.label for passage in passages],
-                                       "discussion_scenario": [passage.discussion_scenario for passage in passages]}),
+                                       "discussion_scenario": [passage.discussion_scenario for passage in passages],
+                                       "passage_source": [passage.passage_source for passage in passages]
+                                       }),
         "queries_relevant_passages_mapping": Dataset.from_dict({
-            "query_id": [id for id, _ in queries_relevant_passages_mapping.items()],
+            "query_id": [idx for idx, _ in queries_relevant_passages_mapping.items()],
             "passages_ids": [ids for _, ids in queries_relevant_passages_mapping.items()]
         }),
         "queries_trivial_passages_mapping": Dataset.from_dict({
-            "query_id": [id for id, _ in queries_trivial_passages_mapping.items()],
+            "query_id": [idx for idx, _ in queries_trivial_passages_mapping.items()],
             "passages_ids": [ids for _, ids in queries_trivial_passages_mapping.items()]
-        })
+        }),
+        "excluded_utterances": Dataset.from_dict({"text": [utterance.text for utterance, _ in excluded_utterances],
+                                                  "labels": [utterance.true_labels for utterance, _ in excluded_utterances],
+                                                    "reason": [reason for _, reason in excluded_utterances]})
     })
 
-    hf_dataset.save_to_disk(save_path)
+    corpus_dataset.save_to_disk(save_path)
 
 
 if __name__ == "__main__":

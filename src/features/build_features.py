@@ -7,8 +7,8 @@ from src.data.dataset_splits import create_splits_from_corpus_dataset
 
 
 def create_dataset_for_multiple_negatives_ranking_loss(
-    split_dataset: DatasetDict,
-    max_positives_per_query: Optional[int] = None
+        split_dataset: DatasetDict,
+        max_positives_per_query: Optional[int] = None
 ) -> Dataset:
     """
     Given a split_dataset with:
@@ -24,12 +24,12 @@ def create_dataset_for_multiple_negatives_ranking_loss(
     of the columns is not taken into account by the loss function, only the order.
     """
 
-    queries = split_dataset["queries"].to_list()   # each item: {"id", "text", ...}
-    passages = split_dataset["passages"].to_list() # each item: {"id", "text", ...}
-    mapping  = split_dataset["queries_relevant_passages_mapping"].to_list()
+    queries = split_dataset["queries"].to_list()  # each item: {"id", "text", ...}
+    passages = split_dataset["passages"].to_list()  # each item: {"id", "text", ...}
+    mapping = split_dataset["queries_relevant_passages_mapping"].to_list()
 
     # Build lookups
-    query_id_to_text = {q["id"]: q["text"] for q in queries}
+    query_id_to_query = {q["id"]: q for q in queries}
     passage_id_to_text = {p["id"]: p["text"] for p in passages}
 
     examples = []
@@ -44,15 +44,25 @@ def create_dataset_for_multiple_negatives_ranking_loss(
         for pid in relevant_pids:
             if pid not in passage_id_to_text:
                 continue
+
+            # add discussion scenario as prefix to scenario specific labels
+            labels = []
+            for label in query_id_to_query[q_id]["labels"]:
+                if label.startswith("Z") or label.startswith("NZ") or label.startswith("FAQ"):
+                    labels.append(f"{query_id_to_query[q_id]['discussion_scenario']}_{label}")
+                else:
+                    labels.append(label)
+
             examples.append({
-                "query": query_id_to_text[q_id],
-                "positive": passage_id_to_text[pid]
+                "query": query_id_to_query[q_id]["text"],
+                "positive": passage_id_to_text[pid],
+                "labels": labels
             })
 
     return Dataset.from_list(examples)
 
 
-if __name__=="__main__":
+if __name__ == "__main__":
     corpus_ds = load_from_disk("../../data/processed/corpus_dataset_experiment_v0")
     split_ds = create_splits_from_corpus_dataset(corpus_ds, DatasetSplitType.Simple)
     pos_ds_train = create_dataset_for_multiple_negatives_ranking_loss(split_ds["train"])
