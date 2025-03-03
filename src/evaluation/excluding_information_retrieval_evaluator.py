@@ -826,7 +826,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             return
 
         top1_classification_table = wandb.Table(
-            columns=["query_id", "query_labels", "query_text", "top1_id", "top1_label", "top1_text","confidence_level", "match"]
+            columns=["query_id", "query_labels", "query_text", "num_query_labels", "top1_id", "top1_label", "top1_text","confidence_level", "match"]
         )
         top1_classification_correct_histogram = wandb.Table(columns=["confidence_level"])
         top1_classification_incorrect_histogram = wandb.Table(columns=["confidence_level"])
@@ -854,11 +854,23 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         correct_labels = []
         incorrect_labels = []
 
+        # Generate a unique identifier for each label in the corpus
+        labels = set()
+        for query_labels in self.query_labels.values():
+            labels = labels.union(query_labels)
+
+        for doc_label in self.doc_labels.values():
+            labels.add(doc_label)
+
+        labels_to_idx = {label: idx for idx, label in enumerate(labels)}
+
+        eval_data = []
         # Iterate over each query in the evaluation corpus and its top-1 classification
         for q_idx, top_hits in enumerate(queries_result_list[score_func_name]):
             query_id = self.queries_ids[q_idx]
             query_text = self.queries[q_idx]
             query_labels = self.query_labels[query_id]
+            num_query_labels = len(query_labels)
             query_relevant_docs = self.relevant_docs[query_id]
 
             # Extract top-1 classification details
@@ -873,13 +885,15 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             if correct_prediction:
                 top1_classification_correct_histogram.add_data(score)
                 correct_labels.append(_determine_label_group(doc_label))
+                eval_data.append([labels_to_idx[doc_label], labels_to_idx[doc_label], query_id, query_text, doc_label, doc_id, doc_text, doc_label, score, correct_prediction, num_query_labels])
             else:
                 top1_classification_incorrect_histogram.add_data(score)
                 for label in query_labels:
                     incorrect_labels.append(_determine_label_group(label))
+                    eval_data.append([labels_to_idx[doc_label], labels_to_idx[label], query_id, query_text, label, doc_id, doc_text, doc_label, score, correct_prediction, num_query_labels])
 
             # Add relevant data to the main evaluation table
-            top1_classification_table.add_data(query_id, ", ".join(query_labels), query_text, doc_id, doc_label, doc_text, score, correct_prediction)
+            top1_classification_table.add_data(query_id, ", ".join(query_labels), query_text, num_query_labels, doc_id, doc_label, doc_text, score, correct_prediction)
 
         # Count occurrences of each label for correct and incorrect predictions
         correct_label_counts = Counter(correct_labels)
@@ -901,6 +915,15 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         incorrect_label_table = wandb.Table(data=[[k, v] for k, v in incorrect_label_counts.items()], columns=["label", "count"])
         ratio_table = wandb.Table(data=data, columns=["label", "correct_ratio"])
 
+        scatter_plot = wandb.Table(
+            data=eval_data,
+            columns=[
+                "predicted_label_idx", "reference_label_idx",
+                "query_id", "query_text", "query_label",
+                "top1_id", "top1_text", "top1_label",
+                "confidence", "match", "num_labels_query"
+            ]
+        )
         # Log all tables and visualization to wandb
         self.run.log({
             f"{self.name}_top1_classification_table": top1_classification_table,
@@ -923,4 +946,5 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             f"{self.name}_top1_classification_label_correct_ratio": wandb.plot.bar(
                 ratio_table, "label", "correct_ratio", title="Top-1 Classification Accuracy per Label"
             ),
+            f"{self.name}_top1_classification_scatter_plot": wandb.plot.scatter(scatter_plot, x="predicted_label_idx", y="reference_label_idx", title="test")
         })
