@@ -946,5 +946,5 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             f"{self.name}_top1_classification_label_correct_ratio": wandb.plot.bar(
                 ratio_table, "label", "correct_ratio", title="Top-1 Classification Accuracy per Label"
             ),
-            f"{self.name}_top1_classification_scatter_plot": wandb.plot.scatter(scatter_plot, x="predicted_label_idx", y="reference_label_idx", title="test")
+            f"{self.name}_top1_classification_scatter_plot": wandb.plot.scatter(scatter_plot, x="predicted_label_idx", y="reference_label_idx", title="Top-1 Classification Scatter Plot")
         })
