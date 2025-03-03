@@ -223,24 +223,27 @@ def check_bounds_correctness(utterance: Utterance, dialogue_id: int) -> None:
         )
 
 
-def utterance_contains_noisy_data(utterance: Utterance, noisy_labels) -> bool:
+def utterance_contains_noisy_data(utterance: Utterance, noisy_labels) -> Tuple[bool, str]:
     """
     Function that checks if certain utterances would introduce noisy data into the dataset.
     """
     if "aus der folgenden Liste" in utterance.text:
         print(f"Flagged utterance with 'aus der folgenden Liste' in text: {utterance.text} as noisy data.")
-        return True
+        return True, "aus der folgenden Liste"
 
     if "Ich bin mir nicht sicher, was du genau meinst." in utterance.text:
         print(f"Flagged utterance with 'bot uttering not understanding': {utterance.text} as noisy data.")
-        return True
+        return True, "Ich bin mir nicht sicher, was du genau meinst."
 
     ## remove duplicates from labels
     true_labels = list(set(utterance.true_labels))
 
-    if len(true_labels) == 1 and true_labels[0] in noisy_labels:
-        print(f"Flagged utterance with noisy label: {utterance.text}, {utterance.true_labels} as noisy data.")
-        return True
+    # check if utterance exclusively contains noisy labels
+    if set(true_labels).issubset(set(noisy_labels)):
+        print(f"Flagged utterance with noisy labels: {utterance.text}, {utterance.true_labels} as noisy data.")
+        return True, "contains only noisy labels"
+
+    return False, ""
 
 
 def load_dataset_from_excel_file(file_path: str, discussion_scenario: DiscussionSzenario) -> List[Dialogue]:
@@ -338,13 +341,14 @@ def preprocess_dataset(dialogues: List[Dialogue],
                        utterance_type: UtteranceType,
                        sep_token: str,
                        include_role: bool,
-                       noisy_labels: List[str]) -> List[ProcessedUtterance]:
+                       noisy_labels: List[str]) -> Tuple[List[ProcessedUtterance], List[Tuple[Utterance, str]]]:
     """
     Preprocesses a dataset by applying text normalization and updating bounds.
     Returns a list of ProcessedUtterance objects.
     """
 
     processed_utterances = []
+    excluded_noisy_utterances = []
 
     gender_language_tools = GenderLanguageTools()
 
@@ -366,7 +370,9 @@ def preprocess_dataset(dialogues: List[Dialogue],
             if utterance_type == UtteranceType.Bot and utterance.is_from_user():
                 continue
 
-            if utterance_contains_noisy_data(utterance, noisy_labels):
+            ucnd, reason = utterance_contains_noisy_data(utterance, noisy_labels)
+            if ucnd:
+                excluded_noisy_utterances.append((utterance, reason))
                 continue
 
             processed_utterance_text, processed_labels, processed_bounds = preprocess_utterance(utterance,
@@ -384,7 +390,7 @@ def preprocess_dataset(dialogues: List[Dialogue],
             id_counter += 1
 
 
-    return processed_utterances
+    return processed_utterances, excluded_noisy_utterances
 
 
 def create_queries_split(processed_utterances: List[ProcessedUtterance]) -> List[Query]:
@@ -477,7 +483,7 @@ def create_dataset_splits(dialogues: List[Dialogue],
                           utterance_type: UtteranceType,
                           argument_graphs: Dict[DiscussionSzenario, ResponseTemplateCollection],
                           noisy_labels: List[str]) \
-        -> Tuple[List[Query], List[Passage], Dict[int, List[int]], Dict[int, List[int]]]:
+        -> Tuple[List[Query], List[Passage], Dict[int, List[int]], Dict[int, List[int]], List[Tuple[Utterance, str]]]:
     """
     Creates the dataset splits for the information retrieval task. This consists of the following splits:
     - queries: A split containing the queries.
@@ -486,7 +492,7 @@ def create_dataset_splits(dialogues: List[Dialogue],
     - queries_trivial_passages_mapping: A mapping from query ids to trivial passage ids. (Passages that are part of the query itself)
     """
 
-    processed_utterances = preprocess_dataset(
+    processed_utterances, excluded_utterances = preprocess_dataset(
         dialogues,
         num_previous_turns,
         utterance_type,
@@ -517,7 +523,7 @@ def create_dataset_splits(dialogues: List[Dialogue],
     check_for_missing_passages(queries_relevant_passages_mapping)
     check_for_missing_passages(queries_trivial_passages_mapping)
 
-    return queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping
+    return queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping, excluded_utterances
 
 
 def create_dataset(config: DatasetConfig) -> None:
@@ -590,11 +596,11 @@ def create_dataset(config: DatasetConfig) -> None:
         DiscussionSzenario.REFAI: argument_graph_ref
     }
 
-    queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping = create_dataset_splits(
+    queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping, excluded_utterances = create_dataset_splits(
         all_dialogues, include_role, num_previous_turns, sep_token, utterance_type, argument_graphs, config.noisy_labels)
 
     # create hf dataset
-    hf_dataset = DatasetDict({
+    corpus_dataset = DatasetDict({
         "queries": Dataset.from_dict({"id": [query.id for query in queries],
                                       "text": [query.text for query in queries],
                                       "labels": [query.labels for query in queries],
@@ -604,16 +610,19 @@ def create_dataset(config: DatasetConfig) -> None:
                                        "label": [passage.label for passage in passages],
                                        "discussion_scenario": [passage.discussion_scenario for passage in passages]}),
         "queries_relevant_passages_mapping": Dataset.from_dict({
-            "query_id": [id for id, _ in queries_relevant_passages_mapping.items()],
+            "query_id": [idx for idx, _ in queries_relevant_passages_mapping.items()],
             "passages_ids": [ids for _, ids in queries_relevant_passages_mapping.items()]
         }),
         "queries_trivial_passages_mapping": Dataset.from_dict({
-            "query_id": [id for id, _ in queries_trivial_passages_mapping.items()],
+            "query_id": [idx for idx, _ in queries_trivial_passages_mapping.items()],
             "passages_ids": [ids for _, ids in queries_trivial_passages_mapping.items()]
-        })
+        }),
+        "excluded_utterances": Dataset.from_dict({"text": [utterance.text for utterance, _ in excluded_utterances],
+                                                  "labels": [utterance.true_labels for utterance, _ in excluded_utterances],
+                                                    "reason": [reason for _, reason in excluded_utterances]})
     })
 
-    hf_dataset.save_to_disk(save_path)
+    corpus_dataset.save_to_disk(save_path)
 
 
 if __name__ == "__main__":
