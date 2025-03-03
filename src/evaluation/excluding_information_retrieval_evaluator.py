@@ -4,6 +4,7 @@ import heapq
 import logging
 import os
 from contextlib import nullcontext
+from collections import Counter
 from typing import TYPE_CHECKING, Callable, Optional, Any, Dict, List, Tuple, Set
 
 import numpy as np
@@ -40,6 +41,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
       * (5) A rank histogram of the first relevant doc
       * (6) Multi-label coverage for each query
       * (7) (Optional) Embedding visualization using t-SNE
+      * (8) Logging statistics about top-1 classification
 
     Usage:
         excluded_docs_map = {
@@ -60,6 +62,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             log_rank_histogram=True,
             log_multilabel_coverage=True,
             log_tsne_embeddings=True,
+            log_top1_classification=True,
         )
         results = evaluator(model)
         # This logs IR metrics AND extra tables/plots for deeper analysis.
@@ -99,6 +102,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         log_rank_histogram: bool = False,  # (5) distribution of rank of first relevant doc
         log_multilabel_coverage: bool = False,  # (6) measure coverage ratio of query's labels in top-k
         log_tsne_embeddings: bool = False,  # (7) do a t-SNE of queries & corpus embeddings
+        log_top1_classification: bool = False, # log statistics regarding the top-1-classification of each query
         tsne_sample_size: int = 1000,  # max number of queries+docs for the t-SNE
     ) -> None:
         super().__init__()
@@ -150,6 +154,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         self.log_fp_fn = log_fp_fn
         self.log_rank_histogram = log_rank_histogram
         self.log_multilabel_coverage = log_multilabel_coverage
+        self.log_top1_classification = log_top1_classification
         self.log_tsne_embeddings = log_tsne_embeddings
         self.tsne_sample_size = tsne_sample_size
 
@@ -380,7 +385,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             scores[score_name] = metrics
 
         # Additional logging for advanced options:
-        if self.log_label_confusion or self.log_fp_fn or self.log_rank_histogram or self.log_multilabel_coverage:
+        if self.log_label_confusion or self.log_fp_fn or self.log_rank_histogram or self.log_multilabel_coverage or self.log_top1_classification:
             self._advanced_analysis(queries_result_list)
 
         # Print them
@@ -584,6 +589,9 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         # (6) Multi-label coverage
         if self.log_multilabel_coverage and self.doc_labels and self.query_labels:
             self._log_multilabel_coverage(queries_result_list)
+
+        if self.log_top1_classification:
+            self._log_top1_classification(queries_result_list)
 
     def _log_label_confusion_table(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
         """
@@ -791,42 +799,128 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
 
     def _log_top1_classification(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
         """
-        Logs a wandb.Table with details about each query and its top-1 classification result.
+            Logs evaluation results for top-1 classification to Weights & Biases (wandb).
 
-        The table includes the following columns:
-        - `query_id`: Unique identifier for the query
-        - `query_text`: Text of the query
-        - `query_labels`: Ground truth labels for the query
-        - `top1_id`: Identifier of the highest-rated passage
-        - `top1_text`: Text of the highest-rated passage
-        - `top1_label`: Label of the highest-rated passage
-        - `score`: Similarity score between the query and the top-1 passage
-        - `match`: Boolean indicating whether the top-1 passage is among the relevant passages for the query
-        """
-        # TODO: add potential filters
+            The following tables and visualizations are logged:
+            - A main table (`top1_classification_table`) containing details for each query and its top-1 result.
+            - Histograms of confidence scores for correct and incorrect predictions.
+            - Bar charts showing the distribution of label type for correct and incorrect predictions.
+            - A bar chart showing the accuracy (correct prediction ratio) for each label type.
+
+            Table Columns:
+                - `query_id`: Unique identifier for the query.
+                - `query_text`: The text of the query.
+                - `query_labels`: Ground truth labels for the query, joined as a comma-separated string.
+                - `top1_id`: Identifier of the highest-rated passage
+                - `top1_text`: Text of the highest-rated passage
+                - `top1_label`: Label of the highest-rated passage
+                - `confidence_level`: Confidence score (similarity score) between the query and the top-1 passage.
+                - `match`: Boolean indicating whether the top-1 passage is among the relevant passages for the query.
+
+            Visualizations:
+                - Confidence level distributions for correct and incorrect predictions.
+                - Label type distributions for correct and incorrect predictions.
+                - Accuracy (correct prediction ratio) for each label type.
+            """
         if not self.run:
             return
 
         top1_classification_table = wandb.Table(
-            columns=["query_id", "query_text", "query_labels",
-                     "top1_id", "top1_text", "top1_label",
-                     "score", "match"]
+            columns=["query_id", "query_labels", "query_text", "top1_id", "top1_label", "top1_text","confidence_level", "match"]
         )
+        top1_classification_correct_histogram = wandb.Table(columns=["confidence_level"])
+        top1_classification_incorrect_histogram = wandb.Table(columns=["confidence_level"])
+
+        def _determine_label_group(label: str) -> str:
+            """
+            Helper function to categorize labels into groups based on their prefixes or concrete values.
+            """
+            if label.startswith("Z."):
+                return "Z"
+            elif label.startswith("NZ."):
+                return "NZ"
+            elif label == "CONSENT":
+                return "CONSENT"
+            elif label == "DISSENT":
+                return "DISSENT"
+            elif label.startswith("FAQ."):
+                return "FAQ"
+            else:
+                return label
 
         score_func_name = next(iter(queries_result_list.keys()))
 
+        # Lists to store labels for correct and incorrect predictions
+        correct_labels = []
+        incorrect_labels = []
+
+        # Iterate over each query in the evaluation corpus and its top-1 classification
         for q_idx, top_hits in enumerate(queries_result_list[score_func_name]):
             query_id = self.queries_ids[q_idx]
             query_text = self.queries[q_idx]
             query_labels = self.query_labels[query_id]
             query_relevant_docs = self.relevant_docs[query_id]
 
+            # Extract top-1 classification details
             score, doc_id = top_hits[0]
             doc_text = self.corpus_map[doc_id]
             doc_label = self.doc_labels[doc_id]
 
+            # Check if the top-1 classification is among the relevant documents of the initial query
             correct_prediction = doc_id in query_relevant_docs
 
-            top1_classification_table.add_data(query_id, query_text, query_labels, doc_id, doc_text, doc_label, score, correct_prediction)
+            # Log data depending on whether the prediction is correct or incorrect
+            if correct_prediction:
+                top1_classification_correct_histogram.add_data(score)
+                correct_labels.append(_determine_label_group(doc_label))
+            else:
+                top1_classification_incorrect_histogram.add_data(score)
+                for label in query_labels:
+                    incorrect_labels.append(_determine_label_group(label))
 
-        self.run.log({f"{self.name}_top1_classification": top1_classification_table})
+            # Add relevant data to the main evaluation table
+            top1_classification_table.add_data(query_id, ", ".join(query_labels), query_text, doc_id, doc_label, doc_text, score, correct_prediction)
+
+        # Count occurrences of each label for correct and incorrect predictions
+        correct_label_counts = Counter(correct_labels)
+        incorrect_label_counts = Counter(incorrect_labels)
+
+        # Get the set of all unique labels in the corpus from the correct and incorrect labels
+        all_labels = set(correct_label_counts.keys()).union(set(incorrect_label_counts.keys()))
+
+        # Calculate the accuracy for each label
+        data = []
+        for label in all_labels:
+            correct = correct_label_counts.get(label, 0)
+            incorrect = incorrect_label_counts.get(label, 0)
+            total = correct + incorrect
+            ratio = correct / total if total > 0 else 0
+            data.append([label, ratio])
+
+        correct_label_table = wandb.Table(data=[[k, v] for k, v in correct_label_counts.items()], columns=["label", "count"])
+        incorrect_label_table = wandb.Table(data=[[k, v] for k, v in incorrect_label_counts.items()], columns=["label", "count"])
+        ratio_table = wandb.Table(data=data, columns=["label", "correct_ratio"])
+
+        # Log all tables and visualization to wandb
+        self.run.log({
+            f"{self.name}_top1_classification_table": top1_classification_table,
+            f"{self.name}_top1_classification_confidence_level_distribution_correct": wandb.plot.histogram(
+                top1_classification_correct_histogram,
+                value="confidence_level",
+                title="Top-1 Classification Confidence Level Distribution For Correct Predictions"
+            ),
+            f"{self.name}_top1_classification_confidence_level_distribution_incorrect": wandb.plot.histogram(
+                top1_classification_incorrect_histogram,
+                value="confidence_level",
+                title="Top-1 Classification Confidence Level Distribution For Incorrect Predictions"
+            ),
+            f"{self.name}_top1_classification_label_distribution_correct": wandb.plot.bar(
+                correct_label_table, "label", "count", title="Top-1 Classification Label Distribution For Correct Predictions"
+            ),
+            f"{self.name}_top1_classification_label_distribution_incorrect": wandb.plot.bar(
+                incorrect_label_table, "label", "count", title="Top-1 Classification Label Distribution For Incorrect Predictions"
+            ),
+            f"{self.name}_top1_classification_label_correct_ratio": wandb.plot.bar(
+                ratio_table, "label", "correct_ratio", title="Top-1 Classification Accuracy per Label"
+            ),
+        })
