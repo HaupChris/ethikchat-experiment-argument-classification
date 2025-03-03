@@ -67,6 +67,13 @@ class ProcessedUtterance:
     discussion_scenario: DiscussionSzenario
 
 
+class PassageSource(Enum):
+    UserUtterance = "user_utterance"
+    ArgumentgraphSummary = "argumentgraph_summary"
+    ArgumentgraphFullText = "argumentgraph_full_text"
+    ArgumentgraphSample = "argumentgraph_sample"
+
+
 @dataclass
 class Passage:
     """
@@ -79,7 +86,9 @@ class Passage:
     text: str
     label: str
     discussion_scenario: str
+    passage_source: PassageSource
     retrieved_query_id: Optional[int] = None
+
 
 
 @dataclass
@@ -435,6 +444,7 @@ def create_passages_from_utterances(processed_utterances: List[ProcessedUtteranc
                                         text=passage_text,
                                         label=pu.labels[idx],
                                         discussion_scenario=pu.discussion_scenario.value,
+                                        passage_source=PassageSource.UserUtterance,
                                         retrieved_query_id=pu.id))
     return passages
 
@@ -447,9 +457,9 @@ def create_passages_from_argument_graph(argument_graph: ResponseTemplateCollecti
     passages = []
 
     for template in argument_graph.arguments_templates:
-        passages.append(Passage(None, template.summary, template.label, discussion_scenario.value, None))
-        passages.append(Passage(None, template.full_text, template.label, discussion_scenario.value, None))
-        passages.extend([Passage(None, sample, template.label, discussion_scenario.value, None) for sample in template.samples])
+        passages.append(Passage(None, template.summary, template.label, discussion_scenario.value, PassageSource.ArgumentgraphSummary, None))
+        passages.append(Passage(None, template.full_text, template.label, discussion_scenario.value, PassageSource.ArgumentgraphFullText, None))
+        passages.extend([Passage(None, sample, template.label, discussion_scenario.value, PassageSource.ArgumentgraphSample, None) for sample in template.samples])
     return passages
 
 
@@ -517,7 +527,7 @@ def create_dataset_splits(dialogues: List[Dialogue],
 
 
     # im passages_split entsprechen die retrieved_query_ids auch
-    passages = [Passage(idx, passage.text, passage.label, passage.discussion_scenario, passage.retrieved_query_id) for idx, passage in
+    passages = [Passage(idx, passage.text, passage.label, passage.discussion_scenario, passage.passage_source, passage.retrieved_query_id) for idx, passage in
                       enumerate(utterances_passages + argument_graphs_passages)]
 
     queries_relevant_passages_mapping = create_queries_relevant_passages_mapping_split(queries, passages)
@@ -607,11 +617,14 @@ def create_dataset(config: DatasetConfig) -> None:
         "queries": Dataset.from_dict({"id": [query.id for query in queries],
                                       "text": [query.text for query in queries],
                                       "labels": [query.labels for query in queries],
-                                      "discussion_scenario": [query.discussion_scenario for query in queries]}),
+                                      "discussion_scenario": [query.discussion_scenario for query in queries]
+                                      }),
         "passages": Dataset.from_dict({"id": [passage.id for passage in passages],
                                        "text": [passage.text for passage in passages],
                                        "label": [passage.label for passage in passages],
-                                       "discussion_scenario": [passage.discussion_scenario for passage in passages]}),
+                                       "discussion_scenario": [passage.discussion_scenario for passage in passages],
+                                       "passage_source": [passage.passage_source for passage in passages]
+                                       }),
         "queries_relevant_passages_mapping": Dataset.from_dict({
             "query_id": [idx for idx, _ in queries_relevant_passages_mapping.items()],
             "passages_ids": [ids for _, ids in queries_relevant_passages_mapping.items()]
