@@ -143,18 +143,24 @@ class DatasetSplitType(Enum):
     Simple is a simple train, validation, test split in the ratio 80:10:10.
     ByDiscussionSzenario leaves out one discussion szenario for Test and uses the other ones for Train and Validation.
     kFold splits the dataset into k folds for cross-validation.
+    InDistribution makes sure that each label in the valid or test set is also present in the training set but not with the same anchors.
+    OutOfDistributionSimple splits the dataset so that the valid and test set contain labels that are not present in the training set but other labels from the same discussion scenario are in the training set.
+    OutOfDistributionHard leaves out all labels from a selected discussion scenario in the training set.
 
     """
-    Simple = "simple"
-    ByDiscussionSzenario = "by_discussion_szenario"
+    InDistribution = "in_distribution"
+    OutOfDistributionSimple = "out_of_distribution_easy"
+    OutOfDistributionHard = "out_of_distribution_hard"
     kFold = "k_fold"
 
     @classmethod
     def from_str(cls, value: str):
-        if value == "simple":
-            return cls.Simple
-        if value == "by_discussion_szenario":
-            return cls.ByDiscussionSzenario
+        if value == "in_distribution":
+            return cls.InDistribution
+        if value == "out_of_distribution_easy":
+            return cls.OutOfDistributionSimple
+        if value == "out_of_distribution_hard":
+            return cls.OutOfDistributionHard
         if value == "k_fold":
             return cls.kFold
         raise ValueError(f"Unknown DatasetSplitType: {value}")
