@@ -18,6 +18,8 @@ from wandb.wandb_run import Run
 from sentence_transformers.evaluation.SentenceEvaluator import SentenceEvaluator
 from sentence_transformers.similarity_functions import SimilarityFunction
 
+from src.data.create_corpus_dataset import Query, Passage
+
 if TYPE_CHECKING:
     from sentence_transformers import SentenceTransformer
 
@@ -63,8 +65,8 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
 
     def __init__(
         self,
-        queries: Dict[str, str],   # qid => query
-        corpus: Dict[str, str],   # cid => doc
+        queries: Dict[str, Query],   # qid => query
+        corpus: Dict[str, Passage],   # cid => doc
         relevant_docs: Dict[str, Set[str]],  # qid => Set[cid]
         corpus_chunk_size: int = 50000,
         mrr_at_k: List[int] = [10],
@@ -86,14 +88,6 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         excluded_docs: Optional[Dict[str, Set[str]]] = None,
         log_top_k_predictions: int = 0,  # New param: how many predictions to log per query to wandb
         run: Run = None,
-
-        # ------- Additional fields for advanced analysis -------
-        query_labels: Optional[Dict[str, List[str]]] = None,  # (3, 6) e.g. {q_id: ["arg", "question"]}
-        doc_labels: Optional[Dict[str, str]] = None,  # (3) e.g. {doc_id: "arg"}
-        log_label_confusion: bool = False,  # (3) create confusion-style table of (query_label, doc_label) retrieval
-        log_fp_fn: bool = False,  # (4) log false positives & false negatives
-        log_rank_histogram: bool = False,  # (5) distribution of rank of first relevant doc
-        log_multilabel_coverage: bool = False,  # (6) measure coverage ratio of query's labels in top-k
     ) -> None:
         super().__init__()
         # Filter queries so we only keep the ones that have relevant docs
@@ -102,12 +96,15 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             if qid in relevant_docs and len(relevant_docs[qid]) > 0:
                 self.queries_ids.append(qid)
 
-        self.queries = [queries[qid] for qid in self.queries_ids]
+        self.queries_metadata = [queries[qid] for qid in self.queries_ids]
+        self.queries = [query.text for query in self.queries_metadata]
+
         self.corpus_ids = list(corpus.keys())
-        self.corpus = [corpus[cid] for cid in self.corpus_ids]
+        self.corpus_metadata = [corpus[cid] for cid in self.corpus_ids]
+        self.corpus = [passage.text for passage in self.corpus_metadata]
 
         # Build a dictionary {doc_id -> doc_text} for logging
-        self.corpus_map = dict(zip(self.corpus_ids, self.corpus))
+        self.corpus_map = dict(zip(self.corpus_ids, self.corpus_metadata))
 
         self.query_prompt = query_prompt
         self.query_prompt_name = query_prompt_name
@@ -116,7 +113,6 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
 
         self.relevant_docs = relevant_docs
         self.excluded_docs = excluded_docs if excluded_docs is not None else {}
-
         self.corpus_chunk_size = corpus_chunk_size
         self.mrr_at_k = mrr_at_k
         self.ndcg_at_k = ndcg_at_k
@@ -137,19 +133,12 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         self.log_top_k_predictions = log_top_k_predictions
         self.run = run
 
-        # Additional advanced analysis
-        self.query_labels = query_labels if query_labels is not None else {}
-        self.doc_labels = doc_labels if doc_labels is not None else {}
-        self.log_label_confusion = log_label_confusion
-        self.log_fp_fn = log_fp_fn
-        self.log_rank_histogram = log_rank_histogram
-        self.log_multilabel_coverage = log_multilabel_coverage
-
         if name:
             name = "_" + name
 
         self.csv_file: str = "Information-Retrieval_evaluation" + name + "_results.csv"
         self.csv_headers = ["epoch", "steps"]
+
         self._append_csv_headers(self.score_function_names)
 
     def _append_csv_headers(self, score_function_names):
@@ -197,7 +186,6 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             self.score_functions = {model.similarity_fn_name: model.similarity}
             self.score_function_names = [model.similarity_fn_name]
             self._append_csv_headers(self.score_function_names)
-
 
         # Main IR procedure
         scores, queries_result_list = self.compute_metrices(model, *args, **kwargs)
