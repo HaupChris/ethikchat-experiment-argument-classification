@@ -1,8 +1,11 @@
+import json
 import os
 import random
 from collections import defaultdict
 from typing import Optional, Union, Dict
 from copy import deepcopy
+
+import datasets
 from datasets import DatasetDict, Dataset, load_from_disk
 from ethikchat_argtoolkit.Dialogue.discussion_szenario import DiscussionSzenario
 
@@ -61,11 +64,22 @@ def create_datasetdict_for_query_ids(corpus_dataset: DatasetDict, query_ids: lis
     })
 
 
+def load_splits_from_disk(save_path) -> DatasetDict:
+    # get splits from dataset_dict.json
+    json_path = os.path.join(save_path, "dataset_dict.json")
+    with open(json_path, "r") as f:
+        dataset_dict = json.load(f)
+    # load datasets
+    dataset_dict = {k: load_from_disk(os.path.join(save_path, k)) for k in dataset_dict["splits"]}
+    return DatasetDict(dataset_dict)
+
+
 def create_splits_from_corpus_dataset(
         corpus_dataset: DatasetDict,
         dataset_split_type: DatasetSplitType,
         test_scenario: Optional[DiscussionSzenario] = None,
-        save_path: Optional[str] = None,
+        save_folder: Optional[str] = None,
+        dataset_save_name: Optional[str] = None,
         k: int = 5,
         seed: int = 42
 ) -> Union[DatasetDict, Dict[str, DatasetDict]]:
@@ -99,16 +113,19 @@ def create_splits_from_corpus_dataset(
         - If kFold: returns a dictionary of k folds,
           each fold is a DatasetDict with keys ["train", "test"].
     """
-
-    # Extract the relevant columns from the corpus
-    # all_queries = corpus_dataset["queries"]  # HF Dataset for queries
-    # num_queries = all_queries.num_rows
+    # if dataset already exists, load it and return it. Otherwise create it.
+    save_path = None
+    if save_folder and dataset_save_name:
+        save_path = os.path.join(save_folder, dataset_save_name)
+        if os.path.exists(save_path):
+            print(f"Dataset already exists at {save_path}. Loading it.")
+            return load_splits_from_disk(save_path)
 
     if dataset_split_type == DatasetSplitType.InDistribution:
         splitted_dataset = create_in_distribution_splits(corpus_dataset,
-                                             train_ratio=0.70,
-                                             val_ratio=0.15,
-                                             seed=seed)
+                                                         train_ratio=0.70,
+                                                         val_ratio=0.15,
+                                                         seed=seed)
 
     elif dataset_split_type == DatasetSplitType.OutOfDistributionSimple:
         splitted_dataset = create_out_of_distribution_simple_splits(
@@ -117,7 +134,6 @@ def create_splits_from_corpus_dataset(
             train_ratio=0.70,
             seed=seed
         )
-        return splitted_dataset
 
     elif dataset_split_type == DatasetSplitType.OutOfDistributionHard:
         if test_scenario is None:
@@ -138,7 +154,7 @@ def create_splits_from_corpus_dataset(
     return splitted_dataset
 
 
-def create_k_fold_splits(corpus_dataset: DatasetDict, k: int):
+def create_k_fold_splits(corpus_dataset: DatasetDict, k: int) -> Dict[str, DatasetDict]:
     indices = list(range(len(corpus_dataset["queries"])))
     num_queries = len(indices)
     all_queries = corpus_dataset["queries"].to_list()
@@ -166,7 +182,7 @@ def create_k_fold_splits(corpus_dataset: DatasetDict, k: int):
     return results
 
 
-def create_out_of_distribution_hard_splits(corpus_dataset, test_scenario):
+def create_out_of_distribution_hard_splits(corpus_dataset: DatasetDict, test_scenario: DiscussionSzenario) -> DatasetDict:
     # Convert HF dataset to python list for easier filtering
     all_queries_list = corpus_dataset["queries"].to_list()
     # test split: queries with the given scenario
@@ -258,7 +274,6 @@ def create_in_distribution_splits(corpus_dataset: DatasetDict,
         "validation": ds_val,
         "test": ds_test
     })
-
 
 def create_out_of_distribution_simple_splits(
         corpus_dataset: DatasetDict,
@@ -400,7 +415,8 @@ def create_out_of_distribution_simple_splits(
 
 if __name__ == "__main__":
 
-    dataset_path = "../../data/processed/corpus_dataset_experiment_v1"
+    dataset_folder = "../../data/processed/"
+    dataset_path = os.path.join(dataset_folder, "corpus_dataset_v1")
 
     if not os.path.exists(dataset_path):
         # Beispiel zum Erstellen eines Datensatzes. Mögliche Optionen von DatasetConfig sind im DocString beschrieben.
@@ -419,12 +435,19 @@ if __name__ == "__main__":
 
     # Beispiel zum Laden des Datensatzes + collate_function des DataLoaders um dynamisch ein Subset der negative passages zu laden.
     loaded_dataset = load_from_disk(dataset_path)
-    # in_distribution_split = create_splits_from_corpus_dataset(loaded_dataset, DatasetSplitType.InDistribution)
+    dataset_name = "dataset_split_in_distribution"
+    save_path = os.path.join(dataset_folder, dataset_name)
+    in_distribution_split = create_splits_from_corpus_dataset(corpus_dataset=loaded_dataset,
+                                                              dataset_split_type=DatasetSplitType.InDistribution,
+                                                              save_folder=dataset_folder,
+                                                              dataset_save_name=dataset_name)
 
     # Create an Out-of-Distribution (Simple) split
     ood_splits = create_splits_from_corpus_dataset(
         loaded_dataset,
         dataset_split_type=DatasetSplitType.OutOfDistributionSimple,
+        save_folder=dataset_folder,
+        dataset_save_name="dataset_split_out_of_distribution_simple",
         seed=420
     )
 
@@ -434,7 +457,11 @@ if __name__ == "__main__":
 
     print("Done.")
 
-    split_by_scenario = create_splits_from_corpus_dataset(loaded_dataset, DatasetSplitType.OutOfDistributionHard,
-                                                          test_scenario=DiscussionSzenario.JURAI)
+    test_scenario = DiscussionSzenario.JURAI
+    split_by_scenario = create_splits_from_corpus_dataset(loaded_dataset,
+                                                          DatasetSplitType.OutOfDistributionHard,
+                                                          save_folder=dataset_folder,
+                                                          dataset_save_name=f"dataset_split_by_scenario_{test_scenario}",
+                                                          test_scenario=test_scenario)
     # kfold_split = create_splits_from_corpus_dataset(hf_dataset, DatasetSplitType.kFold, None, 5)
     print("done")
