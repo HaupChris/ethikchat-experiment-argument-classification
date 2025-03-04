@@ -56,7 +56,7 @@ def create_dataset_for_multiple_negatives_ranking_loss(
             examples.append({
                 "query": query_id_to_query[q_id]["text"],
                 "positive": passage_id_to_text[pid],
-                "labels": labels
+                # "labels": labels
             })
 
     return Dataset.from_list(examples)
