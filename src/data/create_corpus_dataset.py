@@ -86,7 +86,7 @@ class Passage:
     text: str
     label: str
     discussion_scenario: str
-    passage_source: PassageSource
+    passage_source: str
     retrieved_query_id: Optional[int] = None
 
 
@@ -444,7 +444,7 @@ def create_passages_from_utterances(processed_utterances: List[ProcessedUtteranc
                                         text=passage_text,
                                         label=pu.labels[idx],
                                         discussion_scenario=pu.discussion_scenario.value,
-                                        passage_source=PassageSource.UserUtterance,
+                                        passage_source=PassageSource.UserUtterance.value,
                                         retrieved_query_id=pu.id))
     return passages
 
@@ -457,9 +457,9 @@ def create_passages_from_argument_graph(argument_graph: ResponseTemplateCollecti
     passages = []
 
     for template in argument_graph.arguments_templates:
-        passages.append(Passage(None, template.summary, template.label, discussion_scenario.value, PassageSource.ArgumentgraphSummary, None))
-        passages.append(Passage(None, template.full_text, template.label, discussion_scenario.value, PassageSource.ArgumentgraphFullText, None))
-        passages.extend([Passage(None, sample, template.label, discussion_scenario.value, PassageSource.ArgumentgraphSample, None) for sample in template.samples])
+        passages.append(Passage(None, template.summary, template.label, discussion_scenario.value, PassageSource.ArgumentgraphSummary.value, None))
+        passages.append(Passage(None, template.full_text, template.label, discussion_scenario.value, PassageSource.ArgumentgraphFullText.value, None))
+        passages.extend([Passage(None, sample, template.label, discussion_scenario.value, PassageSource.ArgumentgraphSample.value, None) for sample in template.samples])
     return passages
 
 

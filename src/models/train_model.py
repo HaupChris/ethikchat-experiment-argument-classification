@@ -1,6 +1,7 @@
 import argparse
 import os
 import sys
+# from collections import Counter
 from datetime import datetime
 
 import wandb
@@ -8,15 +9,13 @@ from datasets import load_from_disk
 from dotenv import load_dotenv
 from sentence_transformers import (
     SentenceTransformer,
-    SentenceTransformerTrainingArguments
+    SentenceTransformerTrainingArguments, SentenceTransformerTrainer
 )
 from sentence_transformers.losses import CachedMultipleNegativesRankingLoss
 from sentence_transformers.training_args import BatchSamplers
 
-from src.custom_trainer.custom_sentence_transformer_trainer import CustomSentenceTransformerTrainer
 from src.data.create_corpus_dataset import DatasetSplitType
 from src.data.dataset_splits import create_splits_from_corpus_dataset
-from src.data_collation.custom_sentence_transformer_data_collator import CustomSentenceTransformerDataCollator
 from src.evaluation.excluding_information_retrieval_evaluator import ExcludingInformationRetrievalEvaluator
 from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss
 from src.models.experiment_config import ExperimentConfig
@@ -83,29 +82,53 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     # Prepare train and eval datasets
     print("Preparing train_pos and eval_pos...")
     if is_test_run:
-        train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"], 1)
-        eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"], 1)
+        train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"], 2)
+        eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"], 2)
+        train_pos = train_pos.shuffle(seed=42).select(range(10))
+        eval_pos = eval_pos.shuffle(seed=42).select(range(10))
         print("Using small subset for test run.")
+        # Prepare evaluation data
+        print("Preparing evaluation data structures...")
+        # TODO: create here a smaller subset of the evaluation split for the test run.
+        #   this means that eval anchors and passages need to be reduced to a small subset
+
+
     else:
         train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"])
         eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"])
+        # Prepare evaluation data
+        print("Preparing evaluation data structures...")
+        eval_dataset = splitted_dataset["validation"]
+        eval_passages = {row["id"]: row["text"] for row in eval_dataset["passages"]}
+        eval_queries = {row["id"]: row["text"] for row in eval_dataset["queries"]}
+        eval_relevant_passages = {
+            row["query_id"]: set(row["passages_ids"])
+            for row in eval_dataset["queries_relevant_passages_mapping"]
+        }
+        eval_trivial_passages = {
+            row["query_id"]: set(row["passages_ids"])
+            for row in eval_dataset["queries_trivial_passages_mapping"]
+        }
+
+
         print("Full dataset used for training/validation.")
 
     print("Train/Eval datasets prepared.")
 
-    # Prepare evaluation data
-    print("Preparing evaluation data structures...")
-    eval_dataset = splitted_dataset["validation"]
-    eval_passages = {row["id"]: row["text"] for row in eval_dataset["passages"]}
-    eval_queries = {row["id"]: row["text"] for row in eval_dataset["queries"]}
-    eval_relevant_passages = {
-        row["query_id"]: set(row["passages_ids"])
-        for row in eval_dataset["queries_relevant_passages_mapping"]
-    }
-    eval_trivial_passages = {
-        row["query_id"]: set(row["passages_ids"])
-        for row in eval_dataset["queries_trivial_passages_mapping"]
-    }
+    # print("Calculating label frequency in train dataset...")
+    # label_freq = Counter()
+    # for idx in range(len(train_pos)):
+    #     label_freq.update(train_pos[idx]["labels"])
+    #
+    # # sort labels by frequency
+    # label_freq = dict(sorted(label_freq.items(), key=lambda item: item[1], reverse=True))
+    # print("Num labels:", len(label_freq))
+    # print("Sorted label frequency in train dataset:")
+    # for label, freq in label_freq.items():
+    #     print(f"{label}: {freq}")
+
+
+
 
     print("Instantiating ExcludingInformationRetrievalEvaluator for eval...")
     excluding_ir_evaluator_eval = ExcludingInformationRetrievalEvaluator(
@@ -119,12 +142,6 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         run=run,
         query_labels={row["id"]: row["labels"] for row in eval_dataset["queries"]},
         doc_labels={row["id"]: row["label"] for row in eval_dataset["passages"]},
-        log_label_confusion=True,
-        log_fp_fn=True,
-        log_rank_histogram=True,
-        log_multilabel_coverage=True,
-        log_tsne_embeddings=False,
-        tsne_sample_size=1000,
     )
     print("ExcludingInformationRetrievalEvaluator for eval created.")
 
@@ -154,12 +171,6 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         run=run,
         query_labels={row["id"]: row["labels"] for row in test_dataset["queries"]},
         doc_labels={row["id"]: row["label"] for row in test_dataset["passages"]},
-        log_label_confusion=True,
-        log_fp_fn=True,
-        log_rank_histogram=True,
-        log_multilabel_coverage=True,
-        log_tsne_embeddings=False,
-        tsne_sample_size=1000,
     )
     print("ExcludingInformationRetrievalEvaluator for test created.")
 
@@ -167,7 +178,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     train_args = SentenceTransformerTrainingArguments(
         output_dir=exp_config.model_run_dir,
         num_train_epochs=exp_config.num_epochs,
-        per_device_train_batch_size=256,
+        per_device_train_batch_size=64,
         per_device_eval_batch_size=8,
         learning_rate=exp_config.learning_rate,
         warmup_ratio=0.1,
@@ -185,14 +196,13 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     print("Training arguments set.")
 
     print("Initializing CustomSentenceTransformerTrainer...")
-    trainer = CustomSentenceTransformerTrainer(
+    trainer = SentenceTransformerTrainer(
         model=model,
         args=train_args,
         train_dataset=train_pos,
         eval_dataset=eval_pos,
         loss=loss,
         evaluator=excluding_ir_evaluator_eval,
-        data_collator=CustomSentenceTransformerDataCollator(tokenize_fn=model.tokenize, skip_columns=["labels"]),
     )
     print("Trainer initialized.")
 
@@ -251,7 +261,7 @@ if __name__ == "__main__":
         args_experiment_run = "v1"
         args_experiment_dir = "experiments_outputs"
         args_dataset_dir = "data/processed"
-        args_dataset_name = "corpus_dataset_experiment_v1"
+        args_dataset_name = "corpus_dataset_v1"
         args_model_name = "deutsche-telekom/gbert-large-paraphrase-euclidean"
         args_model_name_escaped = args_model_name.replace("/", "-")
         args_learning_rate = 2e-05
@@ -274,7 +284,7 @@ if __name__ == "__main__":
             "learning_rate": args_learning_rate,
             "batch_size": args_batch_size,
             "model_run_dir": args_model_run_dir,
-            "dataset_split_type": DatasetSplitType.Simple,
+            "dataset_split_type": DatasetSplitType.InDistribution,
             "num_epochs": 2,
             "loss_function": "MultipleNegativesRankingLoss",
             "run_time": expirment_timestamp_start
