@@ -2,6 +2,7 @@ import argparse
 import os
 import sys
 # from collections import Counter
+from collections.abc import KeysView
 from datetime import datetime
 
 import wandb
@@ -14,7 +15,7 @@ from sentence_transformers import (
 from sentence_transformers.losses import CachedMultipleNegativesRankingLoss
 from sentence_transformers.training_args import BatchSamplers
 
-from src.data.create_corpus_dataset import DatasetSplitType
+from src.data.create_corpus_dataset import DatasetSplitType, Query, Passage, PassageSource
 from src.data.dataset_splits import create_splits_from_corpus_dataset
 from src.evaluation.excluding_information_retrieval_evaluator import ExcludingInformationRetrievalEvaluator
 from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss
@@ -89,10 +90,23 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         print("Using small subset for test run.")
         # Prepare evaluation data
         print("Preparing evaluation data structures...")
-        # TODO: create here a smaller subset of the evaluation split for the test run.
-        #   this means that eval anchors and passages need to be reduced to a small subset
+        eval_dataset = splitted_dataset["validation"]
+        eval_dataset["passages"] = eval_dataset["passages"].shuffle(seed=42).select(range(400))
+        eval_dataset["queries"] = eval_dataset["queries"].shuffle(seed=42).select(range(100))
 
+        eval_passages = {row["id"]: Passage(row["id"], row["text"], row["label"], row["discussion_scenario"], row["passage_source"]) for row in eval_dataset["passages"]}
+        eval_queries = {row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"]) for row in eval_dataset["queries"]}
 
+        eval_relevant_passages = {
+            row["query_id"]: {passage_id for passage_id in row["passages_ids"] if passage_id in eval_passages.keys()}
+            for row in eval_dataset["queries_relevant_passages_mapping"]
+            if row["query_id"] in eval_queries.keys()
+        }
+        eval_trivial_passages = {
+            row["query_id"]: {passage_id for passage_id in row["passages_ids"] if passage_id in eval_passages.keys()}
+            for row in eval_dataset["queries_trivial_passages_mapping"]
+            if row["query_id"] in eval_queries.keys()
+        }
     else:
         train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"])
         eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"])
@@ -114,7 +128,6 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         print("Full dataset used for training/validation.")
 
     print("Train/Eval datasets prepared.")
-
     # print("Calculating label frequency in train dataset...")
     # label_freq = Counter()
     # for idx in range(len(train_pos)):
@@ -140,8 +153,6 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         write_csv=True,
         log_top_k_predictions=5,
         run=run,
-        query_labels={row["id"]: row["labels"] for row in eval_dataset["queries"]},
-        doc_labels={row["id"]: row["label"] for row in eval_dataset["passages"]},
     )
     print("ExcludingInformationRetrievalEvaluator for eval created.")
 
@@ -160,18 +171,18 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     }
 
     print("Instantiating ExcludingInformationRetrievalEvaluator for test...")
-    excluding_ir_evaluator_test = ExcludingInformationRetrievalEvaluator(
-        corpus=test_passages,
-        queries=test_queries,
-        relevant_docs=test_relevant_passages,
-        excluded_docs=test_trivial_passages,
-        show_progress_bar=True,
-        write_csv=True,
-        log_top_k_predictions=5,
-        run=run,
-        query_labels={row["id"]: row["labels"] for row in test_dataset["queries"]},
-        doc_labels={row["id"]: row["label"] for row in test_dataset["passages"]},
-    )
+    # excluding_ir_evaluator_test = ExcludingInformationRetrievalEvaluator(
+    #     corpus=test_passages,
+    #     queries=test_queries,
+    #     relevant_docs=test_relevant_passages,
+    #     excluded_docs=test_trivial_passages,
+    #     show_progress_bar=True,
+    #     write_csv=True,
+    #     log_top_k_predictions=5,
+    #     run=run,
+    #     query_labels={row["id"]: row["labels"] for row in test_dataset["queries"]},
+    #     doc_labels={row["id"]: row["label"] for row in test_dataset["passages"]},
+    # )
     print("ExcludingInformationRetrievalEvaluator for test created.")
 
     print("Setting up training arguments...")
@@ -215,16 +226,16 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     print("Final evaluation results:", final_eval_results)
     run.log(final_eval_results)
 
-    print("Running evaluation on test set...")
-    test_eval_results = excluding_ir_evaluator_test(model)
-    print("Test evaluation results:", test_eval_results)
-    run.log(test_eval_results)
+    # print("Running evaluation on test set...")
+    # test_eval_results = excluding_ir_evaluator_test(model)
+    # print("Test evaluation results:", test_eval_results)
+    # run.log(test_eval_results)
 
-    print("Saving model as W&B artifact...")
-    artifact = wandb.Artifact(name=run_name, type="model")
-    artifact.add_dir(exp_config.model_run_dir)
-    run.log_artifact(artifact)
-    print("Artifact logged.")
+    # print("Saving model as W&B artifact...")
+    # artifact = wandb.Artifact(name=run_name, type="model")
+    # artifact.add_dir(exp_config.model_run_dir)
+    # run.log_artifact(artifact)
+    # print("Artifact logged.")
 
     print("Finishing wandb run...")
     run.finish()
@@ -249,7 +260,7 @@ if __name__ == "__main__":
     parser.add_argument('--is_test_run', action='store_true', help='Run training in test mode.')
     args = parser.parse_args()
 
-    sys.path.append("/home/ls6/hauptmann/ethikchat-experiment-argument-classification")
+    sys.path.append("/home/erik/Documents/Uni/ethikchat-experiment-argument-classification")
     print("Extended PYTHONPATH:", sys.path)
 
     expirment_timestamp_start = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
@@ -257,7 +268,7 @@ if __name__ == "__main__":
     if args.model_name is None:
         print("Starting training in testing mode...")
 
-        args_project_root = "/home/christian/PycharmProjects/ethikchat-experiment-argument-classification"
+        args_project_root = "/home/erik/Documents/Uni/ethikchat-experiment-argument-classification"
         args_experiment_run = "v1"
         args_experiment_dir = "experiments_outputs"
         args_dataset_dir = "data/processed"
