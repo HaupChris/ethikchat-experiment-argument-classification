@@ -20,11 +20,6 @@ from sentence_transformers.similarity_functions import SimilarityFunction
 if TYPE_CHECKING:
     from sentence_transformers import SentenceTransformer
 
-try:
-    from sklearn.manifold import TSNE
-    TSNE_AVAILABLE = True
-except ImportError:
-    TSNE_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 
@@ -98,8 +93,6 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         log_fp_fn: bool = False,  # (4) log false positives & false negatives
         log_rank_histogram: bool = False,  # (5) distribution of rank of first relevant doc
         log_multilabel_coverage: bool = False,  # (6) measure coverage ratio of query's labels in top-k
-        log_tsne_embeddings: bool = False,  # (7) do a t-SNE of queries & corpus embeddings
-        tsne_sample_size: int = 1000,  # max number of queries+docs for the t-SNE
     ) -> None:
         super().__init__()
         # Filter queries so we only keep the ones that have relevant docs
@@ -150,8 +143,6 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         self.log_fp_fn = log_fp_fn
         self.log_rank_histogram = log_rank_histogram
         self.log_multilabel_coverage = log_multilabel_coverage
-        self.log_tsne_embeddings = log_tsne_embeddings
-        self.tsne_sample_size = tsne_sample_size
 
         if name:
             name = "_" + name
@@ -206,9 +197,6 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             self.score_function_names = [model.similarity_fn_name]
             self._append_csv_headers(self.score_function_names)
 
-        # Possibly do a t-SNE over a sample of queries & docs (7)
-        if self.log_tsne_embeddings:
-            self._compute_and_log_tsne(model)
 
         # Main IR procedure
         scores, queries_result_list = self.compute_metrices(model, *args, **kwargs)
@@ -380,8 +368,6 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             scores[score_name] = metrics
 
         # Additional logging for advanced options:
-        if self.log_label_confusion or self.log_fp_fn or self.log_rank_histogram or self.log_multilabel_coverage:
-            self._advanced_analysis(queries_result_list)
 
         # Print them
         for score_name in self.score_function_names:
@@ -560,231 +546,4 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             if self.run:
                 self.run.log({f"{self.name}_{score_func_name}_top{top_k}_predictions": table})
 
-    # -----------------------------------------
-    # ADDITIONAL METHODS FOR (3), (4), (5), (6), (7)
-    # -----------------------------------------
 
-    def _advanced_analysis(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
-        """
-        Dispatches optional advanced analyses (confusion table, fp/fn table,
-        rank histogram, multi-label coverage, etc.) if enabled.
-        """
-        # (3) Log label confusion if desired
-        if self.log_label_confusion and self.doc_labels and self.query_labels:
-            self._log_label_confusion_table(queries_result_list)
-
-        # (4) Log false positives and false negatives
-        if self.log_fp_fn:
-            self._log_fp_fn_tables(queries_result_list)
-
-        # (5) Rank histogram
-        if self.log_rank_histogram:
-            self._log_first_relevant_rank_histogram(queries_result_list)
-
-        # (6) Multi-label coverage
-        if self.log_multilabel_coverage and self.doc_labels and self.query_labels:
-            self._log_multilabel_coverage(queries_result_list)
-
-    def _log_label_confusion_table(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
-        """
-        Creates a confusion-style breakdown:
-          For each query label Lq, which doc labels Lp get retrieved in top-K?
-        We build a table: (query_label, doc_label, count_of_occurrences).
-        """
-        if not self.run:
-            return
-
-        # We'll gather a dictionary: confusion_counts[(Lq, Lp)] -> total_count
-        confusion_counts = {}
-        # We pick the largest k to unify top-k in confusion
-        largest_k = max(self.accuracy_at_k + self.precision_recall_at_k + self.mrr_at_k + self.ndcg_at_k + self.map_at_k)
-
-        # We do this for the "first" (or any) score function. You could pick one or loop all.
-        # We'll choose an arbitrary score_function to do confusion on:
-        score_func_name = next(iter(queries_result_list.keys()))
-
-        for q_idx, hits in enumerate(queries_result_list[score_func_name]):
-            qid = self.queries_ids[q_idx]
-            q_labels = self.query_labels.get(qid, [])  # e.g., ["arg", "agreement"]
-            sorted_hits = sorted(hits, key=lambda x: x[0], reverse=True)
-            top_k_docs = sorted_hits[:largest_k]
-            for (_, doc_id) in top_k_docs:
-                doc_label = self.doc_labels.get(doc_id, "UNK")
-                for ql in q_labels:
-                    confusion_counts[(ql, doc_label)] = confusion_counts.get((ql, doc_label), 0) + 1
-
-        # Convert confusion_counts to a wandb table
-        table = wandb.Table(columns=["query_label", "doc_label", "count"])
-        for (ql, dl), ccount in confusion_counts.items():
-            table.add_data(ql, dl, ccount)
-
-        self.run.log({f"{self.name}_label_confusion": table})
-
-    def _log_fp_fn_tables(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
-        """
-        Logs two wandb.Tables: one for false positives, one for false negatives,
-        for each score function.
-         - FP = doc retrieved in top-K but not relevant
-         - FN = doc relevant but not in top-K
-        """
-        if not self.run:
-            return
-
-        for score_func_name, per_query_hits in queries_result_list.items():
-            top_k = max(
-                self.mrr_at_k + self.ndcg_at_k + self.accuracy_at_k +
-                self.precision_recall_at_k + self.map_at_k
-            )
-            fp_table = wandb.Table(columns=["query_id", "query_text", "doc_id", "doc_text", "score"])
-            fn_table = wandb.Table(columns=["query_id", "query_text", "doc_id", "doc_text"])
-
-            for q_idx, hits in enumerate(per_query_hits):
-                qid = self.queries_ids[q_idx]
-                q_text = self.queries[q_idx]
-                sorted_hits = sorted(hits, key=lambda x: x[0], reverse=True)[:top_k]
-                relevant_docs_set = self.relevant_docs[qid]
-
-                # Find false positives
-                for (scr, doc_id) in sorted_hits:
-                    if doc_id not in relevant_docs_set:
-                        # It's retrieved but not relevant => FP
-                        fp_table.add_data(qid, q_text, doc_id, self.corpus_map[doc_id], scr)
-
-                # Find false negatives
-                # i.e., docs that are in relevant_docs_set but not in the top-K
-                retrieved_doc_ids = {doc_id for (_, doc_id) in sorted_hits}
-                missing_docs = relevant_docs_set.difference(retrieved_doc_ids)
-                for doc_id in missing_docs:
-                    fn_table.add_data(qid, q_text, doc_id, self.corpus_map[doc_id])
-
-            self.run.log({f"{self.name}_{score_func_name}_false_positives": fp_table})
-            self.run.log({f"{self.name}_{score_func_name}_false_negatives": fn_table})
-
-    def _log_first_relevant_rank_histogram(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
-        """
-        Plots a histogram of the rank of the first relevant doc for each query
-        using the newer wandb.plot.histogram() API, which requires passing a wandb.Table.
-        """
-        if not self.run:
-            return
-
-        # We'll pick the first score function as reference (or do multiple if you prefer)
-        score_func_name = next(iter(queries_result_list.keys()))
-        hits_for_score = queries_result_list[score_func_name]
-        top_k = max(
-            self.mrr_at_k + self.ndcg_at_k + self.accuracy_at_k +
-            self.precision_recall_at_k + self.map_at_k
-        )
-
-        ranks = []
-        for q_idx, hits in enumerate(hits_for_score):
-            qid = self.queries_ids[q_idx]
-            relevant = self.relevant_docs[qid]
-            sorted_hits = sorted(hits, key=lambda x: x[0], reverse=True)[:top_k]
-
-            found_rank = None
-            for rank_i, (scr, doc_id) in enumerate(sorted_hits, start=1):
-                if doc_id in relevant:
-                    found_rank = rank_i
-                    break
-            if found_rank is None:
-                # Means no relevant doc found in top-K
-                found_rank = top_k + 1
-            ranks.append(found_rank)
-
-        # Build a wandb.Table to hold the rank data
-        table = wandb.Table(columns=["rank"])
-        for r in ranks:
-            table.add_data(r)
-
-        # Construct a histogram from the table
-        histogram_plot = wandb.plot.histogram(
-            table,
-            value="rank",
-            title="First Relevant Document Rank Distribution"
-        )
-
-        # Log the histogram object to W&B
-        self.run.log({f"{self.name}_first_relevant_rank_histogram": histogram_plot})
-
-    def _log_multilabel_coverage(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
-        """
-        If a query has multiple labels, measure how many of these labels are 'covered'
-        by top-K docs that share that label. A doc has exactly 1 label, so coverage
-        ratio = (#distinct query labels matched by at least one doc in top-K) / (#query labels).
-        """
-        if not self.run:
-            return
-
-        # We'll pick the largest top_k
-        top_k = max(
-            self.mrr_at_k + self.ndcg_at_k + self.accuracy_at_k +
-            self.precision_recall_at_k + self.map_at_k
-        )
-        score_func_name = next(iter(queries_result_list.keys()))
-        coverage_ratios = []
-
-        for q_idx, hits in enumerate(queries_result_list[score_func_name]):
-            qid = self.queries_ids[q_idx]
-            q_labels = self.query_labels.get(qid, [])
-            if not q_labels:
-                continue  # skip queries with no labels known
-
-            sorted_hits = sorted(hits, key=lambda x: x[0], reverse=True)[:top_k]
-            retrieved_labels = set()
-            for (scr, doc_id) in sorted_hits:
-                doc_label = self.doc_labels.get(doc_id, None)
-                if doc_label in q_labels:
-                    retrieved_labels.add(doc_label)
-
-            coverage_ratio = len(retrieved_labels) / len(q_labels)
-            coverage_ratios.append(coverage_ratio)
-
-        mean_coverage = np.mean(coverage_ratios) if coverage_ratios else 0.0
-        self.run.log({f"{self.name}_multi_label_coverage@{top_k}": mean_coverage})
-
-    def _compute_and_log_tsne(self, model: SentenceTransformer) -> None:
-        """
-        (7) Compute a t-SNE of query and doc embeddings (sampled) for visualization.
-        """
-        if not self.run or not TSNE_AVAILABLE:
-            return
-
-        # We'll sample up to tsne_sample_size queries and docs
-        q_total = len(self.queries_ids)
-        d_total = len(self.corpus_ids)
-        # pick min
-        qs = min(q_total, self.tsne_sample_size // 2)
-        ds = min(d_total, self.tsne_sample_size // 2)
-
-        # sample a subset
-        chosen_qids = np.random.choice(self.queries_ids, size=qs, replace=False) if qs < q_total else self.queries_ids
-        chosen_docs = np.random.choice(self.corpus_ids, size=ds, replace=False) if ds < d_total else self.corpus_ids
-
-        # Gather texts
-        sub_queries = [self.queries[self.queries_ids.index(qid)] for qid in chosen_qids]
-        sub_docs = [self.corpus_map[did] for did in chosen_docs]
-
-        # Encode
-        with nullcontext() if self.truncate_dim is None else model.truncate_sentence_embeddings(self.truncate_dim):
-            q_emb = model.encode(sub_queries, batch_size=self.batch_size, convert_to_tensor=True)
-            d_emb = model.encode(sub_docs, batch_size=self.batch_size, convert_to_tensor=True)
-
-        combined = torch.cat([q_emb, d_emb], dim=0).cpu().numpy()
-        # Do TSNE
-        tsne = TSNE(n_components=2, random_state=42, perplexity=30)
-        coords = tsne.fit_transform(combined)
-
-        # Build wandb.Table
-        table = wandb.Table(columns=["id", "type", "x", "y"])
-        # first queries
-        for i, qid in enumerate(chosen_qids):
-            x, y = coords[i]
-            table.add_data(qid, "query", float(x), float(y))
-        # next docs
-        offset = len(chosen_qids)
-        for j, did in enumerate(chosen_docs):
-            x, y = coords[offset + j]
-            table.add_data(did, "doc", float(x), float(y))
-
-        self.run.log({f"{self.name}_tsne": table})
