@@ -15,7 +15,7 @@ from src.features.build_features import create_dataset_for_multiple_negatives_ra
 from src.models.experiment_config import ExperimentConfig
 
 
-def main():
+def main(is_test_run=False):
     # 1) Initialize W&B and read hyperparameters from wandb.config
     wandb.init(project="argument-classification")  # <--- adjust project name as needed
     config = wandb.config
@@ -117,8 +117,8 @@ def main():
     eval_queries = {row["id"]: row["text"] for row in eval_queries}
 
     eval_relevant_passages = {
-        row["id"]: set(row["passages_ids"]) for row in eval_dataset["queries_relevant_passages_mapping"]
-        if row["id"] in eval_queries.keys()
+        row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_relevant_passages_mapping"]
+        if row["query_id"] in eval_queries.keys()
     }
     # shorten the relevant passages to 2
     for key in eval_relevant_passages.keys():
@@ -139,8 +139,8 @@ def main():
     test_queries = {row["id"]: row["text"] for row in test_queries}
 
     test_relevant_passages = {
-        row["id"]: set(row["passages_ids"]) for row in test_dataset["queries_relevant_passages_mapping"]
-        if row["id"] in test_queries.keys()
+        row["query_id"]: set(row["passages_ids"]) for row in test_dataset["queries_relevant_passages_mapping"]
+        if row["query_id"] in test_queries.keys()
     }
     # shorten the relevant passages to 2
     for key in test_relevant_passages.keys():
@@ -193,9 +193,9 @@ def main():
         per_device_eval_batch_size=8,
         learning_rate=exp_config.learning_rate,
         warmup_ratio=0.1,
-        fp16=True,
+        fp16=(not is_test_run),
         eval_strategy="steps",
-        eval_steps=4000,
+        eval_steps=4000 if not is_test_run else 5,
         save_strategy="steps",
         save_steps=4000,
         save_total_limit=2,
@@ -218,9 +218,13 @@ def main():
 
     # 13) Evaluate
     final_eval_results = excluding_ir_evaluator_eval(model)
-    wandb.log({"eval_acc@1": final_eval_results.get("acc@1", 0.0)})  # Example: log MRR
+    prefixed_eval_results = {f"eval_{key}": value for key, value in final_eval_results.items()}
+    wandb.log(prefixed_eval_results)
+
     test_eval_results = excluding_ir_evaluator_test(model)
-    wandb.log({"test_acc@.1": test_eval_results.get("acc@1", 0.0)})
+    prefixed_test_eval_results = {f"test_{key}": value for key, value in test_eval_results.items()}
+    wandb.log(prefixed_test_eval_results)
+
 
     # 14) Save & log artifact
     artifact = wandb.Artifact(name=f"sweep_{exp_config.model_name_escaped}", type="model")
@@ -231,4 +235,31 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import sys
+
+    # If you pass a --local-test argument, we'll run with a dummy config in offline mode
+    if "--local-test" in sys.argv:
+        # Example static config (pick simple/fast values)
+        local_config = {
+            "project_root": "/home/christian/PycharmProjects/ethikchat-experiment-argument-classification",
+            "experiment_dir": "experiments_outputs",
+            "experiment_run": "v1_local_debug",
+            "dataset_dir": "data/processed",
+            "dataset_name": "corpus_dataset_v1",
+            "dataset_split_type": "in_distribution",
+            "dataset_split_name": "dataset_split_in_distribution",
+            "model_name": "deutsche-telekom/gbert-large-paraphrase-euclidean",
+            "learning_rate": 1e-5,
+            "batch_size": 2,
+            "num_epochs": 2,
+        }
+
+        wandb.init(
+            project="argument-classification",   # or "argument-classification-test"
+            config=local_config,
+            mode="offline"                      # So it doesn't upload to W&B
+        )
+        main(is_test_run=True)
+    else:
+        # The normal sweep entry point
+        main()
