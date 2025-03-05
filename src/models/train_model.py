@@ -115,21 +115,6 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
 
     print("Train/Eval datasets prepared.")
 
-    # print("Calculating label frequency in train dataset...")
-    # label_freq = Counter()
-    # for idx in range(len(train_pos)):
-    #     label_freq.update(train_pos[idx]["labels"])
-    #
-    # # sort labels by frequency
-    # label_freq = dict(sorted(label_freq.items(), key=lambda item: item[1], reverse=True))
-    # print("Num labels:", len(label_freq))
-    # print("Sorted label frequency in train dataset:")
-    # for label, freq in label_freq.items():
-    #     print(f"{label}: {freq}")
-
-
-
-
     print("Instantiating ExcludingInformationRetrievalEvaluator for eval...")
     excluding_ir_evaluator_eval = ExcludingInformationRetrievalEvaluator(
         corpus=eval_passages,
