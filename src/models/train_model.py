@@ -30,6 +30,11 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         exp_config: ExperimentConfig
         is_test_run: bool, defines if the training is a test run and only a small subset of the data is used
     """
+
+
+
+
+
     print("=== MAIN START ===")
     print(f"Experiment config:\n{exp_config}")
     print(f"Is test run? {is_test_run}")
