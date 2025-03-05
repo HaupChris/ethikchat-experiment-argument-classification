@@ -4,11 +4,13 @@ import heapq
 import logging
 import os
 from contextlib import nullcontext
-from collections import Counter
+from collections import Counter, defaultdict
 from typing import TYPE_CHECKING, Callable, Optional, Any, Dict, List, Tuple, Set
 
 import numpy as np
 import torch
+from ethikchat_argtoolkit.ArgumentGraph.response_template import TemplateCategory
+from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
 from torch import Tensor
 from tqdm import trange
 
@@ -88,23 +90,17 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         excluded_docs: Optional[Dict[str, Set[str]]] = None,
         log_top_k_predictions: int = 0,  # New param: how many predictions to log per query to wandb
         run: Run = None,
+        project_root: str = None,
     ) -> None:
         super().__init__()
         # Filter queries so we only keep the ones that have relevant docs
-        self.queries_ids = []
-        for qid in queries:
-            if qid in relevant_docs and len(relevant_docs[qid]) > 0:
-                self.queries_ids.append(qid)
-
-        self.queries_metadata = [queries[qid] for qid in self.queries_ids]
-        self.queries = [query.text for query in self.queries_metadata]
+        self.queries = [query for query_id, query in queries.items() if query_id in relevant_docs and len(relevant_docs[query_id]) > 0]
 
         self.corpus_ids = list(corpus.keys())
-        self.corpus_metadata = [corpus[cid] for cid in self.corpus_ids]
-        self.corpus = [passage.text for passage in self.corpus_metadata]
+        self.corpus = [corpus[cid] for cid in self.corpus_ids]
 
         # Build a dictionary {doc_id -> doc_text} for logging
-        self.corpus_map = dict(zip(self.corpus_ids, self.corpus_metadata))
+        self.corpus_map = dict(zip(self.corpus_ids, self.corpus))
 
         self.query_prompt = query_prompt
         self.query_prompt_name = query_prompt_name
@@ -138,8 +134,13 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
 
         self.csv_file: str = "Information-Retrieval_evaluation" + name + "_results.csv"
         self.csv_headers = ["epoch", "steps"]
-
         self._append_csv_headers(self.score_function_names)
+
+        self.project_root = project_root if project_root is not None else "../../"
+        self.medai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s1"))
+        self.jurai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s2"))
+        self.autoai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s3"))
+        self.refai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s4"))
 
     def _append_csv_headers(self, score_function_names):
         for score_name in score_function_names:
@@ -241,10 +242,10 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         metrics = self.prefix_name_to_metrics(metrics, self.name)
         self.store_metrics_in_model_card_data(model, metrics, epoch, steps)
 
-        # Finally, if requested, log the top-k predictions to wandb
-        if self.log_top_k_predictions > 0:
-            self.log_top_k_predictions_to_wandb(queries_result_list)
-
+        # #Finally, if requested, log the top-k predictions to wandb
+        # if self.log_top_k_predictions > 0:
+        #     self.log_top_k_predictions_to_wandb(queries_result_list)
+        self.log_accuracy_at_k_to_wandb(queries_result_list)
         return metrics
 
     def compute_metrices(
@@ -276,7 +277,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         # Encode queries
         with nullcontext() if self.truncate_dim is None else model.truncate_sentence_embeddings(self.truncate_dim):
             query_embeddings = model.encode(
-                self.queries,
+                [query.text for query in self.queries],
                 prompt_name=self.query_prompt_name,
                 prompt=self.query_prompt,
                 batch_size=self.batch_size,
@@ -303,7 +304,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
                     else corpus_model.truncate_sentence_embeddings(self.truncate_dim)
                 ):
                     sub_corpus_emb = corpus_model.encode(
-                        self.corpus[corpus_start_idx:corpus_end_idx],
+                        [passage.text for passage in self.corpus[corpus_start_idx:corpus_end_idx]],
                         prompt_name=self.corpus_prompt_name,
                         prompt=self.corpus_prompt,
                         batch_size=self.batch_size,
@@ -325,8 +326,8 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
 
                 # For each query, integrate chunk results
                 for q_idx in range(len(query_embeddings)):
-                    qid = self.queries_ids[q_idx]
-                    exclude_set = self.excluded_docs.get(qid, set())
+                    query = self.queries[q_idx]
+                    exclude_set = self.excluded_docs.get(query.id, set())
 
                     # We'll gather valid hits in a min-heap
                     valid_hits = queries_result_list[name][q_idx]
@@ -345,7 +346,6 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             for q_idx in range(len(queries_result_list[name])):
                 sorted_hits = sorted(queries_result_list[name][q_idx], key=lambda x: x[0], reverse=True)
                 queries_result_list[name][q_idx] = sorted_hits
-
         logger.info(f"Queries: {len(self.queries)}")
         logger.info(f"Corpus: {len(self.corpus)}\n")
 
@@ -356,7 +356,6 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             metrics = self.compute_metrics(queries_result_list[score_name], score_name)
             scores[score_name] = metrics
 
-        # Additional logging for advanced options:
 
         # Print them
         for score_name in self.score_function_names:
@@ -384,7 +383,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
 
         # For each query
         for q_idx, top_hits in enumerate(queries_result_list_for_score):
-            query_id = self.queries_ids[q_idx]
+            query_id = self.queries[q_idx].id
             query_relevant_docs = self.relevant_docs[query_id]
 
             # Accuracy@k
@@ -535,8 +534,55 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             if self.run:
                 self.run.log({f"{self.name}_{score_func_name}_top{top_k}_predictions": table})
 
+    def log_accuracy_at_k_to_wandb(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
+        if not self.accuracy_at_k:
+            return
 
+        top_ks = sorted([k for k in self.accuracy_at_k if k > 0])
 
+        def update_accuracy(accuracy_dict: Dict[str, Dict[str, int]], key: str, condition: bool) -> None:
+            if condition:
+                accuracy_dict[key]["correct"] += 1
+            accuracy_dict[key]["total"] += 1
+
+        for score_func_name, per_query_hits in queries_result_list.items():
+            accuracy_results_by_k = {}
+            for k in top_ks:
+                accuracy_per_topic = defaultdict(lambda: {"total": 0, "correct": 0})
+                accuracy_per_topic_and_node_type = defaultdict(lambda: {"total": 0, "correct": 0})
+                accuracy_per_topic_and_node_level = defaultdict(lambda: {"total": 0, "correct": 0})
+                accuracy_per_topic_and_node_label = defaultdict(lambda: {"total": 0, "correct": 0})
+
+                for q_idx, hits in enumerate(per_query_hits):
+                    query = self.queries[q_idx]
+                    any_relevant_passages = any(passage_idx in self.relevant_docs[query.id] for _, passage_idx in hits[:k])
+                    discussion_scenario = query.discussion_scenario.lower()
+                    rtc = self._return_topic_rtc(discussion_scenario)
+
+                    update_accuracy(accuracy_per_topic, discussion_scenario, any_relevant_passages)
+
+                    for label in query.labels:
+                        update_accuracy(accuracy_per_topic_and_node_label, f"{discussion_scenario}_{label}", any_relevant_passages)
+
+                        label_template = rtc.get_template_for_label(label)
+
+                        if label_template is None:
+                            update_accuracy(accuracy_per_topic_and_node_type, f"{discussion_scenario}_other", any_relevant_passages)
+                        else:
+                            update_accuracy(accuracy_per_topic_and_node_type, f"{discussion_scenario}_{label_template.category}", any_relevant_passages)
+
+                            if label_template.category == TemplateCategory.Z:
+                                if label_template.has_parent_labels:
+                                    update_accuracy(accuracy_per_topic_and_node_level, f"{discussion_scenario}_counter", any_relevant_passages)
+                                else:
+                                    update_accuracy(accuracy_per_topic_and_node_level, f"{discussion_scenario}_main", any_relevant_passages)
+
+                accuracy_results_by_k[k] = {
+                    "topic": accuracy_per_topic,
+                    "node_type": accuracy_per_topic_and_node_type,
+                    "node_level": accuracy_per_topic_and_node_level,
+                    "node_label": accuracy_per_topic_and_node_label
+                }
     def _log_top1_classification(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
         """
             Logs evaluation results for top-1 classification to Weights & Biases (wandb).
@@ -688,3 +734,16 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             ),
             f"{self.name}_top1_classification_scatter_plot": wandb.plot.scatter(scatter_plot, x="predicted_label_idx", y="reference_label_idx", title="Top-1 Classification Scatter Plot")
         })
+
+    def _return_topic_rtc(self, discussion_scenario: str) -> ResponseTemplateCollection:
+        discussion_scenario = discussion_scenario.lower()
+        if discussion_scenario == "medai":
+            return self.medai_rtc
+        elif discussion_scenario == "jurai":
+            return self.jurai_rtc
+        elif discussion_scenario == "autoai":
+            return self.autoai_rtc
+        elif discussion_scenario == "refai":
+            return self.refai_rtc
+        else:
+            raise Exception(f"Discussion Scenario '{discussion_scenario}' doesnt have a valid ResponseTemplateCollection")
