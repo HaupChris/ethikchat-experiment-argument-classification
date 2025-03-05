@@ -16,7 +16,8 @@ class ExperimentConfig(BaseModel):
         experiment_run: str (name of the experiment run)
         dataset_dir: str (relative path to the dataset directory)
         dataset_name: str (name of the dataset)
-        dataset_split_type: DatasetSplitType, e.g. DatasetSplitType.Simple
+        dataset_split_type: DatasetSplitType, e.g. DatasetSplitType.InDistribution
+        split_dataset_name: str (name of the split dataset), e.g. "dataset_split_in_distribution"
         model_name: str (name of the model to train)
         model_name_escaped: str (model name with "/" replaced by "-")
         model_run_dir: str (absolute path to the model run directory, e.g. /home/user/my_experiments/this_experiment/experiments_outputs/v0/airnicco8-xlm-roberta-de_lr2e-05_bs4)
@@ -32,6 +33,7 @@ class ExperimentConfig(BaseModel):
     dataset_dir: str
     dataset_name: str
     dataset_split_type: DatasetSplitType
+    split_dataset_name: str
     model_name: str
     model_name_escaped: str
     model_run_dir: str

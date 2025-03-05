@@ -53,11 +53,12 @@ def main():
             f"{config.model_name.replace('/', '-')}_lr{config.learning_rate}_bs{config.batch_size}"
         ),
         "dataset_split_type": DatasetSplitType.from_str(config.dataset_split_type),
-        "dataset_split_name": config.dataset_split_name,
+        "split_dataset_name": config.dataset_split_name,
         "num_epochs": config.num_epochs,
         "loss_function": "MultipleNegativesRankingLoss",  # or config.get(...)
         "run_time": "sweep-run"  # just a placeholder
     }
+
     exp_config = ExperimentConfig(**exp_config_dict)
 
     # Make sure output directory exists
@@ -76,7 +77,7 @@ def main():
     splitted_dataset = create_splits_from_corpus_dataset(corpus_dataset=dataset,
                                                          dataset_split_type=exp_config.dataset_split_type,
                                                          save_folder=dataset_path,
-                                                         dataset_save_name=exp_config.dataset_split_name
+                                                         dataset_save_name=exp_config.split_dataset_name
                                                          )
 
     # 9) Prepare train/eval data
