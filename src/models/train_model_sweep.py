@@ -7,7 +7,6 @@ from dotenv import load_dotenv
 from sentence_transformers import SentenceTransformer
 from sentence_transformers.losses import CachedMultipleNegativesRankingLoss
 from sentence_transformers import SentenceTransformerTrainingArguments, SentenceTransformerTrainer
-from setuptools.sandbox import save_path
 
 from src.data.dataset_splits import create_splits_from_corpus_dataset
 from src.data.create_corpus_dataset import DatasetSplitType
@@ -54,6 +53,7 @@ def main():
             f"{config.model_name.replace('/', '-')}_lr{config.learning_rate}_bs{config.batch_size}"
         ),
         "dataset_split_type": DatasetSplitType.from_str(config.dataset_split_type),
+        "dataset_split_name": config.dataset_split_name,
         "num_epochs": config.num_epochs,
         "loss_function": "MultipleNegativesRankingLoss",  # or config.get(...)
         "run_time": "sweep-run"  # just a placeholder
@@ -76,7 +76,8 @@ def main():
     split_dataset_name = exp_config.dataset_split_name
     splitted_dataset = create_splits_from_corpus_dataset(corpus_dataset=dataset,
                                                          dataset_split_type=exp_config.dataset_split_type,
-                                                         save_path=os.path.join(dataset_path, split_dataset_name)
+                                                         save_folder=dataset_path,
+                                                         dataset_save_name=split_dataset_name
                                                          )
 
     # 9) Prepare train/eval data
