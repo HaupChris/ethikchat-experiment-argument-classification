@@ -4,6 +4,7 @@
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:1          # 1 GPU per task
+#SBATCH --exclude=gpu8a
 #SBATCH --output=sweep_agent_%A_%a.out
 #SBATCH --error=sweep_agent_%A_%a.err
 
