@@ -7,8 +7,16 @@
 #SBATCH --output=sweep_agent_%A_%a.out
 #SBATCH --error=sweep_agent_%A_%a.err
 
+
+project_root_dir="/home/ls6/hauptmann/ethikchat-experiment-argument-classification"
+
+# add project root directory to python path
+export PYTHONPATH="${project_root_dir}:${PYTHONPATH}"
+
 # Load your environment
 source /home/ls6/hauptmann/ethikchat-experiment-argument-classification/venv/bin/activate
+
+
 
 # Make sure you already created the sweep and have the SWEEP_ID. Example:
 # wandb sweep sweep_config.yaml
