@@ -138,11 +138,13 @@ class DatasetConfig:
     validation_test_ratio: float = 0.5
     noisy_labels= ['OTHER',
                    "Z_ARG", "PRO_ZARG", "CON_ZARG",
-                   "NZ_ARG", "PRO_NZARG", "CON_NZARG", "NZ.G1", "NZ.G2", "NZ.G3",
+                   "NZ_ARG", "PRO_NZARG", "CON_NZARG",
                    "FAQ.G1",
                    "Z.GK1", "Z.GK2", "Z.GK3", "Z.GK4", "Z.GK5", "Z.GK6", "Z.GK7", "Z.GK8", "Z.GK9", "Z.GK10",
                    "Z.GP1", "Z.GP2", "Z.GP3", "Z.GP4", "Z.GP5", "Z.GP6", "Z.GP7", "Z.GP8", "Z.GP9", "Z.GP10",
                    "NZ.G1", "NZ.G2", "NZ.G3", "NZ.G4",
+                   "NZ.P1-1", "NZ.P2-1", "NZ.P3-1", "NZ.P4-1", "NZ.P5-1", "NZ.P6-1", "NZ.P7-1", "NZ.P8-1", "NZ.P9-1", "NZ.P10-1",
+                   "NZ.K1-1", "NZ.K2-1", "NZ.K3-1", "NZ.K4-1", "NZ.K5-1", "NZ.K6-1", "NZ.K7-1", "NZ.K8-1", "NZ.K9-1", "NZ.K10-1",
                    "CONSENT", "DISSENT"]
 
 
