@@ -412,7 +412,21 @@ def create_queries_split(processed_utterances: List[ProcessedUtterance]) -> List
     Creates a split that contains utterances and an id. This is the "queries" split.
     """
 
-    return [Query(utt.id, utt.text, utt.labels, utt.discussion_scenario) for utt in processed_utterances]
+    queries = [Query(utt.id, utt.text, utt.labels, utt.discussion_scenario) for utt in processed_utterances]
+
+
+    # check for duplicates in the data and remove them
+    seen = set()
+    unique_queries = []
+    for query in queries:
+        identifier = (query.text, tuple(sorted(query.labels)))  # Ensure labels are hashable and order-independent
+        if identifier not in seen:
+            seen.add(identifier)
+            unique_queries.append(query)
+        else:
+            print(f"Duplicate query found: {query}. Will not be added to the dataset.")
+
+    return unique_queries
 
 
 def create_queries_relevant_passages_mapping_split(queries: List[Query], passages: List[Passage]) -> Dict[int, List[int]]:

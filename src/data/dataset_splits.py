@@ -1,6 +1,7 @@
 import json
 import os
 import random
+import warnings
 from collections import defaultdict
 from typing import Optional, Union, Dict
 from copy import deepcopy
@@ -74,6 +75,48 @@ def load_splits_from_disk(save_path) -> DatasetDict:
     return DatasetDict(dataset_dict)
 
 
+def check_splits_for_contamination(train_split: DatasetDict, val_split: DatasetDict, test_split: DatasetDict) -> None:
+    """
+    Check if there is any overlap between the splits. If there is, the splits are contaminated.
+    """
+    train_ids = set(train_split["queries"]["id"])
+    val_ids = set(val_split["queries"]["id"])
+    test_ids = set(test_split["queries"]["id"])
+
+    id_train_val_contamination = train_ids.intersection(val_ids)
+    id_train_test_contamination = train_ids.intersection(test_ids)
+
+
+    if len(id_train_val_contamination) > 0:
+        raise ValueError(f"Train-Validation contamination: {len(id_train_val_contamination)} overlapping IDs.\n"
+                         f"Example IDs: {list(id_train_val_contamination)}")
+
+    if len(id_train_test_contamination) > 0:
+        raise ValueError(f"Train-Test contamination: {len(id_train_test_contamination)} overlapping IDs.\n"
+                            f"Example IDs: {list(id_train_test_contamination)}")
+
+
+    train_texts = set(train_split["queries"]["text"])
+    val_texts = set(val_split["queries"]["text"])
+    test_texts = set(test_split["queries"]["text"])
+
+    text_train_val_contamination = train_texts.intersection(val_texts)
+    text_train_test_contamination = train_texts.intersection(test_texts)
+
+    if len(text_train_val_contamination) > 0:
+        warnings.warn(f"Overlapping texts between train and validation (but no overlapping query ids, so theses are not the same anchors): {len(text_train_val_contamination)}\n"
+                      f"Example texts: {list(text_train_val_contamination)}")
+
+    if len(text_train_test_contamination) > 0:
+        warnings.warn(f"Overlapping texts between train and test (but no overlapping query ids, so theses are not the same queries): {len(text_train_test_contamination)}\n"
+                      f"Example texts: {list(text_train_test_contamination)}")
+
+
+
+
+
+
+
 def create_splits_from_corpus_dataset(
         corpus_dataset: DatasetDict,
         dataset_split_type: DatasetSplitType,
@@ -119,7 +162,9 @@ def create_splits_from_corpus_dataset(
         save_path = os.path.join(save_folder, dataset_save_name)
         if os.path.exists(save_path):
             print(f"Dataset already exists at {save_path}. Loading it.")
-            return load_splits_from_disk(save_path)
+            splitted_dataset = load_splits_from_disk(save_path)
+            check_splits_for_contamination(splitted_dataset["train"], splitted_dataset["validation"], splitted_dataset["test"])
+            return splitted_dataset
 
     if dataset_split_type == DatasetSplitType.InDistribution:
         splitted_dataset = create_in_distribution_splits(corpus_dataset,
@@ -147,6 +192,8 @@ def create_splits_from_corpus_dataset(
         splitted_dataset = create_k_fold_splits(corpus_dataset, k)
     else:
         raise ValueError(f"Unknown dataset_split_type: {dataset_split_type}")
+
+    check_splits_for_contamination(splitted_dataset["train"], splitted_dataset["validation"], splitted_dataset["test"])
 
     if save_path:
         splitted_dataset.save_to_disk(save_path)
@@ -441,6 +488,14 @@ if __name__ == "__main__":
                                                               dataset_split_type=DatasetSplitType.InDistribution,
                                                               save_folder=dataset_folder,
                                                               dataset_save_name=dataset_name)
+
+    in_distribution_split_2 = create_splits_from_corpus_dataset(corpus_dataset=loaded_dataset,
+                                                                dataset_split_type=DatasetSplitType.InDistribution,
+                                                                save_folder=dataset_path,
+                                                                dataset_save_name=dataset_name)
+
+
+
 
     # Create an Out-of-Distribution (Simple) split
     ood_splits = create_splits_from_corpus_dataset(
