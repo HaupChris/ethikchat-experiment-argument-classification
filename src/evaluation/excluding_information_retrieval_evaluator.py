@@ -53,13 +53,6 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             excluded_docs=excluded_docs_map,
             log_top_k_predictions=5,  # e.g., log top 5
             name="my-eval",
-            query_labels=some_dict_qid_to_labels,
-            doc_labels=some_dict_docid_to_label,
-            log_label_confusion=True,
-            log_fp_fn=True,
-            log_rank_histogram=True,
-            log_multilabel_coverage=True,
-            log_tsne_embeddings=True,
         )
         results = evaluator(model)
         # This logs IR metrics AND extra tables/plots for deeper analysis.
@@ -241,6 +234,10 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             for metric_name, values in values_dict.items()
             for k, value in values.items()
         }
+        metrics.update(self.log_accuracy_at_k_to_wandb(queries_result_list))
+        self.log_error_analysis_table_to_wandb(queries_result_list)
+        self.log_confusion_matrices_to_wandb(queries_result_list)
+
         # Add the standard prefix used by the ST library
         metrics = self.prefix_name_to_metrics(metrics, self.name)
         self.store_metrics_in_model_card_data(model, metrics, epoch, steps)
@@ -248,10 +245,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         # #Finally, if requested, log the top-k predictions to wandb
         # if self.log_top_k_predictions > 0:
         #     self.log_top_k_predictions_to_wandb(queries_result_list)
-        #self.log_accuracy_at_k_to_wandb(queries_result_list)
-        #self.log_error_analysis_table_to_wandb(queries_result_list)
-        #self.log_mrr_at_k_to_wandb(queries_result_list)
-        self.log_confusion_matrices_to_wandb(queries_result_list)
+
         return metrics
 
     def compute_metrices(
@@ -496,52 +490,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             dcg += relevances[i] / np.log2(i + 2)  # +2 as we start at idx=0
         return dcg
 
-    def log_top_k_predictions_to_wandb(
-        self,
-        queries_result_list: Dict[str, List[List[Tuple[float, str]]]]
-    ):
-        """
-        Logs a wandb.Table for each similarity function in queries_result_list,
-        capturing the top N predictions (self.log_top_k_predictions) for each query.
-        """
-
-        top_k = self.log_top_k_predictions
-        if top_k <= 0:
-            return
-
-        # For each similarity function
-        for score_func_name, per_query_hits in queries_result_list.items():
-            # Create a fresh table
-            table = wandb.Table(columns=[
-                "query_id", "query_text", "rank",
-                "doc_id", "doc_text", "score", "is_relevant"
-            ])
-
-            # Populate the table
-            for q_idx, hits in enumerate(per_query_hits):
-                query_id = self.queries_ids[q_idx]
-                query_text = self.queries[q_idx]
-                # Sort descending by score
-                sorted_hits = sorted(hits, key=lambda x: x[0], reverse=True)
-                # Take the top_k
-                for rank_idx, (score_val, doc_id) in enumerate(sorted_hits[:top_k], start=1):
-                    is_rel = (doc_id in self.relevant_docs[query_id])
-                    doc_text = self.corpus_map[doc_id]
-                    table.add_data(
-                        query_id,
-                        query_text,
-                        rank_idx,
-                        doc_id,
-                        doc_text,
-                        score_val,
-                        is_rel
-                    )
-
-            # Log to wandb
-            if self.run:
-                self.run.log({f"{self.name}_{score_func_name}_top{top_k}_predictions": table})
-
-    def log_accuracy_at_k_to_wandb(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
+    def log_accuracy_at_k_to_wandb(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> Dict[str, float] | None:
         """
         Logs accuracy at different k values to wandb.
         Accuracy is tracked based on topic, node type, node level, and node label.
@@ -580,11 +529,11 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
 
             return {k: d[k] for k in sorted(d, key=sort_key)}
 
-        def calculate_accuracy(data: Dict[str, Dict[str, int]]) -> list[float]:
+        def calculate_accuracy(data: Dict[str, int]) -> float:
             """
-            Calculates accuracy ratios for each item in the given dictionary
+            Calculates the accuracy for the given dictionary
             """
-            return [val["correct"] / val["total"] for val in data.values()]
+            return data["correct"] / data["total"]
 
         # Iterate over all score functions
         for score_func_name, per_query_hits in queries_result_list.items():
@@ -600,59 +549,106 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
                 # Iterate over each query and its corresponding hits sorted by descending similarity
                 for q_idx, hits in enumerate(per_query_hits):
                     query = self.queries[q_idx]
+                    passages = [
+                        self.corpus_map[passage_idx] for _, passage_idx in hits[:k] if passage_idx in self.relevant_docs[query.id]
+                    ]
                     discussion_scenario = query.discussion_scenario.lower()
                     rtc = self._return_topic_rtc(discussion_scenario)
 
-                    # Retrieve all relevant passages within top-k results
-                    relevant_passages_in_k = [
-                        passage_idx for _, passage_idx in hits[:k] if passage_idx in self.relevant_docs[query.id]
-                    ]
-                    has_relevant_passages = len(relevant_passages_in_k) > 0
+                    # Update topic accuracy based on whether any relevant top k passage has the same discussion scenario
+                    update_accuracy(accuracy_per_topic, f"{discussion_scenario}", any(query.discussion_scenario.lower() == passage.discussion_scenario.lower() for passage in passages))
 
-                    # Update topic accuracy depending on if any relevant passage was found
-                    update_accuracy(accuracy_per_topic, f"{discussion_scenario}", has_relevant_passages)
-
-                    # Compute accuracy metrics depending on each query label
+                    # Iterate over each label in the query
                     for label in query.labels:
-                        # Check if any of the top_k relevant passages has the same label as the current label
-                        label_in_top_k = any(
-                            label == self.corpus_map[passage_id].label for passage_id in relevant_passages_in_k
-                        )
-                        update_accuracy(accuracy_per_topic_and_node_label, f"{discussion_scenario}_label_{label}", label_in_top_k)
+                        query_template = rtc.get_template_for_label(label)
 
-                        # Retrieve ResponseTemplates for query and top-k passages
-                        label_template = rtc.get_template_for_label(label)
-                        top_k_templates = [
-                            rtc.get_template_for_label(self.corpus_map[passage_id].label) for passage_id in relevant_passages_in_k
-                        ]
+                        # Flags to ensure accuracy gets updated exactly once per metric
+                        type_flag = False
+                        level_flag = False
+                        label_flag = False
 
-                        if label_template is None:
-                            # Check whether any of the top_k relevant passages is also 'other' (None)
-                            other_in_top_k = any(template is None for template in top_k_templates)
-                            update_accuracy(accuracy_per_topic_and_node_type, f"{discussion_scenario}_type_OTHER", other_in_top_k)
-                        else:
-                            # Remove None values from templates list
-                            top_k_templates = [template for template in top_k_templates if template is not None]
+                        # Iterate over the top k relevant passages
+                        for passage in passages:
+                            # Skip passages with wrong discussion scenario
+                            if query.discussion_scenario.lower() != passage.discussion_scenario.lower():
+                                continue
 
-                            # Check if any of the top_k relevant passages has the same category as the query label
-                            template_category_in_top_k = any(
-                                label_template.category == template.category for template in top_k_templates
-                            )
+                            passage_template = rtc.get_template_for_label(passage.label)
+
+                            # Check type matching for query and passage
+                            if not type_flag:
+                                if query_template is None and passage_template is None:
+                                    # Neither are a template -> both are OTHER
+                                    update_accuracy(
+                                        accuracy_per_topic_and_node_type,
+                                        f"{discussion_scenario}_type_OTHER",
+                                        True
+                                    )
+                                    type_flag = True
+                                elif query_template is None or passage_template is None:
+                                    continue
+                                elif query_template.category == passage_template.category:
+                                    # Update if categories match
+                                    update_accuracy(
+                                        accuracy_per_topic_and_node_type,
+                                        f"{discussion_scenario}_type_{query_template.category.name}",
+                                        True
+                                    )
+                                    type_flag = True
+
+                            # Check level matching for query and passage
+                            if not level_flag:
+                                if query_template is None or passage_template is None:
+                                    continue
+
+                                if query_template.has_parent_labels == passage_template.has_parent_labels:
+                                    # If parent labels bool matches update level accuracy
+                                    update_accuracy(
+                                        accuracy_per_topic_and_node_level,
+                                        f"{discussion_scenario}_level_{'counter' if query_template.has_parent_labels else 'main'}",
+                                        True
+                                    )
+                                    level_flag = True
+
+                            # Check label matching for query and passage
+                            if not label_flag:
+                                if label == passage.label:
+                                    update_accuracy(
+                                        accuracy_per_topic_and_node_label,
+                                        f"{discussion_scenario}_label_{label}",
+                                        True
+                                    )
+                                    label_flag = True
+
+                            # If all flags are set exit the loop early
+                            if type_flag and level_flag and label_flag:
+                                break
+
+                        # Update any remaining accuracy which still has a false flag
+                        if not type_flag:
+                            query_type = "OTHER" if not query_template else query_template.category.name
                             update_accuracy(
-                                accuracy_per_topic_and_node_type, f"{discussion_scenario}_type_{label_template.category.name}", template_category_in_top_k
+                                accuracy_per_topic_and_node_type,
+                                f"{discussion_scenario}_type_{query_type}",
+                                False
                             )
 
-                            # For Z args additionally check main and counter args
-                            if label_template.category == TemplateCategory.Z:
-                                if label_template.has_parent_labels:
-                                    # Check if any top-k relevant templates are also counter args
-                                    top_k_has_counter_args = any(template.has_parent_labels for template in top_k_templates)
-                                    update_accuracy(accuracy_per_topic_and_node_level, f"{discussion_scenario}_level_counter", top_k_has_counter_args)
-                                else:
-                                    # Check if any top-k relevant templates are also main args
-                                    top_k_has_main_args = any(not template.has_parent_labels for template in top_k_templates)
-                                    update_accuracy(accuracy_per_topic_and_node_level, f"{discussion_scenario}_level_main", top_k_has_main_args)
+                        if not level_flag:
+                            if query_template is not None:
+                                update_accuracy(
+                                    accuracy_per_topic_and_node_level,
+                                    f"{discussion_scenario}_level_{'counter' if query_template.has_parent_labels else 'main'}",
+                                    False
+                                )
 
+                        if not label_flag:
+                            update_accuracy(
+                                accuracy_per_topic_and_node_label,
+                                f"{discussion_scenario}_label_{label}",
+                                False
+                            )
+
+                # Store accuracy results for each k value
                 accuracy_results_by_k[k] = {
                     "topic": custom_sort_dict(accuracy_per_topic),
                     "node_type": custom_sort_dict(accuracy_per_topic_and_node_type),
@@ -660,185 +656,14 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
                     "node_label": custom_sort_dict(accuracy_per_topic_and_node_label)
                 }
 
-            # Extract first item to get an example of column structure
-            _, v = next(iter(accuracy_results_by_k.items()))
-
-            # Build column list by combining keys of all sub-dictionaries
-            columns = ["top_k"] + \
-                      list(v["topic"].keys()) + \
-                      list(v["node_type"].keys()) + \
-                      list(v["node_level"].keys()) + \
-                      list(v["node_label"].keys())
-
-            # Replace '.' with '_' to avoid formatting issues in wandb webui
-            columns = [column.replace(".", "_") for column in columns]
-
-            table = wandb.Table(columns=columns)
-
-            # Add the data for each k to the table
+            # Flatten the dictionary and calculate accuracy value for each key
+            data = {}
             for k, v in accuracy_results_by_k.items():
-                data = [k] + \
-                       calculate_accuracy(v["topic"]) + \
-                       calculate_accuracy(v["node_type"]) + \
-                       calculate_accuracy(v["node_level"]) + \
-                       calculate_accuracy(v["node_label"])
+                for _k, _ in accuracy_results_by_k[k].items():
+                    for key, value in accuracy_results_by_k[k][_k].items():
+                        data[f"accuracy_{key}@{k}"] = calculate_accuracy(value)
 
-                table.add_data(*data)
-
-            if self.run:
-                self.run.log({f"{self.name}_{score_func_name}_accuracy_at_k": table})
-
-    def _log_top1_classification(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
-        """
-            Logs evaluation results for top-1 classification to Weights & Biases (wandb).
-
-            The following tables and visualizations are logged:
-            - A main table (`top1_classification_table`) containing details for each query and its top-1 result.
-            - Histograms of confidence scores for correct and incorrect predictions.
-            - Bar charts showing the distribution of label type for correct and incorrect predictions.
-            - A bar chart showing the accuracy (correct prediction ratio) for each label type.
-
-            Table Columns:
-                - `query_id`: Unique identifier for the query.
-                - `query_text`: The text of the query.
-                - `query_labels`: Ground truth labels for the query, joined as a comma-separated string.
-                - `top1_id`: Identifier of the highest-rated passage
-                - `top1_text`: Text of the highest-rated passage
-                - `top1_label`: Label of the highest-rated passage
-                - `confidence_level`: Confidence score (similarity score) between the query and the top-1 passage.
-                - `match`: Boolean indicating whether the top-1 passage is among the relevant passages for the query.
-
-            Visualizations:
-                - Confidence level distributions for correct and incorrect predictions.
-                - Label type distributions for correct and incorrect predictions.
-                - Accuracy (correct prediction ratio) for each label type.
-            """
-        if not self.run:
-            return
-
-        top1_classification_table = wandb.Table(
-            columns=["query_id", "query_labels", "query_text", "num_query_labels", "top1_id", "top1_label", "top1_text","confidence_level", "match"]
-        )
-        top1_classification_correct_histogram = wandb.Table(columns=["confidence_level"])
-        top1_classification_incorrect_histogram = wandb.Table(columns=["confidence_level"])
-
-        def _determine_label_group(label: str) -> str:
-            """
-            Helper function to categorize labels into groups based on their prefixes or concrete values.
-            """
-            if label.startswith("Z."):
-                return "Z"
-            elif label.startswith("NZ."):
-                return "NZ"
-            elif label == "CONSENT":
-                return "CONSENT"
-            elif label == "DISSENT":
-                return "DISSENT"
-            elif label.startswith("FAQ."):
-                return "FAQ"
-            else:
-                return label
-
-        score_func_name = next(iter(queries_result_list.keys()))
-
-        # Lists to store labels for correct and incorrect predictions
-        correct_labels = []
-        incorrect_labels = []
-
-        # Generate a unique identifier for each label in the corpus
-        labels = set()
-        for query_labels in self.query_labels.values():
-            labels = labels.union(query_labels)
-
-        for doc_label in self.doc_labels.values():
-            labels.add(doc_label)
-
-        labels_to_idx = {label: idx for idx, label in enumerate(labels)}
-
-        eval_data = []
-        # Iterate over each query in the evaluation corpus and its top-1 classification
-        for q_idx, top_hits in enumerate(queries_result_list[score_func_name]):
-            query_id = self.queries_ids[q_idx]
-            query_text = self.queries[q_idx]
-            query_labels = self.query_labels[query_id]
-            num_query_labels = len(query_labels)
-            query_relevant_docs = self.relevant_docs[query_id]
-
-            # Extract top-1 classification details
-            score, doc_id = top_hits[0]
-            doc_text = self.corpus_map[doc_id]
-            doc_label = self.doc_labels[doc_id]
-
-            # Check if the top-1 classification is among the relevant documents of the initial query
-            correct_prediction = doc_id in query_relevant_docs
-
-            # Log data depending on whether the prediction is correct or incorrect
-            if correct_prediction:
-                top1_classification_correct_histogram.add_data(score)
-                correct_labels.append(_determine_label_group(doc_label))
-                eval_data.append([labels_to_idx[doc_label], labels_to_idx[doc_label], query_id, query_text, doc_label, doc_id, doc_text, doc_label, score, correct_prediction, num_query_labels])
-            else:
-                top1_classification_incorrect_histogram.add_data(score)
-                for label in query_labels:
-                    incorrect_labels.append(_determine_label_group(label))
-                    eval_data.append([labels_to_idx[doc_label], labels_to_idx[label], query_id, query_text, label, doc_id, doc_text, doc_label, score, correct_prediction, num_query_labels])
-
-            # Add relevant data to the main evaluation table
-            top1_classification_table.add_data(query_id, ", ".join(query_labels), query_text, num_query_labels, doc_id, doc_label, doc_text, score, correct_prediction)
-
-        # Count occurrences of each label for correct and incorrect predictions
-        correct_label_counts = Counter(correct_labels)
-        incorrect_label_counts = Counter(incorrect_labels)
-
-        # Get the set of all unique labels in the corpus from the correct and incorrect labels
-        all_labels = set(correct_label_counts.keys()).union(set(incorrect_label_counts.keys()))
-
-        # Calculate the accuracy for each label
-        data = []
-        for label in all_labels:
-            correct = correct_label_counts.get(label, 0)
-            incorrect = incorrect_label_counts.get(label, 0)
-            total = correct + incorrect
-            ratio = correct / total if total > 0 else 0
-            data.append([label, ratio])
-
-        correct_label_table = wandb.Table(data=[[k, v] for k, v in correct_label_counts.items()], columns=["label", "count"])
-        incorrect_label_table = wandb.Table(data=[[k, v] for k, v in incorrect_label_counts.items()], columns=["label", "count"])
-        ratio_table = wandb.Table(data=data, columns=["label", "correct_ratio"])
-
-        scatter_plot = wandb.Table(
-            data=eval_data,
-            columns=[
-                "predicted_label_idx", "reference_label_idx",
-                "query_id", "query_text", "query_label",
-                "top1_id", "top1_text", "top1_label",
-                "confidence", "match", "num_labels_query"
-            ]
-        )
-        # Log all tables and visualization to wandb
-        self.run.log({
-            f"{self.name}_top1_classification_table": top1_classification_table,
-            f"{self.name}_top1_classification_confidence_level_distribution_correct": wandb.plot.histogram(
-                top1_classification_correct_histogram,
-                value="confidence_level",
-                title="Top-1 Classification Confidence Level Distribution For Correct Predictions"
-            ),
-            f"{self.name}_top1_classification_confidence_level_distribution_incorrect": wandb.plot.histogram(
-                top1_classification_incorrect_histogram,
-                value="confidence_level",
-                title="Top-1 Classification Confidence Level Distribution For Incorrect Predictions"
-            ),
-            f"{self.name}_top1_classification_label_distribution_correct": wandb.plot.bar(
-                correct_label_table, "label", "count", title="Top-1 Classification Label Distribution For Correct Predictions"
-            ),
-            f"{self.name}_top1_classification_label_distribution_incorrect": wandb.plot.bar(
-                incorrect_label_table, "label", "count", title="Top-1 Classification Label Distribution For Incorrect Predictions"
-            ),
-            f"{self.name}_top1_classification_label_correct_ratio": wandb.plot.bar(
-                ratio_table, "label", "correct_ratio", title="Top-1 Classification Accuracy per Label"
-            ),
-            f"{self.name}_top1_classification_scatter_plot": wandb.plot.scatter(scatter_plot, x="predicted_label_idx", y="reference_label_idx", title="Top-1 Classification Scatter Plot")
-        })
+            return data
 
     def log_error_analysis_table_to_wandb(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
         """
@@ -900,37 +725,6 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
 
             if self.run:
                 self.run.log({f"{self.name}_{score_func_name}_error_analysis": table})
-
-    def log_mrr_at_k_to_wandb(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
-        for score_func_name, per_query_hits in queries_result_list.items():
-            def get_rank_of_first_relevant(relevant_docs: Set[str], hits: List[Tuple[float, str]]) -> int:
-                """
-                Returns the rank of the first relevant document based on similarities
-                """
-                for rank, (_, cid) in enumerate(hits, start=1):
-                    if cid in relevant_docs:
-                        return rank
-
-                return -1
-
-            table = wandb.Table(columns=[
-                "rank",
-                "mean_reciprocal_rank"
-            ])
-
-            for k in self.mrr_at_k:
-                mrr = 0
-                for q_idx, hits in enumerate(per_query_hits):
-                    query = self.queries[q_idx]
-                    rank_first_relevant = get_rank_of_first_relevant(self.relevant_docs[query.id], hits[:k])
-
-                    if rank_first_relevant > 0:
-                        mrr += (1 / rank_first_relevant)
-                mrr = (1 / len(per_query_hits)) * mrr
-                table.add_data(k, mrr)
-
-            if self.run:
-                self.run.log({f"{self.name}_{score_func_name}_mrr_at_k": table})
 
     def log_confusion_matrices_to_wandb(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
         """
@@ -1010,8 +804,6 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
 
                             for passage in passages:
                                 if passage.discussion_scenario.lower() != topic:
-                                    i+= 1
-                                    print(topic, query.discussion_scenario, passage.discussion_scenario)
                                     # Assign wrong scenario for each metric
                                     y_preds_type.append(get_node_type_index("wrong_scenario"))
                                     y_preds_label.append(get_node_label_index(topic, "wrong_scenario"))
@@ -1055,7 +847,3 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             return self.refai_rtc
         else:
             raise Exception(f"Discussion Scenario '{discussion_scenario}' doesnt have a valid ResponseTemplateCollection")
-
-
-if __name__ == "__main__":
-    print(TemplateCategory.Z.name)
