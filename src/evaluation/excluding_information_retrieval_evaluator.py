@@ -535,54 +535,151 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
                 self.run.log({f"{self.name}_{score_func_name}_top{top_k}_predictions": table})
 
     def log_accuracy_at_k_to_wandb(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
+        """
+        Logs accuracy at different k values to wandb.
+        Accuracy is tracked based on topic, node type, node level, and node label.
+        """
         if not self.accuracy_at_k:
             return
 
+        # Filter and sort list of top-k values
         top_ks = sorted([k for k in self.accuracy_at_k if k > 0])
 
         def update_accuracy(accuracy_dict: Dict[str, Dict[str, int]], key: str, condition: bool) -> None:
+            """
+            Updates accuracy dictionary used to track different accuracy metrics by incrementing total and correct count based on a given condition
+            """
             if condition:
                 accuracy_dict[key]["correct"] += 1
             accuracy_dict[key]["total"] += 1
 
+        def custom_sort_dict(d: Dict[str, Any]) -> Dict[str, Any]:
+            """
+            Sorts dictionary keys based on the custom priority:
+            medai > jurai > autoai > refai
+            """
+            priority = {
+                "medai": 0,
+                "jurai": 1,
+                "autoai": 2,
+                "refai": 3
+            }
+
+            def sort_key(key):
+                for prefix, prio in priority.items():
+                    if key.startswith(prefix):
+                        return prio, key
+                return 4, key
+
+            return {k: d[k] for k in sorted(d, key=sort_key)}
+
+        def calculate_accuracy(data: Dict[str, Dict[str, int]]) -> list[float]:
+            """
+            Calculates accuracy ratios for each item in the given dictionary
+            """
+            return [val["correct"] / val["total"] for val in data.values()]
+
+        # Iterate over all score functions
         for score_func_name, per_query_hits in queries_result_list.items():
             accuracy_results_by_k = {}
+
             for k in top_ks:
+                # Init accuracy tracking dicts
                 accuracy_per_topic = defaultdict(lambda: {"total": 0, "correct": 0})
                 accuracy_per_topic_and_node_type = defaultdict(lambda: {"total": 0, "correct": 0})
                 accuracy_per_topic_and_node_level = defaultdict(lambda: {"total": 0, "correct": 0})
                 accuracy_per_topic_and_node_label = defaultdict(lambda: {"total": 0, "correct": 0})
 
+                # Iterate over each query and its corresponding hits sorted by descending similarity
                 for q_idx, hits in enumerate(per_query_hits):
                     query = self.queries[q_idx]
-                    any_relevant_passages = any(passage_idx in self.relevant_docs[query.id] for _, passage_idx in hits[:k])
                     discussion_scenario = query.discussion_scenario.lower()
                     rtc = self._return_topic_rtc(discussion_scenario)
 
-                    update_accuracy(accuracy_per_topic, discussion_scenario, any_relevant_passages)
+                    # Retrieve all relevant passages within top-k results
+                    relevant_passages_in_k = [
+                        passage_idx for _, passage_idx in hits[:k] if passage_idx in self.relevant_docs[query.id]
+                    ]
+                    has_relevant_passages = len(relevant_passages_in_k) > 0
 
+                    # Update topic accuracy depending on if any relevant passage was found
+                    update_accuracy(accuracy_per_topic, f"{discussion_scenario}", has_relevant_passages)
+
+                    # Compute accuracy metrics depending on each query label
                     for label in query.labels:
-                        update_accuracy(accuracy_per_topic_and_node_label, f"{discussion_scenario}_{label}", any_relevant_passages)
+                        # Check if any of the top_k relevant passages has the same label as the current label
+                        label_in_top_k = any(
+                            label == self.corpus_map[passage_id].label for passage_id in relevant_passages_in_k
+                        )
+                        update_accuracy(accuracy_per_topic_and_node_label, f"{discussion_scenario}_label_{label}", label_in_top_k)
 
+                        # Retrieve ResponseTemplates for query and top-k passages
                         label_template = rtc.get_template_for_label(label)
+                        top_k_templates = [
+                            rtc.get_template_for_label(self.corpus_map[passage_id].label) for passage_id in relevant_passages_in_k
+                        ]
 
                         if label_template is None:
-                            update_accuracy(accuracy_per_topic_and_node_type, f"{discussion_scenario}_other", any_relevant_passages)
+                            # Check whether any of the top_k relevant passages is also 'other' (None)
+                            other_in_top_k = any(template is None for template in top_k_templates)
+                            update_accuracy(accuracy_per_topic_and_node_type, f"{discussion_scenario}_type_OTHER", other_in_top_k)
                         else:
-                            update_accuracy(accuracy_per_topic_and_node_type, f"{discussion_scenario}_{label_template.category}", any_relevant_passages)
+                            # Remove None values from templates list
+                            top_k_templates = [template for template in top_k_templates if template is not None]
 
+                            # Check if any of the top_k relevant passages has the same category as the query label
+                            template_category_in_top_k = any(
+                                label_template.category == template.category for template in top_k_templates
+                            )
+                            update_accuracy(
+                                accuracy_per_topic_and_node_type, f"{discussion_scenario}_type_{label_template.category.name}", template_category_in_top_k
+                            )
+
+                            # For Z args additionally check main and counter args
                             if label_template.category == TemplateCategory.Z:
                                 if label_template.has_parent_labels:
-                                    update_accuracy(accuracy_per_topic_and_node_level, f"{discussion_scenario}_counter", any_relevant_passages)
+                                    # Check if any top-k relevant templates are also counter args
+                                    top_k_has_counter_args = any(template.has_parent_labels for template in top_k_templates)
+                                    update_accuracy(accuracy_per_topic_and_node_level, f"{discussion_scenario}_level_counter", top_k_has_counter_args)
                                 else:
-                                    update_accuracy(accuracy_per_topic_and_node_level, f"{discussion_scenario}_main", any_relevant_passages)
+                                    # Check if any top-k relevant templates are also main args
+                                    top_k_has_main_args = any(not template.has_parent_labels for template in top_k_templates)
+                                    update_accuracy(accuracy_per_topic_and_node_level, f"{discussion_scenario}_level_main", top_k_has_main_args)
 
                 accuracy_results_by_k[k] = {
-                    "topic": accuracy_per_topic,
-                    "node_type": accuracy_per_topic_and_node_type,
-                    "node_level": accuracy_per_topic_and_node_level,
-                    "node_label": accuracy_per_topic_and_node_label
+                    "topic": custom_sort_dict(accuracy_per_topic),
+                    "node_type": custom_sort_dict(accuracy_per_topic_and_node_type),
+                    "node_level": custom_sort_dict(accuracy_per_topic_and_node_level),
+                    "node_label": custom_sort_dict(accuracy_per_topic_and_node_label)
                 }
+
+            # Extract first item to get an example of column structure
+            _, v = next(iter(accuracy_results_by_k.items()))
+
+            # Build column list by combining keys of all sub-dictionaries
+            columns = ["top_k"] + \
+                      list(v["topic"].keys()) + \
+                      list(v["node_type"].keys()) + \
+                      list(v["node_level"].keys()) + \
+                      list(v["node_label"].keys())
+
+            # Replace '.' with '_' to avoid formatting issues in wandb webui
+            columns = [column.replace(".", "_") for column in columns]
+
+            table = wandb.Table(columns=columns)
+
+            # Add the data for each k to the table
+            for k, v in accuracy_results_by_k.items():
+                data = [k] + \
+                       calculate_accuracy(v["topic"]) + \
+                       calculate_accuracy(v["node_type"]) + \
+                       calculate_accuracy(v["node_level"]) + \
+                       calculate_accuracy(v["node_label"])
+
+                table.add_data(*data)
+
+            self.run.log({f"{self.name}_{score_func_name}_accuracy_at_k": table})
+
     def _log_top1_classification(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
         """
             Logs evaluation results for top-1 classification to Weights & Biases (wandb).
@@ -747,3 +844,6 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             return self.refai_rtc
         else:
             raise Exception(f"Discussion Scenario '{discussion_scenario}' doesnt have a valid ResponseTemplateCollection")
+
+if __name__ == "__main__":
+    print(TemplateCategory.Z.name)
