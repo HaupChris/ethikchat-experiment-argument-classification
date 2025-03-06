@@ -72,11 +72,14 @@ def main(is_test_run=False):
     loss = CachedMultipleNegativesRankingLoss(model=model, show_progress_bar=False, mini_batch_size=16)
 
     # 8) Load dataset
-    dataset_path = os.path.join(exp_config.project_root, exp_config.dataset_dir, exp_config.dataset_name)
-    dataset = load_from_disk(dataset_path)
-    splitted_dataset = create_splits_from_corpus_dataset(corpus_dataset=dataset,
+    corpus_dataset_path = os.path.join(exp_config.project_root, exp_config.dataset_dir, exp_config.dataset_name)
+    corpus_dataset = load_from_disk(corpus_dataset_path)
+
+    split_dataset_folder = os.path.join(exp_config.project_root, exp_config.dataset_dir)
+
+    splitted_dataset = create_splits_from_corpus_dataset(corpus_dataset=corpus_dataset,
                                                          dataset_split_type=exp_config.dataset_split_type,
-                                                         save_folder=dataset_path,
+                                                         save_folder=split_dataset_folder,
                                                          dataset_save_name=exp_config.split_dataset_name
                                                          )
 
