@@ -138,10 +138,10 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         self._append_csv_headers(self.score_function_names)
 
         self.project_root = project_root if project_root is not None else "../../"
-        # self.medai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s1"))
-        # self.jurai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s2"))
-        # self.autoai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s3"))
-        # self.refai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s4"))
+        self.medai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s1"))
+        self.jurai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s2"))
+        self.autoai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s3"))
+        self.refai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s4"))
 
         self.max_depth_first_relevant_text = max_depth_first_relevant_text if max_depth_first_relevant_text > 0 else len(self.corpus_ids)
 
@@ -249,7 +249,9 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         # if self.log_top_k_predictions > 0:
         #     self.log_top_k_predictions_to_wandb(queries_result_list)
         #self.log_accuracy_at_k_to_wandb(queries_result_list)
-        self.log_error_analysis_table_to_wandb(queries_result_list)
+        #self.log_error_analysis_table_to_wandb(queries_result_list)
+        #self.log_mrr_at_k_to_wandb(queries_result_list)
+        self.log_confusion_matrices_to_wandb(queries_result_list)
         return metrics
 
     def compute_metrices(
@@ -851,7 +853,6 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
                 if cid in relevant_docs:
                     return rank
 
-            print(relevant_docs, len(hits))
             return -1
 
         # Iterate over each score function
@@ -899,6 +900,148 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
 
             if self.run:
                 self.run.log({f"{self.name}_{score_func_name}_error_analysis": table})
+
+    def log_mrr_at_k_to_wandb(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
+        for score_func_name, per_query_hits in queries_result_list.items():
+            def get_rank_of_first_relevant(relevant_docs: Set[str], hits: List[Tuple[float, str]]) -> int:
+                """
+                Returns the rank of the first relevant document based on similarities
+                """
+                for rank, (_, cid) in enumerate(hits, start=1):
+                    if cid in relevant_docs:
+                        return rank
+
+                return -1
+
+            table = wandb.Table(columns=[
+                "rank",
+                "mean_reciprocal_rank"
+            ])
+
+            for k in self.mrr_at_k:
+                mrr = 0
+                for q_idx, hits in enumerate(per_query_hits):
+                    query = self.queries[q_idx]
+                    rank_first_relevant = get_rank_of_first_relevant(self.relevant_docs[query.id], hits[:k])
+
+                    if rank_first_relevant > 0:
+                        mrr += (1 / rank_first_relevant)
+                mrr = (1 / len(per_query_hits)) * mrr
+                table.add_data(k, mrr)
+
+            if self.run:
+                self.run.log({f"{self.name}_{score_func_name}_mrr_at_k": table})
+
+    def log_confusion_matrices_to_wandb(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
+        """
+        Logs confusion matrices for topic, node type, node level and node label predictions.
+        """
+        # Filter and sort list of top-k values
+        top_ks = sorted([k for k in self.accuracy_at_k if k > 0])
+
+        def get_labels_for_scenario(scenario: str) -> List[str]:
+            """Retrieve unique sorted labels for a given discussion scenario"""
+            return sorted({label for query in self.queries if query.discussion_scenario.lower() == scenario for label in query.labels})
+
+        # Generate label mappings for each discussion scenario
+        topic_labels = {scenario: get_labels_for_scenario(scenario) for scenario in ["medai", "jurai", "autoai", "refai"]}
+
+        # Define mappings for topics, node types, nodel levels and labels
+        topic_mapping = {topic: idx for idx, topic in enumerate(topic_labels.keys())}
+        node_type_mapping = {"Z": 0, "NZ": 1, "FAQ": 2, "OTHER": 3}
+        node_level_mapping = {"main": 0, "counter": 1}
+        node_label_mapping = {topic: {label: idx for idx, label in enumerate(labels)} for topic, labels in topic_labels.items()}
+
+        # Helper functions to retrieve mapping indices with default keys for wrong topics
+        def get_node_type_index(node_type: str) -> int:
+            return node_type_mapping.get(node_type, max(node_type_mapping.values()) + 1)
+
+        def get_node_level_index(node_level: str) -> int:
+            if node_level == "wrong_scenario":
+                return node_level_mapping.get(node_level, max(node_level_mapping.values()) + 1)
+            elif node_level == "wrong_type":
+                return node_level_mapping.get(node_level, max(node_level_mapping.values()) + 2)
+            else:
+                return node_level_mapping.get(node_level)
+
+        def get_node_label_index(topic: str, label: str) -> int:
+            if topic in node_label_mapping:
+                return node_label_mapping[topic].get(label, max(node_label_mapping[topic].values()) + 1)
+            return -1
+
+        # Iterate over all score functions
+        for score_func_name, per_query_hits in queries_result_list.items():
+            for k in top_ks:
+                y_true_topic, y_preds_topic = [], []
+
+                for topic in topic_mapping.keys():
+                    y_true_type, y_preds_type = [], []
+                    y_true_level, y_preds_level = [], []
+                    y_true_label, y_preds_label = [], []
+
+                    rtc = self._return_topic_rtc(topic)
+                    i = 0
+                    for q_idx, hits in enumerate(per_query_hits):
+                        query = self.queries[q_idx]
+
+                        # Skip if query doesn't belong to current topic
+                        if query.discussion_scenario.lower() != topic:
+                            continue
+
+                        # Retrieve top-k passages for the query
+                        passages = [self.corpus_map[passage_idx] for _, passage_idx in hits[:k]]
+
+                        # Store true and predicted topics
+                        y_true_topic.extend([topic_mapping[topic]] * k)
+                        y_preds_topic.extend([topic_mapping[passage.discussion_scenario.lower()] for passage in passages])
+
+                        # Process node type, level and label
+                        for label in query.labels:
+                            query_template = rtc.get_template_for_label(label)
+                            query_type = query_template.category.name if query_template else "OTHER"
+
+                            if query_template:
+                                query_level = "counter" if query_template.has_parent_labels else "main"
+                                y_true_level.extend([get_node_level_index(query_level)] * k)
+
+                            # Store true labels
+                            y_true_type.extend([get_node_type_index(query_type)] * k)
+                            y_true_label.extend([get_node_label_index(topic, label)] * k)
+
+                            for passage in passages:
+                                if passage.discussion_scenario.lower() != topic:
+                                    i+= 1
+                                    print(topic, query.discussion_scenario, passage.discussion_scenario)
+                                    # Assign wrong scenario for each metric
+                                    y_preds_type.append(get_node_type_index("wrong_scenario"))
+                                    y_preds_label.append(get_node_label_index(topic, "wrong_scenario"))
+                                    if query_template:
+                                        y_preds_level.append(get_node_level_index("wrong_scenario"))
+                                else:
+                                    passage_template = rtc.get_template_for_label(passage.label)
+                                    passage_type = passage_template.category.name if passage_template else "OTHER"
+
+                                    if query_template:
+                                        if passage_template:
+                                            passage_level = "counter" if passage_template.has_parent_labels else "main"
+                                            y_preds_level.append(get_node_level_index(passage_level))
+                                        else:
+                                            y_preds_level.append(get_node_level_index("wrong_type"))
+
+                                    y_preds_type.append(get_node_type_index(passage_type))
+                                    y_preds_label.append(get_node_label_index(topic, passage_template.label))
+
+                    if self.run:
+                        self.run.log({
+                            f"{self.name}_{score_func_name}_confusion_{topic}_node_type_at_{k}": wandb.plot.confusion_matrix(probs=None, y_true=y_true_type, preds=y_preds_type, class_names=list(node_type_mapping.keys()) + ["wrong_topic"]),
+                            f"{self.name}_{score_func_name}_confusion_{topic}_node_level_at_{k}": wandb.plot.confusion_matrix(probs=None, y_true=y_true_level, preds=y_preds_level, class_names=list(node_level_mapping.keys()) + ["wrong_topic"] + ["wrong_type"]),
+                            f"{self.name}_{score_func_name}_confusion_{topic}_node_labels_at_{k}": wandb.plot.confusion_matrix(probs=None, y_true=y_true_label, preds=y_preds_label, class_names=list(node_label_mapping[topic].keys()) + ["wrong_topic"])
+                        })
+
+                if self.run:
+                    self.run.log({
+                        f"{self.name}_{score_func_name}_confusion_topics_at_{k}": wandb.plot.confusion_matrix(probs=None, y_true=y_true_topic, preds=y_preds_topic, class_names=list(topic_mapping.keys()))
+                    })
 
     def _return_topic_rtc(self, discussion_scenario: str) -> ResponseTemplateCollection:
         discussion_scenario = discussion_scenario.lower()
