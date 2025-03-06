@@ -26,6 +26,7 @@ class ExperimentConfig(BaseModel):
         num_epochs: int
         loss_function: str (name of the loss function to use, does not change anything but only for logging)
         run_time: str (timestamp of the start of the experiment run)
+        warmup_ratio: float (ratio of the total number of training steps to warmup steps)
     """
     project_root: str
     experiment_dir: str

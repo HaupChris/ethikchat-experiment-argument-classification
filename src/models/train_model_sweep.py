@@ -47,7 +47,7 @@ def main(is_test_run=False):
     exp_config_dict = {
         "project_root": project_root,
         "experiment_dir": config.experiment_dir,  # e.g., "experiments_outputs"
-        "experiment_run": sweep_id,  # e.g., "sandy-sweep-49"
+        "experiment_run": sweep_id,  # e.g., <sweep_id> if it is a sweep run else "manual"
         "dataset_dir": config.dataset_dir,  # e.g., "data/processed"
         "dataset_name": config.dataset_name,  # e.g., "corpus_dataset_experiment_v1"
         "model_name": config.model_name,
