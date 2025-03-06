@@ -2,7 +2,6 @@ import argparse
 import os
 import sys
 # from collections import Counter
-from collections.abc import KeysView
 from datetime import datetime
 
 import wandb
@@ -31,6 +30,11 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         exp_config: ExperimentConfig
         is_test_run: bool, defines if the training is a test run and only a small subset of the data is used
     """
+
+
+
+
+
     print("=== MAIN START ===")
     print(f"Experiment config:\n{exp_config}")
     print(f"Is test run? {is_test_run}")
@@ -128,20 +132,6 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         print("Full dataset used for training/validation.")
 
     print("Train/Eval datasets prepared.")
-    # print("Calculating label frequency in train dataset...")
-    # label_freq = Counter()
-    # for idx in range(len(train_pos)):
-    #     label_freq.update(train_pos[idx]["labels"])
-    #
-    # # sort labels by frequency
-    # label_freq = dict(sorted(label_freq.items(), key=lambda item: item[1], reverse=True))
-    # print("Num labels:", len(label_freq))
-    # print("Sorted label frequency in train dataset:")
-    # for label, freq in label_freq.items():
-    #     print(f"{label}: {freq}")
-
-
-
 
     print("Instantiating ExcludingInformationRetrievalEvaluator for eval...")
     excluding_ir_evaluator_eval = ExcludingInformationRetrievalEvaluator(
@@ -171,18 +161,18 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
     }
 
     print("Instantiating ExcludingInformationRetrievalEvaluator for test...")
-    # excluding_ir_evaluator_test = ExcludingInformationRetrievalEvaluator(
-    #     corpus=test_passages,
-    #     queries=test_queries,
-    #     relevant_docs=test_relevant_passages,
-    #     excluded_docs=test_trivial_passages,
-    #     show_progress_bar=True,
-    #     write_csv=True,
-    #     log_top_k_predictions=5,
-    #     run=run,
-    #     query_labels={row["id"]: row["labels"] for row in test_dataset["queries"]},
-    #     doc_labels={row["id"]: row["label"] for row in test_dataset["passages"]},
-    # )
+    excluding_ir_evaluator_test = ExcludingInformationRetrievalEvaluator(
+        corpus=test_passages,
+        queries=test_queries,
+        relevant_docs=test_relevant_passages,
+        excluded_docs=test_trivial_passages,
+        show_progress_bar=True,
+        write_csv=True,
+        log_top_k_predictions=5,
+        run=run,
+        query_labels={row["id"]: row["labels"] for row in test_dataset["queries"]},
+        doc_labels={row["id"]: row["label"] for row in test_dataset["passages"]},
+    )
     print("ExcludingInformationRetrievalEvaluator for test created.")
 
     print("Setting up training arguments...")

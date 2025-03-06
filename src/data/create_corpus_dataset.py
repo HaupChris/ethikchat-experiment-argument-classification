@@ -138,11 +138,13 @@ class DatasetConfig:
     validation_test_ratio: float = 0.5
     noisy_labels= ['OTHER',
                    "Z_ARG", "PRO_ZARG", "CON_ZARG",
-                   "NZ_ARG", "PRO_NZARG", "CON_NZARG", "NZ.G1", "NZ.G2", "NZ.G3",
+                   "NZ_ARG", "PRO_NZARG", "CON_NZARG",
                    "FAQ.G1",
                    "Z.GK1", "Z.GK2", "Z.GK3", "Z.GK4", "Z.GK5", "Z.GK6", "Z.GK7", "Z.GK8", "Z.GK9", "Z.GK10",
                    "Z.GP1", "Z.GP2", "Z.GP3", "Z.GP4", "Z.GP5", "Z.GP6", "Z.GP7", "Z.GP8", "Z.GP9", "Z.GP10",
                    "NZ.G1", "NZ.G2", "NZ.G3", "NZ.G4",
+                   "NZ.P1-1", "NZ.P2-1", "NZ.P3-1", "NZ.P4-1", "NZ.P5-1", "NZ.P6-1", "NZ.P7-1", "NZ.P8-1", "NZ.P9-1", "NZ.P10-1",
+                   "NZ.K1-1", "NZ.K2-1", "NZ.K3-1", "NZ.K4-1", "NZ.K5-1", "NZ.K6-1", "NZ.K7-1", "NZ.K8-1", "NZ.K9-1", "NZ.K10-1",
                    "CONSENT", "DISSENT"]
 
 
@@ -410,7 +412,21 @@ def create_queries_split(processed_utterances: List[ProcessedUtterance]) -> List
     Creates a split that contains utterances and an id. This is the "queries" split.
     """
 
-    return [Query(utt.id, utt.text, utt.labels, utt.discussion_scenario) for utt in processed_utterances]
+    queries = [Query(utt.id, utt.text, utt.labels, utt.discussion_scenario) for utt in processed_utterances]
+
+
+    # check for duplicates in the data and remove them
+    seen = set()
+    unique_queries = []
+    for query in queries:
+        identifier = (query.text, tuple(sorted(query.labels)))  # Ensure labels are hashable and order-independent
+        if identifier not in seen:
+            seen.add(identifier)
+            unique_queries.append(query)
+        else:
+            print(f"Duplicate query found: {query}. Will not be added to the dataset.")
+
+    return unique_queries
 
 
 def create_queries_relevant_passages_mapping_split(queries: List[Query], passages: List[Passage]) -> Dict[int, List[int]]:
@@ -450,13 +466,17 @@ def create_passages_from_utterances(processed_utterances: List[ProcessedUtteranc
 
 
 def create_passages_from_argument_graph(argument_graph: ResponseTemplateCollection,
-                                        discussion_scenario: DiscussionSzenario) -> List[Passage]:
+                                        discussion_scenario: DiscussionSzenario,
+                                        excluded_labels: List[str]) -> List[Passage]:
     """
     Creates passages from the argument graph.
     """
     passages = []
 
-    for template in argument_graph.arguments_templates:
+    templates = argument_graph.arguments_templates + argument_graph.faq_question_templates
+    templates = list(filter(lambda x: x.label not in excluded_labels, templates))
+
+    for template in templates:
         passages.append(Passage(None, template.summary, template.label, discussion_scenario.value, PassageSource.ArgumentgraphSummary.value, None))
         passages.append(Passage(None, template.full_text, template.label, discussion_scenario.value, PassageSource.ArgumentgraphFullText.value, None))
         passages.extend([Passage(None, sample, template.label, discussion_scenario.value, PassageSource.ArgumentgraphSample.value, None) for sample in template.samples])
@@ -519,7 +539,7 @@ def create_dataset_splits(dialogues: List[Dialogue],
 
     argument_graphs_passages = []
     for discussion_scenario, argument_graph in argument_graphs.items():
-        argument_graphs_passages.extend(create_passages_from_argument_graph(argument_graph, discussion_scenario))
+        argument_graphs_passages.extend(create_passages_from_argument_graph(argument_graph, discussion_scenario, noisy_labels))
 
     # TODO: currently, queries are only an utterance. This should be extended to include the context as well.
     # im queries split hat jede query_id die riehenfolge der processed_utterances.
@@ -643,11 +663,15 @@ def create_dataset(config: DatasetConfig) -> None:
 
 if __name__ == "__main__":
 
-    if not os.path.exists("dummy_dataset"):
+    # load dataset
+    dataset_folder = "../../data/processed/"
+    dataset_path = os.path.join(dataset_folder, "corpus_dataset_v1")
+
+    if not os.path.exists(dataset_path):
         # Beispiel zum Erstellen eines Datensatzes. Mögliche Optionen von DatasetConfig sind im DocString beschrieben.
         create_dataset(
             DatasetConfig(
-                dataset_path="dummy_dataset",
+                dataset_path=dataset_path,
                 project_dir="../../",
                 num_previous_turns=3,
                 include_role=True,
@@ -659,4 +683,5 @@ if __name__ == "__main__":
         )
 
     # Beispiel zum Laden des Datensatzes + collate_function des DataLoaders um dynamisch ein Subset der negative passages zu laden.
-    hf_dataset = load_from_disk("dummy_dataset")
+    hf_dataset = load_from_disk(os.path.join(dataset_folder, "corpus_dataset_v1"))
+    print()
