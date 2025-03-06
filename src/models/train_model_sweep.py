@@ -23,7 +23,7 @@ def main(is_test_run=False):
 
     run_name = wandb.run.name if wandb.run.name else wandb.run.id # e.g. "sandy-sweep-49"
     sweep_id = wandb.run.sweep_id if wandb.run.sweep_id else "manual"
-    sweep_run_name = f"{sweep_id}-{run_name}"
+    sweep_run_name = f"{run_name}"
     print(f"W&B assigned run name: {sweep_run_name}")
 
 
@@ -47,14 +47,14 @@ def main(is_test_run=False):
     exp_config_dict = {
         "project_root": project_root,
         "experiment_dir": config.experiment_dir,  # e.g., "experiments_outputs"
-        "experiment_run": sweep_run_name,  # e.g., "sandy-sweep-49"
+        "experiment_run": sweep_id,  # e.g., "sandy-sweep-49"
         "dataset_dir": config.dataset_dir,  # e.g., "data/processed"
         "dataset_name": config.dataset_name,  # e.g., "corpus_dataset_experiment_v1"
         "model_name": config.model_name,
         "model_name_escaped": config.model_name.replace("/", "-"),
         "learning_rate": config.learning_rate,
         "batch_size": config.batch_size,
-        "model_run_dir": os.path.join(project_root, config.experiment_dir, sweep_run_name),
+        "model_run_dir": os.path.join(project_root, config.experiment_dir, sweep_id, sweep_run_name),
         "dataset_split_type": DatasetSplitType.from_str(config.dataset_split_type),
         "split_dataset_name": config.dataset_split_name,
         "num_epochs": config.num_epochs,
