@@ -42,4 +42,5 @@ class ExperimentConfig(BaseModel):
     num_epochs: int
     loss_function: str
     run_time: str
+    warmup_ratio: float
 

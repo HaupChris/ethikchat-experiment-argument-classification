@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from sentence_transformers import SentenceTransformer
 from sentence_transformers.losses import CachedMultipleNegativesRankingLoss
 from sentence_transformers import SentenceTransformerTrainingArguments, SentenceTransformerTrainer
+from sentence_transformers.training_args import BatchSamplers
 
 from src.data.dataset_splits import create_splits_from_corpus_dataset
 from src.data.create_corpus_dataset import DatasetSplitType
@@ -20,8 +21,11 @@ def main(is_test_run=False):
     wandb.init(project="argument-classification")  # <--- adjust project name as needed
     config = wandb.config
 
-    sweep_run_name = wandb.run.name  # e.g. "sandy-sweep-49"
+    run_name = wandb.run.name if wandb.run.name else wandb.run.id # e.g. "sandy-sweep-49"
+    sweep_id = wandb.run.sweep_id if wandb.run.sweep_id else "manual"
+    sweep_run_name = f"{sweep_id}-{run_name}"
     print(f"W&B assigned run name: {sweep_run_name}")
+
 
     # 2) Load environment variables
     project_root = config.get("project_root", "/home/ls6/hauptmann/ethikchat-experiment-argument-classification")
@@ -50,16 +54,14 @@ def main(is_test_run=False):
         "model_name_escaped": config.model_name.replace("/", "-"),
         "learning_rate": config.learning_rate,
         "batch_size": config.batch_size,
-        "model_run_dir": os.path.join(
-            project_root,
-            config.experiment_dir,
-            sweep_run_name
-        ),
+        "model_run_dir": os.path.join(project_root, config.experiment_dir, sweep_run_name),
         "dataset_split_type": DatasetSplitType.from_str(config.dataset_split_type),
         "split_dataset_name": config.dataset_split_name,
         "num_epochs": config.num_epochs,
         "loss_function": "MultipleNegativesRankingLoss",  # or config.get(...)
-        "run_time": "sweep-run"  # just a placeholder
+        "run_time": "sweep-run",  # just a placeholder
+        "warmup_ratio": config.warmup_ratio
+
     }
 
     exp_config = ExperimentConfig(**exp_config_dict)
@@ -71,7 +73,7 @@ def main(is_test_run=False):
     model = SentenceTransformer(exp_config.model_name)
 
     # 7) Define the loss
-    loss = CachedMultipleNegativesRankingLoss(model=model, show_progress_bar=False, mini_batch_size=16)
+    loss = CachedMultipleNegativesRankingLoss(model=model, show_progress_bar=False, mini_batch_size=8)
 
     # 8) Load dataset
     corpus_dataset_path = os.path.join(exp_config.project_root, exp_config.dataset_dir, exp_config.dataset_name)
@@ -174,7 +176,6 @@ def main(is_test_run=False):
         doc_labels={row["id"]: row["label"] for row in eval_dataset["passages"]},
     )
 
-
     excluding_ir_evaluator_test = ExcludingInformationRetrievalEvaluator(
         corpus=test_passages,
         queries=test_queries,
@@ -195,7 +196,7 @@ def main(is_test_run=False):
         per_device_train_batch_size=exp_config.batch_size,
         per_device_eval_batch_size=8,
         learning_rate=exp_config.learning_rate,
-        warmup_ratio=0.1,
+        warmup_ratio=exp_config.warmup_ratio,
         fp16=(not is_test_run),
         eval_strategy="steps",
         eval_steps=4000 if not is_test_run else 5,
@@ -205,6 +206,7 @@ def main(is_test_run=False):
         run_name=f"sweep_{exp_config.model_name_escaped}",
         load_best_model_at_end=True,
         lr_scheduler_type="linear",
+        batch_sampler=BatchSamplers.NO_DUPLICATES
     )
 
     trainer = SentenceTransformerTrainer(
@@ -227,7 +229,6 @@ def main(is_test_run=False):
     test_eval_results = excluding_ir_evaluator_test(model)
     prefixed_test_eval_results = {f"test_{key}": value for key, value in test_eval_results.items()}
     wandb.log(prefixed_test_eval_results)
-
 
     # 14) Save & log artifact
     artifact = wandb.Artifact(name=f"sweep_{exp_config.model_name_escaped}", type="model")
@@ -255,12 +256,13 @@ if __name__ == "__main__":
             "learning_rate": 1e-5,
             "batch_size": 2,
             "num_epochs": 2,
+            "warmup_ratio": 0.1
         }
 
         wandb.init(
-            project="argument-classification",   # or "argument-classification-test"
+            project="argument-classification",  # or "argument-classification-test"
             config=local_config,
-            mode="offline"                      # So it doesn't upload to W&B
+            mode="offline"  # So it doesn't upload to W&B
         )
         main(is_test_run=True)
     else:
