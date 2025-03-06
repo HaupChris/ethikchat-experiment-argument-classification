@@ -91,6 +91,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         log_top_k_predictions: int = 0,  # New param: how many predictions to log per query to wandb
         run: Run = None,
         project_root: str = None,
+        max_depth_first_relevant_text: int = -1
     ) -> None:
         super().__init__()
         # Filter queries so we only keep the ones that have relevant docs
@@ -137,10 +138,12 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         self._append_csv_headers(self.score_function_names)
 
         self.project_root = project_root if project_root is not None else "../../"
-        self.medai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s1"))
-        self.jurai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s2"))
-        self.autoai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s3"))
-        self.refai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s4"))
+        # self.medai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s1"))
+        # self.jurai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s2"))
+        # self.autoai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s3"))
+        # self.refai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s4"))
+
+        self.max_depth_first_relevant_text = max_depth_first_relevant_text if max_depth_first_relevant_text > 0 else len(self.corpus_ids)
 
     def _append_csv_headers(self, score_function_names):
         for score_name in score_function_names:
@@ -245,7 +248,8 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         # #Finally, if requested, log the top-k predictions to wandb
         # if self.log_top_k_predictions > 0:
         #     self.log_top_k_predictions_to_wandb(queries_result_list)
-        self.log_accuracy_at_k_to_wandb(queries_result_list)
+        #self.log_accuracy_at_k_to_wandb(queries_result_list)
+        self.log_error_analysis_table_to_wandb(queries_result_list)
         return metrics
 
     def compute_metrices(
@@ -272,6 +276,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             max(self.accuracy_at_k),
             max(self.precision_recall_at_k),
             max(self.map_at_k),
+            self.max_depth_first_relevant_text
         )
 
         # Encode queries
@@ -678,7 +683,8 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
 
                 table.add_data(*data)
 
-            self.run.log({f"{self.name}_{score_func_name}_accuracy_at_k": table})
+            if self.run:
+                self.run.log({f"{self.name}_{score_func_name}_accuracy_at_k": table})
 
     def _log_top1_classification(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
         """
@@ -832,6 +838,68 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             f"{self.name}_top1_classification_scatter_plot": wandb.plot.scatter(scatter_plot, x="predicted_label_idx", y="reference_label_idx", title="Top-1 Classification Scatter Plot")
         })
 
+    def log_error_analysis_table_to_wandb(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
+        """
+        Logs an error analysis table to wandb containing a row for each query.
+        The table includes anchor labels and text, top1-label/text/similarity, top5-rank/label/text/similarity, top1-prediction-match, rank of first correct relevant text.
+        """
+        def get_rank_of_first_relevant(relevant_docs: Set[str], hits: List[Tuple[float, str]]) -> int:
+            """
+            Returns the rank of the first relevant document based on similarities
+            """
+            for rank, (_, cid) in enumerate(hits, start=1):
+                if cid in relevant_docs:
+                    return rank
+
+            print(relevant_docs, len(hits))
+            return -1
+
+        # Iterate over each score function
+        for score_func_name, per_query_hits in queries_result_list.items():
+            table = wandb.Table(columns=[
+                "anchor_labels",
+                "anchor_text",
+                "top1_similarity",
+                "top1_label",
+                "top1_text",
+                "top5",
+                "top1_prediction_correct",
+                "rank_first_relevant"
+            ])
+
+            # Iterate over each query and its predicted similarities
+            for q_idx, hits in enumerate(per_query_hits):
+                query = self.queries[q_idx]
+
+                # Get data about top1 prediction
+                top1_similarity, top1_cid = hits[0]
+                top1_passage = self.corpus_map[top1_cid]
+                top1_prediction_correct = top1_passage.id in self.relevant_docs[query.id]
+
+                # Get the top 5 predictions
+                top5 = [(sim, self.corpus_map[cid]) for sim, cid in hits[:5]]
+                top5_tuples = [
+                    f"{rank}//{passage.label}//{passage.text}//{sim}"
+                    for rank, (sim, passage) in enumerate(top5, start=1)
+                ]
+
+                # Get rank of first relevant passage
+                rank_first_relevant = get_rank_of_first_relevant(self.relevant_docs[query.id], hits)
+
+                table.add_data(
+                    query.labels,
+                    query.text,
+                    top1_similarity,
+                    top1_passage.label,
+                    top1_passage.text,
+                    top5_tuples,
+                    top1_prediction_correct,
+                    rank_first_relevant
+                )
+
+            if self.run:
+                self.run.log({f"{self.name}_{score_func_name}_error_analysis": table})
+
     def _return_topic_rtc(self, discussion_scenario: str) -> ResponseTemplateCollection:
         discussion_scenario = discussion_scenario.lower()
         if discussion_scenario == "medai":
@@ -844,6 +912,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
             return self.refai_rtc
         else:
             raise Exception(f"Discussion Scenario '{discussion_scenario}' doesnt have a valid ResponseTemplateCollection")
+
 
 if __name__ == "__main__":
     print(TemplateCategory.Z.name)
