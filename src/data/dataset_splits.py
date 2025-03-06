@@ -489,10 +489,10 @@ if __name__ == "__main__":
                                                               save_folder=dataset_folder,
                                                               dataset_save_name=dataset_name)
 
-    in_distribution_split_2 = create_splits_from_corpus_dataset(corpus_dataset=loaded_dataset,
-                                                                dataset_split_type=DatasetSplitType.InDistribution,
-                                                                save_folder=dataset_path,
-                                                                dataset_save_name=dataset_name)
+    # in_distribution_split_2 = create_splits_from_corpus_dataset(corpus_dataset=loaded_dataset,
+    #                                                             dataset_split_type=DatasetSplitType.InDistribution,
+    #                                                             save_folder=dataset_path,
+    #                                                             dataset_save_name=dataset_name)
 
 
 
