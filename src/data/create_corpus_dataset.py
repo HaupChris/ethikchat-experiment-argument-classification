@@ -90,7 +90,6 @@ class Passage:
     retrieved_query_id: Optional[int] = None
 
 
-
 @dataclass
 class Query:
     """
@@ -136,16 +135,18 @@ class DatasetConfig:
     utterance_type: UtteranceType = UtteranceType.UserAndBot
     eval_size: float = 0.2
     validation_test_ratio: float = 0.5
-    noisy_labels= ['OTHER',
-                   "Z_ARG", "PRO_ZARG", "CON_ZARG",
-                   "NZ_ARG", "PRO_NZARG", "CON_NZARG",
-                   "FAQ.G1",
-                   "Z.GK1", "Z.GK2", "Z.GK3", "Z.GK4", "Z.GK5", "Z.GK6", "Z.GK7", "Z.GK8", "Z.GK9", "Z.GK10",
-                   "Z.GP1", "Z.GP2", "Z.GP3", "Z.GP4", "Z.GP5", "Z.GP6", "Z.GP7", "Z.GP8", "Z.GP9", "Z.GP10",
-                   "NZ.G1", "NZ.G2", "NZ.G3", "NZ.G4",
-                   "NZ.P1-1", "NZ.P2-1", "NZ.P3-1", "NZ.P4-1", "NZ.P5-1", "NZ.P6-1", "NZ.P7-1", "NZ.P8-1", "NZ.P9-1", "NZ.P10-1",
-                   "NZ.K1-1", "NZ.K2-1", "NZ.K3-1", "NZ.K4-1", "NZ.K5-1", "NZ.K6-1", "NZ.K7-1", "NZ.K8-1", "NZ.K9-1", "NZ.K10-1",
-                   "CONSENT", "DISSENT"]
+    noisy_labels = ['OTHER',
+                    "Z_ARG", "PRO_ZARG", "CON_ZARG",
+                    "NZ_ARG", "PRO_NZARG", "CON_NZARG",
+                    "FAQ.G1",
+                    "Z.GK1", "Z.GK2", "Z.GK3", "Z.GK4", "Z.GK5", "Z.GK6", "Z.GK7", "Z.GK8", "Z.GK9", "Z.GK10",
+                    "Z.GP1", "Z.GP2", "Z.GP3", "Z.GP4", "Z.GP5", "Z.GP6", "Z.GP7", "Z.GP8", "Z.GP9", "Z.GP10",
+                    "NZ.G1", "NZ.G2", "NZ.G3", "NZ.G4",
+                    "NZ.P1-1", "NZ.P2-1", "NZ.P3-1", "NZ.P4-1", "NZ.P5-1", "NZ.P6-1", "NZ.P7-1", "NZ.P8-1", "NZ.P9-1",
+                    "NZ.P10-1",
+                    "NZ.K1-1", "NZ.K2-1", "NZ.K3-1", "NZ.K4-1", "NZ.K5-1", "NZ.K6-1", "NZ.K7-1", "NZ.K8-1", "NZ.K9-1",
+                    "NZ.K10-1",
+                    "CONSENT", "DISSENT"]
 
 
 class DatasetSplitType(Enum):
@@ -174,9 +175,12 @@ class DatasetSplitType(Enum):
         raise ValueError(f"Unknown DatasetSplitType: {value}")
 
 
-def load_response_template_collection(topic: str) -> ResponseTemplateCollection:
+def load_response_template_collection(topic: str,
+                                      project_root: str = "/home/christian/PycharmProjects/ethikchat-experiment-argument-classification") -> ResponseTemplateCollection:
+    argument_graph_directory = os.path.join(project_root, "data", "external", "argument_graphs", f"szenario_{topic}")
+
     return ResponseTemplateCollection.from_csv_files(
-        templates_directory_path=f"../../data/external/argument_graphs/szenario_{topic}"
+        templates_directory_path=argument_graph_directory,
     )
 
 
@@ -366,7 +370,6 @@ def preprocess_dataset(dialogues: List[Dialogue],
 
     gender_language_tools = GenderLanguageTools()
 
-
     id_counter = 0
     for dialogue in dialogues:
         dialogue_turns = []
@@ -403,7 +406,6 @@ def preprocess_dataset(dialogues: List[Dialogue],
             ))
             id_counter += 1
 
-
     return processed_utterances, excluded_noisy_utterances
 
 
@@ -413,7 +415,6 @@ def create_queries_split(processed_utterances: List[ProcessedUtterance]) -> List
     """
 
     queries = [Query(utt.id, utt.text, utt.labels, utt.discussion_scenario) for utt in processed_utterances]
-
 
     # check for duplicates in the data and remove them
     seen = set()
@@ -429,7 +430,8 @@ def create_queries_split(processed_utterances: List[ProcessedUtterance]) -> List
     return unique_queries
 
 
-def create_queries_relevant_passages_mapping_split(queries: List[Query], passages: List[Passage]) -> Dict[int, List[int]]:
+def create_queries_relevant_passages_mapping_split(queries: List[Query], passages: List[Passage]) -> Dict[
+    int, List[int]]:
     """
     Creates a mapping from query ids to relevant passage ids. This is the "queries_relevant_passages_mapping" split.
     """
@@ -445,7 +447,8 @@ def create_queries_relevant_passages_mapping_split(queries: List[Query], passage
     return queries_relevant_passages_mapping
 
 
-def create_passages_from_utterances(processed_utterances: List[ProcessedUtterance], excluded_labels: List[str]) -> List[Passage]:
+def create_passages_from_utterances(processed_utterances: List[ProcessedUtterance], excluded_labels: List[str]) -> List[
+    Passage]:
     """
     Creates passages from utterances.
     """
@@ -477,13 +480,17 @@ def create_passages_from_argument_graph(argument_graph: ResponseTemplateCollecti
     templates = list(filter(lambda x: x.label not in excluded_labels, templates))
 
     for template in templates:
-        passages.append(Passage(None, template.summary, template.label, discussion_scenario.value, PassageSource.ArgumentgraphSummary.value, None))
-        passages.append(Passage(None, template.full_text, template.label, discussion_scenario.value, PassageSource.ArgumentgraphFullText.value, None))
-        passages.extend([Passage(None, sample, template.label, discussion_scenario.value, PassageSource.ArgumentgraphSample.value, None) for sample in template.samples])
+        passages.append(Passage(None, template.summary, template.label, discussion_scenario.value,
+                                PassageSource.ArgumentgraphSummary.value, None))
+        passages.append(Passage(None, template.full_text, template.label, discussion_scenario.value,
+                                PassageSource.ArgumentgraphFullText.value, None))
+        passages.extend([Passage(None, sample, template.label, discussion_scenario.value,
+                                 PassageSource.ArgumentgraphSample.value, None) for sample in template.samples])
     return passages
 
 
-def create_queries_trivial_passages_mapping_split(queries: List[Query], passages: List[Passage]) -> Dict[int, List[int]]:
+def create_queries_trivial_passages_mapping_split(queries: List[Query], passages: List[Passage]) -> Dict[
+    int, List[int]]:
     """
     Creates a mapping from query ids to trivial passage ids. A trivial passage is a passage that was extracted from the
     query itself. And is therefore partly or fully identical to the query.
@@ -506,7 +513,7 @@ def check_for_missing_passages(queries_relevant_passages_mapping: Dict[int, List
     """
     for query_id, relevant_passages in queries_relevant_passages_mapping.items():
         if len(relevant_passages) == 0:
-           raise ValueError(f"Query {query_id} has no relevant passages.")
+            raise ValueError(f"Query {query_id} has no relevant passages.")
 
 
 def create_dataset_splits(dialogues: List[Dialogue],
@@ -534,21 +541,21 @@ def create_dataset_splits(dialogues: List[Dialogue],
         noisy_labels
     )
 
-
     utterances_passages = create_passages_from_utterances(processed_utterances, noisy_labels)
 
     argument_graphs_passages = []
     for discussion_scenario, argument_graph in argument_graphs.items():
-        argument_graphs_passages.extend(create_passages_from_argument_graph(argument_graph, discussion_scenario, noisy_labels))
+        argument_graphs_passages.extend(
+            create_passages_from_argument_graph(argument_graph, discussion_scenario, noisy_labels))
 
     # TODO: currently, queries are only an utterance. This should be extended to include the context as well.
     # im queries split hat jede query_id die riehenfolge der processed_utterances.
     queries = create_queries_split(processed_utterances)
 
-
     # im passages_split entsprechen die retrieved_query_ids auch
-    passages = [Passage(idx, passage.text, passage.label, passage.discussion_scenario, passage.passage_source, passage.retrieved_query_id) for idx, passage in
-                      enumerate(utterances_passages + argument_graphs_passages)]
+    passages = [Passage(idx, passage.text, passage.label, passage.discussion_scenario, passage.passage_source,
+                        passage.retrieved_query_id) for idx, passage in
+                enumerate(utterances_passages + argument_graphs_passages)]
 
     queries_relevant_passages_mapping = create_queries_relevant_passages_mapping_split(queries, passages)
     queries_trivial_passages_mapping = create_queries_trivial_passages_mapping_split(queries, passages)
@@ -630,7 +637,8 @@ def create_dataset(config: DatasetConfig) -> None:
     }
 
     queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping, excluded_utterances = create_dataset_splits(
-        all_dialogues, include_role, num_previous_turns, sep_token, utterance_type, argument_graphs, config.noisy_labels)
+        all_dialogues, include_role, num_previous_turns, sep_token, utterance_type, argument_graphs,
+        config.noisy_labels)
 
     # create hf dataset
     corpus_dataset = DatasetDict({
@@ -654,8 +662,9 @@ def create_dataset(config: DatasetConfig) -> None:
             "passages_ids": [ids for _, ids in queries_trivial_passages_mapping.items()]
         }),
         "excluded_utterances": Dataset.from_dict({"text": [utterance.text for utterance, _ in excluded_utterances],
-                                                  "labels": [utterance.true_labels for utterance, _ in excluded_utterances],
-                                                    "reason": [reason for _, reason in excluded_utterances]})
+                                                  "labels": [utterance.true_labels for utterance, _ in
+                                                             excluded_utterances],
+                                                  "reason": [reason for _, reason in excluded_utterances]})
     })
 
     corpus_dataset.save_to_disk(save_path)

@@ -4,12 +4,11 @@ import heapq
 import logging
 import os
 from contextlib import nullcontext
-from collections import Counter, defaultdict
+from collections import defaultdict
 from typing import TYPE_CHECKING, Callable, Optional, Any, Dict, List, Tuple, Set
 
 import numpy as np
 import torch
-from ethikchat_argtoolkit.ArgumentGraph.response_template import TemplateCategory
 from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
 from torch import Tensor
 from tqdm import trange
@@ -62,6 +61,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         self,
         queries: Dict[str, Query],   # qid => query
         corpus: Dict[str, Passage],   # cid => doc
+        argument_graphs: Dict[str, ResponseTemplateCollection],
         relevant_docs: Dict[str, Set[str]],  # qid => Set[cid]
         corpus_chunk_size: int = 50000,
         mrr_at_k: List[int] = [10],
@@ -84,7 +84,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         log_top_k_predictions: int = 0,  # New param: how many predictions to log per query to wandb
         run: Run = None,
         project_root: str = None,
-        max_depth_first_relevant_text: int = -1
+        max_depth_first_relevant_text: int = -1,
     ) -> None:
         super().__init__()
         # Filter queries so we only keep the ones that have relevant docs
@@ -130,11 +130,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
         self.csv_headers = ["epoch", "steps"]
         self._append_csv_headers(self.score_function_names)
 
-        self.project_root = project_root if project_root is not None else "../../"
-        self.medai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s1"))
-        self.jurai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s2"))
-        self.autoai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s3"))
-        self.refai_rtc = ResponseTemplateCollection.from_csv_files(os.path.join(self.project_root, "data", "external", "argument_graphs", "szenario_s4"))
+        self.argument_graphs = argument_graphs
 
         self.max_depth_first_relevant_text = max_depth_first_relevant_text if max_depth_first_relevant_text > 0 else len(self.corpus_ids)
 
@@ -553,7 +549,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
                         self.corpus_map[passage_idx] for _, passage_idx in hits[:k] if passage_idx in self.relevant_docs[query.id]
                     ]
                     discussion_scenario = query.discussion_scenario.lower()
-                    rtc = self._return_topic_rtc(discussion_scenario)
+                    rtc = self._return_topic_argument_graph(discussion_scenario)
 
                     # Update topic accuracy based on whether any relevant top k passage has the same discussion scenario
                     update_accuracy(accuracy_per_topic, f"{discussion_scenario}", any(query.discussion_scenario.lower() == passage.discussion_scenario.lower() for passage in passages))
@@ -773,7 +769,7 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
                     y_true_level, y_preds_level = [], []
                     y_true_label, y_preds_label = [], []
 
-                    rtc = self._return_topic_rtc(topic)
+                    rtc = self._return_topic_argument_graph(topic)
                     i = 0
                     for q_idx, hits in enumerate(per_query_hits):
                         query = self.queries[q_idx]
@@ -835,15 +831,11 @@ class ExcludingInformationRetrievalEvaluator(SentenceEvaluator):
                         f"{self.name}_{score_func_name}_confusion_topics_at_{k}": wandb.plot.confusion_matrix(probs=None, y_true=y_true_topic, preds=y_preds_topic, class_names=list(topic_mapping.keys()))
                     })
 
-    def _return_topic_rtc(self, discussion_scenario: str) -> ResponseTemplateCollection:
+    def _return_topic_argument_graph(self, discussion_scenario: str) -> ResponseTemplateCollection:
         discussion_scenario = discussion_scenario.lower()
-        if discussion_scenario == "medai":
-            return self.medai_rtc
-        elif discussion_scenario == "jurai":
-            return self.jurai_rtc
-        elif discussion_scenario == "autoai":
-            return self.autoai_rtc
-        elif discussion_scenario == "refai":
-            return self.refai_rtc
+
+        if discussion_scenario in self.argument_graphs.keys():
+            return self.argument_graphs[discussion_scenario]
         else:
-            raise Exception(f"Discussion Scenario '{discussion_scenario}' doesnt have a valid ResponseTemplateCollection")
+            raise ValueError(f"No argument graph found for discussion scenario: {discussion_scenario}")
+

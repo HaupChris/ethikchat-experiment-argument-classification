@@ -1,19 +1,41 @@
 #!/usr/bin/env python
 
 import os
+from typing import Dict
+
 import wandb
 from datasets import load_from_disk
 from dotenv import load_dotenv
+from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
+from ethikchat_argtoolkit.Dialogue.discussion_szenario import DiscussionSzenario
 from sentence_transformers import SentenceTransformer
 from sentence_transformers.losses import CachedMultipleNegativesRankingLoss
 from sentence_transformers import SentenceTransformerTrainingArguments, SentenceTransformerTrainer
 from sentence_transformers.training_args import BatchSamplers
 
 from src.data.dataset_splits import create_splits_from_corpus_dataset
-from src.data.create_corpus_dataset import DatasetSplitType
+from src.data.create_corpus_dataset import DatasetSplitType, Passage, Query, load_response_template_collection
 from src.evaluation.excluding_information_retrieval_evaluator import ExcludingInformationRetrievalEvaluator
 from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss
 from src.models.experiment_config import ExperimentConfig
+
+
+
+
+def load_argument_graphs(project_root) -> Dict[str, ResponseTemplateCollection]:
+    argument_graph_med = load_response_template_collection("s1", project_root)
+    argument_graph_jur = load_response_template_collection("s2", project_root)
+    argument_graph_auto = load_response_template_collection("s3", project_root)
+    argument_graph_ref = load_response_template_collection("s4", project_root)
+
+    argument_graphs = {
+        DiscussionSzenario.MEDAI.value: argument_graph_med,
+        DiscussionSzenario.JURAI.value: argument_graph_jur,
+        DiscussionSzenario.AUTOAI.value: argument_graph_auto,
+        DiscussionSzenario.REFAI.value: argument_graph_ref
+    }
+
+    return argument_graphs
 
 
 def main(is_test_run=False):
@@ -21,11 +43,10 @@ def main(is_test_run=False):
     wandb.init(project="argument-classification")  # <--- adjust project name as needed
     config = wandb.config
 
-    run_name = wandb.run.name if wandb.run.name else wandb.run.id # e.g. "sandy-sweep-49"
+    run_name = wandb.run.name if wandb.run.name else wandb.run.id  # e.g. "sandy-sweep-49"
     sweep_id = wandb.run.sweep_id if wandb.run.sweep_id else "manual"
     sweep_run_name = f"{run_name}"
     print(f"W&B assigned run name: {sweep_run_name}")
-
 
     # 2) Load environment variables
     project_root = config.get("project_root", "/home/ls6/hauptmann/ethikchat-experiment-argument-classification")
@@ -69,13 +90,14 @@ def main(is_test_run=False):
     # Make sure output directory exists
     os.makedirs(exp_config.model_run_dir, exist_ok=True)
 
-    # 6) Load the model
     model = SentenceTransformer(exp_config.model_name)
 
-    # 7) Define the loss
+    #  Define the loss
     loss = CachedMultipleNegativesRankingLoss(model=model, show_progress_bar=False, mini_batch_size=8)
 
-    # 8) Load dataset
+    argument_graphs = load_argument_graphs(exp_config.project_root)
+
+    # Load dataset
     corpus_dataset_path = os.path.join(exp_config.project_root, exp_config.dataset_dir, exp_config.dataset_name)
     corpus_dataset = load_from_disk(corpus_dataset_path)
 
@@ -119,12 +141,14 @@ def main(is_test_run=False):
 
     eval_dataset = splitted_dataset["validation"]
     eval_queries = eval_dataset["queries"].shuffle(seed=42).select(range(10))
-    eval_queries = {row["id"]: row["text"] for row in eval_queries}
+    eval_queries = {row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"]) for row in
+                    eval_queries}
 
     eval_relevant_passages = {
         row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_relevant_passages_mapping"]
         if row["query_id"] in eval_queries.keys()
     }
+
     # shorten the relevant passages to 2
     for key in eval_relevant_passages.keys():
         eval_relevant_passages[key] = set(list(eval_relevant_passages[key])[:2])
@@ -137,11 +161,16 @@ def main(is_test_run=False):
     all_relevant_passag_ids = set()
     for key in eval_relevant_passages.keys():
         all_relevant_passag_ids.update(eval_relevant_passages[key])
-    eval_passages = {row["id"]: row["text"] for row in eval_dataset["passages"] if row["id"] in all_relevant_passag_ids}
+
+    eval_passages = {
+        row["id"]: Passage(row["id"], row["text"], row["label"], row["discussion_scenario"], row["passage_source"]) for
+        row in eval_dataset["passages"]}
 
     test_dataset = splitted_dataset["test"]
     test_queries = test_dataset["queries"].shuffle(seed=42).select(range(10))
-    test_queries = {row["id"]: row["text"] for row in test_queries}
+    test_queries = {row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"]) for row in
+                    test_queries}
+
 
     test_relevant_passages = {
         row["query_id"]: set(row["passages_ids"]) for row in test_dataset["queries_relevant_passages_mapping"]
@@ -159,34 +188,36 @@ def main(is_test_run=False):
     all_relevant_passag_ids = set()
     for key in test_relevant_passages.keys():
         all_relevant_passag_ids.update(test_relevant_passages[key])
-    test_passages = {row["id"]: row["text"] for row in test_dataset["passages"] if row["id"] in all_relevant_passag_ids}
+
+    test_passages = {
+        row["id"]: Passage(row["id"], row["text"], row["label"], row["discussion_scenario"], row["passage_source"]) for
+        row in test_dataset["passages"] if row["id"] in all_relevant_passag_ids}
+
 
     #####################################################################################################
 
     excluding_ir_evaluator_eval = ExcludingInformationRetrievalEvaluator(
         corpus=eval_passages,
         queries=eval_queries,
+        argument_graphs = argument_graphs,
         relevant_docs=eval_relevant_passages,
         excluded_docs=eval_trivial_passages,
         show_progress_bar=True,
         write_csv=True,
         log_top_k_predictions=5,
         run=wandb.run,
-        query_labels={row["id"]: row["labels"] for row in eval_dataset["queries"]},
-        doc_labels={row["id"]: row["label"] for row in eval_dataset["passages"]},
     )
 
     excluding_ir_evaluator_test = ExcludingInformationRetrievalEvaluator(
         corpus=test_passages,
         queries=test_queries,
+        argument_graphs=argument_graphs,
         relevant_docs=test_relevant_passages,
         excluded_docs=test_trivial_passages,
         show_progress_bar=True,
         write_csv=True,
         log_top_k_predictions=5,
         run=wandb.run,
-        query_labels={row["id"]: row["labels"] for row in test_dataset["queries"]},
-        doc_labels={row["id"]: row["label"] for row in test_dataset["passages"]},
     )
 
     # 11) Training arguments
@@ -262,7 +293,7 @@ if __name__ == "__main__":
         wandb.init(
             project="argument-classification",  # or "argument-classification-test"
             config=local_config,
-            mode="offline"  # So it doesn't upload to W&B
+            mode="online"  # So it doesn't upload to W&B
         )
         main(is_test_run=True)
     else:
