@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import os
 from typing import Dict
 
@@ -110,88 +108,95 @@ def main(is_test_run=False):
                                                          )
 
     # # 9) Prepare train/eval data
-    # train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"])
-    # eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"])
-    #
-    # eval_dataset = splitted_dataset["validation"]
-    # eval_passages = {row["id"]: row["text"] for row in eval_dataset["passages"]}
-    # eval_queries = {row["id"]: row["text"] for row in eval_dataset["queries"]}
-    # eval_relevant_passages = {
-    #     row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_relevant_passages_mapping"]
-    # }
-    # eval_trivial_passages = {
-    #     row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_trivial_passages_mapping"]
-    # }
-    # # Prepare test data/evaluator
-    # test_dataset = splitted_dataset["test"]
-    # test_passages = {row["id"]: row["text"] for row in test_dataset["passages"]}
-    # test_queries = {row["id"]: row["text"] for row in test_dataset["queries"]}
-    # test_relevant_passages = {
-    #     row["query_id"]: set(row["passages_ids"]) for row in test_dataset["queries_relevant_passages_mapping"]
-    # }
-    # test_trivial_passages = {
-    #     row["query_id"]: set(row["passages_ids"]) for row in test_dataset["queries_trivial_passages_mapping"]
-    # }
-
-    ######################### smaller datasets for testing purposes #####################################
-    train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"], 2)
-    eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"], 2)
-    train_pos = train_pos.shuffle(seed=42).select(range(10))
-    eval_pos = eval_pos.shuffle(seed=42).select(range(10))
+    train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"])
+    eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"])
 
     eval_dataset = splitted_dataset["validation"]
-    eval_queries = eval_dataset["queries"].shuffle(seed=42).select(range(10))
-    eval_queries = {row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"]) for row in
-                    eval_queries}
-
-    eval_relevant_passages = {
-        row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_relevant_passages_mapping"]
-        if row["query_id"] in eval_queries.keys()
-    }
-
-    # shorten the relevant passages to 2
-    for key in eval_relevant_passages.keys():
-        eval_relevant_passages[key] = set(list(eval_relevant_passages[key])[:2])
-
-    eval_trivial_passages = {
-        row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_trivial_passages_mapping"]
-    }
-
-    # adjust the passages set. Only keep the passage_ids that are in the relevant passages
-    all_relevant_passag_ids = set()
-    for key in eval_relevant_passages.keys():
-        all_relevant_passag_ids.update(eval_relevant_passages[key])
-
     eval_passages = {
         row["id"]: Passage(row["id"], row["text"], row["label"], row["discussion_scenario"], row["passage_source"]) for
         row in eval_dataset["passages"]}
-
+    eval_queries = {row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"]) for row in
+                    eval_dataset["queries"]}
+    eval_relevant_passages = {
+        row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_relevant_passages_mapping"]
+    }
+    eval_trivial_passages = {
+        row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_trivial_passages_mapping"]
+    }
+    # Prepare test data/evaluator
     test_dataset = splitted_dataset["test"]
-    test_queries = test_dataset["queries"].shuffle(seed=42).select(range(10))
+    test_passages = {
+        row["id"]: Passage(row["id"], row["text"], row["label"], row["discussion_scenario"], row["passage_source"]) for
+        row in test_dataset["passages"]}
+
     test_queries = {row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"]) for row in
-                    test_queries}
-
-
+                    test_dataset["queries"]}
     test_relevant_passages = {
         row["query_id"]: set(row["passages_ids"]) for row in test_dataset["queries_relevant_passages_mapping"]
-        if row["query_id"] in test_queries.keys()
     }
-    # shorten the relevant passages to 2
-    for key in test_relevant_passages.keys():
-        test_relevant_passages[key] = set(list(test_relevant_passages[key])[:2])
-
     test_trivial_passages = {
         row["query_id"]: set(row["passages_ids"]) for row in test_dataset["queries_trivial_passages_mapping"]
     }
 
-    # adjust the passages set. Only keep the passage_ids that are in the relevant passages
-    all_relevant_passag_ids = set()
-    for key in test_relevant_passages.keys():
-        all_relevant_passag_ids.update(test_relevant_passages[key])
-
-    test_passages = {
-        row["id"]: Passage(row["id"], row["text"], row["label"], row["discussion_scenario"], row["passage_source"]) for
-        row in test_dataset["passages"] if row["id"] in all_relevant_passag_ids}
+    ######################### smaller datasets for testing purposes #####################################
+    # train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"], 2)
+    # eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"], 2)
+    # train_pos = train_pos.shuffle(seed=42).select(range(10))
+    # eval_pos = eval_pos.shuffle(seed=42).select(range(10))
+    #
+    # eval_dataset = splitted_dataset["validation"]
+    # eval_queries = eval_dataset["queries"].shuffle(seed=42).select(range(10))
+    # eval_queries = {row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"]) for row in
+    #                 eval_queries}
+    #
+    # eval_relevant_passages = {
+    #     row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_relevant_passages_mapping"]
+    #     if row["query_id"] in eval_queries.keys()
+    # }
+    #
+    # # shorten the relevant passages to 2
+    # for key in eval_relevant_passages.keys():
+    #     eval_relevant_passages[key] = set(list(eval_relevant_passages[key])[:2])
+    #
+    # eval_trivial_passages = {
+    #     row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_trivial_passages_mapping"]
+    # }
+    #
+    # # adjust the passages set. Only keep the passage_ids that are in the relevant passages
+    # all_relevant_passag_ids = set()
+    # for key in eval_relevant_passages.keys():
+    #     all_relevant_passag_ids.update(eval_relevant_passages[key])
+    #
+    # eval_passages = {
+    #     row["id"]: Passage(row["id"], row["text"], row["label"], row["discussion_scenario"], row["passage_source"]) for
+    #     row in eval_dataset["passages"]}
+    #
+    # test_dataset = splitted_dataset["test"]
+    # test_queries = test_dataset["queries"].shuffle(seed=42).select(range(10))
+    # test_queries = {row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"]) for row in
+    #                 test_queries}
+    #
+    #
+    # test_relevant_passages = {
+    #     row["query_id"]: set(row["passages_ids"]) for row in test_dataset["queries_relevant_passages_mapping"]
+    #     if row["query_id"] in test_queries.keys()
+    # }
+    # # shorten the relevant passages to 2
+    # for key in test_relevant_passages.keys():
+    #     test_relevant_passages[key] = set(list(test_relevant_passages[key])[:2])
+    #
+    # test_trivial_passages = {
+    #     row["query_id"]: set(row["passages_ids"]) for row in test_dataset["queries_trivial_passages_mapping"]
+    # }
+    #
+    # # adjust the passages set. Only keep the passage_ids that are in the relevant passages
+    # all_relevant_passag_ids = set()
+    # for key in test_relevant_passages.keys():
+    #     all_relevant_passag_ids.update(test_relevant_passages[key])
+    #
+    # test_passages = {
+    #     row["id"]: Passage(row["id"], row["text"], row["label"], row["discussion_scenario"], row["passage_source"]) for
+    #     row in test_dataset["passages"] if row["id"] in all_relevant_passag_ids}
 
 
     #####################################################################################################
