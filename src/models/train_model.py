@@ -3,10 +3,12 @@ import os
 import sys
 # from collections import Counter
 from datetime import datetime
+from typing import Dict
 
 import wandb
 from datasets import load_from_disk
 from dotenv import load_dotenv
+from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
 from sentence_transformers import (
     SentenceTransformer,
     SentenceTransformerTrainingArguments, SentenceTransformerTrainer
@@ -19,6 +21,7 @@ from src.data.dataset_splits import create_splits_from_corpus_dataset
 from src.evaluation.excluding_information_retrieval_evaluator import ExcludingInformationRetrievalEvaluator
 from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss
 from src.models.experiment_config import ExperimentConfig
+
 
 
 def main(exp_config: ExperimentConfig, is_test_run=False):
@@ -143,6 +146,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         write_csv=True,
         log_top_k_predictions=5,
         run=run,
+        project_root=exp_config.project_root,
     )
     print("ExcludingInformationRetrievalEvaluator for eval created.")
 
@@ -170,8 +174,7 @@ def main(exp_config: ExperimentConfig, is_test_run=False):
         write_csv=True,
         log_top_k_predictions=5,
         run=run,
-        query_labels={row["id"]: row["labels"] for row in test_dataset["queries"]},
-        doc_labels={row["id"]: row["label"] for row in test_dataset["passages"]},
+        project_root=exp_config.project_root,
     )
     print("ExcludingInformationRetrievalEvaluator for test created.")
 

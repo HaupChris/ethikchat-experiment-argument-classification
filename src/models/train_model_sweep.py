@@ -95,7 +95,7 @@ def main(is_test_run=False):
     #  Define the loss
     loss = CachedMultipleNegativesRankingLoss(model=model, show_progress_bar=False, mini_batch_size=8)
 
-    argument_graphs = load_argument_graphs(exp_config.project_root)
+    # argument_graphs = load_argument_graphs(exp_config.project_root)
 
     # Load dataset
     corpus_dataset_path = os.path.join(exp_config.project_root, exp_config.dataset_dir, exp_config.dataset_name)
@@ -199,7 +199,6 @@ def main(is_test_run=False):
     excluding_ir_evaluator_eval = ExcludingInformationRetrievalEvaluator(
         corpus=eval_passages,
         queries=eval_queries,
-        argument_graphs = argument_graphs,
         relevant_docs=eval_relevant_passages,
         excluded_docs=eval_trivial_passages,
         show_progress_bar=True,
@@ -211,7 +210,6 @@ def main(is_test_run=False):
     excluding_ir_evaluator_test = ExcludingInformationRetrievalEvaluator(
         corpus=test_passages,
         queries=test_queries,
-        argument_graphs=argument_graphs,
         relevant_docs=test_relevant_passages,
         excluded_docs=test_trivial_passages,
         show_progress_bar=True,
@@ -219,6 +217,10 @@ def main(is_test_run=False):
         log_top_k_predictions=5,
         run=wandb.run,
     )
+
+    pretrain_eval_results = excluding_ir_evaluator_eval(model)
+    prefixed_pretrain_eval_results = {f"eval_{key}": value for key, value in pretrain_eval_results.items()}
+    wandb.log(prefixed_pretrain_eval_results)
 
     # 11) Training arguments
     train_args = SentenceTransformerTrainingArguments(
@@ -261,11 +263,6 @@ def main(is_test_run=False):
     prefixed_test_eval_results = {f"test_{key}": value for key, value in test_eval_results.items()}
     wandb.log(prefixed_test_eval_results)
 
-    # 14) Save & log artifact
-    artifact = wandb.Artifact(name=f"sweep_{exp_config.model_name_escaped}", type="model")
-    artifact.add_dir(exp_config.model_run_dir)
-    wandb.run.log_artifact(artifact)
-
     wandb.finish()
 
 
@@ -293,7 +290,7 @@ if __name__ == "__main__":
         wandb.init(
             project="argument-classification",  # or "argument-classification-test"
             config=local_config,
-            mode="online"  # So it doesn't upload to W&B
+            mode="online"
         )
         main(is_test_run=True)
     else:
