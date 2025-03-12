@@ -7,7 +7,6 @@ from collections import defaultdict
 from contextlib import nullcontext
 from typing import TYPE_CHECKING, Callable, Optional, Dict, List, Tuple, Set
 
-import numpy as np
 import torch
 from ethikchat_argtoolkit.ArgumentGraph.response_template import ResponseTemplate, TemplateCategory
 from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
@@ -29,7 +28,19 @@ if TYPE_CHECKING:
 logger = logging.getLogger(__name__)
 
 
-class Evaluator(SentenceEvaluator):
+def update_accuracy(accuracy_dict: Dict[str, Dict[str, int]], key: str, condition: bool) -> None:
+    """Updates accuracy dictionary by incrementing total and correct counts based on a condition."""
+    accuracy_dict[key]["total"] += 1
+    if condition:
+        accuracy_dict[key]["correct"] += 1
+
+
+def calculate_accuracy(data: Dict[str, int]) -> float:
+    """Calculates the accuracy for the given dictionary."""
+    return data["correct"] / data["total"]
+
+
+class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
     """
     IR evaluator that logs:
       1) Overall Accuracy@k, MRR@k, NDCG@k (+ optional loss)
@@ -44,8 +55,6 @@ class Evaluator(SentenceEvaluator):
         relevant_docs: Dict[str, Set[str]],   # qid => set of relevant doc IDs
         corpus_chunk_size: int = 50000,
         accuracy_at_k: List[int] = [1, 3, 5],
-        mrr_at_k: List[int] = [10],
-        ndcg_at_k: List[int] = [10],
         show_progress_bar: bool = False,
         batch_size: int = 32,
         name: str = "",
@@ -58,9 +67,9 @@ class Evaluator(SentenceEvaluator):
         corpus_prompt: str | None = None,
         corpus_prompt_name: str | None = None,
         excluded_docs: Optional[Dict[str, Set[str]]] = None,
-        log_top_k_predictions: int = 0,
         run: Run = None,
-        argument_graphs: Dict[str, ResponseTemplateCollection] = None
+        argument_graphs: Dict[str, ResponseTemplateCollection] = None,
+        maximum_relevancy_depth: int = None
     ) -> None:
         super().__init__()
         # Filter out queries with no relevant docs
@@ -78,9 +87,7 @@ class Evaluator(SentenceEvaluator):
 
         # Logging & config
         self.corpus_chunk_size = corpus_chunk_size
-        self.accuracy_at_k = accuracy_at_k
-        self.mrr_at_k = mrr_at_k
-        self.ndcg_at_k = ndcg_at_k
+        self.accuracy_at_k = sorted([k for k in accuracy_at_k if k > 0])
         self.show_progress_bar = show_progress_bar
         self.batch_size = batch_size
         self.name = name
@@ -91,7 +98,6 @@ class Evaluator(SentenceEvaluator):
         self.main_score_function = SimilarityFunction(main_score_function) if main_score_function else None
 
         self.truncate_dim = truncate_dim
-        self.log_top_k_predictions = log_top_k_predictions
         self.run = run
 
         self.query_prompt = query_prompt
@@ -99,6 +105,7 @@ class Evaluator(SentenceEvaluator):
         self.corpus_prompt = corpus_prompt
         self.corpus_prompt_name = corpus_prompt_name
         self.argument_graphs = argument_graphs
+        self.maximum_relevancy_depth = maximum_relevancy_depth if maximum_relevancy_depth else len(self.corpus)
 
         # For CSV
         if name:
@@ -112,10 +119,6 @@ class Evaluator(SentenceEvaluator):
         for score_name in score_function_names:
             for k in self.accuracy_at_k:
                 self.csv_headers.append(f"{score_name}-Accuracy@{k}")
-            for k in self.mrr_at_k:
-                self.csv_headers.append(f"{score_name}-MRR@{k}")
-            for k in self.ndcg_at_k:
-                self.csv_headers.append(f"{score_name}-NDCG@{k}")
         # We'll also log a 'loss' column
         self.csv_headers.append("loss")
 
@@ -148,56 +151,26 @@ class Evaluator(SentenceEvaluator):
             self.score_function_names = [model.similarity_fn_name]
             self._append_csv_headers(self.score_function_names)
 
-        # 1) Compute metrics overall
-        scores, queries_result_list = self._compute_scores(model, *args, **kwargs)
+        # 1) Compute similarities for each query
+        queries_result_list = self._compute_scores(model, *args, **kwargs)
 
-        # 2) Write to CSV if needed
-        if output_path and self.write_csv:
-            self._write_csv(scores, output_path, epoch, steps, loss)
+        # 2) Log qualitative error analysis table
+        self._log_qualitative_error_analysis_table(queries_result_list)
 
-        # 3) Determine primary metric if not set
-        if not self.primary_metric:
-            if self.main_score_function is None:
-                # By default, pick NDCG@max
-                chosen_score_func = max(
-                    [(s_name, scores[s_name]["ndcg@k"][max(self.ndcg_at_k)]) for s_name in self.score_function_names],
-                    key=lambda x: x[1]
-                )[0]
-                self.primary_metric = f"{chosen_score_func}_ndcg@{max(self.ndcg_at_k)}"
-            else:
-                self.primary_metric = f"{self.main_score_function.value}_ndcg@{max(self.ndcg_at_k)}"
+        # 3) Log accuracy@k tables
+        self._compute_accuracies_at_k(queries_result_list)
 
-        # 4) Convert to single dict for logging
-        metrics = {}
-        for score_function, metric_dict in scores.items():
-            for metric_name, values_for_k in metric_dict.items():
-                for k, val in values_for_k.items():
-                    # e.g. "cosine_accuracy@3" : 0.89
-                    metric_key = f"{score_function}_{metric_name.replace('@k','@'+str(k))}"
-                    metrics[metric_key] = val
+        # 4) Log stance accuracies
+        metrics = self._compute_stance_accuracy(queries_result_list)
 
+        # 5) Log confusion matrices
+        self._log_confusion_matrices_to_wandb(queries_result_list)
 
-
-        # 5) Per-topic accuracy@k
-        per_topic_data = self._compute_topic_accuracy_at_k(queries_result_list)
-        metrics.update(per_topic_data)
-
-        # 6) Stance
-        print(self._compute_stance_accuracy(queries_result_list))
-        ##metrics.update(stance_accuracy)
-
-        # 7) Optionally log loss
-        if loss is not None:
-            metrics["loss"] = loss
-
-        # 8) Log topic confusion matrix
-        self._log_topic_confusion_matrix(queries_result_list)
-
-        # 9) Give these metrics a prefix and store in model card
+        # 6) Give these metrics a prefix and store in model card
         final_metrics = self.prefix_name_to_metrics(metrics, self.name)
         self.store_metrics_in_model_card_data(model, final_metrics, epoch, steps)
 
-        # 10) Log to W&B (if self.run is set)
+        # 7) Log to W&B (if self.run is set)
         if self.run:
             self.run.log(final_metrics)
 
@@ -208,8 +181,7 @@ class Evaluator(SentenceEvaluator):
         model: SentenceTransformer,
         corpus_model=None,
         corpus_embeddings: Tensor | None = None
-    ) -> Tuple[Dict[str, Dict[str, Dict[int, float]]],
-               Dict[str, List[List[Tuple[float, str]]]]]:
+    ) -> Dict[str, List[List[Tuple[float, str]]]]:
         """Encodes queries vs. corpus, does top-k retrieval, then computes IR metrics."""
 
         if corpus_model is None:
@@ -218,8 +190,7 @@ class Evaluator(SentenceEvaluator):
         # We need to handle up to the largest k
         max_k = max(
             max(self.accuracy_at_k) if self.accuracy_at_k else 1,
-            max(self.mrr_at_k) if self.mrr_at_k else 1,
-            max(self.ndcg_at_k) if self.ndcg_at_k else 1
+            self.maximum_relevancy_depth
         )
 
         # Encode queries
@@ -286,14 +257,7 @@ class Evaluator(SentenceEvaluator):
                 sorted_hits = sorted(results_for_queries[q_idx], key=lambda x: x[0], reverse=True)
                 results_for_queries[q_idx] = sorted_hits
 
-        # Compute metrics (accuracy@k, mrr@k, ndcg@k)
-        scores: Dict[str, Dict[str, Dict[int, float]]] = {}
-        for score_fn_name in self.score_functions:
-            result = self._compute_ir_metrics(queries_result_list[score_fn_name])
-            scores[score_fn_name] = result
-            self._log_metrics_to_console(score_fn_name, result)
-
-        return scores, queries_result_list
+        return queries_result_list
 
     def _log_metrics_to_console(self, score_func_name: str, metric_values: Dict[str, Dict[int, float]]):
         """Nicely logs overall metrics to the console."""
@@ -481,7 +445,7 @@ class Evaluator(SentenceEvaluator):
                             passage_template = rtc.get_template_for_label(passage.label)
                             passage_type = passage_template.category.name if passage_template else "OTHER"
                             y_preds_type.append(get_node_type_index(passage_type))
-                            y_preds_label.append(get_node_label_index(topic, passage_template.label))
+                            y_preds_label.append(get_node_label_index(topic, passage.label))
 
                             if query_template and query_template.label in rtc.arguments_labels:
                                 if passage_template and passage_template.label in rtc.arguments_labels:
@@ -509,16 +473,6 @@ class Evaluator(SentenceEvaluator):
         """
         if not self.run:
             return {}
-
-        def update_accuracy(accuracy_dict: Dict[str, Dict[str, int]], key: str, condition: bool) -> None:
-            """Updates accuracy dictionary used to track different accuracy metrics by incrementing total and correct count based on a given condition"""
-            accuracy_dict[key]["total"] += 1
-            if condition:
-                accuracy_dict[key]["correct"] += 1
-
-        def calculate_accuracy(data: Dict[str, int]) -> float:
-            """Calculates the accuracy for the given dictionary"""
-            return data["correct"] / data["total"]
 
         def get_stance(template: ResponseTemplate | None) -> Stance:
             """Extracts the stance from a response template, defaulting to OTHER if None"""
@@ -571,7 +525,7 @@ class Evaluator(SentenceEvaluator):
 
                     # Determine argument level and update stance accuracy per node level
                     arg_level = "counter" if query_template.has_parent_labels else "main"
-                    update_accuracy(metrics["label"], f"{discussion_scenario}_level_{arg_level}", query_stance == passage_stance)
+                    update_accuracy(metrics["level"], f"{discussion_scenario}_level_{arg_level}", query_stance == passage_stance)
 
             accuracy_metrics[score_func_name] = metrics
 
@@ -587,132 +541,59 @@ class Evaluator(SentenceEvaluator):
         if not self.run:
             return
 
-        top_ks = sorted([k for k in self.accuracy_at_k if k > 0])
-
-        def update_accuracy(accuracy_dict: Dict[str, Dict[str, int]], key: str, condition: bool) -> None:
-            """Updates accuracy dictionary used to track different accuracy metrics by incrementing total and correct count based on a given condition"""
-            accuracy_dict[key]["total"] += 1
-            if condition:
-                accuracy_dict[key]["correct"] += 1
-
-        def calculate_accuracy(data: Dict[str, int]) -> float:
-            """
-            Calculates the accuracy for the given dictionary
-            """
-            return data["correct"] / data["total"]
-
         for score_func_name, per_query_hits in queries_result_list.items():
-            accuracy_results_by_k = {}
+            accuracy_results_by_k = {k: {
+                "topic": defaultdict(lambda: {"total": 0, "correct": 0}),
+                "node_type": defaultdict(lambda: {"total": 0, "correct": 0}),
+                "node_level": defaultdict(lambda: {"total": 0, "correct": 0}),
+                "node_label": defaultdict(lambda: {"total": 0, "correct": 0})
+            } for k in self.accuracy_at_k}
 
-            for k in top_ks:
-                accuracy_per_topic = defaultdict(lambda: {"total": 0, "correct": 0})
-                accuracy_per_topic_and_node_type = defaultdict(lambda: {"total": 0, "correct": 0})
-                accuracy_per_topic_and_node_level = defaultdict(lambda: {"total": 0, "correct": 0})
-                accuracy_per_topic_and_node_label = defaultdict(lambda: {"total": 0, "correct": 0})
+            for q_idx, hits in enumerate(per_query_hits):
+                query = self.queries[q_idx]
+                discussion_scenario = query.discussion_scenario
+                rtc = self._return_topic_rtc(discussion_scenario)
 
-                for q_idx, hits in enumerate(per_query_hits):
-                    query = self.queries[q_idx]
-                    hits = any(doc_id in self.relevant_docs[query.id] for _, doc_id in hits[:k])
-                    discussion_scenario = query.discussion_scenario
-                    rtc = self._return_topic_rtc(discussion_scenario)
-
-                    update_accuracy(accuracy_per_topic, f"{discussion_scenario}", hits)
+                for k in self.accuracy_at_k:
+                    relevant_hit = any(doc_id in self.relevant_docs[query.id] for _, doc_id in hits[:k])
+                    update_accuracy(accuracy_results_by_k[k]["topic"], discussion_scenario, relevant_hit)
 
                     for label in query.labels:
                         query_template = rtc.get_template_for_label(label)
+                        category = getattr(query_template, "category", TemplateCategory.OTHER)
+                        update_accuracy(accuracy_results_by_k[k]["node_type"], f"{discussion_scenario}_type_{category.name}", relevant_hit)
 
-                        update_accuracy(
-                            accuracy_per_topic_and_node_type,
-                            f"{discussion_scenario}_type_{getattr(query_template, 'category', TemplateCategory.OTHER).name}",
-                            hits
-                        )
+                        if query_template and query_template.label in rtc.arguments_labels:
+                            level = "counter" if query_template.has_parent_labels else "main"
+                            update_accuracy(accuracy_results_by_k[k]["node_level"], f"{discussion_scenario}_level_{level}", relevant_hit)
 
-                        if query_template and query_template in rtc.arguments_labels:
-                            update_accuracy(
-                                accuracy_per_topic_and_node_level,
-                                f"{discussion_scenario}_level_{'counter' if query_template.has_parent_labels else 'main'}",
-                                hits
-                            )
+                        update_accuracy(accuracy_results_by_k[k]["node_label"], f"{discussion_scenario}_label_{label}", relevant_hit)
 
-                        update_accuracy(accuracy_per_topic_and_node_label, f"{discussion_scenario}_label_{label}", hits)
+            accuracies_at_k = [f"accuracy_at_{k}" for k in self.accuracy_at_k]
+            first_k = self.accuracy_at_k[0]
 
-                accuracy_results_by_k[k] = {
-                    "topic": accuracy_per_topic,
-                    "node_type": accuracy_per_topic_and_node_type,
-                    "node_level": accuracy_per_topic_and_node_level,
-                    "node_label": accuracy_per_topic_and_node_label
-                }
+            tables = {
+                "topic": wandb.Table(columns=["topic", *accuracies_at_k, "num_queries", "correct_predictions"]),
+                "node_type": wandb.Table(columns=["topic", "node_type", *accuracies_at_k, "num_queries", "correct_predictions"]),
+                "node_level": wandb.Table(columns=["topic", "node_level", *accuracies_at_k, "num_queries", "correct_predictions"]),
+                "node_label": wandb.Table(columns=["topic", "node_label", *accuracies_at_k, "num_queries", "correct_predictions"])
+            }
 
-            accuracies_at_k = [f"accuracy_at_{k}" for k in top_ks]
-
-            topic_table = wandb.Table(columns=[
-                "topic", *accuracies_at_k, "num_queries", "correct_predictions"
-            ])
-
-            topic_type_table = wandb.Table(columns=[
-                "topic", "node_type", *accuracies_at_k, "num_queries", "correct_predictions"
-            ])
-
-            topic_level_table = wandb.Table(columns=[
-                "topic", "node_level", *accuracies_at_k, "num_queries", "correct_predictions"
-            ])
-
-            topic_label_table = wandb.Table(columns=[
-                "topic", "nodel_label", *accuracies_at_k, "num_queries", "correct_predictions"
-            ])
-
-            first_k = next(iter(top_ks))
-
-            for topic in accuracy_results_by_k[first_k]["topic"]:
-                data = [topic]
-                for k in top_ks:
-                    data.append(calculate_accuracy(accuracy_results_by_k[k]["topic"][topic]))
-                data.append(accuracy_results_by_k[first_k]["topic"][topic]["total"])
-                data.append(accuracy_results_by_k[first_k]["topic"][topic]["correct"])
-                topic_table.add_data(data)
-
-            for topic_type in accuracy_results_by_k[first_k]["node_type"]:
-                split = topic_type.split("_type_")
-                topic = split[0]
-                arg_type = split[1]
-
-                data = [topic, arg_type]
-                for k in top_ks:
-                    data.append(calculate_accuracy(accuracy_results_by_k[k]["node_type"][topic_type]))
-                data.append(accuracy_results_by_k[first_k]["node_type"][topic_type]["total"])
-                data.append(accuracy_results_by_k[first_k]["node_type"][topic_type]["correct"])
-                topic_type_table.add_data(data)
-
-            for topic_level in accuracy_results_by_k[first_k]["node_level"]:
-                split = topic_level.split("_level_")
-                topic = split[0]
-                arg_level = split[1]
-
-                data = [topic, arg_level]
-                for k in top_ks:
-                    data.append(calculate_accuracy(accuracy_results_by_k[k]["node_level"][topic_level]))
-                data.append(accuracy_results_by_k[first_k]["node_level"][topic_level]["total"])
-                data.append(accuracy_results_by_k[first_k]["node_level"][topic_level]["correct"])
-                topic_level_table.add_data(data)
-
-            for topic_label in accuracy_results_by_k[first_k]["node_label"]:
-                split = topic_label.split("_label_")
-                topic = split[0]
-                arg_label = split[1]
-
-                data = [topic, arg_label]
-                for k in top_ks:
-                    data.append(calculate_accuracy(accuracy_results_by_k[k]["node_label"][topic_label]))
-                data.append(accuracy_results_by_k[first_k]["node_label"][topic_label]["total"])
-                data.append(accuracy_results_by_k[first_k]["node_label"][topic_label]["correct"])
-                topic_label_table.add_data(data)
+            for category in ["topic", "node_type", "node_level", "node_label"]:
+                for key in accuracy_results_by_k[first_k][category]:
+                    split_keys = key.split("_", 2)
+                    data = [split_keys[0], split_keys[2]] if len(split_keys) == 3 else [key]
+                    data += [calculate_accuracy(accuracy_results_by_k[k][category][key]) for k in self.accuracy_at_k]
+                    data.append(accuracy_results_by_k[first_k][category][key]["total"])
+                    data.append(accuracy_results_by_k[first_k][category][key]["correct"])
+                    tables[category].add_data(*data)
 
             if self.run:
                 self.run.log({
-                    f"{self.name}_{score_func_name}_topic_accuracy": topic_table,
-                    f"{self.name}_{score_func_name}_topic_type_accuracy": topic_type_table,
-                    f"{self.name}_{score_func_name}_topic_level_accuracy": topic_level_table,
-                    f"{self.name}_{score_func_name}_topic_label_accuracy": topic_label_table,
+                    f"{self.name}_{score_func_name}_topic_accuracy": tables["topic"],
+                    f"{self.name}_{score_func_name}_topic_type_accuracy": tables["node_type"],
+                    f"{self.name}_{score_func_name}_topic_level_accuracy": tables["node_level"],
+                    f"{self.name}_{score_func_name}_topic_label_accuracy": tables["node_label"]
                 })
 
     def _return_topic_rtc(self, discussion_scenario: str) -> ResponseTemplateCollection:
