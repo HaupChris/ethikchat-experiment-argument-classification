@@ -11,32 +11,28 @@ import torch
 import gc
 import argparse
 
-def main(runs: List[Tuple[str, str]]) -> None:
+def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], dataset_path: str) -> None:
     arguments_graphs = load_argument_graphs("../../")
+    env_path = os.path.join(project_root, ".env")
+    load_dotenv(env_path)
 
-    for run_id, model_path in runs:
+    for run_id, model_name in runs:
         run = wandb.init(project="argument-classification", id=run_id, resume="must")
-        config = run.config
 
         print(f"W&B continuing run: {run.name}")
-
-        project_root = config.get("project_root", "/home/erik/Documents/Uni/ethikchat-experiment-argument-classification")
-        env_path = os.path.join(project_root, ".env")
-        load_dotenv(env_path, override=True)
-
         print(f"Project Root: {project_root}")
-        print(f"Using model: {config.model_name}")
-        print(f"Dataset: {config.dataset_dir}")
+        print(f"Using model: {model_name}")
+        print(f"Dataset: {dataset_path}")
         print(f"run_name: {run.name}")
 
         wandb.login()
 
+        # model_path = os.path.join(models_dir, model_name)
+
         # if not os.path.exists(model_path):
         #     raise FileNotFoundError(f"Directory not found: {model_path}")
 
-        model = SentenceTransformer(model_path)
-
-        dataset_path = os.path.join(project_root, config.dataset_dir, config.dataset_name)
+        model = SentenceTransformer(model_name)
 
         if not os.path.exists(dataset_path):
             raise FileNotFoundError(f"No dataset found at {dataset_path}")
@@ -82,8 +78,14 @@ if __name__ == "__main__":
     parser.add_argument('--models_dir', type=str, help="Directory containing all saved models (assuming they are all in one place).")
     parser.add_argument('--run_ids', type=str, nargs="+", help='List of W&B run ids.')
     parser.add_argument('--models', type=str, nargs="+", help='List of directory names of models on the slurm server')
+    parser.add_argument('--dataset_dir', type=str, help='Directory of the dataset used for evaluation.')
     args = parser.parse_args()
 
-    models = [os.path.join(args.project_root, args.models_dir, model) for model in args.models]
+    models_dir = os.path.join(args.project_root, args.models_dir)
 
-    #main([("4fjymtwj", "deutsche-telekom/gbert-large-paraphrase-euclidean")])
+    main(
+        project_root=args.project_root,
+        models_dir=models_dir,
+        runs=list(zip(args.runs_ids, args.models)),
+        dataset_path=args.dataset_path
+    )
