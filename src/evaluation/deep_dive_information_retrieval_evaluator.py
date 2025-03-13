@@ -3,6 +3,7 @@ from __future__ import annotations
 import heapq
 import logging
 import os
+import numpy as np
 from collections import defaultdict
 from contextlib import nullcontext
 from typing import TYPE_CHECKING, Callable, Optional, Dict, List, Tuple, Set
@@ -458,15 +459,56 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                                     y_preds_level.append(get_node_level_index("wrong_type"))
 
                 if self.run:
+                    # Calculate absolute and relative confusion matrix data for labels to log them as tables, following the underlying implementation of the wandb lib
+                    label_class_names = list(node_label_mapping[topic].keys()) + ["wrong_topic"]
+                    n_classes = len(label_class_names)
+                    class_idx = list(range(n_classes))
+
+                    if len(y_preds_label) != len(y_true_label):
+                        raise ValueError("The number of predictions and true labels must be equal.")
+
+                    if len(set(y_preds_label)) > len(label_class_names):
+                        raise ValueError(
+                            "The number of unique predicted classes exceeds the number of class names."
+                        )
+
+                    if len(set(y_true_label)) > len(label_class_names):
+                        raise ValueError(
+                            "The number of unique true labels exceeds the number of class names."
+                        )
+
+                    class_mapping = {val: i for i, val in enumerate(sorted(list(class_idx)))}
+                    counts = np.zeros((n_classes, n_classes))
+                    for i in range(len(y_preds_label)):
+                        counts[class_mapping[y_true_label[i]], class_mapping[y_preds_label[i]]] += 1
+
+                    data = [
+                        [label_class_names[i], label_class_names[j], counts[i, j]]
+                        for i in range(n_classes)
+                        for j in range(n_classes)
+                    ]
+
+                    row_sums = {label: sum(counts[i, :]) for i, label in enumerate(label_class_names)}
+                    relative_data = [
+                        [label_class_names[i], label_class_names[j], counts[i, j] / row_sums[label_class_names[i]] if row_sums[label_class_names[i]] > 0 else 0]
+                        for i in range(n_classes)
+                        for j in range(n_classes)
+                    ]
+
+                    # Log confusion matrices
                     self.run.log({
-                        f"{self.name}_{score_func_name}_confusion_{topic}_node_type": wandb.plot.confusion_matrix(probs=None, y_true=y_true_type, preds=y_preds_type, class_names=list(node_type_mapping.keys()) + ["wrong_topic"], title=f"{score_func_name}: {topic} Node Type Confusion Matrix (Absolute)"),
-                        f"{self.name}_{score_func_name}_confusion_{topic}_node_level": wandb.plot.confusion_matrix(probs=None, y_true=y_true_level, preds=y_preds_level, class_names=list(node_level_mapping.keys()) + ["wrong_topic"] + ["wrong_type"], title=f"{score_func_name}: {topic} Node Level Confusion Matrix (Absolute)"),
-                        f"{self.name}_{score_func_name}_confusion_{topic}_node_labels": wandb.plot.confusion_matrix(probs=None, y_true=y_true_label, preds=y_preds_label, class_names=list(node_label_mapping[topic].keys()) + ["wrong_topic"], title=f"{score_func_name}: {topic} Label Confusion Matrix (Absolute)")
+                        f"{self.name}_{score_func_name}_confusion_{topic}_node_type_abs": wandb.plot.confusion_matrix(probs=None, y_true=y_true_type, preds=y_preds_type, class_names=list(node_type_mapping.keys()) + ["wrong_topic"], title=f"{score_func_name}: {topic} Node Type Confusion Matrix (Absolute)"),
+                        f"{self.name}_{score_func_name}_confusion_{topic}_node_level_abs": wandb.plot.confusion_matrix(probs=None, y_true=y_true_level, preds=y_preds_level, class_names=list(node_level_mapping.keys()) + ["wrong_topic"] + ["wrong_type"], title=f"{score_func_name}: {topic} Node Level Confusion Matrix (Absolute)"),
+                        f"{self.name}_{score_func_name}_confusion_{topic}_node_type_rel": wandb.plot.confusion_matrix(probs=None, y_true=y_true_type, preds=y_preds_type, class_names=list(node_type_mapping.keys()) + ["wrong_topic"], title=f"{score_func_name}: {topic} Node Type Confusion Matrix (Relative)"),
+                        f"{self.name}_{score_func_name}_confusion_{topic}_node_level_rel": wandb.plot.confusion_matrix(probs=None, y_true=y_true_level, preds=y_preds_level, class_names=list(node_level_mapping.keys()) + ["wrong_topic"] + ["wrong_type"], title=f"{score_func_name}: {topic} Node Level Confusion Matrix (Relative)"),
+                        f"{self.name}_{score_func_name}_confusion_{topic}_node_labels_abs": wandb.Table(columns=["Actual", "Predicted", "nPredictions"], data=data),
+                        f"{self.name}_{score_func_name}_confusion_{topic}_node_labels_rel": wandb.Table(columns=["Actual", "Predicted", "nPredictions"], data=relative_data)
                     })
 
             if self.run:
                 self.run.log({
-                    f"{self.name}_{score_func_name}_confusion_topics": wandb.plot.confusion_matrix(probs=None, y_true=y_true_topic, preds=y_preds_topic, class_names=list(topic_mapping.keys()), title=f"{score_func_name}: Topic Confusion Matrix (Absolute)")
+                    f"{self.name}_{score_func_name}_confusion_topics_abs": wandb.plot.confusion_matrix(probs=None, y_true=y_true_topic, preds=y_preds_topic, class_names=list(topic_mapping.keys()), title=f"{score_func_name}: Topic Confusion Matrix (Absolute)"),
+                    f"{self.name}_{score_func_name}_confusion_topics_rel": wandb.plot.confusion_matrix(probs=None, y_true=y_true_topic, preds=y_preds_topic, class_names=list(topic_mapping.keys()), title=f"{score_func_name}: Topic Confusion Matrix (Relative)")
                 })
 
     def _compute_stance_accuracy(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> Dict[str, float]:
