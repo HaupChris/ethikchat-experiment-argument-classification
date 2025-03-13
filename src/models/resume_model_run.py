@@ -42,7 +42,7 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], datase
         if not os.path.exists(model_path):
             raise FileNotFoundError(f"Directory not found: {model_path}")
 
-        model = SentenceTransformer(model_name)
+        model = SentenceTransformer(model_path)
 
         # Ensure that the passed dataset path exists
         if not os.path.exists(dataset_path):
