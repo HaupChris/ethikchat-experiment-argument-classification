@@ -11,7 +11,7 @@
 # Define project and model directory paths
 project_root="/home/stud/spiegel/ethikchat-experiment-argument-classification"
 models_dir="${project_root}/models"
-dataset_dir="/home/stud/spiegel/ethikchat-experiment-argument-classification/data/processed/corpus_dataset_v1"
+dataset_path="/home/stud/spiegel/ethikchat-experiment-argument-classification/data/processed/corpus_dataset_v1"
 
 # Define lists for run_ids and model_paths
 run_ids=(
@@ -24,10 +24,6 @@ model_paths=(
   "deutsche-telekom/gbert-large-paraphrase-euclidean"
 )
 
-# Convert arrays to space-separated strings
-run_ids_str="${run_ids[*]}"
-model_paths_str="${model_paths[*]}"
-
 # Export project_root to PYTHONPATH for the Python script
 export PYTHONPATH="${project_root}:${PYTHONPATH}"
 
@@ -35,4 +31,4 @@ export PYTHONPATH="${project_root}:${PYTHONPATH}"
 source "${project_root}/venv/bin/activate"
 
 # Run the Python script with the lists converted to arguments
-python resume_model_run.py --run_ids "$run_ids_str" --model_paths "$model_paths_str" --project_root $project_root --models_dir $models_dir --dataset_dir $dataset_dir
+python resume_model_run.py --run_ids "${run_ids[@]}" --models "${model_paths[@]}" --project_root $project_root --models_dir $models_dir --dataset_path $dataset_path

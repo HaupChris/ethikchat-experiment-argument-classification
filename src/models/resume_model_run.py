@@ -86,6 +86,6 @@ if __name__ == "__main__":
     main(
         project_root=args.project_root,
         models_dir=models_dir,
-        runs=list(zip(args.runs_ids, args.models)),
+        runs=list(zip(args.run_ids, args.models)),
         dataset_path=args.dataset_path
     )
