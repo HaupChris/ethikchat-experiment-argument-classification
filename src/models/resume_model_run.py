@@ -1,15 +1,15 @@
 from datasets import load_from_disk
-from ethikchat_evaluators.ClassifierEvaluators.sentence_transformer_intent_classifier_evaluator import SentenceTransformerIntentClassifierEvaluator
 from sentence_transformers import SentenceTransformer
-
 from src.data.create_corpus_dataset import Passage, Query
 from src.evaluation.deep_dive_information_retrieval_evaluator import DeepDiveInformationRetrievalEvaluator
-from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss
 from train_model_sweep import load_argument_graphs
 from typing import List, Tuple
 from dotenv import load_dotenv
 import wandb
 import os
+import torch
+import gc
+import argparse
 
 def main(runs: List[Tuple[str, str]]) -> None:
     arguments_graphs = load_argument_graphs("../../")
@@ -31,8 +31,8 @@ def main(runs: List[Tuple[str, str]]) -> None:
 
         wandb.login()
 
-        if not os.path.exists(model_path):
-            raise FileNotFoundError(f"Directory not found: {model_path}")
+        # if not os.path.exists(model_path):
+        #     raise FileNotFoundError(f"Directory not found: {model_path}")
 
         model = SentenceTransformer(model_path)
 
@@ -68,8 +68,22 @@ def main(runs: List[Tuple[str, str]]) -> None:
         evaluator(model)
         run.finish()
 
+        del model
+        clear_unused_gpu_mem()
+
+def clear_unused_gpu_mem():
+    if torch.cuda.is_available():
+        gc.collect()
+        torch.cuda.empty_cache()
 
 if __name__ == "__main__":
-    # TODO: Create sbatch file to compute evaluation on SLURM server
+    parser = argparse.ArgumentParser(description='Resume W&B run for further evaluation of a model.')
+    parser.add_argument('--project_root', type=str, help="Path to the project root.")
+    parser.add_argument('--models_dir', type=str, help="Directory containing all saved models (assuming they are all in one place).")
+    parser.add_argument('--run_ids', type=str, nargs="+", help='List of W&B run ids.')
+    parser.add_argument('--models', type=str, nargs="+", help='List of directory names of models on the slurm server')
+    args = parser.parse_args()
 
-    main([("ucf4sxqd", "deutsche-telekom/gbert-large-paraphrase-euclidean")])
+    models = [os.path.join(args.project_root, args.models_dir, model) for model in args.models]
+
+    #main([("4fjymtwj", "deutsche-telekom/gbert-large-paraphrase-euclidean")])
