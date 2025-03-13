@@ -1,5 +1,6 @@
 #!/bin/bash
 #SBATCH --job-name=resume_model_run
+#SBATCH --partition=ls6
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
