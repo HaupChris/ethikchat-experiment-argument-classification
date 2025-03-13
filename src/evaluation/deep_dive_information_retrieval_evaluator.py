@@ -43,9 +43,11 @@ def calculate_accuracy(data: Dict[str, int]) -> float:
 class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
     """
     IR evaluator that logs:
-      1) Overall Accuracy@k, MRR@k, NDCG@k (+ optional loss)
-      2) Per-topic Accuracy@k
-      3) Topic confusion matrices (absolute & relative) using wandb's API
+      1) Per-topic, per-topic + (node type, node level, and node label) accuracy@K to a W&B table
+      2) Per-topic, per-topic + (node type, node level, and node label) stance accuracies as metrics
+      3) Confusion matrices over topics, topic + (node type, node level, and node label) with absolute and relative values using W&B's API
+      4) A W&B table for qualitative error analysis containing the columns (anchor_labels, anchor_text, top1_similarity, top1_label, top1_text, top5,
+      top1_prediction_correct, rank_first_relevant) for each query in the dataset
     """
 
     def __init__(
@@ -160,7 +162,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         # 3) Log accuracy@k tables
         self._compute_accuracies_at_k(queries_result_list)
 
-        # 4) Log stance accuracies
+        # 4) Compute stance accuracies
         metrics = self._compute_stance_accuracy(queries_result_list)
 
         # 5) Log confusion matrices
@@ -404,6 +406,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         for score_func_name, per_query_hits in queries_result_list.items():
             y_true_topic, y_preds_topic = [], []
 
+            # Process metrics for each topic seperately
             for topic in topic_mapping.keys():
                 y_true_type, y_preds_type = [], []
                 y_true_level, y_preds_level = [], []
@@ -420,7 +423,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                     # Retrieve top-1 passage for the query
                     passage = self.corpus_map[hits[0][1]]
 
-                    # Store true and predicted topics
+                    # Store true and predicted topic
                     y_true_topic.append(topic_mapping[topic])
                     y_preds_topic.append(topic_mapping[passage.discussion_scenario])
 
@@ -435,8 +438,8 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                             query_level = "counter" if query_template.has_parent_labels else "main"
                             y_true_level.append(get_node_level_index(query_level))
 
+                        # If passage topic doesn't match current topic assign wrong topic to each metric
                         if passage.discussion_scenario != topic:
-                            # Assign wrong scenario for each metric
                             y_preds_type.append(get_node_type_index("wrong_scenario"))
                             y_preds_label.append(get_node_label_index(topic, "wrong_scenario"))
                             if query_template and query_template.label in rtc.arguments_labels:
