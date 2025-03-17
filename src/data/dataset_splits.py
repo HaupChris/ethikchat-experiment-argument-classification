@@ -86,15 +86,13 @@ def check_splits_for_contamination(train_split: DatasetDict, val_split: DatasetD
     id_train_val_contamination = train_ids.intersection(val_ids)
     id_train_test_contamination = train_ids.intersection(test_ids)
 
-
     if len(id_train_val_contamination) > 0:
         raise ValueError(f"Train-Validation contamination: {len(id_train_val_contamination)} overlapping IDs.\n"
                          f"Example IDs: {list(id_train_val_contamination)}")
 
     if len(id_train_test_contamination) > 0:
         raise ValueError(f"Train-Test contamination: {len(id_train_test_contamination)} overlapping IDs.\n"
-                            f"Example IDs: {list(id_train_test_contamination)}")
-
+                         f"Example IDs: {list(id_train_test_contamination)}")
 
     train_texts = set(train_split["queries"]["text"])
     val_texts = set(val_split["queries"]["text"])
@@ -104,17 +102,14 @@ def check_splits_for_contamination(train_split: DatasetDict, val_split: DatasetD
     text_train_test_contamination = train_texts.intersection(test_texts)
 
     if len(text_train_val_contamination) > 0:
-        warnings.warn(f"Overlapping texts between train and validation (but no overlapping query ids, so theses are not the same anchors): {len(text_train_val_contamination)}\n"
-                      f"Example texts: {list(text_train_val_contamination)}")
+        warnings.warn(
+            f"Overlapping texts between train and validation (but no overlapping query ids, so theses are not the same anchors): {len(text_train_val_contamination)}\n"
+            f"Example texts: {list(text_train_val_contamination)}")
 
     if len(text_train_test_contamination) > 0:
-        warnings.warn(f"Overlapping texts between train and test (but no overlapping query ids, so theses are not the same queries): {len(text_train_test_contamination)}\n"
-                      f"Example texts: {list(text_train_test_contamination)}")
-
-
-
-
-
+        warnings.warn(
+            f"Overlapping texts between train and test (but no overlapping query ids, so theses are not the same queries): {len(text_train_test_contamination)}\n"
+            f"Example texts: {list(text_train_test_contamination)}")
 
 
 def create_splits_from_corpus_dataset(
@@ -163,7 +158,8 @@ def create_splits_from_corpus_dataset(
         if os.path.exists(save_path):
             print(f"Dataset already exists at {save_path}. Loading it.")
             splitted_dataset = load_splits_from_disk(save_path)
-            check_splits_for_contamination(splitted_dataset["train"], splitted_dataset["validation"], splitted_dataset["test"])
+            check_splits_for_contamination(splitted_dataset["train"], splitted_dataset["validation"],
+                                           splitted_dataset["test"])
             return splitted_dataset
 
     if dataset_split_type == DatasetSplitType.InDistribution:
@@ -229,7 +225,8 @@ def create_k_fold_splits(corpus_dataset: DatasetDict, k: int) -> Dict[str, Datas
     return results
 
 
-def create_out_of_distribution_hard_splits(corpus_dataset: DatasetDict, test_scenario: DiscussionSzenario) -> DatasetDict:
+def create_out_of_distribution_hard_splits(corpus_dataset: DatasetDict,
+                                           test_scenario: DiscussionSzenario) -> DatasetDict:
     # Convert HF dataset to python list for easier filtering
     all_queries_list = corpus_dataset["queries"].to_list()
     # test split: queries with the given scenario
@@ -278,22 +275,46 @@ def create_in_distribution_splits(corpus_dataset: DatasetDict,
 
     # 1) Shuffle anchors globally
     indices = list(range(len(corpus_dataset["queries"])))
+
     anchor_label_sets = [set(q["labels"]) for q in corpus_dataset["queries"]]
     random.shuffle(indices)
 
-    # 2) For each label, ensure coverage in train
-    train_indices_forced = set()
 
     # Map label -> all anchor indices that contain that label
     label2anchor = defaultdict(list)
     for i in indices:
         for lab in anchor_label_sets[i]:
-            label2anchor[lab].append(i)
+            discusssion_scenario = corpus_dataset["queries"][i]["discussion_scenario"]
+            label2anchor[f"{discusssion_scenario}_{lab}"].append(i)
 
-    # For each label, pick an anchor to ensure coverage in training
-    for lab, anchor_list in label2anchor.items():
-        chosen_idx = anchor_list[0]  # pick the first, or pick randomly
-        train_indices_forced.add(chosen_idx)
+    # 2) Ensure all labels where an anchor is available are in the training set
+    train_indices_forced = set()
+    labels_covered = defaultdict(set)  # scenario -> labels covered
+    for i in indices:
+        scenario = corpus_dataset["queries"][i]["discussion_scenario"]
+        labels = anchor_label_sets[i]
+
+        # Add anchor if it contains labels not yet covered for its scenario
+        if not labels.issubset(labels_covered[scenario]):
+            train_indices_forced.add(i)
+            labels_covered[scenario].update(labels)
+
+
+    # check if all labels are covered
+    all_query_labels_per_scenario = defaultdict(set)
+    for i in indices:
+        scenario = corpus_dataset["queries"][i]["discussion_scenario"]
+        labels = anchor_label_sets[i]
+        all_query_labels_per_scenario[scenario].update(labels)
+
+    for scenario, labels in all_query_labels_per_scenario.items():
+        if not labels.issubset(labels_covered[scenario]):
+            raise ValueError(f"Not all labels are covered for scenario {scenario}.")
+
+
+
+
+
 
     # 3) Remove forced anchors from the main pool
     remaining_indices = [i for i in indices if i not in train_indices_forced]
@@ -321,6 +342,7 @@ def create_in_distribution_splits(corpus_dataset: DatasetDict,
         "validation": ds_val,
         "test": ds_test
     })
+
 
 def create_out_of_distribution_simple_splits(
         corpus_dataset: DatasetDict,
@@ -493,9 +515,6 @@ if __name__ == "__main__":
     #                                                             dataset_split_type=DatasetSplitType.InDistribution,
     #                                                             save_folder=dataset_path,
     #                                                             dataset_save_name=dataset_name)
-
-
-
 
     # Create an Out-of-Distribution (Simple) split
     ood_splits = create_splits_from_corpus_dataset(

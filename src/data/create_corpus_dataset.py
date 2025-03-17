@@ -135,7 +135,7 @@ class DatasetConfig:
     utterance_type: UtteranceType = UtteranceType.UserAndBot
     eval_size: float = 0.2
     validation_test_ratio: float = 0.5
-    noisy_labels = ['OTHER',
+    noisy_labels = ['OTHER', "INTRO"
                     "Z_ARG", "PRO_ZARG", "CON_ZARG",
                     "NZ_ARG", "PRO_NZARG", "CON_NZARG",
                     "FAQ.G1",
