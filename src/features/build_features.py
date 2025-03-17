@@ -62,8 +62,46 @@ def create_dataset_for_multiple_negatives_ranking_loss(
     return Dataset.from_list(examples)
 
 
+def add_scenario_tokens_to_texts(split_dataset: DatasetDict) -> DatasetDict:
+    """
+    Given a split_dataset with:
+      - "queries": has columns ["id", "text", ...]
+      - "passages": has columns ["id", "text", ...]
+      - and other splits
+
+    Returns the same dataset with the "text" columns of queries and passages modified to include the discussion scenario
+    as a prefix to the text.
+
+    This is useful to have the scenario information as part of the text, which can be used by the model to learn
+    scenario-specific patterns.
+    """
+    queries = split_dataset["queries"].map(
+        lambda x: {**x, "text": f"[{x['discussion_scenario']}] {x['text']}"}
+    )
+    passages = split_dataset["passages"].map(
+        lambda x: {**x, "text": f"[{x['discussion_scenario']}] {x['text']}"}
+    )
+
+    return {
+        **split_dataset,
+        "queries": queries,
+        "passages": passages,
+    }
+
+
 if __name__ == "__main__":
-    corpus_ds = load_from_disk("../../data/processed/corpus_dataset_experiment_v0")
-    split_ds = create_splits_from_corpus_dataset(corpus_ds, DatasetSplitType.Simple)
-    pos_ds_train = create_dataset_for_multiple_negatives_ranking_loss(split_ds["train"])
+
+    dataset_folder = "../../data/processed"
+    corpus_ds = load_from_disk(f"{dataset_folder}/corpus_dataset_v1")
+    in_distribution_split = create_splits_from_corpus_dataset(corpus_dataset=corpus_ds,
+                                                              dataset_split_type=DatasetSplitType.InDistribution,
+                                                              save_folder=dataset_folder,
+                                                              dataset_save_name="dataset_split_in_distribution_labels_per_scenario",)
+    ids_train = in_distribution_split["train"]
+    ids_train_empty = DatasetDict({
+        "queries": in_distribution_split["train"]["queries"],
+        "passages": in_distribution_split["train"]["passages"],
+    })
+    in_distribution_split_with_scenario_tokens = add_scenario_tokens_to_texts(ids_train_empty)
+    pos_ds_train = create_dataset_for_multiple_negatives_ranking_loss(in_distribution_split_with_scenario_tokens["train"])
     print(pos_ds_train)
