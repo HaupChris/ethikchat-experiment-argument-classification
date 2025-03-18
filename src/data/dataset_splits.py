@@ -6,7 +6,6 @@ from collections import defaultdict
 from typing import Optional, Union, Dict
 from copy import deepcopy
 
-import datasets
 from datasets import DatasetDict, Dataset, load_from_disk
 from ethikchat_argtoolkit.Dialogue.discussion_szenario import DiscussionSzenario
 
@@ -238,9 +237,11 @@ def create_out_of_distribution_hard_splits(corpus_dataset: DatasetDict,
     tv_cut = int(0.8 * len(train_val_queries))
     train_queries = train_val_queries[:tv_cut]
     val_queries = train_val_queries[tv_cut:]
+
     train_ids = [q["id"] for q in train_queries]
     val_ids = [q["id"] for q in val_queries]
     test_ids = [q["id"] for q in test_queries]
+
     ds_train = create_datasetdict_for_query_ids(corpus_dataset, train_ids)
     ds_val = create_datasetdict_for_query_ids(corpus_dataset, val_ids)
     ds_test = create_datasetdict_for_query_ids(corpus_dataset, test_ids)
@@ -274,23 +275,16 @@ def create_in_distribution_splits(corpus_dataset: DatasetDict,
     random.seed(seed)
 
     # 1) Shuffle anchors globally
-    indices = list(range(len(corpus_dataset["queries"])))
+    all_queries_indices = list(range(len(corpus_dataset["queries"])))
 
     anchor_label_sets = [set(q["labels"]) for q in corpus_dataset["queries"]]
-    random.shuffle(indices)
+    random.shuffle(all_queries_indices)
 
-
-    # Map label -> all anchor indices that contain that label
-    label2anchor = defaultdict(list)
-    for i in indices:
-        for lab in anchor_label_sets[i]:
-            discusssion_scenario = corpus_dataset["queries"][i]["discussion_scenario"]
-            label2anchor[f"{discusssion_scenario}_{lab}"].append(i)
 
     # 2) Ensure all labels where an anchor is available are in the training set
     train_indices_forced = set()
     labels_covered = defaultdict(set)  # scenario -> labels covered
-    for i in indices:
+    for i in all_queries_indices:
         scenario = corpus_dataset["queries"][i]["discussion_scenario"]
         labels = anchor_label_sets[i]
 
@@ -302,7 +296,7 @@ def create_in_distribution_splits(corpus_dataset: DatasetDict,
 
     # check if all labels are covered
     all_query_labels_per_scenario = defaultdict(set)
-    for i in indices:
+    for i in all_queries_indices:
         scenario = corpus_dataset["queries"][i]["discussion_scenario"]
         labels = anchor_label_sets[i]
         all_query_labels_per_scenario[scenario].update(labels)
@@ -312,30 +306,30 @@ def create_in_distribution_splits(corpus_dataset: DatasetDict,
             raise ValueError(f"Not all labels are covered for scenario {scenario}.")
 
 
-
-
-
-
     # 3) Remove forced anchors from the main pool
-    remaining_indices = [i for i in indices if i not in train_indices_forced]
+    remaining_indices = [i for i in all_queries_indices if i not in train_indices_forced]
 
-    # 4) Split the REMAINING anchors by ratio
-    total_num_indices = len(indices)
-    num_train_indices = int(train_ratio * total_num_indices)
-    num_val_indices = int(val_ratio * total_num_indices)
+    num_datapoints_total = len(all_queries_indices)
+    num_datapoints_train = int(num_datapoints_total * train_ratio)
+    num_datapoints_validation = int(num_datapoints_total * val_ratio)
 
-    num_unforced_train_indices = num_train_indices - len(train_indices_forced)
+    num_datapoints_train_forced = len(train_indices_forced)
+    num_datapoints_train_unforced = num_datapoints_train - num_datapoints_train_forced
 
-    train_part = remaining_indices[:num_unforced_train_indices]
-    val_indices = remaining_indices[num_unforced_train_indices:num_unforced_train_indices + num_val_indices]
-    test_indices = remaining_indices[num_unforced_train_indices + num_val_indices:]
+    train_indices_unforced = remaining_indices[:num_datapoints_train_unforced]
 
-    # Union forced-train with newly assigned train
-    train_indices_final = list(train_indices_forced.union(set(train_part)))
+    train_indices = list(train_indices_forced) + train_indices_unforced
+    validation_indices = remaining_indices[num_datapoints_train_unforced: num_datapoints_train_unforced + num_datapoints_validation]
+    test_indices = remaining_indices[num_datapoints_train_unforced + num_datapoints_validation:]
 
-    ds_train = create_datasetdict_for_query_ids(corpus_dataset, train_indices_final)
-    ds_val = create_datasetdict_for_query_ids(corpus_dataset, val_indices)
-    ds_test = create_datasetdict_for_query_ids(corpus_dataset, test_indices)
+    # due to filtering in the creation process of the queries, a query_id is not necessarily the same as its position (index) in the corpus dataset
+    train_query_ids = [corpus_dataset["queries"][index]["id"] for index in train_indices]
+    validation_query_ids = [corpus_dataset["queries"][index]["id"] for index in validation_indices]
+    test_query_ids = [corpus_dataset["queries"][index]["id"] for index in test_indices]
+
+    ds_train = create_datasetdict_for_query_ids(corpus_dataset, train_query_ids)
+    ds_val = create_datasetdict_for_query_ids(corpus_dataset, validation_query_ids)
+    ds_test = create_datasetdict_for_query_ids(corpus_dataset, test_query_ids)
 
     return DatasetDict({
         "train": ds_train,
