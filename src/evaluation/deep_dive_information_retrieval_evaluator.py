@@ -497,18 +497,15 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
 
                     # Log confusion matrices
                     self.run.log({
-                        f"{self.name}_{score_func_name}_confusion_{topic}_node_type_abs": wandb.plot.confusion_matrix(probs=None, y_true=y_true_type, preds=y_preds_type, class_names=list(node_type_mapping.keys()) + ["wrong_topic"], title=f"{score_func_name}: {topic} Node Type Confusion Matrix (Absolute)"),
-                        f"{self.name}_{score_func_name}_confusion_{topic}_node_level_abs": wandb.plot.confusion_matrix(probs=None, y_true=y_true_level, preds=y_preds_level, class_names=list(node_level_mapping.keys()) + ["wrong_topic"] + ["wrong_type"], title=f"{score_func_name}: {topic} Node Level Confusion Matrix (Absolute)"),
-                        f"{self.name}_{score_func_name}_confusion_{topic}_node_type_rel": wandb.plot.confusion_matrix(probs=None, y_true=y_true_type, preds=y_preds_type, class_names=list(node_type_mapping.keys()) + ["wrong_topic"], title=f"{score_func_name}: {topic} Node Type Confusion Matrix (Relative)"),
-                        f"{self.name}_{score_func_name}_confusion_{topic}_node_level_rel": wandb.plot.confusion_matrix(probs=None, y_true=y_true_level, preds=y_preds_level, class_names=list(node_level_mapping.keys()) + ["wrong_topic"] + ["wrong_type"], title=f"{score_func_name}: {topic} Node Level Confusion Matrix (Relative)"),
+                        f"{self.name}_{score_func_name}_confusion_{topic}_node_type": wandb.plot.confusion_matrix(probs=None, y_true=y_true_type, preds=y_preds_type, class_names=list(node_type_mapping.keys()) + ["wrong_topic"], title=f"{score_func_name}: {topic} Node Type Confusion Matrix"),
+                        f"{self.name}_{score_func_name}_confusion_{topic}_node_level": wandb.plot.confusion_matrix(probs=None, y_true=y_true_level, preds=y_preds_level, class_names=list(node_level_mapping.keys()) + ["wrong_topic"] + ["wrong_type"], title=f"{score_func_name}: {topic} Node Level Confusion Matrix"),
                         f"{self.name}_{score_func_name}_confusion_{topic}_node_labels_abs": wandb.Table(columns=["Actual", "Predicted", "nPredictions"], data=data),
                         f"{self.name}_{score_func_name}_confusion_{topic}_node_labels_rel": wandb.Table(columns=["Actual", "Predicted", "nPredictions"], data=relative_data)
                     })
 
             if self.run:
                 self.run.log({
-                    f"{self.name}_{score_func_name}_confusion_topics_abs": wandb.plot.confusion_matrix(probs=None, y_true=y_true_topic, preds=y_preds_topic, class_names=list(topic_mapping.keys()), title=f"{score_func_name}: Topic Confusion Matrix (Absolute)"),
-                    f"{self.name}_{score_func_name}_confusion_topics_rel": wandb.plot.confusion_matrix(probs=None, y_true=y_true_topic, preds=y_preds_topic, class_names=list(topic_mapping.keys()), title=f"{score_func_name}: Topic Confusion Matrix (Relative)")
+                    f"{self.name}_{score_func_name}_confusion_topics": wandb.plot.confusion_matrix(probs=None, y_true=y_true_topic, preds=y_preds_topic, class_names=list(topic_mapping.keys()), title=f"{score_func_name}: Topic Confusion Matrix"),
                 })
 
     def _compute_stance_accuracy(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> Dict[str, float]:
