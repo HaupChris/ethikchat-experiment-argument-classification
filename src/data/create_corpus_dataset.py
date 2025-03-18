@@ -100,6 +100,13 @@ class Query:
     labels: List[str]
     discussion_scenario: str
 
+    def __hash__(self):
+        return hash(("text", self.text, "labels", self.labels))
+
+    def __eq__(self, other):
+        return ((self.text == other.text) and
+                (self.labels == other.labels))
+
 
 @dataclass
 class DatasetConfig:
@@ -409,23 +416,24 @@ def preprocess_dataset(dialogues: List[Dialogue],
     return processed_utterances, excluded_noisy_utterances
 
 
-def create_queries_split(processed_utterances: List[ProcessedUtterance]) -> List[Query]:
+def create_queries(processed_utterances: List[ProcessedUtterance], excluded_labels: List[str]) -> List[Query]:
     """
-    Creates a split that contains utterances and an id. This is the "queries" split.
+    Creates the queries from processed_utterances. Ensures that there are no duplicate queries (
     """
-
-    queries = [Query(utt.id, utt.text, utt.labels, utt.discussion_scenario) for utt in processed_utterances]
-
-    # check for duplicates in the data and remove them
-    seen = set()
+    queries = []
+    for processed_utterance in processed_utterances:
+        filtered_labels = [label for label in processed_utterance.labels if label not in excluded_labels]
+        queries.append(Query(processed_utterance.id,
+                             processed_utterance.text,
+                             filtered_labels,
+                             processed_utterance.discussion_scenario))
+    # check for duplicates
     unique_queries = []
     for query in queries:
-        identifier = (query.text, tuple(sorted(query.labels)))  # Ensure labels are hashable and order-independent
-        if identifier not in seen:
-            seen.add(identifier)
-            unique_queries.append(query)
-        else:
+        if query in unique_queries:
             print(f"Duplicate query found: {query}. Will not be added to the dataset.")
+        else:
+            unique_queries.append(query)
 
     return unique_queries
 
@@ -435,7 +443,6 @@ def create_queries_relevant_passages_mapping_split(queries: List[Query], passage
     """
     Creates a mapping from query ids to relevant passage ids. This is the "queries_relevant_passages_mapping" split.
     """
-
     queries_relevant_passages_mapping = {}
     for query in queries:
         relevant_passages = []
@@ -550,7 +557,7 @@ def create_dataset_splits(dialogues: List[Dialogue],
 
     # TODO: currently, queries are only an utterance. This should be extended to include the context as well.
     # im queries split hat jede query_id die riehenfolge der processed_utterances.
-    queries = create_queries_split(processed_utterances)
+    queries = create_queries(processed_utterances, noisy_labels)
 
     # im passages_split entsprechen die retrieved_query_ids auch
     passages = [Passage(idx, passage.text, passage.label, passage.discussion_scenario, passage.passage_source,
