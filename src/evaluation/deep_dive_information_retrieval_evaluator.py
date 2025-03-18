@@ -513,8 +513,8 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
 
     def _compute_stance_accuracy(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> Dict[str, float]:
         """
-        Computes stance accuracy for different groupings (topic, type, level, label) based on query results. The stance for the topic grouping is considered correct
-        if the stance of the top1-passage is the same as the stance of any label of the query passage. For type, level, and label it is calculated for each label in the query.
+        Computes stance accuracy for different groupings (topic, type, level) based on query results. The stance for the topic grouping is considered correct
+        if the stance of the top1-passage is the same as the stance of any label of the query passage. For type and level it is calculated for each label in the query.
         """
         if not self.run:
             return {}
@@ -532,7 +532,6 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 "topic": defaultdict(lambda: {"total": 0, "correct": 0}),
                 "type": defaultdict(lambda: {"total": 0, "correct": 0}),
                 "level": defaultdict(lambda: {"total": 0, "correct": 0}),
-                "label": defaultdict(lambda: {"total": 0, "correct": 0}),
             }
 
             for q_idx, hits in enumerate(per_query_hits):
@@ -560,9 +559,6 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                         f"{discussion_scenario}_type_{getattr(query_template, 'category', TemplateCategory.OTHER).name}",
                         query_stance == passage_stance
                     )
-
-                    # Update stance accuracy per node label
-                    update_accuracy(metrics["label"], f"{discussion_scenario}_label_{label}", query_stance == passage_stance)
 
                     # Skip node level if query is not an argument
                     if not query_template or query_template.label not in rtc_q.arguments_labels:
