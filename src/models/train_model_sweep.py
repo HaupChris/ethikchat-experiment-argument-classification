@@ -227,6 +227,8 @@ def main(is_test_run=False):
     prefixed_pretrain_eval_results = {f"eval_{key}": value for key, value in pretrain_eval_results.items()}
     wandb.log(prefixed_pretrain_eval_results)
 
+    eval_save_steps = 4000 / (exp_config.batch_size / 32)
+
     # 11) Training arguments
     train_args = SentenceTransformerTrainingArguments(
         output_dir=exp_config.model_run_dir,
@@ -237,9 +239,9 @@ def main(is_test_run=False):
         warmup_ratio=exp_config.warmup_ratio,
         fp16=(not is_test_run),
         eval_strategy="steps",
-        eval_steps=4000 if not is_test_run else 5,
+        eval_steps=eval_save_steps if not is_test_run else 5,
         save_strategy="steps",
-        save_steps=4000,
+        save_steps=eval_save_steps,
         save_total_limit=2,
         run_name=f"sweep_{exp_config.model_name_escaped}",
         load_best_model_at_end=True,
