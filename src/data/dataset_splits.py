@@ -423,6 +423,18 @@ def create_out_of_distribution_simple_splits(
 
         scenario_unseen_labels[scn] = unseen_top.union(unseen_mid).union(unseen_bot)
 
+    # add labels to unseen that appear with as unseen already selected labels to make sure all labels of multilabel queries remain unseen
+    for anchor in anchors:
+        scenario = anchor["discussion_scenario"]
+        labels = set(anchor["labels"])
+        print(labels)
+        print(scenario)
+        print(scenario_unseen_labels[scenario])
+        print()
+        if labels.intersection(scenario_unseen_labels[scenario]):
+            scenario_unseen_labels[scenario].update(labels)
+
+
     # -- STEP C: Separate queries: unseen vs. seen
     #   "unseen" = queries that contain at least one unseen label for *their* scenario
     unseen_label_query_ids = []
@@ -431,8 +443,8 @@ def create_out_of_distribution_simple_splits(
         scn = item["discussion_scenario"]
         qid = item["id"]
         labs = set(item["labels"])
-        # If labs intersect scenario_unseen_labels[scn], it's an unseen query
-        if labs.intersection(scenario_unseen_labels[scn]):
+        # If all labels are unseen, it's an unseen query
+        if labs.issubset(scenario_unseen_labels[scn]):
             unseen_label_query_ids.append(qid)
         else:
             seen_label_query_ids.append(qid)
@@ -511,21 +523,21 @@ if __name__ == "__main__":
     #                                                             dataset_save_name=dataset_name)
 
     # Create an Out-of-Distribution (Simple) split
-    ood_splits = create_splits_from_corpus_dataset(
-        loaded_dataset,
-        dataset_split_type=DatasetSplitType.OutOfDistributionSimple,
-        save_folder=dataset_folder,
-        dataset_save_name="dataset_split_out_of_distribution_simple",
-        seed=420
-    )
+    # ood_splits = create_splits_from_corpus_dataset(
+    #     loaded_dataset,
+    #     dataset_split_type=DatasetSplitType.OutOfDistributionSimple,
+    #     save_folder=dataset_folder,
+    #     dataset_save_name="dataset_split_out_of_distribution_simple",
+    #     seed=420
+    # )
 
-    print("Number of queries in train:", ood_splits["train"]["queries"].num_rows)
-    print("Number of queries in val:", ood_splits["validation"]["queries"].num_rows)
-    print("Number of queries in test:", ood_splits["test"]["queries"].num_rows)
+    # print("Number of queries in train:", ood_splits["train"]["queries"].num_rows)
+    # print("Number of queries in val:", ood_splits["validation"]["queries"].num_rows)
+    # print("Number of queries in test:", ood_splits["test"]["queries"].num_rows)
+    #
+    # print("Done.")
 
-    print("Done.")
-
-    test_scenario = DiscussionSzenario.JURAI
+    test_scenario = DiscussionSzenario.MEDAI
     split_by_scenario = create_splits_from_corpus_dataset(loaded_dataset,
                                                           DatasetSplitType.OutOfDistributionHard,
                                                           save_folder=dataset_folder,
