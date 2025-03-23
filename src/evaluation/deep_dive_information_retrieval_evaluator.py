@@ -4,6 +4,7 @@ import heapq
 import logging
 import os
 import numpy as np
+import bisect
 from collections import defaultdict
 from contextlib import nullcontext
 from typing import TYPE_CHECKING, Callable, Optional, Dict, List, Tuple, Set
@@ -49,6 +50,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
       3) Confusion matrices over topics, topic + (node type, node level, and node label) with absolute and relative values using W&B's API
       4) A W&B table for qualitative error analysis containing the columns (anchor_labels, anchor_text, top1_similarity, top1_label, top1_text, top5,
       top1_prediction_correct, rank_first_relevant) for each query in the dataset
+      5) Graphs displaying single/multi argument classification accuracies depending on a set confidence threshold
     """
 
     def __init__(
@@ -72,7 +74,9 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         excluded_docs: Optional[Dict[str, Set[str]]] = None,
         run: Run = None,
         argument_graphs: Dict[str, ResponseTemplateCollection] = None,
-        maximum_relevancy_depth: int = None
+        maximum_relevancy_depth: int = None,
+        confidence_threshold: Optional[float] = None,
+        confidence_threshold_steps: Optional[float] = None
     ) -> None:
         super().__init__()
         # Filter out queries with no relevant docs
@@ -109,6 +113,8 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         self.corpus_prompt_name = corpus_prompt_name
         self.argument_graphs = argument_graphs
         self.maximum_relevancy_depth = maximum_relevancy_depth if maximum_relevancy_depth else len(self.corpus)
+        self.confidence_threshold = confidence_threshold
+        self.confidence_threshold_steps = confidence_threshold_steps
 
         # For CSV
         if name:
@@ -169,11 +175,16 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         # 5) Log confusion matrices
         self._log_confusion_matrices_to_wandb(queries_result_list)
 
-        # 6) Give these metrics a prefix and store in model card
+        # 6) Log accuracies based on confidence thresholds
+        if self.confidence_threshold:
+            self._log_single_argument_classification_with_similarity_threshold(queries_result_list)
+            self._log_multi_argument_classification_with_similarity_threshold(queries_result_list)
+
+        # 7) Give these metrics a prefix and store in model card
         final_metrics = self.prefix_name_to_metrics(metrics, self.name)
         self.store_metrics_in_model_card_data(model, final_metrics, epoch, steps)
 
-        # 7) Log to W&B (if self.run is set)
+        # 8) Log to W&B (if self.run is set)
         if self.run:
             self.run.log(final_metrics)
 
@@ -633,6 +644,112 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                     f"{self.name}_{score_func_name}_topic_level_accuracy": tables["node_level"],
                     f"{self.name}_{score_func_name}_topic_label_accuracy": tables["node_label"]
                 })
+
+    def _log_single_argument_classification_with_similarity_threshold(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
+        """
+        Logs top-1 classification accuracy at various confidence thresholds.
+        """
+        # Define confidence thresholds based on step size
+        confidences = [self.confidence_threshold]
+        if self.confidence_threshold_steps:
+            confidences = np.arange(
+                self.confidence_threshold, 1.0 + self.confidence_threshold_steps, self.confidence_threshold_steps
+            )
+            confidences = confidences[confidences <= 1.0]
+
+        # Initialize accuracy tracking dict
+        results = {}
+
+        for score_func, per_query_hits in queries_result_list.items():
+            results[score_func] = {}
+
+            # Compute accuracy at various confidence thresholds
+            for confidence in confidences:
+                top1_hits = 0
+                total_queries = len(per_query_hits)
+
+                # Evaluate each query
+                for q_idx, hits in enumerate(per_query_hits):
+                    query = self.queries[q_idx]
+                    top1 = hits[0]
+
+                    # Check if top-1 passage meets confidence threshold and is relevant
+                    if top1[0] >= confidence:
+                        top1_passage = self.corpus_map[top1[1]]
+                        if top1_passage.id in self.relevant_docs[query.id]:
+                            top1_hits += 1
+
+                # Calculate accuracy
+                accuracy = top1_hits / total_queries if total_queries > 0 else 0.0
+                results[score_func][confidence] = accuracy
+
+        self._log_results_as_line_plot(results, "single_argument_classification", "Top-1-Prediction Accuracy By Confidence Threshold")
+
+    def _log_multi_argument_classification_with_similarity_threshold(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
+        """
+        Logs multi argument classification accuracy at various confidence thresholds.
+        """
+        # Define confidence thresholds based on step size
+        confidences = [self.confidence_threshold]
+        if self.confidence_threshold_steps:
+            confidences = np.arange(
+                self.confidence_threshold, 1.0 + self.confidence_threshold_steps, self.confidence_threshold_steps
+            )
+            confidences = confidences[confidences <= 1.0]
+
+        # Initialize accuracy tracking dicts
+        results_exact = {}
+        results_partial = {}
+
+        for score_func, per_query_hits in queries_result_list.items():
+            results_exact[score_func] = {}
+            results_partial[score_func] = {}
+
+            # Compute accuracy at different confidence thresholds
+            for confidence in confidences:
+                total_queries = len(per_query_hits)
+                exact_match, partial_match = 0, 0
+
+                # Evaluate each query
+                for q_idx, hits in enumerate(per_query_hits):
+                    query = self.queries[q_idx]
+                    relevant_passages = [self.corpus_map[pid] for pid in self.relevant_docs[query.id]]
+
+                    # Filter hits based on confidence threshold
+                    hits_above_threshold = [hit for hit in hits if hit[0] >= confidence]
+                    if hits_above_threshold:
+                        passages_above_threshold = [self.corpus_map[p[1]] for p in hits_above_threshold]
+
+                        # Check if all retrieved passages are relevant
+                        false_passage = any(passage not in relevant_passages for passage in passages_above_threshold)
+                        if not false_passage:
+                            relevant_passage_strings = {f"{p.discussion_scenario}_{p.label}" for p in relevant_passages}
+                            threshold_passage_strings = {f"{p.discussion_scenario}_{p.label}" for p in passages_above_threshold}
+
+                            # Increase partial match if retrieved passages are subset of relevant passages (labels + discussion scenario)
+                            if threshold_passage_strings.issubset(relevant_passage_strings):
+                                partial_match += 1
+
+                            # Increase exact match if retrieved passages match exactly relevant passages (labels + discussion scenario)
+                            if threshold_passage_strings == relevant_passage_strings:
+                                exact_match += 1
+
+                # Calculate accuracy scores
+                exact_acc = exact_match / total_queries if total_queries > 0 else 0.0
+                partial_acc = partial_match / total_queries if total_queries > 0 else 0.0
+
+                results_exact[score_func][confidence] = exact_acc
+                results_partial[score_func][confidence] = partial_acc
+
+        self._log_results_as_line_plot(results_exact, "multi_argument_classification_exact_match", "Exact Match Accuracy By Confidence Threshold")
+        self._log_results_as_line_plot(results_partial, "multi_argument_classification_partial_match", "Partial Match Accuracy By Confidence Threshold")
+
+    def _log_results_as_line_plot(self, results: Dict[str, Dict], metric_name: str, title: str) -> None:
+        for score_func_name, confidence_threshold in results.items():
+            data = [[c, acc] for c, acc in confidence_threshold.items()]
+            table = wandb.Table(data=data, columns=["Confidence", "Accuracy"])
+            if self.run:
+                self.run.log({f"{self.name}_{score_func_name}_{metric_name}": wandb.plot.line(table, "Confidence", "Accuracy", title=title)})
 
     def _return_topic_rtc(self, discussion_scenario: str) -> ResponseTemplateCollection:
         rtc = self.argument_graphs.get(discussion_scenario)
