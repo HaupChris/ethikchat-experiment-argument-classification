@@ -13,11 +13,10 @@ from sentence_transformers.training_args import BatchSamplers
 
 from src.data.dataset_splits import create_splits_from_corpus_dataset
 from src.data.create_corpus_dataset import DatasetSplitType, Passage, Query, load_response_template_collection
+from src.evaluation.deep_dive_information_retrieval_evaluator import DeepDiveInformationRetrievalEvaluator
 from src.evaluation.excluding_information_retrieval_evaluator import ExcludingInformationRetrievalEvaluator
 from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss
 from src.models.experiment_config import ExperimentConfig
-
-
 
 
 def load_argument_graphs(project_root) -> Dict[str, ResponseTemplateCollection]:
@@ -26,14 +25,210 @@ def load_argument_graphs(project_root) -> Dict[str, ResponseTemplateCollection]:
     argument_graph_auto = load_response_template_collection("s3", project_root)
     argument_graph_ref = load_response_template_collection("s4", project_root)
 
-    argument_graphs = {
+    return {
         DiscussionSzenario.MEDAI.value: argument_graph_med,
         DiscussionSzenario.JURAI.value: argument_graph_jur,
         DiscussionSzenario.AUTOAI.value: argument_graph_auto,
         DiscussionSzenario.REFAI.value: argument_graph_ref
     }
 
-    return argument_graphs
+
+def prepare_datasets(
+    exp_config: ExperimentConfig,
+    argument_graphs: Dict[str, ResponseTemplateCollection],
+    is_test_run: bool = False
+):
+    """
+    Loads the corpus dataset from disk, creates splits,
+    and optionally uses smaller data for local testing if `is_test_run=True`.
+    Returns all training data, evaluation data, and the evaluators.
+    """
+    # Load the dataset from disk
+    corpus_dataset_path = os.path.join(exp_config.project_root, exp_config.dataset_dir, exp_config.dataset_name)
+    corpus_dataset = load_from_disk(corpus_dataset_path)
+
+    # Create or load the splits
+    split_dataset_folder = os.path.join(exp_config.project_root, exp_config.dataset_dir)
+    splitted_dataset = create_splits_from_corpus_dataset(
+        corpus_dataset=corpus_dataset,
+        dataset_split_type=exp_config.dataset_split_type,
+        save_folder=split_dataset_folder,
+        dataset_save_name=exp_config.split_dataset_name
+    )
+
+    if not is_test_run:
+        # -----------------------------------------
+        # Regular full dataset preparation
+        # -----------------------------------------
+        train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"])
+        eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"])
+
+        eval_dataset = splitted_dataset["validation"]
+        test_dataset = splitted_dataset["test"]
+
+        # Build references for EVAL
+        eval_passages = {
+            row["id"]: Passage(
+                row["id"], row["text"], row["label"],
+                row["discussion_scenario"], row["passage_source"]
+            )
+            for row in eval_dataset["passages"]
+        }
+        eval_queries = {
+            row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"])
+            for row in eval_dataset["queries"]
+        }
+        eval_relevant_passages = {
+            row["query_id"]: set(row["passages_ids"])
+            for row in eval_dataset["queries_relevant_passages_mapping"]
+        }
+        eval_trivial_passages = {
+            row["query_id"]: set(row["passages_ids"])
+            for row in eval_dataset["queries_trivial_passages_mapping"]
+        }
+
+        # Build references for TEST
+        test_passages = {
+            row["id"]: Passage(
+                row["id"], row["text"], row["label"],
+                row["discussion_scenario"], row["passage_source"]
+            )
+            for row in test_dataset["passages"]
+        }
+        test_queries = {
+            row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"])
+            for row in test_dataset["queries"]
+        }
+        test_relevant_passages = {
+            row["query_id"]: set(row["passages_ids"])
+            for row in test_dataset["queries_relevant_passages_mapping"]
+        }
+        test_trivial_passages = {
+            row["query_id"]: set(row["passages_ids"])
+            for row in test_dataset["queries_trivial_passages_mapping"]
+        }
+
+    else:
+        # -----------------------------------------
+        # Smaller dataset snippet for local testing
+        # (EXACTLY as in your original code snippet)
+        # -----------------------------------------
+        # 1) Prepare train/eval data in small form
+        train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"], 2)
+        eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"], 2)
+        train_pos = train_pos.shuffle(seed=42).select(range(10))
+        eval_pos = eval_pos.shuffle(seed=42).select(range(10))
+
+        eval_dataset = splitted_dataset["validation"]
+        eval_queries = eval_dataset["queries"].shuffle(seed=42).select(range(10))
+        eval_queries = {
+            row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"])
+            for row in eval_queries
+        }
+        eval_relevant_passages = {
+            row["query_id"]: set(row["passages_ids"])
+            for row in eval_dataset["queries_relevant_passages_mapping"]
+            if row["query_id"] in eval_queries.keys()
+        }
+        # shorten the relevant passages to 2
+        for key in eval_relevant_passages.keys():
+            eval_relevant_passages[key] = set(list(eval_relevant_passages[key])[:2])
+
+        eval_trivial_passages = {
+            row["query_id"]: set(row["passages_ids"])
+            for row in eval_dataset["queries_trivial_passages_mapping"]
+        }
+
+        # keep only relevant passages in the eval_passages dict
+        all_eval_ids = set()
+        for key in eval_relevant_passages.keys():
+            all_eval_ids.update(eval_relevant_passages[key])
+        eval_passages = {
+            row["id"]: Passage(
+                row["id"], row["text"], row["label"],
+                row["discussion_scenario"], row["passage_source"]
+            )
+            for row in eval_dataset["passages"]
+            if row["id"] in all_eval_ids
+        }
+
+        # 2) Build test references (small)
+        test_dataset = splitted_dataset["test"]
+        test_queries = test_dataset["queries"].shuffle(seed=42).select(range(10))
+        test_queries = {
+            row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"])
+            for row in test_queries
+        }
+        test_relevant_passages = {
+            row["query_id"]: set(row["passages_ids"])
+            for row in test_dataset["queries_relevant_passages_mapping"]
+            if row["query_id"] in test_queries.keys()
+        }
+        # shorten the relevant passages to 2
+        for key in test_relevant_passages.keys():
+            test_relevant_passages[key] = set(list(test_relevant_passages[key])[:2])
+
+        test_trivial_passages = {
+            row["query_id"]: set(row["passages_ids"])
+            for row in test_dataset["queries_trivial_passages_mapping"]
+        }
+
+        # keep only relevant passages in the test_passages dict
+        all_test_ids = set()
+        for key in test_relevant_passages.keys():
+            all_test_ids.update(test_relevant_passages[key])
+        test_passages = {
+            row["id"]: Passage(
+                row["id"], row["text"], row["label"],
+                row["discussion_scenario"], row["passage_source"]
+            )
+            for row in test_dataset["passages"]
+            if row["id"] in all_test_ids
+        }
+
+    # -------------------------------------------------
+    # Create the actual evaluators with loaded references
+    # -------------------------------------------------
+    excluding_ir_evaluator_eval = ExcludingInformationRetrievalEvaluator(
+        corpus=eval_passages,
+        queries=eval_queries,
+        relevant_docs=eval_relevant_passages,
+        excluded_docs=eval_trivial_passages,
+        show_progress_bar=True,
+        write_csv=True,
+        log_top_k_predictions=5,
+        run=wandb.run,
+    )
+
+    excluding_ir_evaluator_test = ExcludingInformationRetrievalEvaluator(
+        corpus=test_passages,
+        queries=test_queries,
+        relevant_docs=test_relevant_passages,
+        excluded_docs=test_trivial_passages,
+        show_progress_bar=True,
+        write_csv=True,
+        log_top_k_predictions=5,
+        run=wandb.run,
+    )
+
+    deep_dive_evaluator_test = DeepDiveInformationRetrievalEvaluator(
+        corpus=test_passages,
+        queries=test_queries,
+        relevant_docs=test_relevant_passages,
+        excluded_docs=test_trivial_passages,
+        show_progress_bar=True,
+        write_csv=True,
+        run=wandb.run,
+        argument_graphs=argument_graphs
+    )
+
+    return (
+        train_pos,
+        eval_pos,
+        excluding_ir_evaluator_eval,
+        excluding_ir_evaluator_test,
+        deep_dive_evaluator_test
+    )
 
 
 def main(is_test_run=False):
@@ -41,7 +236,7 @@ def main(is_test_run=False):
     wandb.init(project="argument-classification")  # <--- adjust project name as needed
     config = wandb.config
 
-    run_name = wandb.run.name if wandb.run.name else wandb.run.id  # e.g. "sandy-sweep-49"
+    run_name = wandb.run.name if wandb.run.name else wandb.run.id
     sweep_id = wandb.run.sweep_id if wandb.run.sweep_id else "manual"
     sweep_run_name = f"{run_name}"
     print(f"W&B assigned run name: {sweep_run_name}")
@@ -65,10 +260,10 @@ def main(is_test_run=False):
     # 5) Prepare training configuration
     exp_config_dict = {
         "project_root": project_root,
-        "experiment_dir": config.experiment_dir,  # e.g., "experiments_outputs"
-        "experiment_run": sweep_id,  # e.g., <sweep_id> if it is a sweep run else "manual"
-        "dataset_dir": config.dataset_dir,  # e.g., "data/processed"
-        "dataset_name": config.dataset_name,  # e.g., "corpus_dataset_experiment_v1"
+        "experiment_dir": config.experiment_dir,
+        "experiment_run": sweep_id,
+        "dataset_dir": config.dataset_dir,
+        "dataset_name": config.dataset_name,
         "model_name": config.model_name,
         "model_name_escaped": config.model_name.replace("/", "-"),
         "learning_rate": config.learning_rate,
@@ -78,158 +273,40 @@ def main(is_test_run=False):
         "split_dataset_name": config.dataset_split_name,
         "num_epochs": config.num_epochs,
         "loss_function": "MultipleNegativesRankingLoss",  # or config.get(...)
-        "run_time": "sweep-run",  # just a placeholder
+        "run_time": "sweep-run",
         "warmup_ratio": config.warmup_ratio
-
     }
-
     exp_config = ExperimentConfig(**exp_config_dict)
 
     # Make sure output directory exists
     os.makedirs(exp_config.model_run_dir, exist_ok=True)
 
+    # 6) Load the model
     model = SentenceTransformer(exp_config.model_name)
 
-    #  Define the loss
+    # 7) Define the loss
     loss = CachedMultipleNegativesRankingLoss(model=model, show_progress_bar=False, mini_batch_size=8)
 
-    # argument_graphs = load_argument_graphs(exp_config.project_root)
+    # 8) Load argument graphs
+    argument_graphs = load_argument_graphs(exp_config.project_root)
 
-    # Load dataset
-    corpus_dataset_path = os.path.join(exp_config.project_root, exp_config.dataset_dir, exp_config.dataset_name)
-    corpus_dataset = load_from_disk(corpus_dataset_path)
+    # 9) Prepare train/eval/test data (including evaluators)
+    (
+        train_pos,
+        eval_pos,
+        excluding_ir_evaluator_eval,
+        excluding_ir_evaluator_test,
+        deep_dive_evaluator_test
+    ) = prepare_datasets(exp_config, argument_graphs, is_test_run=is_test_run)
 
-    split_dataset_folder = os.path.join(exp_config.project_root, exp_config.dataset_dir)
-
-    splitted_dataset = create_splits_from_corpus_dataset(corpus_dataset=corpus_dataset,
-                                                         dataset_split_type=exp_config.dataset_split_type,
-                                                         save_folder=split_dataset_folder,
-                                                         dataset_save_name=exp_config.split_dataset_name
-                                                         )
-
-    # # 9) Prepare train/eval data
-    train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"])
-    eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"])
-
-    eval_dataset = splitted_dataset["validation"]
-    eval_passages = {
-        row["id"]: Passage(row["id"], row["text"], row["label"], row["discussion_scenario"], row["passage_source"]) for
-        row in eval_dataset["passages"]}
-    eval_queries = {row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"]) for row in
-                    eval_dataset["queries"]}
-    eval_relevant_passages = {
-        row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_relevant_passages_mapping"]
-    }
-    eval_trivial_passages = {
-        row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_trivial_passages_mapping"]
-    }
-    # Prepare test data/evaluator
-    test_dataset = splitted_dataset["test"]
-    test_passages = {
-        row["id"]: Passage(row["id"], row["text"], row["label"], row["discussion_scenario"], row["passage_source"]) for
-        row in test_dataset["passages"]}
-
-    test_queries = {row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"]) for row in
-                    test_dataset["queries"]}
-    test_relevant_passages = {
-        row["query_id"]: set(row["passages_ids"]) for row in test_dataset["queries_relevant_passages_mapping"]
-    }
-    test_trivial_passages = {
-        row["query_id"]: set(row["passages_ids"]) for row in test_dataset["queries_trivial_passages_mapping"]
-    }
-
-    ######################### smaller datasets for testing purposes #####################################
-    # train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"], 2)
-    # eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"], 2)
-    # train_pos = train_pos.shuffle(seed=42).select(range(10))
-    # eval_pos = eval_pos.shuffle(seed=42).select(range(10))
-    #
-    # eval_dataset = splitted_dataset["validation"]
-    # eval_queries = eval_dataset["queries"].shuffle(seed=42).select(range(10))
-    # eval_queries = {row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"]) for row in
-    #                 eval_queries}
-    #
-    # eval_relevant_passages = {
-    #     row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_relevant_passages_mapping"]
-    #     if row["query_id"] in eval_queries.keys()
-    # }
-    #
-    # # shorten the relevant passages to 2
-    # for key in eval_relevant_passages.keys():
-    #     eval_relevant_passages[key] = set(list(eval_relevant_passages[key])[:2])
-    #
-    # eval_trivial_passages = {
-    #     row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_trivial_passages_mapping"]
-    # }
-    #
-    # # adjust the passages set. Only keep the passage_ids that are in the relevant passages
-    # all_relevant_passag_ids = set()
-    # for key in eval_relevant_passages.keys():
-    #     all_relevant_passag_ids.update(eval_relevant_passages[key])
-    #
-    # eval_passages = {
-    #     row["id"]: Passage(row["id"], row["text"], row["label"], row["discussion_scenario"], row["passage_source"]) for
-    #     row in eval_dataset["passages"]}
-    #
-    # test_dataset = splitted_dataset["test"]
-    # test_queries = test_dataset["queries"].shuffle(seed=42).select(range(10))
-    # test_queries = {row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"]) for row in
-    #                 test_queries}
-    #
-    #
-    # test_relevant_passages = {
-    #     row["query_id"]: set(row["passages_ids"]) for row in test_dataset["queries_relevant_passages_mapping"]
-    #     if row["query_id"] in test_queries.keys()
-    # }
-    # # shorten the relevant passages to 2
-    # for key in test_relevant_passages.keys():
-    #     test_relevant_passages[key] = set(list(test_relevant_passages[key])[:2])
-    #
-    # test_trivial_passages = {
-    #     row["query_id"]: set(row["passages_ids"]) for row in test_dataset["queries_trivial_passages_mapping"]
-    # }
-    #
-    # # adjust the passages set. Only keep the passage_ids that are in the relevant passages
-    # all_relevant_passag_ids = set()
-    # for key in test_relevant_passages.keys():
-    #     all_relevant_passag_ids.update(test_relevant_passages[key])
-    #
-    # test_passages = {
-    #     row["id"]: Passage(row["id"], row["text"], row["label"], row["discussion_scenario"], row["passage_source"]) for
-    #     row in test_dataset["passages"] if row["id"] in all_relevant_passag_ids}
-
-
-    #####################################################################################################
-
-    excluding_ir_evaluator_eval = ExcludingInformationRetrievalEvaluator(
-        corpus=eval_passages,
-        queries=eval_queries,
-        relevant_docs=eval_relevant_passages,
-        excluded_docs=eval_trivial_passages,
-        show_progress_bar=True,
-        write_csv=True,
-        log_top_k_predictions=5,
-        run=wandb.run,
-    )
-
-    excluding_ir_evaluator_test = ExcludingInformationRetrievalEvaluator(
-        corpus=test_passages,
-        queries=test_queries,
-        relevant_docs=test_relevant_passages,
-        excluded_docs=test_trivial_passages,
-        show_progress_bar=True,
-        write_csv=True,
-        log_top_k_predictions=5,
-        run=wandb.run,
-    )
-
+    # 10) Pre-training evaluation on the eval set
     pretrain_eval_results = excluding_ir_evaluator_eval(model)
     prefixed_pretrain_eval_results = {f"eval_{key}": value for key, value in pretrain_eval_results.items()}
     wandb.log(prefixed_pretrain_eval_results)
 
+    # 11) Decide how often to evaluate and save
     eval_save_steps = 4000 / (exp_config.batch_size / 32)
 
-    # 11) Training arguments
     train_args = SentenceTransformerTrainingArguments(
         output_dir=exp_config.model_run_dir,
         num_train_epochs=exp_config.num_epochs,
@@ -249,6 +326,7 @@ def main(is_test_run=False):
         batch_sampler=BatchSamplers.NO_DUPLICATES
     )
 
+    # 12) Create a trainer
     trainer = SentenceTransformerTrainer(
         model=model,
         args=train_args,
@@ -258,17 +336,23 @@ def main(is_test_run=False):
         evaluator=excluding_ir_evaluator_eval,
     )
 
-    # 12) Train
+    # 13) Train
     trainer.train()
 
-    # 13) Evaluate
+    # 14) Final evaluation on the validation set
     final_eval_results = excluding_ir_evaluator_eval(model)
     prefixed_eval_results = {f"eval_{key}": value for key, value in final_eval_results.items()}
     wandb.log(prefixed_eval_results)
 
+    # 15) Evaluate on the test set
     test_eval_results = excluding_ir_evaluator_test(model)
     prefixed_test_eval_results = {f"test_{key}": value for key, value in test_eval_results.items()}
     wandb.log(prefixed_test_eval_results)
+
+    # 16) Deep dive test evaluation
+    test_deep_dive_results = deep_dive_evaluator_test(model)
+    prefixed_test_deep_dive_results = {f"test_{key}": value for key, value in test_deep_dive_results.items()}
+    wandb.log(prefixed_test_deep_dive_results)
 
     wandb.finish()
 
@@ -278,22 +362,20 @@ if __name__ == "__main__":
 
     # If you pass a --local-test argument, we'll run with a dummy config in offline mode
     if "--local-test" in sys.argv:
-        # Example static config (pick simple/fast values)
         local_config = {
             "project_root": "/home/christian/PycharmProjects/ethikchat-experiment-argument-classification",
             "experiment_dir": "experiments_outputs",
             "experiment_run": "v1_local_debug",
             "dataset_dir": "data/processed",
             "dataset_name": "corpus_dataset_v1",
-            "dataset_split_type": "in_distribution",
-            "dataset_split_name": "dataset_split_in_distribution",
+            "dataset_split_type": "out_of_distribution_hard",
+            "dataset_split_name": "dataset_split_by_scenario_JURAI",
             "model_name": "deutsche-telekom/gbert-large-paraphrase-euclidean",
             "learning_rate": 1e-5,
             "batch_size": 2,
             "num_epochs": 2,
-            "warmup_ratio": 0.1
+            "warmup_ratio": 0.1,
         }
-
         wandb.init(
             project="argument-classification",  # or "argument-classification-test"
             config=local_config,
@@ -301,5 +383,5 @@ if __name__ == "__main__":
         )
         main(is_test_run=True)
     else:
-        # The normal sweep entry point
+        # Normal sweep entry point
         main()
