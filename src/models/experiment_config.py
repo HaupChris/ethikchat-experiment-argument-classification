@@ -10,7 +10,7 @@ class ExperimentConfig(BaseModel):
     Configuration for an experiment run.
 
     This is used to pass the configuration to the training script and log the configuration.
-    Args:
+    Attributes:
         project_root: str (absolute path to the project root)
         experiment_dir: str (relative path to the experiments directory)
         experiment_run: str (name of the experiment run)
@@ -27,6 +27,8 @@ class ExperimentConfig(BaseModel):
         loss_function: str (name of the loss function to use, does not change anything but only for logging)
         run_time: str (timestamp of the start of the experiment run)
         warmup_ratio: float (ratio of the total number of training steps to warmup steps)
+        context_length: int (-1 for all available context, 0 for no context, > 0 for the specified number of utterances before the given user utterance)
+        add_discussion_scenario_info: bool (if true, at the beginning of a query and passage text the discussion_scenario is added, e.g. [MEDAI])
     """
     project_root: str
     experiment_dir: str
@@ -44,4 +46,6 @@ class ExperimentConfig(BaseModel):
     loss_function: str
     run_time: str
     warmup_ratio: float
+    context_length: int
+    add_discussion_scenario_info: bool
 
