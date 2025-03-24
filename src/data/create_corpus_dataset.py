@@ -3,13 +3,14 @@ import os
 import pandas as pd
 import re
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datasets import DatasetDict, Dataset, load_from_disk
 from datetime import datetime
 from enum import Enum
 from typing import List, Tuple, Dict, Optional
 
 from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
+from ethikchat_argtoolkit.ArgumentGraph.stance import Stance
 
 from ethikchat_argtoolkit.Dialogue.utterance import Utterance
 from ethikchat_argtoolkit.Dialogue.discussion_szenario import DiscussionSzenario
@@ -63,8 +64,10 @@ class ProcessedUtterance:
     text: str
     labels: List[str]
     bounds: List[Tuple[int, int]]
-    context: str
+    context: List[Tuple[str, str]]
     discussion_scenario: DiscussionSzenario
+    scenario_description: str
+    scenario_question: str
 
 
 class PassageSource(Enum):
@@ -93,12 +96,25 @@ class Passage:
 @dataclass
 class Query:
     """
-    Dataclass for a query in the dataset.
+    Person represents a user record.
+
+    Attributes:
+        id (int)
+        text (str)
+        labels (List[str])
+        discussion_scenario (str)
+        context (List[Tuple[str, str]] = field(default_factory=list))
+        scenario_description (str = "")
+        scenario_question (str = "")
+
     """
     id: int
     text: str
     labels: List[str]
     discussion_scenario: str
+    context: List[Tuple[str, str]] = field(default_factory=list)
+    scenario_description: str = ""
+    scenario_question: str = ""
 
     def __hash__(self):
         return hash(("text", self.text, "labels", self.labels))
@@ -119,13 +135,6 @@ class DatasetConfig:
         The path to the directory where the created dataset will be saved.
     project_dir : str
         The directory head directory of the project from which will be infered where the dialogue files for the dataset creation are stored.
-    num_previous_turns: int
-        The amount of previous utterance turns to be included in the conversation context. A single turn is considered as one utterance,
-        e.g., for num_previous_turns = 1 the previous bot message would be included as context for every user message and vice versa.
-    include_role: bool
-        Specifies whether the speaker's role (e.g., [Bot] or [User]) should be included for each utterance in the context.
-    sep_token: str, optional
-        The token used to seperate between different utterances in the conversation context field (default is "\n").
     utterance_type : UtteranceType, optional
         The type of utterance that should be used for segmentation or classification. It can be either user or bot
         utterances, or both (default is UtteranceType.UserAndBot).
@@ -136,9 +145,6 @@ class DatasetConfig:
     """
     dataset_path: str
     project_dir: str
-    num_previous_turns: int
-    include_role: bool
-    sep_token: str = "\n"
     utterance_type: UtteranceType = UtteranceType.UserAndBot
     eval_size: float = 0.2
     validation_test_ratio: float = 0.5
@@ -180,6 +186,51 @@ class DatasetSplitType(Enum):
         if value == "k_fold":
             return cls.kFold
         raise ValueError(f"Unknown DatasetSplitType: {value}")
+
+
+def get_scenario_question(discussion_scenario: DiscussionSzenario) -> str:
+    descriptions = {
+        DiscussionSzenario.MEDAI: "Darf ein ausreichend gutes medizinisches Programm aus ethischer Sicht selbstständig Diagnose- und Therapie-Entscheidungen treffen?",
+        DiscussionSzenario.JURAI: "Soll im Zivilrecht (kein Strafrecht und kein Familienrecht) ein juristisch intelligentes Programm (jurKI) Streitfälle in erster Instanz entscheiden, wenn seine Urteile besser sind, d.h. seltener in der Berufung korrigiert werden als bei Richter:innen?",
+        DiscussionSzenario.AUTOAI: "Wir gehen von einem zukünftigen Szenario aus, indem eine KI autonom ein Fahrzeug steuert (AutoKI) und vollkommen ohne mögliches Eingreifen eines Menschen im Straßenverkehr agiert.",
+        DiscussionSzenario.REFAI: "Würden Sie eine solche Schiri-KI begrüßen?",
+    }
+
+    if discussion_scenario not in descriptions:
+        raise ValueError(f"No question text available for scenario {discussion_scenario}!")
+    else:
+        return descriptions[discussion_scenario]
+
+
+def get_scenario_description(discussion_scenario: DiscussionSzenario) -> str:
+    descriptions = {
+        DiscussionSzenario.MEDAI: "Wir gehen von einem zukünftigen Szenario aus, indem eine medizinische KI (medKI) in Untersuchungszentren eigenständig Diagnosen stellt und therapeutische Entscheidungen trifft.\n            In den Untersuchungszentren arbeitet medizinisches Personal, das Daten erhebt und den Patient:innen die Entscheidungen der medKI erklären kann, aber keine Entscheidungen trifft.",
+        DiscussionSzenario.JURAI: "Wir gehen von einem zukünftigen Szenario aus, in dem die KI als Richter:in grundsätzlich erlaubt und ein vom Staat bereitgestelltes, intelligentes (regel- und lernbasiert) Programm ist. Die Aufgabe der beteiligten Richter:innen beschränkt sich auf die Feststellung der Fakten, die KI würde den Prozess leiten und das Urteil fällen.",
+        DiscussionSzenario.AUTOAI: "Wir gehen von einem zukünftigen Szenario aus, indem eine KI autonom ein Fahrzeug steuert (AutoKI) und vollkommen ohne mögliches Eingreifen eines Menschen im Straßenverkehr agiert.",
+        DiscussionSzenario.REFAI: "Bei Profi-Fußballspielen werden alle Schiedsrichter-Entscheidungen von einer sehr guten KI (Künstlichen Intelligenz) auf Basis der Videos verschiedener Kameras im Stadion in Echtzeit getroffen, die umfangreich mit Videos früherer Spiele trainiert wurde.\n Die KI-Entscheidungen werden vom einem menschlichen Schiedsrichter auf dem Platz nur noch kommuniziert.",
+    }
+
+    if discussion_scenario not in descriptions:
+        raise ValueError(f"No desription text available for scenario {discussion_scenario}!")
+    else:
+        return descriptions[discussion_scenario]
+
+
+def get_welcome_message(user_name: str, user_stance: str, discussion_scenario: DiscussionSzenario) -> str:
+    welcome_messages = {
+        DiscussionSzenario.MEDAI: f"Deine Meinung ist, dass in unserem Szenario KI die Zulassung als Ärzt:innen {'' if user_stance == Stance.PRO else 'nicht'} erhalten sollte. Bitte nenne zunächst das wichtigste Argument für deine Meinung.",
+        DiscussionSzenario.JURAI: f"Deine Meinung ist, dass in unserem Szenario KI Fälle in Zivilrechtsprozessen {'' if user_stance == Stance.PRO else 'nicht'} entscheiden sollte. Bitte nenne zunächst das wichtigste Argument für deine Meinung.",
+        DiscussionSzenario.AUTOAI: f"Deine Meinung ist, dass in unserem Szenario die AutoKI für den Straßenverkehr {'' if user_stance == Stance.PRO else 'nicht'} zugelassen werden sollten. Bitte nenne zunächst das wichtigste Argument für deine Meinung.",
+        DiscussionSzenario.REFAI: f"Deine Meinung ist, dass in unserem Szenario KI die Entscheidungen {'' if user_stance == Stance.PRO else 'nicht'} allein treffen sollte. Bitte nenne zunächst das wichtigste Argument für deine Meinung."
+    }
+
+    if discussion_scenario not in welcome_messages:
+        raise ValueError(f"No welcome message text available for scenario {discussion_scenario}!")
+
+    if user_stance == Stance.OTHER:
+        raise ValueError(f"Cannot create a valid welcome messaage with Stance.OTHER!")
+
+    return f"Hallo {user_name}, willkommen im Chat. {welcome_messages[discussion_scenario]}"
 
 
 def load_response_template_collection(topic: str,
@@ -309,8 +360,28 @@ def load_dataset_from_excel_file(file_path: str, discussion_scenario: Discussion
             discussion_szenario=discussion_scenario,
         )
         dialogue.utterances = utterances
+        dialogue.name = dialogue_id
         dialogues.append(dialogue)
     return dialogues
+
+
+def copy_start_survey_result_from_unprocessed_to_processed_dialogues(unprocessed_dialogues: List[Dialogue],
+                                                                     processed_dialogues: List[Dialogue]) -> List[
+    Dialogue]:
+    """
+    Processed dialogues that are stored in excel files do not contain a start survey result which holds the users initial
+    stance. The stance is necessary for further processing of the dataset. The unprocessed data holds this information.
+    This function loads the information from unprocessed into processed dialogues.
+    """
+    unprocessed_lookup = {dialogue.name: dialogue for dialogue in unprocessed_dialogues}
+
+    for dialogue in processed_dialogues:
+        if dialogue.name not in unprocessed_lookup:
+            raise ValueError(f"Unprocessed dialogue {dialogue.name} not found.")
+
+        dialogue.start_survey = unprocessed_lookup[dialogue.name].start_survey
+
+    return processed_dialogues
 
 
 def preprocess_utterance(
@@ -362,10 +433,7 @@ def build_context(dialogue_turns: List[Tuple[str, str]], num_previous_turns: int
 
 
 def preprocess_dataset(dialogues: List[Dialogue],
-                       num_previous_turns: int,
                        utterance_type: UtteranceType,
-                       sep_token: str,
-                       include_role: bool,
                        noisy_labels: List[str]) -> Tuple[List[ProcessedUtterance], List[Tuple[Utterance, str]]]:
     """
     Preprocesses a dataset by applying text normalization and updating bounds.
@@ -380,12 +448,14 @@ def preprocess_dataset(dialogues: List[Dialogue],
     id_counter = 0
     for dialogue in dialogues:
         dialogue_turns = []
+        user_name = dialogue.user_utterances[0].user
+        user_stance = Stance.from_agreement_value(dialogue.start_survey.agreement)
+        dialogue_turns.append(("Bot", get_welcome_message(user_name, user_stance, dialogue.discussion_szenario)))
         for utterance in dialogue.utterances:
             check_bounds_correctness(utterance, dialogue.name)
 
             dialogue_turns.append((
-                "User" if utterance.is_from_user() else "Bot",
-                preprocess_text(utterance.text, gender_language_tools)
+                "User" if utterance.is_from_user() else "Bot", preprocess_text(utterance.text, gender_language_tools)
             ))
 
             if utterance_type == UtteranceType.User and not utterance.is_from_user():
@@ -401,15 +471,17 @@ def preprocess_dataset(dialogues: List[Dialogue],
 
             processed_utterance_text, processed_labels, processed_bounds = preprocess_utterance(utterance,
                                                                                                 gender_language_tools)
-            previous_context = build_context(dialogue_turns, num_previous_turns, sep_token, include_role)
+
 
             processed_utterances.append(ProcessedUtterance(
                 id=id_counter,
                 text=processed_utterance_text,
                 labels=processed_labels,
                 bounds=processed_bounds,
-                context=previous_context,
-                discussion_scenario=dialogue.discussion_szenario
+                context=dialogue_turns,
+                discussion_scenario=dialogue.discussion_szenario,
+                scenario_description=preprocess_text(get_scenario_description(dialogue.discussion_szenario), gender_language_tools),
+                scenario_question=preprocess_text(get_scenario_question(dialogue.discussion_szenario), gender_language_tools)
             ))
             id_counter += 1
 
@@ -426,7 +498,11 @@ def create_queries(processed_utterances: List[ProcessedUtterance], excluded_labe
         queries.append(Query(processed_utterance.id,
                              processed_utterance.text,
                              filtered_labels,
-                             processed_utterance.discussion_scenario))
+                             processed_utterance.discussion_scenario,
+                             processed_utterance.context,
+                             processed_utterance.scenario_description,
+                             processed_utterance.scenario_question
+                             ))
     # check for duplicates
     unique_queries = []
     for query in queries:
@@ -524,9 +600,6 @@ def check_for_missing_passages(queries_relevant_passages_mapping: Dict[int, List
 
 
 def create_dataset_splits(dialogues: List[Dialogue],
-                          include_role: bool,
-                          num_previous_turns: int,
-                          sep_token: str,
                           utterance_type: UtteranceType,
                           argument_graphs: Dict[DiscussionSzenario, ResponseTemplateCollection],
                           noisy_labels: List[str]) \
@@ -541,10 +614,7 @@ def create_dataset_splits(dialogues: List[Dialogue],
 
     processed_utterances, excluded_utterances = preprocess_dataset(
         dialogues,
-        num_previous_turns,
         utterance_type,
-        sep_token,
-        include_role,
         noisy_labels
     )
 
@@ -555,7 +625,6 @@ def create_dataset_splits(dialogues: List[Dialogue],
         argument_graphs_passages.extend(
             create_passages_from_argument_graph(argument_graph, discussion_scenario, noisy_labels))
 
-    # TODO: currently, queries are only an utterance. This should be extended to include the context as well.
     # im queries split hat jede query_id die riehenfolge der processed_utterances.
     queries = create_queries(processed_utterances, noisy_labels)
 
@@ -576,58 +645,9 @@ def create_dataset_splits(dialogues: List[Dialogue],
 def create_dataset(config: DatasetConfig) -> None:
     save_path = config.dataset_path
     project_dir = config.project_dir
-    num_previous_turns = config.num_previous_turns
-    include_role = config.include_role
-    sep_token = config.sep_token
     utterance_type = config.utterance_type
 
-    path_mensateria_survey_1 = os.path.join(project_dir, "data", "external", "ethikchat_data-main", "mensateria_survey",
-                                            "processed", "curated")
-    path_mensateria_survey_2 = os.path.join(project_dir, "data", "external", "ethikchat_data-main",
-                                            "mensateria_survey_2", "processed", "curated")
-
-    m1_dialogues_medai = load_dataset_from_excel_file(
-        os.path.join(path_mensateria_survey_1, "mensateria_survey_medai_curated_dialogues.xlsx"),
-        DiscussionSzenario.MEDAI
-    )
-    m1_dialogues_jurai = load_dataset_from_excel_file(
-        os.path.join(path_mensateria_survey_1, "mensateria_survey_jurai_curated_dialogues.xlsx"),
-        DiscussionSzenario.JURAI
-    )
-    m1_dialogues_autoai = load_dataset_from_excel_file(
-        os.path.join(path_mensateria_survey_1, "mensateria_survey_autoai_curated_dialogues.xlsx"),
-        DiscussionSzenario.AUTOAI
-    )
-    m2_dialogues_medai = load_dataset_from_excel_file(
-        os.path.join(path_mensateria_survey_2, "mensateria_survey_2_medai_curated_dialogues.xlsx"),
-        DiscussionSzenario.MEDAI
-    )
-    m2_dialogues_jurai = load_dataset_from_excel_file(
-        os.path.join(path_mensateria_survey_2, "mensateria_survey_2_jurai_curated_dialogues.xlsx"),
-        DiscussionSzenario.JURAI
-    )
-    m2_dialogues_autoai = load_dataset_from_excel_file(
-        os.path.join(path_mensateria_survey_2, "mensateria_survey_2_autoai_curated_dialogues.xlsx"),
-        DiscussionSzenario.AUTOAI
-    )
-    m2_dialogues_refai = load_dataset_from_excel_file(
-        os.path.join(path_mensateria_survey_2, "mensateria_survey_2_refai_curated_dialogues.xlsx"),
-        DiscussionSzenario.REFAI
-    )
-    m3_dialogues_medai = DialogueLoader.from_directory(
-        dialogues_directory_path=os.path.join(project_dir, "data", "external", "ethikchat_data-main",
-                                              "mensateria_survey_3", "processed", "medai"),
-        version="webathen"
-    )
-    # TODO: load here dialogues from older studies.
-
-    for m3_dialogue in m3_dialogues_medai:
-        m3_dialogue.discussion_szenario = DiscussionSzenario.MEDAI
-
-    dialogues_medai = m1_dialogues_medai + m2_dialogues_medai + m3_dialogues_medai
-    dialogues_jurai = m1_dialogues_jurai + m2_dialogues_jurai
-    dialogues_autoai = m1_dialogues_autoai + m2_dialogues_autoai
-    dialogues_refai = m2_dialogues_refai
+    dialogues_autoai, dialogues_jurai, dialogues_medai, dialogues_refai = load_dialogues(project_dir)
 
     all_dialogues = dialogues_medai + dialogues_jurai + dialogues_autoai + dialogues_refai
 
@@ -644,15 +664,17 @@ def create_dataset(config: DatasetConfig) -> None:
     }
 
     queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping, excluded_utterances = create_dataset_splits(
-        all_dialogues, include_role, num_previous_turns, sep_token, utterance_type, argument_graphs,
-        config.noisy_labels)
+        all_dialogues, utterance_type, argument_graphs, config.noisy_labels)
 
     # create hf dataset
     corpus_dataset = DatasetDict({
         "queries": Dataset.from_dict({"id": [query.id for query in queries],
                                       "text": [query.text for query in queries],
                                       "labels": [query.labels for query in queries],
-                                      "discussion_scenario": [query.discussion_scenario for query in queries]
+                                      "discussion_scenario": [query.discussion_scenario for query in queries],
+                                      "context": [query.context for query in queries],
+                                      "scenario_description": [query.scenario_description for query in queries],
+                                      "scenario_question": [query.scenario_question for query in queries]
                                       }),
         "passages": Dataset.from_dict({"id": [passage.id for passage in passages],
                                        "text": [passage.text for passage in passages],
@@ -677,11 +699,66 @@ def create_dataset(config: DatasetConfig) -> None:
     corpus_dataset.save_to_disk(save_path)
 
 
+def load_dialogues(project_dir) -> Tuple[List[Dialogue], List[Dialogue], List[Dialogue], List[Dialogue]]:
+    def load_and_merge_dialogues(processed_path: str, raw_base_path: str, filename: str,
+                                 szenario: DiscussionSzenario, raw_subdir: str = None,
+                                 version: str = "9", copy_start_survey: bool = True) -> List[Dialogue]:
+        dialogues = load_dataset_from_excel_file(
+            os.path.join(processed_path, filename),
+            szenario
+        )
+        if copy_start_survey and raw_subdir:
+            unprocessed = DialogueLoader.from_directory(
+                dialogues_directory_path=os.path.join(raw_base_path, raw_subdir),
+                version=version
+            )
+            dialogues = copy_start_survey_result_from_unprocessed_to_processed_dialogues(unprocessed, dialogues)
+        return dialogues
+
+    path_m1_curated = os.path.join(project_dir, "data", "external", "ethikchat_data-main", "mensateria_survey", "processed", "curated")
+    path_m1_raw = os.path.join(project_dir, "data", "external", "ethikchat_data-main", "mensateria_survey", "raw")
+
+    path_m2_curated = os.path.join(project_dir, "data", "external", "ethikchat_data-main", "mensateria_survey_2", "processed", "curated")
+    path_m2_raw = os.path.join(project_dir, "data", "external", "ethikchat_data-main", "mensateria_survey_2", "raw")
+
+    m1_dialogues_medai = load_and_merge_dialogues(path_m1_curated, path_m1_raw,
+        "mensateria_survey_medai_curated_dialogues.xlsx", DiscussionSzenario.MEDAI, raw_subdir="medai", version="8")
+    m1_dialogues_jurai = load_and_merge_dialogues(path_m1_curated, path_m1_raw,
+        "mensateria_survey_jurai_curated_dialogues.xlsx", DiscussionSzenario.JURAI, raw_subdir="jurai", version="8")
+    m1_dialogues_autoai = load_and_merge_dialogues(path_m1_curated, path_m1_raw,
+        "mensateria_survey_autoai_curated_dialogues.xlsx", DiscussionSzenario.AUTOAI, raw_subdir="autoai", version="8")
+
+    m2_dialogues_medai = load_and_merge_dialogues(path_m2_curated, path_m2_raw,
+        "mensateria_survey_2_medai_curated_dialogues.xlsx", DiscussionSzenario.MEDAI, raw_subdir="medai")
+    m2_dialogues_jurai = load_and_merge_dialogues(path_m2_curated, path_m2_raw,
+        "mensateria_survey_2_jurai_curated_dialogues.xlsx", DiscussionSzenario.JURAI, raw_subdir="jurai")
+    m2_dialogues_autoai = load_and_merge_dialogues(path_m2_curated, path_m2_raw,
+        "mensateria_survey_2_autoai_curated_dialogues.xlsx", DiscussionSzenario.AUTOAI, raw_subdir="autoai")
+    m2_dialogues_refai = load_and_merge_dialogues(path_m2_curated, path_m2_raw,
+        "mensateria_survey_2_refai_curated_dialogues.xlsx", DiscussionSzenario.REFAI, raw_subdir="refai")
+
+    m3_dialogues_medai = DialogueLoader.from_directory(
+        dialogues_directory_path=os.path.join(project_dir, "data", "external", "ethikchat_data-main",
+                                              "mensateria_survey_3", "processed", "medai"),
+        version="webathen"
+    )
+    for d in m3_dialogues_medai:
+        d.discussion_szenario = DiscussionSzenario.MEDAI
+
+    dialogues_medai = m1_dialogues_medai + m2_dialogues_medai + m3_dialogues_medai
+    dialogues_jurai = m1_dialogues_jurai + m2_dialogues_jurai
+    dialogues_autoai = m1_dialogues_autoai + m2_dialogues_autoai
+    dialogues_refai = m2_dialogues_refai
+
+    return dialogues_autoai, dialogues_jurai, dialogues_medai, dialogues_refai
+
+
+
 if __name__ == "__main__":
 
     # load dataset
     dataset_folder = "../../data/processed/"
-    dataset_path = os.path.join(dataset_folder, "corpus_dataset_v1")
+    dataset_path = os.path.join(dataset_folder, "corpus_dataset_with_context")
 
     if not os.path.exists(dataset_path):
         # Beispiel zum Erstellen eines Datensatzes. Mögliche Optionen von DatasetConfig sind im DocString beschrieben.
@@ -689,9 +766,6 @@ if __name__ == "__main__":
             DatasetConfig(
                 dataset_path=dataset_path,
                 project_dir="../../",
-                num_previous_turns=3,
-                include_role=True,
-                sep_token="[SEP]",
                 utterance_type=UtteranceType.User,
                 eval_size=0.5,
                 validation_test_ratio=0.5
@@ -700,4 +774,5 @@ if __name__ == "__main__":
 
     # Beispiel zum Laden des Datensatzes + collate_function des DataLoaders um dynamisch ein Subset der negative passages zu laden.
     hf_dataset = load_from_disk(os.path.join(dataset_folder, "corpus_dataset_v1"))
+    hf_dataset_with_context = load_from_disk(os.path.join(dataset_folder, "corpus_dataset_with_context"))
     print()

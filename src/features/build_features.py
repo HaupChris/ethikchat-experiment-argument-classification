@@ -75,6 +75,7 @@ def add_scenario_tokens_to_texts(split_dataset: DatasetDict) -> DatasetDict:
     This is useful to have the scenario information as part of the text, which can be used by the model to learn
     scenario-specific patterns.
     """
+
     queries = split_dataset["queries"].map(
         lambda x: {**x, "text": f"[{x['discussion_scenario']}] {x['text']}"}
     )
@@ -82,26 +83,72 @@ def add_scenario_tokens_to_texts(split_dataset: DatasetDict) -> DatasetDict:
         lambda x: {**x, "text": f"[{x['discussion_scenario']}] {x['text']}"}
     )
 
-    return {
+    return DatasetDict({
         **split_dataset,
         "queries": queries,
         "passages": passages,
-    }
+    })
+
+
+def add_context_to_texts(split_dataset: DatasetDict, context_length: int, sep_token="[SEP]") -> DatasetDict:
+    """
+    Args:
+        split_dataset (DatasetDict):
+        context_length (int): -1 for the whole conversation history up to the utterance, 0 for no context or other positive integers. If the specified context in longer than the available context, all context is used.
+        sep_token (str): the sep_token of the model tokenizer
+    Returns:
+        A DatsetDict with the modified queries and the all other parts unchanged.
+
+    """
+
+    def concatenate_context(example):
+        # Extract the conversation history
+        context = example['context']  # Assuming 'context' is a list of tuples [('Speaker', 'Utterance'), ...]
+
+        # Determine the portion of context to include
+        if context_length == -1:
+            selected_context = context
+        elif context_length == 0:
+            selected_context = []
+        elif context_length > 0:
+            selected_context = context[-context_length:]
+        else:
+            raise ValueError(f"Context lenght of {context_length} is not allowed.")
+
+        # Format the context
+        formatted_context = f" {sep_token} ".join(
+            [f"[{speaker.upper()}] {utterance}" for speaker, utterance in selected_context])
+
+        # Prepend the formatted context to the main text
+        example['text'] = f"{formatted_context} {sep_token} [USER] {example['text']}" if formatted_context else example['text']
+
+        return example
+
+    split_dataset["queries"] = split_dataset["queries"].map(concatenate_context)
+
+    return split_dataset
 
 
 if __name__ == "__main__":
-
     dataset_folder = "../../data/processed"
-    corpus_ds = load_from_disk(f"{dataset_folder}/corpus_dataset_v1")
+    corpus_ds = load_from_disk(f"{dataset_folder}/corpus_dataset_with_context")
     in_distribution_split = create_splits_from_corpus_dataset(corpus_dataset=corpus_ds,
                                                               dataset_split_type=DatasetSplitType.InDistribution,
                                                               save_folder=dataset_folder,
-                                                              dataset_save_name="dataset_split_in_distribution_labels_per_scenario",)
+                                                              dataset_save_name="dataset_split_in_distribution_labels_per_scenario", )
     ids_train = in_distribution_split["train"]
     ids_train_empty = DatasetDict({
         "queries": in_distribution_split["train"]["queries"],
         "passages": in_distribution_split["train"]["passages"],
     })
-    in_distribution_split_with_scenario_tokens = add_scenario_tokens_to_texts(ids_train_empty)
-    pos_ds_train = create_dataset_for_multiple_negatives_ranking_loss(in_distribution_split_with_scenario_tokens["train"])
+    in_distribution_split_with_context = add_context_to_texts(ids_train_empty, -1, "[SEP]")
+    in_distribution_split_with_scenario_tokens = add_scenario_tokens_to_texts(in_distribution_split_with_context)
+
+    pos_ds_train = create_dataset_for_multiple_negatives_ranking_loss(
+        in_distribution_split_with_scenario_tokens["train"])
+
+    # pos_ds_train = create_dataset_for_multiple_negatives_ranking_loss(
+    #     in_distribution_split_with_scenario_tokens["train"])
+    pos_ds_train = create_dataset_for_multiple_negatives_ranking_loss(
+        in_distribution_split_with_context["train"])
     print(pos_ds_train)
