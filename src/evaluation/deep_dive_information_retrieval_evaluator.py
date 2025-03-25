@@ -700,15 +700,17 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         # Initialize accuracy tracking dicts
         results_exact = {}
         results_partial = {}
+        results_true_partial = {}
 
         for score_func, per_query_hits in queries_result_list.items():
             results_exact[score_func] = {}
             results_partial[score_func] = {}
+            results_true_partial[score_func] = {}
 
             # Compute accuracy at different confidence thresholds
             for confidence in confidences:
                 total_queries = len(per_query_hits)
-                exact_match, partial_match = 0, 0
+                exact_match, partial_match, true_partial_match = 0, 0, 0
 
                 # Evaluate each query
                 for q_idx, hits in enumerate(per_query_hits):
@@ -730,6 +732,10 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                             if threshold_passage_strings.issubset(relevant_passage_strings):
                                 partial_match += 1
 
+                                # Increase true partial match if retrieved passages are a subset but not equal to relevant passages (labels + discussion scenario)
+                                if not threshold_passage_strings == relevant_passage_strings:
+                                    true_partial_match += 1
+
                             # Increase exact match if retrieved passages match exactly relevant passages (labels + discussion scenario)
                             if threshold_passage_strings == relevant_passage_strings:
                                 exact_match += 1
@@ -737,12 +743,15 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 # Calculate accuracy scores
                 exact_acc = exact_match / total_queries if total_queries > 0 else 0.0
                 partial_acc = partial_match / total_queries if total_queries > 0 else 0.0
+                true_partial_acc = true_partial_match / total_queries if total_queries > 0 else 0.0
 
                 results_exact[score_func][confidence] = exact_acc
                 results_partial[score_func][confidence] = partial_acc
+                results_true_partial[score_func][confidence] = true_partial_acc
 
         self._log_results_as_line_plot(results_exact, "multi_argument_classification_exact_match", "Exact Match Accuracy By Confidence Threshold")
         self._log_results_as_line_plot(results_partial, "multi_argument_classification_partial_match", "Partial Match Accuracy By Confidence Threshold")
+        self._log_results_as_line_plot(results_partial, "multi_argument_classification_true_partial_match", "True Partial Match Accuracy By Confidence Threshold")
 
     def _log_results_as_line_plot(self, results: Dict[str, Dict], metric_name: str, title: str) -> None:
         for score_func_name, confidence_threshold in results.items():
