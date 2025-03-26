@@ -234,8 +234,9 @@ def get_welcome_message(user_name: str, user_stance: str, discussion_scenario: D
 
 
 def load_response_template_collection(topic: str,
-                                      project_root: str = "/home/christian/PycharmProjects/ethikchat-experiment-argument-classification") -> ResponseTemplateCollection:
-    argument_graph_directory = os.path.join(project_root, "data", "external", "argument_graphs", f"szenario_{topic}")
+                                      project_root: str = "/home/christian/PycharmProjects/ethikchat-experiment-argument-classification",
+                                      argument_graphs_dir: str = "data/external/argument_graphs/") -> ResponseTemplateCollection:
+    argument_graph_directory = os.path.join(project_root, argument_graphs_dir, f"szenario_{topic}")
 
     return ResponseTemplateCollection.from_csv_files(
         templates_directory_path=argument_graph_directory,
