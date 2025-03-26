@@ -23,10 +23,10 @@ from src.models.experiment_config import ExperimentConfig
 
 
 def load_argument_graphs(project_root) -> Dict[str, ResponseTemplateCollection]:
-    argument_graph_med = load_response_template_collection("s1", project_root, "data/external/argument_graphs_test")
-    argument_graph_jur = load_response_template_collection("s2", project_root, "data/external/argument_graphs_test")
-    argument_graph_auto = load_response_template_collection("s3", project_root, "data/external/argument_graphs_test")
-    argument_graph_ref = load_response_template_collection("s4", project_root, "data/external/argument_graphs_test")
+    argument_graph_med = load_response_template_collection("s1", project_root, "data/external/argument_graphs")
+    argument_graph_jur = load_response_template_collection("s2", project_root, "data/external/argument_graphs")
+    argument_graph_auto = load_response_template_collection("s3", project_root, "data/external/argument_graphs")
+    argument_graph_ref = load_response_template_collection("s4", project_root, "data/external/argument_graphs")
 
     return {
         DiscussionSzenario.MEDAI.value: argument_graph_med,
