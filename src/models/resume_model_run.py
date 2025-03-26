@@ -16,7 +16,7 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], datase
     Args:
         project_root: Path to root of this project
         models_dir: Path from project root to directory where models are saved
-        runs: List of tuples containing (wandb_run_id, model_name)
+        runs: List of tuples containing (wandb_run_id, wandb_run_name)
         dataset_path: Path to evaluation dataset
     """
     # Load argument graphs and environment variables
@@ -24,25 +24,31 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], datase
     env_path = os.path.join(project_root, ".env")
     load_dotenv(env_path)
 
-    for run_id, model_name in runs:
+    for run_id, run_name in runs:
         # Resume previous W&B run
         run = wandb.init(project="argument-classification", id=run_id, resume="must")
 
         print(f"W&B continuing run: {run.name}")
         print(f"Project Root: {project_root}")
-        print(f"Using model: {model_name}")
+        print(f"Using model: {run_name}")
         print(f"Dataset: {dataset_path}")
         print(f"run_name: {run.name}")
 
         wandb.login()
 
         # Construct path to model and ensure it exists
-        model_path = os.path.join(models_dir, model_name)
+        run_path = os.path.join(models_dir, run_name)
 
-        if not os.path.exists(model_path):
-            raise FileNotFoundError(f"Directory not found: {model_path}")
+        if not os.path.exists(run_path):
+            raise FileNotFoundError(f"Directory not found: {run_path}")
 
-        model = SentenceTransformer(model_path)
+        # get latest checkpoint of that run
+        # checkpoint folders are named "checpoint-<save_step>". Get the latest checkpoint
+        max_checkpoint_step=max([int(folder.split("-")[1]) for folder in os.listdir(run_path) if "checkpoint" in folder])
+        checkpoint_path = os.path.join(run_path, f"checkpoint-{max_checkpoint_step}")
+
+
+        model = SentenceTransformer(checkpoint_path)
 
         # Ensure that the passed dataset path exists
         if not os.path.exists(dataset_path):
@@ -93,13 +99,13 @@ if __name__ == "__main__":
     parser.add_argument('--project_root', type=str, help="Path to the project root.")
     parser.add_argument('--models_dir', type=str, help="Directory containing all saved models (assuming they are all in one place).")
     parser.add_argument('--run_ids', type=str, nargs="+", help='List of W&B run ids.')
-    parser.add_argument('--models', type=str, nargs="+", help='List of directory names of models on the slurm server')
+    parser.add_argument('--run_names', type=str, nargs="+", help='List of directory names of models on the slurm server')
     parser.add_argument('--dataset_path', type=str, help='Directory of the dataset used for evaluation.')
     args = parser.parse_args()
 
     main(
         project_root=args.project_root,
         models_dir=args.models_dir,
-        runs=list(zip(args.run_ids, args.models)),
+        runs=list(zip(args.run_ids, args.run_names)),
         dataset_path=args.dataset_path
     )
