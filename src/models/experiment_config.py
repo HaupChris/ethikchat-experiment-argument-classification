@@ -1,5 +1,6 @@
 from typing import Union
 
+from ethikchat_argtoolkit.Dialogue.discussion_szenario import DiscussionSzenario
 from pydantic import BaseModel
 
 from src.data.create_corpus_dataset import DatasetSplitType
@@ -29,6 +30,7 @@ class ExperimentConfig(BaseModel):
         warmup_ratio: float (ratio of the total number of training steps to warmup steps)
         context_length: int (-1 for all available context, 0 for no context, > 0 for the specified number of utterances before the given user utterance)
         add_discussion_scenario_info: bool (if true, at the beginning of a query and passage text the discussion_scenario is added, e.g. [MEDAI])
+        test_scenario: DiscussionSzenario (the discussion scenario that is to be left out from the train and kept for the test set)
     """
     project_root: str
     experiment_dir: str
@@ -48,4 +50,5 @@ class ExperimentConfig(BaseModel):
     warmup_ratio: float
     context_length: int
     add_discussion_scenario_info: bool
+    test_scenario: DiscussionSzenario
 
