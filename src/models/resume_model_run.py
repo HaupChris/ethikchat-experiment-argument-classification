@@ -78,7 +78,9 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], datase
             show_progress_bar=True,
             write_csv=True,
             run=run,
-            argument_graphs=arguments_graphs
+            argument_graphs=arguments_graphs,
+            confidence_threshold=0.8,
+            confidence_threshold_steps=0.01
         )
 
         evaluator(model)

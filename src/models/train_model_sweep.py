@@ -258,7 +258,9 @@ def prepare_datasets(
         show_progress_bar=True,
         write_csv=True,
         run=wandb.run,
-        argument_graphs=argument_graphs
+        argument_graphs=argument_graphs,
+        confidence_threshold=0.8,
+        confidence_threshold_steps=0.01
     )
 
     return (
