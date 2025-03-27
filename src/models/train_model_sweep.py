@@ -287,6 +287,8 @@ def main(is_test_run=False):
     env_path = os.path.join(project_root, ".env")
     load_dotenv(env_path)
 
+
+
     # 3) Print debug info
     print(f"Project Root: {project_root}")
     print(f"Using model: {config.model_name}")
@@ -301,6 +303,14 @@ def main(is_test_run=False):
     wandb.login()
 
     # 5) Prepare training configuration
+    scenario_string_to_discussion_scenario={
+        "MEDAI": DiscussionSzenario.MEDAI,
+        "JURAI": DiscussionSzenario.JURAI,
+        "AUTOAI": DiscussionSzenario.AUTOAI,
+        "REFAI": DiscussionSzenario.REFAI,
+    }
+    test_scenario = scenario_string_to_discussion_scenario[config.dataset_split_name.split("_")[-1]]
+
     exp_config_dict = {
         "project_root": project_root,
         "experiment_dir": config.experiment_dir,
@@ -320,7 +330,7 @@ def main(is_test_run=False):
         "warmup_ratio": config.warmup_ratio,
         "context_length": config.context_length,
         "add_discussion_scenario_info": config.add_discussion_scenario_info,
-        "test_scenario": config.test_scenario
+        "test_scenario": test_scenario
     }
     exp_config = ExperimentConfig(**exp_config_dict)
 
@@ -417,10 +427,10 @@ if __name__ == "__main__":
             "project_root": "/home/christian/PycharmProjects/ethikchat-experiment-argument-classification",
             "experiment_dir": "experiments_outputs",
             "experiment_run": "v1_local_debug",
-            "dataset_dir": "data/processed",
-            "dataset_name": "corpus_dataset_with_context",
+            "dataset_dir": "data/processed/with_context",
+            "dataset_name": "corpus_dataset_v1",
             "dataset_split_type": "out_of_distribution_hard",
-            "dataset_split_name": "dataset_split_by_scenario_JURAI_with_context",
+            "dataset_split_name": "dataset_split_by_scenario_JURAI",
             "model_name": "deutsche-telekom/gbert-large-paraphrase-euclidean",
             "learning_rate": 1e-5,
             "batch_size": 2,

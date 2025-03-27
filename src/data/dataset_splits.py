@@ -137,7 +137,8 @@ def create_splits_from_corpus_dataset(
     test_scenario : Optional[DiscussionSzenario], optional
         Required if dataset_split_type == ByDiscussionSzenario;
         the scenario that should go into the test split.
-    save_path : Optional[str], if provided, saves the splits to this path.
+    save_folder:
+    dataset_save_name:
     k : int, optional
         Number of folds for kFold splitting (default=5).
     seed : int, optional
@@ -490,7 +491,7 @@ def create_out_of_distribution_simple_splits(
 
 if __name__ == "__main__":
 
-    dataset_folder = "../../data/processed/"
+    dataset_folder = "../../data/processed/with_context"
     dataset_path = os.path.join(dataset_folder, "corpus_dataset_v1")
 
     if not os.path.exists(dataset_path):
@@ -499,9 +500,6 @@ if __name__ == "__main__":
             DatasetConfig(
                 dataset_path=dataset_path,
                 project_dir="../../",
-                num_previous_turns=3,
-                include_role=True,
-                sep_token="[SEP]",
                 utterance_type=UtteranceType.User,
                 eval_size=0.5,
                 validation_test_ratio=0.5
@@ -510,12 +508,12 @@ if __name__ == "__main__":
 
     # Beispiel zum Laden des Datensatzes + collate_function des DataLoaders um dynamisch ein Subset der negative passages zu laden.
     loaded_dataset = load_from_disk(dataset_path)
-    dataset_name = "dataset_split_in_distribution"
-    save_path = os.path.join(dataset_folder, dataset_name)
-    in_distribution_split = create_splits_from_corpus_dataset(corpus_dataset=loaded_dataset,
-                                                              dataset_split_type=DatasetSplitType.InDistribution,
-                                                              save_folder=dataset_folder,
-                                                              dataset_save_name=dataset_name)
+    # dataset_name = "dataset_split_in_distribution"
+    # save_path = os.path.join(dataset_folder, dataset_name)
+    # in_distribution_split = create_splits_from_corpus_dataset(corpus_dataset=loaded_dataset,
+    #                                                           dataset_split_type=DatasetSplitType.InDistribution,
+    #                                                           save_folder=dataset_folder,
+    #                                                           dataset_save_name=dataset_name)
 
     # in_distribution_split_2 = create_splits_from_corpus_dataset(corpus_dataset=loaded_dataset,
     #                                                             dataset_split_type=DatasetSplitType.InDistribution,
