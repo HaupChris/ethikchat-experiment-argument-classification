@@ -294,6 +294,8 @@ def main(is_test_run=False):
     print(f"Batch Size: {config.batch_size}")
     print(f"Num Epochs: {config.num_epochs}")
     print(f"run_name: {sweep_run_name}")
+    print(f"context length: {config.context_length}")
+    print(f"add discussion_scenario info: {config.add_discussion_scenario_info}")
 
     # 4) Login to W&B (key is usually read from env or netrc)
     wandb.login()
