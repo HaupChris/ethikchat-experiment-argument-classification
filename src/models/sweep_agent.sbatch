@@ -17,7 +17,7 @@ export PYTHONPATH="${project_root_dir}:${PYTHONPATH}"
 
 # Load your environment
 source /home/ls6/hauptmann/ethikchat-experiment-argument-classification/venv/bin/activate
-CUDA_LAUNCH_BLOCKING=1
+export CUDA_LAUNCH_BLOCKING=1
 
 # Make sure you already created the sweep and have the SWEEP_ID. Example:
 # wandb sweep sweep_config.yaml

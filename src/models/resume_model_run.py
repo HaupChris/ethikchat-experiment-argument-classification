@@ -80,7 +80,7 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], datase
             run=run,
             argument_graphs=arguments_graphs,
             confidence_threshold=0.8,
-            confidence_threshold_steps=0.01
+            confidence_threshold_steps=0.01,
         )
 
         evaluator(model)
