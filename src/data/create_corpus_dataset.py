@@ -701,7 +701,8 @@ def create_dataset(config: DatasetConfig) -> None:
                                        "text": [passage.text for passage in passages],
                                        "label": [passage.label for passage in passages],
                                        "discussion_scenario": [passage.discussion_scenario for passage in passages],
-                                       "passage_source": [passage.passage_source for passage in passages]
+                                       "passage_source": [passage.passage_source for passage in passages],
+                                       "retrieved_query_id": [passage.retrieved_query_id for passage in passages]
                                        }),
         "queries_relevant_passages_mapping": Dataset.from_dict({
             "query_id": [idx for idx, _ in queries_relevant_passages_mapping.items()],
@@ -794,8 +795,8 @@ def load_dialogues(project_dir) -> Tuple[List[Dialogue], List[Dialogue], List[Di
 if __name__ == "__main__":
 
     # load dataset
-    dataset_folder = "../../data/processed/"
-    dataset_path = os.path.join(dataset_folder, "corpus_dataset_with_context_v1")
+    dataset_folder = "../../data/processed/with_context"
+    dataset_path = os.path.join(dataset_folder, "corpus_dataset_v2")
 
     if not os.path.exists(dataset_path):
         # Beispiel zum Erstellen eines Datensatzes. Mögliche Optionen von DatasetConfig sind im DocString beschrieben.
@@ -810,6 +811,6 @@ if __name__ == "__main__":
         )
 
     # Beispiel zum Laden des Datensatzes + collate_function des DataLoaders um dynamisch ein Subset der negative passages zu laden.
-    hf_dataset = load_from_disk(os.path.join(dataset_folder, "corpus_dataset_v1"))
+    hf_dataset = load_from_disk(os.path.join(dataset_folder, "corpus_dataset_v2"))
     hf_dataset_with_context = load_from_disk(os.path.join(dataset_folder, "corpus_dataset_with_context_v1"))
     print()
