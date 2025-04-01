@@ -69,6 +69,10 @@ class ProcessedUtterance:
     scenario_description: str
     scenario_question: str
 
+@dataclass
+class NoisyProcessedUtterance(ProcessedUtterance):
+    reason: str = ""
+
 
 class PassageSource(Enum):
     UserUtterance = "user_utterance"
@@ -435,7 +439,7 @@ def build_context(dialogue_turns: List[Tuple[str, str]], num_previous_turns: int
 
 def preprocess_dataset(dialogues: List[Dialogue],
                        utterance_type: UtteranceType,
-                       noisy_labels: List[str]) -> Tuple[List[ProcessedUtterance], List[Tuple[Utterance, str]]]:
+                       noisy_labels: List[str]) -> Tuple[List[ProcessedUtterance], List[NoisyProcessedUtterance]]:
     """
     Preprocesses a dataset by applying text normalization and updating bounds.
     Returns a list of ProcessedUtterance objects.
@@ -465,25 +469,38 @@ def preprocess_dataset(dialogues: List[Dialogue],
             if utterance_type == UtteranceType.Bot and utterance.is_from_user():
                 continue
 
-            ucnd, reason = utterance_contains_noisy_data(utterance, noisy_labels)
-            if ucnd:
-                excluded_noisy_utterances.append((utterance, reason))
-                continue
-
             processed_utterance_text, processed_labels, processed_bounds = preprocess_utterance(utterance,
                                                                                                 gender_language_tools)
 
+            ucnd, reason = utterance_contains_noisy_data(utterance, noisy_labels)
+            if ucnd:
+                excluded_noisy_utterances.append(NoisyProcessedUtterance(
+                    id=id_counter,
+                    text=processed_utterance_text,
+                    labels=processed_labels,
+                    bounds=processed_bounds,
+                    context=dialogue_turns,
+                    discussion_scenario=dialogue.discussion_szenario,
+                    scenario_description=preprocess_text(get_scenario_description(dialogue.discussion_szenario),
+                                                         gender_language_tools),
+                    scenario_question=preprocess_text(get_scenario_question(dialogue.discussion_szenario),
+                                                      gender_language_tools),
+                    reason=reason
+                ))
+            else:
+                processed_utterances.append(ProcessedUtterance(
+                    id=id_counter,
+                    text=processed_utterance_text,
+                    labels=processed_labels,
+                    bounds=processed_bounds,
+                    context=dialogue_turns,
+                    discussion_scenario=dialogue.discussion_szenario,
+                    scenario_description=preprocess_text(get_scenario_description(dialogue.discussion_szenario),
+                                                         gender_language_tools),
+                    scenario_question=preprocess_text(get_scenario_question(dialogue.discussion_szenario),
+                                                      gender_language_tools)
+                ))
 
-            processed_utterances.append(ProcessedUtterance(
-                id=id_counter,
-                text=processed_utterance_text,
-                labels=processed_labels,
-                bounds=processed_bounds,
-                context=dialogue_turns,
-                discussion_scenario=dialogue.discussion_szenario,
-                scenario_description=preprocess_text(get_scenario_description(dialogue.discussion_szenario), gender_language_tools),
-                scenario_question=preprocess_text(get_scenario_question(dialogue.discussion_szenario), gender_language_tools)
-            ))
             id_counter += 1
 
     return processed_utterances, excluded_noisy_utterances
@@ -604,16 +621,17 @@ def create_dataset_splits(dialogues: List[Dialogue],
                           utterance_type: UtteranceType,
                           argument_graphs: Dict[DiscussionSzenario, ResponseTemplateCollection],
                           noisy_labels: List[str]) \
-        -> Tuple[List[Query], List[Passage], Dict[int, List[int]], Dict[int, List[int]], List[Tuple[Utterance, str]]]:
+        -> Tuple[List[Query], List[Passage], Dict[int, List[int]], Dict[int, List[int]], List[Tuple[Query, str]]]:
     """
     Creates the dataset splits for the information retrieval task. This consists of the following splits:
     - queries: A split containing the queries.
     - passages: A split containing the passages.
     - queries_relevant_passages_mapping: A mapping from query ids to relevant passage ids.
     - queries_trivial_passages_mapping: A mapping from query ids to trivial passage ids. (Passages that are part of the query itself)
+    - noisy_queries: Queries containing no text that can be mapped to any part of the argument graph
     """
 
-    processed_utterances, excluded_utterances = preprocess_dataset(
+    processed_utterances, noisy_processed_utterances = preprocess_dataset(
         dialogues,
         utterance_type,
         noisy_labels
@@ -626,10 +644,12 @@ def create_dataset_splits(dialogues: List[Dialogue],
         argument_graphs_passages.extend(
             create_passages_from_argument_graph(argument_graph, discussion_scenario, noisy_labels))
 
-    # im queries split hat jede query_id die riehenfolge der processed_utterances.
+    # im queries split hat jede query_id die reihenfolge der processed_utterances.
     queries = create_queries(processed_utterances, noisy_labels)
+    noisy_queries = create_queries(noisy_processed_utterances, [])
+    noisy_queries = list(zip(noisy_queries, [noisy_processed_utterance.reason for noisy_processed_utterance in noisy_processed_utterances]))
 
-    # im passages_split entsprechen die retrieved_query_ids auch
+    # merge passages and assign ids
     passages = [Passage(idx, passage.text, passage.label, passage.discussion_scenario, passage.passage_source,
                         passage.retrieved_query_id) for idx, passage in
                 enumerate(utterances_passages + argument_graphs_passages)]
@@ -640,7 +660,7 @@ def create_dataset_splits(dialogues: List[Dialogue],
     check_for_missing_passages(queries_relevant_passages_mapping)
     check_for_missing_passages(queries_trivial_passages_mapping)
 
-    return queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping, excluded_utterances
+    return queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping, noisy_queries
 
 
 def create_dataset(config: DatasetConfig) -> None:
@@ -664,7 +684,7 @@ def create_dataset(config: DatasetConfig) -> None:
         DiscussionSzenario.REFAI: argument_graph_ref
     }
 
-    queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping, excluded_utterances = create_dataset_splits(
+    queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping, excluded_queries = create_dataset_splits(
         all_dialogues, utterance_type, argument_graphs, config.noisy_labels)
 
     # create hf dataset
@@ -691,10 +711,18 @@ def create_dataset(config: DatasetConfig) -> None:
             "query_id": [idx for idx, _ in queries_trivial_passages_mapping.items()],
             "passages_ids": [ids for _, ids in queries_trivial_passages_mapping.items()]
         }),
-        "excluded_utterances": Dataset.from_dict({"text": [utterance.text for utterance, _ in excluded_utterances],
-                                                  "labels": [utterance.true_labels for utterance, _ in
-                                                             excluded_utterances],
-                                                  "reason": [reason for _, reason in excluded_utterances]})
+        "excluded_utterances": Dataset.from_dict({"id": [query.id for (query, reason) in excluded_queries],
+                                                  "text": [query.text for (query, reason) in excluded_queries],
+                                                  "labels": [query.labels for (query, reason) in excluded_queries],
+                                                  "discussion_scenario": [query.discussion_scenario for (query, reason)
+                                                                          in excluded_queries],
+                                                  "context": [query.context for (query, reason) in excluded_queries],
+                                                  "scenario_description": [query.scenario_description for
+                                                                           (query, reason) in excluded_queries],
+                                                  "scenario_question": [query.scenario_question for (query, reason) in
+                                                                        excluded_queries],
+                                                  "reason": [reason for (query, reason) in excluded_queries]
+                                                  })
     })
 
     corpus_dataset.save_to_disk(save_path)
@@ -716,27 +744,36 @@ def load_dialogues(project_dir) -> Tuple[List[Dialogue], List[Dialogue], List[Di
             dialogues = copy_start_survey_result_from_unprocessed_to_processed_dialogues(unprocessed, dialogues)
         return dialogues
 
-    path_m1_curated = os.path.join(project_dir, "data", "external", "ethikchat_data-main", "mensateria_survey", "processed", "curated")
+    path_m1_curated = os.path.join(project_dir, "data", "external", "ethikchat_data-main", "mensateria_survey",
+                                   "processed", "curated")
     path_m1_raw = os.path.join(project_dir, "data", "external", "ethikchat_data-main", "mensateria_survey", "raw")
 
-    path_m2_curated = os.path.join(project_dir, "data", "external", "ethikchat_data-main", "mensateria_survey_2", "processed", "curated")
+    path_m2_curated = os.path.join(project_dir, "data", "external", "ethikchat_data-main", "mensateria_survey_2",
+                                   "processed", "curated")
     path_m2_raw = os.path.join(project_dir, "data", "external", "ethikchat_data-main", "mensateria_survey_2", "raw")
 
     m1_dialogues_medai = load_and_merge_dialogues(path_m1_curated, path_m1_raw,
-        "mensateria_survey_medai_curated_dialogues.xlsx", DiscussionSzenario.MEDAI, raw_subdir="medai", version="8")
+                                                  "mensateria_survey_medai_curated_dialogues.xlsx",
+                                                  DiscussionSzenario.MEDAI, raw_subdir="medai", version="8")
     m1_dialogues_jurai = load_and_merge_dialogues(path_m1_curated, path_m1_raw,
-        "mensateria_survey_jurai_curated_dialogues.xlsx", DiscussionSzenario.JURAI, raw_subdir="jurai", version="8")
+                                                  "mensateria_survey_jurai_curated_dialogues.xlsx",
+                                                  DiscussionSzenario.JURAI, raw_subdir="jurai", version="8")
     m1_dialogues_autoai = load_and_merge_dialogues(path_m1_curated, path_m1_raw,
-        "mensateria_survey_autoai_curated_dialogues.xlsx", DiscussionSzenario.AUTOAI, raw_subdir="autoai", version="8")
+                                                   "mensateria_survey_autoai_curated_dialogues.xlsx",
+                                                   DiscussionSzenario.AUTOAI, raw_subdir="autoai", version="8")
 
     m2_dialogues_medai = load_and_merge_dialogues(path_m2_curated, path_m2_raw,
-        "mensateria_survey_2_medai_curated_dialogues.xlsx", DiscussionSzenario.MEDAI, raw_subdir="medai")
+                                                  "mensateria_survey_2_medai_curated_dialogues.xlsx",
+                                                  DiscussionSzenario.MEDAI, raw_subdir="medai")
     m2_dialogues_jurai = load_and_merge_dialogues(path_m2_curated, path_m2_raw,
-        "mensateria_survey_2_jurai_curated_dialogues.xlsx", DiscussionSzenario.JURAI, raw_subdir="jurai")
+                                                  "mensateria_survey_2_jurai_curated_dialogues.xlsx",
+                                                  DiscussionSzenario.JURAI, raw_subdir="jurai")
     m2_dialogues_autoai = load_and_merge_dialogues(path_m2_curated, path_m2_raw,
-        "mensateria_survey_2_autoai_curated_dialogues.xlsx", DiscussionSzenario.AUTOAI, raw_subdir="autoai")
+                                                   "mensateria_survey_2_autoai_curated_dialogues.xlsx",
+                                                   DiscussionSzenario.AUTOAI, raw_subdir="autoai")
     m2_dialogues_refai = load_and_merge_dialogues(path_m2_curated, path_m2_raw,
-        "mensateria_survey_2_refai_curated_dialogues.xlsx", DiscussionSzenario.REFAI, raw_subdir="refai")
+                                                  "mensateria_survey_2_refai_curated_dialogues.xlsx",
+                                                  DiscussionSzenario.REFAI, raw_subdir="refai")
 
     m3_dialogues_medai = DialogueLoader.from_directory(
         dialogues_directory_path=os.path.join(project_dir, "data", "external", "ethikchat_data-main",
@@ -754,12 +791,11 @@ def load_dialogues(project_dir) -> Tuple[List[Dialogue], List[Dialogue], List[Di
     return dialogues_autoai, dialogues_jurai, dialogues_medai, dialogues_refai
 
 
-
 if __name__ == "__main__":
 
     # load dataset
     dataset_folder = "../../data/processed/"
-    dataset_path = os.path.join(dataset_folder, "corpus_dataset_with_context")
+    dataset_path = os.path.join(dataset_folder, "corpus_dataset_with_context_v1")
 
     if not os.path.exists(dataset_path):
         # Beispiel zum Erstellen eines Datensatzes. Mögliche Optionen von DatasetConfig sind im DocString beschrieben.
@@ -775,5 +811,5 @@ if __name__ == "__main__":
 
     # Beispiel zum Laden des Datensatzes + collate_function des DataLoaders um dynamisch ein Subset der negative passages zu laden.
     hf_dataset = load_from_disk(os.path.join(dataset_folder, "corpus_dataset_v1"))
-    hf_dataset_with_context = load_from_disk(os.path.join(dataset_folder, "corpus_dataset_with_context"))
+    hf_dataset_with_context = load_from_disk(os.path.join(dataset_folder, "corpus_dataset_with_context_v1"))
     print()
