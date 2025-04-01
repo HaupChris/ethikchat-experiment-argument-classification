@@ -11,7 +11,7 @@ from sentence_transformers import SentenceTransformer
 from sentence_transformers.losses import CachedMultipleNegativesRankingLoss
 from sentence_transformers import SentenceTransformerTrainingArguments, SentenceTransformerTrainer
 from sentence_transformers.training_args import BatchSamplers
-from transformers import PreTrainedTokenizer
+from transformers import PreTrainedTokenizer, EarlyStoppingCallback
 
 from src.data.dataset_splits import create_splits_from_corpus_dataset
 from src.data.create_corpus_dataset import DatasetSplitType, Passage, Query, load_response_template_collection
@@ -309,7 +309,7 @@ def main(is_test_run=False):
         "AUTOAI": DiscussionSzenario.AUTOAI,
         "REFAI": DiscussionSzenario.REFAI,
     }
-    test_scenario = scenario_string_to_discussion_scenario[config.dataset_split_name.split("_")[-1]]
+    test_scenario = config.test_scenario
 
     exp_config_dict = {
         "project_root": project_root,
@@ -366,6 +366,11 @@ def main(is_test_run=False):
 
     # 11) Decide how often to evaluate and save
     eval_save_steps = int(4000 / (exp_config.batch_size / 32))
+    early_stopper = EarlyStoppingCallback(
+        early_stopping_patience=2,  # you can change this value if needed
+        early_stopping_threshold=0.5  # you can change this value if needed
+    )
+
 
     train_args = SentenceTransformerTrainingArguments(
         output_dir=exp_config.model_run_dir,
@@ -383,7 +388,8 @@ def main(is_test_run=False):
         run_name=f"sweep_{exp_config.model_name_escaped}",
         load_best_model_at_end=True,
         lr_scheduler_type="linear",
-        batch_sampler=BatchSamplers.NO_DUPLICATES
+        batch_sampler=BatchSamplers.NO_DUPLICATES,
+        metric_for_best_model="cosine_accuracy@1"
     )
 
 
@@ -428,17 +434,17 @@ if __name__ == "__main__":
             "experiment_dir": "experiments_outputs",
             "experiment_run": "v1_local_debug",
             "dataset_dir": "data/processed/with_context",
-            "dataset_name": "corpus_dataset_v1",
-            "dataset_split_type": "out_of_distribution_hard",
-            "dataset_split_name": "dataset_split_by_scenario_JURAI",
+            "dataset_name": "corpus_dataset_v2",
+            "dataset_split_type": DatasetSplitType.InDistribution.value,
+            "dataset_split_name": "dataset_split_in_distribution",
             "model_name": "deutsche-telekom/gbert-large-paraphrase-euclidean",
             "learning_rate": 1e-5,
             "batch_size": 2,
-            "num_epochs": 2,
-            "warmup_ratio": 0.1,
+            "num_epochs": 10,
+            "warmup_ratio": 0.0,
             "context_length": 3,
             "add_discussion_scenario_info": True,
-            "test_scenario": DiscussionSzenario.JURAI
+            "test_scenario": DiscussionSzenario.JURAI.value
         }
         wandb.init(
             project="argument-classification",  # or "argument-classification-test"
