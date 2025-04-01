@@ -1,8 +1,11 @@
+import dataclasses
 import random
-from typing import Optional
+import warnings
+from collections import defaultdict
+from typing import Optional, List
 from datasets import Dataset, DatasetDict, load_from_disk
 
-from src.data.create_corpus_dataset import DatasetSplitType
+from src.data.create_corpus_dataset import DatasetSplitType, Passage, PassageSource
 from src.data.dataset_splits import create_splits_from_corpus_dataset
 
 
@@ -120,7 +123,8 @@ def add_context_to_texts(split_dataset: DatasetDict, context_length: int, sep_to
             [f"[{speaker.upper()}] {utterance}" for speaker, utterance in selected_context])
 
         # Prepend the formatted context to the main text
-        example['text'] = f"{formatted_context} {sep_token} [USER] {example['text']}" if formatted_context else example['text']
+        example['text'] = f"{formatted_context} {sep_token} [USER] {example['text']}" if formatted_context else example[
+            'text']
 
         return example
 
@@ -129,26 +133,151 @@ def add_context_to_texts(split_dataset: DatasetDict, context_length: int, sep_to
     return split_dataset
 
 
+def filter_queries_for_few_shot_setting(split_dataset: DatasetDict, num_shots: int) -> DatasetDict:
+    pass
+
+
+def default_dict(list):
+    pass
+
+
+def filter_passages_for_few_shot_setting(
+        split_dataset: dict,
+        num_shots: int,
+        prefered_passage_sources: Optional[List[PassageSource]] = [PassageSource.ArgumentgraphFullText,
+                                                                   PassageSource.ArgumentgraphSummary,
+                                                                   PassageSource.UserUtterance,
+                                                                   PassageSource.ArgumentgraphSample]
+) -> dict:
+    """
+    Filters the passages in the dataset so that each label has at most 'num_shots' passages,
+    optionally prioritizing certain passage sources first. If fewer than 'num_shots' passages exist
+    for a label, all passages for that label are kept and a warning is issued.
+
+    Args:
+        split_dataset: Dictionary with keys ["queries", "passages", "queries_relevant_passages_mapping", "queries_trivial_passages_mapping"].
+        num_shots: Number of passages to keep per label.
+        prefered_passage_sources: If provided, list of sources to try first (in the given order).
+
+    Returns:
+        A filtered copy of the dataset with a reduced set of passages (and updated mappings).
+    """
+
+    # Convert the dictionary entries into Passage objects
+    passages = [
+        Passage(
+            id=entry["id"],
+            text=entry["text"],
+            label=entry["label"],
+            discussion_scenario=entry["discussion_scenario"],
+            passage_source=entry["passage_source"],
+            retrieved_query_id=entry["retrieved_query_id"]
+        )
+        for entry in split_dataset["passages"]
+    ]
+
+    # Group passages by label, preserving the original order
+    label_to_passages = defaultdict(list)
+    for passage in passages:
+        label_to_passages[passage.label].append(passage)
+
+    # Helper function to pick up to num_shots passages according to the source preference
+    def pick_passages_for_label(label_passages: List[Passage], label: str):
+        total_available = len(label_passages)
+        random.seed(42)
+        random.shuffle(label_passages)
+
+        # If there's not enough total to reach num_shots, keep everything and warn
+        if total_available < num_shots:
+            warnings.warn(
+                f"Label '{label}' has only {total_available} passages but {num_shots} requested; keeping all."
+            )
+            return label_passages
+
+        # Otherwise, we attempt to pick in order from the prefered_passage_source
+        if prefered_passage_sources:
+            chosen = []
+            # In preferred order
+            for src in prefered_passage_sources:
+                if len(chosen) >= num_shots:
+                    break
+                # Keep them in the order they appear, but filtered by src
+
+                chosen.extend([p for p in label_passages if p.passage_source == src][: (num_shots - len(chosen))])
+            # If we still don't have enough, pick from remaining sources (in order)
+            if len(chosen) < num_shots:
+                remaining_needed = num_shots - len(chosen)
+                # All sources not in prefered_passage_source
+                remaining_passages = [
+                    p for p in label_passages if p.passage_source not in prefered_passage_sources
+                ]
+                chosen.extend(remaining_passages[:remaining_needed])
+            return chosen
+        else:
+            # No preference given; just pick the first num_shots
+            return label_passages[:num_shots]
+
+    # Select passages for each label
+    filtered_passages = []
+    for label, label_passes in label_to_passages.items():
+        chosen_for_label = pick_passages_for_label(label_passes, label)
+        filtered_passages.extend(chosen_for_label)
+
+    # Build a set of IDs we keep, so we can update relevant/trivial mappings
+    kept_passage_ids = set(p.id for p in filtered_passages)
+
+    # Filter the passages portion of the dataset
+    new_passages = [dataclasses.asdict(p) for p in filtered_passages]
+
+    # Helper to filter passage IDs in the mapping
+    def filter_mapping(original_map):
+        # Often the mapping is a dict of query_id -> list of passage_ids
+        # Adjust if your mapping structure differs
+        filtered_map = {}
+        for entry in original_map:
+            q_id = entry["query_id"]
+            p_ids = entry["passages_ids"]
+            retained = [pid for pid in p_ids if pid in kept_passage_ids]
+            if retained:
+                filtered_map[q_id] = retained
+        return filtered_map
+
+    # Update 'relevant_passages_mapping' and 'trivial_passages_mapping'
+    new_relevant_map = filter_mapping(split_dataset["queries_relevant_passages_mapping"])
+    new_trivial_map = filter_mapping(split_dataset["queries_trivial_passages_mapping"])
+
+    # Return the filtered dataset with the same structure
+    filtered_dataset = {
+        **split_dataset,
+        "passages": new_passages,
+        "queries_relevant_passages_mapping": new_relevant_map,
+        "queries_trivial_passages_mapping": new_trivial_map
+    }
+
+    return filtered_dataset
+
+
 if __name__ == "__main__":
-    dataset_folder = "../../data/processed"
-    corpus_ds = load_from_disk(f"{dataset_folder}/corpus_dataset_with_context")
+    dataset_folder = "../../data/processed/with_context"
+    corpus_ds = load_from_disk(f"{dataset_folder}/corpus_dataset_v2")
     in_distribution_split = create_splits_from_corpus_dataset(corpus_dataset=corpus_ds,
                                                               dataset_split_type=DatasetSplitType.InDistribution,
                                                               save_folder=dataset_folder,
-                                                              dataset_save_name="dataset_split_in_distribution_labels_per_scenario", )
+                                                              dataset_save_name="dataset_split_in_distribution")
     ids_train = in_distribution_split["train"]
-    ids_train_empty = DatasetDict({
-        "queries": in_distribution_split["train"]["queries"],
-        "passages": in_distribution_split["train"]["passages"],
-    })
-    in_distribution_split_with_context = add_context_to_texts(ids_train_empty, -1, "[SEP]")
+    # ids_train_empty = DatasetDict({
+    #     "queries": in_distribution_split["train"]["queries"],
+    #     "passages": in_distribution_split["train"]["passages"],
+    # })
+    in_distribution_split_with_context = add_context_to_texts(ids_train, -1, "[SEP]")
     in_distribution_split_with_scenario_tokens = add_scenario_tokens_to_texts(in_distribution_split_with_context)
-
-    pos_ds_train = create_dataset_for_multiple_negatives_ranking_loss(
-        in_distribution_split_with_scenario_tokens["train"])
+    in_distribution_split_with_scenario_tokens_few_shot = filter_passages_for_few_shot_setting(in_distribution_split_with_scenario_tokens, 1)
 
     # pos_ds_train = create_dataset_for_multiple_negatives_ranking_loss(
     #     in_distribution_split_with_scenario_tokens["train"])
-    pos_ds_train = create_dataset_for_multiple_negatives_ranking_loss(
-        in_distribution_split_with_context["train"])
-    print(pos_ds_train)
+    #
+    # # pos_ds_train = create_dataset_for_multiple_negatives_ranking_loss(
+    # #     in_distribution_split_with_scenario_tokens["train"])
+    # pos_ds_train = create_dataset_for_multiple_negatives_ranking_loss(
+    #     in_distribution_split_with_context["train"])
+    # print(pos_ds_train)
