@@ -10,19 +10,20 @@
 
 project_root_dir="/home/ls6/hauptmann/ethikchat-experiment-argument-classification"
 
+
+
 # add project root directory to python path
 export PYTHONPATH="${project_root_dir}:${PYTHONPATH}"
 
 # Load your environment
 source /home/ls6/hauptmann/ethikchat-experiment-argument-classification/venv/bin/activate
-
-
+export CUDA_LAUNCH_BLOCKING=1
 
 # Make sure you already created the sweep and have the SWEEP_ID. Example:
 # wandb sweep sweep_config.yaml
 # which prints e.g. "Run wandb agent <USERNAME>/<PROJECT>/<SWEEP_ID>"
 
-SWEEP_ID="christian-hauptmann-uniwue/argument-classification/3unf2cdm"  # Replace with your actual sweep ID
+SWEEP_ID="christian-hauptmann-uniwue/argument-classification/0t75n8ov"  # Replace with your actual sweep ID
 
 echo "Starting W&B agent on task $SLURM_ARRAY_TASK_ID..."
 wandb agent $SWEEP_ID

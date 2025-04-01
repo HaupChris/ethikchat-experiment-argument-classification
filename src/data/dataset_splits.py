@@ -3,13 +3,13 @@ import os
 import random
 import warnings
 from collections import defaultdict
-from typing import Optional, Union, Dict
+from typing import Optional, Union, Dict, Set, List, Tuple
 from copy import deepcopy
 
 from datasets import DatasetDict, Dataset, load_from_disk
 from ethikchat_argtoolkit.Dialogue.discussion_szenario import DiscussionSzenario
 
-from src.data.create_corpus_dataset import DatasetSplitType, create_dataset, DatasetConfig, UtteranceType
+from src.data.create_corpus_dataset import DatasetSplitType, create_dataset, DatasetConfig, UtteranceType, Query
 
 
 # --- Helper Functions ---
@@ -137,7 +137,8 @@ def create_splits_from_corpus_dataset(
     test_scenario : Optional[DiscussionSzenario], optional
         Required if dataset_split_type == ByDiscussionSzenario;
         the scenario that should go into the test split.
-    save_path : Optional[str], if provided, saves the splits to this path.
+    save_folder:
+    dataset_save_name:
     k : int, optional
         Number of folds for kFold splitting (default=5).
     seed : int, optional
@@ -157,7 +158,8 @@ def create_splits_from_corpus_dataset(
         if os.path.exists(save_path):
             print(f"Dataset already exists at {save_path}. Loading it.")
             splitted_dataset = load_splits_from_disk(save_path)
-            check_splits_for_contamination(splitted_dataset["train"], splitted_dataset["validation"],
+            check_splits_for_contamination(splitted_dataset["train"],
+                                           splitted_dataset["validation"],
                                            splitted_dataset["test"])
             return splitted_dataset
 
@@ -272,60 +274,96 @@ def create_in_distribution_splits(corpus_dataset: DatasetDict,
     -------
     DatasetDict, with keys ["train", "validation", "test"]
     """
+
+    def put_queries_forced_by_labels_into_split(queries: List[Query]) -> Tuple[Dict[DiscussionSzenario, Set[str]], List[Query], List[Query]]:
+        """
+        Creates a set of
+        """
+        forced_queries = []
+        rest_queries = []
+        covered_labels = defaultdict(set)  # scenario -> labels covered
+
+        for query in queries:
+            label_set = set(query.labels)
+            if not label_set.issubset(covered_labels[query.discussion_scenario]):
+                forced_queries.append(query)
+                covered_labels[query.discussion_scenario].update(label_set)
+            else:
+                rest_queries.append(query)
+        return covered_labels, forced_queries, rest_queries
+
+    def check_label_coverage_of_split(queries: List[Query], split_covered_labels: Dict[DiscussionSzenario, Set[str]]) -> None:
+        """
+        Checks if the labels of a split cover all labels that are possible to ensure in-distribution testing
+        """
+
+        # get all labels that exist per scenario in the whole query split
+        all_available_labels_per_scenario = defaultdict(set)
+        for query in queries:
+            label_set = set(query.labels)
+            all_available_labels_per_scenario[query.discussion_scenario].update(label_set)
+
+        # check for each scenario if the covered labels by a split completely contain
+        for scenario, available_labels in all_available_labels_per_scenario.items():
+            if available_labels != split_covered_labels[scenario]:
+                missing_labels = split_covered_labels[scenario].difference(available_labels)
+                raise ValueError(f"Not all labels are covered for scenario {scenario}.\n"
+                                 f"These labels are missing: {missing_labels}")
+
     random.seed(seed)
 
     # 1) Shuffle anchors globally
-    all_queries_indices = list(range(len(corpus_dataset["queries"])))
+    all_queries = [
+        Query(
+            id=entry["id"],
+            text=entry["text"],
+            labels=entry["labels"],
+            discussion_scenario=entry["discussion_scenario"],
+            context=entry["context"],
+            scenario_description=entry["scenario_description"],
+            scenario_question=entry["scenario_question"]
+        )
+        for entry in corpus_dataset["queries"]
+    ]
 
-    anchor_label_sets = [set(q["labels"]) for q in corpus_dataset["queries"]]
-    random.shuffle(all_queries_indices)
+    random.shuffle(all_queries)
 
+    # Ensure all labels where an anchor is available are in the training set
+    train_labels_covered, train_queries_forced, remaining_queries_after_train_selection = put_queries_forced_by_labels_into_split(all_queries)
 
-    # 2) Ensure all labels where an anchor is available are in the training set
-    train_indices_forced = set()
-    labels_covered = defaultdict(set)  # scenario -> labels covered
-    for i in all_queries_indices:
-        scenario = corpus_dataset["queries"][i]["discussion_scenario"]
-        labels = anchor_label_sets[i]
+    # check if all labels are covered in train
+    check_label_coverage_of_split(all_queries, train_labels_covered)
 
-        # Add anchor if it contains labels not yet covered for its scenario
-        if not labels.issubset(labels_covered[scenario]):
-            train_indices_forced.add(i)
-            labels_covered[scenario].update(labels)
+    # all labels where still an anchor is available need to be in the test set to ensure in-distribution testing
+    test_labels_covered, test_queries_forced, remaining_queries_after_test_selection = put_queries_forced_by_labels_into_split(remaining_queries_after_train_selection)
 
-
-    # check if all labels are covered
-    all_query_labels_per_scenario = defaultdict(set)
-    for i in all_queries_indices:
-        scenario = corpus_dataset["queries"][i]["discussion_scenario"]
-        labels = anchor_label_sets[i]
-        all_query_labels_per_scenario[scenario].update(labels)
-
-    for scenario, labels in all_query_labels_per_scenario.items():
-        if not labels.issubset(labels_covered[scenario]):
-            raise ValueError(f"Not all labels are covered for scenario {scenario}.")
+    # check if all remaining labels (left after train forced assignment) are covered
+    check_label_coverage_of_split(remaining_queries_after_train_selection, test_labels_covered)
 
 
-    # 3) Remove forced anchors from the main pool
-    remaining_indices = [i for i in all_queries_indices if i not in train_indices_forced]
+    # calculate split sizes. test size is the remaining part, after train and validation are selected.
+    # since the data is shuffled, the selection from the remaining indices corresponds to sampling from the distribution of the dataset.
+    dataset_size = len(all_queries)
+    train_size = int(dataset_size * train_ratio)
+    validation_size = int(dataset_size * val_ratio)
+    test_size = dataset_size - (train_size + validation_size)
 
-    num_datapoints_total = len(all_queries_indices)
-    num_datapoints_train = int(num_datapoints_total * train_ratio)
-    num_datapoints_validation = int(num_datapoints_total * val_ratio)
+    train_forced_size = len(train_queries_forced)
+    train_unforced_size = train_size - train_forced_size
 
-    num_datapoints_train_forced = len(train_indices_forced)
-    num_datapoints_train_unforced = num_datapoints_train - num_datapoints_train_forced
+    test_forced_size = len(test_queries_forced)
+    test_unforced_size = test_size - test_forced_size
 
-    train_indices_unforced = remaining_indices[:num_datapoints_train_unforced]
+    train_queries_unforced = remaining_queries_after_test_selection[:train_unforced_size]
+    train_queries = train_queries_forced + train_queries_unforced
 
-    train_indices = list(train_indices_forced) + train_indices_unforced
-    validation_indices = remaining_indices[num_datapoints_train_unforced: num_datapoints_train_unforced + num_datapoints_validation]
-    test_indices = remaining_indices[num_datapoints_train_unforced + num_datapoints_validation:]
+    validation_queries = remaining_queries_after_test_selection[train_unforced_size: train_unforced_size + validation_size]
+    test_queries_unforced = remaining_queries_after_test_selection[train_unforced_size + validation_size:]
+    test_queries = test_queries_forced + test_queries_unforced
 
-    # due to filtering in the creation process of the queries, a query_id is not necessarily the same as its position (index) in the corpus dataset
-    train_query_ids = [corpus_dataset["queries"][index]["id"] for index in train_indices]
-    validation_query_ids = [corpus_dataset["queries"][index]["id"] for index in validation_indices]
-    test_query_ids = [corpus_dataset["queries"][index]["id"] for index in test_indices]
+    train_query_ids = [query.id for query in train_queries]
+    validation_query_ids = [query.id for query in validation_queries]
+    test_query_ids = [query.id for query in test_queries]
 
     ds_train = create_datasetdict_for_query_ids(corpus_dataset, train_query_ids)
     ds_val = create_datasetdict_for_query_ids(corpus_dataset, validation_query_ids)
@@ -434,7 +472,6 @@ def create_out_of_distribution_simple_splits(
         if labels.intersection(scenario_unseen_labels[scenario]):
             scenario_unseen_labels[scenario].update(labels)
 
-
     # -- STEP C: Separate queries: unseen vs. seen
     #   "unseen" = queries that contain at least one unseen label for *their* scenario
     unseen_label_query_ids = []
@@ -490,8 +527,8 @@ def create_out_of_distribution_simple_splits(
 
 if __name__ == "__main__":
 
-    dataset_folder = "../../data/processed/"
-    dataset_path = os.path.join(dataset_folder, "corpus_dataset_v1")
+    dataset_folder = "../../data/processed/with_context"
+    dataset_path = os.path.join(dataset_folder, "corpus_dataset_v2")
 
     if not os.path.exists(dataset_path):
         # Beispiel zum Erstellen eines Datensatzes. Mögliche Optionen von DatasetConfig sind im DocString beschrieben.
@@ -499,9 +536,6 @@ if __name__ == "__main__":
             DatasetConfig(
                 dataset_path=dataset_path,
                 project_dir="../../",
-                num_previous_turns=3,
-                include_role=True,
-                sep_token="[SEP]",
                 utterance_type=UtteranceType.User,
                 eval_size=0.5,
                 validation_test_ratio=0.5
@@ -510,12 +544,12 @@ if __name__ == "__main__":
 
     # Beispiel zum Laden des Datensatzes + collate_function des DataLoaders um dynamisch ein Subset der negative passages zu laden.
     loaded_dataset = load_from_disk(dataset_path)
-    dataset_name = "dataset_split_in_distribution"
-    save_path = os.path.join(dataset_folder, dataset_name)
-    in_distribution_split = create_splits_from_corpus_dataset(corpus_dataset=loaded_dataset,
-                                                              dataset_split_type=DatasetSplitType.InDistribution,
-                                                              save_folder=dataset_folder,
-                                                              dataset_save_name=dataset_name)
+    # dataset_name = "dataset_split_in_distribution"
+    # save_path = os.path.join(dataset_folder, dataset_name)
+    # in_distribution_split = create_splits_from_corpus_dataset(corpus_dataset=loaded_dataset,
+    #                                                           dataset_split_type=DatasetSplitType.InDistribution,
+    #                                                           save_folder=dataset_folder,
+    #                                                           dataset_save_name=dataset_name)
 
     # in_distribution_split_2 = create_splits_from_corpus_dataset(corpus_dataset=loaded_dataset,
     #                                                             dataset_split_type=DatasetSplitType.InDistribution,
@@ -539,9 +573,9 @@ if __name__ == "__main__":
 
     test_scenario = DiscussionSzenario.MEDAI
     split_by_scenario = create_splits_from_corpus_dataset(loaded_dataset,
-                                                          DatasetSplitType.OutOfDistributionHard,
+                                                          DatasetSplitType.InDistribution,
                                                           save_folder=dataset_folder,
-                                                          dataset_save_name=f"dataset_split_by_scenario_{test_scenario}",
+                                                          dataset_save_name=f"dataset_in_distribution",
                                                           test_scenario=test_scenario)
     # kfold_split = create_splits_from_corpus_dataset(hf_dataset, DatasetSplitType.kFold, None, 5)
     print("done")

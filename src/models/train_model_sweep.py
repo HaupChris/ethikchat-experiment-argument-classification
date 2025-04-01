@@ -1,8 +1,9 @@
 import os
+import warnings
 from typing import Dict
 
 import wandb
-from datasets import load_from_disk
+from datasets import load_from_disk, DatasetDict, Dataset
 from dotenv import load_dotenv
 from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
 from ethikchat_argtoolkit.Dialogue.discussion_szenario import DiscussionSzenario
@@ -10,20 +11,22 @@ from sentence_transformers import SentenceTransformer
 from sentence_transformers.losses import CachedMultipleNegativesRankingLoss
 from sentence_transformers import SentenceTransformerTrainingArguments, SentenceTransformerTrainer
 from sentence_transformers.training_args import BatchSamplers
+from transformers import PreTrainedTokenizer
 
 from src.data.dataset_splits import create_splits_from_corpus_dataset
 from src.data.create_corpus_dataset import DatasetSplitType, Passage, Query, load_response_template_collection
 from src.evaluation.deep_dive_information_retrieval_evaluator import DeepDiveInformationRetrievalEvaluator
 from src.evaluation.excluding_information_retrieval_evaluator import ExcludingInformationRetrievalEvaluator
-from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss
+from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss, add_context_to_texts, \
+    add_scenario_tokens_to_texts
 from src.models.experiment_config import ExperimentConfig
 
 
 def load_argument_graphs(project_root) -> Dict[str, ResponseTemplateCollection]:
-    argument_graph_med = load_response_template_collection("s1", project_root)
-    argument_graph_jur = load_response_template_collection("s2", project_root)
-    argument_graph_auto = load_response_template_collection("s3", project_root)
-    argument_graph_ref = load_response_template_collection("s4", project_root)
+    argument_graph_med = load_response_template_collection("s1", project_root, "data/external/argument_graphs")
+    argument_graph_jur = load_response_template_collection("s2", project_root, "data/external/argument_graphs")
+    argument_graph_auto = load_response_template_collection("s3", project_root, "data/external/argument_graphs")
+    argument_graph_ref = load_response_template_collection("s4", project_root, "data/external/argument_graphs")
 
     return {
         DiscussionSzenario.MEDAI.value: argument_graph_med,
@@ -32,10 +35,33 @@ def load_argument_graphs(project_root) -> Dict[str, ResponseTemplateCollection]:
         DiscussionSzenario.REFAI.value: argument_graph_ref
     }
 
+def check_dataset_texts_for_truncation(tokenizer: PreTrainedTokenizer, split_dataset: DatasetDict, split_name: str, max_sequence_length: int) -> None:
+    """
+    Assumes a split_dataset with queries and passages and checks each of their "text" features if the encoded sequence
+    length exceeds max_sequence_length.
+    Args:
+        tokenizer (PreTrainedTokenizer): The tokenizer of the model that is being fine-tuned
+        split_dataset (): A Huggingface DatasetDict containing the datasets "queries" and "passages"
+        max_sequence_length (): The maximum sequence length of the fine-tuned model
+    """
+    def check_dataset_for_text_truncations(dataset_name: str, dataset: Dataset):
+        num_truncated_examples = 0
+        for example in dataset:
+            encoded_text = tokenizer.encode(example["text"])
+            if len(encoded_text) > max_sequence_length:
+                num_truncated_examples +=1
+                warnings.warn(f"Example with id {example['id']} in dataset {dataset_name}-{split_name} exceeds length {max_sequence_length} ({len(encoded_text)}) and will be truncated during training!")
+        print(f"{dataset_name}-{split_name}: There are {num_truncated_examples} of {len(dataset)} examples that will be truncated during training.")
+
+    check_dataset_for_text_truncations("queries", split_dataset["queries"])
+    check_dataset_for_text_truncations("passages", split_dataset["passages"])
+
 
 def prepare_datasets(
     exp_config: ExperimentConfig,
+    tokenizer: PreTrainedTokenizer,
     argument_graphs: Dict[str, ResponseTemplateCollection],
+    maximum_sequence_length: int,
     is_test_run: bool = False
 ):
     """
@@ -52,19 +78,39 @@ def prepare_datasets(
     splitted_dataset = create_splits_from_corpus_dataset(
         corpus_dataset=corpus_dataset,
         dataset_split_type=exp_config.dataset_split_type,
+        test_scenario=exp_config.test_scenario,
         save_folder=split_dataset_folder,
         dataset_save_name=exp_config.split_dataset_name
     )
+    tokenizer_sep_token = getattr(tokenizer, "sep_token", None)
+
+    if tokenizer_sep_token is None:
+        sep_token = "[SEP]"
+    else:
+        sep_token = tokenizer_sep_token
+
+    train_split = splitted_dataset["train"]
+    eval_split = splitted_dataset["validation"]
+    test_split = splitted_dataset["test"]
+    train_split = add_context_to_texts(train_split, exp_config.context_length, sep_token)
+    eval_split = add_context_to_texts(eval_split, exp_config.context_length, sep_token)
+    test_split = add_context_to_texts(test_split, exp_config.context_length, sep_token)
+
+    if exp_config.add_discussion_scenario_info:
+        train_split = add_scenario_tokens_to_texts(train_split)
+        eval_split = add_scenario_tokens_to_texts(eval_split)
+        test_split = add_scenario_tokens_to_texts(test_split)
+
+
+    check_dataset_texts_for_truncation(tokenizer, train_split, "train", maximum_sequence_length)
+    check_dataset_texts_for_truncation(tokenizer, eval_split, "eval", maximum_sequence_length)
+    check_dataset_texts_for_truncation(tokenizer, test_split, "test", maximum_sequence_length)
+
 
     if not is_test_run:
-        # -----------------------------------------
-        # Regular full dataset preparation
-        # -----------------------------------------
-        train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"])
-        eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"])
+        train_pos = create_dataset_for_multiple_negatives_ranking_loss(train_split)
+        eval_pos = create_dataset_for_multiple_negatives_ranking_loss(eval_split)
 
-        eval_dataset = splitted_dataset["validation"]
-        test_dataset = splitted_dataset["test"]
 
         # Build references for EVAL
         eval_passages = {
@@ -72,19 +118,19 @@ def prepare_datasets(
                 row["id"], row["text"], row["label"],
                 row["discussion_scenario"], row["passage_source"]
             )
-            for row in eval_dataset["passages"]
+            for row in eval_split["passages"]
         }
         eval_queries = {
             row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"])
-            for row in eval_dataset["queries"]
+            for row in eval_split["queries"]
         }
         eval_relevant_passages = {
             row["query_id"]: set(row["passages_ids"])
-            for row in eval_dataset["queries_relevant_passages_mapping"]
+            for row in eval_split["queries_relevant_passages_mapping"]
         }
         eval_trivial_passages = {
             row["query_id"]: set(row["passages_ids"])
-            for row in eval_dataset["queries_trivial_passages_mapping"]
+            for row in eval_split["queries_trivial_passages_mapping"]
         }
 
         # Build references for TEST
@@ -93,41 +139,35 @@ def prepare_datasets(
                 row["id"], row["text"], row["label"],
                 row["discussion_scenario"], row["passage_source"]
             )
-            for row in test_dataset["passages"]
+            for row in test_split["passages"]
         }
         test_queries = {
             row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"])
-            for row in test_dataset["queries"]
+            for row in test_split["queries"]
         }
         test_relevant_passages = {
             row["query_id"]: set(row["passages_ids"])
-            for row in test_dataset["queries_relevant_passages_mapping"]
+            for row in test_split["queries_relevant_passages_mapping"]
         }
         test_trivial_passages = {
             row["query_id"]: set(row["passages_ids"])
-            for row in test_dataset["queries_trivial_passages_mapping"]
+            for row in test_split["queries_trivial_passages_mapping"]
         }
 
     else:
-        # -----------------------------------------
-        # Smaller dataset snippet for local testing
-        # (EXACTLY as in your original code snippet)
-        # -----------------------------------------
-        # 1) Prepare train/eval data in small form
-        train_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["train"], 2)
-        eval_pos = create_dataset_for_multiple_negatives_ranking_loss(splitted_dataset["validation"], 2)
+        train_pos = create_dataset_for_multiple_negatives_ranking_loss(train_split, 2)
+        eval_pos = create_dataset_for_multiple_negatives_ranking_loss(eval_split, 2)
         train_pos = train_pos.shuffle(seed=42).select(range(10))
         eval_pos = eval_pos.shuffle(seed=42).select(range(10))
 
-        eval_dataset = splitted_dataset["validation"]
-        eval_queries = eval_dataset["queries"].shuffle(seed=42).select(range(10))
+        eval_queries = eval_split["queries"].shuffle(seed=42).select(range(10))
         eval_queries = {
             row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"])
             for row in eval_queries
         }
         eval_relevant_passages = {
             row["query_id"]: set(row["passages_ids"])
-            for row in eval_dataset["queries_relevant_passages_mapping"]
+            for row in eval_split["queries_relevant_passages_mapping"]
             if row["query_id"] in eval_queries.keys()
         }
         # shorten the relevant passages to 2
@@ -136,7 +176,7 @@ def prepare_datasets(
 
         eval_trivial_passages = {
             row["query_id"]: set(row["passages_ids"])
-            for row in eval_dataset["queries_trivial_passages_mapping"]
+            for row in eval_split["queries_trivial_passages_mapping"]
         }
 
         # keep only relevant passages in the eval_passages dict
@@ -148,20 +188,19 @@ def prepare_datasets(
                 row["id"], row["text"], row["label"],
                 row["discussion_scenario"], row["passage_source"]
             )
-            for row in eval_dataset["passages"]
+            for row in eval_split["passages"]
             if row["id"] in all_eval_ids
         }
 
         # 2) Build test references (small)
-        test_dataset = splitted_dataset["test"]
-        test_queries = test_dataset["queries"].shuffle(seed=42).select(range(10))
+        test_queries = test_split["queries"].shuffle(seed=42).select(range(10))
         test_queries = {
             row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"])
             for row in test_queries
         }
         test_relevant_passages = {
             row["query_id"]: set(row["passages_ids"])
-            for row in test_dataset["queries_relevant_passages_mapping"]
+            for row in test_split["queries_relevant_passages_mapping"]
             if row["query_id"] in test_queries.keys()
         }
         # shorten the relevant passages to 2
@@ -170,7 +209,7 @@ def prepare_datasets(
 
         test_trivial_passages = {
             row["query_id"]: set(row["passages_ids"])
-            for row in test_dataset["queries_trivial_passages_mapping"]
+            for row in test_split["queries_trivial_passages_mapping"]
         }
 
         # keep only relevant passages in the test_passages dict
@@ -182,7 +221,7 @@ def prepare_datasets(
                 row["id"], row["text"], row["label"],
                 row["discussion_scenario"], row["passage_source"]
             )
-            for row in test_dataset["passages"]
+            for row in test_split["passages"]
             if row["id"] in all_test_ids
         }
 
@@ -219,7 +258,9 @@ def prepare_datasets(
         show_progress_bar=True,
         write_csv=True,
         run=wandb.run,
-        argument_graphs=argument_graphs
+        argument_graphs=argument_graphs,
+        confidence_threshold=0.8,
+        confidence_threshold_steps=0.01
     )
 
     return (
@@ -246,6 +287,8 @@ def main(is_test_run=False):
     env_path = os.path.join(project_root, ".env")
     load_dotenv(env_path)
 
+
+
     # 3) Print debug info
     print(f"Project Root: {project_root}")
     print(f"Using model: {config.model_name}")
@@ -253,11 +296,21 @@ def main(is_test_run=False):
     print(f"Batch Size: {config.batch_size}")
     print(f"Num Epochs: {config.num_epochs}")
     print(f"run_name: {sweep_run_name}")
+    print(f"context length: {config.context_length}")
+    print(f"add discussion_scenario info: {config.add_discussion_scenario_info}")
 
     # 4) Login to W&B (key is usually read from env or netrc)
     wandb.login()
 
     # 5) Prepare training configuration
+    scenario_string_to_discussion_scenario={
+        "MEDAI": DiscussionSzenario.MEDAI,
+        "JURAI": DiscussionSzenario.JURAI,
+        "AUTOAI": DiscussionSzenario.AUTOAI,
+        "REFAI": DiscussionSzenario.REFAI,
+    }
+    test_scenario = scenario_string_to_discussion_scenario[config.dataset_split_name.split("_")[-1]]
+
     exp_config_dict = {
         "project_root": project_root,
         "experiment_dir": config.experiment_dir,
@@ -274,7 +327,10 @@ def main(is_test_run=False):
         "num_epochs": config.num_epochs,
         "loss_function": "MultipleNegativesRankingLoss",  # or config.get(...)
         "run_time": "sweep-run",
-        "warmup_ratio": config.warmup_ratio
+        "warmup_ratio": config.warmup_ratio,
+        "context_length": config.context_length,
+        "add_discussion_scenario_info": config.add_discussion_scenario_info,
+        "test_scenario": test_scenario
     }
     exp_config = ExperimentConfig(**exp_config_dict)
 
@@ -288,7 +344,11 @@ def main(is_test_run=False):
     loss = CachedMultipleNegativesRankingLoss(model=model, show_progress_bar=False, mini_batch_size=8)
 
     # 8) Load argument graphs
-    argument_graphs = load_argument_graphs(exp_config.project_root)
+    if is_test_run:
+        argument_graphs = load_argument_graphs(exp_config.project_root)
+
+    else:
+        argument_graphs = load_argument_graphs(exp_config.project_root)
 
     # 9) Prepare train/eval/test data (including evaluators)
     (
@@ -297,7 +357,7 @@ def main(is_test_run=False):
         excluding_ir_evaluator_eval,
         excluding_ir_evaluator_test,
         deep_dive_evaluator_test
-    ) = prepare_datasets(exp_config, argument_graphs, is_test_run=is_test_run)
+    ) = prepare_datasets(exp_config, model.tokenizer, argument_graphs, model.max_seq_length, is_test_run=is_test_run)
 
     # 10) Pre-training evaluation on the eval set
     pretrain_eval_results = excluding_ir_evaluator_eval(model)
@@ -305,7 +365,7 @@ def main(is_test_run=False):
     wandb.log(prefixed_pretrain_eval_results)
 
     # 11) Decide how often to evaluate and save
-    eval_save_steps = 4000 / (exp_config.batch_size / 32)
+    eval_save_steps = int(4000 / (exp_config.batch_size / 32))
 
     train_args = SentenceTransformerTrainingArguments(
         output_dir=exp_config.model_run_dir,
@@ -325,6 +385,7 @@ def main(is_test_run=False):
         lr_scheduler_type="linear",
         batch_sampler=BatchSamplers.NO_DUPLICATES
     )
+
 
     # 12) Create a trainer
     trainer = SentenceTransformerTrainer(
@@ -366,7 +427,7 @@ if __name__ == "__main__":
             "project_root": "/home/christian/PycharmProjects/ethikchat-experiment-argument-classification",
             "experiment_dir": "experiments_outputs",
             "experiment_run": "v1_local_debug",
-            "dataset_dir": "data/processed",
+            "dataset_dir": "data/processed/with_context",
             "dataset_name": "corpus_dataset_v1",
             "dataset_split_type": "out_of_distribution_hard",
             "dataset_split_name": "dataset_split_by_scenario_JURAI",
@@ -375,6 +436,9 @@ if __name__ == "__main__":
             "batch_size": 2,
             "num_epochs": 2,
             "warmup_ratio": 0.1,
+            "context_length": 3,
+            "add_discussion_scenario_info": True,
+            "test_scenario": DiscussionSzenario.JURAI
         }
         wandb.init(
             project="argument-classification",  # or "argument-classification-test"
