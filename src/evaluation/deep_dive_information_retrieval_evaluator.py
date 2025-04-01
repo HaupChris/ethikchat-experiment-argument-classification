@@ -13,6 +13,7 @@ import torch
 from ethikchat_argtoolkit.ArgumentGraph.response_template import ResponseTemplate, TemplateCategory
 from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
 from ethikchat_argtoolkit.ArgumentGraph.stance import Stance
+from src.data.create_corpus_dataset import Passage, Query
 from torch import Tensor
 from tqdm import trange
 
@@ -51,6 +52,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
       4) A W&B table for qualitative error analysis containing the columns (anchor_labels, anchor_text, top1_similarity, top1_label, top1_text, top5,
       top1_prediction_correct, rank_first_relevant) for each query in the dataset
       5) Graphs displaying single/multi argument classification accuracies depending on a set confidence threshold
+      6) Query and Passage Embeddings
     """
 
     def __init__(
@@ -76,7 +78,8 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         argument_graphs: Dict[str, ResponseTemplateCollection] = None,
         maximum_relevancy_depth: int = None,
         confidence_threshold: Optional[float] = None,
-        confidence_threshold_steps: Optional[float] = None
+        confidence_threshold_steps: Optional[float] = None,
+        log_embeddings: Optional[bool] = False,
     ) -> None:
         super().__init__()
         # Filter out queries with no relevant docs
@@ -115,6 +118,11 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         self.maximum_relevancy_depth = maximum_relevancy_depth if maximum_relevancy_depth else len(self.corpus)
         self.confidence_threshold = confidence_threshold
         self.confidence_threshold_steps = confidence_threshold_steps
+        self.log_embeddings = log_embeddings
+
+        # For Embeddings
+        self.query_embeddings = []
+        self.corpus_embeddings = []
 
         # For CSV
         if name:
@@ -184,7 +192,11 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         final_metrics = self.prefix_name_to_metrics(metrics, self.name)
         self.store_metrics_in_model_card_data(model, final_metrics, epoch, steps)
 
-        # 8) Log to W&B (if self.run is set)
+        # 8) Log embeddings
+        if self.log_embeddings:
+            self._log_query_and_passage_embeddings()
+
+        # 9) Log to W&B (if self.run is set)
         if self.run:
             self.run.log(final_metrics)
 
@@ -218,6 +230,8 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 convert_to_tensor=True,
             )
 
+            self.query_embeddings = query_embeddings.tolist()
+
         # Prepare structure: queries_result_list[score_func][q_idx] = [(score, doc_id), ...]
         queries_result_list: Dict[str, List[List[Tuple[float, str]]]] = {}
         for score_name in self.score_functions:
@@ -241,6 +255,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
             else:
                 sub_corpus_emb = corpus_embeddings[corpus_start:corpus_end]
 
+            self.corpus_embeddings.extend(sub_corpus_emb.tolist())
             # For each scoring function
             for score_fn_name, score_function in self.score_functions.items():
                 pair_scores = score_function(query_embeddings, sub_corpus_emb)
@@ -759,6 +774,21 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
             table = wandb.Table(data=data, columns=["Confidence", "Accuracy"])
             if self.run:
                 self.run.log({f"{self.name}_{score_func_name}_{metric_name}": wandb.plot.line(table, "Confidence", "Accuracy", title=title)})
+
+    def _log_query_and_passage_embeddings(self):
+        """Logs query and corpus embeddings to wandb."""
+        def format_query_labels(q: Query) -> str:
+            labels = sorted(q.labels)
+            return (q.discussion_scenario + "_" + "_".join(labels)).lower()
+
+        def format_passage_label(p: Passage) -> str:
+            return (p.discussion_scenario + "_" + p.label).lower()
+
+        columns = ["label", "text"] + [f"dim_{i}" for i in range(len(self.query_embeddings[0]))]
+        data = [(format_query_labels(q), q.text, *emb) for q, emb in zip(self.queries, self.query_embeddings)] + [(format_passage_label(p), p.text, *emb) for p, emb in zip(self.corpus, self.corpus_embeddings)]
+
+        if self.run:
+            self.run.log({"embeddings2": wandb.Table(data=data, columns=columns)})
 
     def _return_topic_rtc(self, discussion_scenario: str) -> ResponseTemplateCollection:
         rtc = self.argument_graphs.get(discussion_scenario)
