@@ -5,7 +5,7 @@ from collections import defaultdict
 from typing import Optional, List
 from datasets import Dataset, DatasetDict, load_from_disk
 
-from src.data.create_corpus_dataset import DatasetSplitType, Passage, PassageSource
+from src.data.create_corpus_dataset import DatasetSplitType, Passage, PassageSource, Query
 from src.data.dataset_splits import create_splits_from_corpus_dataset
 
 
@@ -134,11 +134,26 @@ def add_context_to_texts(split_dataset: DatasetDict, context_length: int, sep_to
 
 
 def filter_queries_for_few_shot_setting(split_dataset: DatasetDict, num_shots: int) -> DatasetDict:
-    pass
+    """
 
+    Args:
+        split_dataset ():
+        num_shots ():
 
-def default_dict(list):
-    pass
+    Returns:
+
+    """
+    queries = [Query(
+        id=entry["id"],
+        text=entry["text"],
+        labels=entry["labels"],
+        discussion_scenario=entry["discussion_scenario"],
+        context=entry["context"],
+        scenario_description=entry["scenario_description"],
+        scenario_question=entry["scenario_question"]
+    ) for entry in split_dataset["queries"]]
+
+    return assigned_queries
 
 
 def filter_passages_for_few_shot_setting(

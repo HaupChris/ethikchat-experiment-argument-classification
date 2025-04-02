@@ -13,6 +13,7 @@ from sentence_transformers import SentenceTransformerTrainingArguments, Sentence
 from sentence_transformers.training_args import BatchSamplers
 from transformers import PreTrainedTokenizer
 
+from src.callbacks.custom_early_stopping_callback import EarlyStoppingWithLoggingCallback
 from src.data.dataset_splits import create_splits_from_corpus_dataset
 from src.data.create_corpus_dataset import DatasetSplitType, Passage, Query, load_response_template_collection
 from src.evaluation.deep_dive_information_retrieval_evaluator import DeepDiveInformationRetrievalEvaluator
@@ -23,10 +24,10 @@ from src.models.experiment_config import ExperimentConfig
 
 
 def load_argument_graphs(project_root) -> Dict[str, ResponseTemplateCollection]:
-    argument_graph_med = load_response_template_collection("s1", project_root, "data/external/argument_graphs")
-    argument_graph_jur = load_response_template_collection("s2", project_root, "data/external/argument_graphs")
-    argument_graph_auto = load_response_template_collection("s3", project_root, "data/external/argument_graphs")
-    argument_graph_ref = load_response_template_collection("s4", project_root, "data/external/argument_graphs")
+    argument_graph_med = load_response_template_collection("s1", project_root, "data/external/argument_graphs_test")
+    argument_graph_jur = load_response_template_collection("s2", project_root, "data/external/argument_graphs_test")
+    argument_graph_auto = load_response_template_collection("s3", project_root, "data/external/argument_graphs_test")
+    argument_graph_ref = load_response_template_collection("s4", project_root, "data/external/argument_graphs_test")
 
     return {
         DiscussionSzenario.MEDAI.value: argument_graph_med,
@@ -288,7 +289,6 @@ def main(is_test_run=False):
     load_dotenv(env_path)
 
 
-
     # 3) Print debug info
     print(f"Project Root: {project_root}")
     print(f"Using model: {config.model_name}")
@@ -309,7 +309,7 @@ def main(is_test_run=False):
         "AUTOAI": DiscussionSzenario.AUTOAI,
         "REFAI": DiscussionSzenario.REFAI,
     }
-    test_scenario = scenario_string_to_discussion_scenario[config.dataset_split_name.split("_")[-1]]
+    test_scenario = config.test_scenario
 
     exp_config_dict = {
         "project_root": project_root,
@@ -346,7 +346,6 @@ def main(is_test_run=False):
     # 8) Load argument graphs
     if is_test_run:
         argument_graphs = load_argument_graphs(exp_config.project_root)
-
     else:
         argument_graphs = load_argument_graphs(exp_config.project_root)
 
@@ -366,6 +365,11 @@ def main(is_test_run=False):
 
     # 11) Decide how often to evaluate and save
     eval_save_steps = int(4000 / (exp_config.batch_size / 32))
+    early_stopper = EarlyStoppingWithLoggingCallback(
+        early_stopping_patience=2,  # you can change this value if needed
+        early_stopping_threshold=0.5  # you can change this value if needed
+    )
+
 
     train_args = SentenceTransformerTrainingArguments(
         output_dir=exp_config.model_run_dir,
@@ -378,12 +382,14 @@ def main(is_test_run=False):
         eval_strategy="steps",
         eval_steps=eval_save_steps if not is_test_run else 5,
         save_strategy="steps",
-        save_steps=eval_save_steps,
+        save_steps=eval_save_steps if not is_test_run else 5,
         save_total_limit=2,
         run_name=f"sweep_{exp_config.model_name_escaped}",
         load_best_model_at_end=True,
         lr_scheduler_type="linear",
-        batch_sampler=BatchSamplers.NO_DUPLICATES
+        batch_sampler=BatchSamplers.NO_DUPLICATES,
+        metric_for_best_model="cosine_accuracy@1",
+        log_level="info"
     )
 
 
@@ -395,6 +401,7 @@ def main(is_test_run=False):
         eval_dataset=eval_pos,
         loss=loss,
         evaluator=excluding_ir_evaluator_eval,
+        callbacks=[early_stopper]
     )
 
     # 13) Train
@@ -428,17 +435,17 @@ if __name__ == "__main__":
             "experiment_dir": "experiments_outputs",
             "experiment_run": "v1_local_debug",
             "dataset_dir": "data/processed/with_context",
-            "dataset_name": "corpus_dataset_v1",
-            "dataset_split_type": "out_of_distribution_hard",
-            "dataset_split_name": "dataset_split_by_scenario_JURAI",
+            "dataset_name": "corpus_dataset_v2",
+            "dataset_split_type": DatasetSplitType.InDistribution.value,
+            "dataset_split_name": "dataset_split_in_distribution",
             "model_name": "deutsche-telekom/gbert-large-paraphrase-euclidean",
             "learning_rate": 1e-5,
             "batch_size": 2,
-            "num_epochs": 2,
-            "warmup_ratio": 0.1,
+            "num_epochs": 10,
+            "warmup_ratio": 0.0,
             "context_length": 3,
             "add_discussion_scenario_info": True,
-            "test_scenario": DiscussionSzenario.JURAI
+            "test_scenario": DiscussionSzenario.JURAI.value
         }
         wandb.init(
             project="argument-classification",  # or "argument-classification-test"
