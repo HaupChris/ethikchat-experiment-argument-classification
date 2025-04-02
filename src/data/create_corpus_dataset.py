@@ -100,8 +100,6 @@ class Passage:
 @dataclass
 class Query:
     """
-    Person represents a user record.
-
     Attributes:
         id (int)
         text (str)
@@ -110,7 +108,6 @@ class Query:
         context (List[Tuple[str, str]] = field(default_factory=list))
         scenario_description (str = "")
         scenario_question (str = "")
-
     """
     id: int
     text: str
@@ -121,7 +118,7 @@ class Query:
     scenario_question: str = ""
 
     def __hash__(self):
-        return hash(("text", self.text, "labels", self.labels))
+        return hash((self.text, tuple(self.labels)))
 
     def __eq__(self, other):
         return ((self.text == other.text) and
