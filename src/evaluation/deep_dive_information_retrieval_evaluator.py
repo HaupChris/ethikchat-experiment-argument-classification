@@ -174,36 +174,36 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         # 1) Compute similarities for each query
         queries_result_list, noisy_queries_result_list = self._compute_scores(model, *args, **kwargs)
 
-        # # 2) Log qualitative error analysis table
-        # self._log_qualitative_error_analysis_table(queries_result_list)
-        #
-        # # 3) Log accuracy@k tables
-        # self._compute_accuracies_at_k(queries_result_list)
-        #
-        # # 4) Compute stance accuracies
-        # metrics = self._compute_stance_accuracy(queries_result_list)
-        #
-        # # 5) Log confusion matrices
-        # self._log_confusion_matrices_to_wandb(queries_result_list)
-        #
+        # 2) Log qualitative error analysis table
+        self._log_qualitative_error_analysis_table(queries_result_list)
+
+        # 3) Log accuracy@k tables
+        self._compute_accuracies_at_k(queries_result_list)
+
+        # 4) Compute stance accuracies
+        metrics = self._compute_stance_accuracy(queries_result_list)
+
+        # 5) Log confusion matrices
+        self._log_confusion_matrices_to_wandb(queries_result_list)
+
         # # 6) Log accuracies based on confidence thresholds
         # if self.confidence_threshold:
         #     self._log_single_argument_classification_with_similarity_threshold(queries_result_list, noisy_queries_result_list)
         #     self._log_multi_argument_classification_with_similarity_threshold(queries_result_list, noisy_queries_result_list)
-        #
-        # # 7) Give these metrics a prefix and store in model card
-        # final_metrics = self.prefix_name_to_metrics(metrics, self.name)
-        # self.store_metrics_in_model_card_data(model, final_metrics, epoch, steps)
+
+        # 7) Give these metrics a prefix and store in model card
+        final_metrics = self.prefix_name_to_metrics(metrics, self.name)
+        self.store_metrics_in_model_card_data(model, final_metrics, epoch, steps)
 
         # 8) Log embeddings
         if self.log_embeddings:
             self._log_query_and_passage_embeddings()
 
-        # # 9) Log to W&B (if self.run is set)
-        # if self.run:
-        #     self.run.log(final_metrics)
-        #
-        # return final_metrics
+        # 9) Log to W&B (if self.run is set)
+        if self.run:
+            self.run.log(final_metrics)
+
+        return final_metrics
 
     def _compute_scores(
         self,
