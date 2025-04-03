@@ -7,12 +7,13 @@ import numpy as np
 import bisect
 from collections import defaultdict
 from contextlib import nullcontext
-from typing import TYPE_CHECKING, Callable, Optional, Dict, List, Tuple, Set
+from typing import TYPE_CHECKING, Callable, Optional, Dict, List, Tuple, Set, Iterable
 
 import torch
 from ethikchat_argtoolkit.ArgumentGraph.response_template import ResponseTemplate, TemplateCategory
 from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
 from ethikchat_argtoolkit.ArgumentGraph.stance import Stance
+from src.data.create_corpus_dataset import Passage, Query
 from torch import Tensor
 from tqdm import trange
 
@@ -51,6 +52,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
       4) A W&B table for qualitative error analysis containing the columns (anchor_labels, anchor_text, top1_similarity, top1_label, top1_text, top5,
       top1_prediction_correct, rank_first_relevant) for each query in the dataset
       5) Graphs displaying single/multi argument classification accuracies depending on a set confidence threshold
+      6) Query and Passage Embeddings
     """
 
     def __init__(
@@ -76,7 +78,9 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         argument_graphs: Dict[str, ResponseTemplateCollection] = None,
         maximum_relevancy_depth: int = None,
         confidence_threshold: Optional[float] = None,
-        confidence_threshold_steps: Optional[float] = None
+        confidence_threshold_steps: Optional[float] = None,
+        log_embeddings: Optional[bool] = False,
+        noisy_queries: Optional[List[any]] = None,
     ) -> None:
         super().__init__()
         # Filter out queries with no relevant docs
@@ -84,6 +88,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
             q for qid, q in queries.items()
             if qid in relevant_docs and len(relevant_docs[qid]) > 0
         ]
+        self.noisy_queries = noisy_queries if noisy_queries else []
 
         self.corpus_ids = list(corpus.keys())
         self.corpus = [corpus[cid] for cid in self.corpus_ids]
@@ -115,6 +120,12 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         self.maximum_relevancy_depth = maximum_relevancy_depth if maximum_relevancy_depth else len(self.corpus)
         self.confidence_threshold = confidence_threshold
         self.confidence_threshold_steps = confidence_threshold_steps
+        self.log_embeddings = log_embeddings
+
+        # For Embeddings
+        self.query_embeddings = []
+        self.noisy_query_embeddings = []
+        self.corpus_embeddings = []
 
         # For CSV
         if name:
@@ -161,7 +172,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
             self._append_csv_headers(self.score_function_names)
 
         # 1) Compute similarities for each query
-        queries_result_list = self._compute_scores(model, *args, **kwargs)
+        queries_result_list, noisy_queries_result_list = self._compute_scores(model, *args, **kwargs)
 
         # 2) Log qualitative error analysis table
         self._log_qualitative_error_analysis_table(queries_result_list)
@@ -175,16 +186,20 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         # 5) Log confusion matrices
         self._log_confusion_matrices_to_wandb(queries_result_list)
 
-        # 6) Log accuracies based on confidence thresholds
-        if self.confidence_threshold:
-            self._log_single_argument_classification_with_similarity_threshold(queries_result_list)
-            self._log_multi_argument_classification_with_similarity_threshold(queries_result_list)
+        # # 6) Log accuracies based on confidence thresholds
+        # if self.confidence_threshold:
+        #     self._log_single_argument_classification_with_similarity_threshold(queries_result_list, noisy_queries_result_list)
+        #     self._log_multi_argument_classification_with_similarity_threshold(queries_result_list, noisy_queries_result_list)
 
         # 7) Give these metrics a prefix and store in model card
         final_metrics = self.prefix_name_to_metrics(metrics, self.name)
         self.store_metrics_in_model_card_data(model, final_metrics, epoch, steps)
 
-        # 8) Log to W&B (if self.run is set)
+        # 8) Log embeddings
+        if self.log_embeddings:
+            self._log_query_and_passage_embeddings()
+
+        # 9) Log to W&B (if self.run is set)
         if self.run:
             self.run.log(final_metrics)
 
@@ -195,7 +210,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         model: SentenceTransformer,
         corpus_model=None,
         corpus_embeddings: Tensor | None = None
-    ) -> Dict[str, List[List[Tuple[float, str]]]]:
+    ) -> Tuple[Dict[str, List[List[Tuple[float, str]]]], Dict[str, List[List[Tuple[float, str]]]]]:
         """Encodes queries vs. corpus, does top-k retrieval, then computes IR metrics."""
 
         if corpus_model is None:
@@ -217,11 +232,24 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 show_progress_bar=self.show_progress_bar,
                 convert_to_tensor=True,
             )
+            noisy_query_embeddings = model.encode(
+                [query.text for query in self.noisy_queries],
+                prompt_name=self.query_prompt_name,
+                prompt=self.query_prompt,
+                batch_size=self.batch_size,
+                show_progress_bar=self.show_progress_bar,
+                convert_to_tensor=True,
+            )
+
+            self.query_embeddings = query_embeddings.tolist()
+            self.noisy_query_embeddings = noisy_query_embeddings.tolist()
 
         # Prepare structure: queries_result_list[score_func][q_idx] = [(score, doc_id), ...]
         queries_result_list: Dict[str, List[List[Tuple[float, str]]]] = {}
+        noisy_queries_result_list: Dict[str, List[List[Tuple[float, str]]]] = {}
         for score_name in self.score_functions:
             queries_result_list[score_name] = [[] for _ in range(len(query_embeddings))]
+            noisy_queries_result_list[score_name] = [[] for _ in range(len(noisy_query_embeddings))]
 
         # Encode corpus in chunks and compare
         for corpus_start in trange(0, len(self.corpus), self.corpus_chunk_size, disable=not self.show_progress_bar):
@@ -241,37 +269,45 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
             else:
                 sub_corpus_emb = corpus_embeddings[corpus_start:corpus_end]
 
+            self.corpus_embeddings.extend(sub_corpus_emb.tolist())
             # For each scoring function
             for score_fn_name, score_function in self.score_functions.items():
-                pair_scores = score_function(query_embeddings, sub_corpus_emb)
-                # Get top-k for each query
-                top_k_vals, top_k_idx = torch.topk(
-                    pair_scores, min(max_k, sub_corpus_emb.size(0)), dim=1, largest=True, sorted=False
-                )
-                top_k_vals = top_k_vals.cpu().tolist()
-                top_k_idx = top_k_idx.cpu().tolist()
+                for q_embeddings, q_list, q_result_list in [
+                    (query_embeddings, self.queries, queries_result_list),
+                    (noisy_query_embeddings, self.noisy_queries, noisy_queries_result_list)
+                ]:
+                    if len(q_list) > 0:
+                        pair_scores = score_function(q_embeddings, sub_corpus_emb)
 
-                # Store them
-                for q_idx in range(len(query_embeddings)):
-                    exclude_set = self.excluded_docs.get(self.queries[q_idx].id, set())
-                    valid_hits = queries_result_list[score_fn_name][q_idx]
+                        # Get top-k for each query
+                        top_k_vals, top_k_idx = torch.topk(
+                            pair_scores, min(max_k, sub_corpus_emb.size(0)), dim=1, largest=True, sorted=False
+                        )
+                        top_k_vals = top_k_vals.cpu().tolist()
+                        top_k_idx = top_k_idx.cpu().tolist()
 
-                    for doc_idx, score_val in zip(top_k_idx[q_idx], top_k_vals[q_idx]):
-                        doc_id = self.corpus_ids[corpus_start + doc_idx]
-                        if doc_id in exclude_set:
-                            continue
-                        if len(valid_hits) < max_k:
-                            heapq.heappush(valid_hits, (score_val, doc_id))
-                        else:
-                            heapq.heappushpop(valid_hits, (score_val, doc_id))
+                        # Store them
+                        for q_idx in range(len(q_embeddings)):
+                            exclude_set = self.excluded_docs.get(q_list[q_idx].id, set())
+                            valid_hits = q_result_list[score_fn_name][q_idx]
+
+                            for doc_idx, score_val in zip(top_k_idx[q_idx], top_k_vals[q_idx]):
+                                doc_id = self.corpus_ids[corpus_start + doc_idx]
+                                if doc_id in exclude_set:
+                                    continue
+                                if len(valid_hits) < max_k:
+                                    heapq.heappush(valid_hits, (score_val, doc_id))
+                                else:
+                                    heapq.heappushpop(valid_hits, (score_val, doc_id))
 
         # Sort the hits for each query by descending score
-        for score_fn_name, results_for_queries in queries_result_list.items():
-            for q_idx in range(len(results_for_queries)):
-                sorted_hits = sorted(results_for_queries[q_idx], key=lambda x: x[0], reverse=True)
-                results_for_queries[q_idx] = sorted_hits
+        for q_result_list in [queries_result_list, noisy_queries_result_list]:
+            for score_fn_name, results_for_queries in q_result_list.items():
+                for q_idx in range(len(results_for_queries)):
+                    sorted_hits = sorted(results_for_queries[q_idx], key=lambda x: x[0], reverse=True)
+                    results_for_queries[q_idx] = sorted_hits
 
-        return queries_result_list
+        return queries_result_list, noisy_queries_result_list
 
     def _log_metrics_to_console(self, score_func_name: str, metric_values: Dict[str, Dict[int, float]]):
         """Nicely logs overall metrics to the console."""
@@ -645,86 +681,127 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                     f"{self.name}_{score_func_name}_topic_label_accuracy": tables["node_label"]
                 })
 
-    def _log_single_argument_classification_with_similarity_threshold(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
-        """
-        Logs top-1 classification accuracy at various confidence thresholds.
-        """
-        # Define confidence thresholds based on step size
-        confidences = [self.confidence_threshold]
+    def _generate_confidence_thresholds(self) -> Iterable[float]:
+        """Generate confidence thresholds based on step size"""
         if self.confidence_threshold_steps:
             confidences = np.arange(
                 self.confidence_threshold, 1.0 + self.confidence_threshold_steps, self.confidence_threshold_steps
             )
-            confidences = confidences[confidences <= 1.0]
+            return confidences[confidences <= 1.0]
+        return [self.confidence_threshold]
 
-        # Initialize accuracy tracking dict
-        results = {}
+    def _log_single_argument_classification_with_similarity_threshold(
+            self,
+            queries_result_list: Dict[str, List[List[Tuple[float, str]]]],
+            noisy_queries_result_list: Dict[str, List[List[Tuple[float, str]]]]
+    ) -> None:
+        """
+        Logs top-1 classification accuracy at various confidence thresholds.
+        """
+        confidences = self._generate_confidence_thresholds()
 
-        for score_func, per_query_hits in queries_result_list.items():
-            results[score_func] = {}
+        def compute_accuracy(
+                result_list: Dict[str, List[List[Tuple[float, str]]]],
+                confidences: Iterable[float],
+                query_list: list,
+                handle_noisy: bool = False
+        ) -> Dict[str, Dict[float, float]]:
+            """Computes accuracy at different confidence thresholds"""
+            results = {}
 
-            # Compute accuracy at various confidence thresholds
-            for confidence in confidences:
-                top1_hits = 0
-                total_queries = len(per_query_hits)
+            for score_func, per_query_hits in result_list.items():
+                results[score_func] = {}
 
-                # Evaluate each query
-                for q_idx, hits in enumerate(per_query_hits):
-                    query = self.queries[q_idx]
-                    top1 = hits[0]
+                for confidence in confidences:
+                    top1_hits = 0
+                    total_queries = len(per_query_hits)
 
-                    # Check if top-1 passage meets confidence threshold and is relevant
-                    if top1[0] >= confidence:
-                        top1_passage = self.corpus_map[top1[1]]
-                        if top1_passage.id in self.relevant_docs[query.id]:
-                            top1_hits += 1
+                    for q_idx, hits in enumerate(per_query_hits):
+                        query = query_list[q_idx]
+                        top1 = hits[0]
 
-                # Calculate accuracy
-                accuracy = top1_hits / total_queries if total_queries > 0 else 0.0
-                results[score_func][confidence] = accuracy
+                        if handle_noisy and not self.relevant_docs.get(query.id):
+                            # If query is noisy and top 1 prediction confidence is below threshold count it as correct
+                            if top1[0] < confidence:
+                                top1_hits += 1
+                        elif top1[0] >= confidence:
+                            # Check if the top-1 passage meets confidence threshold and is relevant to query
+                            top1_passage = self.corpus_map[top1[1]]
+                            if top1_passage.id in self.relevant_docs.get(query.id, []):
+                                top1_hits += 1
 
-        self._log_results_as_line_plot(results, "single_argument_classification", "Top-1-Prediction Accuracy By Confidence Threshold")
+                    # Compute accuracy as the fraction of correctly classified queries
+                    results[score_func][confidence] = top1_hits / total_queries if total_queries else 0.0
 
-    def _log_multi_argument_classification_with_similarity_threshold(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
+            return results
+
+        # Compute and log accuracy for normal queries
+        results = compute_accuracy(queries_result_list, confidences, self.queries)
+        self._log_results_as_line_plot(
+            results,
+            "single_argument_classification_normal_queries",
+            "Top1-Prediction Accuracy By Confidence Threshold (Normal Queries)"
+        )
+
+        if self.noisy_queries:
+            if queries_result_list.keys() != noisy_queries_result_list.keys():
+                raise ValueError("Dicts do not have similar score functions")
+
+            # Merge normal and noise query results for combined evaluation
+            merged_results_list = {k: queries_result_list[k] + noisy_queries_result_list[k] for k in queries_result_list.keys()}
+
+            for result_list, q_list, q_type, q_name in [
+                (noisy_queries_result_list, self.noisy_queries, "noisy", "Noisy"),
+                (merged_results_list, self.queries + self.noisy_queries, "merged", "Normal + Noisy")
+            ]:
+                # Compute and log accuracy for noisy and merged queries
+                results = compute_accuracy(result_list, confidences, q_list, handle_noisy=True)
+                self._log_results_as_line_plot(
+                    results,
+                    f"single_argument_classification_{q_type}_queries",
+                    f"Top1-Prediction Accuracy By Confidence Threshold ({q_name} Queries)"
+                )
+
+    def _log_multi_argument_classification_with_similarity_threshold(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]], noisy_queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
         """
         Logs multi argument classification accuracy at various confidence thresholds.
         """
         # Define confidence thresholds based on step size
-        confidences = [self.confidence_threshold]
-        if self.confidence_threshold_steps:
-            confidences = np.arange(
-                self.confidence_threshold, 1.0 + self.confidence_threshold_steps, self.confidence_threshold_steps
-            )
-            confidences = confidences[confidences <= 1.0]
+        confidences = self._generate_confidence_thresholds()
 
-        # Initialize accuracy tracking dicts
-        results_exact = {}
-        results_partial = {}
-        results_true_partial = {}
+        def compute_accuracy(
+                results_list: Dict[str, List[List[Tuple[float, str]]]],
+                confidences: Iterable[float],
+                query_list: list,
+                handle_noisy: bool = False
+        ) -> Tuple[Dict[str, Dict[float, float]], Dict[str, Dict[float, float]], Dict[str, Dict[float, float]]]:
+            # Initialize accuracy tracking dicts
+            results_exact = {}
+            results_partial = {}
+            results_true_partial = {}
 
-        for score_func, per_query_hits in queries_result_list.items():
-            results_exact[score_func] = {}
-            results_partial[score_func] = {}
-            results_true_partial[score_func] = {}
+            for score_func, per_query_hits in results_list.items():
+                results_exact[score_func] = {}
+                results_partial[score_func] = {}
+                results_true_partial[score_func] = {}
 
-            # Compute accuracy at different confidence thresholds
-            for confidence in confidences:
-                total_queries = len(per_query_hits)
-                exact_match, partial_match, true_partial_match = 0, 0, 0
+                for confidence in confidences:
+                    total_queries = len(per_query_hits)
+                    exact_match, partial_match, true_partial_match = 0, 0, 0
 
-                # Evaluate each query
-                for q_idx, hits in enumerate(per_query_hits):
-                    query = self.queries[q_idx]
-                    relevant_passages = [self.corpus_map[pid] for pid in self.relevant_docs[query.id]]
+                    for q_idx, hits in enumerate(per_query_hits):
+                        query = query_list[q_idx]
+                        relevant_passages = [self.corpus_map[pid] for pid in self.relevant_docs[query.id]]
 
-                    # Filter hits based on confidence threshold
-                    hits_above_threshold = [hit for hit in hits if hit[0] >= confidence]
-                    if hits_above_threshold:
-                        passages_above_threshold = [self.corpus_map[p[1]] for p in hits_above_threshold]
+                        hits_above_threshold = [hit for hit in hits if hit[0] >= confidence]
 
-                        # Check if all retrieved passages are relevant
-                        false_passage = any(passage not in relevant_passages for passage in passages_above_threshold)
-                        if not false_passage:
+                        if handle_noisy and not hits_above_threshold:
+                            partial_match += 1
+                            exact_match += 1
+                            true_partial_match += 1
+                        elif hits_above_threshold:
+                            passages_above_threshold = [self.corpus_map[p[1]] for p in hits_above_threshold]
+
                             relevant_passage_strings = {f"{p.discussion_scenario}_{p.label}" for p in relevant_passages}
                             threshold_passage_strings = {f"{p.discussion_scenario}_{p.label}" for p in passages_above_threshold}
 
@@ -740,18 +817,39 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                             if threshold_passage_strings == relevant_passage_strings:
                                 exact_match += 1
 
-                # Calculate accuracy scores
-                exact_acc = exact_match / total_queries if total_queries > 0 else 0.0
-                partial_acc = partial_match / total_queries if total_queries > 0 else 0.0
-                true_partial_acc = true_partial_match / total_queries if total_queries > 0 else 0.0
+                    # Calculate accuracy scores
+                    exact_acc = exact_match / total_queries if total_queries > 0 else 0.0
+                    partial_acc = partial_match / total_queries if total_queries > 0 else 0.0
+                    true_partial_acc = true_partial_match / total_queries if total_queries > 0 else 0.0
 
-                results_exact[score_func][confidence] = exact_acc
-                results_partial[score_func][confidence] = partial_acc
-                results_true_partial[score_func][confidence] = true_partial_acc
+                    results_exact[score_func][confidence] = exact_acc
+                    results_partial[score_func][confidence] = partial_acc
+                    results_true_partial[score_func][confidence] = true_partial_acc
+
+            return results_exact, results_partial, results_true_partial
+
+        results_exact, results_partial, results_true_partial = compute_accuracy(queries_result_list, confidences, self.queries)
 
         self._log_results_as_line_plot(results_exact, "multi_argument_classification_exact_match", "Exact Match Accuracy By Confidence Threshold")
         self._log_results_as_line_plot(results_partial, "multi_argument_classification_partial_match", "Partial Match Accuracy By Confidence Threshold")
         self._log_results_as_line_plot(results_partial, "multi_argument_classification_true_partial_match", "True Partial Match Accuracy By Confidence Threshold")
+
+        if self.noisy_queries:
+            if queries_result_list.keys() != noisy_queries_result_list.keys():
+                raise ValueError("Dicts do not have similar score functions")
+
+            # Merge normal and noise query results for combined evaluation
+            merged_results_list = {k: queries_result_list[k] + noisy_queries_result_list[k] for k in queries_result_list.keys()}
+            for result_list, q_list, q_type, q_name in [
+                (noisy_queries_result_list, self.noisy_queries, "noisy", "Noisy"),
+                (merged_results_list, self.queries + self.noisy_queries, "merged", "Normal + Noisy")
+            ]:
+                # Compute and log accuracy for noisy and merged queries
+                results_exact, results_partial, results_true_partial = compute_accuracy(result_list, confidences, q_list, handle_noisy=True)
+                self._log_results_as_line_plot(results_exact, f"multi_argument_classification_exact_match_{q_type}", f"Exact Match Accuracy By Confidence Threshold ({q_name} Queries)")
+                self._log_results_as_line_plot(results_partial, f"multi_argument_classification_partial_match_{q_type}", f"Partial Match Accuracy By Confidence Threshold ({q_name} Queries)")
+                self._log_results_as_line_plot(results_partial, f"multi_argument_classification_true_partial_match_{q_type}", f"True Partial Match Accuracy By Confidence Threshold ({q_name} Queries)")
+
 
     def _log_results_as_line_plot(self, results: Dict[str, Dict], metric_name: str, title: str) -> None:
         for score_func_name, confidence_threshold in results.items():
@@ -759,6 +857,33 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
             table = wandb.Table(data=data, columns=["Confidence", "Accuracy"])
             if self.run:
                 self.run.log({f"{self.name}_{score_func_name}_{metric_name}": wandb.plot.line(table, "Confidence", "Accuracy", title=title)})
+
+    def _log_query_and_passage_embeddings(self):
+        """Logs query and corpus embeddings to wandb."""
+        def format_query_labels(q: Query) -> str:
+            labels = sorted(q.labels)
+            return (q.discussion_scenario + "_" + "_".join(labels)).lower()
+
+        def format_passage_label(p: Passage) -> str:
+            return (p.discussion_scenario + "_" + p.label).lower()
+
+        def get_text_type(q: Optional[Query] = None, p: Optional[Passage] = None) -> str:
+            if q:
+                rtc = self._return_topic_rtc(q.discussion_scenario)
+                categories = [getattr(rtc.get_template_for_label(label), 'category', TemplateCategory.OTHER) for label in q.labels]
+                categories.sort(key=lambda e: e.value)
+                return f"{q.discussion_scenario}_{categories[0].name}"
+
+            if p:
+                rtc = self._return_topic_rtc(p.discussion_scenario)
+                return f"{p.discussion_scenario}_{getattr(rtc.get_template_for_label(p.label), 'category', TemplateCategory.OTHER).name}"
+
+
+        columns = ["label", "text", "discussion_scenario", "arg_type"] + [f"dim_{i}" for i in range(len(self.query_embeddings[0]))]
+        data = [(format_query_labels(q), q.text, q.discussion_scenario, get_text_type(q=q), *emb) for q, emb in zip(self.queries, self.query_embeddings)] + [(format_passage_label(p), p.text, p.discussion_scenario, get_text_type(p=p), *emb) for p, emb in zip(self.corpus, self.corpus_embeddings)]
+
+        if self.run:
+            self.run.log({"embeddings": wandb.Table(data=data, columns=columns)})
 
     def _return_topic_rtc(self, discussion_scenario: str) -> ResponseTemplateCollection:
         rtc = self.argument_graphs.get(discussion_scenario)
