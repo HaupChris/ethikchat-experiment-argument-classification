@@ -80,7 +80,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         confidence_threshold: Optional[float] = None,
         confidence_threshold_steps: Optional[float] = None,
         log_embeddings: Optional[bool] = False,
-        noisy_queries: Optional[List[any]] = None,
+        noisy_queries: Optional[Dict[str, any]] = None,
     ) -> None:
         super().__init__()
         # Filter out queries with no relevant docs
@@ -88,7 +88,9 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
             q for qid, q in queries.items()
             if qid in relevant_docs and len(relevant_docs[qid]) > 0
         ]
-        self.noisy_queries = noisy_queries if noisy_queries else []
+        self.noisy_queries = [
+            q for qid, q in noisy_queries.items()
+        ] if noisy_queries else []
 
         self.corpus_ids = list(corpus.keys())
         self.corpus = [corpus[cid] for cid in self.corpus_ids]
@@ -186,10 +188,10 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         # 5) Log confusion matrices
         self._log_confusion_matrices_to_wandb(queries_result_list)
 
-        # # 6) Log accuracies based on confidence thresholds
-        # if self.confidence_threshold:
-        #     self._log_single_argument_classification_with_similarity_threshold(queries_result_list, noisy_queries_result_list)
-        #     self._log_multi_argument_classification_with_similarity_threshold(queries_result_list, noisy_queries_result_list)
+        # 6) Log accuracies based on confidence thresholds
+        if self.confidence_threshold:
+            self._log_single_argument_classification_with_similarity_threshold(queries_result_list, noisy_queries_result_list)
+            self._log_multi_argument_classification_with_similarity_threshold(queries_result_list, noisy_queries_result_list)
 
         # 7) Give these metrics a prefix and store in model card
         final_metrics = self.prefix_name_to_metrics(metrics, self.name)
@@ -720,14 +722,14 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                         query = query_list[q_idx]
                         top1 = hits[0]
 
-                        if handle_noisy and not self.relevant_docs.get(query.id):
+                        if handle_noisy and not self.relevant_docs.get(query.id, []):
                             # If query is noisy and top 1 prediction confidence is below threshold count it as correct
                             if top1[0] < confidence:
                                 top1_hits += 1
                         elif top1[0] >= confidence:
                             # Check if the top-1 passage meets confidence threshold and is relevant to query
                             top1_passage = self.corpus_map[top1[1]]
-                            if top1_passage.id in self.relevant_docs.get(query.id, []):
+                            if top1_passage.id in self.relevant_docs.get(query.id):
                                 top1_hits += 1
 
                     # Compute accuracy as the fraction of correctly classified queries
@@ -791,7 +793,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
 
                     for q_idx, hits in enumerate(per_query_hits):
                         query = query_list[q_idx]
-                        relevant_passages = [self.corpus_map[pid] for pid in self.relevant_docs[query.id]]
+                        relevant_passages = [self.corpus_map[pid] for pid in self.relevant_docs.get(query.id, [])]
 
                         hits_above_threshold = [hit for hit in hits if hit[0] >= confidence]
 
@@ -830,9 +832,9 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
 
         results_exact, results_partial, results_true_partial = compute_accuracy(queries_result_list, confidences, self.queries)
 
-        self._log_results_as_line_plot(results_exact, "multi_argument_classification_exact_match", "Exact Match Accuracy By Confidence Threshold")
-        self._log_results_as_line_plot(results_partial, "multi_argument_classification_partial_match", "Partial Match Accuracy By Confidence Threshold")
-        self._log_results_as_line_plot(results_partial, "multi_argument_classification_true_partial_match", "True Partial Match Accuracy By Confidence Threshold")
+        self._log_results_as_line_plot(results_exact, "multi_argument_classification_exact_match", "Exact Match Accuracy By Confidence Threshold (Normal Queries)")
+        self._log_results_as_line_plot(results_partial, "multi_argument_classification_partial_match", "Partial Match Accuracy By Confidence Threshold (Normal Queries)")
+        self._log_results_as_line_plot(results_true_partial, "multi_argument_classification_true_partial_match", "True Partial Match Accuracy By Confidence Threshold (Normal Queries)")
 
         if self.noisy_queries:
             if queries_result_list.keys() != noisy_queries_result_list.keys():
@@ -848,7 +850,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 results_exact, results_partial, results_true_partial = compute_accuracy(result_list, confidences, q_list, handle_noisy=True)
                 self._log_results_as_line_plot(results_exact, f"multi_argument_classification_exact_match_{q_type}", f"Exact Match Accuracy By Confidence Threshold ({q_name} Queries)")
                 self._log_results_as_line_plot(results_partial, f"multi_argument_classification_partial_match_{q_type}", f"Partial Match Accuracy By Confidence Threshold ({q_name} Queries)")
-                self._log_results_as_line_plot(results_partial, f"multi_argument_classification_true_partial_match_{q_type}", f"True Partial Match Accuracy By Confidence Threshold ({q_name} Queries)")
+                self._log_results_as_line_plot(results_true_partial, f"multi_argument_classification_true_partial_match_{q_type}", f"True Partial Match Accuracy By Confidence Threshold ({q_name} Queries)")
 
 
     def _log_results_as_line_plot(self, results: Dict[str, Dict], metric_name: str, title: str) -> None:
@@ -880,7 +882,9 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
 
 
         columns = ["label", "text", "discussion_scenario", "arg_type"] + [f"dim_{i}" for i in range(len(self.query_embeddings[0]))]
-        data = [(format_query_labels(q), q.text, q.discussion_scenario, get_text_type(q=q), *emb) for q, emb in zip(self.queries, self.query_embeddings)] + [(format_passage_label(p), p.text, p.discussion_scenario, get_text_type(p=p), *emb) for p, emb in zip(self.corpus, self.corpus_embeddings)]
+        data = ([(format_query_labels(q), q.text, q.discussion_scenario, get_text_type(q=q), *emb) for q, emb in zip(self.queries, self.query_embeddings)] +
+                [(format_query_labels(q), q.text, q.discussion_scenario, get_text_type(q=q), *emb) for q, emb in zip(self.noisy_queries, self.noisy_query_embeddings)] +
+                [(format_passage_label(p), p.text, p.discussion_scenario, get_text_type(p=p), *emb) for p, emb in zip(self.corpus, self.corpus_embeddings)])
 
         if self.run:
             self.run.log({"embeddings": wandb.Table(data=data, columns=columns)})
