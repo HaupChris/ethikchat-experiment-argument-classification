@@ -158,6 +158,10 @@ def prepare_datasets(
             row["query_id"]: set(row["passages_ids"])
             for row in test_split["queries_trivial_passages_mapping"]
         }
+        noisy_queries = {
+            row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"])
+            for row in corpus_dataset["noisy_queries"]
+        }
 
     else:
         train_pos = create_dataset_for_multiple_negatives_ranking_loss(train_split, 2)
@@ -229,6 +233,10 @@ def prepare_datasets(
             for row in test_split["passages"]
             if row["id"] in all_test_ids
         }
+        noisy_queries = {
+            row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"])
+            for row in corpus_dataset["noisy_queries"]
+        }
 
     # -------------------------------------------------
     # Create the actual evaluators with loaded references
@@ -260,6 +268,7 @@ def prepare_datasets(
     deep_dive_evaluator_test = DeepDiveInformationRetrievalEvaluator(
         corpus=test_passages,
         queries=test_queries,
+        noisy_queries=noisy_queries,
         relevant_docs=test_relevant_passages,
         excluded_docs=test_trivial_passages,
         show_progress_bar=True,
