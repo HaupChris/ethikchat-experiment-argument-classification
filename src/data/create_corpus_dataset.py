@@ -705,7 +705,7 @@ def create_dataset(config: DatasetConfig) -> None:
             "query_id": [idx for idx, _ in queries_trivial_passages_mapping.items()],
             "passages_ids": [ids for _, ids in queries_trivial_passages_mapping.items()]
         }),
-        "excluded_utterances": Dataset.from_dict({"id": [query.id for (query, reason) in excluded_queries],
+        "noisy_queries": Dataset.from_dict({"id": [query.id for (query, reason) in excluded_queries],
                                                   "text": [query.text for (query, reason) in excluded_queries],
                                                   "labels": [query.labels for (query, reason) in excluded_queries],
                                                   "discussion_scenario": [query.discussion_scenario for (query, reason)
