@@ -242,6 +242,7 @@ def prepare_datasets(
         write_csv=True,
         log_top_k_predictions=5,
         run=wandb.run,
+        name="eval",
     )
 
     excluding_ir_evaluator_test = ExcludingInformationRetrievalEvaluator(
@@ -253,6 +254,7 @@ def prepare_datasets(
         write_csv=True,
         log_top_k_predictions=5,
         run=wandb.run,
+        name="test",
     )
 
     deep_dive_evaluator_test = DeepDiveInformationRetrievalEvaluator(
@@ -265,7 +267,8 @@ def prepare_datasets(
         run=wandb.run,
         argument_graphs=argument_graphs,
         confidence_threshold=0.8,
-        confidence_threshold_steps=0.01
+        confidence_threshold_steps=0.01,
+        name="test_deepdive"
     )
 
     return (
@@ -363,7 +366,8 @@ def main(is_test_run=False):
     wandb.log(prefixed_pretrain_eval_results)
 
     # 10) Decide how often to evaluate and save
-    eval_save_steps = int(4000 / (exp_config.batch_size / 32))
+    # evaluate twice per epoch.
+    eval_save_steps = int((len(train_pos) / config.batch_size) / 2)
     early_stopper = EarlyStoppingWithLoggingCallback(
         early_stopping_patience=3,  # you can change this value if needed
         early_stopping_threshold=0.001  # you can change this value if needed
@@ -408,18 +412,18 @@ def main(is_test_run=False):
 
     # 14) Final evaluation on the validation set
     final_eval_results = excluding_ir_evaluator_eval(model)
-    prefixed_eval_results = {f"eval_{key}": value for key, value in final_eval_results.items()}
-    wandb.log(prefixed_eval_results)
+    # prefixed_eval_results = {f"eval_{key}": value for key, value in final_eval_results.items()}
+    # wandb.log(prefixed_eval_results)
 
     # 15) Evaluate on the test set
     test_eval_results = excluding_ir_evaluator_test(model)
-    prefixed_test_eval_results = {f"test_{key}": value for key, value in test_eval_results.items()}
-    wandb.log(prefixed_test_eval_results)
+    # prefixed_test_eval_results = {f"test_{key}": value for key, value in test_eval_results.items()}
+    # wandb.log(prefixed_test_eval_results)
 
     # 16) Deep dive test evaluation
     test_deep_dive_results = deep_dive_evaluator_test(model)
-    prefixed_test_deep_dive_results = {f"test_{key}": value for key, value in test_deep_dive_results.items()}
-    wandb.log(prefixed_test_deep_dive_results)
+    # prefixed_test_deep_dive_results = {f"test_{key}": value for key, value in test_deep_dive_results.items()}
+    # wandb.log(prefixed_test_deep_dive_results)
 
     wandb.finish()
 
@@ -438,16 +442,33 @@ if __name__ == "__main__":
             "dataset_split_type": DatasetSplitType.InDistribution.value,
             "dataset_split_name": "dataset_split_in_distribution",
             "model_name": "deutsche-telekom/gbert-large-paraphrase-euclidean",
-            "learning_rate": 1e-5,
+            "learning_rate": 2e-5,
             "batch_size": 2,
             "num_epochs": 10,
-            "warmup_ratio": 0.0,
+            "warmup_ratio": 0.1,
             "context_length": 3,
             "add_discussion_scenario_info": True,
             "test_scenario": DiscussionSzenario.JURAI.value,
-            "num_shots_queries": 2,
-            "num_shots_passages": 2,
+            "num_shots_queries": -1,
+            "num_shots_passages": 21,
         }
+
+        # 	add_discussion_scenario_info: True
+        # 	batch_size: 128
+        # 	context_length: 3
+        # 	dataset_dir: data/processed/with_conte
+        # 	dataset_name: corpus_dataset_v1
+        # 	dataset_split_name: dataset_split_in_distribution
+        # 	dataset_split_type: in_distribution
+        # 	experiment_dir: experiments_outputs
+        # 	learning_rate: 2e-05
+        # 	model_name: T-Systems-onsite/cross-en-de-roberta-sentence-transformer
+        # 	num_epochs: 8
+        # 	num_shots_passages: 21
+        # 	num_shots_queries: -1
+        # 	project_root: /home/ls6/hauptmann/ethikchat-experiment-argument-classification
+        # 	test_scenario: MEDAI
+        # 	warmup_ratio: 0.1
         wandb.init(
             project="argument-classification",  # or "argument-classification-test"
             config=local_config,
