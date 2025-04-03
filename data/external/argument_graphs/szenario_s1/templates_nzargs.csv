@@ -16,4 +16,4 @@
 14,NZ.K11,NZ,CON,,,Täuschung der KI,,KI /kann getäuscht werden,KI kann getäuscht bzw. manipuliert werden,"Die medKI kann durch das Lügen oder Verheimlichen von Patienten getäuscht werden. So wird die KI zu verfälschten Diagnosen oder Verschreibungen manipuliert, die nicht der Realität angemessen sind. Derartige Verfälschungen können auch unbeabsichtigt von Patientenaussagen verursacht werden.",NZ.G3,0,
 15,NZ.K11-1,NZ,PRO,NZ.K11,,Das medizinische Personal nimmt  die Patientendaten auf,,,,,NZ.G3,,
 16,NZ.P1,NZ,PRO,,,KI kann alles in Zukunft,,KI /wird in zukunft gewissermaßen alles können.,KI wird in zukunft gewissermaßen alles können.,"KI wird in der zukunft gewissermaßen alles können, wodurch diese Diskussion hinfällig ist.",NZ.G3,,
-17,NZ.P1-1,NZ,CON,,,,,,,"Dass KI in Zukunft... lernen wird, ist unrealistisch.",NZ.G3,,
+17,NZ.P1-1,NZ,CON,NZ.P1,,,,,,"Dass KI in Zukunft... lernen wird, ist unrealistisch.",NZ.G3,,
