@@ -362,8 +362,8 @@ def main(is_test_run=False):
 
     # 9) Pre-training evaluation on the eval set
     pretrain_eval_results = excluding_ir_evaluator_eval(model)
-    prefixed_pretrain_eval_results = {f"eval_{key}": value for key, value in pretrain_eval_results.items()}
-    wandb.log(prefixed_pretrain_eval_results)
+    # prefixed_pretrain_eval_results = {f"eval_{key}": value for key, value in pretrain_eval_results.items()}
+    # wandb.log(prefixed_pretrain_eval_results)
 
     # 10) Decide how often to evaluate and save
     # evaluate twice per epoch.
