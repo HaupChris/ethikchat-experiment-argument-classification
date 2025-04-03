@@ -363,7 +363,8 @@ def main(is_test_run=False):
     wandb.log(prefixed_pretrain_eval_results)
 
     # 10) Decide how often to evaluate and save
-    eval_save_steps = int(4000 / (exp_config.batch_size / 32))
+    # evaluate twice per epoch.
+    eval_save_steps = int((len(train_pos) / config.batch_size) / 2)
     early_stopper = EarlyStoppingWithLoggingCallback(
         early_stopping_patience=3,  # you can change this value if needed
         early_stopping_threshold=0.001  # you can change this value if needed
