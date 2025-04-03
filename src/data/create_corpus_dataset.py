@@ -149,18 +149,6 @@ class DatasetConfig:
     utterance_type: UtteranceType = UtteranceType.UserAndBot
     eval_size: float = 0.2
     validation_test_ratio: float = 0.5
-    noisy_labels = ['OTHER', "INTRO",
-                    "Z_ARG", "PRO_ZARG", "CON_ZARG",
-                    "NZ_ARG", "PRO_NZARG", "CON_NZARG",
-                    "FAQ.G1",
-                    "Z.GK1", "Z.GK2", "Z.GK3", "Z.GK4", "Z.GK5", "Z.GK6", "Z.GK7", "Z.GK8", "Z.GK9", "Z.GK10",
-                    "Z.GP1", "Z.GP2", "Z.GP3", "Z.GP4", "Z.GP5", "Z.GP6", "Z.GP7", "Z.GP8", "Z.GP9", "Z.GP10",
-                    "NZ.G1", "NZ.G2", "NZ.G3", "NZ.G4",
-                    "NZ.P1-1", "NZ.P2-1", "NZ.P3-1", "NZ.P4-1", "NZ.P5-1", "NZ.P6-1", "NZ.P7-1", "NZ.P8-1", "NZ.P9-1",
-                    "NZ.P10-1",
-                    "NZ.K1-1", "NZ.K2-1", "NZ.K3-1", "NZ.K4-1", "NZ.K5-1", "NZ.K6-1", "NZ.K7-1", "NZ.K8-1", "NZ.K9-1",
-                    "NZ.K10-1",
-                    "CONSENT", "DISSENT"]
 
 
 class DatasetSplitType(Enum):
@@ -574,7 +562,7 @@ def create_passages_from_argument_graph(argument_graph: ResponseTemplateCollecti
     """
     passages = []
 
-    templates = argument_graph.arguments_templates + argument_graph.faq_question_templates
+    templates = argument_graph.user_intent_templates
     templates = list(filter(lambda x: x.label not in excluded_labels, templates))
 
     for template in templates:
@@ -669,10 +657,10 @@ def create_dataset(config: DatasetConfig) -> None:
 
     all_dialogues = dialogues_medai + dialogues_jurai + dialogues_autoai + dialogues_refai
 
-    argument_graph_med = load_response_template_collection("s1")
-    argument_graph_jur = load_response_template_collection("s2")
-    argument_graph_auto = load_response_template_collection("s3")
-    argument_graph_ref = load_response_template_collection("s4")
+    argument_graph_med = load_response_template_collection("s1", argument_graphs_dir = "data/external/argument_graphs/")
+    argument_graph_jur = load_response_template_collection("s2", argument_graphs_dir = "data/external/argument_graphs/")
+    argument_graph_auto = load_response_template_collection("s3", argument_graphs_dir = "data/external/argument_graphs/")
+    argument_graph_ref = load_response_template_collection("s4", argument_graphs_dir = "data/external/argument_graphs/")
 
     argument_graphs = {
         DiscussionSzenario.MEDAI: argument_graph_med,
@@ -681,8 +669,16 @@ def create_dataset(config: DatasetConfig) -> None:
         DiscussionSzenario.REFAI: argument_graph_ref
     }
 
+    all_possible_labels = [utterance.true_labels for dialogue in all_dialogues for utterance in dialogue.utterances]
+    all_possible_labels = set([label for label_list in all_possible_labels for label in label_list])
+    good_labels = set()
+    for arg_graph in argument_graphs.values():
+        good_labels.update(arg_graph.user_intent_labels)
+
+    noisy_labels = all_possible_labels.difference(good_labels)
+
     queries, passages, queries_relevant_passages_mapping, queries_trivial_passages_mapping, excluded_queries = create_dataset_splits(
-        all_dialogues, utterance_type, argument_graphs, config.noisy_labels)
+        all_dialogues, utterance_type, argument_graphs, noisy_labels)
 
     # create hf dataset
     corpus_dataset = DatasetDict({
