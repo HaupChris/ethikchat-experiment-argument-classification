@@ -242,6 +242,7 @@ def prepare_datasets(
         write_csv=True,
         log_top_k_predictions=5,
         run=wandb.run,
+        name="eval",
     )
 
     excluding_ir_evaluator_test = ExcludingInformationRetrievalEvaluator(
@@ -253,6 +254,7 @@ def prepare_datasets(
         write_csv=True,
         log_top_k_predictions=5,
         run=wandb.run,
+        name="test",
     )
 
     deep_dive_evaluator_test = DeepDiveInformationRetrievalEvaluator(
@@ -265,7 +267,8 @@ def prepare_datasets(
         run=wandb.run,
         argument_graphs=argument_graphs,
         confidence_threshold=0.8,
-        confidence_threshold_steps=0.01
+        confidence_threshold_steps=0.01,
+        name="test_deepdive"
     )
 
     return (
@@ -409,18 +412,18 @@ def main(is_test_run=False):
 
     # 14) Final evaluation on the validation set
     final_eval_results = excluding_ir_evaluator_eval(model)
-    prefixed_eval_results = {f"eval_{key}": value for key, value in final_eval_results.items()}
-    wandb.log(prefixed_eval_results)
+    # prefixed_eval_results = {f"eval_{key}": value for key, value in final_eval_results.items()}
+    # wandb.log(prefixed_eval_results)
 
     # 15) Evaluate on the test set
     test_eval_results = excluding_ir_evaluator_test(model)
-    prefixed_test_eval_results = {f"test_{key}": value for key, value in test_eval_results.items()}
-    wandb.log(prefixed_test_eval_results)
+    # prefixed_test_eval_results = {f"test_{key}": value for key, value in test_eval_results.items()}
+    # wandb.log(prefixed_test_eval_results)
 
     # 16) Deep dive test evaluation
     test_deep_dive_results = deep_dive_evaluator_test(model)
-    prefixed_test_deep_dive_results = {f"test_{key}": value for key, value in test_deep_dive_results.items()}
-    wandb.log(prefixed_test_deep_dive_results)
+    # prefixed_test_deep_dive_results = {f"test_{key}": value for key, value in test_deep_dive_results.items()}
+    # wandb.log(prefixed_test_deep_dive_results)
 
     wandb.finish()
 
