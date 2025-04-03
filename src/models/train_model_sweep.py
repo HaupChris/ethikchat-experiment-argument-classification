@@ -438,16 +438,33 @@ if __name__ == "__main__":
             "dataset_split_type": DatasetSplitType.InDistribution.value,
             "dataset_split_name": "dataset_split_in_distribution",
             "model_name": "deutsche-telekom/gbert-large-paraphrase-euclidean",
-            "learning_rate": 1e-5,
+            "learning_rate": 2e-5,
             "batch_size": 2,
             "num_epochs": 10,
-            "warmup_ratio": 0.0,
+            "warmup_ratio": 0.1,
             "context_length": 3,
             "add_discussion_scenario_info": True,
             "test_scenario": DiscussionSzenario.JURAI.value,
-            "num_shots_queries": 2,
-            "num_shots_passages": 2,
+            "num_shots_queries": -1,
+            "num_shots_passages": 21,
         }
+
+        # 	add_discussion_scenario_info: True
+        # 	batch_size: 128
+        # 	context_length: 3
+        # 	dataset_dir: data/processed/with_conte
+        # 	dataset_name: corpus_dataset_v1
+        # 	dataset_split_name: dataset_split_in_distribution
+        # 	dataset_split_type: in_distribution
+        # 	experiment_dir: experiments_outputs
+        # 	learning_rate: 2e-05
+        # 	model_name: T-Systems-onsite/cross-en-de-roberta-sentence-transformer
+        # 	num_epochs: 8
+        # 	num_shots_passages: 21
+        # 	num_shots_queries: -1
+        # 	project_root: /home/ls6/hauptmann/ethikchat-experiment-argument-classification
+        # 	test_scenario: MEDAI
+        # 	warmup_ratio: 0.1
         wandb.init(
             project="argument-classification",  # or "argument-classification-test"
             config=local_config,

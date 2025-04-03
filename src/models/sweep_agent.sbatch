@@ -23,7 +23,7 @@ export CUDA_LAUNCH_BLOCKING=1
 # wandb sweep sweep_config.yaml
 # which prints e.g. "Run wandb agent <USERNAME>/<PROJECT>/<SWEEP_ID>"
 
-SWEEP_ID="christian-hauptmann-uniwue/argument-classification/1y0o2pmz"  # Replace with your actual sweep ID
+SWEEP_ID="christian-hauptmann-uniwue/argument-classification/45g06mpb"  # Replace with your actual sweep ID
 
 echo "Starting W&B agent on task $SLURM_ARRAY_TASK_ID..."
 wandb agent $SWEEP_ID
