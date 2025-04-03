@@ -19,15 +19,15 @@ from src.data.create_corpus_dataset import DatasetSplitType, Passage, Query, loa
 from src.evaluation.deep_dive_information_retrieval_evaluator import DeepDiveInformationRetrievalEvaluator
 from src.evaluation.excluding_information_retrieval_evaluator import ExcludingInformationRetrievalEvaluator
 from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss, add_context_to_texts, \
-    add_scenario_tokens_to_texts
+    add_scenario_tokens_to_texts, filter_queries_for_few_shot_setting, filter_passages_for_few_shot_setting
 from src.models.experiment_config import ExperimentConfig
 
 
-def load_argument_graphs(project_root) -> Dict[str, ResponseTemplateCollection]:
-    argument_graph_med = load_response_template_collection("s1", project_root, "data/external/argument_graphs_test")
-    argument_graph_jur = load_response_template_collection("s2", project_root, "data/external/argument_graphs_test")
-    argument_graph_auto = load_response_template_collection("s3", project_root, "data/external/argument_graphs_test")
-    argument_graph_ref = load_response_template_collection("s4", project_root, "data/external/argument_graphs_test")
+def load_argument_graphs(project_root, is_test_run=False) -> Dict[str, ResponseTemplateCollection]:
+    argument_graph_med = load_response_template_collection("s1", project_root, f"data/external/argument_graphs{'_test' if is_test_run else ''}")
+    argument_graph_jur = load_response_template_collection("s2", project_root, f"data/external/argument_graphs{'_test' if is_test_run else ''}")
+    argument_graph_auto = load_response_template_collection("s3", project_root, f"data/external/argument_graphs{'_test' if is_test_run else ''}")
+    argument_graph_ref = load_response_template_collection("s4", project_root, f"data/external/argument_graphs{'_test' if is_test_run else ''}")
 
     return {
         DiscussionSzenario.MEDAI.value: argument_graph_med,
@@ -102,6 +102,11 @@ def prepare_datasets(
         eval_split = add_scenario_tokens_to_texts(eval_split)
         test_split = add_scenario_tokens_to_texts(test_split)
 
+    if exp_config.num_shots_queries > -1:
+        train_split = filter_queries_for_few_shot_setting(train_split, exp_config.num_shots_queries)
+
+    if exp_config.num_shots_passages > -1:
+        train_split = filter_passages_for_few_shot_setting(train_split, exp_config.num_shots_passages)
 
     check_dataset_texts_for_truncation(tokenizer, train_split, "train", maximum_sequence_length)
     check_dataset_texts_for_truncation(tokenizer, eval_split, "eval", maximum_sequence_length)
@@ -111,7 +116,6 @@ def prepare_datasets(
     if not is_test_run:
         train_pos = create_dataset_for_multiple_negatives_ranking_loss(train_split)
         eval_pos = create_dataset_for_multiple_negatives_ranking_loss(eval_split)
-
 
         # Build references for EVAL
         eval_passages = {
@@ -288,21 +292,10 @@ def main(is_test_run=False):
     env_path = os.path.join(project_root, ".env")
     load_dotenv(env_path)
 
-
-    # 3) Print debug info
-    print(f"Project Root: {project_root}")
-    print(f"Using model: {config.model_name}")
-    print(f"Learning Rate: {config.learning_rate}")
-    print(f"Batch Size: {config.batch_size}")
-    print(f"Num Epochs: {config.num_epochs}")
-    print(f"run_name: {sweep_run_name}")
-    print(f"context length: {config.context_length}")
-    print(f"add discussion_scenario info: {config.add_discussion_scenario_info}")
-
-    # 4) Login to W&B (key is usually read from env or netrc)
+    # 3) Login to W&B (key is usually read from env or netrc)
     wandb.login()
 
-    # 5) Prepare training configuration
+    # 4) Prepare training configuration
     scenario_string_to_discussion_scenario={
         "MEDAI": DiscussionSzenario.MEDAI,
         "JURAI": DiscussionSzenario.JURAI,
@@ -330,26 +323,32 @@ def main(is_test_run=False):
         "warmup_ratio": config.warmup_ratio,
         "context_length": config.context_length,
         "add_discussion_scenario_info": config.add_discussion_scenario_info,
-        "test_scenario": test_scenario
+        "test_scenario": test_scenario,
+        "num_shots_passages": config.num_shots_passages,
+        "num_shots_queries": config.num_shots_queries,
     }
     exp_config = ExperimentConfig(**exp_config_dict)
+
+    print("\n\n ------------------------ Experiment configuration: ------------------------ ")
+    for key, value in exp_config.model_dump().items():
+        print(f"{key}: {value}")
+    print(" ------------------------ ----------------------------- ------------------------ \n\n")
+
 
     # Make sure output directory exists
     os.makedirs(exp_config.model_run_dir, exist_ok=True)
 
-    # 6) Load the model
+    # 5) Load the model
     model = SentenceTransformer(exp_config.model_name)
 
-    # 7) Define the loss
+    # 6) Define the loss
     loss = CachedMultipleNegativesRankingLoss(model=model, show_progress_bar=False, mini_batch_size=8)
 
-    # 8) Load argument graphs
-    if is_test_run:
-        argument_graphs = load_argument_graphs(exp_config.project_root)
-    else:
-        argument_graphs = load_argument_graphs(exp_config.project_root)
+    # 7) Load argument graphs
+    argument_graphs = load_argument_graphs(exp_config.project_root, is_test_run)
 
-    # 9) Prepare train/eval/test data (including evaluators)
+
+    # 8) Prepare train/eval/test data (including evaluators)
     (
         train_pos,
         eval_pos,
@@ -358,12 +357,12 @@ def main(is_test_run=False):
         deep_dive_evaluator_test
     ) = prepare_datasets(exp_config, model.tokenizer, argument_graphs, model.max_seq_length, is_test_run=is_test_run)
 
-    # 10) Pre-training evaluation on the eval set
+    # 9) Pre-training evaluation on the eval set
     pretrain_eval_results = excluding_ir_evaluator_eval(model)
     prefixed_pretrain_eval_results = {f"eval_{key}": value for key, value in pretrain_eval_results.items()}
     wandb.log(prefixed_pretrain_eval_results)
 
-    # 11) Decide how often to evaluate and save
+    # 10) Decide how often to evaluate and save
     eval_save_steps = int(4000 / (exp_config.batch_size / 32))
     early_stopper = EarlyStoppingWithLoggingCallback(
         early_stopping_patience=2,  # you can change this value if needed
@@ -445,12 +444,14 @@ if __name__ == "__main__":
             "warmup_ratio": 0.0,
             "context_length": 3,
             "add_discussion_scenario_info": True,
-            "test_scenario": DiscussionSzenario.JURAI.value
+            "test_scenario": DiscussionSzenario.JURAI.value,
+            "num_shots_queries": 2,
+            "num_shots_passages": 2,
         }
         wandb.init(
             project="argument-classification",  # or "argument-classification-test"
             config=local_config,
-            mode="online"
+            mode="offline"
         )
         main(is_test_run=True)
     else:

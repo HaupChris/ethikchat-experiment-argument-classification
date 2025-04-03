@@ -31,6 +31,9 @@ class ExperimentConfig(BaseModel):
         context_length: int (-1 for all available context, 0 for no context, > 0 for the specified number of utterances before the given user utterance)
         add_discussion_scenario_info: bool (if true, at the beginning of a query and passage text the discussion_scenario is added, e.g. [MEDAI])
         test_scenario: DiscussionSzenario (the discussion scenario that is to be left out from the train and kept for the test set)
+        num_shots_passages: int (The number of passages for each label for each scenario in the dataset. If for a certain lable not enough passages are available, all available are used. -1 selects all)
+        num_shots_queries: int (The number of queries for each label for each scenario in the dataset. If for a certain lable not enough queries are available, all available are used. -1 selects all)
+
     """
     project_root: str
     experiment_dir: str
@@ -51,4 +54,6 @@ class ExperimentConfig(BaseModel):
     context_length: int
     add_discussion_scenario_info: bool
     test_scenario: DiscussionSzenario
+    num_shots_passages: int
+    num_shots_queries: int
 
