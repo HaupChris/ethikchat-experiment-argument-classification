@@ -110,6 +110,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         self.score_functions = score_functions
         self.score_function_names = sorted(list(self.score_functions.keys())) if score_functions else []
         self.main_score_function = SimilarityFunction(main_score_function) if main_score_function else None
+        self.primary_metric = "cosine_accuracy@1"
 
         self.truncate_dim = truncate_dim
         self.run = run
@@ -178,6 +179,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
 
         # 2) Log qualitative error analysis table
         self._log_qualitative_error_analysis_table(queries_result_list)
+
 
         # 3) Log accuracy@k tables
         self._compute_accuracies_at_k(queries_result_list)
