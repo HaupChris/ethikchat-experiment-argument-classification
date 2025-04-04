@@ -178,7 +178,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         queries_result_list, noisy_queries_result_list = self._compute_scores(model, *args, **kwargs)
 
         # 2) Log qualitative error analysis table
-        self._log_qualitative_error_analysis_table(queries_result_list)
+        self._log_qualitative_error_analysis_table(queries_result_list, noisy_queries_result_list)
 
 
         # 3) Log accuracy@k tables
@@ -358,7 +358,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
 
             fOut.write(",".join(map(str, output_data)) + "\n")
 
-    def _log_qualitative_error_analysis_table(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
+    def _log_qualitative_error_analysis_table(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]], noisy_queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
         """
         Logs an error analysis table to wandb containing a row for each query.
         The table includes anchor labels and text, top1-label/text/similarity, top5-rank/label/text/similarity, top1-prediction-match, rank of first correct relevant text.
@@ -376,6 +376,21 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                     return rank
 
             return -1
+
+        def find_threshold_value(similarity: float) -> any:
+            """Returns the first confidence threshold within the interval for which similarity would be evaluated as correct or higher/lower if the similarity is above/below the interval"""
+            confidences = self._generate_confidence_thresholds()
+
+            lowest = confidences[0]
+
+            if similarity < lowest:
+                return "lower"
+
+            for c in confidences:
+                if similarity < c:
+                    return str(round(c, 2))
+
+            return "higher"
 
         # Iterate over each score function
         for score_func_name, per_query_hits in queries_result_list.items():
@@ -421,6 +436,51 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 )
 
             self.run.log({f"{self.name}_{score_func_name}_error_analysis": table})
+
+
+        if self.noisy_queries:
+             # Iterate over each score function
+            for score_func_name, per_query_hits in noisy_queries_result_list.items():
+                table = wandb.Table(columns=[
+                    "anchor_labels",
+                    "anchor_text",
+                    "top1_similarity",
+                    "top1_label",
+                    "top1_text",
+                    "top5",
+                    "first_correct_confidence_threshold"
+                ])
+
+                # Iterate over each query and its predicted similarities
+                for q_idx, hits in enumerate(per_query_hits):
+                    query = self.noisy_queries[q_idx]
+
+                    # Get data about top1 prediction
+                    top1_similarity, top1_cid = hits[0]
+                    top1_passage = self.corpus_map[top1_cid]
+
+                    # Get the top 5 predictions
+                    top5 = [(sim, self.corpus_map[cid]) for sim, cid in hits[:5]]
+                    top5_tuples = [
+                        f"{rank}//{passage.label}//{passage.text}//{sim}"
+                        for rank, (sim, passage) in enumerate(top5, start=1)
+                    ]
+
+                    # Get rank of first relevant passage
+                    first_correct_threshold = find_threshold_value(similarity=top1_similarity)
+
+                    table.add_data(
+                        query.labels,
+                        query.text,
+                        top1_similarity,
+                        top1_passage.label,
+                        top1_passage.text,
+                        top5_tuples,
+                        first_correct_threshold
+                    )
+
+                self.run.log({f"{self.name}_{score_func_name}_error_analysis_noisy_queries": table})
+
 
     def _log_confusion_matrices_to_wandb(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
         """
