@@ -12,6 +12,7 @@ from sentence_transformers.losses import CachedMultipleNegativesRankingLoss
 from sentence_transformers import SentenceTransformerTrainingArguments, SentenceTransformerTrainer
 from sentence_transformers.training_args import BatchSamplers
 from transformers import PreTrainedTokenizer
+from transformers.integrations import WandbCallback
 
 from src.callbacks.custom_early_stopping_callback import EarlyStoppingWithLoggingCallback
 from src.data.dataset_splits import create_splits_from_corpus_dataset
@@ -307,13 +308,6 @@ def main(is_test_run=False):
     # 3) Login to W&B (key is usually read from env or netrc)
     wandb.login()
 
-    # 4) Prepare training configuration
-    scenario_string_to_discussion_scenario={
-        "MEDAI": DiscussionSzenario.MEDAI,
-        "JURAI": DiscussionSzenario.JURAI,
-        "AUTOAI": DiscussionSzenario.AUTOAI,
-        "REFAI": DiscussionSzenario.REFAI,
-    }
     test_scenario = config.test_scenario
 
     exp_config_dict = {
@@ -370,9 +364,8 @@ def main(is_test_run=False):
     ) = prepare_datasets(exp_config, model.tokenizer, argument_graphs, model.max_seq_length, is_test_run=is_test_run)
 
     # 9) Pre-training evaluation on the eval set
-    pretrain_eval_results = excluding_ir_evaluator_eval(model)
-    # prefixed_pretrain_eval_results = {f"eval_{key}": value for key, value in pretrain_eval_results.items()}
-    # wandb.log(prefixed_pretrain_eval_results)
+    excluding_ir_evaluator_eval(model)
+
 
     # 10) Decide how often to evaluate and save
     # evaluate twice per epoch.
@@ -381,7 +374,6 @@ def main(is_test_run=False):
         early_stopping_patience=3,  # you can change this value if needed
         early_stopping_threshold=0.001  # you can change this value if needed
     )
-
 
     train_args = SentenceTransformerTrainingArguments(
         output_dir=exp_config.model_run_dir,
@@ -401,7 +393,9 @@ def main(is_test_run=False):
         lr_scheduler_type="linear",
         batch_sampler=BatchSamplers.NO_DUPLICATES,
         metric_for_best_model="cosine_accuracy@1",
-        log_level="info"
+        log_level="info",
+        logging_steps=10,
+        report_to="wandb",
     )
 
 
@@ -413,26 +407,20 @@ def main(is_test_run=False):
         eval_dataset=eval_pos,
         loss=loss,
         evaluator=excluding_ir_evaluator_eval,
-        callbacks=[early_stopper]
+        callbacks=[early_stopper, WandbCallback()]
     )
 
     # 13) Train
     trainer.train()
 
     # 14) Final evaluation on the validation set
-    final_eval_results = excluding_ir_evaluator_eval(model)
-    # prefixed_eval_results = {f"eval_{key}": value for key, value in final_eval_results.items()}
-    # wandb.log(prefixed_eval_results)
+    excluding_ir_evaluator_eval(model)
 
     # 15) Evaluate on the test set
-    test_eval_results = excluding_ir_evaluator_test(model)
-    # prefixed_test_eval_results = {f"test_{key}": value for key, value in test_eval_results.items()}
-    # wandb.log(prefixed_test_eval_results)
+    excluding_ir_evaluator_test(model)
 
     # 16) Deep dive test evaluation
-    test_deep_dive_results = deep_dive_evaluator_test(model)
-    # prefixed_test_deep_dive_results = {f"test_{key}": value for key, value in test_deep_dive_results.items()}
-    # wandb.log(prefixed_test_deep_dive_results)
+    deep_dive_evaluator_test(model)
 
     wandb.finish()
 
@@ -481,7 +469,7 @@ if __name__ == "__main__":
         wandb.init(
             project="argument-classification",  # or "argument-classification-test"
             config=local_config,
-            mode="offline"
+            mode="online"
         )
         main(is_test_run=True)
     else:
