@@ -275,7 +275,7 @@ def prepare_datasets(
         write_csv=True,
         run=wandb.run,
         argument_graphs=argument_graphs,
-        confidence_threshold=0.8,
+        confidence_threshold=0.7,
         confidence_threshold_steps=0.01,
         name="test_deepdive"
     )
