@@ -46,13 +46,12 @@ def calculate_accuracy(data: Dict[str, int]) -> float:
 class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
     """
     IR evaluator that logs:
-      1) Per-topic, per-topic + (node type, node level, and node label) accuracy@K to a W&B table
-      2) Per-topic, per-topic + (node type, node level, and node label) stance accuracies as metrics
-      3) Confusion matrices over topics, topic + (node type, node level, and node label) with absolute and relative values using W&B's API
-      4) A W&B table for qualitative error analysis containing the columns (anchor_labels, anchor_text, top1_similarity, top1_label, top1_text, top5,
-      top1_prediction_correct, rank_first_relevant) for each query in the dataset
-      5) Graphs displaying single/multi argument classification accuracies depending on a set confidence threshold
-      6) Query and Passage Embeddings
+        1) Error Analysis Table for Normal and Noisy Queries
+        2) Per-topic, per-topic + (node type, node level, and node label) accuracy@K to a W&B table
+        3) Per-topic, per-topic + (node type, node level, and node label) stance accuracies as metrics
+        4) Confusion matrices over topics, topic + (node type, node level, and node label) with absolute and relative values using W&B's API
+        5) Graphs displaying single/multi argument classification accuracies depending on a set confidence threshold
+        6) Normal + Noisy Query and Passage Embeddings for use with W&B's 2D Projection Tool
     """
 
     def __init__(
