@@ -25,7 +25,7 @@ from src.features.build_features import create_dataset_for_multiple_negatives_ra
 from src.models.experiment_config import ExperimentConfig
 
 
-print(f"Cuda available: {torch.cuda.is_available()}")
+
 
 def load_argument_graphs(project_root, is_test_run=False) -> Dict[str, ResponseTemplateCollection]:
     argument_graph_med = load_response_template_collection("s1", project_root, f"data/external/argument_graphs{'_test' if is_test_run else ''}")
@@ -302,6 +302,7 @@ def main(is_test_run=False):
     sweep_id = wandb.run.sweep_id if wandb.run.sweep_id else "manual"
     sweep_run_name = f"{run_name}"
     print(f"W&B assigned run name: {sweep_run_name}")
+    print(f"Cuda available: {torch.cuda.is_available()}")
 
     # 2) Load environment variables
     project_root = config.get("project_root", "/home/ls6/hauptmann/ethikchat-experiment-argument-classification")
