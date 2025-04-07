@@ -3,13 +3,15 @@ import os
 import random
 import warnings
 from collections import defaultdict
-from typing import Optional, Union, Dict, Set, List, Tuple
+from typing import Optional, Union, Dict, List, Tuple, Set, Any
 from copy import deepcopy
 
 from datasets import DatasetDict, Dataset, load_from_disk
 from ethikchat_argtoolkit.Dialogue.discussion_szenario import DiscussionSzenario
+from sklearn.model_selection import train_test_split
 
-from src.data.create_corpus_dataset import DatasetSplitType, create_dataset, DatasetConfig, UtteranceType, Query
+from src.data.create_corpus_dataset import DatasetSplitType, create_dataset, DatasetConfig, UtteranceType, Query, \
+    Passage
 
 
 # --- Helper Functions ---
@@ -151,7 +153,7 @@ def create_splits_from_corpus_dataset(
         - If kFold: returns a dictionary of k folds,
           each fold is a DatasetDict with keys ["train", "test"].
     """
-    # if dataset already exists, load it and return it. Otherwise create it.
+    # if dataset already exists, load it and return it. Otherwise, create it.
     save_path = None
     if save_folder and dataset_save_name:
         save_path = os.path.join(save_folder, dataset_save_name)
@@ -170,10 +172,9 @@ def create_splits_from_corpus_dataset(
                                                          seed=seed)
 
     elif dataset_split_type == DatasetSplitType.OutOfDistributionSimple:
-        splitted_dataset = create_out_of_distribution_simple_splits(
+        splitted_dataset = create_out_of_distribution_label_split(
             corpus_dataset,
-            fraction_unseen=0.15,
-            train_ratio=0.70,
+            heldout_label_fraction=0.3,
             seed=seed
         )
 
@@ -196,6 +197,186 @@ def create_splits_from_corpus_dataset(
         splitted_dataset.save_to_disk(save_path)
 
     return splitted_dataset
+
+
+def compute_label_frequencies(queries: List[Query]) -> Dict[str, Dict[str, int]]:
+    frequencies = defaultdict(lambda: defaultdict(int))
+    for query in queries:
+        for label in query.labels:
+            frequencies[query.discussion_scenario][label] += 1
+    return frequencies
+
+
+def bucketize(items: List[Any], num_buckets: int) -> List[List[Any]]:
+    k, r = divmod(len(items), num_buckets)
+    return [items[i * k + min(i, r):(i + 1) * k + min(i + 1, r)] for i in range(num_buckets)]
+
+
+def select_heldout_labels(label_frequencies: Dict[str, Dict[str, int]],
+                          fraction: float,
+                          num_buckets: int) -> set[Tuple[str, str]]:
+    heldout_labels = set()
+    for scenario, label_freqs in label_frequencies.items():
+        sorted_labels = sorted(label_freqs.items(), key=lambda x: x[1], reverse=True)
+        buckets = bucketize(sorted_labels, num_buckets)
+        for bucket in buckets:
+            random.shuffle(bucket)
+            num_to_select = max(1, int(len(bucket) * fraction))
+            heldout_labels.update([(scenario, label) for label, _ in bucket[:num_to_select]])
+    return heldout_labels
+
+
+def split_queries_by_label_presence(queries: List[Query],
+                                    heldout_labels: set[Tuple[str, str]]) -> Tuple[List[Query], List[Query]]:
+    with_heldout, with_only_train = [], []
+    for query in queries:
+        if any((query.discussion_scenario, label) in heldout_labels for label in query.labels):
+            with_heldout.append(query)
+        else:
+            with_only_train.append(query)
+    return with_heldout, with_only_train
+
+
+def extract_primary_heldout_labels(queries: List[Query],
+                                   heldout_labels: set[Tuple[str, str]]) -> Tuple[List[Query], List[Tuple[str, str]]]:
+    filtered_queries = []
+    primary_labels = []
+    for query in queries:
+        for label in query.labels:
+            key = (query.discussion_scenario, label)
+            if key in heldout_labels:
+                primary_labels.append(key)
+                filtered_queries.append(query)
+                break
+    return filtered_queries, primary_labels
+
+
+def stratified_split(queries: List[Query],
+                     labels: List[Tuple[str, str]],
+                     seed: int) -> Tuple[List[Query], List[Query]]:
+    label_support = defaultdict(int)
+    for label in labels:
+        label_support[label] += 1
+
+    stratifiable_labels = {label for label, count in label_support.items() if count >= 2}
+
+    strat_queries, strat_labels, non_strat_queries = [], [], []
+    for query, label in zip(queries, labels):
+        if label in stratifiable_labels:
+            strat_queries.append(query)
+            strat_labels.append(label)
+        else:
+            non_strat_queries.append(query)
+
+    val, test = train_test_split(
+        strat_queries, test_size=0.67, random_state=seed, stratify=strat_labels
+    )
+
+    random.shuffle(non_strat_queries)
+    split_point = int(len(non_strat_queries) * 0.33)
+    val += non_strat_queries[:split_point]
+    test += non_strat_queries[split_point:]
+
+    return val, test
+
+
+def create_out_of_distribution_label_split(corpus_dataset: DatasetDict,
+                                           heldout_label_fraction: float = 0.3,
+                                           seed: int = 42) -> DatasetDict:
+    random.seed(seed)
+    num_buckets = 5
+
+    all_queries = [
+        Query(
+            id=entry["id"],
+            text=entry["text"],
+            labels=entry["labels"],
+            discussion_scenario=entry["discussion_scenario"],
+            context=entry["context"],
+            scenario_description=entry["scenario_description"],
+            scenario_question=entry["scenario_question"]
+        ) for entry in corpus_dataset["queries"]
+    ]
+
+    label_frequencies = compute_label_frequencies(all_queries)
+    heldout_labels = select_heldout_labels(label_frequencies, heldout_label_fraction, num_buckets)
+
+    queries_with_heldout, queries_with_only_train = split_queries_by_label_presence(all_queries, heldout_labels)
+    selected_heldout_queries, primary_labels = extract_primary_heldout_labels(queries_with_heldout, heldout_labels)
+
+    queries_validation, queries_test = stratified_split(selected_heldout_queries, primary_labels, seed)
+    queries_train = queries_with_only_train
+
+    ds_train = create_datasetdict_for_query_ids(corpus_dataset, [query.id for query in queries_train])
+    ds_validation = create_datasetdict_for_query_ids(corpus_dataset, [query.id for query in queries_validation])
+    ds_test = create_datasetdict_for_query_ids(corpus_dataset, [query.id for query in queries_test])
+
+    ds_validation = clean_passages_mappings(ds_validation, heldout_labels)
+    ds_test = clean_passages_mappings(ds_test, heldout_labels)
+
+
+    return DatasetDict({
+        "train": ds_train,
+        "validation": ds_validation,
+        "test": ds_test
+    })
+
+
+def clean_passages_mappings(corpus_dataset: DatasetDict, held_out_labels: List[Tuple[str]]) -> DatasetDict:
+    queries = [
+        Query(
+            id=entry["id"],
+            text=entry["text"],
+            labels=entry["labels"],
+            discussion_scenario=entry["discussion_scenario"],
+            context=entry["context"],
+            scenario_description=entry["scenario_description"],
+            scenario_question=entry["scenario_question"]
+        ) for entry in corpus_dataset["queries"]
+    ]
+
+    passages = [Passage(
+        id = entry["id"],
+        text = entry["text"],
+        label = entry["label"],
+        discussion_scenario = entry["discussion_scenario"],
+        passage_source = entry["passage_source"],
+        retrieved_query_id = entry["retrieved_query_id"]
+    ) for entry in corpus_dataset["passages"]]
+
+    relevant_mapping = {
+        entry["query_id"]: entry["passages_ids"] for entry in  corpus_dataset["queries_relevant_passages_mapping"]
+    }
+    trivial_mapping = {
+        entry["query_id"]: entry["passages_ids"] for entry in corpus_dataset["queries_trivial_passages_mapping"]
+    }
+
+    for query in queries:
+        relevant_passages = [passage for passage in passages if passage.id in relevant_mapping[query.id]]
+        trivial_passages = [passage for passage in passages if passage.id in trivial_mapping[query.id]]
+        for label in query.labels:
+            if (query.discussion_scenario, label) not in held_out_labels:
+                # remove relevant passages with non held out labels
+                print(len(relevant_passages))
+                trivial_passages.extend([passage for passage in relevant_passages if passage.label == label])
+                relevant_passages = [passage for passage in relevant_passages if passage.label != label]
+                print(len(relevant_passages))
+                # add trivial passages with held out labels
+        relevant_mapping[query.id] = [passage.id for passage in relevant_passages]
+        trivial_mapping[query.id] = [passage.id for passage in trivial_passages]
+
+    return DatasetDict({
+        **corpus_dataset,
+        "queries_relevant_passages_mapping": Dataset.from_dict({
+            "query_id": [idx for idx, _ in relevant_mapping.items()],
+            "passages_ids": [ids for _, ids in relevant_mapping.items()]
+        }),
+        "queries_trivial_passages_mapping": Dataset.from_dict({
+            "query_id": [idx for idx, _ in trivial_mapping.items()],
+            "passages_ids": [ids for _, ids in trivial_mapping.items()]
+        }),
+    })
+
 
 
 def create_k_fold_splits(corpus_dataset: DatasetDict, k: int) -> Dict[str, DatasetDict]:
@@ -275,7 +456,8 @@ def create_in_distribution_splits(corpus_dataset: DatasetDict,
     DatasetDict, with keys ["train", "validation", "test"]
     """
 
-    def put_queries_forced_by_labels_into_split(queries: List[Query]) -> Tuple[Dict[DiscussionSzenario, Set[str]], List[Query], List[Query]]:
+    def put_queries_forced_by_labels_into_split(queries: List[Query]) -> Tuple[
+        Dict[DiscussionSzenario, Set[str]], List[Query], List[Query]]:
         """
         Creates a set of
         """
@@ -292,7 +474,8 @@ def create_in_distribution_splits(corpus_dataset: DatasetDict,
                 rest_queries.append(query)
         return covered_labels, forced_queries, rest_queries
 
-    def check_label_coverage_of_split(queries: List[Query], split_covered_labels: Dict[DiscussionSzenario, Set[str]]) -> None:
+    def check_label_coverage_of_split(queries: List[Query],
+                                      split_covered_labels: Dict[DiscussionSzenario, Set[str]]) -> None:
         """
         Checks if the labels of a split cover all labels that are possible to ensure in-distribution testing
         """
@@ -329,17 +512,18 @@ def create_in_distribution_splits(corpus_dataset: DatasetDict,
     random.shuffle(all_queries)
 
     # Ensure all labels where an anchor is available are in the training set
-    train_labels_covered, train_queries_forced, remaining_queries_after_train_selection = put_queries_forced_by_labels_into_split(all_queries)
+    train_labels_covered, train_queries_forced, remaining_queries_after_train_selection = put_queries_forced_by_labels_into_split(
+        all_queries)
 
     # check if all labels are covered in train
     check_label_coverage_of_split(all_queries, train_labels_covered)
 
     # all labels where still an anchor is available need to be in the test set to ensure in-distribution testing
-    test_labels_covered, test_queries_forced, remaining_queries_after_test_selection = put_queries_forced_by_labels_into_split(remaining_queries_after_train_selection)
+    test_labels_covered, test_queries_forced, remaining_queries_after_test_selection = put_queries_forced_by_labels_into_split(
+        remaining_queries_after_train_selection)
 
     # check if all remaining labels (left after train forced assignment) are covered
     check_label_coverage_of_split(remaining_queries_after_train_selection, test_labels_covered)
-
 
     # calculate split sizes. test size is the remaining part, after train and validation are selected.
     # since the data is shuffled, the selection from the remaining indices corresponds to sampling from the distribution of the dataset.
@@ -357,7 +541,8 @@ def create_in_distribution_splits(corpus_dataset: DatasetDict,
     train_queries_unforced = remaining_queries_after_test_selection[:train_unforced_size]
     train_queries = train_queries_forced + train_queries_unforced
 
-    validation_queries = remaining_queries_after_test_selection[train_unforced_size: train_unforced_size + validation_size]
+    validation_queries = remaining_queries_after_test_selection[
+                         train_unforced_size: train_unforced_size + validation_size]
     test_queries_unforced = remaining_queries_after_test_selection[train_unforced_size + validation_size:]
     test_queries = test_queries_forced + test_queries_unforced
 
@@ -369,155 +554,6 @@ def create_in_distribution_splits(corpus_dataset: DatasetDict,
     ds_val = create_datasetdict_for_query_ids(corpus_dataset, validation_query_ids)
     ds_test = create_datasetdict_for_query_ids(corpus_dataset, test_query_ids)
 
-    return DatasetDict({
-        "train": ds_train,
-        "validation": ds_val,
-        "test": ds_test
-    })
-
-
-def create_out_of_distribution_simple_splits(
-        corpus_dataset: DatasetDict,
-        fraction_unseen: float = 0.15,
-        train_ratio: float = 0.70,
-        seed: int = 42
-) -> DatasetDict:
-    """
-    Creates an Out-of-Distribution (Simple) split by withholding a subset of labels
-    (chosen from top, middle, and bottom frequency ranges) entirely from training.
-
-    1) Determine label frequencies over all queries.
-    2) Sort labels by frequency descending.
-    3) Partition into top-third, middle-third, bottom-third.
-    4) Randomly pick some fraction of labels from each partition to be "unseen".
-    5) All queries with those unseen labels go into the final test set.
-    6) Remaining queries (with only "seen" labels) are split 80:20.
-
-    Parameters
-    ----------
-    corpus_dataset : DatasetDict, with keys ["queries", "passages", "queries_relevant_passages_mapping", "queries_trivial_passages_mapping"]
-    fraction_unseen : float, optional
-        Fraction of labels (in each frequency partition) to mark as unseen (default=0.20).
-    train_ratio : float, optional
-        Train portion for the queries (default=0.70).
-    seed : int, optional
-        Random seed for reproducibility.
-
-    Returns
-    -------
-    DatasetDict
-      With three splits: "train", "validation", "test"
-    """
-    random.seed(seed)
-
-    # -- STEP A: Gather all queries + their labels
-    all_queries = corpus_dataset["queries"]  # huggingface Dataset
-    anchors = all_queries.to_list()  # convert to python list for easier manip
-
-    # anchors[i]["labels"] is the list of labels for the i-th query
-    # anchors[i]["id"] is the query ID
-
-    # -- STEP B: Count frequencies for each label for each scenario
-    scenario_label_counts = {"MEDAI": {}, "AUTOAI": {}, "JURAI": {}, "REFAI": {}}
-    for item in anchors:
-        for lab in item["labels"]:
-            if lab not in scenario_label_counts[item["discussion_scenario"]]:
-                scenario_label_counts[item["discussion_scenario"]][lab] = 1
-            else:
-                scenario_label_counts[item["discussion_scenario"]][lab] += 1
-
-    scenario_sorted_labels = {}
-    num_labels_per_scenario = {}
-    for scn, label_counts in scenario_label_counts.items():
-        sorted_labels = sorted(label_counts.keys(), key=lambda x: label_counts[x], reverse=True)
-        scenario_sorted_labels[scn] = sorted_labels
-        num_labels_per_scenario[scn] = len(sorted_labels)
-
-    for scn, count in num_labels_per_scenario.items():
-        if count < 3:
-            raise ValueError(f"Scenario '{scn}' has fewer than 3 labels, cannot partition top/middle/bottom.")
-
-    # --- Helper function to pick fraction_unseen from each partition
-    def pick_unseen_from_partition(labels_partition):
-        # e.g. 20% of that partition's labels
-        k = int(len(labels_partition) * fraction_unseen)
-        random.shuffle(labels_partition)
-        return set(labels_partition[:k])
-
-    # -- STEP B: For each scenario, partition & pick unseen labels
-    scenario_unseen_labels = {"MEDAI": set(), "AUTOAI": set(), "JURAI": set(), "REFAI": set()}
-
-    for scn, sorted_labels in scenario_sorted_labels.items():
-        num_labels = len(sorted_labels)
-        one_third = num_labels // 3
-
-        top_third = sorted_labels[:one_third]
-        mid_third = sorted_labels[one_third:2 * one_third]
-        bot_third = sorted_labels[2 * one_third:]  # possibly bigger if not multiple of 3
-
-        unseen_top = pick_unseen_from_partition(top_third)
-        unseen_mid = pick_unseen_from_partition(mid_third)
-        unseen_bot = pick_unseen_from_partition(bot_third)
-
-        scenario_unseen_labels[scn] = unseen_top.union(unseen_mid).union(unseen_bot)
-
-    # add labels to unseen that appear with as unseen already selected labels to make sure all labels of multilabel queries remain unseen
-    for anchor in anchors:
-        scenario = anchor["discussion_scenario"]
-        labels = set(anchor["labels"])
-        print(labels)
-        print(scenario)
-        print(scenario_unseen_labels[scenario])
-        print()
-        if labels.intersection(scenario_unseen_labels[scenario]):
-            scenario_unseen_labels[scenario].update(labels)
-
-    # -- STEP C: Separate queries: unseen vs. seen
-    #   "unseen" = queries that contain at least one unseen label for *their* scenario
-    unseen_label_query_ids = []
-    seen_label_query_ids = []
-    for item in anchors:
-        scn = item["discussion_scenario"]
-        qid = item["id"]
-        labs = set(item["labels"])
-        # If all labels are unseen, it's an unseen query
-        if labs.issubset(scenario_unseen_labels[scn]):
-            unseen_label_query_ids.append(qid)
-        else:
-            seen_label_query_ids.append(qid)
-
-    # -- STEP D: The "unseen" queries go into test. The "seen" queries get 70:15:15
-    random.shuffle(seen_label_query_ids)
-    total_seen = len(seen_label_query_ids)
-
-    test_size = len(unseen_label_query_ids)
-
-    # determine if the test_size is roughly 20% of the total dataset
-    if test_size < (fraction_unseen * 0.8) * (total_seen + test_size):
-        raise ValueError(
-            f"Test set should be at least {(fraction_unseen * 0.8)} of the total dataset. but is {test_size / (total_seen + test_size)}. Choose a different seed.")
-    elif test_size > (fraction_unseen * 1.2) * (total_seen + test_size):
-        raise ValueError(
-            f"Test set should be at most {(fraction_unseen * 1.2)} of the total dataset. but is {test_size / (total_seen + test_size)}. Choose a different seed.")
-
-    seen_fraction = total_seen / (total_seen + test_size)
-    train_fraction_of_seen = train_ratio / seen_fraction
-    n_train = int(train_fraction_of_seen * total_seen)
-
-    train_ids = seen_label_query_ids[:n_train]
-    val_ids = seen_label_query_ids[n_train:]
-    test_ids = unseen_label_query_ids
-
-    # check if all data has been used
-    if len(train_ids) + len(val_ids) + test_size != total_seen + test_size:
-        raise ValueError("Not all data has been used. Choose a different seed.")
-
-    # -- STEP E: Build final splits with your existing helper
-    ds_train = create_datasetdict_for_query_ids(corpus_dataset, train_ids)
-    ds_val = create_datasetdict_for_query_ids(corpus_dataset, val_ids)
-    ds_test = create_datasetdict_for_query_ids(corpus_dataset, test_ids)
-
-    # Return a DatasetDict with top-level "train", "validation", "test"
     return DatasetDict({
         "train": ds_train,
         "validation": ds_val,
@@ -573,9 +609,11 @@ if __name__ == "__main__":
 
     test_scenario = DiscussionSzenario.MEDAI
     split_by_scenario = create_splits_from_corpus_dataset(loaded_dataset,
-                                                          DatasetSplitType.InDistribution,
+                                                          DatasetSplitType.OutOfDistributionSimple,
                                                           save_folder=dataset_folder,
-                                                          dataset_save_name=f"dataset_in_distribution",
+                                                          dataset_save_name=f"dataset_out_of_distribution_label",
                                                           test_scenario=test_scenario)
+
+    # create_out_of_distribution_label_split(loaded_dataset, 0.15, 0.7, 42)
     # kfold_split = create_splits_from_corpus_dataset(hf_dataset, DatasetSplitType.kFold, None, 5)
     print("done")
