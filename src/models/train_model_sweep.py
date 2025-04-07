@@ -3,6 +3,7 @@ import warnings
 from typing import Dict
 
 import wandb
+import torch
 from datasets import load_from_disk, DatasetDict, Dataset
 from dotenv import load_dotenv
 from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
@@ -23,6 +24,8 @@ from src.features.build_features import create_dataset_for_multiple_negatives_ra
     add_scenario_tokens_to_texts, filter_queries_for_few_shot_setting, filter_passages_for_few_shot_setting
 from src.models.experiment_config import ExperimentConfig
 
+
+print(f"Cuda available: {torch.cuda.is_available()}")
 
 def load_argument_graphs(project_root, is_test_run=False) -> Dict[str, ResponseTemplateCollection]:
     argument_graph_med = load_response_template_collection("s1", project_root, f"data/external/argument_graphs{'_test' if is_test_run else ''}")
