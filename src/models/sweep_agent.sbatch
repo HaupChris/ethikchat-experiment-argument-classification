@@ -1,9 +1,10 @@
 #!/bin/bash
 #SBATCH --job-name=wandb_sweep        # 4 parallel tasks
 #SBATCH --cpus-per-task=4
-#SBATCH --array=1-5
+#SBATCH --array=1-2
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:1          # 1 GPU per task
+#SBATCH --exclude=gpu8a
 #SBATCH --output=sweep_agent_%A_%a.out
 #SBATCH --error=sweep_agent_%A_%a.err
 
