@@ -1,9 +1,11 @@
-import dataclasses
 import random
 import warnings
 from collections import defaultdict
-from typing import Optional, List, Any
+from typing import Optional, List, Dict, Tuple
 from datasets import Dataset, DatasetDict, load_from_disk
+from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
+from ethikchat_argtoolkit.Preprocessing.DatasetPreparation.create_text_similarity_dataset import \
+    create_text_similarity_dataset
 
 from src.data.create_corpus_dataset import DatasetSplitType, Passage, PassageSource, Query
 from src.data.dataset_splits import create_splits_from_corpus_dataset
@@ -284,15 +286,84 @@ def filter_passages_for_few_shot_setting(
         filter_passage_ids)
 
     return split_dataset
+create_text_similarity_dataset()
+
+def get_similarity_score_for_passage_pair(passage_1: Passage, passage_2: Passage,
+                                          argument_graphs: Dict[str, ResponseTemplateCollection]) -> float:
+
+    """
+    # scores:
+    # 4.0 Fulltext und Summary texte vom selben label
+    # 3.0 Selbes label, aber mind einer der Texte ist aus der Quelle user oder synthetic
+    # 2.0 texte, deren templates eine kannte gemeinsam haben
+    # 1.0 texte, die zur gleichen Gruppe gehören
+    # 0.0 alle anderen
+    Args:
+        passage_1 ():
+        passage_2 ():
+        argument_graphs ():
+
+    Returns:
+
+    """
+    same_source = {PassageSource.ArgumentgraphSummary, PassageSource.ArgumentgraphFullText}
+    template_1 = argument_graphs[passage_1.discussion_scenario].get_template_for_label(passage_1.label)
+    template_2 = argument_graphs[passage_2.discussion_scenario].get_template_for_label(passage_2.label)
+
+    if passage_1.discussion_scenario != passage_2.discussion_scenario:
+        return 0.0
+
+    if passage_1.label == passage_2.label:
+        if passage_1.passage_source in same_source and passage_2.passage_source in same_source:
+            return 4.0
+        return 3.0
+    if template_1 in template_2.parent_templates or template_2 in template_1.parent_templates:
+        return 2.0
+    if template_1 in  template_2.group_templates or template_2 in template_1.group_templates:
+        return 1.0
+    return 0.0
+
+
+def create_textual_similarity_dataset(split_dataset: DatasetDict,
+                                      argument_graphs: Dict[str, ResponseTemplateCollection]) -> List[Tuple[str, str, float]]:
+
+    passages = Passage.get_passages_from_hf_dataset(split_dataset["train"]["passages"])
+    queries = Query.get_queries_from_hf_dataset(split_dataset["train"]["queries"])
+
+    user_passages = list(filter(lambda passage: passage.passage_source == PassageSource.UserUtterance, passages))
+    non_user_passages = list(filter(lambda passage: passage.passage_source != PassageSource.UserUtterance, passages))
+
+    query_ids = [query.id for query in queries]
+    non_user_passages = list(filter(lambda passage: passage.retrieved_query_id not in query_ids, non_user_passages))
+
+    train_passages = user_passages + non_user_passages
+
+    similarity_texts = defaultdict(list)
+    for passage1 in train_passages:
+        for passage2 in train_passages:
+            if passage1 == passage2:
+                continue
+            else:
+                similarity_score = get_similarity_score_for_passage_pair(passage1, passage2, argument_graphs)
+                similarity_score /= 4.
+                similarity_texts[similarity_score].append((passage1.text, passage2.text, similarity_score))
+
+    return similarity_texts
 
 
 if __name__ == "__main__":
+    from src.models.train_model_sweep import load_argument_graphs
+
     dataset_folder = "../../data/processed/with_context"
     corpus_ds = load_from_disk(f"{dataset_folder}/corpus_dataset_v2")
+    argument_graphs = load_argument_graphs("/home/christian/PycharmProjects/ethikchat-experiment-argument-classification", is_test_run=True)
+
     in_distribution_split = create_splits_from_corpus_dataset(corpus_dataset=corpus_ds,
                                                               dataset_split_type=DatasetSplitType.InDistribution,
                                                               save_folder=dataset_folder,
                                                               dataset_save_name="dataset_split_in_distribution")
+    textual_similarity_dataset = create_textual_similarity_dataset(in_distribution_split, argument_graphs)
+
     ids_train = in_distribution_split["train"]
     # ids_train_empty = DatasetDict({
     #     "queries": in_distribution_split["train"]["queries"],
