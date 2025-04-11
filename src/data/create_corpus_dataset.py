@@ -69,6 +69,7 @@ class ProcessedUtterance:
     scenario_description: str
     scenario_question: str
 
+
 @dataclass
 class NoisyProcessedUtterance(ProcessedUtterance):
     reason: str = ""
@@ -95,6 +96,24 @@ class Passage:
     discussion_scenario: str
     passage_source: str
     retrieved_query_id: Optional[int] = None
+
+    def __eq__(self, other: 'Passage'):
+        return ((self.text == other.text) and
+                (self.label == other.label) and
+                (self.discussion_scenario == other.discussion_scenario))
+
+    @staticmethod
+    def get_passages_from_hf_dataset(passages: Dataset) -> List['Passage']:
+        return [Passage(
+            id=passage["id"],
+            text=passage["text"],
+            label=passage["label"],
+            discussion_scenario=passage["discussion_scenario"],
+            passage_source=passage["passage_source"],
+            retrieved_query_id=passage["retrieved_query_id"]
+        ) for passage in passages]
+
+
 
 
 @dataclass
@@ -123,6 +142,18 @@ class Query:
     def __eq__(self, other):
         return ((self.text == other.text) and
                 (self.labels == other.labels))
+
+    @staticmethod
+    def get_queries_from_hf_dataset(queries: Dataset) -> List['Query']:
+        return [Query(
+            id=query["id"],
+            text=query["text"],
+            labels=query["labels"],
+            discussion_scenario=query["discussion_scenario"],
+            context=query["context"],
+            scenario_description=query["scenario_description"],
+            scenario_question=query["scenario_question"]
+        ) for query in queries]
 
 
 @dataclass
@@ -632,7 +663,8 @@ def create_dataset_splits(dialogues: List[Dialogue],
     # im queries split hat jede query_id die reihenfolge der processed_utterances.
     queries = create_queries(processed_utterances, noisy_labels)
     noisy_queries = create_queries(noisy_processed_utterances, [])
-    noisy_queries = list(zip(noisy_queries, [noisy_processed_utterance.reason for noisy_processed_utterance in noisy_processed_utterances]))
+    noisy_queries = list(zip(noisy_queries, [noisy_processed_utterance.reason for noisy_processed_utterance in
+                                             noisy_processed_utterances]))
 
     # merge passages and assign ids
     passages = [Passage(idx, passage.text, passage.label, passage.discussion_scenario, passage.passage_source,
@@ -657,10 +689,10 @@ def create_dataset(config: DatasetConfig) -> None:
 
     all_dialogues = dialogues_medai + dialogues_jurai + dialogues_autoai + dialogues_refai
 
-    argument_graph_med = load_response_template_collection("s1", argument_graphs_dir = "data/external/argument_graphs/")
-    argument_graph_jur = load_response_template_collection("s2", argument_graphs_dir = "data/external/argument_graphs/")
-    argument_graph_auto = load_response_template_collection("s3", argument_graphs_dir = "data/external/argument_graphs/")
-    argument_graph_ref = load_response_template_collection("s4", argument_graphs_dir = "data/external/argument_graphs/")
+    argument_graph_med = load_response_template_collection("s1", argument_graphs_dir="data/external/argument_graphs/")
+    argument_graph_jur = load_response_template_collection("s2", argument_graphs_dir="data/external/argument_graphs/")
+    argument_graph_auto = load_response_template_collection("s3", argument_graphs_dir="data/external/argument_graphs/")
+    argument_graph_ref = load_response_template_collection("s4", argument_graphs_dir="data/external/argument_graphs/")
 
     argument_graphs = {
         DiscussionSzenario.MEDAI: argument_graph_med,
@@ -706,17 +738,17 @@ def create_dataset(config: DatasetConfig) -> None:
             "passages_ids": [ids for _, ids in queries_trivial_passages_mapping.items()]
         }),
         "noisy_queries": Dataset.from_dict({"id": [query.id for (query, reason) in excluded_queries],
-                                                  "text": [query.text for (query, reason) in excluded_queries],
-                                                  "labels": [query.labels for (query, reason) in excluded_queries],
-                                                  "discussion_scenario": [query.discussion_scenario for (query, reason)
-                                                                          in excluded_queries],
-                                                  "context": [query.context for (query, reason) in excluded_queries],
-                                                  "scenario_description": [query.scenario_description for
-                                                                           (query, reason) in excluded_queries],
-                                                  "scenario_question": [query.scenario_question for (query, reason) in
-                                                                        excluded_queries],
-                                                  "reason": [reason for (query, reason) in excluded_queries]
-                                                  })
+                                            "text": [query.text for (query, reason) in excluded_queries],
+                                            "labels": [query.labels for (query, reason) in excluded_queries],
+                                            "discussion_scenario": [query.discussion_scenario for (query, reason)
+                                                                    in excluded_queries],
+                                            "context": [query.context for (query, reason) in excluded_queries],
+                                            "scenario_description": [query.scenario_description for
+                                                                     (query, reason) in excluded_queries],
+                                            "scenario_question": [query.scenario_question for (query, reason) in
+                                                                  excluded_queries],
+                                            "reason": [reason for (query, reason) in excluded_queries]
+                                            })
     })
 
     corpus_dataset.save_to_disk(save_path)
