@@ -6,6 +6,7 @@ from collections import defaultdict
 from typing import Optional, Union, Dict, List, Tuple, Set, Any
 from copy import deepcopy
 
+import pandas as pd
 from datasets import DatasetDict, Dataset, load_from_disk
 from ethikchat_argtoolkit.Dialogue.discussion_szenario import DiscussionSzenario
 from sklearn.model_selection import train_test_split
@@ -216,14 +217,16 @@ def select_heldout_labels(label_frequencies: Dict[str, Dict[str, int]],
                           fraction: float,
                           num_buckets: int) -> set[Tuple[str, str]]:
     heldout_labels = set()
+    scenario_buckets = {}
     for scenario, label_freqs in label_frequencies.items():
         sorted_labels = sorted(label_freqs.items(), key=lambda x: x[1], reverse=True)
         buckets = bucketize(sorted_labels, num_buckets)
+        scenario_buckets[scenario] = buckets
         for bucket in buckets:
             random.shuffle(bucket)
             num_to_select = max(1, int(len(bucket) * fraction))
             heldout_labels.update([(scenario, label) for label, _ in bucket[:num_to_select]])
-    return heldout_labels
+    return heldout_labels, scenario_buckets
 
 
 def split_queries_by_label_presence(queries: List[Query],
@@ -299,7 +302,7 @@ def create_out_of_distribution_label_split(corpus_dataset: DatasetDict,
     ]
 
     label_frequencies = compute_label_frequencies(all_queries)
-    heldout_labels = select_heldout_labels(label_frequencies, heldout_label_fraction, num_buckets)
+    heldout_labels, scenario_buckets = select_heldout_labels(label_frequencies, heldout_label_fraction, num_buckets)
 
     queries_with_heldout, queries_with_only_train = split_queries_by_label_presence(all_queries, heldout_labels)
     selected_heldout_queries, primary_labels = extract_primary_heldout_labels(queries_with_heldout, heldout_labels)
@@ -314,11 +317,17 @@ def create_out_of_distribution_label_split(corpus_dataset: DatasetDict,
     ds_validation = clean_passages_mappings(ds_validation, heldout_labels)
     ds_test = clean_passages_mappings(ds_test, heldout_labels)
 
+    rows = []
+    for scenario, buckets in scenario_buckets.items():
+        for bucket_id, bucket in enumerate(buckets):
+            for label, freq in bucket:
+                rows.append([scenario, bucket_id, label, freq])
 
     return DatasetDict({
         "train": ds_train,
         "validation": ds_validation,
-        "test": ds_test
+        "test": ds_test,
+        "buckets": Dataset.from_pandas(pd.DataFrame(rows, columns=["Scenario", "bucket", "label", "freq"]))
     })
 
 
@@ -412,14 +421,14 @@ def create_out_of_distribution_hard_splits(corpus_dataset: DatasetDict,
     # Convert HF dataset to python list for easier filtering
     all_queries_list = corpus_dataset["queries"].to_list()
     # test split: queries with the given scenario
-    test_queries = [q for q in all_queries_list if q["discussion_scenario"] == test_scenario.value]
+    test_val_queries = [q for q in all_queries_list if q["discussion_scenario"] == test_scenario.value]
     # train+val: the rest
-    train_val_queries = [q for q in all_queries_list if q["discussion_scenario"] != test_scenario.value]
-    # Now do an 80:20 split on the train_val queries for train/validation
-    random.shuffle(train_val_queries)
-    tv_cut = int(0.8 * len(train_val_queries))
-    train_queries = train_val_queries[:tv_cut]
-    val_queries = train_val_queries[tv_cut:]
+    train_queries = [q for q in all_queries_list if q["discussion_scenario"] != test_scenario.value]
+    random.shuffle(test_val_queries)
+    test_validation_cut = int(0.5 * len(test_val_queries))
+
+    test_queries = test_val_queries[:test_validation_cut]
+    val_queries = test_val_queries[test_validation_cut:]
 
     train_ids = [q["id"] for q in train_queries]
     val_ids = [q["id"] for q in val_queries]
