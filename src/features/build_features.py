@@ -4,8 +4,6 @@ from collections import defaultdict
 from typing import Optional, List, Dict, Tuple
 from datasets import Dataset, DatasetDict, load_from_disk
 from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
-from ethikchat_argtoolkit.Preprocessing.DatasetPreparation.create_text_similarity_dataset import \
-    create_text_similarity_dataset
 
 from src.data.create_corpus_dataset import DatasetSplitType, Passage, PassageSource, Query
 from src.data.dataset_splits import create_splits_from_corpus_dataset
@@ -286,7 +284,7 @@ def filter_passages_for_few_shot_setting(
         filter_passage_ids)
 
     return split_dataset
-create_text_similarity_dataset()
+
 
 def get_similarity_score_for_passage_pair(passage_1: Passage, passage_2: Passage,
                                           argument_graphs: Dict[str, ResponseTemplateCollection]) -> float:
