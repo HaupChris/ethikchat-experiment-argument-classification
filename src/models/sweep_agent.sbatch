@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=wandb_sweep        # 4 parallel tasks
+#SBATCH --job-name=num_shots        # 4 parallel tasks
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:1          # 1 GPU per task
@@ -19,7 +19,7 @@ source /home/ls6/hauptmann/ethikchat-experiment-argument-classification/venv/bin
 # wandb sweep sweep_config.yaml
 # which prints e.g. "Run wandb agent <USERNAME>/<PROJECT>/<SWEEP_ID>"
 
-SWEEP_ID="christian-hauptmann-uniwue/argument-classification/5qgtbfrb"  # Replace with your actual sweep ID
+SWEEP_ID="christian-hauptmann-uniwue/argument-classification/qooh61ky"  # Replace with your actual sweep ID
 
 echo "Starting W&B agent on task $SLURM_ARRAY_TASK_ID..."
 wandb agent $SWEEP_ID
