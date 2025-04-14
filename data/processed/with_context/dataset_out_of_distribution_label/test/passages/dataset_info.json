@@ -1,0 +1,32 @@
+{
+  "citation": "",
+  "description": "",
+  "features": {
+    "id": {
+      "dtype": "int64",
+      "_type": "Value"
+    },
+    "text": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "label": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "discussion_scenario": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "passage_source": {
+      "dtype": "string",
+      "_type": "Value"
+    },
+    "retrieved_query_id": {
+      "dtype": "int64",
+      "_type": "Value"
+    }
+  },
+  "homepage": "",
+  "license": ""
+}

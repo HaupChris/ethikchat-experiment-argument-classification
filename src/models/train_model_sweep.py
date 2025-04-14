@@ -3,6 +3,7 @@ import warnings
 from typing import Dict
 
 import wandb
+import torch
 from datasets import load_from_disk, DatasetDict, Dataset
 from dotenv import load_dotenv
 from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
@@ -22,6 +23,8 @@ from src.evaluation.excluding_information_retrieval_evaluator import ExcludingIn
 from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss, add_context_to_texts, \
     add_scenario_tokens_to_texts, filter_queries_for_few_shot_setting, filter_passages_for_few_shot_setting
 from src.models.experiment_config import ExperimentConfig
+
+
 
 
 def load_argument_graphs(project_root, is_test_run=False) -> Dict[str, ResponseTemplateCollection]:
@@ -299,6 +302,7 @@ def main(is_test_run=False):
     sweep_id = wandb.run.sweep_id if wandb.run.sweep_id else "manual"
     sweep_run_name = f"{run_name}"
     print(f"W&B assigned run name: {sweep_run_name}")
+    print(f"Cuda available: {torch.cuda.is_available()}")
 
     # 2) Load environment variables
     project_root = config.get("project_root", "/home/ls6/hauptmann/ethikchat-experiment-argument-classification")
