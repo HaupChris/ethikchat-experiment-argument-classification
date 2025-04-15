@@ -1,0 +1,156 @@
+% LaTeX Tables for Argument Classification Analysis
+% Generated from Jupyter Notebook
+
+\begin{table}[htbp]
+\centering
+\caption{Performance Comparison of Different Model Architectures}
+\label{tab:model_performance}
+\begin{tabularx}{\textwidth}{lXXXXX}
+\toprule
+Model & Acc@1 & Acc@3 & Acc@5 & Improvement 1→3 (\%) & Improvement 3→5 (\%) \\
+\midrule
+German\_STS\_V2 & 94.0 & 97.6 & 98.1 & 3.83 & 0.49 \\
+gbert-large & 93.8 & 95.4 & 95.9 & 1.79 & 0.50 \\
+cross-en-de & 92.8 & 95.2 & 96.4 & 2.58 & 1.26 \\
+german-roberta & 91.6 & 94.7 & 95.9 & 3.40 & 1.27 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Performance Across Different Scenarios (Best Model: German\_STS\_V2)}
+\label{tab:scenario_performance}
+\begin{tabularx}{\textwidth}{lXXXX}
+\toprule
+Scenario & Acc@1 & Acc@3 & Acc@5 & Relative Performance \\
+\midrule
+MEDAI & 97.8 & 98.4 & 98.9 & 104.1 \\
+AUTOAI & 94.4 & 97.2 & 97.9 & 100.4 \\
+JURAI & 89.1 & 98.4 & 98.4 & 94.8 \\
+REFAI & 76.0 & 92.0 & 92.0 & 80.9 \\
+Overall & 94.0 & 97.6 & 98.1 & 100.0 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Impact of Context Length on Model Performance}
+\label{tab:context_impact}
+\begin{tabularx}{\textwidth}{lXXXXXX}
+\toprule
+Context Length & Context Description & Avg. Acc@1 & Avg. Acc@3 & Avg. Acc@5 & Sample Size & Relative Performance \\
+\midrule
+0 & No context & 91.5 & 94.8 & 95.7 & 8 & 100.0 \\
+1 & 1 utterance & 84.7 & 91.1 & 92.7 & 4 & 92.6 \\
+2 & 2 utterances & 85.2 & 91.2 & 92.7 & 5 & 93.1 \\
+3 & 3 utterances & 84.3 & 90.5 & 91.8 & 2 & 92.1 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Impact of Including Scenario Information}
+\label{tab:scenario_info_impact}
+\begin{tabularx}{\textwidth}{lXXXXX}
+\toprule
+Description & Avg. Acc@1 & Avg. Acc@3 & Avg. Acc@5 & Sample Size & Relative Difference \\
+\midrule
+Not Included & 87.4 & 92.6 & 94.0 & 9 & Reference \\
+Included & 87.9 & 92.7 & 93.7 & 10 & +0.5\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Impact of Learning Rate on Model Performance}
+\label{tab:learning_rate_impact}
+\begin{tabularx}{\textwidth}{XXXXXXX}
+\toprule
+Learning Rate & Avg. Acc@1 & Avg. Acc@3 & Avg. Acc@5 & Max Acc@1 & Min Acc@1 & Sample Size \\
+\midrule
+0.00001 & 83.1 & 88.8 & 90.5 & 86.3 & 81.5 & 5 \\
+0.00002 & 90.0 & 93.8 & 95.0 & 93.8 & 84.7 & 9 \\
+0.00003 & 88.0 & 92.7 & 93.8 & 94.0 & 84.4 & 5 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Impact of Batch Size on Model Performance}
+\label{tab:batch_size_impact}
+\begin{tabularx}{\textwidth}{XXXXXXXX}
+\toprule
+Batch Size & Avg. Acc@1 & Avg. Acc@3 & Avg. Acc@5 & Max Acc@1 & Min Acc@1 & Sample Size & Relative to Smallest \\
+\midrule
+128 & 86.4 & 91.1 & 92.7 & 92.8 & 82.0 & 10 & Reference \\
+256 & 89.0 & 94.3 & 95.4 & 94.0 & 81.5 & 9 & +3.0\% \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Learning Rate and Batch Size Interaction}
+\label{tab:lr_bs_interaction}
+\begin{tabularx}{\textwidth}{XXXXX}
+\toprule
+ & \multicolumn{2}{c}{Avg. Acc@1} & \multicolumn{2}{c}{Sample Count} \\
+\cmidrule(lr){2-3} \cmidrule(lr){4-5}
+Learning Rate & 128 & 256 & 128 & 256 \\
+\midrule
+0.00001 & 83.5 & 81.5 & 4 & 1 \\
+0.00002 & 89.5 & 90.3 & 4 & 5 \\
+0.00003 & 86.0 & 89.4 & 2 & 3 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Impact of Training Epochs on Model Performance}
+\label{tab:epochs_impact}
+\begin{tabularx}{\textwidth}{XXXXX}
+\toprule
+Epochs & Avg. Acc@1 & Max Acc@1 & Min Acc@1 & Sample Count \\
+\midrule
+8 & 87.0 & 93.8 & 81.5 & 9 \\
+10 & 90.0 & 94.0 & 84.9 & 4 \\
+12 & 87.1 & 92.8 & 82.0 & 6 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Impact of Warmup Ratio on Model Performance}
+\label{tab:warmup_impact}
+\begin{tabularx}{\textwidth}{XXXXX}
+\toprule
+WR & Avg. Acc@1 & Max Acc@1 & Min Acc@1 & Sample Count \\
+\midrule
+0.10 & 89.0 & 93.8 & 83.5 & 7 \\
+0.15 & 86.8 & 94.0 & 81.5 & 12 \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\begin{table}[htbp]
+\centering
+\caption{Optimal Hyperparameter Configurations by Model Architecture}
+\label{tab:best_hyperparameters}
+\begin{tabularx}{\textwidth}{lXXXXXXX}
+\toprule
+Model & Best Acc@1 & LR & BS & Ep & CL & SI & WR \\
+\midrule
+German\_STS\_V2 & 94.0 & 0.00003 & 256 & 10 & 0 & False & 0.15 \\
+gbert-large & 93.8 & 0.00002 & 256 & 8 & 0 & True & 0.10 \\
+cross-en-de & 92.8 & 0.00002 & 128 & 12 & 0 & False & 0.15 \\
+german-roberta & 91.6 & 0.00002 & 256 & 8 & 0 & True & 0.15 \\
+\bottomrule
+\end{tabularx}
+\end{table}

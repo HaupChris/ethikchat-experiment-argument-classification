@@ -1,0 +1,758 @@
+Starting W&B agent on task 4...
+W&B assigned run name: twilight-sweep-2
+
+
+ ------------------------ Experiment configuration: ------------------------ 
+project_root: /home/ls6/hauptmann/ethikchat-experiment-argument-classification
+experiment_dir: experiments_outputs
+experiment_run: qooh61ky
+dataset_dir: data/processed/with_context
+dataset_name: corpus_dataset_v2
+dataset_split_type: DatasetSplitType.InDistribution
+split_dataset_name: dataset_split_in_distribution
+model_name: aari1995/German_Semantic_STS_V2
+model_name_escaped: aari1995-German_Semantic_STS_V2
+model_run_dir: /home/ls6/hauptmann/ethikchat-experiment-argument-classification/experiments_outputs/qooh61ky/twilight-sweep-2
+learning_rate: 1e-05
+batch_size: 128
+num_epochs: 8
+loss_function: MultipleNegativesRankingLoss
+run_time: sweep-run
+warmup_ratio: 0.15
+context_length: 3
+add_discussion_scenario_info: False
+test_scenario: MEDAI
+num_shots_passages: 16
+num_shots_queries: 25
+ ------------------------ ----------------------------- ------------------------ 
+
+
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/samples_collection.csv ... Done
+Dataset already exists at /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/processed/with_context/dataset_split_in_distribution. Loading it.
+queries-train: There are 22 of 1452 examples that will be truncated during training.
+passages-train: There are 0 of 4704 examples that will be truncated during training.
+queries-eval: There are 11 of 415 examples that will be truncated during training.
+passages-eval: There are 0 of 10386 examples that will be truncated during training.
+queries-test: There are 6 of 417 examples that will be truncated during training.
+passages-test: There are 0 of 10386 examples that will be truncated during training.
+W&B assigned run name: earnest-sweep-6
+
+
+ ------------------------ Experiment configuration: ------------------------ 
+project_root: /home/ls6/hauptmann/ethikchat-experiment-argument-classification
+experiment_dir: experiments_outputs
+experiment_run: qooh61ky
+dataset_dir: data/processed/with_context
+dataset_name: corpus_dataset_v2
+dataset_split_type: DatasetSplitType.InDistribution
+split_dataset_name: dataset_split_in_distribution
+model_name: T-Systems-onsite/german-roberta-sentence-transformer-v2
+model_name_escaped: T-Systems-onsite-german-roberta-sentence-transformer-v2
+model_run_dir: /home/ls6/hauptmann/ethikchat-experiment-argument-classification/experiments_outputs/qooh61ky/earnest-sweep-6
+learning_rate: 3e-05
+batch_size: 128
+num_epochs: 12
+loss_function: MultipleNegativesRankingLoss
+run_time: sweep-run
+warmup_ratio: 0.15
+context_length: 2
+add_discussion_scenario_info: False
+test_scenario: MEDAI
+num_shots_passages: 13
+num_shots_queries: 10
+ ------------------------ ----------------------------- ------------------------ 
+
+
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/samples_collection.csv ... Done
+Dataset already exists at /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/processed/with_context/dataset_split_in_distribution. Loading it.
+queries-train: There are 0 of 1007 examples that will be truncated during training.
+passages-train: There are 0 of 3822 examples that will be truncated during training.
+queries-eval: There are 0 of 415 examples that will be truncated during training.
+passages-eval: There are 0 of 10386 examples that will be truncated during training.
+queries-test: There are 0 of 417 examples that will be truncated during training.
+passages-test: There are 0 of 10386 examples that will be truncated during training.
+{'loss': 5.7895, 'grad_norm': 19.212949752807617, 'learning_rate': 1.3846153846153846e-06, 'epoch': 0.09}
+{'loss': 5.5449, 'grad_norm': 14.3781099319458, 'learning_rate': 2.923076923076923e-06, 'epoch': 0.19}
+{'loss': 5.1124, 'grad_norm': 11.933801651000977, 'learning_rate': 4.4615384615384614e-06, 'epoch': 0.28}
+{'loss': 4.7856, 'grad_norm': 12.67741870880127, 'learning_rate': 6e-06, 'epoch': 0.37}
+{'loss': 4.4821, 'grad_norm': inf, 'learning_rate': 7.384615384615385e-06, 'epoch': 0.46}
+{'eval_loss': 1.9801815748214722, 'eval_cosine_accuracy@1': 0.11325301204819277, 'eval_cosine_accuracy@3': 0.22409638554216868, 'eval_cosine_accuracy@5': 0.27951807228915665, 'eval_cosine_mrr@10': 0.18869095429336394, 'eval_cosine_ndcg@10': 0.09513474765517953, 'eval_cosine_MEDAI_accuracy@1': 0.1206896551724138, 'eval_cosine_JURAI_accuracy@1': 0.02, 'eval_cosine_AUTOAI_accuracy@1': 0.136, 'eval_cosine_REFAI_accuracy@1': 0.125, 'eval_cosine_MEDAI_accuracy@3': 0.21982758620689655, 'eval_cosine_JURAI_accuracy@3': 0.08, 'eval_cosine_AUTOAI_accuracy@3': 0.288, 'eval_cosine_REFAI_accuracy@3': 0.25, 'eval_cosine_MEDAI_accuracy@5': 0.2672413793103448, 'eval_cosine_JURAI_accuracy@5': 0.14, 'eval_cosine_AUTOAI_accuracy@5': 0.36, 'eval_cosine_REFAI_accuracy@5': 0.25, 'eval_runtime': 2661.0607, 'eval_samples_per_second': 12.876, 'eval_steps_per_second': 1.61, 'epoch': 0.49}
+{'loss': 4.2995, 'grad_norm': 9.665983200073242, 'learning_rate': 8.76923076923077e-06, 'epoch': 0.56}
+{'loss': 4.1698, 'grad_norm': 8.733137130737305, 'learning_rate': 1.0307692307692309e-05, 'epoch': 0.65}
+{'loss': 3.9297, 'grad_norm': 9.133737564086914, 'learning_rate': 1.1846153846153846e-05, 'epoch': 0.74}
+{'loss': 3.7405, 'grad_norm': 8.823742866516113, 'learning_rate': 1.3384615384615386e-05, 'epoch': 0.83}
+{'loss': 3.5563, 'grad_norm': 8.392616271972656, 'learning_rate': 1.4923076923076923e-05, 'epoch': 0.93}
+{'eval_loss': 1.5459716320037842, 'eval_cosine_accuracy@1': 0.23132530120481928, 'eval_cosine_accuracy@3': 0.3686746987951807, 'eval_cosine_accuracy@5': 0.43373493975903615, 'eval_cosine_mrr@10': 0.318082807420157, 'eval_cosine_ndcg@10': 0.1761046090989672, 'eval_cosine_MEDAI_accuracy@1': 0.2025862068965517, 'eval_cosine_JURAI_accuracy@1': 0.14, 'eval_cosine_AUTOAI_accuracy@1': 0.328, 'eval_cosine_REFAI_accuracy@1': 0.125, 'eval_cosine_MEDAI_accuracy@3': 0.34051724137931033, 'eval_cosine_JURAI_accuracy@3': 0.22, 'eval_cosine_AUTOAI_accuracy@3': 0.48, 'eval_cosine_REFAI_accuracy@3': 0.375, 'eval_cosine_MEDAI_accuracy@5': 0.40948275862068967, 'eval_cosine_JURAI_accuracy@5': 0.26, 'eval_cosine_AUTOAI_accuracy@5': 0.544, 'eval_cosine_REFAI_accuracy@5': 0.5, 'eval_runtime': 1986.5396, 'eval_samples_per_second': 17.248, 'eval_steps_per_second': 2.156, 'epoch': 0.98}
+{'loss': 3.188, 'grad_norm': 8.430855751037598, 'learning_rate': 1.6461538461538463e-05, 'epoch': 1.01}
+{'loss': 3.2358, 'grad_norm': 7.4696760177612305, 'learning_rate': 1.8e-05, 'epoch': 1.1}
+{'loss': 3.0743, 'grad_norm': 9.240241050720215, 'learning_rate': 1.953846153846154e-05, 'epoch': 1.19}
+{'loss': 3.0111, 'grad_norm': 8.968826293945312, 'learning_rate': 2.1076923076923075e-05, 'epoch': 1.29}
+{'loss': 2.8844, 'grad_norm': 9.443888664245605, 'learning_rate': 2.2615384615384615e-05, 'epoch': 1.38}
+{'eval_loss': 1.4531315565109253, 'eval_cosine_accuracy@1': 0.27951807228915665, 'eval_cosine_accuracy@3': 0.43132530120481927, 'eval_cosine_accuracy@5': 0.5036144578313253, 'eval_cosine_mrr@10': 0.3788563778925225, 'eval_cosine_ndcg@10': 0.22805601694909913, 'eval_cosine_MEDAI_accuracy@1': 0.21982758620689655, 'eval_cosine_JURAI_accuracy@1': 0.18, 'eval_cosine_AUTOAI_accuracy@1': 0.44, 'eval_cosine_REFAI_accuracy@1': 0.125, 'eval_cosine_MEDAI_accuracy@3': 0.3879310344827586, 'eval_cosine_JURAI_accuracy@3': 0.28, 'eval_cosine_AUTOAI_accuracy@3': 0.568, 'eval_cosine_REFAI_accuracy@3': 0.5, 'eval_cosine_MEDAI_accuracy@5': 0.4482758620689655, 'eval_cosine_JURAI_accuracy@5': 0.3, 'eval_cosine_AUTOAI_accuracy@5': 0.68, 'eval_cosine_REFAI_accuracy@5': 0.625, 'eval_runtime': 1794.4128, 'eval_samples_per_second': 19.094, 'eval_steps_per_second': 2.387, 'epoch': 1.46}
+{'loss': 2.7172, 'grad_norm': 15.329792022705078, 'learning_rate': 2.4153846153846155e-05, 'epoch': 1.47}
+{'loss': 2.6002, 'grad_norm': 8.641322135925293, 'learning_rate': 2.5692307692307692e-05, 'epoch': 1.56}
+{'loss': 2.4968, 'grad_norm': 9.047883033752441, 'learning_rate': 2.7230769230769233e-05, 'epoch': 1.66}
+{'loss': 2.3928, 'grad_norm': 10.80655574798584, 'learning_rate': 2.876923076923077e-05, 'epoch': 1.75}
+{'loss': 2.3174, 'grad_norm': 9.315047264099121, 'learning_rate': 2.994550408719346e-05, 'epoch': 1.84}
+{'loss': 2.0906, 'grad_norm': 9.454712867736816, 'learning_rate': 2.9673024523160763e-05, 'epoch': 1.94}
+{'eval_loss': 1.4336191415786743, 'eval_cosine_accuracy@1': 0.3036144578313253, 'eval_cosine_accuracy@3': 0.491566265060241, 'eval_cosine_accuracy@5': 0.5542168674698795, 'eval_cosine_mrr@10': 0.41189041881812954, 'eval_cosine_ndcg@10': 0.2719479455306968, 'eval_cosine_MEDAI_accuracy@1': 0.21982758620689655, 'eval_cosine_JURAI_accuracy@1': 0.24, 'eval_cosine_AUTOAI_accuracy@1': 0.488, 'eval_cosine_REFAI_accuracy@1': 0.25, 'eval_cosine_MEDAI_accuracy@3': 0.4224137931034483, 'eval_cosine_JURAI_accuracy@3': 0.34, 'eval_cosine_AUTOAI_accuracy@3': 0.68, 'eval_cosine_REFAI_accuracy@3': 0.5, 'eval_cosine_MEDAI_accuracy@5': 0.4870689655172414, 'eval_cosine_JURAI_accuracy@5': 0.42, 'eval_cosine_AUTOAI_accuracy@5': 0.736, 'eval_cosine_REFAI_accuracy@5': 0.5, 'eval_runtime': 1734.7521, 'eval_samples_per_second': 19.751, 'eval_steps_per_second': 2.469, 'epoch': 1.95}
+{'loss': 1.6953, 'grad_norm': 9.51285457611084, 'learning_rate': 2.940054495912807e-05, 'epoch': 2.02}
+{'loss': 1.748, 'grad_norm': 9.923635482788086, 'learning_rate': 2.9128065395095368e-05, 'epoch': 2.11}
+{'loss': 1.6727, 'grad_norm': 9.396796226501465, 'learning_rate': 2.885558583106267e-05, 'epoch': 2.2}
+{'loss': 1.621, 'grad_norm': 8.231061935424805, 'learning_rate': 2.8583106267029973e-05, 'epoch': 2.3}
+{'loss': 1.5835, 'grad_norm': 9.453268051147461, 'learning_rate': 2.8310626702997276e-05, 'epoch': 2.39}
+{'eval_loss': 1.4723997116088867, 'eval_cosine_accuracy@1': 0.3349397590361446, 'eval_cosine_accuracy@3': 0.5397590361445783, 'eval_cosine_accuracy@5': 0.6048192771084338, 'eval_cosine_mrr@10': 0.445665519219736, 'eval_cosine_ndcg@10': 0.29485684300893855, 'eval_cosine_MEDAI_accuracy@1': 0.2543103448275862, 'eval_cosine_JURAI_accuracy@1': 0.34, 'eval_cosine_AUTOAI_accuracy@1': 0.48, 'eval_cosine_REFAI_accuracy@1': 0.375, 'eval_cosine_MEDAI_accuracy@3': 0.46551724137931033, 'eval_cosine_JURAI_accuracy@3': 0.48, 'eval_cosine_AUTOAI_accuracy@3': 0.696, 'eval_cosine_REFAI_accuracy@3': 0.625, 'eval_cosine_MEDAI_accuracy@5': 0.521551724137931, 'eval_cosine_JURAI_accuracy@5': 0.56, 'eval_cosine_AUTOAI_accuracy@5': 0.768, 'eval_cosine_REFAI_accuracy@5': 0.75, 'eval_runtime': 1613.9602, 'eval_samples_per_second': 21.229, 'eval_steps_per_second': 2.654, 'epoch': 2.44}
+{'loss': 1.5152, 'grad_norm': 8.819272994995117, 'learning_rate': 2.8038147138964578e-05, 'epoch': 2.48}
+{'loss': 1.5132, 'grad_norm': 8.89119815826416, 'learning_rate': 2.776566757493188e-05, 'epoch': 2.57}
+{'loss': 1.3967, 'grad_norm': 8.46502685546875, 'learning_rate': 2.7493188010899183e-05, 'epoch': 2.67}
+{'loss': 1.3702, 'grad_norm': 9.523791313171387, 'learning_rate': 2.7220708446866486e-05, 'epoch': 2.76}
+{'loss': 1.3662, 'grad_norm': 7.944958686828613, 'learning_rate': 2.6948228882833788e-05, 'epoch': 2.85}
+{'eval_loss': 1.490567684173584, 'eval_cosine_accuracy@1': 0.3927710843373494, 'eval_cosine_accuracy@3': 0.5493975903614458, 'eval_cosine_accuracy@5': 0.6096385542168675, 'eval_cosine_mrr@10': 0.4870921782367566, 'eval_cosine_ndcg@10': 0.3342104938632848, 'eval_cosine_MEDAI_accuracy@1': 0.28879310344827586, 'eval_cosine_JURAI_accuracy@1': 0.42, 'eval_cosine_AUTOAI_accuracy@1': 0.568, 'eval_cosine_REFAI_accuracy@1': 0.5, 'eval_cosine_MEDAI_accuracy@3': 0.47844827586206895, 'eval_cosine_JURAI_accuracy@3': 0.46, 'eval_cosine_AUTOAI_accuracy@3': 0.712, 'eval_cosine_REFAI_accuracy@3': 0.625, 'eval_cosine_MEDAI_accuracy@5': 0.5344827586206896, 'eval_cosine_JURAI_accuracy@5': 0.6, 'eval_cosine_AUTOAI_accuracy@5': 0.752, 'eval_cosine_REFAI_accuracy@5': 0.625, 'eval_runtime': 1884.6139, 'eval_samples_per_second': 18.18, 'eval_steps_per_second': 2.273, 'epoch': 2.93}
+{'loss': 1.3667, 'grad_norm': 9.052278518676758, 'learning_rate': 2.667574931880109e-05, 'epoch': 2.94}
+{'loss': 0.9951, 'grad_norm': 9.597670555114746, 'learning_rate': 2.6403269754768393e-05, 'epoch': 3.03}
+{'loss': 1.1059, 'grad_norm': 8.684491157531738, 'learning_rate': 2.6130790190735696e-05, 'epoch': 3.12}
+{'loss': 1.0504, 'grad_norm': 7.262875556945801, 'learning_rate': 2.5858310626702998e-05, 'epoch': 3.21}
+{'loss': 1.0064, 'grad_norm': 7.773682117462158, 'learning_rate': 2.55858310626703e-05, 'epoch': 3.31}
+{'loss': 1.0018, 'grad_norm': 7.277379035949707, 'learning_rate': 2.5313351498637603e-05, 'epoch': 3.4}
+{'eval_loss': 1.6018680334091187, 'eval_cosine_accuracy@1': 0.37349397590361444, 'eval_cosine_accuracy@3': 0.5469879518072289, 'eval_cosine_accuracy@5': 0.5975903614457831, 'eval_cosine_mrr@10': 0.4714390896921019, 'eval_cosine_ndcg@10': 0.33944021443267314, 'eval_cosine_MEDAI_accuracy@1': 0.28879310344827586, 'eval_cosine_JURAI_accuracy@1': 0.32, 'eval_cosine_AUTOAI_accuracy@1': 0.56, 'eval_cosine_REFAI_accuracy@1': 0.25, 'eval_cosine_MEDAI_accuracy@3': 0.46551724137931033, 'eval_cosine_JURAI_accuracy@3': 0.46, 'eval_cosine_AUTOAI_accuracy@3': 0.728, 'eval_cosine_REFAI_accuracy@3': 0.625, 'eval_cosine_MEDAI_accuracy@5': 0.5172413793103449, 'eval_cosine_JURAI_accuracy@5': 0.52, 'eval_cosine_AUTOAI_accuracy@5': 0.776, 'eval_cosine_REFAI_accuracy@5': 0.625, 'eval_runtime': 2079.8034, 'eval_samples_per_second': 16.474, 'eval_steps_per_second': 2.059, 'epoch': 3.41}
+{'loss': 1.0059, 'grad_norm': 6.709440231323242, 'learning_rate': 2.5040871934604905e-05, 'epoch': 3.49}
+{'loss': 0.9902, 'grad_norm': 7.468995094299316, 'learning_rate': 2.4768392370572208e-05, 'epoch': 3.58}
+{'loss': 1.0201, 'grad_norm': 8.095337867736816, 'learning_rate': 2.449591280653951e-05, 'epoch': 3.68}
+{'loss': 1.0105, 'grad_norm': 6.801042079925537, 'learning_rate': 2.4223433242506813e-05, 'epoch': 3.77}
+{'loss': 0.9996, 'grad_norm': 7.118102550506592, 'learning_rate': 2.3950953678474115e-05, 'epoch': 3.86}
+{'eval_loss': 1.5498907566070557, 'eval_cosine_accuracy@1': 0.42168674698795183, 'eval_cosine_accuracy@3': 0.5397590361445783, 'eval_cosine_accuracy@5': 0.6144578313253012, 'eval_cosine_mrr@10': 0.49881239242685027, 'eval_cosine_ndcg@10': 0.3647298520805637, 'eval_cosine_MEDAI_accuracy@1': 0.3146551724137931, 'eval_cosine_JURAI_accuracy@1': 0.42, 'eval_cosine_AUTOAI_accuracy@1': 0.616, 'eval_cosine_REFAI_accuracy@1': 0.5, 'eval_cosine_MEDAI_accuracy@3': 0.4396551724137931, 'eval_cosine_JURAI_accuracy@3': 0.56, 'eval_cosine_AUTOAI_accuracy@3': 0.712, 'eval_cosine_REFAI_accuracy@3': 0.625, 'eval_cosine_MEDAI_accuracy@5': 0.5258620689655172, 'eval_cosine_JURAI_accuracy@5': 0.66, 'eval_cosine_AUTOAI_accuracy@5': 0.76, 'eval_cosine_REFAI_accuracy@5': 0.625, 'eval_runtime': 1922.1629, 'eval_samples_per_second': 17.825, 'eval_steps_per_second': 2.228, 'epoch': 3.9}
+{'loss': 0.9838, 'grad_norm': 6.582015037536621, 'learning_rate': 2.3678474114441418e-05, 'epoch': 3.95}
+{'loss': 0.7685, 'grad_norm': 6.000067234039307, 'learning_rate': 2.340599455040872e-05, 'epoch': 4.04}
+{'loss': 0.834, 'grad_norm': 6.104711532592773, 'learning_rate': 2.313351498637602e-05, 'epoch': 4.13}
+{'loss': 0.8295, 'grad_norm': 6.095947742462158, 'learning_rate': 2.2861035422343325e-05, 'epoch': 4.22}
+{'loss': 0.8436, 'grad_norm': 6.201176643371582, 'learning_rate': 2.2588555858310628e-05, 'epoch': 4.31}
+{'eval_loss': 1.5719696283340454, 'eval_cosine_accuracy@1': 0.43373493975903615, 'eval_cosine_accuracy@3': 0.5879518072289157, 'eval_cosine_accuracy@5': 0.6337349397590362, 'eval_cosine_mrr@10': 0.5221084337349395, 'eval_cosine_ndcg@10': 0.3765518865876313, 'eval_cosine_MEDAI_accuracy@1': 0.33189655172413796, 'eval_cosine_JURAI_accuracy@1': 0.42, 'eval_cosine_AUTOAI_accuracy@1': 0.616, 'eval_cosine_REFAI_accuracy@1': 0.625, 'eval_cosine_MEDAI_accuracy@3': 0.5, 'eval_cosine_JURAI_accuracy@3': 0.56, 'eval_cosine_AUTOAI_accuracy@3': 0.752, 'eval_cosine_REFAI_accuracy@3': 0.75, 'eval_cosine_MEDAI_accuracy@5': 0.5431034482758621, 'eval_cosine_JURAI_accuracy@5': 0.68, 'eval_cosine_AUTOAI_accuracy@5': 0.776, 'eval_cosine_REFAI_accuracy@5': 0.75, 'eval_runtime': 1849.6179, 'eval_samples_per_second': 18.524, 'eval_steps_per_second': 2.316, 'epoch': 4.38}
+{'loss': 0.8326, 'grad_norm': 6.138128280639648, 'learning_rate': 2.231607629427793e-05, 'epoch': 4.41}
+{'loss': 0.8352, 'grad_norm': 6.844089984893799, 'learning_rate': 2.2043596730245233e-05, 'epoch': 4.5}
+{'loss': 0.8286, 'grad_norm': 7.354916095733643, 'learning_rate': 2.1771117166212532e-05, 'epoch': 4.59}
+{'loss': 0.8519, 'grad_norm': 6.45334005355835, 'learning_rate': 2.1498637602179838e-05, 'epoch': 4.69}
+{'loss': 0.7914, 'grad_norm': 6.170415878295898, 'learning_rate': 2.122615803814714e-05, 'epoch': 4.78}
+{'loss': 0.8108, 'grad_norm': 6.144248962402344, 'learning_rate': 2.0953678474114443e-05, 'epoch': 4.87}
+{'eval_loss': 1.6364446878433228, 'eval_cosine_accuracy@1': 0.42891566265060244, 'eval_cosine_accuracy@3': 0.5590361445783133, 'eval_cosine_accuracy@5': 0.636144578313253, 'eval_cosine_mrr@10': 0.514039969401415, 'eval_cosine_ndcg@10': 0.37144666352367184, 'eval_cosine_MEDAI_accuracy@1': 0.3232758620689655, 'eval_cosine_JURAI_accuracy@1': 0.48, 'eval_cosine_AUTOAI_accuracy@1': 0.6, 'eval_cosine_REFAI_accuracy@1': 0.5, 'eval_cosine_MEDAI_accuracy@3': 0.47413793103448276, 'eval_cosine_JURAI_accuracy@3': 0.52, 'eval_cosine_AUTOAI_accuracy@3': 0.728, 'eval_cosine_REFAI_accuracy@3': 0.625, 'eval_cosine_MEDAI_accuracy@5': 0.5517241379310345, 'eval_cosine_JURAI_accuracy@5': 0.64, 'eval_cosine_AUTOAI_accuracy@5': 0.776, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 1762.0706, 'eval_samples_per_second': 19.445, 'eval_steps_per_second': 2.431, 'epoch': 4.87}
+{'loss': 0.8282, 'grad_norm': 5.92767333984375, 'learning_rate': 2.0681198910081742e-05, 'epoch': 4.96}
+{'loss': 0.6497, 'grad_norm': 6.4329447746276855, 'learning_rate': 2.0408719346049048e-05, 'epoch': 5.05}
+{'loss': 0.6973, 'grad_norm': 5.296746253967285, 'learning_rate': 2.013623978201635e-05, 'epoch': 5.14}
+{'loss': 0.7337, 'grad_norm': 5.660024166107178, 'learning_rate': 1.9863760217983653e-05, 'epoch': 5.23}
+{'loss': 0.7082, 'grad_norm': 5.741876125335693, 'learning_rate': 1.9591280653950955e-05, 'epoch': 5.32}
+{'eval_loss': 1.639479160308838, 'eval_cosine_accuracy@1': 0.41686746987951806, 'eval_cosine_accuracy@3': 0.5807228915662651, 'eval_cosine_accuracy@5': 0.6313253012048192, 'eval_cosine_mrr@10': 0.5084748517881047, 'eval_cosine_ndcg@10': 0.38710219438327953, 'eval_cosine_MEDAI_accuracy@1': 0.3232758620689655, 'eval_cosine_JURAI_accuracy@1': 0.4, 'eval_cosine_AUTOAI_accuracy@1': 0.6, 'eval_cosine_REFAI_accuracy@1': 0.375, 'eval_cosine_MEDAI_accuracy@3': 0.4870689655172414, 'eval_cosine_JURAI_accuracy@3': 0.56, 'eval_cosine_AUTOAI_accuracy@3': 0.752, 'eval_cosine_REFAI_accuracy@3': 0.75, 'eval_cosine_MEDAI_accuracy@5': 0.5387931034482759, 'eval_cosine_JURAI_accuracy@5': 0.64, 'eval_cosine_AUTOAI_accuracy@5': 0.784, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 1791.5721, 'eval_samples_per_second': 19.125, 'eval_steps_per_second': 2.391, 'epoch': 5.35}
+{'loss': 0.7221, 'grad_norm': 6.314861297607422, 'learning_rate': 1.9318801089918254e-05, 'epoch': 5.42}
+{'loss': 0.695, 'grad_norm': 5.4369025230407715, 'learning_rate': 1.904632152588556e-05, 'epoch': 5.51}
+{'loss': 0.7551, 'grad_norm': 5.60155725479126, 'learning_rate': 1.8773841961852863e-05, 'epoch': 5.6}
+{'loss': 0.7101, 'grad_norm': 5.827370643615723, 'learning_rate': 1.8501362397820165e-05, 'epoch': 5.69}
+{'loss': 0.7342, 'grad_norm': 5.142046928405762, 'learning_rate': 1.8228882833787464e-05, 'epoch': 5.79}
+{'eval_loss': 1.6627941131591797, 'eval_cosine_accuracy@1': 0.43373493975903615, 'eval_cosine_accuracy@3': 0.5807228915662651, 'eval_cosine_accuracy@5': 0.6265060240963856, 'eval_cosine_mrr@10': 0.5167431631287052, 'eval_cosine_ndcg@10': 0.3832462356551653, 'eval_cosine_MEDAI_accuracy@1': 0.3232758620689655, 'eval_cosine_JURAI_accuracy@1': 0.46, 'eval_cosine_AUTOAI_accuracy@1': 0.624, 'eval_cosine_REFAI_accuracy@1': 0.5, 'eval_cosine_MEDAI_accuracy@3': 0.49137931034482757, 'eval_cosine_JURAI_accuracy@3': 0.62, 'eval_cosine_AUTOAI_accuracy@3': 0.728, 'eval_cosine_REFAI_accuracy@3': 0.625, 'eval_cosine_MEDAI_accuracy@5': 0.5344827586206896, 'eval_cosine_JURAI_accuracy@5': 0.66, 'eval_cosine_AUTOAI_accuracy@5': 0.784, 'eval_cosine_REFAI_accuracy@5': 0.625, 'eval_runtime': 1616.4548, 'eval_samples_per_second': 21.196, 'eval_steps_per_second': 2.65, 'epoch': 5.84}
+{'train_runtime': 33746.0588, 'train_samples_per_second': 4.896, 'train_steps_per_second': 0.038, 'train_loss': 1.8769158162410904, 'epoch': 5.84}
+W&B assigned run name: clear-sweep-11
+
+
+ ------------------------ Experiment configuration: ------------------------ 
+project_root: /home/ls6/hauptmann/ethikchat-experiment-argument-classification
+experiment_dir: experiments_outputs
+experiment_run: qooh61ky
+dataset_dir: data/processed/with_context
+dataset_name: corpus_dataset_v2
+dataset_split_type: DatasetSplitType.InDistribution
+split_dataset_name: dataset_split_in_distribution
+model_name: aari1995/German_Semantic_STS_V2
+model_name_escaped: aari1995-German_Semantic_STS_V2
+model_run_dir: /home/ls6/hauptmann/ethikchat-experiment-argument-classification/experiments_outputs/qooh61ky/clear-sweep-11
+learning_rate: 5e-06
+batch_size: 64
+num_epochs: 10
+loss_function: MultipleNegativesRankingLoss
+run_time: sweep-run
+warmup_ratio: 0.1
+context_length: 0
+add_discussion_scenario_info: False
+test_scenario: MEDAI
+num_shots_passages: 16
+num_shots_queries: 10
+ ------------------------ ----------------------------- ------------------------ 
+
+
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/samples_collection.csv ... Done
+Dataset already exists at /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/processed/with_context/dataset_split_in_distribution. Loading it.
+queries-train: There are 0 of 1007 examples that will be truncated during training.
+passages-train: There are 0 of 4704 examples that will be truncated during training.
+queries-eval: There are 0 of 415 examples that will be truncated during training.
+passages-eval: There are 0 of 10386 examples that will be truncated during training.
+queries-test: There are 0 of 417 examples that will be truncated during training.
+passages-test: There are 0 of 10386 examples that will be truncated during training.
+{'loss': 3.2368, 'grad_norm': inf, 'learning_rate': 1.69811320754717e-07, 'epoch': 0.04}
+{'loss': 3.0811, 'grad_norm': 12.450221061706543, 'learning_rate': 3.39622641509434e-07, 'epoch': 0.08}
+{'loss': 3.1805, 'grad_norm': 20.87942886352539, 'learning_rate': 5.09433962264151e-07, 'epoch': 0.11}
+{'loss': 3.1722, 'grad_norm': 24.152315139770508, 'learning_rate': 6.79245283018868e-07, 'epoch': 0.15}
+{'loss': 3.031, 'grad_norm': 14.384793281555176, 'learning_rate': 8.679245283018868e-07, 'epoch': 0.19}
+{'loss': 2.9395, 'grad_norm': 18.878202438354492, 'learning_rate': 1.0566037735849057e-06, 'epoch': 0.23}
+{'loss': 2.9324, 'grad_norm': 14.474556922912598, 'learning_rate': 1.2264150943396227e-06, 'epoch': 0.26}
+{'loss': 2.7648, 'grad_norm': 14.16505241394043, 'learning_rate': 1.4150943396226415e-06, 'epoch': 0.3}
+{'loss': 2.777, 'grad_norm': 18.679174423217773, 'learning_rate': 1.6037735849056604e-06, 'epoch': 0.34}
+{'loss': 2.7874, 'grad_norm': 15.345662117004395, 'learning_rate': 1.7924528301886793e-06, 'epoch': 0.38}
+{'loss': 2.6453, 'grad_norm': 34.5128059387207, 'learning_rate': 1.981132075471698e-06, 'epoch': 0.42}
+{'loss': 2.6574, 'grad_norm': 22.39767837524414, 'learning_rate': 2.1698113207547173e-06, 'epoch': 0.45}
+{'loss': 2.4573, 'grad_norm': 14.45492935180664, 'learning_rate': 2.358490566037736e-06, 'epoch': 0.49}
+{'eval_loss': 1.3167016506195068, 'eval_cosine_accuracy@1': 0.4602409638554217, 'eval_cosine_accuracy@3': 0.6578313253012048, 'eval_cosine_accuracy@5': 0.7204819277108434, 'eval_cosine_mrr@10': 0.5729087779690191, 'eval_cosine_ndcg@10': 0.34543411508487154, 'eval_cosine_MEDAI_accuracy@1': 0.4267241379310345, 'eval_cosine_JURAI_accuracy@1': 0.32, 'eval_cosine_AUTOAI_accuracy@1': 0.6, 'eval_cosine_REFAI_accuracy@1': 0.125, 'eval_cosine_MEDAI_accuracy@3': 0.6594827586206896, 'eval_cosine_JURAI_accuracy@3': 0.5, 'eval_cosine_AUTOAI_accuracy@3': 0.728, 'eval_cosine_REFAI_accuracy@3': 0.5, 'eval_cosine_MEDAI_accuracy@5': 0.7327586206896551, 'eval_cosine_JURAI_accuracy@5': 0.54, 'eval_cosine_AUTOAI_accuracy@5': 0.768, 'eval_cosine_REFAI_accuracy@5': 0.75, 'eval_runtime': 2870.4453, 'eval_samples_per_second': 11.936, 'eval_steps_per_second': 1.492, 'epoch': 0.5}
+{'loss': 2.6326, 'grad_norm': 19.629127502441406, 'learning_rate': 2.547169811320755e-06, 'epoch': 0.53}
+{'loss': 2.6617, 'grad_norm': 16.184328079223633, 'learning_rate': 2.716981132075472e-06, 'epoch': 0.57}
+{'loss': 2.5489, 'grad_norm': 70.75189971923828, 'learning_rate': 2.9056603773584907e-06, 'epoch': 0.6}
+{'loss': 2.4316, 'grad_norm': 25.41457748413086, 'learning_rate': 3.0943396226415094e-06, 'epoch': 0.64}
+{'loss': 2.4147, 'grad_norm': 17.78822135925293, 'learning_rate': 3.2830188679245285e-06, 'epoch': 0.68}
+{'loss': 2.389, 'grad_norm': 17.844989776611328, 'learning_rate': 3.471698113207547e-06, 'epoch': 0.72}
+{'loss': 2.3177, 'grad_norm': 17.111125946044922, 'learning_rate': 3.6603773584905663e-06, 'epoch': 0.75}
+{'loss': 2.2152, 'grad_norm': 17.137460708618164, 'learning_rate': 3.849056603773585e-06, 'epoch': 0.79}
+{'loss': 2.1343, 'grad_norm': 15.378434181213379, 'learning_rate': 4.037735849056604e-06, 'epoch': 0.83}
+{'loss': 2.1135, 'grad_norm': 63.151939392089844, 'learning_rate': 4.226415094339623e-06, 'epoch': 0.87}
+{'loss': 2.1423, 'grad_norm': 58.354488372802734, 'learning_rate': 4.415094339622642e-06, 'epoch': 0.91}
+{'loss': 2.1103, 'grad_norm': 41.775630950927734, 'learning_rate': 4.603773584905661e-06, 'epoch': 0.94}
+{'loss': 2.0459, 'grad_norm': 18.744916915893555, 'learning_rate': 4.79245283018868e-06, 'epoch': 0.98}
+{'eval_loss': 1.105797290802002, 'eval_cosine_accuracy@1': 0.4939759036144578, 'eval_cosine_accuracy@3': 0.6771084337349398, 'eval_cosine_accuracy@5': 0.7542168674698795, 'eval_cosine_mrr@10': 0.6005048766494552, 'eval_cosine_ndcg@10': 0.40042717318887017, 'eval_cosine_MEDAI_accuracy@1': 0.46551724137931033, 'eval_cosine_JURAI_accuracy@1': 0.32, 'eval_cosine_AUTOAI_accuracy@1': 0.64, 'eval_cosine_REFAI_accuracy@1': 0.125, 'eval_cosine_MEDAI_accuracy@3': 0.6336206896551724, 'eval_cosine_JURAI_accuracy@3': 0.58, 'eval_cosine_AUTOAI_accuracy@3': 0.8, 'eval_cosine_REFAI_accuracy@3': 0.625, 'eval_cosine_MEDAI_accuracy@5': 0.7456896551724138, 'eval_cosine_JURAI_accuracy@5': 0.62, 'eval_cosine_AUTOAI_accuracy@5': 0.824, 'eval_cosine_REFAI_accuracy@5': 0.75, 'eval_runtime': 2117.444, 'eval_samples_per_second': 16.181, 'eval_steps_per_second': 2.023, 'epoch': 1.0}
+{'loss': 1.6548, 'grad_norm': 17.6732177734375, 'learning_rate': 4.981132075471698e-06, 'epoch': 1.02}
+{'loss': 1.8302, 'grad_norm': 66.42862701416016, 'learning_rate': 4.981132075471698e-06, 'epoch': 1.05}
+{'loss': 1.7865, 'grad_norm': 16.383073806762695, 'learning_rate': 4.960167714884696e-06, 'epoch': 1.09}
+{'loss': 1.806, 'grad_norm': 20.557544708251953, 'learning_rate': 4.939203354297694e-06, 'epoch': 1.13}
+{'loss': 1.6614, 'grad_norm': 42.4392204284668, 'learning_rate': 4.918238993710692e-06, 'epoch': 1.17}
+{'loss': 1.7025, 'grad_norm': 19.091495513916016, 'learning_rate': 4.89727463312369e-06, 'epoch': 1.2}
+{'loss': 1.6896, 'grad_norm': 21.173423767089844, 'learning_rate': 4.876310272536688e-06, 'epoch': 1.24}
+{'loss': 1.5731, 'grad_norm': 19.961084365844727, 'learning_rate': 4.855345911949686e-06, 'epoch': 1.28}
+{'loss': 1.685, 'grad_norm': 227.2492218017578, 'learning_rate': 4.834381551362684e-06, 'epoch': 1.32}
+{'loss': 1.5272, 'grad_norm': 17.595338821411133, 'learning_rate': 4.813417190775682e-06, 'epoch': 1.35}
+{'loss': 1.5939, 'grad_norm': 18.258588790893555, 'learning_rate': 4.79245283018868e-06, 'epoch': 1.39}
+{'loss': 1.5416, 'grad_norm': 16.682222366333008, 'learning_rate': 4.7714884696016775e-06, 'epoch': 1.43}
+{'loss': 1.4084, 'grad_norm': 20.419254302978516, 'learning_rate': 4.7505241090146755e-06, 'epoch': 1.47}
+{'eval_loss': 1.0477131605148315, 'eval_cosine_accuracy@1': 0.5493975903614458, 'eval_cosine_accuracy@3': 0.7180722891566265, 'eval_cosine_accuracy@5': 0.7566265060240964, 'eval_cosine_mrr@10': 0.641993689041882, 'eval_cosine_ndcg@10': 0.4494477400665966, 'eval_cosine_MEDAI_accuracy@1': 0.5, 'eval_cosine_JURAI_accuracy@1': 0.42, 'eval_cosine_AUTOAI_accuracy@1': 0.696, 'eval_cosine_REFAI_accuracy@1': 0.5, 'eval_cosine_MEDAI_accuracy@3': 0.6982758620689655, 'eval_cosine_JURAI_accuracy@3': 0.58, 'eval_cosine_AUTOAI_accuracy@3': 0.816, 'eval_cosine_REFAI_accuracy@3': 0.625, 'eval_cosine_MEDAI_accuracy@5': 0.7456896551724138, 'eval_cosine_JURAI_accuracy@5': 0.64, 'eval_cosine_AUTOAI_accuracy@5': 0.832, 'eval_cosine_REFAI_accuracy@5': 0.625, 'eval_runtime': 3334.8254, 'eval_samples_per_second': 10.274, 'eval_steps_per_second': 1.284, 'epoch': 1.49}
+{'loss': 1.4346, 'grad_norm': 19.09335708618164, 'learning_rate': 4.729559748427673e-06, 'epoch': 1.51}
+{'loss': 1.4866, 'grad_norm': 33.191280364990234, 'learning_rate': 4.708595387840671e-06, 'epoch': 1.54}
+{'loss': 1.3505, 'grad_norm': 67.82401275634766, 'learning_rate': 4.687631027253669e-06, 'epoch': 1.58}
+{'loss': 1.3761, 'grad_norm': 18.018224716186523, 'learning_rate': 4.666666666666667e-06, 'epoch': 1.62}
+{'loss': 1.3154, 'grad_norm': 16.400495529174805, 'learning_rate': 4.645702306079665e-06, 'epoch': 1.66}
+{'loss': 1.2365, 'grad_norm': 18.01580810546875, 'learning_rate': 4.624737945492663e-06, 'epoch': 1.69}
+{'loss': 1.191, 'grad_norm': 117.3637466430664, 'learning_rate': 4.603773584905661e-06, 'epoch': 1.73}
+{'loss': 1.2284, 'grad_norm': 22.86613655090332, 'learning_rate': 4.582809224318658e-06, 'epoch': 1.77}
+{'loss': 1.2934, 'grad_norm': 24.92975425720215, 'learning_rate': 4.561844863731657e-06, 'epoch': 1.81}
+{'loss': 1.1649, 'grad_norm': 19.748661041259766, 'learning_rate': 4.540880503144655e-06, 'epoch': 1.85}
+{'loss': 1.2931, 'grad_norm': 20.016801834106445, 'learning_rate': 4.519916142557652e-06, 'epoch': 1.88}
+{'loss': 1.162, 'grad_norm': 22.209665298461914, 'learning_rate': 4.4989517819706506e-06, 'epoch': 1.92}
+{'loss': 1.0857, 'grad_norm': 85.19596862792969, 'learning_rate': 4.4779874213836485e-06, 'epoch': 1.96}
+{'eval_loss': 1.0297033786773682, 'eval_cosine_accuracy@1': 0.5614457831325301, 'eval_cosine_accuracy@3': 0.7373493975903614, 'eval_cosine_accuracy@5': 0.7927710843373494, 'eval_cosine_mrr@10': 0.664847963281698, 'eval_cosine_ndcg@10': 0.48194839347397495, 'eval_cosine_MEDAI_accuracy@1': 0.5129310344827587, 'eval_cosine_JURAI_accuracy@1': 0.44, 'eval_cosine_AUTOAI_accuracy@1': 0.696, 'eval_cosine_REFAI_accuracy@1': 0.625, 'eval_cosine_MEDAI_accuracy@3': 0.7025862068965517, 'eval_cosine_JURAI_accuracy@3': 0.62, 'eval_cosine_AUTOAI_accuracy@3': 0.84, 'eval_cosine_REFAI_accuracy@3': 0.875, 'eval_cosine_MEDAI_accuracy@5': 0.7586206896551724, 'eval_cosine_JURAI_accuracy@5': 0.72, 'eval_cosine_AUTOAI_accuracy@5': 0.88, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 2582.0148, 'eval_samples_per_second': 13.27, 'eval_steps_per_second': 1.659, 'epoch': 1.99}
+{'loss': 1.1535, 'grad_norm': 50.801700592041016, 'learning_rate': 4.4570230607966456e-06, 'epoch': 2.0}
+{'loss': 0.9703, 'grad_norm': 15.900592803955078, 'learning_rate': 4.4360587002096435e-06, 'epoch': 2.03}
+{'loss': 0.9937, 'grad_norm': 15.425583839416504, 'learning_rate': 4.415094339622642e-06, 'epoch': 2.07}
+{'loss': 0.9883, 'grad_norm': 15.692672729492188, 'learning_rate': 4.394129979035639e-06, 'epoch': 2.11}
+{'loss': 0.9826, 'grad_norm': 19.811668395996094, 'learning_rate': 4.373165618448637e-06, 'epoch': 2.14}
+{'loss': 0.973, 'grad_norm': 17.457813262939453, 'learning_rate': 4.352201257861636e-06, 'epoch': 2.18}
+{'loss': 0.9996, 'grad_norm': 17.67408561706543, 'learning_rate': 4.331236897274633e-06, 'epoch': 2.22}
+{'loss': 0.8507, 'grad_norm': 17.0006103515625, 'learning_rate': 4.310272536687631e-06, 'epoch': 2.26}
+{'loss': 0.933, 'grad_norm': 18.46974754333496, 'learning_rate': 4.28930817610063e-06, 'epoch': 2.29}
+{'loss': 0.9175, 'grad_norm': 18.6922550201416, 'learning_rate': 4.268343815513627e-06, 'epoch': 2.33}
+{'loss': 0.8368, 'grad_norm': 49.832550048828125, 'learning_rate': 4.247379454926625e-06, 'epoch': 2.37}
+{'loss': 0.8714, 'grad_norm': 15.512823104858398, 'learning_rate': 4.226415094339623e-06, 'epoch': 2.41}
+{'loss': 0.917, 'grad_norm': 17.705469131469727, 'learning_rate': 4.205450733752621e-06, 'epoch': 2.45}
+{'loss': 0.8367, 'grad_norm': 18.657684326171875, 'learning_rate': 4.184486373165619e-06, 'epoch': 2.48}
+{'eval_loss': 1.0549308061599731, 'eval_cosine_accuracy@1': 0.5590361445783133, 'eval_cosine_accuracy@3': 0.7590361445783133, 'eval_cosine_accuracy@5': 0.8168674698795181, 'eval_cosine_mrr@10': 0.6699072480397781, 'eval_cosine_ndcg@10': 0.5126829590335905, 'eval_cosine_MEDAI_accuracy@1': 0.5172413793103449, 'eval_cosine_JURAI_accuracy@1': 0.48, 'eval_cosine_AUTOAI_accuracy@1': 0.672, 'eval_cosine_REFAI_accuracy@1': 0.5, 'eval_cosine_MEDAI_accuracy@3': 0.7413793103448276, 'eval_cosine_JURAI_accuracy@3': 0.66, 'eval_cosine_AUTOAI_accuracy@3': 0.84, 'eval_cosine_REFAI_accuracy@3': 0.625, 'eval_cosine_MEDAI_accuracy@5': 0.7974137931034483, 'eval_cosine_JURAI_accuracy@5': 0.72, 'eval_cosine_AUTOAI_accuracy@5': 0.888, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 2557.878, 'eval_samples_per_second': 13.395, 'eval_steps_per_second': 1.674, 'epoch': 2.48}
+{'loss': 0.8378, 'grad_norm': 14.891520500183105, 'learning_rate': 4.1635220125786165e-06, 'epoch': 2.52}
+{'loss': 0.8186, 'grad_norm': 15.340435028076172, 'learning_rate': 4.1425576519916144e-06, 'epoch': 2.56}
+{'loss': 0.8335, 'grad_norm': 23.172222137451172, 'learning_rate': 4.121593291404612e-06, 'epoch': 2.6}
+{'loss': 0.7794, 'grad_norm': 25.51460075378418, 'learning_rate': 4.10062893081761e-06, 'epoch': 2.63}
+{'loss': 0.7686, 'grad_norm': 72.58013916015625, 'learning_rate': 4.079664570230608e-06, 'epoch': 2.67}
+{'loss': 0.8334, 'grad_norm': 21.966339111328125, 'learning_rate': 4.058700209643606e-06, 'epoch': 2.71}
+{'loss': 0.7262, 'grad_norm': 202.72254943847656, 'learning_rate': 4.037735849056604e-06, 'epoch': 2.75}
+{'loss': 0.852, 'grad_norm': 19.967376708984375, 'learning_rate': 4.016771488469602e-06, 'epoch': 2.78}
+{'loss': 0.7987, 'grad_norm': 18.246030807495117, 'learning_rate': 3.9958071278826e-06, 'epoch': 2.82}
+{'loss': 0.7534, 'grad_norm': 20.327606201171875, 'learning_rate': 3.974842767295598e-06, 'epoch': 2.86}
+{'loss': 0.7514, 'grad_norm': 40.336090087890625, 'learning_rate': 3.953878406708596e-06, 'epoch': 2.9}
+{'loss': 0.7015, 'grad_norm': 18.575916290283203, 'learning_rate': 3.932914046121594e-06, 'epoch': 2.94}
+{'loss': 0.8055, 'grad_norm': 20.533138275146484, 'learning_rate': 3.911949685534592e-06, 'epoch': 2.97}
+{'eval_loss': 1.069605827331543, 'eval_cosine_accuracy@1': 0.6120481927710844, 'eval_cosine_accuracy@3': 0.7783132530120482, 'eval_cosine_accuracy@5': 0.8554216867469879, 'eval_cosine_mrr@10': 0.7102323580034422, 'eval_cosine_ndcg@10': 0.5454756385230249, 'eval_cosine_MEDAI_accuracy@1': 0.5689655172413793, 'eval_cosine_JURAI_accuracy@1': 0.5, 'eval_cosine_AUTOAI_accuracy@1': 0.744, 'eval_cosine_REFAI_accuracy@1': 0.5, 'eval_cosine_MEDAI_accuracy@3': 0.7327586206896551, 'eval_cosine_JURAI_accuracy@3': 0.68, 'eval_cosine_AUTOAI_accuracy@3': 0.912, 'eval_cosine_REFAI_accuracy@3': 0.625, 'eval_cosine_MEDAI_accuracy@5': 0.8318965517241379, 'eval_cosine_JURAI_accuracy@5': 0.78, 'eval_cosine_AUTOAI_accuracy@5': 0.936, 'eval_cosine_REFAI_accuracy@5': 0.75, 'eval_runtime': 2434.3416, 'eval_samples_per_second': 14.075, 'eval_steps_per_second': 1.759, 'epoch': 2.98}
+{'loss': 0.6407, 'grad_norm': 16.35544776916504, 'learning_rate': 3.8909853249475895e-06, 'epoch': 3.01}
+{'loss': 0.6665, 'grad_norm': 77.97064208984375, 'learning_rate': 3.8700209643605875e-06, 'epoch': 3.05}
+{'loss': 0.7065, 'grad_norm': 16.728591918945312, 'learning_rate': 3.849056603773585e-06, 'epoch': 3.08}
+{'loss': 0.641, 'grad_norm': 19.658395767211914, 'learning_rate': 3.828092243186583e-06, 'epoch': 3.12}
+{'loss': 0.7946, 'grad_norm': 17.25482749938965, 'learning_rate': 3.8071278825995812e-06, 'epoch': 3.16}
+{'loss': 0.634, 'grad_norm': 43.46599197387695, 'learning_rate': 3.786163522012579e-06, 'epoch': 3.2}
+{'loss': 0.6657, 'grad_norm': 15.499709129333496, 'learning_rate': 3.7651991614255767e-06, 'epoch': 3.23}
+{'loss': 0.7044, 'grad_norm': 19.246328353881836, 'learning_rate': 3.744234800838575e-06, 'epoch': 3.27}
+{'loss': 0.609, 'grad_norm': 15.091254234313965, 'learning_rate': 3.7232704402515725e-06, 'epoch': 3.31}
+{'loss': 0.6573, 'grad_norm': 22.8940486907959, 'learning_rate': 3.7023060796645704e-06, 'epoch': 3.35}
+{'loss': 0.6112, 'grad_norm': 15.0120267868042, 'learning_rate': 3.6813417190775684e-06, 'epoch': 3.38}
+{'loss': 0.6916, 'grad_norm': 22.189313888549805, 'learning_rate': 3.6603773584905663e-06, 'epoch': 3.42}
+{'loss': 0.6141, 'grad_norm': 12.110983848571777, 'learning_rate': 3.6394129979035642e-06, 'epoch': 3.46}
+{'eval_loss': 1.0970842838287354, 'eval_cosine_accuracy@1': 0.6168674698795181, 'eval_cosine_accuracy@3': 0.8048192771084337, 'eval_cosine_accuracy@5': 0.8602409638554217, 'eval_cosine_mrr@10': 0.720497227003251, 'eval_cosine_ndcg@10': 0.5682214973960737, 'eval_cosine_MEDAI_accuracy@1': 0.5905172413793104, 'eval_cosine_JURAI_accuracy@1': 0.5, 'eval_cosine_AUTOAI_accuracy@1': 0.72, 'eval_cosine_REFAI_accuracy@1': 0.5, 'eval_cosine_MEDAI_accuracy@3': 0.7672413793103449, 'eval_cosine_JURAI_accuracy@3': 0.74, 'eval_cosine_AUTOAI_accuracy@3': 0.904, 'eval_cosine_REFAI_accuracy@3': 0.75, 'eval_cosine_MEDAI_accuracy@5': 0.8362068965517241, 'eval_cosine_JURAI_accuracy@5': 0.78, 'eval_cosine_AUTOAI_accuracy@5': 0.936, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 2700.1178, 'eval_samples_per_second': 12.689, 'eval_steps_per_second': 1.586, 'epoch': 3.48}
+{'loss': 0.6045, 'grad_norm': 12.332077980041504, 'learning_rate': 3.618448637316562e-06, 'epoch': 3.5}
+{'loss': 0.6193, 'grad_norm': 18.957765579223633, 'learning_rate': 3.5974842767295596e-06, 'epoch': 3.54}
+{'loss': 0.6378, 'grad_norm': 16.565813064575195, 'learning_rate': 3.576519916142558e-06, 'epoch': 3.57}
+{'loss': 0.6152, 'grad_norm': 14.220942497253418, 'learning_rate': 3.555555555555556e-06, 'epoch': 3.61}
+{'loss': 0.5999, 'grad_norm': 15.346168518066406, 'learning_rate': 3.5345911949685534e-06, 'epoch': 3.65}
+{'loss': 0.6256, 'grad_norm': 17.303678512573242, 'learning_rate': 3.5136268343815518e-06, 'epoch': 3.69}
+{'loss': 0.5879, 'grad_norm': 13.99304485321045, 'learning_rate': 3.4926624737945497e-06, 'epoch': 3.72}
+{'loss': 0.5875, 'grad_norm': 15.98288631439209, 'learning_rate': 3.471698113207547e-06, 'epoch': 3.76}
+{'loss': 0.6219, 'grad_norm': 14.605615615844727, 'learning_rate': 3.4507337526205455e-06, 'epoch': 3.8}
+{'loss': 0.5944, 'grad_norm': 19.096508026123047, 'learning_rate': 3.4297693920335435e-06, 'epoch': 3.84}
+{'loss': 0.606, 'grad_norm': 21.948049545288086, 'learning_rate': 3.408805031446541e-06, 'epoch': 3.88}
+{'loss': 0.6027, 'grad_norm': 15.204889297485352, 'learning_rate': 3.387840670859539e-06, 'epoch': 3.91}
+{'loss': 0.5449, 'grad_norm': 13.528353691101074, 'learning_rate': 3.3668763102725372e-06, 'epoch': 3.95}
+{'eval_loss': 1.1113624572753906, 'eval_cosine_accuracy@1': 0.6602409638554216, 'eval_cosine_accuracy@3': 0.8192771084337349, 'eval_cosine_accuracy@5': 0.8530120481927711, 'eval_cosine_mrr@10': 0.7452256645630139, 'eval_cosine_ndcg@10': 0.5920550370977872, 'eval_cosine_MEDAI_accuracy@1': 0.6163793103448276, 'eval_cosine_JURAI_accuracy@1': 0.5, 'eval_cosine_AUTOAI_accuracy@1': 0.816, 'eval_cosine_REFAI_accuracy@1': 0.5, 'eval_cosine_MEDAI_accuracy@3': 0.7931034482758621, 'eval_cosine_JURAI_accuracy@3': 0.76, 'eval_cosine_AUTOAI_accuracy@3': 0.896, 'eval_cosine_REFAI_accuracy@3': 0.75, 'eval_cosine_MEDAI_accuracy@5': 0.8275862068965517, 'eval_cosine_JURAI_accuracy@5': 0.8, 'eval_cosine_AUTOAI_accuracy@5': 0.92, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 2782.4101, 'eval_samples_per_second': 12.314, 'eval_steps_per_second': 1.539, 'epoch': 3.97}
+{'loss': 0.5662, 'grad_norm': 11.549299240112305, 'learning_rate': 3.3459119496855347e-06, 'epoch': 3.99}
+{'loss': 0.4916, 'grad_norm': 21.055002212524414, 'learning_rate': 3.3249475890985327e-06, 'epoch': 4.02}
+{'loss': 0.5098, 'grad_norm': 16.331390380859375, 'learning_rate': 3.303983228511531e-06, 'epoch': 4.06}
+{'loss': 0.5, 'grad_norm': 13.334854125976562, 'learning_rate': 3.2830188679245285e-06, 'epoch': 4.1}
+{'loss': 0.5186, 'grad_norm': 15.246390342712402, 'learning_rate': 3.2620545073375264e-06, 'epoch': 4.14}
+{'loss': 0.5398, 'grad_norm': 14.484183311462402, 'learning_rate': 3.2410901467505248e-06, 'epoch': 4.17}
+{'loss': 0.557, 'grad_norm': 17.899276733398438, 'learning_rate': 3.2201257861635223e-06, 'epoch': 4.21}
+{'loss': 0.5774, 'grad_norm': 18.70916748046875, 'learning_rate': 3.1991614255765202e-06, 'epoch': 4.25}
+{'loss': 0.5227, 'grad_norm': 21.20819854736328, 'learning_rate': 3.178197064989518e-06, 'epoch': 4.29}
+{'loss': 0.5415, 'grad_norm': 13.813745498657227, 'learning_rate': 3.1572327044025156e-06, 'epoch': 4.32}
+{'loss': 0.4995, 'grad_norm': 17.23479461669922, 'learning_rate': 3.136268343815514e-06, 'epoch': 4.36}
+{'loss': 0.5288, 'grad_norm': 21.197935104370117, 'learning_rate': 3.115303983228512e-06, 'epoch': 4.4}
+{'loss': 0.5514, 'grad_norm': 13.551694869995117, 'learning_rate': 3.0943396226415094e-06, 'epoch': 4.44}
+{'eval_loss': 1.1222846508026123, 'eval_cosine_accuracy@1': 0.7060240963855422, 'eval_cosine_accuracy@3': 0.8168674698795181, 'eval_cosine_accuracy@5': 0.8602409638554217, 'eval_cosine_mrr@10': 0.7720529737999619, 'eval_cosine_ndcg@10': 0.6144176589348598, 'eval_cosine_MEDAI_accuracy@1': 0.6422413793103449, 'eval_cosine_JURAI_accuracy@1': 0.64, 'eval_cosine_AUTOAI_accuracy@1': 0.856, 'eval_cosine_REFAI_accuracy@1': 0.625, 'eval_cosine_MEDAI_accuracy@3': 0.771551724137931, 'eval_cosine_JURAI_accuracy@3': 0.78, 'eval_cosine_AUTOAI_accuracy@3': 0.912, 'eval_cosine_REFAI_accuracy@3': 0.875, 'eval_cosine_MEDAI_accuracy@5': 0.8318965517241379, 'eval_cosine_JURAI_accuracy@5': 0.82, 'eval_cosine_AUTOAI_accuracy@5': 0.928, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 3733.8429, 'eval_samples_per_second': 9.176, 'eval_steps_per_second': 1.147, 'epoch': 4.47}
+{'loss': 0.4982, 'grad_norm': 20.492958068847656, 'learning_rate': 3.0733752620545078e-06, 'epoch': 4.48}
+{'loss': 0.609, 'grad_norm': 16.711872100830078, 'learning_rate': 3.0524109014675057e-06, 'epoch': 4.51}
+{'loss': 0.5199, 'grad_norm': 13.389655113220215, 'learning_rate': 3.031446540880503e-06, 'epoch': 4.55}
+{'loss': 0.4819, 'grad_norm': 12.61457633972168, 'learning_rate': 3.0104821802935015e-06, 'epoch': 4.59}
+{'loss': 0.4624, 'grad_norm': 11.575695991516113, 'learning_rate': 2.9895178197064995e-06, 'epoch': 4.63}
+{'loss': 0.5186, 'grad_norm': 10.846179962158203, 'learning_rate': 2.968553459119497e-06, 'epoch': 4.66}
+{'loss': 0.4943, 'grad_norm': 13.173294067382812, 'learning_rate': 2.947589098532495e-06, 'epoch': 4.7}
+{'loss': 0.5466, 'grad_norm': 42.73167419433594, 'learning_rate': 2.9266247379454932e-06, 'epoch': 4.74}
+{'loss': 0.5246, 'grad_norm': 14.46073055267334, 'learning_rate': 2.9056603773584907e-06, 'epoch': 4.78}
+{'loss': 0.5256, 'grad_norm': 14.34548568725586, 'learning_rate': 2.8846960167714887e-06, 'epoch': 4.82}
+{'loss': 0.5408, 'grad_norm': 16.354469299316406, 'learning_rate': 2.863731656184486e-06, 'epoch': 4.85}
+{'loss': 0.5217, 'grad_norm': 9.700997352600098, 'learning_rate': 2.8427672955974845e-06, 'epoch': 4.89}
+{'loss': 0.516, 'grad_norm': 15.102344512939453, 'learning_rate': 2.8218029350104824e-06, 'epoch': 4.93}
+{'loss': 0.4537, 'grad_norm': 12.932173728942871, 'learning_rate': 2.80083857442348e-06, 'epoch': 4.97}
+{'eval_loss': 1.1198369264602661, 'eval_cosine_accuracy@1': 0.691566265060241, 'eval_cosine_accuracy@3': 0.8265060240963855, 'eval_cosine_accuracy@5': 0.8771084337349397, 'eval_cosine_mrr@10': 0.767183973991203, 'eval_cosine_ndcg@10': 0.6244310754100842, 'eval_cosine_MEDAI_accuracy@1': 0.6293103448275862, 'eval_cosine_JURAI_accuracy@1': 0.56, 'eval_cosine_AUTOAI_accuracy@1': 0.864, 'eval_cosine_REFAI_accuracy@1': 0.625, 'eval_cosine_MEDAI_accuracy@3': 0.7974137931034483, 'eval_cosine_JURAI_accuracy@3': 0.74, 'eval_cosine_AUTOAI_accuracy@3': 0.912, 'eval_cosine_REFAI_accuracy@3': 0.875, 'eval_cosine_MEDAI_accuracy@5': 0.8491379310344828, 'eval_cosine_JURAI_accuracy@5': 0.84, 'eval_cosine_AUTOAI_accuracy@5': 0.944, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 6181.9191, 'eval_samples_per_second': 5.542, 'eval_steps_per_second': 0.693, 'epoch': 4.97}
+{'loss': 0.4838, 'grad_norm': 9.156527084996924e-05, 'learning_rate': 2.7798742138364783e-06, 'epoch': 5.0}
+{'loss': 0.4436, 'grad_norm': 12.999384880065918, 'learning_rate': 2.7589098532494762e-06, 'epoch': 5.04}
+{'loss': 0.4483, 'grad_norm': 15.59009075164795, 'learning_rate': 2.7379454926624737e-06, 'epoch': 5.08}
+{'loss': 0.4992, 'grad_norm': 22.33647346496582, 'learning_rate': 2.716981132075472e-06, 'epoch': 5.11}
+{'loss': 0.46, 'grad_norm': 26.50771141052246, 'learning_rate': 2.69601677148847e-06, 'epoch': 5.15}
+{'loss': 0.4608, 'grad_norm': 14.19679069519043, 'learning_rate': 2.6750524109014675e-06, 'epoch': 5.19}
+{'loss': 0.4577, 'grad_norm': 42.35392379760742, 'learning_rate': 2.6540880503144654e-06, 'epoch': 5.23}
+{'loss': 0.4515, 'grad_norm': 11.824676513671875, 'learning_rate': 2.6331236897274638e-06, 'epoch': 5.26}
+{'loss': 0.4603, 'grad_norm': 16.616897583007812, 'learning_rate': 2.6121593291404613e-06, 'epoch': 5.3}
+{'loss': 0.5054, 'grad_norm': 15.575935363769531, 'learning_rate': 2.591194968553459e-06, 'epoch': 5.34}
+{'loss': 0.4608, 'grad_norm': 12.839300155639648, 'learning_rate': 2.5702306079664575e-06, 'epoch': 5.38}
+{'loss': 0.4453, 'grad_norm': 13.00051212310791, 'learning_rate': 2.549266247379455e-06, 'epoch': 5.42}
+{'loss': 0.4984, 'grad_norm': 11.715551376342773, 'learning_rate': 2.528301886792453e-06, 'epoch': 5.45}
+{'eval_loss': 1.1540117263793945, 'eval_cosine_accuracy@1': 0.7060240963855422, 'eval_cosine_accuracy@3': 0.8337349397590361, 'eval_cosine_accuracy@5': 0.8819277108433735, 'eval_cosine_mrr@10': 0.7777022375215148, 'eval_cosine_ndcg@10': 0.6277328327357873, 'eval_cosine_MEDAI_accuracy@1': 0.6379310344827587, 'eval_cosine_JURAI_accuracy@1': 0.62, 'eval_cosine_AUTOAI_accuracy@1': 0.872, 'eval_cosine_REFAI_accuracy@1': 0.625, 'eval_cosine_MEDAI_accuracy@3': 0.7801724137931034, 'eval_cosine_JURAI_accuracy@3': 0.82, 'eval_cosine_AUTOAI_accuracy@3': 0.936, 'eval_cosine_REFAI_accuracy@3': 0.875, 'eval_cosine_MEDAI_accuracy@5': 0.8448275862068966, 'eval_cosine_JURAI_accuracy@5': 0.84, 'eval_cosine_AUTOAI_accuracy@5': 0.968, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 6023.919, 'eval_samples_per_second': 5.688, 'eval_steps_per_second': 0.711, 'epoch': 5.46}
+{'loss': 0.4748, 'grad_norm': 13.266022682189941, 'learning_rate': 2.5073375262054513e-06, 'epoch': 5.49}
+{'loss': 0.5249, 'grad_norm': 16.50304412841797, 'learning_rate': 2.486373165618449e-06, 'epoch': 5.53}
+{'loss': 0.4177, 'grad_norm': 12.555948257446289, 'learning_rate': 2.4654088050314467e-06, 'epoch': 5.57}
+{'loss': 0.4167, 'grad_norm': 11.217964172363281, 'learning_rate': 2.4444444444444447e-06, 'epoch': 5.6}
+{'loss': 0.4004, 'grad_norm': 11.620451927185059, 'learning_rate': 2.4234800838574426e-06, 'epoch': 5.64}
+{'loss': 0.5109, 'grad_norm': 10.085529327392578, 'learning_rate': 2.4025157232704405e-06, 'epoch': 5.68}
+{'loss': 0.4287, 'grad_norm': 10.521421432495117, 'learning_rate': 2.3815513626834384e-06, 'epoch': 5.72}
+{'loss': 0.4874, 'grad_norm': 15.447988510131836, 'learning_rate': 2.3605870020964364e-06, 'epoch': 5.75}
+{'loss': 0.4639, 'grad_norm': 9.971888542175293, 'learning_rate': 2.3396226415094343e-06, 'epoch': 5.79}
+{'loss': 0.4776, 'grad_norm': 38.43333435058594, 'learning_rate': 2.3186582809224322e-06, 'epoch': 5.83}
+{'loss': 0.4368, 'grad_norm': 13.461701393127441, 'learning_rate': 2.29769392033543e-06, 'epoch': 5.87}
+{'loss': 0.4273, 'grad_norm': 16.61603355407715, 'learning_rate': 2.276729559748428e-06, 'epoch': 5.91}
+{'loss': 0.4056, 'grad_norm': 41.59297561645508, 'learning_rate': 2.2557651991614256e-06, 'epoch': 5.94}
+{'eval_loss': 1.1163661479949951, 'eval_cosine_accuracy@1': 0.7204819277108434, 'eval_cosine_accuracy@3': 0.8361445783132531, 'eval_cosine_accuracy@5': 0.8746987951807229, 'eval_cosine_mrr@10': 0.7831382673551349, 'eval_cosine_ndcg@10': 0.6353379591031203, 'eval_cosine_MEDAI_accuracy@1': 0.6637931034482759, 'eval_cosine_JURAI_accuracy@1': 0.64, 'eval_cosine_AUTOAI_accuracy@1': 0.864, 'eval_cosine_REFAI_accuracy@1': 0.625, 'eval_cosine_MEDAI_accuracy@3': 0.7974137931034483, 'eval_cosine_JURAI_accuracy@3': 0.78, 'eval_cosine_AUTOAI_accuracy@3': 0.928, 'eval_cosine_REFAI_accuracy@3': 0.875, 'eval_cosine_MEDAI_accuracy@5': 0.8405172413793104, 'eval_cosine_JURAI_accuracy@5': 0.84, 'eval_cosine_AUTOAI_accuracy@5': 0.952, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 8076.0476, 'eval_samples_per_second': 4.243, 'eval_steps_per_second': 0.53, 'epoch': 5.96}
+{'loss': 0.4497, 'grad_norm': 12.582558631896973, 'learning_rate': 2.2348008385744235e-06, 'epoch': 5.98}
+{'loss': 0.4372, 'grad_norm': 17.155736923217773, 'learning_rate': 2.213836477987422e-06, 'epoch': 6.02}
+{'loss': 0.4474, 'grad_norm': 13.10102653503418, 'learning_rate': 2.1928721174004193e-06, 'epoch': 6.05}
+{'loss': 0.4709, 'grad_norm': 25.555864334106445, 'learning_rate': 2.1719077568134173e-06, 'epoch': 6.09}
+{'loss': 0.4591, 'grad_norm': 12.897427558898926, 'learning_rate': 2.150943396226415e-06, 'epoch': 6.13}
+{'loss': 0.4117, 'grad_norm': 11.016508102416992, 'learning_rate': 2.129979035639413e-06, 'epoch': 6.17}
+{'loss': 0.3695, 'grad_norm': 13.651869773864746, 'learning_rate': 2.109014675052411e-06, 'epoch': 6.2}
+{'loss': 0.4125, 'grad_norm': 12.729976654052734, 'learning_rate': 2.088050314465409e-06, 'epoch': 6.24}
+{'loss': 0.4437, 'grad_norm': 17.95407485961914, 'learning_rate': 2.067085953878407e-06, 'epoch': 6.28}
+{'loss': 0.4325, 'grad_norm': 14.2809419631958, 'learning_rate': 2.046121593291405e-06, 'epoch': 6.32}
+{'loss': 0.4315, 'grad_norm': 14.319986343383789, 'learning_rate': 2.0251572327044027e-06, 'epoch': 6.35}
+{'loss': 0.4352, 'grad_norm': 11.173449516296387, 'learning_rate': 2.0041928721174007e-06, 'epoch': 6.39}
+{'loss': 0.4249, 'grad_norm': 12.99388313293457, 'learning_rate': 1.9832285115303986e-06, 'epoch': 6.43}
+{'eval_loss': 1.1414822340011597, 'eval_cosine_accuracy@1': 0.7228915662650602, 'eval_cosine_accuracy@3': 0.8289156626506025, 'eval_cosine_accuracy@5': 0.8771084337349397, 'eval_cosine_mrr@10': 0.7824526678141137, 'eval_cosine_ndcg@10': 0.6432663215705506, 'eval_cosine_MEDAI_accuracy@1': 0.6551724137931034, 'eval_cosine_JURAI_accuracy@1': 0.68, 'eval_cosine_AUTOAI_accuracy@1': 0.872, 'eval_cosine_REFAI_accuracy@1': 0.625, 'eval_cosine_MEDAI_accuracy@3': 0.7844827586206896, 'eval_cosine_JURAI_accuracy@3': 0.8, 'eval_cosine_AUTOAI_accuracy@3': 0.92, 'eval_cosine_REFAI_accuracy@3': 0.875, 'eval_cosine_MEDAI_accuracy@5': 0.8491379310344828, 'eval_cosine_JURAI_accuracy@5': 0.84, 'eval_cosine_AUTOAI_accuracy@5': 0.944, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 8024.4726, 'eval_samples_per_second': 4.27, 'eval_steps_per_second': 0.534, 'epoch': 6.45}
+{'loss': 0.3756, 'grad_norm': 12.557947158813477, 'learning_rate': 1.9622641509433965e-06, 'epoch': 6.47}
+{'loss': 0.4261, 'grad_norm': 11.395769119262695, 'learning_rate': 1.9412997903563944e-06, 'epoch': 6.51}
+{'loss': 0.4005, 'grad_norm': 11.123983383178711, 'learning_rate': 1.920335429769392e-06, 'epoch': 6.54}
+{'loss': 0.4208, 'grad_norm': 9.29976749420166, 'learning_rate': 1.8993710691823903e-06, 'epoch': 6.58}
+{'loss': 0.3862, 'grad_norm': 11.465919494628906, 'learning_rate': 1.878406708595388e-06, 'epoch': 6.62}
+{'loss': 0.4732, 'grad_norm': 13.976768493652344, 'learning_rate': 1.857442348008386e-06, 'epoch': 6.66}
+{'loss': 0.3991, 'grad_norm': 9.293543815612793, 'learning_rate': 1.8364779874213836e-06, 'epoch': 6.69}
+{'loss': 0.3896, 'grad_norm': 12.567275047302246, 'learning_rate': 1.8155136268343818e-06, 'epoch': 6.73}
+{'loss': 0.3976, 'grad_norm': 12.738909721374512, 'learning_rate': 1.7945492662473795e-06, 'epoch': 6.77}
+{'loss': 0.4013, 'grad_norm': 11.071969985961914, 'learning_rate': 1.7735849056603774e-06, 'epoch': 6.81}
+{'loss': 0.4446, 'grad_norm': 11.827198028564453, 'learning_rate': 1.7526205450733756e-06, 'epoch': 6.85}
+{'loss': 0.406, 'grad_norm': 11.047698020935059, 'learning_rate': 1.7316561844863733e-06, 'epoch': 6.88}
+{'loss': 0.3974, 'grad_norm': 10.804015159606934, 'learning_rate': 1.7106918238993712e-06, 'epoch': 6.92}
+{'eval_loss': 1.12385094165802, 'eval_cosine_accuracy@1': 0.7180722891566265, 'eval_cosine_accuracy@3': 0.8265060240963855, 'eval_cosine_accuracy@5': 0.8674698795180723, 'eval_cosine_mrr@10': 0.7796739338305605, 'eval_cosine_ndcg@10': 0.6460848027463009, 'eval_cosine_MEDAI_accuracy@1': 0.6422413793103449, 'eval_cosine_JURAI_accuracy@1': 0.7, 'eval_cosine_AUTOAI_accuracy@1': 0.872, 'eval_cosine_REFAI_accuracy@1': 0.625, 'eval_cosine_MEDAI_accuracy@3': 0.7844827586206896, 'eval_cosine_JURAI_accuracy@3': 0.82, 'eval_cosine_AUTOAI_accuracy@3': 0.904, 'eval_cosine_REFAI_accuracy@3': 0.875, 'eval_cosine_MEDAI_accuracy@5': 0.8405172413793104, 'eval_cosine_JURAI_accuracy@5': 0.82, 'eval_cosine_AUTOAI_accuracy@5': 0.936, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 7955.0062, 'eval_samples_per_second': 4.307, 'eval_steps_per_second': 0.538, 'epoch': 6.95}
+{'loss': 0.3972, 'grad_norm': 13.714021682739258, 'learning_rate': 1.6897274633123691e-06, 'epoch': 6.96}
+{'loss': 0.4003, 'grad_norm': 11.734067916870117, 'learning_rate': 1.668763102725367e-06, 'epoch': 7.0}
+{'loss': 0.3882, 'grad_norm': 12.491886138916016, 'learning_rate': 1.6477987421383648e-06, 'epoch': 7.03}
+{'loss': 0.4157, 'grad_norm': 16.381328582763672, 'learning_rate': 1.6268343815513629e-06, 'epoch': 7.07}
+{'loss': 0.3995, 'grad_norm': 17.751604080200195, 'learning_rate': 1.6058700209643608e-06, 'epoch': 7.11}
+{'loss': 0.3863, 'grad_norm': 13.058948516845703, 'learning_rate': 1.5849056603773585e-06, 'epoch': 7.14}
+{'loss': 0.4181, 'grad_norm': 13.105016708374023, 'learning_rate': 1.5639412997903567e-06, 'epoch': 7.18}
+{'loss': 0.3756, 'grad_norm': 12.59408187866211, 'learning_rate': 1.5429769392033544e-06, 'epoch': 7.22}
+{'loss': 0.3981, 'grad_norm': 9.846617698669434, 'learning_rate': 1.5220125786163523e-06, 'epoch': 7.26}
+{'loss': 0.4254, 'grad_norm': 9.290340423583984, 'learning_rate': 1.5010482180293504e-06, 'epoch': 7.29}
+{'loss': 0.405, 'grad_norm': 13.556827545166016, 'learning_rate': 1.4800838574423482e-06, 'epoch': 7.33}
+{'loss': 0.3923, 'grad_norm': 14.391557693481445, 'learning_rate': 1.459119496855346e-06, 'epoch': 7.37}
+{'loss': 0.3916, 'grad_norm': 14.338366508483887, 'learning_rate': 1.4381551362683438e-06, 'epoch': 7.41}
+{'loss': 0.4327, 'grad_norm': 10.34264087677002, 'learning_rate': 1.417190775681342e-06, 'epoch': 7.45}
+{'eval_loss': 1.1595622301101685, 'eval_cosine_accuracy@1': 0.7253012048192771, 'eval_cosine_accuracy@3': 0.8361445783132531, 'eval_cosine_accuracy@5': 0.8626506024096385, 'eval_cosine_mrr@10': 0.7845811818703383, 'eval_cosine_ndcg@10': 0.6538502563666467, 'eval_cosine_MEDAI_accuracy@1': 0.6594827586206896, 'eval_cosine_JURAI_accuracy@1': 0.68, 'eval_cosine_AUTOAI_accuracy@1': 0.872, 'eval_cosine_REFAI_accuracy@1': 0.625, 'eval_cosine_MEDAI_accuracy@3': 0.7931034482758621, 'eval_cosine_JURAI_accuracy@3': 0.82, 'eval_cosine_AUTOAI_accuracy@3': 0.92, 'eval_cosine_REFAI_accuracy@3': 0.875, 'eval_cosine_MEDAI_accuracy@5': 0.8275862068965517, 'eval_cosine_JURAI_accuracy@5': 0.82, 'eval_cosine_AUTOAI_accuracy@5': 0.944, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 7330.9092, 'eval_samples_per_second': 4.674, 'eval_steps_per_second': 0.584, 'epoch': 7.45}
+{'loss': 0.366, 'grad_norm': 66.90961456298828, 'learning_rate': 1.3962264150943396e-06, 'epoch': 7.48}
+{'loss': 0.4085, 'grad_norm': 12.300887107849121, 'learning_rate': 1.3752620545073376e-06, 'epoch': 7.52}
+{'loss': 0.3729, 'grad_norm': 10.928750038146973, 'learning_rate': 1.3542976939203357e-06, 'epoch': 7.56}
+{'loss': 0.407, 'grad_norm': 13.53911018371582, 'learning_rate': 1.3333333333333334e-06, 'epoch': 7.6}
+{'loss': 0.4166, 'grad_norm': 11.048266410827637, 'learning_rate': 1.3123689727463313e-06, 'epoch': 7.63}
+{'loss': 0.3815, 'grad_norm': 10.161114692687988, 'learning_rate': 1.2914046121593293e-06, 'epoch': 7.67}
+{'loss': 0.3788, 'grad_norm': 10.483572959899902, 'learning_rate': 1.2704402515723272e-06, 'epoch': 7.71}
+{'loss': 0.3627, 'grad_norm': 9.686800956726074, 'learning_rate': 1.2494758909853251e-06, 'epoch': 7.75}
+{'loss': 0.4444, 'grad_norm': 92.87029266357422, 'learning_rate': 1.2285115303983228e-06, 'epoch': 7.78}
+{'loss': 0.4039, 'grad_norm': 28.475589752197266, 'learning_rate': 1.207547169811321e-06, 'epoch': 7.82}
+{'loss': 0.3867, 'grad_norm': 11.736577987670898, 'learning_rate': 1.1865828092243189e-06, 'epoch': 7.86}
+{'loss': 0.3686, 'grad_norm': 10.991551399230957, 'learning_rate': 1.1656184486373166e-06, 'epoch': 7.9}
+{'loss': 0.3917, 'grad_norm': 11.267688751220703, 'learning_rate': 1.1446540880503145e-06, 'epoch': 7.94}
+{'eval_loss': 1.1440205574035645, 'eval_cosine_accuracy@1': 0.7373493975903614, 'eval_cosine_accuracy@3': 0.8361445783132531, 'eval_cosine_accuracy@5': 0.8722891566265061, 'eval_cosine_mrr@10': 0.7938410786001148, 'eval_cosine_ndcg@10': 0.657395807283151, 'eval_cosine_MEDAI_accuracy@1': 0.6724137931034483, 'eval_cosine_JURAI_accuracy@1': 0.68, 'eval_cosine_AUTOAI_accuracy@1': 0.888, 'eval_cosine_REFAI_accuracy@1': 0.625, 'eval_cosine_MEDAI_accuracy@3': 0.7887931034482759, 'eval_cosine_JURAI_accuracy@3': 0.82, 'eval_cosine_AUTOAI_accuracy@3': 0.928, 'eval_cosine_REFAI_accuracy@3': 0.875, 'eval_cosine_MEDAI_accuracy@5': 0.8362068965517241, 'eval_cosine_JURAI_accuracy@5': 0.84, 'eval_cosine_AUTOAI_accuracy@5': 0.952, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 7865.1807, 'eval_samples_per_second': 4.356, 'eval_steps_per_second': 0.545, 'epoch': 7.94}
+{'loss': 0.4135, 'grad_norm': 22.412940979003906, 'learning_rate': 1.1236897274633125e-06, 'epoch': 7.97}
+{'loss': 0.3233, 'grad_norm': 15.382224082946777, 'learning_rate': 1.1027253668763104e-06, 'epoch': 8.01}
+{'loss': 0.4128, 'grad_norm': 17.588096618652344, 'learning_rate': 1.0817610062893083e-06, 'epoch': 8.05}
+{'loss': 0.4239, 'grad_norm': 18.468843460083008, 'learning_rate': 1.060796645702306e-06, 'epoch': 8.08}
+{'loss': 0.4065, 'grad_norm': 12.39001750946045, 'learning_rate': 1.0398322851153042e-06, 'epoch': 8.12}
+{'loss': 0.3388, 'grad_norm': 10.329628944396973, 'learning_rate': 1.018867924528302e-06, 'epoch': 8.16}
+{'loss': 0.3579, 'grad_norm': 15.6459321975708, 'learning_rate': 9.979035639412998e-07, 'epoch': 8.2}
+{'loss': 0.4379, 'grad_norm': 12.121514320373535, 'learning_rate': 9.769392033542977e-07, 'epoch': 8.23}
+{'loss': 0.3776, 'grad_norm': 10.661589622497559, 'learning_rate': 9.559748427672956e-07, 'epoch': 8.27}
+{'loss': 0.3604, 'grad_norm': 11.501150131225586, 'learning_rate': 9.350104821802936e-07, 'epoch': 8.31}
+{'loss': 0.4213, 'grad_norm': 11.790729522705078, 'learning_rate': 9.140461215932915e-07, 'epoch': 8.35}
+{'loss': 0.4084, 'grad_norm': 24.023250579833984, 'learning_rate': 8.930817610062893e-07, 'epoch': 8.38}
+{'loss': 0.401, 'grad_norm': 17.74411964416504, 'learning_rate': 8.721174004192872e-07, 'epoch': 8.42}
+{'eval_loss': 1.161734938621521, 'eval_cosine_accuracy@1': 0.727710843373494, 'eval_cosine_accuracy@3': 0.8240963855421687, 'eval_cosine_accuracy@5': 0.8650602409638555, 'eval_cosine_mrr@10': 0.7849311531841651, 'eval_cosine_ndcg@10': 0.6549350216262648, 'eval_cosine_MEDAI_accuracy@1': 0.6681034482758621, 'eval_cosine_JURAI_accuracy@1': 0.68, 'eval_cosine_AUTOAI_accuracy@1': 0.872, 'eval_cosine_REFAI_accuracy@1': 0.5, 'eval_cosine_MEDAI_accuracy@3': 0.771551724137931, 'eval_cosine_JURAI_accuracy@3': 0.82, 'eval_cosine_AUTOAI_accuracy@3': 0.92, 'eval_cosine_REFAI_accuracy@3': 0.875, 'eval_cosine_MEDAI_accuracy@5': 0.8232758620689655, 'eval_cosine_JURAI_accuracy@5': 0.84, 'eval_cosine_AUTOAI_accuracy@5': 0.952, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 7494.655, 'eval_samples_per_second': 4.572, 'eval_steps_per_second': 0.571, 'epoch': 8.44}
+{'loss': 0.3601, 'grad_norm': 9.022027015686035, 'learning_rate': 8.511530398322853e-07, 'epoch': 8.46}
+{'loss': 0.411, 'grad_norm': 18.517976760864258, 'learning_rate': 8.301886792452831e-07, 'epoch': 8.5}
+{'loss': 0.3224, 'grad_norm': 10.782541275024414, 'learning_rate': 8.09224318658281e-07, 'epoch': 8.54}
+{'loss': 0.3566, 'grad_norm': 10.299531936645508, 'learning_rate': 7.882599580712789e-07, 'epoch': 8.57}
+{'loss': 0.3584, 'grad_norm': 9.16225528717041, 'learning_rate': 7.672955974842768e-07, 'epoch': 8.61}
+{'loss': 0.354, 'grad_norm': 10.96906852722168, 'learning_rate': 7.463312368972747e-07, 'epoch': 8.65}
+{'loss': 0.3509, 'grad_norm': 11.133962631225586, 'learning_rate': 7.253668763102725e-07, 'epoch': 8.69}
+{'loss': 0.3788, 'grad_norm': 9.865299224853516, 'learning_rate': 7.044025157232705e-07, 'epoch': 8.72}
+{'loss': 0.4104, 'grad_norm': 10.99441146850586, 'learning_rate': 6.834381551362685e-07, 'epoch': 8.76}
+{'loss': 0.4722, 'grad_norm': 11.056548118591309, 'learning_rate': 6.624737945492663e-07, 'epoch': 8.8}
+{'loss': 0.4074, 'grad_norm': 8.029007911682129, 'learning_rate': 6.415094339622642e-07, 'epoch': 8.84}
+{'loss': 0.352, 'grad_norm': 83.3428955078125, 'learning_rate': 6.205450733752621e-07, 'epoch': 8.88}
+{'loss': 0.3884, 'grad_norm': 9.76265811920166, 'learning_rate': 5.9958071278826e-07, 'epoch': 8.91}
+{'eval_loss': 1.1621246337890625, 'eval_cosine_accuracy@1': 0.7325301204819277, 'eval_cosine_accuracy@3': 0.8337349397590361, 'eval_cosine_accuracy@5': 0.8650602409638555, 'eval_cosine_mrr@10': 0.7900392044367947, 'eval_cosine_ndcg@10': 0.661020699142548, 'eval_cosine_MEDAI_accuracy@1': 0.6637931034482759, 'eval_cosine_JURAI_accuracy@1': 0.68, 'eval_cosine_AUTOAI_accuracy@1': 0.888, 'eval_cosine_REFAI_accuracy@1': 0.625, 'eval_cosine_MEDAI_accuracy@3': 0.7844827586206896, 'eval_cosine_JURAI_accuracy@3': 0.82, 'eval_cosine_AUTOAI_accuracy@3': 0.928, 'eval_cosine_REFAI_accuracy@3': 0.875, 'eval_cosine_MEDAI_accuracy@5': 0.8232758620689655, 'eval_cosine_JURAI_accuracy@5': 0.84, 'eval_cosine_AUTOAI_accuracy@5': 0.952, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 7656.4428, 'eval_samples_per_second': 4.475, 'eval_steps_per_second': 0.559, 'epoch': 8.94}
+{'loss': 0.3616, 'grad_norm': 72.19632720947266, 'learning_rate': 5.78616352201258e-07, 'epoch': 8.95}
+{'loss': 0.3536, 'grad_norm': 9.912554740905762, 'learning_rate': 5.576519916142558e-07, 'epoch': 8.99}
+{'loss': 0.3133, 'grad_norm': 14.845227241516113, 'learning_rate': 5.366876310272537e-07, 'epoch': 9.02}
+{'loss': 0.3621, 'grad_norm': 14.336983680725098, 'learning_rate': 5.157232704402516e-07, 'epoch': 9.06}
+{'loss': 0.3603, 'grad_norm': 10.678007125854492, 'learning_rate': 4.947589098532496e-07, 'epoch': 9.1}
+{'loss': 0.3986, 'grad_norm': 15.363500595092773, 'learning_rate': 4.737945492662474e-07, 'epoch': 9.14}
+{'loss': 0.3698, 'grad_norm': 9.349668502807617, 'learning_rate': 4.528301886792453e-07, 'epoch': 9.17}
+{'loss': 0.3341, 'grad_norm': 9.848037719726562, 'learning_rate': 4.3186582809224323e-07, 'epoch': 9.21}
+{'loss': 0.3659, 'grad_norm': 9.115899085998535, 'learning_rate': 4.109014675052411e-07, 'epoch': 9.25}
+{'loss': 0.3659, 'grad_norm': 8.566487312316895, 'learning_rate': 3.8993710691823903e-07, 'epoch': 9.29}
+{'loss': 0.3729, 'grad_norm': 8.58014965057373, 'learning_rate': 3.6897274633123696e-07, 'epoch': 9.32}
+{'loss': 0.3979, 'grad_norm': 14.412517547607422, 'learning_rate': 3.4800838574423483e-07, 'epoch': 9.36}
+{'loss': 0.3711, 'grad_norm': 14.846677780151367, 'learning_rate': 3.2704402515723275e-07, 'epoch': 9.4}
+{'eval_loss': 1.1635171175003052, 'eval_cosine_accuracy@1': 0.7373493975903614, 'eval_cosine_accuracy@3': 0.8361445783132531, 'eval_cosine_accuracy@5': 0.8698795180722891, 'eval_cosine_mrr@10': 0.7924909160451328, 'eval_cosine_ndcg@10': 0.6609453166502117, 'eval_cosine_MEDAI_accuracy@1': 0.6681034482758621, 'eval_cosine_JURAI_accuracy@1': 0.72, 'eval_cosine_AUTOAI_accuracy@1': 0.88, 'eval_cosine_REFAI_accuracy@1': 0.625, 'eval_cosine_MEDAI_accuracy@3': 0.7887931034482759, 'eval_cosine_JURAI_accuracy@3': 0.82, 'eval_cosine_AUTOAI_accuracy@3': 0.928, 'eval_cosine_REFAI_accuracy@3': 0.875, 'eval_cosine_MEDAI_accuracy@5': 0.8275862068965517, 'eval_cosine_JURAI_accuracy@5': 0.82, 'eval_cosine_AUTOAI_accuracy@5': 0.968, 'eval_cosine_REFAI_accuracy@5': 0.875, 'eval_runtime': 6967.7718, 'eval_samples_per_second': 4.917, 'eval_steps_per_second': 0.615, 'epoch': 9.43}
+{'train_runtime': 155873.071, 'train_samples_per_second': 1.087, 'train_steps_per_second': 0.017, 'train_loss': 0.8318068767278388, 'epoch': 9.43}
+W&B assigned run name: vital-sweep-68
+
+
+ ------------------------ Experiment configuration: ------------------------ 
+project_root: /home/ls6/hauptmann/ethikchat-experiment-argument-classification
+experiment_dir: experiments_outputs
+experiment_run: qooh61ky
+dataset_dir: data/processed/with_context
+dataset_name: corpus_dataset_v2
+dataset_split_type: DatasetSplitType.InDistribution
+split_dataset_name: dataset_split_in_distribution
+model_name: T-Systems-onsite/german-roberta-sentence-transformer-v2
+model_name_escaped: T-Systems-onsite-german-roberta-sentence-transformer-v2
+model_run_dir: /home/ls6/hauptmann/ethikchat-experiment-argument-classification/experiments_outputs/qooh61ky/vital-sweep-68
+learning_rate: 5e-06
+batch_size: 128
+num_epochs: 12
+loss_function: MultipleNegativesRankingLoss
+run_time: sweep-run
+warmup_ratio: 0.1
+context_length: 3
+add_discussion_scenario_info: True
+test_scenario: MEDAI
+num_shots_passages: 22
+num_shots_queries: 19
+ ------------------------ ----------------------------- ------------------------ 
+
+
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/samples_collection.csv ... Done
+Dataset already exists at /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/processed/with_context/dataset_split_in_distribution. Loading it.
+queries-train: There are 25 of 1322 examples that will be truncated during training.
+passages-train: There are 0 of 6468 examples that will be truncated during training.
+queries-eval: There are 12 of 415 examples that will be truncated during training.
+passages-eval: There are 0 of 10386 examples that will be truncated during training.
+queries-test: There are 8 of 417 examples that will be truncated during training.
+passages-test: There are 0 of 10386 examples that will be truncated during training.
+{'loss': 5.3335, 'grad_norm': 21.774662017822266, 'learning_rate': 1.5734265734265737e-07, 'epoch': 0.04}
+{'loss': 5.2793, 'grad_norm': 21.40966033935547, 'learning_rate': 3.1468531468531473e-07, 'epoch': 0.08}
+{'loss': 5.1632, 'grad_norm': 22.226049423217773, 'learning_rate': 4.895104895104896e-07, 'epoch': 0.13}
+{'loss': 4.7995, 'grad_norm': 15.773505210876465, 'learning_rate': 6.643356643356644e-07, 'epoch': 0.17}
+{'loss': 4.6256, 'grad_norm': 13.149139404296875, 'learning_rate': 8.391608391608393e-07, 'epoch': 0.21}
+{'loss': 4.4049, 'grad_norm': 11.668174743652344, 'learning_rate': 9.965034965034966e-07, 'epoch': 0.25}
+{'loss': 4.233, 'grad_norm': 20.379409790039062, 'learning_rate': 1.1713286713286715e-06, 'epoch': 0.29}
+{'loss': 4.0389, 'grad_norm': 8.84636116027832, 'learning_rate': 1.3461538461538462e-06, 'epoch': 0.34}
+{'loss': 3.916, 'grad_norm': 8.180656433105469, 'learning_rate': 1.5209790209790213e-06, 'epoch': 0.38}
+{'loss': 3.8108, 'grad_norm': 6.228609561920166, 'learning_rate': 1.695804195804196e-06, 'epoch': 0.42}
+{'loss': 3.7208, 'grad_norm': 5.235097408294678, 'learning_rate': 1.8706293706293706e-06, 'epoch': 0.46}
+{'eval_loss': 1.4217333793640137, 'eval_cosine_accuracy@1': 0.05301204819277108, 'eval_cosine_accuracy@3': 0.12771084337349398, 'eval_cosine_accuracy@5': 0.20240963855421687, 'eval_cosine_mrr@10': 0.11522662076878952, 'eval_cosine_ndcg@10': 0.055425982526565484, 'eval_cosine_MEDAI_accuracy@1': 0.0603448275862069, 'eval_cosine_JURAI_accuracy@1': 0.02, 'eval_cosine_AUTOAI_accuracy@1': 0.048, 'eval_cosine_REFAI_accuracy@1': 0.125, 'eval_cosine_MEDAI_accuracy@3': 0.12931034482758622, 'eval_cosine_JURAI_accuracy@3': 0.1, 'eval_cosine_AUTOAI_accuracy@3': 0.136, 'eval_cosine_REFAI_accuracy@3': 0.125, 'eval_cosine_MEDAI_accuracy@5': 0.22844827586206898, 'eval_cosine_JURAI_accuracy@5': 0.2, 'eval_cosine_AUTOAI_accuracy@5': 0.16, 'eval_cosine_REFAI_accuracy@5': 0.125, 'eval_runtime': 4424.3969, 'eval_samples_per_second': 7.744, 'eval_steps_per_second': 0.968, 'epoch': 0.5}
+{'loss': 3.6837, 'grad_norm': 5.424556255340576, 'learning_rate': 2.0454545454545457e-06, 'epoch': 0.5}
+{'loss': 3.6429, 'grad_norm': 4.460283279418945, 'learning_rate': 2.2202797202797206e-06, 'epoch': 0.55}
+{'loss': 3.5936, 'grad_norm': 4.659384250640869, 'learning_rate': 2.395104895104895e-06, 'epoch': 0.59}
+{'loss': 3.5984, 'grad_norm': 4.135751247406006, 'learning_rate': 2.56993006993007e-06, 'epoch': 0.63}
+{'loss': 3.5842, 'grad_norm': 5.455504894256592, 'learning_rate': 2.744755244755245e-06, 'epoch': 0.67}
+{'loss': 3.5239, 'grad_norm': 4.134023666381836, 'learning_rate': 2.91958041958042e-06, 'epoch': 0.71}
+{'loss': 3.4925, 'grad_norm': 4.6608781814575195, 'learning_rate': 3.0944055944055947e-06, 'epoch': 0.76}
+{'loss': 3.4229, 'grad_norm': 4.657569885253906, 'learning_rate': 3.2692307692307696e-06, 'epoch': 0.8}
+{'loss': 3.3858, 'grad_norm': 4.987525463104248, 'learning_rate': 3.4440559440559445e-06, 'epoch': 0.84}
+{'loss': 3.3335, 'grad_norm': 5.114612102508545, 'learning_rate': 3.618881118881119e-06, 'epoch': 0.88}
+{'loss': 3.3903, 'grad_norm': 5.334305763244629, 'learning_rate': 3.7937062937062942e-06, 'epoch': 0.92}
+{'loss': 3.3235, 'grad_norm': 5.688979148864746, 'learning_rate': 3.968531468531469e-06, 'epoch': 0.97}
+{'eval_loss': 1.3176509141921997, 'eval_cosine_accuracy@1': 0.15903614457831325, 'eval_cosine_accuracy@3': 0.25783132530120484, 'eval_cosine_accuracy@5': 0.2963855421686747, 'eval_cosine_mrr@10': 0.2225855804169058, 'eval_cosine_ndcg@10': 0.1212880841614435, 'eval_cosine_MEDAI_accuracy@1': 0.1336206896551724, 'eval_cosine_JURAI_accuracy@1': 0.1, 'eval_cosine_AUTOAI_accuracy@1': 0.24, 'eval_cosine_REFAI_accuracy@1': 0.0, 'eval_cosine_MEDAI_accuracy@3': 0.2413793103448276, 'eval_cosine_JURAI_accuracy@3': 0.22, 'eval_cosine_AUTOAI_accuracy@3': 0.32, 'eval_cosine_REFAI_accuracy@3': 0.0, 'eval_cosine_MEDAI_accuracy@5': 0.2801724137931034, 'eval_cosine_JURAI_accuracy@5': 0.24, 'eval_cosine_AUTOAI_accuracy@5': 0.368, 'eval_cosine_REFAI_accuracy@5': 0.0, 'eval_runtime': 4867.4322, 'eval_samples_per_second': 7.039, 'eval_steps_per_second': 0.88, 'epoch': 0.99}
+{'loss': 3.0014, 'grad_norm': 5.232546806335449, 'learning_rate': 4.143356643356644e-06, 'epoch': 1.0}
+{'loss': 3.2293, 'grad_norm': 6.382118225097656, 'learning_rate': 4.3181818181818185e-06, 'epoch': 1.05}
+{'loss': 3.2343, 'grad_norm': 5.759923458099365, 'learning_rate': 4.493006993006993e-06, 'epoch': 1.09}
+{'loss': 3.1459, 'grad_norm': 6.39035177230835, 'learning_rate': 4.667832167832168e-06, 'epoch': 1.13}
+{'loss': 3.1802, 'grad_norm': 6.289338111877441, 'learning_rate': 4.842657342657343e-06, 'epoch': 1.17}
+{'loss': 3.0651, 'grad_norm': 6.389277458190918, 'learning_rate': 4.9980544747081715e-06, 'epoch': 1.21}
+{'loss': 3.1119, 'grad_norm': 6.906123161315918, 'learning_rate': 4.978599221789884e-06, 'epoch': 1.26}
+{'loss': 3.0453, 'grad_norm': 7.117650032043457, 'learning_rate': 4.959143968871596e-06, 'epoch': 1.3}
+{'loss': 2.9932, 'grad_norm': 7.148335933685303, 'learning_rate': 4.939688715953308e-06, 'epoch': 1.34}
+{'loss': 3.0155, 'grad_norm': 7.324141979217529, 'learning_rate': 4.92023346303502e-06, 'epoch': 1.38}
+{'loss': 2.9423, 'grad_norm': 7.467005729675293, 'learning_rate': 4.900778210116731e-06, 'epoch': 1.42}
+{'loss': 2.8699, 'grad_norm': 7.4137797355651855, 'learning_rate': 4.881322957198444e-06, 'epoch': 1.47}
+{'eval_loss': 1.2622929811477661, 'eval_cosine_accuracy@1': 0.2289156626506024, 'eval_cosine_accuracy@3': 0.3421686746987952, 'eval_cosine_accuracy@5': 0.41204819277108434, 'eval_cosine_mrr@10': 0.311795754446357, 'eval_cosine_ndcg@10': 0.19024642223176602, 'eval_cosine_MEDAI_accuracy@1': 0.1724137931034483, 'eval_cosine_JURAI_accuracy@1': 0.12, 'eval_cosine_AUTOAI_accuracy@1': 0.384, 'eval_cosine_REFAI_accuracy@1': 0.125, 'eval_cosine_MEDAI_accuracy@3': 0.28448275862068967, 'eval_cosine_JURAI_accuracy@3': 0.28, 'eval_cosine_AUTOAI_accuracy@3': 0.488, 'eval_cosine_REFAI_accuracy@3': 0.125, 'eval_cosine_MEDAI_accuracy@5': 0.3577586206896552, 'eval_cosine_JURAI_accuracy@5': 0.36, 'eval_cosine_AUTOAI_accuracy@5': 0.536, 'eval_cosine_REFAI_accuracy@5': 0.375, 'eval_runtime': 4991.637, 'eval_samples_per_second': 6.864, 'eval_steps_per_second': 0.858, 'epoch': 1.48}
+{'loss': 2.8833, 'grad_norm': 7.489218711853027, 'learning_rate': 4.861867704280156e-06, 'epoch': 1.51}
+{'loss': 2.8664, 'grad_norm': 10.425093650817871, 'learning_rate': 4.8424124513618685e-06, 'epoch': 1.55}
+{'loss': 2.8516, 'grad_norm': 7.5515923500061035, 'learning_rate': 4.82295719844358e-06, 'epoch': 1.59}
+{'loss': 2.8288, 'grad_norm': 8.305420875549316, 'learning_rate': 4.803501945525292e-06, 'epoch': 1.63}
+{'loss': 2.8128, 'grad_norm': 8.789584159851074, 'learning_rate': 4.784046692607005e-06, 'epoch': 1.68}
+{'loss': 2.7253, 'grad_norm': 7.723833084106445, 'learning_rate': 4.764591439688716e-06, 'epoch': 1.72}
+{'loss': 2.7587, 'grad_norm': 7.9195780754089355, 'learning_rate': 4.7451361867704284e-06, 'epoch': 1.76}
+{'loss': 2.692, 'grad_norm': 9.123047828674316, 'learning_rate': 4.72568093385214e-06, 'epoch': 1.8}
+{'loss': 2.7212, 'grad_norm': 8.989503860473633, 'learning_rate': 4.706225680933852e-06, 'epoch': 1.84}
+{'loss': 2.6796, 'grad_norm': 9.25687313079834, 'learning_rate': 4.686770428015565e-06, 'epoch': 1.89}
+{'loss': 2.6189, 'grad_norm': 9.088397026062012, 'learning_rate': 4.6673151750972765e-06, 'epoch': 1.93}
+{'loss': 2.6044, 'grad_norm': 9.640107154846191, 'learning_rate': 4.647859922178989e-06, 'epoch': 1.97}
+{'eval_loss': 1.2676632404327393, 'eval_cosine_accuracy@1': 0.3060240963855422, 'eval_cosine_accuracy@3': 0.41686746987951806, 'eval_cosine_accuracy@5': 0.4674698795180723, 'eval_cosine_mrr@10': 0.3737081659973227, 'eval_cosine_ndcg@10': 0.22801653566312396, 'eval_cosine_MEDAI_accuracy@1': 0.2413793103448276, 'eval_cosine_JURAI_accuracy@1': 0.22, 'eval_cosine_AUTOAI_accuracy@1': 0.456, 'eval_cosine_REFAI_accuracy@1': 0.375, 'eval_cosine_MEDAI_accuracy@3': 0.35344827586206895, 'eval_cosine_JURAI_accuracy@3': 0.34, 'eval_cosine_AUTOAI_accuracy@3': 0.568, 'eval_cosine_REFAI_accuracy@3': 0.375, 'eval_cosine_MEDAI_accuracy@5': 0.41810344827586204, 'eval_cosine_JURAI_accuracy@5': 0.46, 'eval_cosine_AUTOAI_accuracy@5': 0.568, 'eval_cosine_REFAI_accuracy@5': 0.375, 'eval_runtime': 4555.8133, 'eval_samples_per_second': 7.521, 'eval_steps_per_second': 0.94, 'epoch': 1.98}
+{'loss': 2.3591, 'grad_norm': 9.276091575622559, 'learning_rate': 4.628404669260701e-06, 'epoch': 2.01}
+{'loss': 2.5667, 'grad_norm': 10.004694938659668, 'learning_rate': 4.608949416342413e-06, 'epoch': 2.05}
+{'loss': 2.617, 'grad_norm': 8.631429672241211, 'learning_rate': 4.589494163424125e-06, 'epoch': 2.09}
+{'loss': 2.4613, 'grad_norm': 9.324040412902832, 'learning_rate': 4.570038910505836e-06, 'epoch': 2.13}
+{'loss': 2.5201, 'grad_norm': 9.571173667907715, 'learning_rate': 4.550583657587549e-06, 'epoch': 2.18}
+{'loss': 2.4456, 'grad_norm': 12.992515563964844, 'learning_rate': 4.531128404669261e-06, 'epoch': 2.22}
+{'loss': 2.4045, 'grad_norm': 13.482877731323242, 'learning_rate': 4.5116731517509735e-06, 'epoch': 2.26}
+{'loss': 2.4796, 'grad_norm': 10.023356437683105, 'learning_rate': 4.492217898832685e-06, 'epoch': 2.3}
+{'loss': 2.4283, 'grad_norm': 8.840086936950684, 'learning_rate': 4.472762645914397e-06, 'epoch': 2.34}
+{'loss': 2.434, 'grad_norm': 11.617290496826172, 'learning_rate': 4.45330739299611e-06, 'epoch': 2.39}
+{'loss': 2.3138, 'grad_norm': 10.020133018493652, 'learning_rate': 4.433852140077821e-06, 'epoch': 2.43}
+{'loss': 2.3498, 'grad_norm': 10.320253372192383, 'learning_rate': 4.4143968871595334e-06, 'epoch': 2.47}
+{'eval_loss': 1.279140830039978, 'eval_cosine_accuracy@1': 0.30120481927710846, 'eval_cosine_accuracy@3': 0.42650602409638555, 'eval_cosine_accuracy@5': 0.4771084337349398, 'eval_cosine_mrr@10': 0.3749847007075922, 'eval_cosine_ndcg@10': 0.24611382490620237, 'eval_cosine_MEDAI_accuracy@1': 0.24568965517241378, 'eval_cosine_JURAI_accuracy@1': 0.16, 'eval_cosine_AUTOAI_accuracy@1': 0.456, 'eval_cosine_REFAI_accuracy@1': 0.375, 'eval_cosine_MEDAI_accuracy@3': 0.3620689655172414, 'eval_cosine_JURAI_accuracy@3': 0.32, 'eval_cosine_AUTOAI_accuracy@3': 0.584, 'eval_cosine_REFAI_accuracy@3': 0.5, 'eval_cosine_MEDAI_accuracy@5': 0.41810344827586204, 'eval_cosine_JURAI_accuracy@5': 0.4, 'eval_cosine_AUTOAI_accuracy@5': 0.616, 'eval_cosine_REFAI_accuracy@5': 0.5, 'eval_runtime': 4349.1352, 'eval_samples_per_second': 7.878, 'eval_steps_per_second': 0.985, 'epoch': 2.47}
+{'loss': 2.2974, 'grad_norm': 11.687800407409668, 'learning_rate': 4.394941634241245e-06, 'epoch': 2.51}
+{'loss': 2.3846, 'grad_norm': 13.03658390045166, 'learning_rate': 4.375486381322958e-06, 'epoch': 2.55}
+{'loss': 2.2888, 'grad_norm': 10.926556587219238, 'learning_rate': 4.35603112840467e-06, 'epoch': 2.6}
+{'loss': 2.2708, 'grad_norm': 9.232419967651367, 'learning_rate': 4.3365758754863815e-06, 'epoch': 2.64}
+{'loss': 2.2906, 'grad_norm': 11.047197341918945, 'learning_rate': 4.317120622568094e-06, 'epoch': 2.68}
+{'loss': 2.2275, 'grad_norm': 9.304022789001465, 'learning_rate': 4.297665369649806e-06, 'epoch': 2.72}
+{'loss': 2.3063, 'grad_norm': 9.917174339294434, 'learning_rate': 4.278210116731518e-06, 'epoch': 2.76}
+{'loss': 2.2295, 'grad_norm': 10.525330543518066, 'learning_rate': 4.25875486381323e-06, 'epoch': 2.81}
+{'loss': 2.2536, 'grad_norm': 12.134037017822266, 'learning_rate': 4.239299610894942e-06, 'epoch': 2.85}
+{'loss': 2.1789, 'grad_norm': 10.823780059814453, 'learning_rate': 4.219844357976654e-06, 'epoch': 2.89}
+{'loss': 2.2372, 'grad_norm': 10.728180885314941, 'learning_rate': 4.200389105058366e-06, 'epoch': 2.93}
+{'eval_loss': 1.287371039390564, 'eval_cosine_accuracy@1': 0.2891566265060241, 'eval_cosine_accuracy@3': 0.43132530120481927, 'eval_cosine_accuracy@5': 0.5036144578313253, 'eval_cosine_mrr@10': 0.38044081086249765, 'eval_cosine_ndcg@10': 0.25206493803623314, 'eval_cosine_MEDAI_accuracy@1': 0.2413793103448276, 'eval_cosine_JURAI_accuracy@1': 0.12, 'eval_cosine_AUTOAI_accuracy@1': 0.432, 'eval_cosine_REFAI_accuracy@1': 0.5, 'eval_cosine_MEDAI_accuracy@3': 0.3706896551724138, 'eval_cosine_JURAI_accuracy@3': 0.3, 'eval_cosine_AUTOAI_accuracy@3': 0.592, 'eval_cosine_REFAI_accuracy@3': 0.5, 'eval_cosine_MEDAI_accuracy@5': 0.45689655172413796, 'eval_cosine_JURAI_accuracy@5': 0.42, 'eval_cosine_AUTOAI_accuracy@5': 0.624, 'eval_cosine_REFAI_accuracy@5': 0.5, 'eval_runtime': 4936.3399, 'eval_samples_per_second': 6.941, 'eval_steps_per_second': 0.868, 'epoch': 2.97}
+{'loss': 2.206, 'grad_norm': 10.945544242858887, 'learning_rate': 4.1809338521400785e-06, 'epoch': 2.97}
+{'loss': 2.0237, 'grad_norm': 9.881003379821777, 'learning_rate': 4.16147859922179e-06, 'epoch': 3.01}
+{'loss': 2.121, 'grad_norm': 9.661869049072266, 'learning_rate': 4.142023346303502e-06, 'epoch': 3.05}
+{'loss': 2.1017, 'grad_norm': 13.634682655334473, 'learning_rate': 4.122568093385214e-06, 'epoch': 3.1}
+{'loss': 2.104, 'grad_norm': 11.05754566192627, 'learning_rate': 4.103112840466927e-06, 'epoch': 3.14}
+{'loss': 2.1133, 'grad_norm': 15.198325157165527, 'learning_rate': 4.0836575875486384e-06, 'epoch': 3.18}
+{'loss': 1.9642, 'grad_norm': 11.36400032043457, 'learning_rate': 4.06420233463035e-06, 'epoch': 3.22}
+{'loss': 2.0737, 'grad_norm': 11.12617015838623, 'learning_rate': 4.044747081712063e-06, 'epoch': 3.26}
+{'loss': 2.0604, 'grad_norm': 10.025532722473145, 'learning_rate': 4.025291828793775e-06, 'epoch': 3.31}
+{'loss': 2.0253, 'grad_norm': 10.943598747253418, 'learning_rate': 4.0058365758754865e-06, 'epoch': 3.35}
+{'loss': 2.0686, 'grad_norm': 10.728106498718262, 'learning_rate': 3.986381322957199e-06, 'epoch': 3.39}
+{'loss': 1.9605, 'grad_norm': 12.348915100097656, 'learning_rate': 3.966926070038911e-06, 'epoch': 3.43}
+{'eval_loss': 1.3179479837417603, 'eval_cosine_accuracy@1': 0.30120481927710846, 'eval_cosine_accuracy@3': 0.4530120481927711, 'eval_cosine_accuracy@5': 0.5156626506024097, 'eval_cosine_mrr@10': 0.3914123159303882, 'eval_cosine_ndcg@10': 0.26229510145155666, 'eval_cosine_MEDAI_accuracy@1': 0.22413793103448276, 'eval_cosine_JURAI_accuracy@1': 0.2, 'eval_cosine_AUTOAI_accuracy@1': 0.472, 'eval_cosine_REFAI_accuracy@1': 0.5, 'eval_cosine_MEDAI_accuracy@3': 0.38362068965517243, 'eval_cosine_JURAI_accuracy@3': 0.32, 'eval_cosine_AUTOAI_accuracy@3': 0.632, 'eval_cosine_REFAI_accuracy@3': 0.5, 'eval_cosine_MEDAI_accuracy@5': 0.4525862068965517, 'eval_cosine_JURAI_accuracy@5': 0.46, 'eval_cosine_AUTOAI_accuracy@5': 0.656, 'eval_cosine_REFAI_accuracy@5': 0.5, 'eval_runtime': 4579.077, 'eval_samples_per_second': 7.483, 'eval_steps_per_second': 0.935, 'epoch': 3.46}
+{'train_runtime': 64259.7267, 'train_samples_per_second': 5.682, 'train_steps_per_second': 0.044, 'train_loss': 2.924525847446543, 'epoch': 3.46}
+W&B assigned run name: devoted-sweep-91
+
+
+ ------------------------ Experiment configuration: ------------------------ 
+project_root: /home/ls6/hauptmann/ethikchat-experiment-argument-classification
+experiment_dir: experiments_outputs
+experiment_run: qooh61ky
+dataset_dir: data/processed/with_context
+dataset_name: corpus_dataset_v2
+dataset_split_type: DatasetSplitType.InDistribution
+split_dataset_name: dataset_split_in_distribution
+model_name: T-Systems-onsite/german-roberta-sentence-transformer-v2
+model_name_escaped: T-Systems-onsite-german-roberta-sentence-transformer-v2
+model_run_dir: /home/ls6/hauptmann/ethikchat-experiment-argument-classification/experiments_outputs/qooh61ky/devoted-sweep-91
+learning_rate: 1e-05
+batch_size: 128
+num_epochs: 12
+loss_function: MultipleNegativesRankingLoss
+run_time: sweep-run
+warmup_ratio: 0.15
+context_length: 2
+add_discussion_scenario_info: True
+test_scenario: MEDAI
+num_shots_passages: 1
+num_shots_queries: 13
+ ------------------------ ----------------------------- ------------------------ 
+
+
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/samples_collection.csv ... Done
+Dataset already exists at /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/processed/with_context/dataset_split_in_distribution. Loading it.
+queries-train: There are 0 of 1135 examples that will be truncated during training.
+passages-train: There are 0 of 294 examples that will be truncated during training.
+queries-eval: There are 0 of 415 examples that will be truncated during training.
+passages-eval: There are 0 of 10386 examples that will be truncated during training.
+queries-test: There are 0 of 417 examples that will be truncated during training.
+passages-test: There are 0 of 10386 examples that will be truncated during training.
+{'eval_loss': 2.173922300338745, 'eval_cosine_accuracy@1': 0.08674698795180723, 'eval_cosine_accuracy@3': 0.1783132530120482, 'eval_cosine_accuracy@5': 0.25060240963855424, 'eval_cosine_mrr@10': 0.15803977816026027, 'eval_cosine_ndcg@10': 0.07405099298361147, 'eval_cosine_MEDAI_accuracy@1': 0.08620689655172414, 'eval_cosine_JURAI_accuracy@1': 0.06, 'eval_cosine_AUTOAI_accuracy@1': 0.104, 'eval_cosine_REFAI_accuracy@1': 0.0, 'eval_cosine_MEDAI_accuracy@3': 0.16379310344827586, 'eval_cosine_JURAI_accuracy@3': 0.1, 'eval_cosine_AUTOAI_accuracy@3': 0.248, 'eval_cosine_REFAI_accuracy@3': 0.0, 'eval_cosine_MEDAI_accuracy@5': 0.25, 'eval_cosine_JURAI_accuracy@5': 0.12, 'eval_cosine_AUTOAI_accuracy@5': 0.312, 'eval_cosine_REFAI_accuracy@5': 0.125, 'eval_runtime': 4560.5766, 'eval_samples_per_second': 7.513, 'eval_steps_per_second': 0.939, 'epoch': 0.4}
+{'eval_loss': 1.9857375621795654, 'eval_cosine_accuracy@1': 0.0819277108433735, 'eval_cosine_accuracy@3': 0.18072289156626506, 'eval_cosine_accuracy@5': 0.2385542168674699, 'eval_cosine_mrr@10': 0.15590552686938242, 'eval_cosine_ndcg@10': 0.07434152977502488, 'eval_cosine_MEDAI_accuracy@1': 0.07327586206896551, 'eval_cosine_JURAI_accuracy@1': 0.06, 'eval_cosine_AUTOAI_accuracy@1': 0.112, 'eval_cosine_REFAI_accuracy@1': 0.0, 'eval_cosine_MEDAI_accuracy@3': 0.1810344827586207, 'eval_cosine_JURAI_accuracy@3': 0.1, 'eval_cosine_AUTOAI_accuracy@3': 0.224, 'eval_cosine_REFAI_accuracy@3': 0.0, 'eval_cosine_MEDAI_accuracy@5': 0.2413793103448276, 'eval_cosine_JURAI_accuracy@5': 0.12, 'eval_cosine_AUTOAI_accuracy@5': 0.288, 'eval_cosine_REFAI_accuracy@5': 0.125, 'eval_runtime': 4623.2697, 'eval_samples_per_second': 7.411, 'eval_steps_per_second': 0.926, 'epoch': 0.8}
+{'loss': 4.2501, 'grad_norm': 13.026076316833496, 'learning_rate': 5e-06, 'epoch': 1.0}
+{'eval_loss': 1.7512075901031494, 'eval_cosine_accuracy@1': 0.0746987951807229, 'eval_cosine_accuracy@3': 0.18795180722891566, 'eval_cosine_accuracy@5': 0.24819277108433735, 'eval_cosine_mrr@10': 0.15491298527443126, 'eval_cosine_ndcg@10': 0.0763348378495043, 'eval_cosine_MEDAI_accuracy@1': 0.07758620689655173, 'eval_cosine_JURAI_accuracy@1': 0.04, 'eval_cosine_AUTOAI_accuracy@1': 0.088, 'eval_cosine_REFAI_accuracy@1': 0.0, 'eval_cosine_MEDAI_accuracy@3': 0.1939655172413793, 'eval_cosine_JURAI_accuracy@3': 0.14, 'eval_cosine_AUTOAI_accuracy@3': 0.208, 'eval_cosine_REFAI_accuracy@3': 0.0, 'eval_cosine_MEDAI_accuracy@5': 0.25, 'eval_cosine_JURAI_accuracy@5': 0.14, 'eval_cosine_AUTOAI_accuracy@5': 0.296, 'eval_cosine_REFAI_accuracy@5': 0.125, 'eval_runtime': 4685.0459, 'eval_samples_per_second': 7.313, 'eval_steps_per_second': 0.914, 'epoch': 1.1}
+{'eval_loss': 1.5730379819869995, 'eval_cosine_accuracy@1': 0.0963855421686747, 'eval_cosine_accuracy@3': 0.20240963855421687, 'eval_cosine_accuracy@5': 0.27228915662650605, 'eval_cosine_mrr@10': 0.17606043220501064, 'eval_cosine_ndcg@10': 0.08292326785714055, 'eval_cosine_MEDAI_accuracy@1': 0.10775862068965517, 'eval_cosine_JURAI_accuracy@1': 0.08, 'eval_cosine_AUTOAI_accuracy@1': 0.088, 'eval_cosine_REFAI_accuracy@1': 0.0, 'eval_cosine_MEDAI_accuracy@3': 0.21551724137931033, 'eval_cosine_JURAI_accuracy@3': 0.12, 'eval_cosine_AUTOAI_accuracy@3': 0.216, 'eval_cosine_REFAI_accuracy@3': 0.125, 'eval_cosine_MEDAI_accuracy@5': 0.2801724137931034, 'eval_cosine_JURAI_accuracy@5': 0.2, 'eval_cosine_AUTOAI_accuracy@5': 0.296, 'eval_cosine_REFAI_accuracy@5': 0.125, 'eval_runtime': 4803.3979, 'eval_samples_per_second': 7.133, 'eval_steps_per_second': 0.892, 'epoch': 1.5}
+{'loss': 3.5011, 'grad_norm': 6.146496295928955, 'learning_rate': 9.901960784313727e-06, 'epoch': 1.9}

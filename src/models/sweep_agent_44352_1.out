@@ -1,0 +1,65 @@
+Starting W&B agent on task 1...
+W&B assigned run name: eager-sweep-33
+Cuda available: True
+
+
+ ------------------------ Experiment configuration: ------------------------ 
+project_root: /home/ls6/hauptmann/ethikchat-experiment-argument-classification
+experiment_dir: experiments_outputs
+experiment_run: 5qgtbfrb
+dataset_dir: data/processed/with_context
+dataset_name: corpus_dataset_v2
+dataset_split_type: DatasetSplitType.InDistribution
+split_dataset_name: dataset_split_in_distribution
+model_name: aari1995/German_Semantic_STS_V2
+model_name_escaped: aari1995-German_Semantic_STS_V2
+model_run_dir: /home/ls6/hauptmann/ethikchat-experiment-argument-classification/experiments_outputs/5qgtbfrb/eager-sweep-33
+learning_rate: 2e-05
+batch_size: 128
+num_epochs: 12
+loss_function: MultipleNegativesRankingLoss
+run_time: sweep-run
+warmup_ratio: 0.15
+context_length: 1
+add_discussion_scenario_info: True
+test_scenario: MEDAI
+num_shots_passages: -1
+num_shots_queries: -1
+ ------------------------ ----------------------------- ------------------------ 
+
+
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s1/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s2/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s3/samples_collection.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_introductions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_transitions.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_groups.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_zargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_nzargs.csv ... Done
+Loading templates from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/templates_faq.csv ... Done
+Loading samples from file /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/external/argument_graphs/szenario_s4/samples_collection.csv ... Done
+Dataset already exists at /home/ls6/hauptmann/ethikchat-experiment-argument-classification/data/processed/with_context/dataset_split_in_distribution. Loading it.
+queries-train: There are 0 of 1940 examples that will be truncated during training.
+passages-train: There are 0 of 10386 examples that will be truncated during training.
+queries-eval: There are 0 of 415 examples that will be truncated during training.
+passages-eval: There are 0 of 10386 examples that will be truncated during training.
+queries-test: There are 0 of 417 examples that will be truncated during training.
+passages-test: There are 0 of 10386 examples that will be truncated during training.
