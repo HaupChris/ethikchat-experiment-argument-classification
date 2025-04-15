@@ -1,0 +1,54 @@
+
+method: grid
+metric:
+  goal: maximize
+  name: eval_cosine_accuracy@1
+parameters:
+  add_discussion_scenario_info:
+    values:
+      - true
+      - false
+  batch_size:
+    values:
+      - 256
+  context_length:
+    values:
+      - 1
+      - 2
+      - 3
+  dataset_dir:
+    value: data/processed/with_context
+  dataset_name:
+    value: corpus_dataset_v2
+  dataset_split_name:
+    value: dataset_split_in_distribution
+  dataset_split_type:
+    value: in_distribution
+  experiment_dir:
+    value: experiments_outputs
+  learning_rate:
+    values:
+      - 2e-05
+      - 3e-05
+  model_name:
+    values:
+      - T-Systems-onsite/cross-en-de-roberta-sentence-transformer
+      - deutsche-telekom/gbert-large-paraphrase-euclidean
+  num_epochs:
+    values:
+      - 10
+  num_shots_passages:
+    values:
+      - -1
+  num_shots_queries:
+    values:
+      - -1
+  project_root:
+    value: /home/ls6/hauptmann/ethikchat-experiment-argument-classification
+  test_scenario:
+    value: MEDAI
+  warmup_ratio:
+    values:
+      - 0.1
+      - 0.15
+program: train_model_sweep.py
