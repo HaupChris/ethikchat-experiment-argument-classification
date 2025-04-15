@@ -37,6 +37,10 @@ def update_accuracy(accuracy_dict: Dict[str, Dict[str, int]], key: str, conditio
     if condition:
         accuracy_dict[key]["correct"] += 1
 
+def update_precision(accuracy_dict: Dict[str, Dict[str, int]], key: str, increment_total: int, increment_correct: int) -> None:
+    """Updates precision dictionary by incrementing total and correct counts based on a condition."""
+    accuracy_dict[key]["total"] += increment_total
+    accuracy_dict[key]["correct"] += increment_correct
 
 def calculate_accuracy(data: Dict[str, int]) -> float:
     """Calculates the accuracy for the given dictionary."""
@@ -48,6 +52,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
     IR evaluator that logs:
         1) Error Analysis Table for Normal and Noisy Queries
         2) Per-topic, per-topic + (node type, node level, and node label) accuracy@K to a W&B table
+        2) Per-topic, per-topic + (node type, node level, and node label) precision@K to a W&B table
         3) Per-topic, per-topic + (node type, node level, and node label) stance accuracies as metrics
         4) Confusion matrices over topics, topic + (node type, node level, and node label) with absolute and relative values using W&B's API
         5) Graphs displaying single/multi argument classification accuracies depending on a set confidence threshold
@@ -80,6 +85,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         confidence_threshold_steps: Optional[float] = None,
         log_embeddings: Optional[bool] = False,
         noisy_queries: Optional[Dict[str, any]] = None,
+        precision_at_k: Optional[List[int]] = None
     ) -> None:
         super().__init__()
         # Filter out queries with no relevant docs
@@ -101,6 +107,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         # Logging & config
         self.corpus_chunk_size = corpus_chunk_size
         self.accuracy_at_k = sorted([k for k in accuracy_at_k if k > 0])
+        self.precision_at_k = precision_at_k if precision_at_k else accuracy_at_k
         self.show_progress_bar = show_progress_bar
         self.batch_size = batch_size
         self.name = name
@@ -179,30 +186,32 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         # 2) Log qualitative error analysis table
         self._log_qualitative_error_analysis_table(queries_result_list, noisy_queries_result_list)
 
-
         # 3) Log accuracy@k tables
         self._compute_accuracies_at_k(queries_result_list)
 
-        # 4) Compute stance accuracies
+        # 4) Log precision@k tables
+        self._compute_precision_at_k(queries_result_list)
+
+        # 5) Compute stance accuracies
         metrics = self._compute_stance_accuracy(queries_result_list)
 
-        # 5) Log confusion matrices
+        # 6) Log confusion matrices
         self._log_confusion_matrices_to_wandb(queries_result_list)
 
-        # 6) Log accuracies based on confidence thresholds
+        # 7) Log accuracies based on confidence thresholds
         if self.confidence_threshold:
             self._log_single_argument_classification_with_similarity_threshold(queries_result_list, noisy_queries_result_list)
             self._log_multi_argument_classification_with_similarity_threshold(queries_result_list, noisy_queries_result_list)
 
-        # 7) Give these metrics a prefix and store in model card
+        # 8) Give these metrics a prefix and store in model card
         final_metrics = self.prefix_name_to_metrics(metrics, self.name)
         self.store_metrics_in_model_card_data(model, final_metrics, epoch, steps)
 
-        # 8) Log embeddings
+        # 9) Log embeddings
         if self.log_embeddings:
             self._log_query_and_passage_embeddings()
 
-        # 9) Log to W&B (if self.run is set)
+        # 10) Log to W&B (if self.run is set)
         if self.run:
             self.run.log(final_metrics)
 
@@ -424,8 +433,17 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 query_template = rtc.get_template_for_label(label)
                 categories.append(getattr(query_template, "category", TemplateCategory.OTHER).name)
 
+            main_arg_labels = {temp.label for temp in rtc.first_level_z_templates}
+
+            for i in range(len(categories)):
+                if categories[i] == "Z":
+                    if query.labels[i] in main_arg_labels:
+                        categories[i] = "Main"
+                    else:
+                        categories[i] = "Counter"
+
             # Define label priority order
-            priority = {"NZ": 0, "FAQ": 1, "Counter": 2, "Main": 3}
+            priority = {"OTHER" : 0, "NZ": 1, "FAQ": 2, "Counter": 3, "Main": 4}
 
             # Sort categories by priority
             sorted_categories = sorted(categories, key=lambda x: priority[x])
@@ -455,6 +473,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 "anchor_labels",
                 "anchor_text",
                 "num_anchor_labels",
+                "anchor_node_type",
                 "top1_similarity",
                 "top1_label",
                 "top1_text",
@@ -482,6 +501,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                     query.labels,
                     query.text,
                     len(query.labels),
+                    get_node_type(query),
                     top1_similarity,
                     top1_passage.label,
                     top1_passage.text,
@@ -499,6 +519,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                     "anchor_labels",
                     "anchor_text",
                     "num_anchor_labels",
+                    "anchor_node_type",
                     "top1_similarity",
                     "top1_label",
                     "top1_text",
@@ -524,6 +545,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                         query.labels,
                         query.text,
                         len(query.labels),
+                        get_node_type(query),
                         top1_similarity,
                         top1_passage.label,
                         top1_passage.text,
@@ -738,10 +760,19 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         return final_data
 
     def _compute_accuracies_at_k(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
+        """
+        Computes and logs top-k accuracy metrics across different categories (topic, node type, node level, node label)
+        for a set of query results generated by various scoring functions.
+
+        Accuracy is calculated based on whether at least one relevant document appears in the top-k hits for each query.
+        """
         if not self.run:
             return
 
+        # Iterate over each scoring function and their corresponding query results
         for score_func_name, per_query_hits in queries_result_list.items():
+
+            # Initialize nested accuracy tracking dicts for each k value
             accuracy_results_by_k = {k: {
                 "topic": defaultdict(lambda: {"total": 0, "correct": 0}),
                 "node_type": defaultdict(lambda: {"total": 0, "correct": 0}),
@@ -749,29 +780,41 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 "node_label": defaultdict(lambda: {"total": 0, "correct": 0})
             } for k in self.accuracy_at_k}
 
+            # Iterate over the results for each query
             for q_idx, hits in enumerate(per_query_hits):
                 query = self.queries[q_idx]
                 discussion_scenario = query.discussion_scenario
                 rtc = self._return_topic_rtc(discussion_scenario)
 
+                # Evaluate accuracy at different k's
                 for k in self.accuracy_at_k:
+                    # Check if any of the top-k documents are relevant
                     relevant_hit = any(doc_id in self.relevant_docs[query.id] for _, doc_id in hits[:k])
+
+                    # Update topic level accuracy
                     update_accuracy(accuracy_results_by_k[k]["topic"], discussion_scenario, relevant_hit)
 
+                    # For each label in the query, update the corresponding accuracy categories
                     for label in query.labels:
                         query_template = rtc.get_template_for_label(label)
+
+                        # Get category of the node
                         category = getattr(query_template, "category", TemplateCategory.OTHER)
                         update_accuracy(accuracy_results_by_k[k]["node_type"], f"{discussion_scenario}_type_{category.name}", relevant_hit)
 
+                        # Determine node level (main vs counter) based on template structure
                         if query_template and query_template.label in rtc.arguments_labels:
                             level = "counter" if query_template.has_parent_labels else "main"
                             update_accuracy(accuracy_results_by_k[k]["node_level"], f"{discussion_scenario}_level_{level}", relevant_hit)
 
+                        # Update accuracy by label
                         update_accuracy(accuracy_results_by_k[k]["node_label"], f"{discussion_scenario}_label_{label}", relevant_hit)
 
+            # Prepare table headers for logging
             accuracies_at_k = [f"accuracy_at_{k}" for k in self.accuracy_at_k]
             first_k = self.accuracy_at_k[0]
 
+            # Initialize wandb tables to hold results for each category
             tables = {
                 "topic": wandb.Table(columns=["topic", *accuracies_at_k, "num_queries", "correct_predictions"]),
                 "node_type": wandb.Table(columns=["topic", "node_type", *accuracies_at_k, "num_queries", "correct_predictions"]),
@@ -779,6 +822,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 "node_label": wandb.Table(columns=["topic", "node_label", *accuracies_at_k, "num_queries", "correct_predictions"])
             }
 
+            # Populate each table with the retrieved data
             for category in ["topic", "node_type", "node_level", "node_label"]:
                 for key in accuracy_results_by_k[first_k][category]:
                     split_keys = key.split("_", 2)
@@ -797,11 +841,83 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 })
 
     def _compute_precision_at_k(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
+        """
+        Computes and logs precision@K metrics across different categories (topic, node type, node level, node label)
+        for a set of query results generated by various scoring functions.
+
+        Precision@k is the number of relevant documents in the top-k retrieved results, divided by k.
+        """
         if not self.run:
             return
 
+        # Iterate over each scoring function's results
         for score_func_name, per_query_hits in queries_result_list.items():
-            pass
+
+            # Initialize precision tracking structures for each k
+            precision_results_by_k = {k: {
+                "topic": defaultdict(lambda: {"total": 0, "correct": 0}),
+                "node_type": defaultdict(lambda: {"total": 0, "correct": 0}),
+                "node_level": defaultdict(lambda: {"total": 0, "correct": 0}),
+                "node_label": defaultdict(lambda: {"total": 0, "correct": 0})
+            } for k in self.precision_at_k}
+
+            # Loop over each query and its corresponding hits
+            for q_idx, hits in enumerate(per_query_hits):
+                query = self.queries[q_idx]
+                discussion_scenario = query.discussion_scenario
+                rtc = self._return_topic_rtc(discussion_scenario)
+
+                # Compute precision at each cutoff value k
+                for k in self.precision_at_k:
+                    # Count how many of the top-k hits are relevant
+                    relevant_hit_count = sum(doc_id in self.relevant_docs[query.id] for _, doc_id in hits[:k])
+
+                    # Update topic-level precision
+                    update_precision(precision_results_by_k[k]["topic"], discussion_scenario, k, relevant_hit_count)
+
+                    # Update other precision categories using the query's labels
+                    for label in query.labels:
+                        query_template = rtc.get_template_for_label(label)
+                        category = getattr(query_template, "category", TemplateCategory.OTHER)
+
+                        # Update precision by node type
+                        update_precision(precision_results_by_k[k]["node_type"], f"{discussion_scenario}_type_{category.name}", k, relevant_hit_count)
+
+                        # Update precision by node level
+                        if query_template and query_template.label in rtc.arguments_labels:
+                            level = "counter" if query_template.has_parent_labels else "main"
+                            update_precision(precision_results_by_k[k]["node_level"], f"{discussion_scenario}_level_{level}", k, relevant_hit_count)
+
+                        # Update precision by label
+                        update_precision(precision_results_by_k[k]["node_label"], f"{discussion_scenario}_label_{label}", k, relevant_hit_count)
+
+            # Prepare wandb table column headers
+            precisions_at_k = [f"precision_at_{k}" for k in self.precision_at_k]
+            first_k = self.precision_at_k[0]
+
+            # Initialize wandb Tables for each metric category
+            tables = {
+                "topic": wandb.Table(columns=["topic", *precisions_at_k]),
+                "node_type": wandb.Table(columns=["topic", "node_type", *precisions_at_k]),
+                "node_level": wandb.Table(columns=["topic", "node_level", *precisions_at_k]),
+                "node_label": wandb.Table(columns=["topic", "node_label", *precisions_at_k])
+            }
+
+            # Populate each table with precision values across all keys
+            for category in ["topic", "node_type", "node_level", "node_label"]:
+                for key in precision_results_by_k[first_k][category]:
+                    split_keys = key.split("_", 2)
+                    data = [split_keys[0], split_keys[2]] if len(split_keys) == 3 else [key]
+                    data += [calculate_accuracy(precision_results_by_k[k][category][key]) for k in self.precision_at_k]
+                    tables[category].add_data(*data)
+
+            if self.run:
+                self.run.log({
+                    f"{self.name}_{score_func_name}_topic_precision": tables["topic"],
+                    f"{self.name}_{score_func_name}_topic_type_precision": tables["node_type"],
+                    f"{self.name}_{score_func_name}_topic_level_precision": tables["node_level"],
+                    f"{self.name}_{score_func_name}_topic_label_precision": tables["node_label"]
+                })
 
     def _generate_confidence_thresholds(self) -> Iterable[float]:
         """Generate confidence thresholds based on step size"""
@@ -1023,7 +1139,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         for exact, partial, true_partial, metric_name_suffix, metric_title_type in [
             (results_exact, results_partial, results_true_partial, "", "(Normal Queries)"),
             (single_results_exact, single_results_partial, single_results_true_partial, "_single_label", "(Normal Queries Single Label Only)"),
-            (multi_results_exact, multi_results_partial, multi_results_true_partial, "multi_label", "(Normal Queries Multi Label Only")
+            (multi_results_exact, multi_results_partial, multi_results_true_partial, "_multi_label", "(Normal Queries Multi Label Only")
         ]:
             # Always log exact match metric for all query types
             self._log_results_as_line_plot(exact, f"multi_argument_classification_exact_match{metric_name_suffix}", f"Exact Match Accuracy By Confidence Threshold {metric_title_type}")
