@@ -104,3 +104,5 @@ experiments_outputs/*
 /wandb/
 
 *cache-*.arrow
+*.err
+*.out
