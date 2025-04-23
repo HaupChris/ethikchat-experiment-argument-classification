@@ -193,7 +193,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         self._compute_precision_at_k(queries_result_list)
 
         # 5) Compute stance accuracies
-        metrics = self._compute_stance_accuracy(queries_result_list)
+        # metrics = self._compute_stance_accuracy(queries_result_list)
 
         # 6) Log confusion matrices
         self._log_confusion_matrices_to_wandb(queries_result_list)
