@@ -8,16 +8,16 @@
    - All architectures can exceed 91% accuracy with optimal hyperparameters
 
 2. **Learning Rate**:
-   - 0.00002 yields the highest average accuracy
+   - 0.00003 yields the highest average accuracy
    - Lower learning rate (0.00001) consistently underperforms
 
 3. **Batch Size**:
    - Larger batch size (256) outperforms smaller batch size (128) on average
-   - Difference is meaningful: 89.0% vs 86.4% average accuracy
+   - Difference is meaningful: 82.4% vs 77.7% average accuracy
 
 4. **Training Epochs**:
    - 10 epochs significantly outperforms other options
-   - Average accuracy with 10 epochs: 90.0%
+   - Average accuracy with 10 epochs: 81.9%
 
 5. **Context Length**:
    - No context (0) consistently outperforms models with context
@@ -49,10 +49,10 @@ Based on the above analysis, the following hyperparameter settings are recommend
 ## Recommendations for Additional Experiments
 
 The analysis of context length effects showed a surprisingly negative impact, but the number of runs with higher context lengths was limited:
-- Context Length 0: 8 runs
-- Context Length 1: 4 runs
-- Context Length 2: 5 runs
-- Context Length 3: 2 runs
+- Context Length 0: 10 runs
+- Context Length 1: 24 runs
+- Context Length 2: 29 runs
+- Context Length 3: 14 runs
 
 To validate whether context truly hurts performance or if the current results are due to insufficient exploration, I recommend:
 
