@@ -190,4 +190,4 @@ export PYTHONPATH="${project_root}:${PYTHONPATH}"
 source "${project_root}/venv/bin/activate"
 
 # Run the python script
-python resume_model_run.py --run_ids "${run_ids[@]}" --run_names "${run_names[@]}" --project_root $project_root --models_dir $models_dir --test_dataset_path test_dataset_path --corpus_dataset_path $corpus_dataset_path
+python resume_model_run.py --run_ids "${run_ids[@]}" --run_names "${run_names[@]}" --project_root $project_root --models_dir $models_dir --test_dataset_path $test_dataset_path --corpus_dataset_path $corpus_dataset_path
