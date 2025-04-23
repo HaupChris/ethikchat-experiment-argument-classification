@@ -1,6 +1,6 @@
 import os
 import warnings
-from typing import Dict
+from typing import Dict, List
 
 import wandb
 import torch
@@ -25,13 +25,15 @@ from src.features.build_features import create_dataset_for_multiple_negatives_ra
 from src.models.experiment_config import ExperimentConfig
 
 
-
-
 def load_argument_graphs(project_root, is_test_run=False) -> Dict[str, ResponseTemplateCollection]:
-    argument_graph_med = load_response_template_collection("s1", project_root, f"data/external/argument_graphs{'_test' if is_test_run else ''}")
-    argument_graph_jur = load_response_template_collection("s2", project_root, f"data/external/argument_graphs{'_test' if is_test_run else ''}")
-    argument_graph_auto = load_response_template_collection("s3", project_root, f"data/external/argument_graphs{'_test' if is_test_run else ''}")
-    argument_graph_ref = load_response_template_collection("s4", project_root, f"data/external/argument_graphs{'_test' if is_test_run else ''}")
+    argument_graph_med = load_response_template_collection("s1", project_root,
+                                                           f"data/external/argument_graphs{'_test' if is_test_run else ''}")
+    argument_graph_jur = load_response_template_collection("s2", project_root,
+                                                           f"data/external/argument_graphs{'_test' if is_test_run else ''}")
+    argument_graph_auto = load_response_template_collection("s3", project_root,
+                                                            f"data/external/argument_graphs{'_test' if is_test_run else ''}")
+    argument_graph_ref = load_response_template_collection("s4", project_root,
+                                                           f"data/external/argument_graphs{'_test' if is_test_run else ''}")
 
     return {
         DiscussionSzenario.MEDAI.value: argument_graph_med,
@@ -40,34 +42,44 @@ def load_argument_graphs(project_root, is_test_run=False) -> Dict[str, ResponseT
         DiscussionSzenario.REFAI.value: argument_graph_ref
     }
 
-def check_dataset_texts_for_truncation(tokenizer: PreTrainedTokenizer, split_dataset: DatasetDict, split_name: str, max_sequence_length: int) -> None:
+
+def check_dataset_texts_for_truncation(tokenizer: PreTrainedTokenizer,
+                                       split_dataset: DatasetDict,
+                                       split_name: str,
+                                       max_sequence_length: int,
+                                       dataset_names: List[str] = ["queries", "passages"]) -> None:
     """
     Assumes a split_dataset with queries and passages and checks each of their "text" features if the encoded sequence
     length exceeds max_sequence_length.
     Args:
         tokenizer (PreTrainedTokenizer): The tokenizer of the model that is being fine-tuned
-        split_dataset (): A Huggingface DatasetDict containing the datasets "queries" and "passages"
+        split_dataset (): A Huggingface DatasetDict containing the datasets, e.g. "queries" and "passages"
+        split_name: Name of of the split_dataset, e.g. "corpus_dataset" or "test" or "train"
         max_sequence_length (): The maximum sequence length of the fine-tuned model
+        dataset_names:
     """
-    def check_dataset_for_text_truncations(dataset_name: str, dataset: Dataset):
+
+    def check_dataset_for_text_truncations(ds_name: str, dataset: Dataset):
         num_truncated_examples = 0
         for example in dataset:
             encoded_text = tokenizer.encode(example["text"])
             if len(encoded_text) > max_sequence_length:
-                num_truncated_examples +=1
-                warnings.warn(f"Example with id {example['id']} in dataset {dataset_name}-{split_name} exceeds length {max_sequence_length} ({len(encoded_text)}) and will be truncated during training!")
-        print(f"{dataset_name}-{split_name}: There are {num_truncated_examples} of {len(dataset)} examples that will be truncated during training.")
+                num_truncated_examples += 1
+                warnings.warn(
+                    f"Example with id {example['id']} in dataset {ds_name}-{split_name} exceeds length {max_sequence_length} ({len(encoded_text)}) and will be truncated during training!")
+        print(
+            f"{ds_name}-{split_name}: There are {num_truncated_examples} of {len(dataset)} examples that will be truncated during training.")
 
-    check_dataset_for_text_truncations("queries", split_dataset["queries"])
-    check_dataset_for_text_truncations("passages", split_dataset["passages"])
+    for dataset_name in dataset_names:
+        check_dataset_for_text_truncations(dataset_name, split_dataset[dataset_name])
 
 
 def prepare_datasets(
-    exp_config: ExperimentConfig,
-    tokenizer: PreTrainedTokenizer,
-    argument_graphs: Dict[str, ResponseTemplateCollection],
-    maximum_sequence_length: int,
-    is_test_run: bool = False
+        exp_config: ExperimentConfig,
+        tokenizer: PreTrainedTokenizer,
+        argument_graphs: Dict[str, ResponseTemplateCollection],
+        maximum_sequence_length: int,
+        is_test_run: bool = False
 ):
     """
     Loads the corpus dataset from disk, creates splits,
@@ -115,7 +127,6 @@ def prepare_datasets(
     check_dataset_texts_for_truncation(tokenizer, train_split, "train", maximum_sequence_length)
     check_dataset_texts_for_truncation(tokenizer, eval_split, "eval", maximum_sequence_length)
     check_dataset_texts_for_truncation(tokenizer, test_split, "test", maximum_sequence_length)
-
 
     if not is_test_run:
         train_pos = create_dataset_for_multiple_negatives_ranking_loss(train_split)
@@ -344,7 +355,6 @@ def main(is_test_run=False):
         print(f"{key}: {value}")
     print(" ------------------------ ----------------------------- ------------------------ \n\n")
 
-
     # Make sure output directory exists
     os.makedirs(exp_config.model_run_dir, exist_ok=True)
 
@@ -357,7 +367,6 @@ def main(is_test_run=False):
     # 7) Load argument graphs
     argument_graphs = load_argument_graphs(exp_config.project_root, is_test_run)
 
-
     # 8) Prepare train/eval/test data (including evaluators)
     (
         train_pos,
@@ -369,7 +378,6 @@ def main(is_test_run=False):
 
     # 9) Pre-training evaluation on the eval set
     excluding_ir_evaluator_eval(model)
-
 
     # 10) Decide how often to evaluate and save
     # evaluate twice per epoch.
@@ -401,7 +409,6 @@ def main(is_test_run=False):
         logging_steps=10,
         report_to="wandb",
     )
-
 
     # 12) Create a trainer
     trainer = SentenceTransformerTrainer(

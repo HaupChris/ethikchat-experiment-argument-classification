@@ -9,7 +9,7 @@
 #SBATCH --error=resume_run_%A_%a.err
 
 # Define project, model directory and dataset paths
-sweep_id="sl3evhzh"
+sweep_id="5qgtbfrb"
 project_root="/home/ls6/hauptmann/ethikchat-experiment-argument-classification"
 models_dir="${project_root}/experiments_outputs/${sweep_id}"
 dataset_path="${project_root}/data/processed/dataset_split_in_distribution/test"

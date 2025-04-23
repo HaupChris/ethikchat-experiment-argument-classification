@@ -1,15 +1,123 @@
 from datasets import load_from_disk
 from sentence_transformers import SentenceTransformer
 from src.data.create_corpus_dataset import Passage, Query
+from src.data.dataset_splits import create_splits_from_corpus_dataset
 from src.evaluation.deep_dive_information_retrieval_evaluator import DeepDiveInformationRetrievalEvaluator
-from train_model_sweep import load_argument_graphs
+from src.features.build_features import add_context_to_texts, add_scenario_tokens_to_texts
+from train_model_sweep import load_argument_graphs, check_dataset_texts_for_truncation
 from typing import List, Tuple
 from dotenv import load_dotenv
+import json
 import wandb
 import os
 import torch
 import gc
 import argparse
+
+
+
+
+def prepare_datasets(
+    exp_config: ExperimentConfig,
+    tokenizer: PreTrainedTokenizer,
+    argument_graphs: Dict[str, ResponseTemplateCollection],
+    maximum_sequence_length: int,
+    is_test_run: bool = False
+):
+    """
+    Loads the corpus dataset from disk, creates splits,
+    and optionally uses smaller data for local testing if `is_test_run=True`.
+    Returns all training data, evaluation data, and the evaluators.
+    """
+    # Load the dataset from disk
+    corpus_dataset_path = os.path.join(exp_config.project_root, exp_config.dataset_dir, exp_config.dataset_name)
+    corpus_dataset = load_from_disk(corpus_dataset_path)
+
+    # Create or load the splits
+    split_dataset_folder = os.path.join(exp_config.project_root, exp_config.dataset_dir)
+    splitted_dataset = create_splits_from_corpus_dataset(
+        corpus_dataset=corpus_dataset,
+        dataset_split_type=exp_config.dataset_split_type,
+        test_scenario=exp_config.test_scenario,
+        save_folder=split_dataset_folder,
+        dataset_save_name=exp_config.split_dataset_name
+    )
+
+    tokenizer_sep_token = getattr(tokenizer, "sep_token", None)
+
+    if tokenizer_sep_token is None:
+        sep_token = "[SEP]"
+    else:
+        sep_token = tokenizer_sep_token
+
+    test_split = splitted_dataset["test"]
+    test_split = add_context_to_texts(test_split, exp_config.context_length, sep_token)
+
+    corpus_dataset = add_context_to_texts(corpus_dataset, exp_config.context_length, sep_token, "noisy_queries")
+
+
+    if exp_config.add_discussion_scenario_info:
+        test_split = add_scenario_tokens_to_texts(test_split)
+        corpus_dataset = add_scenario_tokens_to_texts(corpus_dataset, ["noisy_queries"])
+
+
+    check_dataset_texts_for_truncation(tokenizer, test_split, "test", maximum_sequence_length)
+    check_dataset_texts_for_truncation(tokenizer, corpus_dataset, "corpus_dataset", maximum_sequence_length, ["noisy_queries"])
+
+    # Build references for TEST
+    test_passages = {
+        row["id"]: Passage(
+            row["id"], row["text"], row["label"],
+            row["discussion_scenario"], row["passage_source"]
+        )
+        for row in test_split["passages"]
+    }
+    test_queries = {
+        row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"])
+        for row in test_split["queries"]
+    }
+    test_relevant_passages = {
+        row["query_id"]: set(row["passages_ids"])
+        for row in test_split["queries_relevant_passages_mapping"]
+    }
+    test_trivial_passages = {
+        row["query_id"]: set(row["passages_ids"])
+        for row in test_split["queries_trivial_passages_mapping"]
+    }
+    noisy_queries = {
+        row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"])
+        for row in corpus_dataset["noisy_queries"]
+    }
+
+
+    deep_dive_evaluator_test = DeepDiveInformationRetrievalEvaluator(
+        corpus=test_passages,
+        queries=test_queries,
+        noisy_queries=noisy_queries,
+        relevant_docs=test_relevant_passages,
+        excluded_docs=test_trivial_passages,
+        show_progress_bar=True,
+        accuracy_at_k=[1,3,5],
+        precision_at_k=[1,3,5],
+        write_csv=True,
+        run=wandb.run,
+        argument_graphs=argument_graphs,
+        confidence_threshold=0.7,
+        confidence_threshold_steps=0.01,
+        name="After_run_deepdive"
+    )
+
+    return (
+        train_pos,
+        eval_pos,
+        excluding_ir_evaluator_eval,
+        excluding_ir_evaluator_test,
+        deep_dive_evaluator_test
+    )
+
+
+
+
 
 def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], dataset_path: str) -> None:
     """
@@ -44,17 +152,22 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], datase
 
         # get latest checkpoint of that run
         # checkpoint folders are named "checpoint-<save_step>". Get the latest checkpoint
-        max_checkpoint_step=max([int(folder.split("-")[1]) for folder in os.listdir(run_path) if "checkpoint" in folder])
-        checkpoint_path = os.path.join(run_path, f"checkpoint-{max_checkpoint_step}")
+        latest_checkpoint_step=max([int(folder.split("-")[1]) for folder in os.listdir(run_path) if "checkpoint" in folder])
+        latest_checkpoint_path = os.path.join(run_path, f"checkpoint-{latest_checkpoint_step}")
 
+        # get the best checkpoint of the model. this is logged in trainer_state.json
+        with open(os.path.join(latest_checkpoint_path, "trainer_state.json")) as json_file:
+            trainer_state = json.loads(json_file.read())
+            best_model_checkpoint_path = trainer_state["best_model_checkpoint"]
 
-        model = SentenceTransformer(checkpoint_path)
+        model = SentenceTransformer(best_model_checkpoint_path)
 
         # Ensure that the passed dataset path exists
         if not os.path.exists(dataset_path):
             raise FileNotFoundError(f"No dataset found at {dataset_path}")
 
         eval_dataset = load_from_disk(dataset_path)
+        corpus_dataset = load_from_disk(corpus_dataset_path)
 
         # Prepare queries and passages from the dataset for the evaluator
         eval_passages = {
@@ -68,6 +181,9 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], datase
         eval_trivial_passages = {
             row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_trivial_passages_mapping"]
         }
+
+        eval_queries = {row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"]) for row in
+                        corpus_dataset["noiy_queries"]}
 
         # Load the evaluator and run it
         evaluator = DeepDiveInformationRetrievalEvaluator(
