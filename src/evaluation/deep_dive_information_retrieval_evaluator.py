@@ -4,7 +4,6 @@ import heapq
 import logging
 import os
 import numpy as np
-import bisect
 from collections import defaultdict
 from contextlib import nullcontext
 from typing import TYPE_CHECKING, Callable, Optional, Dict, List, Tuple, Set, Iterable
@@ -193,7 +192,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         self._compute_precision_at_k(queries_result_list)
 
         # 5) Compute stance accuracies
-        # metrics = self._compute_stance_accuracy(queries_result_list)
+        metrics = self._compute_stance_accuracy(queries_result_list)
 
         # 6) Log confusion matrices
         self._log_confusion_matrices_to_wandb(queries_result_list)
@@ -212,9 +211,10 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
             self._log_query_and_passage_embeddings()
 
         # 10) Log to W&B (if self.run is set)
-        if self.run:
-            self.run.log(final_metrics)
+        # if self.run:
+        #     self.run.log(final_metrics)
 
+        # return None
         return final_metrics
 
     def _compute_scores(
@@ -354,12 +354,12 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 # accuracy@k
                 for k_val in self.accuracy_at_k:
                     output_data.append(data["accuracy@k"][k_val])
-                # mrr@k
-                for k_val in self.mrr_at_k:
-                    output_data.append(data["mrr@k"][k_val])
-                # ndcg@k
-                for k_val in self.ndcg_at_k:
-                    output_data.append(data["ndcg@k"][k_val])
+                # # mrr@k
+                # for k_val in self.mrr_at_k:
+                #     output_data.append(data["mrr@k"][k_val])
+                # # ndcg@k
+                # for k_val in self.ndcg_at_k:
+                #     output_data.append(data["ndcg@k"][k_val])
 
             # Append loss
             output_data.append(loss if loss is not None else "n/a")
