@@ -66,40 +66,39 @@ def create_dataset_for_multiple_negatives_ranking_loss(
     return Dataset.from_list(examples)
 
 
-def add_scenario_tokens_to_texts(split_dataset: DatasetDict) -> DatasetDict:
+def add_scenario_tokens_to_texts(split_dataset: DatasetDict,
+                                 split_dataset_keys: List[str] = ["queries", "passages"]) -> DatasetDict:
     """
-    Given a split_dataset with:
-      - "queries": has columns ["id", "text", ...]
-      - "passages": has columns ["id", "text", ...]
-      - and other splits
+    Given a split_dataset where each split_datasets_key has a "text" and a "discussion_scenario" feature:
 
-    Returns the same dataset with the "text" columns of queries and passages modified to include the discussion scenario
-    as a prefix to the text.
+    Returns the same dataset with the "text" columns of each split_dataset_key modified to include a discussion scenario
+    string as a prefix to the text.
 
     This is useful to have the scenario information as part of the text, which can be used by the model to learn
     scenario-specific patterns.
     """
 
-    queries = split_dataset["queries"].map(
-        lambda x: {**x, "text": f"[{x['discussion_scenario']}] {x['text']}"}
-    )
-    passages = split_dataset["passages"].map(
-        lambda x: {**x, "text": f"[{x['discussion_scenario']}] {x['text']}"}
-    )
+    split_keys_with_scenario_token_texts = {}
+
+    for split_dataset_key in split_dataset_keys:
+        split_keys_with_scenario_token_texts[split_dataset_key] = split_dataset[split_dataset_key].map(
+            lambda x: {**x, "text": f"[{x['discussion_scenario']}] {x['text']}"}
+        )
 
     return DatasetDict({
         **split_dataset,
-        "queries": queries,
-        "passages": passages,
+        **split_keys_with_scenario_token_texts
     })
 
 
-def add_context_to_texts(split_dataset: DatasetDict, context_length: int, sep_token="[SEP]") -> DatasetDict:
+def add_context_to_texts(split_dataset: DatasetDict, context_length: int, sep_token="[SEP]",
+                         split_dataset_key: str = "queries") -> DatasetDict:
     """
     Args:
         split_dataset (DatasetDict):
         context_length (int): -1 for the whole conversation history up to the utterance, 0 for no context or other positive integers. If the specified context in longer than the available context, all context is used.
         sep_token (str): the sep_token of the model tokenizer
+        split_dataset_key: e.g. "queries" or "noisy_queries"
     Returns:
         A DatsetDict with the modified queries and the all other parts unchanged.
 
@@ -117,7 +116,7 @@ def add_context_to_texts(split_dataset: DatasetDict, context_length: int, sep_to
         elif context_length > 0:
             selected_context = context[-context_length:]
         else:
-            raise ValueError(f"Context lenght of {context_length} is not allowed.")
+            raise ValueError(f"Context length of {context_length} is not allowed.")
 
         # Format the context
         formatted_context = f" {sep_token} ".join(
@@ -129,7 +128,7 @@ def add_context_to_texts(split_dataset: DatasetDict, context_length: int, sep_to
 
         return example
 
-    split_dataset["queries"] = split_dataset["queries"].map(concatenate_context)
+    split_dataset[split_dataset_key] = split_dataset[split_dataset_key].map(concatenate_context)
 
     return split_dataset
 
@@ -288,7 +287,6 @@ def filter_passages_for_few_shot_setting(
 
 def get_similarity_score_for_passage_pair(passage_1: Passage, passage_2: Passage,
                                           argument_graphs: Dict[str, ResponseTemplateCollection]) -> float:
-
     """
     # scores:
     # 4.0 Fulltext und Summary texte vom selben label
@@ -317,14 +315,14 @@ def get_similarity_score_for_passage_pair(passage_1: Passage, passage_2: Passage
         return 3.0
     if template_1 in template_2.parent_templates or template_2 in template_1.parent_templates:
         return 2.0
-    if template_1 in  template_2.group_templates or template_2 in template_1.group_templates:
+    if template_1 in template_2.group_templates or template_2 in template_1.group_templates:
         return 1.0
     return 0.0
 
 
 def create_textual_similarity_dataset(split_dataset: DatasetDict,
-                                      argument_graphs: Dict[str, ResponseTemplateCollection]) -> List[Tuple[str, str, float]]:
-
+                                      argument_graphs: Dict[str, ResponseTemplateCollection]) -> List[
+    Tuple[str, str, float]]:
     passages = Passage.get_passages_from_hf_dataset(split_dataset["train"]["passages"])
     queries = Query.get_queries_from_hf_dataset(split_dataset["train"]["queries"])
 
@@ -354,7 +352,8 @@ if __name__ == "__main__":
 
     dataset_folder = "../../data/processed/with_context"
     corpus_ds = load_from_disk(f"{dataset_folder}/corpus_dataset_v2")
-    argument_graphs = load_argument_graphs("/home/christian/PycharmProjects/ethikchat-experiment-argument-classification", is_test_run=True)
+    argument_graphs = load_argument_graphs(
+        "/home/christian/PycharmProjects/ethikchat-experiment-argument-classification", is_test_run=True)
 
     in_distribution_split = create_splits_from_corpus_dataset(corpus_dataset=corpus_ds,
                                                               dataset_split_type=DatasetSplitType.InDistribution,
