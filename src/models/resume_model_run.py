@@ -1,11 +1,14 @@
-from datasets import load_from_disk
+from datasets import load_from_disk, DatasetDict
+from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
 from sentence_transformers import SentenceTransformer
+from transformers import PreTrainedTokenizer
+
 from src.data.create_corpus_dataset import Passage, Query
 from src.data.dataset_splits import create_splits_from_corpus_dataset
 from src.evaluation.deep_dive_information_retrieval_evaluator import DeepDiveInformationRetrievalEvaluator
 from src.features.build_features import add_context_to_texts, add_scenario_tokens_to_texts
 from train_model_sweep import load_argument_graphs, check_dataset_texts_for_truncation
-from typing import List, Tuple
+from typing import List, Tuple, Dict
 from dotenv import load_dotenv
 import json
 import wandb
@@ -15,14 +18,13 @@ import gc
 import argparse
 
 
-
-
 def prepare_datasets(
-    exp_config: ExperimentConfig,
-    tokenizer: PreTrainedTokenizer,
-    argument_graphs: Dict[str, ResponseTemplateCollection],
-    maximum_sequence_length: int,
-    is_test_run: bool = False
+        corpus_dataset: DatasetDict,
+        split_dataset: DatasetDict,
+        tokenizer: PreTrainedTokenizer,
+        context_length: int,
+        add_discussion_scenario_info: bool,
+        maximum_sequence_length: int,
 ):
     """
     Loads the corpus dataset from disk, creates splits,
@@ -30,18 +32,16 @@ def prepare_datasets(
     Returns all training data, evaluation data, and the evaluators.
     """
     # Load the dataset from disk
-    corpus_dataset_path = os.path.join(exp_config.project_root, exp_config.dataset_dir, exp_config.dataset_name)
-    corpus_dataset = load_from_disk(corpus_dataset_path)
 
     # Create or load the splits
-    split_dataset_folder = os.path.join(exp_config.project_root, exp_config.dataset_dir)
-    splitted_dataset = create_splits_from_corpus_dataset(
-        corpus_dataset=corpus_dataset,
-        dataset_split_type=exp_config.dataset_split_type,
-        test_scenario=exp_config.test_scenario,
-        save_folder=split_dataset_folder,
-        dataset_save_name=exp_config.split_dataset_name
-    )
+    # split_dataset_folder = os.path.join(exp_config.project_root, exp_config.dataset_dir)
+    # splitted_dataset = create_splits_from_corpus_dataset(
+    #     corpus_dataset=corpus_dataset,
+    #     dataset_split_type=exp_config.dataset_split_type,
+    #     test_scenario=exp_config.test_scenario,
+    #     save_folder=split_dataset_folder,
+    #     dataset_save_name=exp_config.split_dataset_name
+    # )
 
     tokenizer_sep_token = getattr(tokenizer, "sep_token", None)
 
@@ -50,19 +50,18 @@ def prepare_datasets(
     else:
         sep_token = tokenizer_sep_token
 
-    test_split = splitted_dataset["test"]
-    test_split = add_context_to_texts(test_split, exp_config.context_length, sep_token)
+    test_split = split_dataset
+    test_split = add_context_to_texts(test_split, context_length, sep_token)
 
-    corpus_dataset = add_context_to_texts(corpus_dataset, exp_config.context_length, sep_token, "noisy_queries")
+    corpus_dataset = add_context_to_texts(corpus_dataset, context_length, sep_token, "noisy_queries")
 
-
-    if exp_config.add_discussion_scenario_info:
+    if add_discussion_scenario_info:
         test_split = add_scenario_tokens_to_texts(test_split)
         corpus_dataset = add_scenario_tokens_to_texts(corpus_dataset, ["noisy_queries"])
 
-
     check_dataset_texts_for_truncation(tokenizer, test_split, "test", maximum_sequence_length)
-    check_dataset_texts_for_truncation(tokenizer, corpus_dataset, "corpus_dataset", maximum_sequence_length, ["noisy_queries"])
+    check_dataset_texts_for_truncation(tokenizer, corpus_dataset, "corpus_dataset", maximum_sequence_length,
+                                       ["noisy_queries"])
 
     # Build references for TEST
     test_passages = {
@@ -89,46 +88,20 @@ def prepare_datasets(
         for row in corpus_dataset["noisy_queries"]
     }
 
-
-    deep_dive_evaluator_test = DeepDiveInformationRetrievalEvaluator(
-        corpus=test_passages,
-        queries=test_queries,
-        noisy_queries=noisy_queries,
-        relevant_docs=test_relevant_passages,
-        excluded_docs=test_trivial_passages,
-        show_progress_bar=True,
-        accuracy_at_k=[1,3,5],
-        precision_at_k=[1,3,5],
-        write_csv=True,
-        run=wandb.run,
-        argument_graphs=argument_graphs,
-        confidence_threshold=0.7,
-        confidence_threshold_steps=0.01,
-        name="After_run_deepdive"
-    )
-
-    return (
-        train_pos,
-        eval_pos,
-        excluding_ir_evaluator_eval,
-        excluding_ir_evaluator_test,
-        deep_dive_evaluator_test
-    )
+    return test_queries, test_passages, test_relevant_passages, test_trivial_passages, noisy_queries
 
 
-
-
-
-def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], dataset_path: str) -> None:
+def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], test_dataset_path: str,
+         corpus_dataset_path: str) -> None:
     """
     Args:
         project_root: Path to root of this project
         models_dir: Path from project root to directory where models are saved
         runs: List of tuples containing (wandb_run_id, wandb_run_name)
-        dataset_path: Path to evaluation dataset
+        test_dataset_path: Path to test dataset
     """
     # Load argument graphs and environment variables
-    arguments_graphs = load_argument_graphs("../../")
+
     env_path = os.path.join(project_root, ".env")
     load_dotenv(env_path)
 
@@ -136,11 +109,19 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], datase
         # Resume previous W&B run
         run = wandb.init(project="argument-classification", id=run_id, resume="must")
 
+        # get dataset parameters from run config
+        context_length = run.config["context_length"]
+        add_discussion_scenario_info = run.config["add_discussion_scenario_info"]
+
         print(f"W&B continuing run: {run.name}")
         print(f"Project Root: {project_root}")
         print(f"Using model: {run_name}")
-        print(f"Dataset: {dataset_path}")
+        print(f"Test Dataset: {test_dataset_path}")
+        print(f"Corpus Dataset: {corpus_dataset_path}")
         print(f"run_name: {run.name}")
+        print("+++++++++++++++++++++++++++  Run config: ++++++++++++++++++++++++++++++++++++++++++")
+        print(run.config)
+        print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 
         wandb.login()
 
@@ -152,59 +133,69 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], datase
 
         # get latest checkpoint of that run
         # checkpoint folders are named "checpoint-<save_step>". Get the latest checkpoint
-        latest_checkpoint_step=max([int(folder.split("-")[1]) for folder in os.listdir(run_path) if "checkpoint" in folder])
+        latest_checkpoint_step = max(
+            [int(folder.split("-")[1]) for folder in os.listdir(run_path) if "checkpoint" in folder])
         latest_checkpoint_path = os.path.join(run_path, f"checkpoint-{latest_checkpoint_step}")
 
         # get the best checkpoint of the model. this is logged in trainer_state.json
         with open(os.path.join(latest_checkpoint_path, "trainer_state.json")) as json_file:
             trainer_state = json.loads(json_file.read())
             best_model_checkpoint_path = trainer_state["best_model_checkpoint"]
+            if not os.path.exists(best_model_checkpoint_path):
+                # running script locally, not on cluster
+                best_model_checkpoint_path = os.path.join(run_path, trainer_state["best_model_checkpoint"].split("/")[-1])
+
 
         model = SentenceTransformer(best_model_checkpoint_path)
 
         # Ensure that the passed dataset path exists
-        if not os.path.exists(dataset_path):
-            raise FileNotFoundError(f"No dataset found at {dataset_path}")
+        if not os.path.exists(test_dataset_path):
+            raise FileNotFoundError(f"No dataset found at {test_dataset_path}")
 
-        eval_dataset = load_from_disk(dataset_path)
+        if not os.path.exists(corpus_dataset_path):
+            raise FileNotFoundError(f"No dataset found at {corpus_dataset_path}")
+
+        test_dataset = load_from_disk(test_dataset_path)
         corpus_dataset = load_from_disk(corpus_dataset_path)
 
-        # Prepare queries and passages from the dataset for the evaluator
-        eval_passages = {
-            row["id"]: Passage(row["id"], row["text"], row["label"], row["discussion_scenario"], row["passage_source"]) for
-            row in eval_dataset["passages"]}
-        eval_queries = {row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"]) for row in
-                        eval_dataset["queries"]}
-        eval_relevant_passages = {
-            row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_relevant_passages_mapping"]
-        }
-        eval_trivial_passages = {
-            row["query_id"]: set(row["passages_ids"]) for row in eval_dataset["queries_trivial_passages_mapping"]
-        }
+        (test_queries,
+         test_passages,
+         test_relevant_passages,
+         test_trivial_passages,
+         noisy_queries) = prepare_datasets(corpus_dataset,
+                                           test_dataset,
+                                           model.tokenizer,
+                                           context_length,
+                                           add_discussion_scenario_info,
+                                           model.max_seq_length)
 
-        eval_queries = {row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"]) for row in
-                        corpus_dataset["noiy_queries"]}
+        arguments_graphs = load_argument_graphs("../../")
 
-        # Load the evaluator and run it
-        evaluator = DeepDiveInformationRetrievalEvaluator(
-            corpus=eval_passages,
-            queries=eval_queries,
-            relevant_docs=eval_relevant_passages,
-            excluded_docs=eval_trivial_passages,
+        deep_dive_evaluator_test = DeepDiveInformationRetrievalEvaluator(
+            corpus=test_passages,
+            queries=test_queries,
+            noisy_queries=noisy_queries,
+            relevant_docs=test_relevant_passages,
+            excluded_docs=test_trivial_passages,
             show_progress_bar=True,
+            accuracy_at_k=[1, 3, 5],
+            precision_at_k=[1, 3, 5],
             write_csv=True,
-            run=run,
+            run=wandb.run,
             argument_graphs=arguments_graphs,
-            confidence_threshold=0.8,
+            confidence_threshold=0.7,
             confidence_threshold_steps=0.01,
+            name="After_run_deepdive"
         )
 
-        evaluator(model)
+        deep_dive_evaluator_test(model)
         run.finish()
 
         # Delete model instance and free up GPU memory
         del model
         clear_unused_gpu_mem()
+        break
+
 
 def clear_unused_gpu_mem():
     """Clears unused GPU memory to free up space"""
@@ -212,18 +203,36 @@ def clear_unused_gpu_mem():
         gc.collect()
         torch.cuda.empty_cache()
 
+
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Resume W&B run for further evaluation of a model.')
+    parser = argparse.ArgumentParser(description='Resume W&B run for further testing of a model.')
     parser.add_argument('--project_root', type=str, help="Path to the project root.")
-    parser.add_argument('--models_dir', type=str, help="Directory containing all saved models (assuming they are all in one place).")
+    parser.add_argument('--models_dir', type=str,
+                        help="Directory containing all saved models (assuming they are all in one place).")
     parser.add_argument('--run_ids', type=str, nargs="+", help='List of W&B run ids.')
-    parser.add_argument('--run_names', type=str, nargs="+", help='List of directory names of models on the slurm server')
-    parser.add_argument('--dataset_path', type=str, help='Directory of the dataset used for evaluation.')
+    parser.add_argument('--run_names', type=str, nargs="+",
+                        help='List of directory names of models on the slurm server')
+    parser.add_argument('--test_dataset_path', type=str, help='Directory of the dataset used for testing.')
+    parser.add_argument('--corpus_dataset_path', type=str, help='Directory of the corpus dataset used for testing.')
     args = parser.parse_args()
 
     main(
         project_root=args.project_root,
         models_dir=args.models_dir,
         runs=list(zip(args.run_ids, args.run_names)),
-        dataset_path=args.dataset_path
+        test_dataset_path=args.test_dataset_path,
+        corpus_dataset_path=args.corpus_datset_path
     )
+
+    #     test
+    # project_root="/home/christian/PycharmProjects/ethikchat-experiment-argument-classification"
+    # sweep_id="e3xgfhuq"
+    #
+    # runs = [("ru8lyf3q", "exalted-sweep-13/")]
+    # main(
+    #     project_root=project_root,
+    #     models_dir=f"{project_root}/experiments_outputs/{sweep_id}",
+    #     runs=runs,
+    #     test_dataset_path=f"{project_root}/data/processed/with_context/dataset_split_in_distribution/test",
+    #     corpus_dataset_path=f"{project_root}/data/processed/with_context/corpus_dataset_v2",
+    # )
