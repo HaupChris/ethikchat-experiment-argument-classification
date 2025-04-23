@@ -221,7 +221,7 @@ if __name__ == "__main__":
         models_dir=args.models_dir,
         runs=list(zip(args.run_ids, args.run_names)),
         test_dataset_path=args.test_dataset_path,
-        corpus_dataset_path=args.corpus_datset_path
+        corpus_dataset_path=args.corpus_dataset_path
     )
 
     #     test
