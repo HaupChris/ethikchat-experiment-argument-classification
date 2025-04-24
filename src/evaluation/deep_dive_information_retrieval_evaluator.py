@@ -459,7 +459,6 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         # Return highest prio category
         return sorted_categories[0]
 
-
     def get_noisy_node_type(self, query: Query) -> str:
         type_to_label = {
             "CONSENT": ["CONSENT"],
@@ -511,10 +510,6 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
             assigned_type = "OTHER"
 
         return assigned_type
-
-
-
-
 
     def _log_qualitative_error_analysis_table(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]],
                                               noisy_queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) \
@@ -592,8 +587,6 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 "top1_prediction_correct", "rank_first_relevant"
             ]
 
-
-
             # Iterate over each query and its predicted similarities
             for q_idx, hits in enumerate(per_query_hits):
                 query = self.queries[q_idx]
@@ -641,9 +634,8 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         if self.noisy_queries:
             # Iterate over each score function
 
-
             for score_func_name, per_query_hits in noisy_queries_result_list.items():
-                header=[
+                header = [
                     "anchor_labels",
                     "anchor_text",
                     "num_anchor_labels",
@@ -695,7 +687,6 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                         writer.writerows(data)
 
                     logger.info(f"Saved error analysis noisy_queries to {filepath}")
-
 
     def _log_confusion_matrices_to_wandb(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) -> None:
         """
@@ -1190,6 +1181,9 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         """
         confidences = self._generate_confidence_thresholds()
 
+        # Initialize query counts by threshold tracking
+        self.query_counts_by_threshold = {}
+
         def compute_accuracy(
                 result_list: Dict[str, List[List[Tuple[float, str]]]],
                 confidences: Iterable[float],
@@ -1197,7 +1191,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 handle_noisy: bool = False
         ) -> Dict[str, Dict[float, float]]:
             """
-            Computes accuracy at different confidence thresholds
+            Computes accuracy at different confidence thresholds and tracks queries above threshold
 
             Args:
                 result_list: Query results grouped by scoring function
@@ -1211,17 +1205,24 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 Nested dictionary mapping score functions to {threshold: accuracy} pairs
             """
             results = {}
+            query_counts = {}
 
             for score_func, per_query_hits in result_list.items():
                 results[score_func] = {}
+                query_counts[score_func] = {}
 
                 for confidence in confidences:
                     top1_hits = 0
                     total_queries = len(per_query_hits)
+                    queries_above_threshold = 0
 
                     for q_idx, hits in enumerate(per_query_hits):
                         query = query_list[q_idx]
                         top1 = hits[0]
+
+                        # Track queries with top1 prediction above threshold
+                        if top1[0] >= confidence:
+                            queries_above_threshold += 1
 
                         if handle_noisy and not self.relevant_docs.get(query.id, []):
                             # If query is noisy and top 1 prediction confidence is below threshold count it as correct
@@ -1235,6 +1236,11 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
 
                     # Compute accuracy as the fraction of correctly classified queries
                     results[score_func][confidence] = top1_hits / total_queries if total_queries else 0.0
+                    # Store count of queries above threshold
+                    query_counts[score_func][confidence] = queries_above_threshold
+
+                # Add query counts to the class tracking dict
+                self.query_counts_by_threshold[score_func] = query_counts[score_func]
 
             return results
 
@@ -1297,12 +1303,18 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         # Define confidence thresholds based on step size
         confidences = self._generate_confidence_thresholds()
 
+        # Initialize query counts by threshold tracking
+        self.query_counts_by_threshold = {}
+
         def compute_accuracy(
                 results_list: Dict[str, List[List[Tuple[float, str]]]],
                 confidences: Iterable[float],
                 query_list: list,
                 handle_noisy: bool = False
-        ) -> Tuple[Dict[str, Dict[float, float]], Dict[str, Dict[float, float]], Dict[str, Dict[float, float]]]:
+        ) -> Tuple[
+            Dict[str, Dict[float, float]],
+            Dict[str, Dict[float, float]],
+            Dict[str, Dict[float, float]]]:
             """
             Computes three types of accuracy metrics at different confidence thresholds.
 
@@ -1314,23 +1326,27 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                              (count as match if no predictions above threshold)
 
             Returns:
-                Tuple of three dictionaries (exact_match, partial_match, true_partial_match)
-                Each dictionary maps score functions to {threshold: accuracy} pairs
+                Tuple of four dictionaries (exact_match, partial_match, true_partial_match)
+                dictionaries map score functions to {threshold: accuracy} pairs
+                Fourth dictionary maps score functions to {threshold: query_count} pairs
             """
             # Initialize accuracy tracking dicts
             results_exact = {}
             results_partial = {}
             results_true_partial = {}
+            query_counts = {}
 
             for score_func, per_query_hits in results_list.items():
                 # Init nested dicts for each scoring function
                 results_exact[score_func] = {}
                 results_partial[score_func] = {}
                 results_true_partial[score_func] = {}
+                query_counts[score_func] = {}
 
                 for confidence in confidences:
                     total_queries = len(per_query_hits)
                     exact_match, partial_match, true_partial_match = 0, 0, 0
+                    queries_above_threshold = 0
 
                     for q_idx, hits in enumerate(per_query_hits):
                         query = query_list[q_idx]
@@ -1339,6 +1355,10 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
 
                         # Filter hits that meet confidence threshold
                         hits_above_threshold = [hit for hit in hits if hit[0] >= confidence]
+
+                        # Count queries with at least one hit above threshold
+                        if hits_above_threshold:
+                            queries_above_threshold += 1
 
                         if handle_noisy and not hits_above_threshold:
                             # For noisy queries with no predictions above threshold we count all metrics as correct
@@ -1376,6 +1396,10 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                     results_exact[score_func][confidence] = exact_acc
                     results_partial[score_func][confidence] = partial_acc
                     results_true_partial[score_func][confidence] = true_partial_acc
+                    query_counts[score_func][confidence] = queries_above_threshold
+
+                # Store query counts in the class tracking dict
+                self.query_counts_by_threshold[score_func] = query_counts[score_func]
 
             return results_exact, results_partial, results_true_partial
 
@@ -1441,13 +1465,192 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                                                f"multi_argument_classification_true_partial_match_{q_type}",
                                                f"True Partial Match Accuracy By Confidence Threshold ({q_name} Queries)")
 
+
+
     def _log_results_as_line_plot(self, results: Dict[str, Dict], metric_name: str, title: str) -> None:
+        """
+        Logs line plot data to wandb and saves it as CSV.
+
+        Also tracks the number of queries that remain above each confidence threshold.
+        """
         for score_func_name, confidence_threshold in results.items():
-            data = [[c, acc] for c, acc in confidence_threshold.items()]
-            table = wandb.Table(data=data, columns=["Confidence", "Accuracy"])
+            # Calculate total queries above each threshold (if available in results)
+            if hasattr(self, 'query_counts_by_threshold') and score_func_name in self.query_counts_by_threshold:
+                query_counts = self.query_counts_by_threshold[score_func_name]
+                data = [[c, acc, query_counts.get(c, 0)] for c, acc in confidence_threshold.items()]
+                columns = ["Confidence", "Accuracy", "Queries_Above_Threshold"]
+            else:
+                data = [[c, acc] for c, acc in confidence_threshold.items()]
+                columns = ["Confidence", "Accuracy"]
+
+            table = wandb.Table(data=data, columns=columns)
+
             if self.run:
-                self.run.log({f"{self.name}_{score_func_name}_{metric_name}": wandb.plot.line(table, "Confidence",
-                                                                                              "Accuracy", title=title)})
+                self.run.log({f"{self.name}_{score_func_name}_{metric_name}": wandb.plot.line(
+                    table, "Confidence", "Accuracy", title=title)})
+
+            # Save to CSV
+            if self.save_tables_as_csv:
+                csv_dir = os.path.join(self.csv_output_dir, "confidence_threshold_metrics")
+                os.makedirs(csv_dir, exist_ok=True)
+                filepath = os.path.join(csv_dir, f"{score_func_name}_{metric_name}.csv")
+
+                with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerow(columns)
+                    writer.writerows(data)
+
+                logger.info(f"Saved confidence threshold metrics to {filepath}")
+
+    # Modified _evaluate_noisy_query_performance_by_type to use confidence_threshold_steps
+    def _evaluate_noisy_query_performance_by_type(self, noisy_queries_result_list):
+        """
+        Evaluates performance metrics for each type of noisy query.
+
+        This function calculates:
+        1. Accuracy@k for each noisy query type
+        2. False positive rates at different confidence thresholds
+        """
+        if not self.noisy_queries:
+            logger.info("No noisy queries available for type-specific performance analysis")
+            return
+
+        # Get all confidence thresholds based on steps
+        confidences = self._generate_confidence_thresholds()
+
+        # Group noisy queries by type
+        queries_by_type = {
+            "CONSENT": [],
+            "DISSENT": [],
+            "UNKNOWN_NZ_ARG": [],
+            "UNKNOWN_Z_ARG": [],
+            "OTHER": []
+        }
+
+        query_indices_by_type = {
+            "CONSENT": [],
+            "DISSENT": [],
+            "UNKNOWN_NZ_ARG": [],
+            "UNKNOWN_Z_ARG": [],
+            "OTHER": []
+        }
+
+        for q_idx, query in enumerate(self.noisy_queries):
+            query_type = self.get_noisy_node_type(query)
+            queries_by_type[query_type].append(query)
+            query_indices_by_type[query_type].append(q_idx)
+
+        # For each score function
+        for score_func_name, per_query_hits in noisy_queries_result_list.items():
+            # Create filtered result lists for each type
+            type_result_lists = {}
+            for qtype, indices in query_indices_by_type.items():
+                if indices:  # Only process types that have queries
+                    type_result_lists[qtype] = [per_query_hits[idx] for idx in indices]
+
+            # Calculate accuracy@k for each type across all confidence thresholds
+            accuracy_data = []
+
+            # For each noisy query type
+            for qtype, type_queries in queries_by_type.items():
+                if not type_queries:
+                    continue
+
+                type_hits = type_result_lists[qtype]
+                num_queries = len(type_queries)
+
+                # First, calculate accuracy@k for each confidence threshold and k value
+                for confidence in confidences:
+                    for k in self.accuracy_at_k:
+                        correct_predictions = 0
+
+                        for hits in type_hits:
+                            if len(hits) >= k:
+                                # For noisy queries, a "correct" prediction is when confidence is below threshold
+                                # (i.e., the model correctly realizes it shouldn't predict anything)
+                                if hits[0][0] < confidence:
+                                    correct_predictions += 1
+
+                        accuracy = correct_predictions / num_queries if num_queries else 0
+                        accuracy_data.append([
+                            qtype,
+                            k,
+                            confidence,
+                            f"{accuracy:.4f}",
+                            correct_predictions,
+                            num_queries
+                        ])
+
+            # Log accuracy table
+            if self.run:
+                table = wandb.Table(
+                    columns=["Noisy Query Type", "K", "Confidence Threshold", "Accuracy@K",
+                             "Correct Predictions", "Number of Queries"],
+                    data=accuracy_data
+                )
+                self.run.log({f"{self.name}_{score_func_name}_noisy_type_accuracy": table})
+
+            # Save to CSV
+            if self.save_tables_as_csv:
+                csv_dir = os.path.join(self.csv_output_dir, "noisy_query_performance")
+                os.makedirs(csv_dir, exist_ok=True)
+                filepath = os.path.join(csv_dir, f"{score_func_name}_noisy_type_accuracy.csv")
+
+                with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerow(["Noisy Query Type", "K", "Confidence Threshold", "Accuracy@K",
+                                     "Correct Predictions", "Number of Queries"])
+                    writer.writerows(accuracy_data)
+
+                logger.info(f"Saved noisy query type accuracy to {filepath}")
+
+            # Calculate false positive rates at different confidence thresholds
+            fp_data = []
+
+            for confidence in confidences:
+                for qtype, type_hits in type_result_lists.items():
+                    if not type_hits:
+                        continue
+
+                    num_queries = len(type_hits)
+                    false_positives = 0
+
+                    for hits in type_hits:
+                        # Count as false positive if any hit is above threshold
+                        if any(hit[0] >= confidence for hit in hits):
+                            false_positives += 1
+
+                    fp_rate = false_positives / num_queries if num_queries else 0
+                    fp_data.append([
+                        qtype,
+                        confidence,
+                        f"{fp_rate:.4f}",
+                        false_positives,
+                        num_queries
+                    ])
+
+            # Log false positive rate table
+            if self.run:
+                table = wandb.Table(
+                    columns=["Noisy Query Type", "Confidence Threshold", "False Positive Rate",
+                             "False Positives", "Number of Queries"],
+                    data=fp_data
+                )
+                self.run.log({f"{self.name}_{score_func_name}_noisy_type_fp_rates": table})
+
+            # Save to CSV
+            if self.save_tables_as_csv:
+                csv_dir = os.path.join(self.csv_output_dir, "noisy_query_performance")
+                os.makedirs(csv_dir, exist_ok=True)
+                filepath = os.path.join(csv_dir, f"{score_func_name}_noisy_type_fp_rates.csv")
+
+                with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerow(["Noisy Query Type", "Confidence Threshold", "False Positive Rate",
+                                     "False Positives", "Number of Queries"])
+                    writer.writerows(fp_data)
+
+                logger.info(f"Saved noisy query type false positive rates to {filepath}")
 
     def _log_query_and_passage_embeddings(self):
         """Logs query and corpus embeddings to wandb."""
@@ -1597,148 +1800,6 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
             logger.info(f"  {qtype}: {count} ({percentage:.2f}%)")
 
         return type_counts
-
-    def _evaluate_noisy_query_performance_by_type(self, noisy_queries_result_list):
-        """
-        Evaluates performance metrics for each type of noisy query.
-
-        This function calculates:
-        1. Accuracy@k for each noisy query type
-        2. Precision@k for each noisy query type
-        3. False positive rates at different confidence thresholds
-        """
-        if not self.noisy_queries:
-            logger.info("No noisy queries available for type-specific performance analysis")
-            return
-
-        # Group noisy queries by type
-        queries_by_type = {
-            "CONSENT": [],
-            "DISSENT": [],
-            "UNKNOWN_NZ_ARG": [],
-            "UNKNOWN_Z_ARG": [],
-            "OTHER": []
-        }
-
-        query_indices_by_type = {
-            "CONSENT": [],
-            "DISSENT": [],
-            "UNKNOWN_NZ_ARG": [],
-            "UNKNOWN_Z_ARG": [],
-            "OTHER": []
-        }
-
-        for q_idx, query in enumerate(self.noisy_queries):
-            query_type = self.get_noisy_node_type(query)
-            queries_by_type[query_type].append(query)
-            query_indices_by_type[query_type].append(q_idx)
-
-        # For each score function
-        for score_func_name, per_query_hits in noisy_queries_result_list.items():
-            # Create filtered result lists for each type
-            type_result_lists = {}
-            for qtype, indices in query_indices_by_type.items():
-                if indices:  # Only process types that have queries
-                    type_result_lists[qtype] = [per_query_hits[idx] for idx in indices]
-
-            # Calculate accuracy@k for each type
-            accuracy_data = []
-            for qtype, type_queries in queries_by_type.items():
-                if not type_queries:
-                    continue
-
-                type_hits = type_result_lists[qtype]
-                num_queries = len(type_queries)
-
-                # For each k value, calculate how many noisy queries have confidence below threshold
-                # (for noisy queries, this is a "correct" prediction)
-                for k in self.accuracy_at_k:
-                    correct_below_threshold = 0
-
-                    for hits in type_hits:
-                        if len(hits) >= k:
-                            # For noisy queries, a "correct" prediction is when confidence is below threshold
-                            # (i.e., the model correctly realizes it shouldn't predict anything)
-                            if hits[0][0] < self.confidence_threshold:
-                                correct_below_threshold += 1
-
-                    accuracy = correct_below_threshold / num_queries if num_queries else 0
-                    accuracy_data.append([
-                        qtype,
-                        k,
-                        f"{accuracy:.4f}",
-                        num_queries
-                    ])
-
-            # Log accuracy table
-            if self.run:
-                table = wandb.Table(
-                    columns=["Noisy Query Type", "K", "Accuracy@K", "Number of Queries"],
-                    data=accuracy_data
-                )
-                self.run.log({f"{self.name}_{score_func_name}_noisy_type_accuracy": table})
-
-            # Save to CSV
-            if self.save_tables_as_csv:
-                csv_dir = os.path.join(self.csv_output_dir, "noisy_query_performance")
-                os.makedirs(csv_dir, exist_ok=True)
-                filepath = os.path.join(csv_dir, f"{score_func_name}_noisy_type_accuracy.csv")
-
-                with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
-                    writer = csv.writer(csvfile)
-                    writer.writerow(["Noisy Query Type", "K", "Accuracy@K", "Number of Queries"])
-                    writer.writerows(accuracy_data)
-
-                logger.info(f"Saved noisy query type accuracy to {filepath}")
-
-            # Calculate false positive rates at different confidence thresholds
-            confidences = self._generate_confidence_thresholds()
-            fp_data = []
-
-            for confidence in confidences:
-                for qtype, type_hits in type_result_lists.items():
-                    if not type_hits:
-                        continue
-
-                    num_queries = len(type_hits)
-                    false_positives = 0
-
-                    for hits in type_hits:
-                        # Count as false positive if any hit is above threshold
-                        if any(hit[0] >= confidence for hit in hits):
-                            false_positives += 1
-
-                    fp_rate = false_positives / num_queries if num_queries else 0
-                    fp_data.append([
-                        qtype,
-                        confidence,
-                        f"{fp_rate:.4f}",
-                        false_positives,
-                        num_queries
-                    ])
-
-            # Log false positive rate table
-            if self.run:
-                table = wandb.Table(
-                    columns=["Noisy Query Type", "Confidence Threshold", "False Positive Rate",
-                             "False Positives", "Number of Queries"],
-                    data=fp_data
-                )
-                self.run.log({f"{self.name}_{score_func_name}_noisy_type_fp_rates": table})
-
-            # Save to CSV
-            if self.save_tables_as_csv:
-                csv_dir = os.path.join(self.csv_output_dir, "noisy_query_performance")
-                os.makedirs(csv_dir, exist_ok=True)
-                filepath = os.path.join(csv_dir, f"{score_func_name}_noisy_type_fp_rates.csv")
-
-                with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
-                    writer = csv.writer(csvfile)
-                    writer.writerow(["Noisy Query Type", "Confidence Threshold", "False Positive Rate",
-                                     "False Positives", "Number of Queries"])
-                    writer.writerows(fp_data)
-
-                logger.info(f"Saved noisy query type false positive rates to {filepath}")
 
 
 if __name__ == "__main__":
