@@ -1459,7 +1459,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         def format_passage_label(p: Passage) -> str:
             return (p.discussion_scenario + "_" + p.label).lower()
 
-        def get_text_type(q: Optional[Query] = None, p: Optional[Passage] = None) -> str:
+        def get_text_type(q: Optional[Query] = None, p: Optional[Passage] = None):
             if q:
                 rtc = self._return_topic_rtc(q.discussion_scenario)
                 categories = [getattr(rtc.get_template_for_label(label), 'category', TemplateCategory.OTHER) for label
@@ -1470,6 +1470,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
             if p:
                 rtc = self._return_topic_rtc(p.discussion_scenario)
                 return f"{p.discussion_scenario}_{getattr(rtc.get_template_for_label(p.label), 'category', TemplateCategory.OTHER).name}"
+            return None
 
         columns = ["label", "text", "discussion_scenario", "arg_type"] + [f"dim_{i}" for i in
                                                                           range(len(self.query_embeddings[0]))]
