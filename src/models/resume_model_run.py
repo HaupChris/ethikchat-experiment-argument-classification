@@ -196,7 +196,7 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], test_d
         # Delete model instance and free up GPU memory
         del model
         clear_unused_gpu_mem()
-        break
+
 
 
 def clear_unused_gpu_mem():
