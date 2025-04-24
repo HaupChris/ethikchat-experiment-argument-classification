@@ -1,14 +1,12 @@
 from datasets import load_from_disk, DatasetDict
-from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
 from sentence_transformers import SentenceTransformer
 from transformers import PreTrainedTokenizer
 
 from src.data.create_corpus_dataset import Passage, Query
-from src.data.dataset_splits import create_splits_from_corpus_dataset
 from src.evaluation.deep_dive_information_retrieval_evaluator import DeepDiveInformationRetrievalEvaluator
 from src.features.build_features import add_context_to_texts, add_scenario_tokens_to_texts
 from train_model_sweep import load_argument_graphs, check_dataset_texts_for_truncation
-from typing import List, Tuple, Dict
+from typing import List, Tuple
 from dotenv import load_dotenv
 import json
 import wandb
@@ -99,6 +97,7 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], test_d
         models_dir: Path from project root to directory where models are saved
         runs: List of tuples containing (wandb_run_id, wandb_run_name)
         test_dataset_path: Path to test dataset
+        corpus_dataset_path
     """
     # Load argument graphs and environment variables
 
@@ -185,7 +184,10 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], test_d
             argument_graphs=arguments_graphs,
             confidence_threshold=0.7,
             confidence_threshold_steps=0.01,
-            name="After_run_deepdive"
+            name="After_run_deepdive",
+            save_tables_as_csv=True,
+            csv_output_dir=run_path
+
         )
 
         deep_dive_evaluator_test(model)
@@ -234,5 +236,5 @@ if __name__ == "__main__":
     #     models_dir=f"{project_root}/experiments_outputs/{sweep_id}",
     #     runs=runs,
     #     test_dataset_path=f"{project_root}/data/processed/with_context/dataset_split_in_distribution/test",
-    #     corpus_dataset_path=f"{project_root}/data/processed/with_context/corpus_dataset_v2",
+    #     corpus_dataset_path=f"{project_root}/data/processed/with_context/corpus_dataset_v2"
     # )
