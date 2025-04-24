@@ -506,8 +506,6 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
             # If above all thresholds
             return "higher"
 
-
-
         def format_top_predictions(hits: List[Tuple[float, str]]) -> List[str]:
             """
             Formats the top predictions into readable strings.
@@ -533,7 +531,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 "top1_prediction_correct", "rank_first_relevant"
             ]
 
-            table = wandb.Table(columns=header)
+
 
             # Iterate over each query and its predicted similarities
             for q_idx, hits in enumerate(per_query_hits):
@@ -563,8 +561,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                     rank_first_relevant
                 ])
 
-            table.add_data(data)
-
+            table = wandb.Table(columns=header, data=data)
             self.run.log({f"{self.name}_{score_func_name}_error_analysis": table})
 
             # Save to CSV
@@ -596,8 +593,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                     "top10",
                     "first_correct_confidence_threshold"
                 ]
-                rows = []
-                table = wandb.Table(columns=header)
+                data = []
 
                 # Iterate over each query and its predicted similarities
                 for q_idx, hits in enumerate(per_query_hits):
@@ -613,7 +609,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                     # Get rank of first relevant passage
                     first_correct_threshold = find_threshold_value(similarity=top1_similarity)
 
-                    rows.append([
+                    data.append([
                         query.labels,
                         query.text,
                         len(query.labels),
@@ -624,7 +620,8 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                         top10_tuples,
                         first_correct_threshold
                     ])
-                table.add_data(rows)
+
+                table = wandb.Table(columns=header, data=data)
                 self.run.log({f"{self.name}_{score_func_name}_error_analysis_noisy_queries": table})
                 if self.save_tables_as_csv:
                     csv_dir = os.path.join(self.csv_output_dir, "error_analysis_noisy_queries")
