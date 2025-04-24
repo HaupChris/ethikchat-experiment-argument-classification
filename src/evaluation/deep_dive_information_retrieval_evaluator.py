@@ -1162,12 +1162,12 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
 
         logger.info(f"Saved overall metrics to {filepath}")
 
-    def _generate_confidence_thresholds(self) -> List[float]:
+    def _generate_confidence_thresholds(self) -> Iterable[float]:
         """Generate confidence thresholds based on step size"""
         if self.confidence_threshold_steps:
             confidences = np.arange(
                 self.confidence_threshold, 1.0 + self.confidence_threshold_steps, self.confidence_threshold_steps
-            ).tolist()
+            )
             return confidences[confidences <= 1.0]
         return [self.confidence_threshold]
 
