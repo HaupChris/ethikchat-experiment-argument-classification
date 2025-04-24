@@ -217,6 +217,11 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
             self._log_multi_argument_classification_with_similarity_threshold(queries_result_list,
                                                                               noisy_queries_result_list)
 
+        # 8) Analyze noisy query types and performance (NEW)
+        if self.noisy_queries:
+            self._analyze_noisy_query_types()
+            self._evaluate_noisy_query_performance_by_type(noisy_queries_result_list)
+
         # 8) Combine all metrics
         metrics = {**stance_metrics}
         if accuracy_metrics:
@@ -455,6 +460,62 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         return sorted_categories[0]
 
 
+    def get_noisy_node_type(self, query: Query) -> str:
+        type_to_label = {
+            "CONSENT": ["CONSENT"],
+            "DISSENT": ["DISSENT"],
+            "UNKNOWN_NZ_ARG": ["CON_NZARG", "NZ_ARG", "NZ.G1", "NZ.G2", "NZ.G3", "PRO_NZARG"],
+            "UNKNOWN_Z_ARG": ["CON_ZARG", "Z.K3-1-1-1", "Z.P4-1-1", "Z.GP1", "PRO_ZARG", "Z.GK5", "Z.GP74-1"],
+            "OTHER": ["OTHER", "FAQ.1-1", "FAQ.6-1", "FAQ.G1"]
+        }
+
+        priority = {"DISSENT": 0, "CONSENT": 1, "OTHER": 2, "UNKNOWN_NZ_ARG": 3, "UNKNOWN_Z_ARG": 4}
+
+        # Get labels from query
+        labels = query.labels
+
+        # Initialize with lowest priority node type
+        assigned_type = None
+        assigned_priority = 0
+
+        # Check each label against the type mappings
+        for label in labels:
+            assigned = False
+
+            # First check explicit mappings
+            for node_type, label_list in type_to_label.items():
+                if label in label_list:
+                    if priority[node_type] > assigned_priority:
+                        assigned_type = node_type
+                        assigned_priority = priority[node_type]
+                    assigned = True
+                    break
+
+            # If not explicitly mapped, apply the rules
+            if not assigned:
+                if "NZ" in label:
+                    if priority["UNKNOWN_NZ_ARG"] > assigned_priority:
+                        assigned_type = "UNKNOWN_NZ_ARG"
+                        assigned_priority = priority["UNKNOWN_NZ_ARG"]
+                elif "Z" in label:
+                    if priority["UNKNOWN_Z_ARG"] > assigned_priority:
+                        assigned_type = "UNKNOWN_Z_ARG"
+                        assigned_priority = priority["UNKNOWN_Z_ARG"]
+                else:
+                    if priority["OTHER"] > assigned_priority:
+                        assigned_type = "OTHER"
+                        assigned_priority = priority["OTHER"]
+
+        # If no type was assigned, default to OTHER
+        if assigned_type is None:
+            assigned_type = "OTHER"
+
+        return assigned_type
+
+
+
+
+
     def _log_qualitative_error_analysis_table(self, queries_result_list: Dict[str, List[List[Tuple[float, str]]]],
                                               noisy_queries_result_list: Dict[str, List[List[Tuple[float, str]]]]) \
             -> None:
@@ -613,7 +674,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                         query.labels,
                         query.text,
                         len(query.labels),
-                        self._get_node_type(query),
+                        self.get_noisy_node_type(query),
                         top1_similarity,
                         top1_passage.label,
                         top1_passage.text,
@@ -1460,6 +1521,223 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         }
 
         return single_label_queries, single_label_queries_result_list, multi_label_queries, multi_label_queries_result_list
+
+    def _analyze_noisy_query_types(self):
+        """
+        Analyzes the distribution of noisy query types and creates a table of statistics.
+        This can be called during evaluation to understand the composition of noisy queries.
+        """
+        if not self.noisy_queries:
+            logger.info("No noisy queries available for analysis")
+            return
+
+        # Count query types
+        type_counts = {
+            "CONSENT": 0,
+            "DISSENT": 0,
+            "UNKNOWN_NZ_ARG": 0,
+            "UNKNOWN_Z_ARG": 0,
+            "OTHER": 0
+        }
+
+        # Group queries by type
+        queries_by_type = {
+            "CONSENT": [],
+            "DISSENT": [],
+            "UNKNOWN_NZ_ARG": [],
+            "UNKNOWN_Z_ARG": [],
+            "OTHER": []
+        }
+
+        # Analyze each query
+        for query in self.noisy_queries:
+            query_type = self.get_noisy_node_type(query)
+            type_counts[query_type] += 1
+            queries_by_type[query_type].append(query)
+
+        # Create analysis table
+        data = []
+        for qtype, count in type_counts.items():
+            percentage = (count / len(self.noisy_queries)) * 100 if self.noisy_queries else 0
+            # Get some example texts for each type (up to 3)
+            examples = [q.text[:100] + "..." if len(q.text) > 100 else q.text
+                        for q in queries_by_type[qtype][:3]]
+            examples_str = "\n".join(examples) if examples else "No examples"
+
+            data.append([
+                qtype,
+                count,
+                f"{percentage:.2f}%",
+                examples_str
+            ])
+
+        # Log to wandb
+        if self.run:
+            table = wandb.Table(columns=["Noisy Query Type", "Count", "Percentage", "Example Texts"], data=data)
+            self.run.log({f"{self.name}_noisy_query_type_distribution": table})
+
+        # Save to CSV
+        if self.save_tables_as_csv:
+            csv_dir = os.path.join(self.csv_output_dir, "noisy_query_analysis")
+            os.makedirs(csv_dir, exist_ok=True)
+            filepath = os.path.join(csv_dir, "noisy_query_type_distribution.csv")
+
+            with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow(["Noisy Query Type", "Count", "Percentage", "Example Texts"])
+                writer.writerows(data)
+
+            logger.info(f"Saved noisy query type distribution to {filepath}")
+
+        # Log summary to console
+        logger.info("Noisy Query Type Distribution:")
+        for qtype, count in type_counts.items():
+            percentage = (count / len(self.noisy_queries)) * 100 if self.noisy_queries else 0
+            logger.info(f"  {qtype}: {count} ({percentage:.2f}%)")
+
+        return type_counts
+
+    def _evaluate_noisy_query_performance_by_type(self, noisy_queries_result_list):
+        """
+        Evaluates performance metrics for each type of noisy query.
+
+        This function calculates:
+        1. Accuracy@k for each noisy query type
+        2. Precision@k for each noisy query type
+        3. False positive rates at different confidence thresholds
+        """
+        if not self.noisy_queries:
+            logger.info("No noisy queries available for type-specific performance analysis")
+            return
+
+        # Group noisy queries by type
+        queries_by_type = {
+            "CONSENT": [],
+            "DISSENT": [],
+            "UNKNOWN_NZ_ARG": [],
+            "UNKNOWN_Z_ARG": [],
+            "OTHER": []
+        }
+
+        query_indices_by_type = {
+            "CONSENT": [],
+            "DISSENT": [],
+            "UNKNOWN_NZ_ARG": [],
+            "UNKNOWN_Z_ARG": [],
+            "OTHER": []
+        }
+
+        for q_idx, query in enumerate(self.noisy_queries):
+            query_type = self.get_noisy_node_type(query)
+            queries_by_type[query_type].append(query)
+            query_indices_by_type[query_type].append(q_idx)
+
+        # For each score function
+        for score_func_name, per_query_hits in noisy_queries_result_list.items():
+            # Create filtered result lists for each type
+            type_result_lists = {}
+            for qtype, indices in query_indices_by_type.items():
+                if indices:  # Only process types that have queries
+                    type_result_lists[qtype] = [per_query_hits[idx] for idx in indices]
+
+            # Calculate accuracy@k for each type
+            accuracy_data = []
+            for qtype, type_queries in queries_by_type.items():
+                if not type_queries:
+                    continue
+
+                type_hits = type_result_lists[qtype]
+                num_queries = len(type_queries)
+
+                # For each k value, calculate how many noisy queries have confidence below threshold
+                # (for noisy queries, this is a "correct" prediction)
+                for k in self.accuracy_at_k:
+                    correct_below_threshold = 0
+
+                    for hits in type_hits:
+                        if len(hits) >= k:
+                            # For noisy queries, a "correct" prediction is when confidence is below threshold
+                            # (i.e., the model correctly realizes it shouldn't predict anything)
+                            if hits[0][0] < self.confidence_threshold:
+                                correct_below_threshold += 1
+
+                    accuracy = correct_below_threshold / num_queries if num_queries else 0
+                    accuracy_data.append([
+                        qtype,
+                        k,
+                        f"{accuracy:.4f}",
+                        num_queries
+                    ])
+
+            # Log accuracy table
+            if self.run:
+                table = wandb.Table(
+                    columns=["Noisy Query Type", "K", "Accuracy@K", "Number of Queries"],
+                    data=accuracy_data
+                )
+                self.run.log({f"{self.name}_{score_func_name}_noisy_type_accuracy": table})
+
+            # Save to CSV
+            if self.save_tables_as_csv:
+                csv_dir = os.path.join(self.csv_output_dir, "noisy_query_performance")
+                os.makedirs(csv_dir, exist_ok=True)
+                filepath = os.path.join(csv_dir, f"{score_func_name}_noisy_type_accuracy.csv")
+
+                with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerow(["Noisy Query Type", "K", "Accuracy@K", "Number of Queries"])
+                    writer.writerows(accuracy_data)
+
+                logger.info(f"Saved noisy query type accuracy to {filepath}")
+
+            # Calculate false positive rates at different confidence thresholds
+            confidences = self._generate_confidence_thresholds()
+            fp_data = []
+
+            for confidence in confidences:
+                for qtype, type_hits in type_result_lists.items():
+                    if not type_hits:
+                        continue
+
+                    num_queries = len(type_hits)
+                    false_positives = 0
+
+                    for hits in type_hits:
+                        # Count as false positive if any hit is above threshold
+                        if any(hit[0] >= confidence for hit in hits):
+                            false_positives += 1
+
+                    fp_rate = false_positives / num_queries if num_queries else 0
+                    fp_data.append([
+                        qtype,
+                        confidence,
+                        f"{fp_rate:.4f}",
+                        false_positives,
+                        num_queries
+                    ])
+
+            # Log false positive rate table
+            if self.run:
+                table = wandb.Table(
+                    columns=["Noisy Query Type", "Confidence Threshold", "False Positive Rate",
+                             "False Positives", "Number of Queries"],
+                    data=fp_data
+                )
+                self.run.log({f"{self.name}_{score_func_name}_noisy_type_fp_rates": table})
+
+            # Save to CSV
+            if self.save_tables_as_csv:
+                csv_dir = os.path.join(self.csv_output_dir, "noisy_query_performance")
+                os.makedirs(csv_dir, exist_ok=True)
+                filepath = os.path.join(csv_dir, f"{score_func_name}_noisy_type_fp_rates.csv")
+
+                with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerow(["Noisy Query Type", "Confidence Threshold", "False Positive Rate",
+                                     "False Positives", "Number of Queries"])
+                    writer.writerows(fp_data)
+
+                logger.info(f"Saved noisy query type false positive rates to {filepath}")
 
 
 if __name__ == "__main__":
