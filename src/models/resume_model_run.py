@@ -184,7 +184,7 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], test_d
             argument_graphs=arguments_graphs,
             confidence_threshold=0.7,
             confidence_threshold_steps=0.01,
-            name="After_run_deepdive",
+            name="Test_After_run_deepdive",
             save_tables_as_csv=True,
             csv_output_dir=run_path
 
