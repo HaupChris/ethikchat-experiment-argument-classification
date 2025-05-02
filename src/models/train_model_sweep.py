@@ -260,6 +260,7 @@ def prepare_datasets(
     excluding_ir_evaluator_eval = ExcludingInformationRetrievalEvaluator(
         corpus=eval_passages,
         queries=eval_queries,
+        accuracy_at_k=[1,3,5,7,10],
         relevant_docs=eval_relevant_passages,
         excluded_docs=eval_trivial_passages,
         show_progress_bar=True,
@@ -274,6 +275,7 @@ def prepare_datasets(
         queries=test_queries,
         relevant_docs=test_relevant_passages,
         excluded_docs=test_trivial_passages,
+        accuracy_at_k=[1, 3, 5, 7, 10],
         show_progress_bar=True,
         write_csv=True,
         log_top_k_predictions=10,
@@ -293,6 +295,8 @@ def prepare_datasets(
         argument_graphs=argument_graphs,
         confidence_threshold=0.7,
         confidence_threshold_steps=0.01,
+        accuracy_at_k=[1, 3, 5, 7, 10],
+        precision_at_k=[1,3,5,7,10],
         name="test_deepdive"
     )
 
@@ -384,7 +388,7 @@ def main(is_test_run=False):
     # evaluate twice per epoch.
     eval_save_steps = int((len(train_pos) / config.batch_size) / 2)
     early_stopper = EarlyStoppingWithLoggingCallback(
-        early_stopping_patience=4,  # you can change this value if needed
+        early_stopping_patience=7,  # you can change this value if needed
         early_stopping_threshold=0.001  # you can change this value if needed
     )
 
