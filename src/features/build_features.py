@@ -150,6 +150,30 @@ def filter_queries_for_few_shot_setting(split_dataset: DatasetDict, num_shots: i
          Other keys of the dataset are untouched and kept in the output dataset dict.
     """
 
+    def split_dataset_by_filter(dataset: Dataset, filter_fn) -> Tuple[Dataset, Dataset]:
+        """
+        Applies a filter function and returns two datasets:
+        - The filtered (kept) dataset
+        - The removed dataset
+        """
+        keep_indices = []
+        drop_indices = []
+
+        for idx, example in enumerate(dataset):
+            if filter_fn(example):
+                keep_indices.append(idx)
+            else:
+                drop_indices.append(idx)
+
+        kept = dataset.select(keep_indices)
+        removed = dataset.select(drop_indices)
+
+        return kept, removed
+
+    if num_shots < 0:
+        warnings.warn("Parameter 'num_shots' < 0. All queries are kept in the dataset.")
+        return split_dataset
+
     queries = [Query(
         id=entry["id"],
         text=entry["text"],
@@ -166,12 +190,27 @@ def filter_queries_for_few_shot_setting(split_dataset: DatasetDict, num_shots: i
 
     result_queries = defaultdict(list)
     for scenario, s_queries in scenario_queries.items():
-        result_queries[scenario] = approximate_n_cover(s_queries, num_shots)
+        n_cover_queries = approximate_n_cover(s_queries, num_shots)
+        if len(n_cover_queries) != len(s_queries):
+            print(len(n_cover_queries), len(s_queries))
+        result_queries[scenario] = n_cover_queries
 
     result = [query for _, s_queries in result_queries.items() for query in s_queries]
     result_query_ids = list(map(lambda q: q.id, result))
 
     split_dataset["queries"] = split_dataset["queries"].filter(lambda query: query["id"] in result_query_ids)
+
+    # UserUtterance = "user_utterance"
+    # ArgumentgraphSummary = "argumentgraph_summary"
+    # ArgumentgraphFullText = "argumentgraph_full_text"
+    # ArgumentgraphSample = "argumentgraph_sample"
+
+    # remove all passages from the dataset that originate from queries that have been removed.
+    split_dataset["passages"], removed = split_dataset_by_filter(split_dataset["passages"],
+                                                                 lambda entry: entry[
+                                                                                   "passage_source"] != PassageSource.UserUtterance.value or
+                                                                               entry[
+                                                                                   "retrieved_query_id"] in result_query_ids)
 
     split_dataset["queries_relevant_passages_mapping"] = split_dataset["queries_relevant_passages_mapping"].filter(
         lambda entry: entry["query_id"] in result_query_ids)
@@ -201,6 +240,10 @@ def filter_passages_for_few_shot_setting(
         Other keys of the dataset are untouched and kept in the output dataset dict.
 
     """
+
+    if num_shots < 0:
+        warnings.warn("Parameter 'num_shots' < 0. All passages are kept in the dataset.")
+        return split_dataset
 
     # Convert the dictionary entries into Passage objects
     if len(prefered_passage_sources) == 0:

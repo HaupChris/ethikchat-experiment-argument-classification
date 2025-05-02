@@ -560,6 +560,11 @@ def create_in_distribution_splits(corpus_dataset: DatasetDict,
     test_query_ids = [query.id for query in test_queries]
 
     ds_train = create_datasetdict_for_query_ids(corpus_dataset, train_query_ids)
+    # keep passages for train split that are experte crafted, generated or come from queries in the train set.
+    # passages that originate from queries of the test and validation set are excluded for training.
+    ds_train["passages"] = ds_train["passages"].filter(lambda entry: entry["passage_source"] != "user_utterance" or
+                                                       entry["retrieved_query_id"] in train_query_ids)
+
     ds_val = create_datasetdict_for_query_ids(corpus_dataset, validation_query_ids)
     ds_test = create_datasetdict_for_query_ids(corpus_dataset, test_query_ids)
 
