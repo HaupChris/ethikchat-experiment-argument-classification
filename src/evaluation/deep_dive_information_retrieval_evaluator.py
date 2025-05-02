@@ -69,7 +69,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
             corpus: Dict[str, any],  # cid => Passage object (must have .text, .discussion_scenario, .id)
             relevant_docs: Dict[str, Set[str]],  # qid => set of relevant doc IDs
             corpus_chunk_size: int = 50000,
-            accuracy_at_k: List[int] = [1, 3, 5],
+            accuracy_at_k: List[int] = [1, 3, 5, 7],
             show_progress_bar: bool = False,
             batch_size: int = 32,
             name: str = "",
@@ -89,7 +89,7 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
             confidence_threshold_steps: Optional[float] = None,
             log_embeddings: Optional[bool] = False,
             noisy_queries: Optional[Dict[str, any]] = None,
-            precision_at_k: Optional[List[int]] = None,
+            precision_at_k: Optional[List[int]] = [1,3,5,7],
             save_tables_as_csv=True,
             csv_output_dir=".",
             log_to_huggingface=False
