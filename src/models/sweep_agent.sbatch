@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=add_data        # 4 parallel tasks
+#SBATCH --job-name=id_aD        # 4 parallel tasks
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:1          # 1 GPU per task
