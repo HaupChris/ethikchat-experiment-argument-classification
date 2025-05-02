@@ -16,6 +16,7 @@ from transformers import PreTrainedTokenizer
 from transformers.integrations import WandbCallback
 
 from src.callbacks.custom_early_stopping_callback import EarlyStoppingWithLoggingCallback
+from src.callbacks.wandb_logging_callback import WandbLoggingCallback
 from src.data.dataset_splits import create_splits_from_corpus_dataset
 from src.data.create_corpus_dataset import DatasetSplitType, Passage, Query, load_response_template_collection
 from src.evaluation.deep_dive_information_retrieval_evaluator import DeepDiveInformationRetrievalEvaluator
@@ -263,7 +264,7 @@ def prepare_datasets(
         excluded_docs=eval_trivial_passages,
         show_progress_bar=True,
         write_csv=True,
-        log_top_k_predictions=5,
+        log_top_k_predictions=10,
         run=wandb.run,
         name="eval",
     )
@@ -275,7 +276,7 @@ def prepare_datasets(
         excluded_docs=test_trivial_passages,
         show_progress_bar=True,
         write_csv=True,
-        log_top_k_predictions=5,
+        log_top_k_predictions=10,
         run=wandb.run,
         name="test",
     )
@@ -383,7 +384,7 @@ def main(is_test_run=False):
     # evaluate twice per epoch.
     eval_save_steps = int((len(train_pos) / config.batch_size) / 2)
     early_stopper = EarlyStoppingWithLoggingCallback(
-        early_stopping_patience=3,  # you can change this value if needed
+        early_stopping_patience=4,  # you can change this value if needed
         early_stopping_threshold=0.001  # you can change this value if needed
     )
 
@@ -404,7 +405,7 @@ def main(is_test_run=False):
         load_best_model_at_end=True,
         lr_scheduler_type="linear",
         batch_sampler=BatchSamplers.NO_DUPLICATES,
-        metric_for_best_model="cosine_accuracy@1",
+        metric_for_best_model="eval_cosine_accuracy@1",
         log_level="info",
         logging_steps=10,
         report_to="wandb",
@@ -418,7 +419,7 @@ def main(is_test_run=False):
         eval_dataset=eval_pos,
         loss=loss,
         evaluator=excluding_ir_evaluator_eval,
-        callbacks=[early_stopper, WandbCallback()]
+        callbacks=[early_stopper, WandbCallback(), WandbLoggingCallback()]
     )
 
     # 13) Train
@@ -454,11 +455,11 @@ if __name__ == "__main__":
             "batch_size": 2,
             "num_epochs": 10,
             "warmup_ratio": 0.1,
-            "context_length": 3,
+            "context_length": 2,
             "add_discussion_scenario_info": True,
             "test_scenario": DiscussionSzenario.JURAI.value,
             "num_shots_queries": -1,
-            "num_shots_passages": 21,
+            "num_shots_passages": 23,
         }
 
         # 	add_discussion_scenario_info: True

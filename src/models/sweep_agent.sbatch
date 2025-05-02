@@ -19,7 +19,7 @@ source /home/ls6/hauptmann/ethikchat-experiment-argument-classification/venv/bin
 # wandb sweep sweep_config.yaml
 # which prints e.g. "Run wandb agent <USERNAME>/<PROJECT>/<SWEEP_ID>"
 
-SWEEP_ID="christian-hauptmann-uniwue/argument-classification/e3xgfhuq"  # Replace with your actual sweep ID
+SWEEP_ID="christian-hauptmann-uniwue/argument-classification/w1t1loc4"  # Replace with your actual sweep ID
 
 echo "Starting W&B agent on task $SLURM_ARRAY_TASK_ID..."
 wandb agent $SWEEP_ID
