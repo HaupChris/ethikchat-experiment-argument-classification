@@ -14,7 +14,7 @@ import torch
 from ethikchat_argtoolkit.ArgumentGraph.response_template import ResponseTemplate, TemplateCategory
 from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
 from ethikchat_argtoolkit.ArgumentGraph.stance import Stance
-from src.data.create_corpus_dataset import Passage, Query
+from src.data.classes import Passage, Query
 from torch import Tensor
 from tqdm import trange
 
