@@ -351,7 +351,8 @@ def preprocess_dataset(dialogues: List[Dialogue],
     return processed_utterances, excluded_noisy_utterances
 
 
-def create_queries(processed_utterances: List[ProcessedUtterance], excluded_labels: Set[str]) -> List[Query]:
+def create_queries(processed_utterances: List[ProcessedUtterance], excluded_labels: Set[str]) \
+        -> Tuple[List[Query], List[int]]:
     """
     Creates the queries from processed_utterances. Ensures that there are no duplicate queries (
     """
@@ -371,13 +372,15 @@ def create_queries(processed_utterances: List[ProcessedUtterance], excluded_labe
                              ))
     # check for duplicates
     unique_queries = []
+    duplicate_query_ids = []
     for query in queries:
         if query in unique_queries:
             warnings.warn(f"Duplicate query found: {query.id} {query.text}. Will not be added to the dataset.")
+            duplicate_query_ids.append(query.id)
         else:
             unique_queries.append(query)
 
-    return unique_queries
+    return unique_queries, duplicate_query_ids
 
 
 def create_noisy_queries(noisy_processed_utterances: List[NoisyProcessedUtterance]) -> List[NoisyQuery]:
@@ -385,7 +388,7 @@ def create_noisy_queries(noisy_processed_utterances: List[NoisyProcessedUtteranc
     Creates the noisy queries from noisy processed_utterances. Ensures that there are no duplicates
 
     """
-    queries = create_queries(noisy_processed_utterances, [])
+    queries, _ = create_queries(noisy_processed_utterances, [])
     noisy_queries = [
         NoisyQuery(
             reason=npu.reason,
@@ -513,13 +516,14 @@ def create_dataset_splits(dialogues: List[Dialogue],
             create_passages_from_argument_graph(argument_graph, discussion_scenario, noisy_labels))
 
     # im queries split hat jede query_id die reihenfolge der processed_utterances.
-    queries = create_queries(processed_utterances, noisy_labels)
+    queries, duplicate_queries_ids = create_queries(processed_utterances, noisy_labels)
     noisy_queries = create_noisy_queries(noisy_processed_utterances)
 
     # merge passages and assign ids
     passages = [Passage(idx, passage.text, passage.label, passage.discussion_scenario, passage.passage_source,
                         passage.retrieved_query_id) for idx, passage in
-                enumerate(utterances_passages + argument_graphs_passages)]
+                enumerate(utterances_passages + argument_graphs_passages)
+                if passage.retrieved_query_id not in duplicate_queries_ids]
 
     queries_relevant_passages_mapping = create_queries_relevant_passages_mapping_split(queries, passages)
     queries_trivial_passages_mapping = create_queries_trivial_passages_mapping_split(queries, passages)
