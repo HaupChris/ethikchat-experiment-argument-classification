@@ -1,9 +1,6 @@
-import random
 from collections import defaultdict
 from typing import List, Dict
 
-from datasets import DatasetDict
-from ethikchat_argtoolkit.Dialogue.discussion_szenario import DiscussionSzenario
 from matplotlib import pyplot as plt
 
 from src.data.classes import Query, DatasetSplitType
@@ -169,8 +166,8 @@ def visualize_n_cover_distribution(full_query_set: List[Query],
 
 
 if __name__ == "__main__":
-    from datasets import load_from_disk, DatasetDict
-    from src.data.dataset_splits import create_splits_from_corpus_dataset
+    from datasets import load_from_disk
+    from src.data.dataset_splitting.dataset_splits import create_splits_from_corpus_dataset
 
     dataset_folder = "../../data/processed/with_context"
     corpus_ds = load_from_disk(f"{dataset_folder}/corpus_dataset_v2")

@@ -17,7 +17,7 @@ from transformers.integrations import WandbCallback
 
 from src.callbacks.custom_early_stopping_callback import EarlyStoppingWithLoggingCallback
 from src.callbacks.wandb_logging_callback import WandbLoggingCallback
-from src.data.dataset_splits import create_splits_from_corpus_dataset
+from src.data.dataset_splitting.dataset_splits import create_splits_from_corpus_dataset
 from src.data.create_corpus_dataset import load_response_template_collection
 from src.data.classes import Passage, Query, DatasetSplitType
 from src.evaluation.deep_dive_information_retrieval_evaluator import DeepDiveInformationRetrievalEvaluator

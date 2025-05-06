@@ -86,6 +86,10 @@ class Query:
         context (List[Tuple[str, str]] = field(default_factory=list))
         scenario_description (str = "")
         scenario_question (str = "")
+        user_stance (str = "")
+        context_labels (List[List[str]] = field(default_factory=list))
+        original_dialogue_id ( str = "")
+
     """
     id: int
     text: str

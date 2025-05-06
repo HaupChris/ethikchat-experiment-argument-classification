@@ -3,12 +3,10 @@ import os
 import sys
 # from collections import Counter
 from datetime import datetime
-from typing import Dict
 
 import wandb
 from datasets import load_from_disk
 from dotenv import load_dotenv
-from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
 from sentence_transformers import (
     SentenceTransformer,
     SentenceTransformerTrainingArguments, SentenceTransformerTrainer
@@ -16,8 +14,8 @@ from sentence_transformers import (
 from sentence_transformers.losses import CachedMultipleNegativesRankingLoss
 from sentence_transformers.training_args import BatchSamplers
 
-from src.data.classes import PassageSource, Passage, Query, DatasetSplitType
-from src.data.dataset_splits import create_splits_from_corpus_dataset
+from src.data.classes import Passage, Query, DatasetSplitType
+from src.data.dataset_splitting.dataset_splits import create_splits_from_corpus_dataset
 from src.evaluation.excluding_information_retrieval_evaluator import ExcludingInformationRetrievalEvaluator
 from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss
 from src.models.experiment_config import ExperimentConfig
