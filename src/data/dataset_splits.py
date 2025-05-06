@@ -11,8 +11,8 @@ from datasets import DatasetDict, Dataset, load_from_disk
 from ethikchat_argtoolkit.Dialogue.discussion_szenario import DiscussionSzenario
 from sklearn.model_selection import train_test_split
 
-from src.data.create_corpus_dataset import DatasetSplitType, create_dataset, DatasetConfig, UtteranceType, Query, \
-    Passage
+from src.data.create_corpus_dataset import create_dataset
+from src.data.classes import UtteranceType, DatasetConfig, Passage, Query, DatasetSplitType
 
 
 # --- Helper Functions ---
@@ -578,7 +578,7 @@ def create_in_distribution_splits(corpus_dataset: DatasetDict,
 if __name__ == "__main__":
 
     dataset_folder = "../../data/processed/with_context"
-    dataset_path = os.path.join(dataset_folder, "corpus_dataset_v2")
+    dataset_path = os.path.join(dataset_folder, "corpus_dataset_v3")
 
     if not os.path.exists(dataset_path):
         # Beispiel zum Erstellen eines Datensatzes. Mögliche Optionen von DatasetConfig sind im DocString beschrieben.
@@ -594,18 +594,18 @@ if __name__ == "__main__":
 
     # Beispiel zum Laden des Datensatzes + collate_function des DataLoaders um dynamisch ein Subset der negative passages zu laden.
     loaded_dataset = load_from_disk(dataset_path)
-    # dataset_name = "dataset_split_in_distribution"
-    # save_path = os.path.join(dataset_folder, dataset_name)
-    # in_distribution_split = create_splits_from_corpus_dataset(corpus_dataset=loaded_dataset,
-    #                                                           dataset_split_type=DatasetSplitType.InDistribution,
-    #                                                           save_folder=dataset_folder,
-    #                                                           dataset_save_name=dataset_name)
+    dataset_name = "dataset_split_in_distribution_from_v3"
+    save_path = os.path.join(dataset_folder, dataset_name)
+    in_distribution_split = create_splits_from_corpus_dataset(corpus_dataset=loaded_dataset,
+                                                              dataset_split_type=DatasetSplitType.InDistribution,
+                                                              save_folder=dataset_folder,
+                                                              dataset_save_name=dataset_name)
 
-    # in_distribution_split_2 = create_splits_from_corpus_dataset(corpus_dataset=loaded_dataset,
-    #                                                             dataset_split_type=DatasetSplitType.InDistribution,
-    #                                                             save_folder=dataset_path,
-    #                                                             dataset_save_name=dataset_name)
-
+    in_distribution_split_2 = create_splits_from_corpus_dataset(corpus_dataset=loaded_dataset,
+                                                                dataset_split_type=DatasetSplitType.InDistribution,
+                                                                save_folder=dataset_path,
+                                                                dataset_save_name="dataset_split_in_distribution")
+    print()
     # Create an Out-of-Distribution (Simple) split
     # ood_splits = create_splits_from_corpus_dataset(
     #     loaded_dataset,
@@ -621,12 +621,12 @@ if __name__ == "__main__":
     #
     # print("Done.")
 
-    test_scenario = DiscussionSzenario.MEDAI
-    split_by_scenario = create_splits_from_corpus_dataset(loaded_dataset,
-                                                          DatasetSplitType.OutOfDistributionSimple,
-                                                          save_folder=dataset_folder,
-                                                          dataset_save_name=f"dataset_out_of_distribution_label",
-                                                          test_scenario=test_scenario)
+    # test_scenario = DiscussionSzenario.MEDAI
+    # split_by_scenario = create_splits_from_corpus_dataset(loaded_dataset,
+    #                                                       DatasetSplitType.OutOfDistributionSimple,
+    #                                                       save_folder=dataset_folder,
+    #                                                       dataset_save_name=f"dataset_out_of_distribution_label",
+    #                                                       test_scenario=test_scenario)
 
     # create_out_of_distribution_label_split(loaded_dataset, 0.15, 0.7, 42)
     # kfold_split = create_splits_from_corpus_dataset(hf_dataset, DatasetSplitType.kFold, None, 5)

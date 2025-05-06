@@ -16,7 +16,7 @@ from sentence_transformers import (
 from sentence_transformers.losses import CachedMultipleNegativesRankingLoss
 from sentence_transformers.training_args import BatchSamplers
 
-from src.data.create_corpus_dataset import DatasetSplitType, Query, Passage, PassageSource
+from src.data.classes import PassageSource, Passage, Query, DatasetSplitType
 from src.data.dataset_splits import create_splits_from_corpus_dataset
 from src.evaluation.excluding_information_retrieval_evaluator import ExcludingInformationRetrievalEvaluator
 from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss

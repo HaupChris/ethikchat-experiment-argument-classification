@@ -18,7 +18,8 @@ from transformers.integrations import WandbCallback
 from src.callbacks.custom_early_stopping_callback import EarlyStoppingWithLoggingCallback
 from src.callbacks.wandb_logging_callback import WandbLoggingCallback
 from src.data.dataset_splits import create_splits_from_corpus_dataset
-from src.data.create_corpus_dataset import DatasetSplitType, Passage, Query, load_response_template_collection
+from src.data.create_corpus_dataset import load_response_template_collection
+from src.data.classes import Passage, Query, DatasetSplitType
 from src.evaluation.deep_dive_information_retrieval_evaluator import DeepDiveInformationRetrievalEvaluator
 from src.evaluation.excluding_information_retrieval_evaluator import ExcludingInformationRetrievalEvaluator
 from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss, add_context_to_texts, \

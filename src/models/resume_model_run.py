@@ -2,7 +2,7 @@ from datasets import load_from_disk, DatasetDict
 from sentence_transformers import SentenceTransformer
 from transformers import PreTrainedTokenizer
 
-from src.data.create_corpus_dataset import Passage, Query
+from src.data.classes import Passage, Query
 from src.evaluation.deep_dive_information_retrieval_evaluator import DeepDiveInformationRetrievalEvaluator
 from src.features.build_features import add_context_to_texts, add_scenario_tokens_to_texts
 from train_model_sweep import load_argument_graphs, check_dataset_texts_for_truncation

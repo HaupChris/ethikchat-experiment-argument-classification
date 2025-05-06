@@ -3,7 +3,7 @@ from typing import Union
 from ethikchat_argtoolkit.Dialogue.discussion_szenario import DiscussionSzenario
 from pydantic import BaseModel
 
-from src.data.create_corpus_dataset import DatasetSplitType
+from src.data.classes import DatasetSplitType
 
 
 class ExperimentConfig(BaseModel):

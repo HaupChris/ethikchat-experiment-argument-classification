@@ -5,7 +5,7 @@ from typing import Optional, List, Dict, Tuple
 from datasets import Dataset, DatasetDict, load_from_disk
 from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
 
-from src.data.create_corpus_dataset import DatasetSplitType, Passage, PassageSource, Query
+from src.data.classes import PassageSource, Passage, Query, DatasetSplitType
 from src.data.dataset_splits import create_splits_from_corpus_dataset
 from src.features.find_n_cover import approximate_n_cover
 
