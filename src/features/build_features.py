@@ -133,7 +133,7 @@ def add_context_to_texts(split_dataset: DatasetDict, context_length: int, sep_to
     return split_dataset
 
 
-def filter_queries_for_few_shot_setting(split_dataset: DatasetDict, num_shots: int) -> DatasetDict:
+def filter_queries_for_few_shot_setting(split_dataset: DatasetDict, num_shots: int, debug=False) -> DatasetDict:
     """
     Filters the queries in the dataset so that each label has about 'num_shots' queries.
     Due to the possibility of multiple labels for a query, it can happen that num_shots
@@ -211,6 +211,12 @@ def filter_queries_for_few_shot_setting(split_dataset: DatasetDict, num_shots: i
                                                                                    "passage_source"] != PassageSource.UserUtterance.value or
                                                                                entry[
                                                                                    "retrieved_query_id"] in result_query_ids)
+
+    if debug:
+        print("The folllowing passages where removed:")
+        for passage in removed:
+            print(passage)
+
 
     split_dataset["queries_relevant_passages_mapping"] = split_dataset["queries_relevant_passages_mapping"].filter(
         lambda entry: entry["query_id"] in result_query_ids)
