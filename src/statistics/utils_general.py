@@ -1,10 +1,11 @@
+from typing import Optional, Dict
+
 import matplotlib.pyplot as plt
 import pandas as pd
-import numpy as np
 from matplotlib.ticker import ScalarFormatter
 
 
-def create_combined_rank_frequency_plot(datasets_dict,
+def create_combined_rank_frequency_plot(number_of_queries_per_split_label_df: pd.DataFrame,
                                         figsize=(10, 6),
                                         colors=None,
                                         markers=None,
@@ -17,7 +18,8 @@ def create_combined_rank_frequency_plot(datasets_dict,
                                         log_y=False,
                                         y_min=None,
                                         y_max=None,
-                                        linthresh=1):
+                                        linthresh=1,
+                                        rename_splits: Optional[Dict] = None):
     """
     Create a rank-frequency plot for multiple datasets combined in one chart.
 
@@ -56,11 +58,9 @@ def create_combined_rank_frequency_plot(datasets_dict,
     if markers is None:
         markers = ['o', 's', 'D', '^', 'v', '>', '<', 'p', '*', 'h']
 
-    for i, (dataset_name, label_counts) in enumerate(datasets_dict.items()):
-        df = pd.DataFrame({
-            'label': list(label_counts.keys()),
-            'count': list(label_counts.values())
-        })
+    split_names = list(number_of_queries_per_split_label_df.columns)
+    for i, split in enumerate(split_names):
+        df = number_of_queries_per_split_label_df[[split]].rename(columns={split: "count"})
 
         df = df.sort_values('count', ascending=False).reset_index(drop=True)
         df['rank'] = df.index + 1
@@ -69,18 +69,23 @@ def create_combined_rank_frequency_plot(datasets_dict,
         # Handle log/symlog transformations
         if log_y == 'log':
             df = df[df['count'] > 0]  # Cannot plot zero on log scale
-        elif log_y == 'symlog':
-            df['count'] = df['count'].fillna(0)  # Symlog allows 0
+        # elif log_y == 'symlog':
+        #     pass
+        #     # df['count'] = df['count'].fillna(0)  # Symlog allows 0
 
         color = colors[i % len(colors)]
         marker = markers[i % len(markers)]
 
+        if rename_splits:
+            label = rename_splits[split]
+        else:
+            label = split
         ax.scatter(df['rank'], df['count'],
                    color=color,
                    marker=marker,
                    s=50,
                    alpha=0.7,
-                   label=dataset_name,
+                   label=label,
                    zorder=3)
 
         if include_line:
@@ -119,3 +124,5 @@ def create_combined_rank_frequency_plot(datasets_dict,
 
     plt.tight_layout()
     return fig, ax
+
+
