@@ -93,7 +93,7 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], test_d
     env_path = os.path.join(project_root, ".env")
     load_dotenv(env_path)
 
-    for run_id, run_name in runs:
+    for run_id in runs:
         # Resume previous W&B run
         run = wandb.init(project="argument-classification", id=run_id, resume="must")
 
@@ -103,7 +103,7 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], test_d
 
         print(f"W&B continuing run: {run.name}")
         print(f"Project Root: {project_root}")
-        print(f"Using model: {run_name}")
+        print(f"Using model: {run.name}")
         print(f"Test Dataset: {test_dataset_path}")
         print(f"Corpus Dataset: {corpus_dataset_path}")
         print(f"run_name: {run.name}")
@@ -114,7 +114,7 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], test_d
         wandb.login()
 
         # Construct path to model and ensure it exists
-        run_path = os.path.join(models_dir, run_name)
+        run_path = os.path.join(models_dir, run.name)
 
         if not os.path.exists(run_path):
             raise FileNotFoundError(f"Directory not found: {run_path}")
@@ -200,8 +200,6 @@ if __name__ == "__main__":
     parser.add_argument('--models_dir', type=str,
                         help="Directory containing all saved models (assuming they are all in one place).")
     parser.add_argument('--run_ids', type=str, nargs="+", help='List of W&B run ids.')
-    parser.add_argument('--run_names', type=str, nargs="+",
-                        help='List of directory names of models on the slurm server')
     parser.add_argument('--test_dataset_path', type=str, help='Directory of the dataset used for testing.')
     parser.add_argument('--corpus_dataset_path', type=str, help='Directory of the corpus dataset used for testing.')
     args = parser.parse_args()
@@ -209,7 +207,7 @@ if __name__ == "__main__":
     main(
         project_root=args.project_root,
         models_dir=args.models_dir,
-        runs=list(zip(args.run_ids, args.run_names)),
+        runs=list(args.run_ids),
         test_dataset_path=args.test_dataset_path,
         corpus_dataset_path=args.corpus_dataset_path
     )

@@ -16,7 +16,6 @@ models_dir="${project_root}/experiments_outputs/${sweep_id}"
 test_dataset_path="${project_root}/data/processed/with_context/dataset_split_in_distribution_from_v3/test"
 corpus_dataset_path="${project_root}/data/processed/with_context/corpus_dataset_v3"
 
-# Lists of length 20
 run_ids=(
 "dixffits"
 "494m8hcc"
@@ -27,21 +26,6 @@ run_ids=(
 "ly0so9wf"
 "rrq5oask"
 )
-run_names=(
-"autumn-sweep-64/"
-"fiery-sweep-133/"
-"iconic-sweep-129/"
-"honest-sweep-51/"
-"bright-sweep-55/"
-"crisp-sweep-53/"
-"good-sweep-141/"
-"misunderstood-sweep-56/"
-)
-
-# pick out this task’s index
-idx=$SLURM_ARRAY_TASK_ID
-run_id=${run_ids[$idx]}
-run_name=${run_names[$idx]}
 
 
 # Export project_root to PYTHONPATH for the Python script
@@ -51,5 +35,5 @@ export PYTHONPATH="${project_root}:${PYTHONPATH}"
 source "${project_root}/venv/bin/activate"
 
 # Run the python script
-python resume_model_run.py --run_ids "${run_ids[@]}" --run_names "${run_names[@]}" --project_root $project_root --models_dir $models_dir --test_dataset_path $test_dataset_path --corpus_dataset_path $corpus_dataset_path
+python resume_model_run.py --run_ids "${run_ids[@]}" --project_root $project_root --models_dir $models_dir --test_dataset_path $test_dataset_path --corpus_dataset_path $corpus_dataset_path
 
