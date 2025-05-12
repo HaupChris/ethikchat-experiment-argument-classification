@@ -8,7 +8,8 @@
 #SBATCH --output=resume_run_%A_%a.out
 #SBATCH --error=resume_run_%A_%a.err
 # here: one task per run; with 20 runs this becomes 0-19
-#SBATCH --array=0-19
+#SBATCH --array=0-10
+#SBATCH --exclude=gpu8a
 
 # Define project, model directory and dataset paths
 sweep_id="6te7vzul"
@@ -19,50 +20,30 @@ corpus_dataset_path="${project_root}/data/processed/with_context/corpus_dataset_
 
 # Lists of length 20
 run_ids=(
-"nq1xf4g7"
+"dixffits"
+"jtqy48u0"
+"494m8hcc"
+"9izanmce"
+"68xtlm4l"
+"9ry9pir3"
+"kfaeabcz"
+"4lc0lrg8"
+"u6zhl1pb"
 "ly0so9wf"
 "rrq5oask"
-"3sn1ynic"
-"jefhym4d"
-"f2g9karn"
-"f99yk1ld"
-"jtqy48u0"
-"zvtxkghe"
-"494m8hcc"
-"o11zgn5e"
-"dixffits"
-"u6zhl1pb"
-"4lc0lrg8"
-"9izanmce"
-"9ry9pir3"
-"68xtlm4l"
-"ac6jg8nt"
-"kfaeabcz"
-"72oloxb7"
-"zyouwaia"
 )
 run_names=(
-"lilac-sweep-65/"
+"autumn-sweep-64/"
+"zany-sweep-49/"
+"fiery-sweep-133/"
+"iconic-sweep-129/"
+"colorful-sweep-140/"
+"honest-sweep-51/"
+"bright-sweep-55/"
+"crisp-sweep-53/"
+"fluent-sweep-136/"
 "good-sweep-141/"
 "misunderstood-sweep-56/"
-"eager-sweep-52/"
-"major-sweep-60/"
-"whole-sweep-57/"
-"eternal-sweep-132/"
-"zany-sweep-49/"
-"feasible-sweep-137/"
-"fiery-sweep-133/"
-"royal-sweep-61/"
-"autumn-sweep-64/"
-"fluent-sweep-136/"
-"crisp-sweep-53/"
-"iconic-sweep-129/"
-"honest-sweep-51/"
-"colorful-sweep-140/"
-"atomic-sweep-50/"
-"bright-sweep-55/"
-"spring-sweep-54/"
-"pious-sweep-125/"
 )
 
 # pick out this task’s index
