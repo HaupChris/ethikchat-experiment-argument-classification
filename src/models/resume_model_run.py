@@ -29,17 +29,6 @@ def prepare_datasets(
     and optionally uses smaller data for local testing if `is_test_run=True`.
     Returns all training data, evaluation data, and the evaluators.
     """
-    # Load the dataset from disk
-
-    # Create or load the splits
-    # split_dataset_folder = os.path.join(exp_config.project_root, exp_config.dataset_dir)
-    # splitted_dataset = create_splits_from_corpus_dataset(
-    #     corpus_dataset=corpus_dataset,
-    #     dataset_split_type=exp_config.dataset_split_type,
-    #     test_scenario=exp_config.test_scenario,
-    #     save_folder=split_dataset_folder,
-    #     dataset_save_name=exp_config.split_dataset_name
-    # )
 
     tokenizer_sep_token = getattr(tokenizer, "sep_token", None)
 
@@ -144,7 +133,7 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], test_d
                 # running script locally, not on cluster
                 best_model_checkpoint_path = os.path.join(run_path, trainer_state["best_model_checkpoint"].split("/")[-1])
 
-
+        print(f"Loading checkpoint: {best_model_checkpoint_path}")
         model = SentenceTransformer(best_model_checkpoint_path)
 
         # Ensure that the passed dataset path exists
@@ -187,7 +176,6 @@ def main(project_root: str, models_dir: str, runs: List[Tuple[str, str]], test_d
             name="Test_After_run_deepdive",
             save_tables_as_csv=True,
             csv_output_dir=run_path
-
         )
 
         deep_dive_evaluator_test(model)
@@ -226,15 +214,15 @@ if __name__ == "__main__":
         corpus_dataset_path=args.corpus_dataset_path
     )
 
-    #     test
+        # test
     # project_root="/home/christian/PycharmProjects/ethikchat-experiment-argument-classification"
-    # sweep_id="e3xgfhuq"
+    # sweep_id="6te7vzul"
     #
-    # runs = [("ru8lyf3q", "exalted-sweep-13/")]
+    # runs = [("nq1xf4g7", "lilac-sweep-65/")]
     # main(
     #     project_root=project_root,
     #     models_dir=f"{project_root}/experiments_outputs/{sweep_id}",
     #     runs=runs,
-    #     test_dataset_path=f"{project_root}/data/processed/with_context/dataset_split_in_distribution/test",
-    #     corpus_dataset_path=f"{project_root}/data/processed/with_context/corpus_dataset_v2"
+    #     test_dataset_path=f"{project_root}/data/processed/with_context/dataset_split_in_distribution_from_v3/test",
+    #     corpus_dataset_path=f"{project_root}/data/processed/with_context/corpus_dataset_v3"
     # )
