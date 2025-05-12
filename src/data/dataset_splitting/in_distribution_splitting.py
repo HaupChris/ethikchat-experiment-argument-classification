@@ -62,11 +62,11 @@ def _ids_from(dialogues: Dict[str, List[Query]], dlg_ids: Iterable[str]) -> List
 # ---------------------------------------------------------------------------
 
 def dialogue_level_in_distribution_split(
-    corpus_dataset: DatasetDict,
-    *,
-    train_ratio: float = 0.70,
-    val_ratio: float = 0.15,
-    seed: int = 42,
+        corpus_dataset: DatasetDict,
+        *,
+        train_ratio: float = 0.70,
+        val_ratio: float = 0.15,
+        seed: int = 42,
 ) -> DatasetDict:
     """Return HF DatasetDict with *scenario‑aware* in‑distribution guarantee."""
 
@@ -130,17 +130,44 @@ def dialogue_level_in_distribution_split(
 
     # --- build HF DatasetDict -------------------------------------------- #
     train_ids = _ids_from(dialogues, train_dlg)
-    val_ids   = _ids_from(dialogues, val_dlg)
-    test_ids  = _ids_from(dialogues, test_dlg)
+    val_ids = _ids_from(dialogues, val_dlg)
+    test_ids = _ids_from(dialogues, test_dlg)
 
     ds_train = create_datasetdict_for_query_ids(corpus_dataset, train_ids)
-    ds_val   = create_datasetdict_for_query_ids(corpus_dataset, val_ids)
-    ds_test  = create_datasetdict_for_query_ids(corpus_dataset, test_ids)
+    ds_val = create_datasetdict_for_query_ids(corpus_dataset, val_ids)
+    ds_test = create_datasetdict_for_query_ids(corpus_dataset, test_ids)
 
     # prune duplicated user‑utterance passages
     forbidden = set(val_ids) | set(test_ids)
     ds_train["passages"] = ds_train["passages"].filter(
-        lambda ex: ex["passage_source"] != "user_utterance" or ex["retrieved_query_id"] not in forbidden
+        lambda ex: ex["passage_source"] != "user_utterance" or ex["retrieved_query_id"] not in forbidden,
+        desc="Filtering out passages retrieved from test or validation queries"
     )
+    query_passage_counts = {item["query_id"]: len(item["passages_ids"]) for item in
+                            ds_train["queries_relevant_passages_mapping"]}
+
+    # If needed, get total count
+    total_passages = sum(query_passage_counts.values())
+    print(total_passages)
+
+    remaining_passage_ids = [entry["id"] for entry in ds_train["passages"]]
+
+    ds_train["queries_relevant_passages_mapping"] = ds_train["queries_relevant_passages_mapping"].map(
+        lambda entry: {
+            "query_id": entry["query_id"],
+            "passages_ids": [pid for pid in entry["passages_ids"] if pid in remaining_passage_ids]
+        }, desc="Removing passages from relevant mapping")
+    ds_train["queries_trivial_passages_mapping"] = ds_train["queries_trivial_passages_mapping"].map(
+        lambda entry: {
+            "query_id": entry["query_id"],
+            "passages_ids": [pid for pid in entry["passages_ids"] if pid in remaining_passage_ids]
+        }, desc="Removing passages from trivial mapping")
+
+    query_passage_counts = {item["query_id"]: len(item["passages_ids"]) for item in
+                            ds_train["queries_relevant_passages_mapping"]}
+
+    # If needed, get total count
+    total_passages = sum(query_passage_counts.values())
+    print(total_passages)
 
     return DatasetDict(train=ds_train, validation=ds_val, test=ds_test)

@@ -149,7 +149,7 @@ if __name__ == "__main__":
 
     # Beispiel zum Laden des Datensatzes + collate_function des DataLoaders um dynamisch ein Subset der negative passages zu laden.
     loaded_dataset = load_from_disk(dataset_path)
-    dataset_name = "dataset_split_in_distribution_from_v3"
+    dataset_name = "dataset_split_in_distribution_from_v4"
     save_path = os.path.join(dataset_folder, dataset_name)
     in_distribution_split = create_splits_from_corpus_dataset(corpus_dataset=loaded_dataset,
                                                               dataset_split_type=DatasetSplitType.InDistribution,
