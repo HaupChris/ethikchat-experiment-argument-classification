@@ -198,6 +198,9 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
         # 2) Log qualitative error analysis table
         self._log_qualitative_error_analysis_table(queries_result_list, noisy_queries_result_list)
 
+        if self.save_tables_as_csv:
+            self.save_passage_rankings_to_csv(queries_result_list, noisy_queries_result_list)
+
         # 3) Log accuracy@k tables - now returns overall metrics
         accuracy_metrics = self._compute_accuracies_at_k(queries_result_list)
 
@@ -1161,6 +1164,86 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 writer.writerow([k, v])
 
         logger.info(f"Saved overall metrics to {filepath}")
+
+    def save_passage_rankings_to_csv(self, queries_result_list, noisy_queries_result_list=None):
+        """
+        Saves complete passage rankings for each query to CSV files.
+
+        Parameters:
+        -----------
+        queries_result_list : Dict[str, List[List[Tuple[float, str]]]]
+            Results for normal queries, organized by scoring function
+        noisy_queries_result_list : Dict[str, List[List[Tuple[float, str]]]], optional
+            Results for noisy queries, organized by scoring function
+        """
+        # Create output directory
+        rankings_dir = os.path.join(self.csv_output_dir, "passage_rankings")
+        os.makedirs(rankings_dir, exist_ok=True)
+
+        # Process normal queries
+        for score_func_name, per_query_hits in queries_result_list.items():
+            # Create a new CSV file for this scoring function
+            filename = f"{score_func_name}_normal_query_rankings.csv"
+            filepath = os.path.join(rankings_dir, filename)
+
+            with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow(
+                    ['query_id', 'query_text', 'query_labels', 'query_discussion_scenario', 'passage_id', 'passage_text', 'passage_label', 'passage_discussion_scenario', 'rank',
+                     'similarity'])
+
+                for q_idx, hits in enumerate(per_query_hits):
+                    query = self.queries[q_idx]
+
+                    for rank, (similarity, passage_id) in enumerate(hits, start=1):
+                        passage = self.corpus_map[passage_id]
+                        writer.writerow([
+                            query.id,
+                            query.text,
+                            ','.join(query.labels),
+                            query.discussion_scenario,
+                            passage_id,
+                            passage.text[:100].replace('\n', ' '),  # Truncate and clean text for CSV
+                            passage.label,
+                            passage.discussion_scenario,
+                            rank,
+                            similarity
+                        ])
+
+            logger.info(f"Saved normal query rankings to {filepath}")
+
+        # Process noisy queries if available
+        if noisy_queries_result_list and self.noisy_queries:
+            for score_func_name, per_query_hits in noisy_queries_result_list.items():
+                # Create a new CSV file for this scoring function
+                filename = f"{score_func_name}_noisy_query_rankings.csv"
+                filepath = os.path.join(rankings_dir, filename)
+
+                with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
+                    writer = csv.writer(csvfile)
+                    writer.writerow(
+                        ['query_id', 'query_text', 'query_labels', 'query_type', 'passage_id', 'passage_text',
+                         'passage_label', 'rank', 'similarity'])
+
+                    for q_idx, hits in enumerate(per_query_hits):
+                        query = self.noisy_queries[q_idx]
+                        query_type = self.get_noisy_node_type(query)
+
+                        for rank, (similarity, passage_id) in enumerate(hits, start=1):
+                            passage = self.corpus_map[passage_id]
+                            writer.writerow([
+                                query.id,
+                                query.text,
+                                ','.join(query.labels),
+                                query_type,
+                                passage_id,
+                                passage.text,
+                                passage.label,
+                                rank,
+                                similarity
+                            ])
+
+                logger.info(f"Saved noisy query rankings to {filepath}")
 
     def _generate_confidence_thresholds(self) -> Iterable[float]:
         """Generate confidence thresholds based on step size"""
