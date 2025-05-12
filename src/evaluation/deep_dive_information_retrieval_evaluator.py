@@ -1189,25 +1189,14 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
             with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
                 writer = csv.writer(csvfile)
                 writer.writerow(
-                    ['query_id', 'query_text', 'query_labels', 'query_discussion_scenario', 'passage_id', 'passage_text', 'passage_label', 'passage_discussion_scenario', 'rank',
-                     'similarity'])
+                    ['query_id', 'passage_id', 'similarity', 'rank'])
 
                 for q_idx, hits in enumerate(per_query_hits):
                     query = self.queries[q_idx]
 
                     for rank, (similarity, passage_id) in enumerate(hits, start=1):
-                        passage = self.corpus_map[passage_id]
                         writer.writerow([
-                            query.id,
-                            query.text,
-                            ','.join(query.labels),
-                            query.discussion_scenario,
-                            passage_id,
-                            passage.text[:100].replace('\n', ' '),  # Truncate and clean text for CSV
-                            passage.label,
-                            passage.discussion_scenario,
-                            rank,
-                            similarity
+                            query.id, passage_id, similarity, rank
                         ])
 
             logger.info(f"Saved normal query rankings to {filepath}")
@@ -1222,24 +1211,16 @@ class DeepDiveInformationRetrievalEvaluator(SentenceEvaluator):
                 with open(filepath, 'w', newline='', encoding='utf-8') as csvfile:
                     writer = csv.writer(csvfile)
                     writer.writerow(
-                        ['query_id', 'query_text', 'query_labels', 'query_type', 'passage_id', 'passage_text',
-                         'passage_label', 'rank', 'similarity'])
+                        ['query_id', 'passage_id', 'rank', 'similarity'])
 
                     for q_idx, hits in enumerate(per_query_hits):
                         query = self.noisy_queries[q_idx]
-                        query_type = self.get_noisy_node_type(query)
 
                         for rank, (similarity, passage_id) in enumerate(hits, start=1):
-                            passage = self.corpus_map[passage_id]
                             writer.writerow([
                                 query.id,
-                                query.text,
-                                ','.join(query.labels),
-                                query_type,
                                 passage_id,
-                                passage.text,
-                                passage.label,
-                                rank,
+                                 rank,
                                 similarity
                             ])
 
