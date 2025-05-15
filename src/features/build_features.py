@@ -4,15 +4,19 @@ from collections import defaultdict
 from typing import Optional, List, Dict, Tuple
 from datasets import Dataset, DatasetDict, load_from_disk
 from ethikchat_argtoolkit.ArgumentGraph.response_template_collection import ResponseTemplateCollection
+from sympy import false
 
 from src.data.classes import PassageSource, Passage, Query, DatasetSplitType
 from src.data.dataset_splitting.dataset_splits import create_splits_from_corpus_dataset
 from src.features.find_n_cover import approximate_n_cover
 
 
+
+
 def create_dataset_for_multiple_negatives_ranking_loss(
         split_dataset: DatasetDict,
-        max_positives_per_query: Optional[int] = None
+        max_positives_per_query: Optional[int] = None,
+        include_labels: bool = false
 ) -> Dataset:
     """
     Given a split_dataset with:
@@ -34,34 +38,40 @@ def create_dataset_for_multiple_negatives_ranking_loss(
 
     # Build lookups
     query_id_to_query = {q["id"]: q for q in queries}
-    passage_id_to_text = {p["id"]: p["text"] for p in passages}
+    passage_id_to_passage = {p["id"]: p for p in passages}
 
     examples = []
     for row in mapping:
         q_id = row["query_id"]
+        query = query_id_to_query[q_id]
         relevant_pids = row["passages_ids"]
+        query_scenario = query["discussion_scenario"]
+        query_labels = [f"{query_scenario}_{label}" for label in query["labels"]]
         # optionally limit the positives to reduce dataset size
         if max_positives_per_query is not None:
             random.shuffle(relevant_pids)
             relevant_pids = relevant_pids[:max_positives_per_query]
 
         for pid in relevant_pids:
-            if pid not in passage_id_to_text:
+            if pid not in passage_id_to_passage:
                 continue
-
+            passage = passage_id_to_passage[pid]
+            passage_label = f"{passage['discussion_scenario']}_{passage['label']}"
             # add discussion scenario as prefix to scenario specific labels
-            labels = []
-            for label in query_id_to_query[q_id]["labels"]:
-                if label.startswith("Z") or label.startswith("NZ") or label.startswith("FAQ"):
-                    labels.append(f"{query_id_to_query[q_id]['discussion_scenario']}_{label}")
-                else:
-                    labels.append(label)
-
-            examples.append({
-                "query": query_id_to_query[q_id]["text"],
-                "positive": passage_id_to_text[pid],
-                # "labels": labels
-            })
+            if include_labels:
+                if isinstance(query_labels, list):
+                    query_labels = "|".join(query_labels)
+                examples.append({
+                    "query": query["text"],
+                    "positive": passage["text"],
+                    "query_label": query_labels,  # Add query labels
+                    "positive_label": passage_label  # Add positive passage label
+                })
+            else:
+                examples.append({
+                    "query": query["text"],
+                    "positive": passage["text"]
+                })
 
     return Dataset.from_list(examples)
 

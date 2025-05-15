@@ -56,4 +56,5 @@ class ExperimentConfig(BaseModel):
     test_scenario: DiscussionSzenario
     num_shots_passages: int
     num_shots_queries: int
+    exclude_same_label_negatives: bool
 

@@ -20,10 +20,13 @@ from src.callbacks.wandb_logging_callback import WandbLoggingCallback
 from src.data.dataset_splitting.dataset_splits import create_splits_from_corpus_dataset
 from src.data.create_corpus_dataset import load_response_template_collection
 from src.data.classes import Passage, Query, DatasetSplitType
+from src.data_collation.custom_sentence_transformer_data_collator import CustomSentenceTransformerDataCollator
 from src.evaluation.deep_dive_information_retrieval_evaluator import DeepDiveInformationRetrievalEvaluator
 from src.evaluation.excluding_information_retrieval_evaluator import ExcludingInformationRetrievalEvaluator
 from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss, add_context_to_texts, \
     add_scenario_tokens_to_texts, filter_queries_for_few_shot_setting, filter_passages_for_few_shot_setting
+from src.losses.MaskedCachedMultipleNegativesRankingLoss import MaskedCachedMultipleNegativesRankingLoss, \
+    MaskLoggingCallback
 from src.models.experiment_config import ExperimentConfig
 
 
@@ -91,6 +94,9 @@ def prepare_datasets(
     # Load the dataset from disk
     corpus_dataset_path = os.path.join(exp_config.project_root, exp_config.dataset_dir, exp_config.dataset_name)
     corpus_dataset = load_from_disk(corpus_dataset_path)
+    test_evaluator_name = "test_deepdive"
+    test_evaluator_csv_output_dir = os.path.join(exp_config.model_run_dir, test_evaluator_name)
+    os.makedirs(test_evaluator_csv_output_dir, exist_ok=True)
 
     # Create or load the splits
     split_dataset_folder = os.path.join(exp_config.project_root, exp_config.dataset_dir)
@@ -131,8 +137,10 @@ def prepare_datasets(
     check_dataset_texts_for_truncation(tokenizer, test_split, "test", maximum_sequence_length)
 
     if not is_test_run:
-        train_pos = create_dataset_for_multiple_negatives_ranking_loss(train_split)
-        eval_pos = create_dataset_for_multiple_negatives_ranking_loss(eval_split)
+        train_pos = create_dataset_for_multiple_negatives_ranking_loss(train_split,
+                                                                       include_labels=exp_config.exclude_same_label_negatives)
+        eval_pos = create_dataset_for_multiple_negatives_ranking_loss(eval_split,
+                                                                      include_labels=exp_config.exclude_same_label_negatives)
 
         # Build references for EVAL
         eval_passages = {
@@ -181,8 +189,10 @@ def prepare_datasets(
         }
 
     else:
-        train_pos = create_dataset_for_multiple_negatives_ranking_loss(train_split, 2)
-        eval_pos = create_dataset_for_multiple_negatives_ranking_loss(eval_split, 2)
+        train_pos = create_dataset_for_multiple_negatives_ranking_loss(train_split,
+                                                                       include_labels=exp_config.exclude_same_label_negatives)
+        eval_pos = create_dataset_for_multiple_negatives_ranking_loss(eval_split,
+                                                                      include_labels=exp_config.exclude_same_label_negatives)
         train_pos = train_pos.shuffle(seed=42).select(range(10))
         eval_pos = eval_pos.shuffle(seed=42).select(range(10))
 
@@ -261,7 +271,7 @@ def prepare_datasets(
     excluding_ir_evaluator_eval = ExcludingInformationRetrievalEvaluator(
         corpus=eval_passages,
         queries=eval_queries,
-        accuracy_at_k=[1,3,5,7,10],
+        accuracy_at_k=[1, 3, 5, 7, 10],
         relevant_docs=eval_relevant_passages,
         excluded_docs=eval_trivial_passages,
         show_progress_bar=True,
@@ -297,8 +307,10 @@ def prepare_datasets(
         confidence_threshold=0.7,
         confidence_threshold_steps=0.01,
         accuracy_at_k=[1, 3, 5, 7, 10],
-        precision_at_k=[1,3,5,7,10],
-        name="test_deepdive"
+        precision_at_k=[1, 3, 5, 7, 10],
+        save_tables_as_csv=True,
+        csv_output_dir=test_evaluator_csv_output_dir,
+        name=test_evaluator_name
     )
 
     return (
@@ -353,6 +365,7 @@ def main(is_test_run=False):
         "test_scenario": test_scenario,
         "num_shots_passages": config.num_shots_passages,
         "num_shots_queries": config.num_shots_queries,
+        "exclude_same_label_negatives": config.exclude_same_label_negatives
     }
     exp_config = ExperimentConfig(**exp_config_dict)
 
@@ -368,7 +381,13 @@ def main(is_test_run=False):
     model = SentenceTransformer(exp_config.model_name)
 
     # 6) Define the loss
-    loss = CachedMultipleNegativesRankingLoss(model=model, show_progress_bar=False, mini_batch_size=8)
+    if exp_config.exclude_same_label_negatives:
+        loss = MaskedCachedMultipleNegativesRankingLoss(model=model,
+                                                    show_progress_bar=True,
+                                                    mini_batch_size=8,
+                                                    exclude_same_label_negatives=exp_config.exclude_same_label_negatives)
+    else:
+        loss = CachedMultipleNegativesRankingLoss(model=model, show_progress_bar=True, mini_batch_size=8)
 
     # 7) Load argument graphs
     argument_graphs = load_argument_graphs(exp_config.project_root, is_test_run)
@@ -415,6 +434,17 @@ def main(is_test_run=False):
         logging_steps=10,
         report_to="wandb",
     )
+    callbacks = [early_stopper, WandbCallback(), WandbLoggingCallback()]
+    data_collator = None
+
+    if exp_config.exclude_same_label_negatives:
+        data_collator = CustomSentenceTransformerDataCollator(
+            tokenize_fn=model.tokenize,
+            handle_specialized_label_columns=exp_config.exclude_same_label_negatives
+        )
+        callbacks.append(MaskLoggingCallback(loss, wandb.run))
+
+
 
     # 12) Create a trainer
     trainer = SentenceTransformerTrainer(
@@ -424,7 +454,8 @@ def main(is_test_run=False):
         eval_dataset=eval_pos,
         loss=loss,
         evaluator=excluding_ir_evaluator_eval,
-        callbacks=[early_stopper, WandbCallback(), WandbLoggingCallback()]
+        callbacks=callbacks,
+        data_collator=data_collator
     )
 
     # 13) Train
@@ -452,9 +483,9 @@ if __name__ == "__main__":
             "experiment_dir": "experiments_outputs",
             "experiment_run": "v1_local_debug",
             "dataset_dir": "data/processed/with_context",
-            "dataset_name": "corpus_dataset_v2",
+            "dataset_name": "corpus_dataset_v3",
             "dataset_split_type": DatasetSplitType.InDistribution.value,
-            "dataset_split_name": "dataset_split_in_distribution",
+            "dataset_split_name": "dataset_split_in_distribution_from-v3",
             "model_name": "deutsche-telekom/gbert-large-paraphrase-euclidean",
             "learning_rate": 2e-5,
             "batch_size": 2,
@@ -465,6 +496,7 @@ if __name__ == "__main__":
             "test_scenario": DiscussionSzenario.JURAI.value,
             "num_shots_queries": -1,
             "num_shots_passages": 23,
+            "exclude_same_label_negatives": True
         }
 
         # 	add_discussion_scenario_info: True

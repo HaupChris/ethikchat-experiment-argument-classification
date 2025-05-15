@@ -1,7 +1,5 @@
 import os
 import pandas as pd
-import matplotlib.pyplot as plt
-
 from tqdm import tqdm
 from typing import List, Dict
 
@@ -31,6 +29,7 @@ def convert_hf_dataset_to_objects(dataset):
 
 def scenario_filter(query: Query, passages: List[Passage]) -> List[Passage]:
     """Filter passages to only include those from the same discussion scenario as the query."""
+
     return [p for p in passages if p.discussion_scenario == query.discussion_scenario]
 
 
@@ -43,7 +42,7 @@ def stance_filter(query: Query, passages: List[Passage],
     filtered_passages = []
     for passage in passages:
         template = response_template_collections[passage.discussion_scenario].get_template_for_label(passage.label)
-        if template and template.stance == user_stance:
+        if template and template.stance == user_stance or template.stance == Stance.OTHER:
             filtered_passages.append(passage)
 
     return filtered_passages
@@ -84,8 +83,8 @@ def counter_argument_filter(query: Query, passages: List[Passage],
     valid_labels = set()
 
     # Get first level argument labels
-    first_level_args = set(label for label in rtc.user_arguments_labels
-                           if not rtc.get_template_for_label(label).has_parent_labels)
+    first_level_args = rtc.primary_z_labels
+    valid_labels.update(first_level_args)
 
     # For each bot's last argument
     for label in bot_last_labels:
@@ -94,19 +93,16 @@ def counter_argument_filter(query: Query, passages: List[Passage],
             continue
 
         # Add all counter arguments (traversing down the argument tree)
-        counter_queue = list(template.child_templates)
-        while counter_queue:
-            counter = counter_queue.pop(0)
-            valid_labels.add(counter.label)
-            counter_queue.extend(counter.child_templates)
+        counters_and_descendents = set([desc.label for desc in template.descendant_templates])
+        valid_labels.update(counters_and_descendents)
 
         # Add counters to similar arguments
         for similar in template.similar_templates:
-            for counter in similar.child_templates:
-                valid_labels.add(counter.label)
+            for desc in similar.descendant_templates:
+                valid_labels.add(desc.label)
 
     # Combine with first-level arguments
-    valid_labels.update(first_level_args)
+
 
     # Return passages with labels in our valid set
     filtered_passages = [p for p in passages if p.label in valid_labels]
@@ -264,10 +260,117 @@ def evaluate_filter(filter_function, queries, passages, query_passage_mapping,
     return results
 
 
+def evaluate_filter_with_errors(filter_function, queries, passages, query_passage_mapping,
+                                response_template_collections, **filter_kwargs):
+    """
+    Extended version of evaluate_filter that captures specific examples for error analysis.
+
+    Returns:
+        Tuple containing:
+        1. Dict with overall metrics
+        2. List of successful examples (space reduced while retaining gold)
+        3. List of failure examples (gold labels lost during filtering)
+    """
+    # Original metrics
+    results = {
+        'total_queries': 0,
+        'queries_with_retained_gold': 0,
+        'avg_retained_passages': 0,
+        'avg_retained_gold_passages': 0,
+        'avg_reduction_percentage': 0,
+        'precision_improvement': 0
+    }
+
+    # Lists for error analysis
+    successful_examples = []
+    failure_examples = []
+
+    total_retained = 0
+    total_gold_retained = 0
+    total_reduction = 0
+    total_precision_improvement = 0
+
+    for query in tqdm(queries, desc="Evaluating filter"):
+        if query.id not in query_passage_mapping:
+            continue
+
+        gold_passage_ids = query_passage_mapping[query.id]
+        if not gold_passage_ids:
+            continue
+
+        # Get gold passages
+        gold_passages = [p for p in passages if p.id in gold_passage_ids]
+
+        # Apply filter
+        filtered_passages = filter_function(query, passages, response_template_collections, **filter_kwargs)
+
+        # Check how many gold passages are retained
+        filtered_passage_ids = [p.id for p in filtered_passages]
+        retained_gold_ids = [pid for pid in gold_passage_ids if pid in filtered_passage_ids]
+        retained_gold_passages = [p for p in passages if p.id in retained_gold_ids]
+
+        # Calculate stats
+        reduction_percentage = (1 - (len(filtered_passages) / len(passages))) * 100 if passages else 0
+        original_precision = len(gold_passage_ids) / len(passages) if passages else 0
+        filtered_precision = len(retained_gold_ids) / len(filtered_passages) if filtered_passages else 0
+        precision_improvement = filtered_precision - original_precision
+
+        # Update metrics
+        results['total_queries'] += 1
+        if retained_gold_ids:
+            results['queries_with_retained_gold'] += 1
+
+        total_retained += len(filtered_passages)
+        total_gold_retained += len(retained_gold_ids)
+        total_reduction += reduction_percentage
+        total_precision_improvement += precision_improvement
+
+        # Store example for error analysis
+        example = {
+            'query_id': query.id,
+            'user_stance': query.user_stance,
+            'query_text': query.text,
+            'labels': query.labels,
+            'discussion_scenario': query.discussion_scenario,
+            'context_labels': query.context_labels,
+            'gold_passage_ids': gold_passage_ids,
+            # 'gold_passages': [{'id': p.id, 'label': p.label, 'text': p.text} for p in gold_passages],
+            'filtered_passage_count': len(filtered_passages),
+            'original_passage_count': len(passages),
+            'reduction_percentage': reduction_percentage,
+            'retained_gold_count': len(retained_gold_ids),
+            'original_gold_count': len(gold_passage_ids),
+            'precision_improvement': precision_improvement,
+            'filtered_passages': [{'id': p.id, 'label': p.label, 'text': p.text} for p in filtered_passages[:10]]
+            # Limit to first 10 for readability
+        }
+
+        # Determine success or failure based on gold retention and space reduction
+        if len(retained_gold_ids) == len(gold_passage_ids) and reduction_percentage > 10:
+            successful_examples.append(example)
+        elif len(retained_gold_ids) < len(gold_passage_ids):
+            # Add missing gold passages
+            example['missing_gold'] = [
+                {'id': p.id, 'label': p.label, 'text': p.text}
+                for p in gold_passages if p.id not in retained_gold_ids
+            ]
+            failure_examples.append(example)
+
+    # Calculate averages
+    if results['total_queries'] > 0:
+        results['avg_retained_passages'] = total_retained / results['total_queries']
+        results['avg_retained_gold_passages'] = total_gold_retained / results['total_queries']
+        results['avg_reduction_percentage'] = total_reduction / results['total_queries']
+        results['recall'] = results['queries_with_retained_gold'] / results['total_queries']
+        results['precision_improvement'] = total_precision_improvement / results['total_queries']
+
+    return results, successful_examples, failure_examples
+
+
 def main():
     # Set paths directly instead of using command line arguments
     project_root = "/home/christian/PycharmProjects/ethikchat-experiment-argument-classification"
-    dataset_path = os.path.join(project_root, "data/processed/with_context/dataset_split_in_distribution_from_v3")  # Adjust this path
+    dataset_path = os.path.join(project_root, "data/processed/with_context/dataset_split_in_distribution_from_v4")  # Adjust this path
     print(f"Loading dataset from {dataset_path}")
     dataset = load_splits_from_disk(dataset_path)
     print("Dataset loaded")
@@ -289,6 +392,7 @@ def main():
         "stance_filter": lambda q, p, rtc, **kwargs: stance_filter(q, p, rtc),
         "history_filter": lambda q, p, rtc, **kwargs: history_filter(q, p),
         "group_filter": lambda q, p, rtc, **kwargs: group_filter(q, p, rtc),
+
         "counter_argument_filter": lambda q, p, rtc, **kwargs: counter_argument_filter(q, p, rtc),
         "combined_scenario_stance": lambda q, p, rtc, **kwargs: combined_filter(
             q, p, rtc, use_scenario=True, use_stance=True, use_group=False, use_counter=False, use_history=False),
@@ -302,66 +406,44 @@ def main():
             q, p, rtc, use_scenario=True, use_stance=True, use_group=True, use_counter=True, use_history=True),
     }
 
-    # Evaluate each filter
-    results = {}
+    # Evaluate each filter with error analysis
+    all_results = {}
     for filter_name, filter_func in filters.items():
         print(f"Evaluating {filter_name}...")
-        results[filter_name] = evaluate_filter(
+        results, successful_examples, failure_examples = evaluate_filter_with_errors(
             filter_func, queries, passages, query_passage_mapping, arg_graphs)
+
+        all_results[filter_name] = {
+            'metrics': results,
+            'successful_examples_count': len(successful_examples),
+            'failure_examples_count': len(failure_examples)
+        }
+
         print(f"Results for {filter_name}:")
-        for metric, value in results[filter_name].items():
+        for metric, value in results.items():
             print(f"  {metric}: {value}")
+        print(f"  Successful examples: {len(successful_examples)}")
+        print(f"  Failure examples: {len(failure_examples)}")
 
-    # Convert results to DataFrame for easier analysis
-    results_df = pd.DataFrame(results).T
+        # Save examples for detailed analysis
+        if successful_examples:
+            success_df = pd.DataFrame(successful_examples)
+            success_df.to_csv(os.path.join(output_dir, f"{filter_name}_successful_examples.csv"))
+
+
+        if failure_examples:
+            failures_df = pd.DataFrame(failure_examples)
+            failures_df.to_csv(os.path.join(output_dir, f"{filter_name}_failure_examples.csv"))
+
+
+    # Convert aggregate results to DataFrame as before
+    results_df = pd.DataFrame({k: v['metrics'] for k, v in all_results.items()}).T
+
+    # Add example counts to the DataFrame
+    results_df['successful_examples'] = [v['successful_examples_count'] for v in all_results.values()]
+    results_df['failure_examples'] = [v['failure_examples_count'] for v in all_results.values()]
+
     results_df.to_csv(os.path.join(output_dir, "filter_evaluation_results.csv"))
-
-    # Create visualizations
-    plt.figure(figsize=(12, 8))
-
-    # Plot recall vs reduction as a scatter plot
-    plt.scatter(
-        results_df['avg_reduction_percentage'],
-        results_df['recall'],
-        s=100,
-        alpha=0.7
-    )
-
-    # Add labels for each point
-    for idx, row in results_df.iterrows():
-        plt.annotate(
-            idx,
-            (row['avg_reduction_percentage'], row['recall']),
-            xytext=(5, 5),
-            textcoords='offset points'
-        )
-
-    plt.xlabel('Average Search Space Reduction (%)')
-    plt.ylabel('Recall (% of queries with retained gold passages)')
-    plt.title('Filter Performance: Recall vs Search Space Reduction')
-    plt.grid(True, linestyle='--', alpha=0.7)
-
-    # Save the visualization
-    plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "filter_performance.png"))
-
-    # Create separate bar charts for key metrics
-    metrics = ['recall', 'avg_reduction_percentage', 'precision_improvement']
-
-    fig, axes = plt.subplots(len(metrics), 1, figsize=(10, 15))
-
-    for i, metric in enumerate(metrics):
-        axes[i].bar(results_df.index, results_df[metric])
-        axes[i].set_title(f'{metric}')
-        axes[i].set_xticklabels(results_df.index, rotation=45, ha='right')
-        axes[i].grid(True, linestyle='--', alpha=0.7)
-
-    plt.tight_layout()
-    plt.savefig(os.path.join(output_dir, "filter_metrics.png"))
-
-    print(f"Results saved to {output_dir}")
-
-    return results_df  # Return results DataFrame for further analysis in IDE
 
 
 if __name__ == "__main__":
