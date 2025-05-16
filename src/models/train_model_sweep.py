@@ -412,7 +412,7 @@ def main(is_test_run=False):
     # evaluate twice per epoch.
     eval_save_steps = int((len(train_pos) / config.batch_size) / 2)
     early_stopper = EarlyStoppingWithLoggingCallback(
-        early_stopping_patience=7,  # you can change this value if needed
+        early_stopping_patience=20,  # you can change this value if needed
         early_stopping_threshold=0.001  # you can change this value if needed
     )
 
@@ -433,7 +433,8 @@ def main(is_test_run=False):
         load_best_model_at_end=True,
         lr_scheduler_type="linear",
         batch_sampler= (None if exp_config.exclude_same_label_negatives else BatchSamplers.NO_DUPLICATES),
-        metric_for_best_model="eval_cosine_accuracy@1",
+        metric_for_best_model="eval/loss",
+        greater_is_better=False,
         log_level="info",
         logging_steps=10,
         report_to="wandb",
