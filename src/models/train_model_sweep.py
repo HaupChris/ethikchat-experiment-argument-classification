@@ -138,9 +138,9 @@ def prepare_datasets(
 
     if not is_test_run:
         train_pos = create_dataset_for_multiple_negatives_ranking_loss(train_split,
-                                                                       include_labels=exp_config.exclude_same_label_negatives)
+                                                                       include_labels=True)
         eval_pos = create_dataset_for_multiple_negatives_ranking_loss(eval_split,
-                                                                      include_labels=exp_config.exclude_same_label_negatives)
+                                                                      include_labels=True)
 
         # Build references for EVAL
         eval_passages = {
@@ -189,14 +189,18 @@ def prepare_datasets(
         }
 
     else:
-        train_pos = create_dataset_for_multiple_negatives_ranking_loss(train_split,
-                                                                       include_labels=exp_config.exclude_same_label_negatives)
-        eval_pos = create_dataset_for_multiple_negatives_ranking_loss(eval_split,
-                                                                      include_labels=exp_config.exclude_same_label_negatives)
-        train_pos = train_pos.shuffle(seed=42).select(range(10))
-        eval_pos = eval_pos.shuffle(seed=42).select(range(10))
+        train_split["queries"] = train_split["queries"].filter(lambda entry: "NZ.K10" in entry["labels"])
+        train_q_ids = {entry["id"] for entry in train_split["queries"]}
+        train_split["queries_relevant_passages_mapping"] = train_split["queries_relevant_passages_mapping"].filter(lambda entry: entry["query_id"] in train_q_ids)
 
-        eval_queries = eval_split["queries"].shuffle(seed=42).select(range(10))
+        train_pos = create_dataset_for_multiple_negatives_ranking_loss(train_split,
+                                                                       include_labels=True)
+        eval_pos = create_dataset_for_multiple_negatives_ranking_loss(eval_split,
+                                                                      include_labels=True)
+        train_pos = train_pos.shuffle(42).select(range(64))
+        eval_pos = eval_pos.shuffle(42).select(range(64))
+
+        eval_queries = eval_split["queries"].select(range(64))
         eval_queries = {
             row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"])
             for row in eval_queries
@@ -206,9 +210,9 @@ def prepare_datasets(
             for row in eval_split["queries_relevant_passages_mapping"]
             if row["query_id"] in eval_queries.keys()
         }
-        # shorten the relevant passages to 2
+        # shorten the relevant passages to 4
         for key in eval_relevant_passages.keys():
-            eval_relevant_passages[key] = set(list(eval_relevant_passages[key])[:2])
+            eval_relevant_passages[key] = set(list(eval_relevant_passages[key])[:4])
 
         eval_trivial_passages = {
             row["query_id"]: set(row["passages_ids"])
@@ -229,7 +233,7 @@ def prepare_datasets(
         }
 
         # 2) Build test references (small)
-        test_queries = test_split["queries"].shuffle(seed=42).select(range(10))
+        test_queries = test_split["queries"].select(range(32))
         test_queries = {
             row["id"]: Query(row["id"], row["text"], row["labels"], row["discussion_scenario"])
             for row in test_queries
@@ -239,9 +243,9 @@ def prepare_datasets(
             for row in test_split["queries_relevant_passages_mapping"]
             if row["query_id"] in test_queries.keys()
         }
-        # shorten the relevant passages to 2
+        # shorten the relevant passages to 4
         for key in test_relevant_passages.keys():
-            test_relevant_passages[key] = set(list(test_relevant_passages[key])[:2])
+            test_relevant_passages[key] = set(list(test_relevant_passages[key])[:4])
 
         test_trivial_passages = {
             row["query_id"]: set(row["passages_ids"])
@@ -383,9 +387,9 @@ def main(is_test_run=False):
     # 6) Define the loss
     if exp_config.exclude_same_label_negatives:
         loss = MaskedCachedMultipleNegativesRankingLoss(model=model,
-                                                    show_progress_bar=True,
-                                                    mini_batch_size=8,
-                                                    exclude_same_label_negatives=exp_config.exclude_same_label_negatives)
+                                                        show_progress_bar=True,
+                                                        mini_batch_size=8,
+                                                        exclude_same_label_negatives=exp_config.exclude_same_label_negatives)
     else:
         loss = CachedMultipleNegativesRankingLoss(model=model, show_progress_bar=True, mini_batch_size=8)
 
@@ -428,7 +432,7 @@ def main(is_test_run=False):
         run_name=f"sweep_{exp_config.model_name_escaped}",
         load_best_model_at_end=True,
         lr_scheduler_type="linear",
-        batch_sampler=BatchSamplers.NO_DUPLICATES,
+        batch_sampler= (None if exp_config.exclude_same_label_negatives else BatchSamplers.NO_DUPLICATES),
         metric_for_best_model="eval_cosine_accuracy@1",
         log_level="info",
         logging_steps=10,
@@ -438,11 +442,13 @@ def main(is_test_run=False):
     data_collator = None
 
     if exp_config.exclude_same_label_negatives:
-        data_collator = CustomSentenceTransformerDataCollator(
-            tokenize_fn=model.tokenize,
-            handle_specialized_label_columns=exp_config.exclude_same_label_negatives
-        )
         callbacks.append(MaskLoggingCallback(loss, wandb.run))
+
+
+    data_collator = CustomSentenceTransformerDataCollator(
+        tokenize_fn=model.tokenize,
+        handle_specialized_label_columns=True
+    )
 
 
 
@@ -488,7 +494,7 @@ if __name__ == "__main__":
             "dataset_split_name": "dataset_split_in_distribution_from-v3",
             "model_name": "deutsche-telekom/gbert-large-paraphrase-euclidean",
             "learning_rate": 2e-5,
-            "batch_size": 2,
+            "batch_size": 8,
             "num_epochs": 10,
             "warmup_ratio": 0.1,
             "context_length": 2,
@@ -496,7 +502,7 @@ if __name__ == "__main__":
             "test_scenario": DiscussionSzenario.JURAI.value,
             "num_shots_queries": -1,
             "num_shots_passages": 23,
-            "exclude_same_label_negatives": True
+            "exclude_same_label_negatives": False
         }
 
         # 	add_discussion_scenario_info: True

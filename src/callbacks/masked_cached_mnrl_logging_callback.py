@@ -3,8 +3,6 @@ import io
 import numpy as np
 import pandas as pd
 import wandb
-from matplotlib import pyplot as plt
-
 from transformers import TrainerCallback, TrainingArguments, TrainerState
 from wandb.sdk.wandb_run import Run
 
@@ -23,13 +21,13 @@ class MaskLoggingCallback(TrainerCallback):
         stats = self.loss_module.pop_batch_metrics()
         if stats:
             self.run.log(stats)
-        self.log_heatmap()
+        self.log_heatmap(state.epoch)
 
     # ────────────────────────────────────────── epoch-level
     def on_epoch_end(self, args: TrainingArguments, state: TrainerState, control, **kwargs):
-        self.log_heatmap()
+        self.log_heatmap(state.epoch)
 
-    def log_heatmap(self):
+    def log_heatmap(self, epoch: int):
         heatmap_dict = self.loss_module.pop_epoch_heatmaps()
         for scenario, counts in heatmap_dict.items():
             if not counts:
@@ -39,9 +37,9 @@ class MaskLoggingCallback(TrainerCallback):
             negative_labels = sorted({n for _, n in counts})
 
             matrix = np.zeros((len(anchor_labels), len(negative_labels)), dtype=int)
-            for (a_lbl, n_lbl), cnt in counts.items():
-                matrix[anchor_labels.index(a_lbl), negative_labels.index(n_lbl)] = cnt
+            for (anchor_label, negative_label), count in counts.items():
+                matrix[anchor_labels.index(anchor_label), negative_labels.index(negative_label)] = count
 
-            result_df = pd.DataFrame(data=matrix, columns=["queries labels", "passage labels"])
+            result_df = pd.DataFrame(matrix, index=anchor_labels, columns=negative_labels)
 
-            self.run.log({f"{scenario}/label_overlap_heatmap": wandb.Table(dataframe=result_df)})
+            self.run.log({f"{scenario}/label_overlap_heatmap_{epoch}": wandb.Table(dataframe=result_df)})

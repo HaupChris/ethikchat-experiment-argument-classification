@@ -94,7 +94,12 @@ class MaskedCachedMultipleNegativesRankingLoss(CachedMultipleNegativesRankingLos
         return metrics
 
     def pop_epoch_heatmaps(self) -> Dict[str, Dict[Tuple[str, str], int]]:
-        """Return & reset accumulated overlap counts (one heatmap per scenario)."""
+        """Return & reset accumulated overlap counts (one heatmap per scenario).
+        Dict is of format Scenario -> (anchor_label, passage_label) -> count
+
+        """
+
+
         heatmaps = self._epoch_overlap_counts
         self._epoch_overlap_counts = {}
         return heatmaps
