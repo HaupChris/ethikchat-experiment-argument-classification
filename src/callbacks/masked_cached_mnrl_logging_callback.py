@@ -21,7 +21,6 @@ class MaskLoggingCallback(TrainerCallback):
         stats = self.loss_module.pop_batch_metrics()
         if stats:
             self.run.log(stats)
-        self.log_heatmap(state.epoch)
 
     # ────────────────────────────────────────── epoch-level
     def on_epoch_end(self, args: TrainingArguments, state: TrainerState, control, **kwargs):

@@ -387,11 +387,11 @@ def main(is_test_run=False):
     # 6) Define the loss
     if exp_config.exclude_same_label_negatives:
         loss = MaskedCachedMultipleNegativesRankingLoss(model=model,
-                                                        show_progress_bar=True,
+                                                        show_progress_bar=False,
                                                         mini_batch_size=8,
                                                         exclude_same_label_negatives=exp_config.exclude_same_label_negatives)
     else:
-        loss = CachedMultipleNegativesRankingLoss(model=model, show_progress_bar=True, mini_batch_size=8)
+        loss = CachedMultipleNegativesRankingLoss(model=model, show_progress_bar=False, mini_batch_size=8)
 
     # 7) Load argument graphs
     argument_graphs = load_argument_graphs(exp_config.project_root, is_test_run)
