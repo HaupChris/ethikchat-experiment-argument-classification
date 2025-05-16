@@ -21,7 +21,7 @@ negatives*). It extends the GradCache‑powered
   the collator.
 """
 
-from typing import Any, Iterable, List, Sequence, Tuple, Dict
+from typing import Any, Iterable, List, Sequence, Tuple, Dict, Callable
 from functools import partial
 
 import tqdm
@@ -70,7 +70,7 @@ class MaskedCachedMultipleNegativesRankingLoss(CachedMultipleNegativesRankingLos
             self,
             model: SentenceTransformer,
             scale: float = 20.0,
-            similarity_fct: callable[[Tensor, Tensor], Tensor] = util.cos_sim,
+            similarity_fct: Callable[[Tensor, Tensor], Tensor] = util.cos_sim,
             mini_batch_size: int = 32,
             show_progress_bar: bool = False,
             exclude_same_label_negatives: bool = False,
@@ -237,9 +237,9 @@ class MaskedCachedMultipleNegativesRankingLoss(CachedMultipleNegativesRankingLos
             )
 
             if candidate_labels_flat is not None:
-                mask = self._build_mask(
+                mask = self._create_label_mask(
                     anchor_labels=batched_labels_per_tower[0][anchor_start:anchor_end],
-                    candidate_labels=candidate_labels_flat,
+                    passage_labels=candidate_labels_flat,
                     positive_column_offset=anchor_start,
                     device=device,
                 )
@@ -314,7 +314,7 @@ class MaskedCachedMultipleNegativesRankingLoss(CachedMultipleNegativesRankingLos
             loss_val = self.calculate_loss(embeddings_per_tower, label_lists)
         return loss_val
 
-    def calculate_loss_and_cache_gradients(  # noqa: D401
+    def calculate_loss_and_cache_gradients(
         self,
         embeddings_per_tower: List[List[Tensor]],
         label_lists: List[List[str]] | None = None,
@@ -328,14 +328,3 @@ class MaskedCachedMultipleNegativesRankingLoss(CachedMultipleNegativesRankingLos
         self.cache = [[mb_grad.grad for mb_grad in tower] for tower in embeddings_per_tower]
         return loss_val
 
-    # -------------------------------- override to propagate labels downstream
-
-    def calculate_loss_and_cache_gradients(
-            self,
-            reps: list[list[Tensor]],
-            labels_info: list[list[str]] | None = None,
-    ) -> Tensor:  # noqa: D401 – signature kept for ST trainer
-        loss = self.calculate_loss(reps, labels_info, with_backward=True)
-        loss = loss.detach().requires_grad_()
-        self.cache = [[x.grad for x in row] for row in reps]
-        return loss
