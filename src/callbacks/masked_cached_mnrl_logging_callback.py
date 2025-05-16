@@ -1,6 +1,7 @@
 import io
 
 import numpy as np
+import pandas as pd
 import wandb
 from matplotlib import pyplot as plt
 
@@ -41,17 +42,6 @@ class MaskLoggingCallback(TrainerCallback):
             for (a_lbl, n_lbl), cnt in counts.items():
                 matrix[anchor_labels.index(a_lbl), negative_labels.index(n_lbl)] = cnt
 
-            # Matplotlib heat-map → PNG bytes → W&B Image
-            fig, ax = plt.subplots(figsize=(6, 5))
-            im = ax.imshow(matrix, cmap="viridis")
-            ax.set_xticks(np.arange(len(negative_labels)), labels=negative_labels, rotation=90)
-            ax.set_yticks(np.arange(len(anchor_labels)), labels=anchor_labels)
-            ax.set_title(f"Label overlap – {scenario}")
-            fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
+            result_df = pd.DataFrame(data=matrix, columns=["queries labels", "passage labels"])
 
-            buf = io.BytesIO()
-            fig.tight_layout()
-            fig.savefig(buf, format="png", dpi=120)
-            plt.close(fig)
-            buf.seek(0)
-            self.run.log({f"{scenario}/label_overlap_heatmap": wandb.Image(buf)})
+            self.run.log({f"{scenario}/label_overlap_heatmap": wandb.Table(dataframe=result_df)})
