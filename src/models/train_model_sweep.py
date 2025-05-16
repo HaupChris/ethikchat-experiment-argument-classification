@@ -16,6 +16,7 @@ from transformers import PreTrainedTokenizer
 from transformers.integrations import WandbCallback
 
 from src.callbacks.custom_early_stopping_callback import EarlyStoppingWithLoggingCallback
+from src.callbacks.masked_cached_mnrl_logging_callback import MaskLoggingCallback
 from src.callbacks.wandb_logging_callback import WandbLoggingCallback
 from src.data.dataset_splitting.dataset_splits import create_splits_from_corpus_dataset
 from src.data.create_corpus_dataset import load_response_template_collection
@@ -25,8 +26,7 @@ from src.evaluation.deep_dive_information_retrieval_evaluator import DeepDiveInf
 from src.evaluation.excluding_information_retrieval_evaluator import ExcludingInformationRetrievalEvaluator
 from src.features.build_features import create_dataset_for_multiple_negatives_ranking_loss, add_context_to_texts, \
     add_scenario_tokens_to_texts, filter_queries_for_few_shot_setting, filter_passages_for_few_shot_setting
-from src.losses.MaskedCachedMultipleNegativesRankingLoss import MaskedCachedMultipleNegativesRankingLoss, \
-    MaskLoggingCallback
+from src.losses.MaskedCachedMultipleNegativesRankingLoss import MaskedCachedMultipleNegativesRankingLoss
 from src.models.experiment_config import ExperimentConfig
 
 

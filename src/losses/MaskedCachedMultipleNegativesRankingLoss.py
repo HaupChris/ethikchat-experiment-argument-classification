@@ -1,10 +1,6 @@
 from __future__ import annotations
 
-import wandb
-from wandb.wandb_run import Run
-from transformers import TrainerCallback
-
-"""masked_cached_mnrl.py
+"""
 
 A memory‑efficient contrastive loss for Sentence‑Transformers that **ignores
 in‑batch items whose label overlaps with the anchor’s label** (so‑called *false
@@ -37,28 +33,29 @@ from sentence_transformers.losses import CachedMultipleNegativesRankingLoss
 from sentence_transformers.losses.CachedMultipleNegativesRankingLoss import _backward_hook
 
 
-# --------------------------------------------------------------------------- util
-
-def _first_matching_key(d: dict[str, Any], *candidates: str) -> str | None:
-    """Return the first key from *candidates* present in *d* or *None*."""
-    for key in candidates:
-        if key in d:
+# --------------------------------------------------------------------------- helpers
+def first_key_present(sample: dict[str, Any], *candidate_keys: str) -> str | None:
+    """Return the first key present in *sample* or *None*."""
+    for key in candidate_keys:
+        if key in sample:
             return key
     return None
 
 
-def _split_label(raw: str) -> Tuple[str, str]:
-    """Return ``(scenario, label)`` from a raw label string ``SCENARIO_label``."""
+def split_scenario_label(raw: str) -> Tuple[str, str]:
+    """Split `SCENARIO_label` → (`SCENARIO`, `label`)."""
     if "_" not in raw:
-        return "GLOBAL", raw  # fallback
-    scenario, label = raw.split("_", 1)
-    return scenario, label
+        return "GLOBAL", raw
+    return tuple(raw.split("_", 1))  # type: ignore[return-value]
 
 
 # =============================================================== main loss class
 
 class MaskedCachedMultipleNegativesRankingLoss(CachedMultipleNegativesRankingLoss):
     """Drop‑in replacement with optional *label‑aware masking*.
+    CachedMultipleNegativesRankingLoss uses for each anchor the positive_passages of the other anchors in the same
+    batch as in-batch-negatives. Based on their labels, this loss masks out in-batch-negatives witht the same
+    labels as the respective anchor, preventing false-in-batch-negatives.
 
     Parameters
     ----------
@@ -70,13 +67,13 @@ class MaskedCachedMultipleNegativesRankingLoss(CachedMultipleNegativesRankingLos
     # --------------------------------------------------------------------- init
 
     def __init__(
-        self,
-        model: SentenceTransformer,
-        scale: float = 20.0,
-        similarity_fct: callable[[Tensor, Tensor], Tensor] = util.cos_sim,
-        mini_batch_size: int = 32,
-        show_progress_bar: bool = False,
-        exclude_same_label_negatives: bool = False,
+            self,
+            model: SentenceTransformer,
+            scale: float = 20.0,
+            similarity_fct: callable[[Tensor, Tensor], Tensor] = util.cos_sim,
+            mini_batch_size: int = 32,
+            show_progress_bar: bool = False,
+            exclude_same_label_negatives: bool = False,
     ) -> None:
         super().__init__(
             model,
@@ -87,269 +84,258 @@ class MaskedCachedMultipleNegativesRankingLoss(CachedMultipleNegativesRankingLos
         )
         self.exclude_same_label_negatives = exclude_same_label_negatives
 
-        # ---- runtime containers ------------------------------------------------------
-        self._batch_metrics: Dict[str, float] | None = None
-        # scenario → (anchor_label, neg_label) → count
-        self._overlap_counts: Dict[str, Dict[Tuple[str, str], int]] = {}
-
-
-
-    # ----------------------------------------------------------- public helpers
+        # containers for metrics -------------------------------------------------------
+        self._latest_batch_metrics: Dict[str, float] | None = None
+        self._epoch_overlap_counts: Dict[str, Dict[Tuple[str, str], int]] = {}
 
     def pop_batch_metrics(self) -> Dict[str, float] | None:
-        """Return and *reset* last mini‑batch stats (thread‑safe for trainer)."""
-        out, self._batch_metrics = self._batch_metrics, None
-        return out
+        """Return & reset mini-batch statistics (thread-safe)."""
+        metrics, self._latest_batch_metrics = self._latest_batch_metrics, None
+        return metrics
 
-    def pop_overlap_counts(self) -> Dict[str, Dict[Tuple[str, str], int]]:
-        """Return and reset accumulated overlap counts for current epoch."""
-        out = self._overlap_counts
-        self._overlap_counts = {}
-        return out
-
-    # ----------------------------------------------------------- label helpers
+    def pop_epoch_heatmaps(self) -> Dict[str, Dict[Tuple[str, str], int]]:
+        """Return & reset accumulated overlap counts (one heatmap per scenario)."""
+        heatmaps = self._epoch_overlap_counts
+        self._epoch_overlap_counts = {}
+        return heatmaps
 
     @staticmethod
-    def _extract_labels(sentence_features: Sequence[dict[str, Any]]) -> list[list[str]]:
-        label_lists: list[list[str]] = []
-        for idx, sf in enumerate(sentence_features):
-            key = _first_matching_key(sf, "label", "query_label", "positive_label")
-            if key is None:
-                matches = [k for k in sf if k.endswith("_label")]
-                if not matches:
-                    raise ValueError("No *_label key found in sentence_features[{idx}].")
-                key = matches[0]
-            values = sf[key]
-            if torch.is_tensor(values):
-                values = values.tolist()
-            label_lists.append(list(values) if isinstance(values, (list, tuple)) else [values])
-        return label_lists
+    def _gather_label_lists(feature_dicts: Sequence[dict[str, Any]]) -> List[List[str]]:
+        """Extract labels as `List[List[str]]` – one inner list per tower."""
+        all_label_lists: List[List[str]] = []
 
+        for tower_index, features in enumerate(feature_dicts):
+            key = first_key_present(features, "label", "query_label", "positive_label")
+            if key is None:  # fallback: any *_label key
+                candidate_keys = [k for k in features if k.endswith("_label")]
+                if not candidate_keys:
+                    raise ValueError(
+                        f"Tower {tower_index} has no *_label field while masking is enabled."
+                    )
+                key = candidate_keys[0]
 
-    # ------------------------------------------------- mask + stats calculation
+            raw_values = features[key]
+            if torch.is_tensor(raw_values):
+                raw_values = raw_values.tolist()
+            all_label_lists.append(list(raw_values) if isinstance(raw_values, (list, tuple)) else [raw_values])
 
-    def _update_overlap_counts(
-        self,
-        q_labels: list[str],
-        p_labels: list[str],
-        mask: Tensor,
-        row_offset: int,
+        return all_label_lists
+
+    # ---------------------------------------------------------- overlap heat-map utils
+    def _update_overlap_heatmap(
+            self,
+            anchor_labels: List[str],
+            candidate_labels: List[str],
+            mask_matrix: Tensor,
+            positive_column_offset: int,
     ) -> None:
-        """Accumulate masked pair frequencies for heatmaps."""
-        q_size, _ = mask.shape
-        for i in range(q_size):
-            pos_col = row_offset + i
-            # indices where mask is True for this row
-            cols = mask[i].nonzero(as_tuple=False).flatten().tolist()
-            for j in cols:
-                if j == pos_col:
-                    continue  # skip positive
-                q_lbl_raw = q_labels[i]
-                p_lbl_raw = p_labels[j]
-                q_scen, q_lbl = _split_label(q_lbl_raw)
-                p_scen, p_lbl = _split_label(p_lbl_raw)
-                if q_scen != p_scen:  # heatmap per scenario – ignore cross‑scenario pairs
+        """Update per-scenario heatmap with newly masked pairs."""
+        num_anchor_rows, _ = mask_matrix.shape
+        for row in range(num_anchor_rows):
+            positive_col = positive_column_offset + row
+            for col in mask_matrix[row].nonzero(as_tuple=False).flatten().tolist():
+                if col == positive_col:  # skip the true positive
                     continue
-                scen_dict = self._overlap_counts.setdefault(q_scen, {})
-                scen_dict[(q_lbl, p_lbl)] = scen_dict.get((q_lbl, p_lbl), 0) + 1
+                anchor_raw = anchor_labels[row]
+                negative_raw = candidate_labels[col]
+                anchor_scenario, anchor_label = split_scenario_label(anchor_raw)
+                negative_scenario, negative_label = split_scenario_label(negative_raw)
+                if anchor_scenario != negative_scenario:
+                    continue  # cross-scenario; ignore
+                scenario_map = self._epoch_overlap_counts.setdefault(anchor_scenario, {})
+                scenario_map[(anchor_label, negative_label)] = scenario_map.get(
+                    (anchor_label, negative_label), 0
+                ) + 1
 
     # ---------------------------------------------------------------- masking
 
     @staticmethod
     def _create_label_mask(
-        query_labels: list[str],
-        passage_labels: list[str],
-        row_offset: int,
-        device: torch.device,
+            anchor_labels: list[str],
+            passage_labels: list[str],
+            positive_column_offset: int,
+            *,
+            device: torch.device,
     ) -> Tensor:
         """Return a boolean mask with shape ``(len(query_labels), len(passage_labels))``.
 
         *True* means *ignore*.  The diagonal (true positives) is always kept
         unmasked.
         """
-        q_size = len(query_labels)
-        p_size = len(passage_labels)
+        num_anchors = len(anchor_labels)
+        num_candidates = len(passage_labels)
 
         # ---------------------------------------------------------------- scalar fast path
-        all_scalar = all("|" not in lbl for lbl in query_labels + passage_labels)
+        all_scalar = all("|" not in lbl for lbl in anchor_labels + passage_labels)
         if all_scalar:
             # Encode strings → ints on the fly for GPU broadcasting
-            id_map: dict[str, int] = {}
-
-            def _enc(label: str) -> int:  # closure capturing id_map
-                if label not in id_map:
-                    id_map[label] = len(id_map)
-                return id_map[label]
-
-            q_ids = torch.tensor([_enc(l) for l in query_labels], device=device)
-            p_ids = torch.tensor([_enc(l) for l in passage_labels], device=device)
-            mask = q_ids.unsqueeze(1).eq(p_ids)  # (q, p)
-
-            # remove diagonal (offset by row_offset)
-            row_idx = torch.arange(q_size, device=device)
-            col_idx = torch.arange(row_offset, row_offset + q_size, device=device)
-            valid = col_idx < p_size  # guard when >2 towers
-            mask[row_idx[valid], col_idx[valid]] = False
+            label_to_int: Dict[str, int] = {}
+            encode = lambda s: label_to_int.setdefault(s, len(label_to_int))
+            anchor_ids = torch.tensor([encode(l) for l in anchor_labels], device=device)
+            passage_ids = torch.tensor([encode(l) for l in passage_labels], device=device)
+            mask = anchor_ids.unsqueeze(1).eq(passage_ids)  # get matrix of size (anchors, passages)
+            diagonal_rows = torch.arange(num_anchors, device=device)
+            diagonal_cols = torch.arange(
+                positive_column_offset, positive_column_offset + num_anchors, device=device
+            )
+            valid_diag = diagonal_cols < num_candidates
+            mask[diagonal_rows[valid_diag], diagonal_cols[valid_diag]] = False
             return mask
 
-        # ---------------------------------------------------------------- multi‑label path
-        mask = torch.zeros((q_size, p_size), dtype=torch.bool, device=device)
-
-        q_sets = [set(lbl.split("|")) for lbl in query_labels]
-        p_sets = [set(lbl.split("|")) for lbl in passage_labels]
-
-        for i in range(q_size):
-            pos_col = row_offset + i  # column of the positive
-            for j in range(p_size):
-                if j == pos_col:
-                    continue  # keep the genuine positive
-                mask[i, j] = bool(q_sets[i] & p_sets[j])
+        # multi-label fallback -------------------------------------------------
+        mask = torch.zeros((num_anchors, num_candidates), dtype=torch.bool, device=device)
+        anchor_sets = [set(l.split("|")) for l in anchor_labels]
+        candidate_sets = [set(l.split("|")) for l in passage_labels]
+        for row, anchor_set in enumerate(anchor_sets):
+            positive_col = positive_column_offset + row
+            for col, cand_set in enumerate(candidate_sets):
+                if col == positive_col:
+                    continue
+                mask[row, col] = bool(anchor_set & cand_set)
         return mask
 
     # ----------------------------------------------------------- loss helpers
 
-    def calculate_loss(
+    # --------------------------------------------------- core loss (with statistics)
+    def calculate_loss(  # type: ignore[override]
         self,
-        reps: list[list[Tensor]],
-        labels_info: list[list[str]] | None = None,
+        batched_embeddings_per_tower: List[List[Tensor]],
+        batched_labels_per_tower: List[List[str]] | None = None,
+        *,
         with_backward: bool = False,
-    ) -> Tensor:  # type: ignore[override]
-        """Exact same semantics as the parent class, plus optional masking."""
-        emb_a = torch.cat(reps[0])  # (bsz, dim)
-        emb_b = torch.cat([torch.cat(r) for r in reps[1:]])  # ((1+nneg)*bsz, dim)
+    ) -> Tensor:
+        anchor_embeddings = torch.cat(batched_embeddings_per_tower[0])
+        candidate_embeddings = torch.cat(
+            [torch.cat(batch) for batch in batched_embeddings_per_tower[1:]]
+        )
 
-        bsz = emb_a.size(0)
-        device = emb_a.device
-        target = torch.arange(bsz, device=device, dtype=torch.long)
+        batch_size = anchor_embeddings.size(0)
+        device = anchor_embeddings.device
+        correct_targets = torch.arange(batch_size, device=device, dtype=torch.long)
 
-        # flatten passage labels once (list‑of‑lists → flat list)
-        passage_labels: list[str] | None = None
-        if self.exclude_same_label_negatives and labels_info is not None:
-            passage_labels = [lbl for tower in labels_info[1:] for lbl in tower]
+        # flatten candidate labels once --------------------------------------
+        candidate_labels_flat: List[str] | None = None
+        if self.exclude_same_label_negatives and batched_labels_per_tower is not None:
+            candidate_labels_flat = [
+                label for tower_labels in batched_labels_per_tower[1:] for label in tower_labels
+            ]
 
-        losses: List[Tensor] = []
-        total_masked = 0
-        total_negatives = 0
+        cumulative_loss: List[Tensor] = []
+        total_masked = total_negatives = 0
 
-        for b in tqdm.trange(
+        for anchor_start in tqdm.trange(
             0,
-            bsz,
+            batch_size,
             self.mini_batch_size,
-            desc="Preparing caches",
+            desc="Prepare caches",
             disable=not self.show_progress_bar,
         ):
-            e = b + self.mini_batch_size
-            scores = self.similarity_fct(emb_a[b:e], emb_b) * self.scale
+            anchor_end = anchor_start + self.mini_batch_size
+            similarity = (
+                self.similarity_fct(anchor_embeddings[anchor_start:anchor_end], candidate_embeddings)
+                * self.scale
+            )
 
-            if passage_labels is not None:
-                mask = self._create_label_mask(
-                    query_labels=labels_info[0][b:e],
-                    passage_labels=passage_labels,
-                    row_offset=b,
+            if candidate_labels_flat is not None:
+                mask = self._build_mask(
+                    anchor_labels=batched_labels_per_tower[0][anchor_start:anchor_end],
+                    candidate_labels=candidate_labels_flat,
+                    positive_column_offset=anchor_start,
                     device=device,
                 )
-                self._update_overlap_counts(labels_info[0][b:e], passage_labels, mask, row_offset=b)
-                masked_cnt = mask.sum().item()
-                scores = scores.masked_fill(mask, float("-inf"))
+                self._update_overlap_heatmap(
+                    anchor_labels=batched_labels_per_tower[0][anchor_start:anchor_end],
+                    candidate_labels=candidate_labels_flat,
+                    mask_matrix=mask,
+                    positive_column_offset=anchor_start,
+                )
+                masked_count = mask.sum().item()
+                similarity = similarity.masked_fill(mask, float("-inf"))
             else:
-                masked_cnt = 0
-                mask = None  # type: ignore
+                masked_count = 0
 
-            # stats ---------------------------------------------------------
-            all_neg = scores.numel() - scores.size(0)  # remove positives (diag)
-            total_masked += masked_cnt
-            total_negatives += all_neg
+            negatives_in_mb = similarity.numel() - similarity.size(0)
+            total_masked += masked_count
+            total_negatives += negatives_in_mb
 
-            loss_mb = self.cross_entropy_loss(scores, target[b:e]) * scores.size(0) / bsz
+            mb_loss = (
+                self.cross_entropy_loss(similarity, correct_targets[anchor_start:anchor_end])
+                * similarity.size(0)
+                / batch_size
+            )
             if with_backward:
-                loss_mb.backward()
-                loss_mb = loss_mb.detach()
-            losses.append(loss_mb)
+                mb_loss.backward()
+                mb_loss = mb_loss.detach()
+            cumulative_loss.append(mb_loss)
 
-            # save batch‑level metrics for logging ------------------------------
-            if total_negatives > 0:
-                self._batch_metrics = {
-                    "masked_negatives_per_batch": total_masked,
-                    "masked_ratio": total_masked / total_negatives,
-                    "effective_negatives": total_negatives - total_masked,
-                }
-            else:
-                self._batch_metrics = None
+        # store mini-batch metrics -------------------------------------------
+        if total_negatives:
+            self._latest_batch_metrics = {
+                "masked_negatives_per_batch": total_masked,
+                "masked_ratio": total_masked / total_negatives,
+                "effective_negatives": total_negatives - total_masked,
+            }
 
-        return torch.stack(losses).sum()
+        return torch.stack(cumulative_loss).sum()
+
 
     # --------------------------------------------------------------- forward pass
-
-    def forward(
+    def forward(  # noqa: D401
         self,
-        sentence_features: Iterable[dict[str, Any]],
-        labels: Tensor | None = None,  # kept for ST compatibility
-    ) -> Tensor:  # noqa: D401  – keeps parent signature
-        label_lists: list[list[str]] | None = None
+        sentence_features: Iterable[Dict[str, Any]],
+        labels: Tensor | None = None,  # kept for ST trainer compatibility
+    ) -> Tensor:
+        label_lists: List[List[str]] | None = None
         if self.exclude_same_label_negatives:
-            label_lists = self._extract_labels(sentence_features)
+            label_lists = self._gather_label_lists(sentence_features)
 
-        # -------------------------- first forward pass (no-grad, cache rand‑states)
-        reps: list[list[Tensor]] = []
+        # 1) no-grad embed pass + rand-state capture -------------------------
+        embeddings_per_tower: List[List[Tensor]] = []
         self.random_states = []
-        for sf in sentence_features:
-            reps_mb, states_mb = [], []
-            for reps_i, rs_i in self.embed_minibatch_iter(sf, with_grad=False, copy_random_state=True):
-                reps_mb.append(reps_i.detach().requires_grad_())
-                states_mb.append(rs_i)
-            reps.append(reps_mb)
-            self.random_states.append(states_mb)
+        for feature_dict in sentence_features:
+            tower_emb_batches, tower_random_states = [], []
+            for emb_mb, rng_state in self.embed_minibatch_iter(
+                feature_dict, with_grad=False, copy_random_state=True
+            ):
+                tower_emb_batches.append(emb_mb.detach().requires_grad_())
+                tower_random_states.append(rng_state)
+            embeddings_per_tower.append(tower_emb_batches)
+            self.random_states.append(tower_random_states)
 
-        # ---------------------------- loss + cached backward hook when training
+        # 2) loss & gradient caching ----------------------------------------
         if torch.is_grad_enabled():
-            loss = self.calculate_loss_and_cache_gradients(reps, label_lists)
-            loss.register_hook(partial(_backward_hook, sentence_features=sentence_features, loss_obj=self))
+            loss_val = self.calculate_loss_and_cache_gradients(
+                embeddings_per_tower, label_lists
+            )
+            loss_val.register_hook(
+                partial(_backward_hook, sentence_features=sentence_features, loss_obj=self)
+            )
         else:
-            loss = self.calculate_loss(reps, label_lists)
-        return loss
+            loss_val = self.calculate_loss(embeddings_per_tower, label_lists)
+        return loss_val
+
+    def calculate_loss_and_cache_gradients(  # noqa: D401
+        self,
+        embeddings_per_tower: List[List[Tensor]],
+        label_lists: List[List[str]] | None = None,
+    ) -> Tensor:
+        loss_val = self.calculate_loss(
+            embeddings_per_tower,
+            label_lists,
+            with_backward=True,
+        )
+        loss_val = loss_val.detach().requires_grad_()
+        self.cache = [[mb_grad.grad for mb_grad in tower] for tower in embeddings_per_tower]
+        return loss_val
 
     # -------------------------------- override to propagate labels downstream
 
     def calculate_loss_and_cache_gradients(
-        self,
-        reps: list[list[Tensor]],
-        labels_info: list[list[str]] | None = None,
+            self,
+            reps: list[list[Tensor]],
+            labels_info: list[list[str]] | None = None,
     ) -> Tensor:  # noqa: D401 – signature kept for ST trainer
         loss = self.calculate_loss(reps, labels_info, with_backward=True)
         loss = loss.detach().requires_grad_()
         self.cache = [[x.grad for x in row] for row in reps]
         return loss
-
-
-# ===================================================== callback for easy logging
-
-class MaskLoggingCallback(TrainerCallback):
-    """Logs masking statistics and per‑scenario heatmaps to W&B."""
-
-    def __init__(self, loss_obj: MaskedCachedMultipleNegativesRankingLoss, run: Run):
-        self.loss_obj = loss_obj
-        self.run = run
-
-    # per step ------------------------------------------------------------------------
-    def on_step_end(self, args: TrainingArguments, state: TrainerState, control, **kwargs):  # type: ignore
-        stats = self.loss_obj.pop_batch_metrics()
-        if stats is not None:
-            self.run.log(stats)
-
-    # epoch‑level heatmaps -------------------------------------------------------------
-    def on_epoch_end(self, args: TrainingArguments, state: TrainerState, control, **kwargs):  # type: ignore
-        overlap = self.loss_obj.pop_overlap_counts()
-        for scenario, pair_dict in overlap.items():
-            if not pair_dict:
-                continue
-            # build square label set ---------------------------------------------------
-            labels = sorted({lbl for pair in pair_dict for lbl in pair})
-            size = len(labels)
-            mat = [[0] * size for _ in range(size)]
-            idx = {lbl: i for i, lbl in enumerate(labels)}
-            for (anchor_lbl, neg_lbl), cnt in pair_dict.items():
-                mat[idx[anchor_lbl]][idx[neg_lbl]] = cnt
-            # log heatmap -------------------------------------------------------------
-            table = wandb.Table(data=mat, columns=labels, rows=labels)
-            self.run.log({f"label_overlap_heatmap/{scenario}": self._wandb.plot.heatmap(table, "_idx", "_col", "value", title=f"Overlap {scenario}")}, step=state.global_step)
-
